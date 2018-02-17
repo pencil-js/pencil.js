@@ -1,0 +1,28 @@
+{
+  "name": "Pencil.js",
+  "version": "0.1.0",
+  "description": "Modular drawing library",
+  "main": "pencil.js",
+  "scripts": {
+    "check": "eslint modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencilJS.git"
+  },
+  "keywords": [
+    "canvas",
+    "drawing",
+    "modular",
+    "toolbelt"
+  ],
+  "author": "GMartigny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencilJS/issues"
+  },
+  "homepage": "https://github.com/GMartigny/pencilJS#readme",
+  "devDependencies": {
+    "eslint": "^4.18.0"
+  }
+}
