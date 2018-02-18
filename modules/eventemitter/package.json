@@ -1,0 +1,21 @@
+{
+  "name": "pencil.js-eventemitter",
+  "version": "0.1.0",
+  "description": "Event emitter for Pencil.js package",
+  "main": "eventemitter.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencilJS.git"
+  },
+  "keywords": [
+    "pencil.js",
+    "listener"
+  ],
+  "dependencies": {
+  },
+  "author": "GMartigny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencilJS/issues"
+  }
+}

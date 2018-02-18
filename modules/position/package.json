@@ -1,0 +1,21 @@
+{
+  "name": "pencil.js-position",
+  "version": "0.1.0",
+  "description": "2D space position for Pencil.js package",
+  "main": "position.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencilJS.git"
+  },
+  "keywords": [
+    "pencil.js",
+    "pair"
+  ],
+  "dependencies": {
+  },
+  "author": "GMartigny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencilJS/issues"
+  }
+}

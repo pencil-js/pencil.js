@@ -1,16 +1,19 @@
 {
-  "name": "pencil.js-eventemitter",
+  "name": "pencil.js-component",
   "version": "0.1.0",
-  "description": "Event emitter for Pencil.js package",
-  "main": "eventemitter.js",
+  "description": "Abstract component for Pencil.js package",
+  "main": "component.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencilJS.git"
   },
   "keywords": [
     "pencil.js",
-    "listener"
+    "rendered"
   ],
+  "dependencies": {
+    "pencil.js-container": "^0.1.0"
+  },
   "author": "GMartigny",
   "license": "MIT",
   "bugs": {

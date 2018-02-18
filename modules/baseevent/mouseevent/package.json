@@ -1,0 +1,23 @@
+{
+  "name": "pencil.js-mouseevent",
+  "version": "0.1.0",
+  "description": "Mouse related event for Pencil.js package",
+  "main": "mouseevent.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencilJS.git"
+  },
+  "keywords": [
+    "pencil.js",
+    "event",
+    "mouse"
+  ],
+  "dependencies": {
+    "pencil.js-baseevent": "^0.1.0"
+  },
+  "author": "GMartigny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencilJS/issues"
+  }
+}

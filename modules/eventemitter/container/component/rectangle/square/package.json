@@ -1,0 +1,22 @@
+{
+  "name": "pencil.js-square",
+  "version": "0.1.0",
+  "description": "Square shape for Pencil.js package",
+  "main": "square.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencilJS.git"
+  },
+  "keywords": [
+    "pencil.js",
+    "shape"
+  ],
+  "dependencies": {
+    "pencil.js-rectangle": "^0.1.0"
+  },
+  "author": "GMartigny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencilJS/issues"
+  }
+}

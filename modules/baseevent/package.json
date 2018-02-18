@@ -1,0 +1,21 @@
+{
+  "name": "pencil.js-baseevent",
+  "version": "0.1.0",
+  "description": "Basic event for Pencil.js package",
+  "main": "baseevent.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencilJS.git"
+  },
+  "keywords": [
+    "pencil.js",
+    "event"
+  ],
+  "dependencies": {
+  },
+  "author": "GMartigny",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencilJS/issues"
+  }
+}

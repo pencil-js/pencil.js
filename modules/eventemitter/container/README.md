@@ -5,7 +5,7 @@ Simple wrapper for others component in you scene.
 
 ## Installation
 
-    npm install pencil.js-container
+    npm install pencil.js-container --save
 
 
 ## Examples

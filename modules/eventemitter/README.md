@@ -1,11 +1,11 @@
-# Scene
+# EventEmitter
 
-Abstract class for event listener and trigger.
+Abstract class for event listener and triggerer.
 
 
 ## Installation
 
-    npm install pencil.js-eventemitter
+    npm install pencil.js-eventemitter --save
 
 
 ## Examples

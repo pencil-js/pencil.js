@@ -23,6 +23,7 @@ But, know that each part is a JS module and can be used independently, ex:
     
     let scene = new Scene(document.body);
     
+    
     const width = 80;
     const height = 50;
     let rectangle = new Rectangle(new Position(100, 200), width, height, {
