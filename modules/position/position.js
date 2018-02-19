@@ -31,6 +31,10 @@ export default class Position {
         return this;
     }
 
+    /**
+     * Create a copy of this position
+     * @return {Position}
+     */
     clone () {
         return new Position(this.x, this.y);
     }

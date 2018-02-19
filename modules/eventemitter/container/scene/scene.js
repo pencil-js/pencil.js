@@ -77,10 +77,17 @@ export default class Scene extends Container {
         }
     }
 
+    /**
+     * Define if is hovered (always true as a fallback)
+     * @return {Boolean}
+     */
     isHover () {
         return true;
     }
 
+    /**
+     * Erase everything on scene
+     */
     clear () {
         if (this.options.fill) {
             this.ctx.fillStyle = this.options.fill;
@@ -91,23 +98,38 @@ export default class Scene extends Container {
         }
     }
 
+    /**
+     * Start to render the scene each frame
+     */
     startLoop () {
         this.isLooped = true;
         this.render();
     }
 
+    /**
+     * Stop scene from being rendered
+     */
     stopLoop () {
         this.isLooped = false;
     }
 
+    /**
+     * Hide the scene
+     */
     hide () {
         this.ctx.canvas.style.visibility = "hidden";
     }
 
+    /**
+     * Show the scene
+     */
     show () {
         this.ctx.canvas.style.visibility = "";
     }
 
+    /**
+     * @return {SceneOptions}
+     */
     static get defaultOptions () {
         return Object.assign({
             fill: null,

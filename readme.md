@@ -9,9 +9,32 @@ You can install the whole package with the following command :
     npm install pencil.js
 
 
-But, know that each part is a JS module and can be used independently, ex:
+But, each part is a JS module and can be used independently, ex:
 
     npm install @pencil.js/scene
+
+## Usage
+
+Once you have installed it, you can start to import it using common.js or ES6 syntax.
+
+Either, the whole package (good to wrap it in a namespace) :
+```js
+    const Pencil = require("pencil.js");
+    // or
+    import Pencil from "pencil.js";
+    
+    let scene = new Pencil.Scene();
+```
+
+Or, just the package you need (good for simplicity) :
+
+```js
+    const Scene = require("@pencil.js/scene");
+    // or
+    import Scene from "@pencil.js/scene";
+    
+    let scene = new Scene();
+```
 
 
 ## Examples
@@ -38,23 +61,23 @@ Take a look at [more advanced examples]().
 
 ## Modules
 
- * [EventEmitter](/tree/master/modules/eventemitter)
-   * [Container](/tree/master/modules/eventemitter/container)
-     * [Scene](/tree/master/modules/eventemitter/scene)
-     * [Component](/tree/master/modules/eventemitter/component)
-       * [.draggable()](/tree/master/modules/eventemitter/component/draggable)
-       * [Polygon](/tree/master/modules/eventemitter/component/polygon)
-         * [Star](/tree/master/modules/eventemitter/component/polygon/star)
-       * [Rectangle](/tree/master/modules/eventemitter/component/rectangle)
-         * [.resizable()](/tree/master/modules/eventemitter/component/rectangle/resizable)
-         * [Square](/tree/master/modules/eventemitter/component/rectangle/square)
-       * [Circle](/tree/master/modules/eventemitter/component/circle)
-       * [Text](/tree/master/modules/eventemitter/component/text)
-     * [Slider](/tree/master/modules/eventemitter/container/slider)
- * [Position](/tree/master/modules/position)
- * [Vector](/tree/master/modules/vector)
- * [BaseEvent](/tree/master/modules/baseevent)
-   * [MouseEvent](/tree/master/modules/baseevent/mouseevent)
+ * [EventEmitter](/modules/eventemitter)
+   * [Container](/modules/eventemitter/container)
+     * [Scene](/modules/eventemitter/container/scene)
+     * [Component](/modules/eventemitter/container/component)
+       * [.draggable()](/modules/eventemitter/container/component/draggable)
+       * [Polygon](/modules/eventemitter/container/component/polygon)
+         * [Star](/modules/eventemitter/container/component/polygon/star)
+       * [Rectangle](/modules/eventemitter/container/component/rectangle)
+         * [.resizable()](/modules/eventemitter/container/component/rectangle/resizable)
+         * [Square](/modules/eventemitter/container/component/rectangle/square)
+       * [Circle](/modules/eventemitter/container/component/circle)
+       * [Text](/modules/eventemitter/container/component/text)
+     * [Slider](/modules/eventemitter/container/container/slider)
+ * [Position](/modules/position)
+ * [Vector](/modules/vector)
+ * [BaseEvent](/modules/baseevent)
+   * [MouseEvent](/modules/baseevent/mouseevent)
 
 
 ## Purpose

@@ -40,6 +40,11 @@ export default class Rectangle extends Component {
         ctx.rect(x << 0, y << 0, width << 0, height << 0);
     }
 
+    /**
+     * Define if is hover a position
+     * @param {Position} position - Any position
+     * @return {Boolean}
+     */
     isHover (position) {
         return super.isHover(position) &&
             this.position.x <= position.x && position.x <= this.position.x + this.width &&

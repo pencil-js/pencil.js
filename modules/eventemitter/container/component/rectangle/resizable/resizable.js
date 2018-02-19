@@ -1,9 +1,9 @@
-import Rectangle from "../shapes/rectangle";
-import Square from "../shapes/square";
-import Polygon from "../shapes/polygon";
-import Position from "../position";
-import "./draggable";
-import MouseEvent from "../../events/mouse";
+import Rectangle from "@pencil.js/rectangle";
+import Square from "@pencil.js/square";
+// import Polygon from "@pencil.js/polygon";
+import Position from "@pencil.js/position";
+import "@pencil.js/draggable";
+import MouseEvent from "@pencil.js/mouseevent";
 
 /**
  * @typedef {Object} ResizableOptions
@@ -14,9 +14,10 @@ import MouseEvent from "../../events/mouse";
 
 /**
  * Enable resize on a rectangle
- * @param {ResizableOptions} options
+ * @param {ResizableOptions} options - Additional options
+ * @return {DraggableAPI}
  */
-Rectangle.prototype.resizable = function(options) {
+Rectangle.prototype.resizable = function (options) {
     this.isResizable = true;
     let mergedOptions = Object.assign({
         x: true,

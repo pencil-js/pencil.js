@@ -16,8 +16,8 @@ export default class Star extends Polygon {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position, outerRadius, nbBranches = 5, bevelRatio = 0.5, options) {
-        if (nbBranches < Star.minNbBranches) {
-            throw new RangeError(`Star can't have less than ${Star.minNbBranches} branches, ${nbBranches} asked.`);
+        if (nbBranches < Star.MIN_NB_BRANCHES) {
+            throw new RangeError(`Star can't have less than ${Star.MIN_NB_BRANCHES} branches, ${nbBranches} asked.`);
         }
 
         let innerRadius = outerRadius * bevelRatio;
@@ -37,8 +37,9 @@ export default class Star extends Polygon {
     /**
      * Minimum number of branches for a star
      * @return {Number}
+     * @constant
      */
-    static get minNbBranches () {
+    static get MIN_NB_BRANCHES () {
         return 2;
     }
 }

@@ -1,18 +1,18 @@
-import Container from "../container";
-import Rectangle from "../shapes/rectangle";
-import Circle from "../shapes/circle";
-import Vector from "../vector";
-import Position from "../position";
-import BaseEvent from "../../events/base";
+import Container from "@pencil.js/container";
+import Rectangle from "@pencil.js/rectangle";
+import Circle from "@pencil.js/circle";
+import Vector from "@pencil.js/vector";
+import Position from "@pencil.js/position";
+import BaseEvent from "@pencil.js/baseevent";
 
 /**
  * @typedef {Object} SliderOptions
  * @extends ContainerOptions
  * @prop {Number} [min=0] - Minimum value when the slider is at lowest
- * @prop {Number} [max=10] -
- * @prop {Number [width=200]
- * @prop {String} [fill="#F00"] -
- * @prop {String} [background="#FFF"] -
+ * @prop {Number} [max=10] - Maximum value when the slider is at highest
+ * @prop {Number [width=200] - Size of the slider
+ * @prop {String} [fill="#F00"] - Color of the round handle
+ * @prop {String} [background="#FFF"] - Color of the rectangle background
  */
 
 /**
@@ -26,7 +26,7 @@ export default class Slider extends Container {
      * @param {Position} position -
      * @param {SliderOptions} options -
      */
-    constructor(position, options) {
+    constructor (position, options) {
         super(position, options);
 
         let sliderHeight = Slider.HEIGHT;
@@ -48,7 +48,11 @@ export default class Slider extends Container {
         this.handle.on("drag", () => this.fire(new BaseEvent(this, "change")), true);
     }
 
-    set width(newWidth) {
+    /**
+     * Change this slider's size
+     * @param {Number} newWidth - A new size in pixels
+     */
+    set width (newWidth) {
         if (newWidth < Slider.HEIGHT) {
             throw new RangeError(`Slider is too small, minimum is ${Slider.HEIGHT}`);
         }
@@ -60,7 +64,11 @@ export default class Slider extends Container {
         this.value = value;
     }
 
-    get width() {
+    /**
+     * Return this slider's size
+     * @return {Number}
+     */
+    get width () {
         return this.options.width;
     }
 
@@ -68,16 +76,16 @@ export default class Slider extends Container {
      * Returns this current value
      * @return {Number}
      */
-    get value() {
+    get value () {
         return this.options.min + (this.options.max - this.options.min) * (this.handle.position.x / (this.width - Slider.HEIGHT));
     }
 
     /**
      * Change this current value
-     * @param {Number} newValue
+     * @param {Number} newValue - A new value to set
      * @return {Number} Real value used (between min and max)
      */
-    set value(newValue) {
+    set value (newValue) {
         let minmaxValue = Math.max(this.options.min, Math.min(this.options.max, newValue));
         this.handle.position.x = (this.width - Slider.HEIGHT) * (minmaxValue / (this.options.max - this.options.min));
         this.fire(new BaseEvent(this, "change"));
@@ -87,7 +95,7 @@ export default class Slider extends Container {
     /**
      * @return {SliderOptions}
      */
-    static get defaultOptions() {
+    static get defaultOptions () {
         return Object.assign({
             min: 0,
             max: 10,
@@ -97,7 +105,12 @@ export default class Slider extends Container {
         }, super.defaultOptions);
     }
 
-    static get HEIGHT() {
+    /**
+     * Height of sliders
+     * @return {Number}
+     * @constant
+     */
+    static get HEIGHT () {
         return 30;
     }
 }

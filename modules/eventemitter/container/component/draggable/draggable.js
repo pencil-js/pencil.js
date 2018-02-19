@@ -1,5 +1,5 @@
-import Component from "views/component";
-import MouseEvent from "events/mouse";
+import Component from "@pencil.js/component";
+import MouseEvent from "@pencil.js/mouseevent";
 
 /**
  * @typedef {Object} DraggableOptions
@@ -9,10 +9,18 @@ import MouseEvent from "events/mouse";
  */
 
 /**
- * Set this component draggable
- * @param {DraggableOptions} options
+ * @typedef {Object} DraggableAPI
+ * @prop {Function} x - Change the "x" value in the draggable's options
+ * @prop {Function} y - Change the "y" value in the draggable's options
+ * @prop {Function} constrain - Change the "constrain" value in the draggable's options
  */
-Component.prototype.draggable = function(options) {
+
+/**
+ * Set this component draggable
+ * @param {DraggableOptions} options - Additional options
+ * @return {DraggableAPI}
+ */
+Component.prototype.draggable = function (options) {
     this.isDraggable = true;
     if (!this.options.cursor) {
         this.options.cursor = "-webkit-grab";
@@ -50,7 +58,7 @@ Component.prototype.draggable = function(options) {
 
             this.fire(new MouseEvent(this, "drag", event.position));
         }
-    }.bind(this)).on("mouseup", function(event) {
+    }.bind(this)).on("mouseup", function (event) {
         this.isDragged = false;
         startPosition = null;
 
@@ -58,15 +66,27 @@ Component.prototype.draggable = function(options) {
     }.bind(this));
 
     return {
-        set x(x) {
+        /**
+         * Set the draggable "x" option
+         * @param {Boolean} x - New value for "x"
+         */
+        set x (x) {
             mergedOptions.x = x;
         },
 
-        set y(y) {
+        /**
+         * Set the draggable "y" option
+         * @param {Boolean} y - New value for "y"
+         */
+        set y (y) {
             mergedOptions.y = y;
         },
 
-        set constrain(constrain) {
+        /**
+         * Set the draggable "constrain" option
+         * @param {Vector} constrain - New value for "constrain"
+         */
+        set constrain (constrain) {
             mergedOptions.constrain = constrain;
         }
     };

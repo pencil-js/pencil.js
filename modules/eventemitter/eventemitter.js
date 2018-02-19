@@ -68,11 +68,13 @@ export default class EventEmitter {
     /**
      * Trigger an event
      * @param {BaseEvent} event - Event to trigger
+     * @return {EventEmitter} Itself
      */
     fire (event) {
         let listeners = this.eventListeners[event.name];
         if (listeners && listeners.length) {
             listeners.forEach(listener => (listener.bubble || listener.element === event.target) && listener.callback.call(this, event));
         }
+        return this;
     }
 }

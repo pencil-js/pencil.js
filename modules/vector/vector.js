@@ -30,6 +30,10 @@ export default class Vector {
         return this.start.distance(this.end);
     }
 
+    /**
+     * Create a new copy of this vector
+     * @return {Vector}
+     */
     clone () {
         return new Vector(this.start.clone(), this.end.clone());
     }
@@ -42,15 +46,30 @@ export default class Vector {
         return this.end.subtract(this.start);
     }
 
+    /**
+     * Add a vector to this
+     * @param {Vector} vector - Any vector
+     * @return {Vector}
+     */
     add (vector) {
         return new Vector(this.start.clone(), this.end.add(vector.getDelta()));
     }
 
+    /**
+     * Move this vector by another vector
+     * @param {Vector} vector - Any vector
+     * @return {Vector}
+     */
     translate (vector) {
         let delta = vector.getDelta();
         return new Vector(this.start.add(delta), this.end.add(delta));
     }
 
+    /**
+     * Define if it's hover a position
+     * @param {Position} position - Any position
+     * @return {Boolean}
+     */
     isHover (position) {
         let delta = this.getDelta();
         let zero = new Position();
@@ -58,8 +77,8 @@ export default class Vector {
     }
 
     /**
-     *
-     * @param {Vector} vector -
+     * Define if this vector intersect another
+     * @param {Vector} vector - Any vector
      * @return {Boolean}
      */
     intersect (vector) {
