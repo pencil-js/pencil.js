@@ -1,5 +1,5 @@
 {
-  "name": "pencil.js-scene",
+  "name": "@pencil.js/scene",
   "version": "0.1.0",
   "description": "Scene renderer for Pencil.js package",
   "main": "scene.js",
@@ -12,9 +12,12 @@
     "renderer"
   ],
   "dependencies": {
-    "pencil.js-container": "^0.1.0"
+    "@pencil.js/container": "^0.1.0",
+    "@pencil.js/eventemitter": "^0.1.0",
+    "@pencil.js/mouseevent": "^0.1.0",
+    "@pencil.js/baseevent": "^0.1.0"
   },
-  "author": "GMartigny",
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencilJS/issues"

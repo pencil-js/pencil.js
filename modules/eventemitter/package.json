@@ -1,5 +1,5 @@
 {
-  "name": "pencil.js-eventemitter",
+  "name": "@pencil.js/eventemitter",
   "version": "0.1.0",
   "description": "Event emitter for Pencil.js package",
   "main": "eventemitter.js",
@@ -12,8 +12,10 @@
     "listener"
   ],
   "dependencies": {
+    "@pencil.js/mouseevent": "^0.1.0",
+    "@pencil.js/position": "^0.1.0"
   },
-  "author": "GMartigny",
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencilJS/issues"

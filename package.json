@@ -1,5 +1,5 @@
 {
-  "name": "Pencil.js",
+  "name": "pencil.js",
   "version": "0.1.0",
   "description": "Modular drawing library",
   "main": "pencil.js",
@@ -13,16 +13,38 @@
   "keywords": [
     "canvas",
     "drawing",
+    "frontend",
     "modular",
     "toolbelt"
   ],
-  "author": "GMartigny",
+  "dependencies": {
+    "@pencil.js/eventemitter": "^0.1.0",
+    "@pencil.js/container": "^0.1.0",
+    "@pencil.js/scene": "^0.1.0",
+    "@pencil.js/component": "^0.1.0",
+    "@pencil.js/circle": "^0.1.0",
+    "@pencil.js/line": "^0.1.0",
+    "@pencil.js/polygon": "^0.1.0",
+    "@pencil.js/star": "^0.1.0",
+    "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/square": "^0.1.0",
+    "@pencil.js/text": "^0.1.0",
+    "@pencil.js/draggable": "^0.1.0",
+    "@pencil.js/resizable": "^0.1.0",
+    "@pencil.js/position": "^0.1.0",
+    "@pencil.js/vector": "^0.1.0",
+    "@pencil.js/basevent": "^0.1.0",
+    "@pencil.js/mouseevent": "^0.1.0",
+    "@pencil.js/slider": "^0.1.0"
+  },
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencilJS/issues"
   },
   "homepage": "https://github.com/GMartigny/pencilJS#readme",
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "eslint": "^4.18.0"
   }
 }

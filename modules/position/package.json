@@ -1,5 +1,5 @@
 {
-  "name": "pencil.js-position",
+  "name": "@pencil.js/position",
   "version": "0.1.0",
   "description": "2D space position for Pencil.js package",
   "main": "position.js",
@@ -9,11 +9,11 @@
   },
   "keywords": [
     "pencil.js",
-    "pair"
+    "2d"
   ],
   "dependencies": {
   },
-  "author": "GMartigny",
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencilJS/issues"

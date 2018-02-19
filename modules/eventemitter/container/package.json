@@ -1,5 +1,5 @@
 {
-  "name": "pencil.js-container",
+  "name": "@pencil.js/container",
   "version": "0.1.0",
   "description": "Simple container for Pencil.js package",
   "main": "container.js",
@@ -12,9 +12,10 @@
     "wrapper"
   ],
   "dependencies": {
-    "pencil.js-eventemitter": "^0.1.0"
+    "@pencil.js/eventemitter": "^0.1.0",
+    "@pencil.js/position": "^0.1.0"
   },
-  "author": "GMartigny",
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencilJS/issues"

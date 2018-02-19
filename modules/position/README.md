@@ -5,13 +5,13 @@
 
 ## Installation
 
-    npm install pencil.js-position --save
+    npm install @pencil.js/position
 
 
 ## Examples
 
 ```js
-    import Position from "pencil.js-position";
+    import Position from "@pencil.js/position";
     
     let position = new Position(100, 200);
     let doublePosition = position.add(position);

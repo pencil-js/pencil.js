@@ -5,13 +5,13 @@ Abstract class for visual component of a scene.
 
 ## Installation
 
-    npm install pencil.js-component --save
+    npm install @pencil.js/component
 
 
 ## Examples
 
 ```js
-    import Component from "pencil.js-component";
+    import Component from "@pencil.js/component";
     
     class FunnyShape extends Component {
         /**

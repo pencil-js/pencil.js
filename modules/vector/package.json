@@ -1,19 +1,18 @@
 {
-  "name": "@pencil.js/mouseevent",
+  "name": "@pencil.js/vector",
   "version": "0.1.0",
-  "description": "Mouse related event for Pencil.js package",
-  "main": "mouseevent.js",
+  "description": "Vector in 2D space Pencil.js package",
+  "main": "vector.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencilJS.git"
   },
   "keywords": [
     "pencil.js",
-    "event",
-    "mouse"
+    "2d"
   ],
   "dependencies": {
-    "@pencil.js/baseevent": "^0.1.0"
+    "@pencil.js/position": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

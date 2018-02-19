@@ -5,13 +5,13 @@ Square shape.
 
 ## Installation
 
-    npm install pencil.js-square --save
+    npm install @pencil.js/square
 
 
 ## Examples
 
 ```js
-    import Square from "pencil.js-square";
+    import Square from "@pencil.js/square";
     
     const size = 200;
     const options = {

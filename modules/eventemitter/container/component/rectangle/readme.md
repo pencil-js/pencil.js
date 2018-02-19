@@ -5,13 +5,13 @@ Rectangle shape.
 
 ## Installation
 
-    npm install pencil.js-rectangle --save
+    npm install @pencil.js/rectangle
 
 
 ## Examples
 
 ```js
-    import Rectangle from "pencil.js-rectangle";
+    import Rectangle from "@pencil.js/rectangle";
     
     const width = 200;
     const height = 100;

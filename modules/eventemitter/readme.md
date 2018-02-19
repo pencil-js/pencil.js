@@ -5,13 +5,13 @@ Abstract class for event listener and triggerer.
 
 ## Installation
 
-    npm install pencil.js-eventemitter --save
+    npm install @pencil.js/eventemitter
 
 
 ## Examples
 
 ```js
-    import EventEmitter from "pencil.js-eventemitter";
+    import EventEmitter from "@pencil.js/eventemitter";
     
     class MyEmitter extends EventEmitter {
         /**

@@ -1,5 +1,5 @@
 {
-  "name": "pencil.js-component",
+  "name": "@pencil.js/component",
   "version": "0.1.0",
   "description": "Abstract component for Pencil.js package",
   "main": "component.js",
@@ -12,9 +12,9 @@
     "rendered"
   ],
   "dependencies": {
-    "pencil.js-container": "^0.1.0"
+    "@pencil.js/container": "^0.1.0"
   },
-  "author": "GMartigny",
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencilJS/issues"
