@@ -29,22 +29,22 @@ import "@pencil.js/draggable";
 import "@pencil.js/resizable";
 
 export default {
-    EventEmitter: EventEmitter,
-    Container: Container,
-    Scene: Scene,
-    Component: Component,
-    Circle: Circle,
-    Line: Line,
-    Polygon: Polygon,
-    Star: Star,
-    Rectangle: Rectangle,
-    Square: Square,
-    Text: Text,
-    Position: Position,
-    Vector: Vector,
-    BaseEvent: BaseEvent,
-    MouseEvent: MouseEvent,
-    Slider: Slider
+    EventEmitter,
+    Container,
+    Scene,
+    Component,
+    Circle,
+    Line,
+    Polygon,
+    Star,
+    Rectangle,
+    Square,
+    Text,
+    Position,
+    Vector,
+    BaseEvent,
+    MouseEvent,
+    Slider,
 };
 export {
     EventEmitter,
@@ -62,5 +62,5 @@ export {
     Vector,
     BaseEvent,
     MouseEvent,
-    Slider
+    Slider,
 };

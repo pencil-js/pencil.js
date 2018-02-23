@@ -1,11 +1,11 @@
 {
   "name": "@pencil.js/scene",
   "version": "0.1.0",
-  "description": "Scene renderer for Pencil.js package",
+  "description": "Scene renderer for Pencil.js package.",
   "main": "scene.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GMartigny/pencilJS.git"
+    "url": "git+https://github.com/GMartigny/pencil.js.git"
   },
   "keywords": [
     "pencil.js",
@@ -20,6 +20,6 @@
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GMartigny/pencilJS/issues"
+    "url": "https://github.com/GMartigny/pencil.js/issues"
   }
 }
