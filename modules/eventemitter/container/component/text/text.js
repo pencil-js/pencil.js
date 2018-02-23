@@ -34,8 +34,8 @@ export default class Text extends Component {
      * @return {Text} Itself
      */
     render (ctx) {
-        return Container.prototype.render.call(this, ctx, function () {
-            let text = this.text.toString();
+        return Container.prototype.render.call(this, ctx, function textRender () {
+            const text = this.text.toString();
             if (text) {
                 ctx.globalAlpha = this.options.alpha;
                 ctx.font = `${this.options.fontSize}px ${this.options.font}`;
@@ -68,14 +68,13 @@ export default class Text extends Component {
      * @return {Number}
      */
     get width () {
-        let root = this.getRoot();
+        const root = this.getRoot();
         if (root instanceof Scene) {
             root.ctx.font = `${this.options.fontSize}px ${this.options.font}`;
             return root.ctx.measureText(this.text).width;
         }
-        else {
-            return 0;
-        }
+
+        return 0;
     }
 
     /**
@@ -92,7 +91,7 @@ export default class Text extends Component {
         return Object.assign({
             font: "sans-serif",
             fontSize: 10,
-            baseline: "top"
+            baseline: "top",
         }, super.defaultOptions);
     }
 }

@@ -9,8 +9,8 @@ export default class Position {
      * @param {Number} y - Horizontal
      */
     constructor (x = 0, y = 0) {
-        this.x = x;
-        this.y = y;
+        this.x = Math.floor(x);
+        this.y = Math.floor(y);
     }
 
     /**
@@ -67,7 +67,7 @@ export default class Position {
      * @return {Position}
      */
     add (position, y) {
-        return this.calc((x, y) => x + y, position, y);
+        return this.calc((a, b) => a + b, position, y);
     }
 
     /**
@@ -77,7 +77,7 @@ export default class Position {
      * @return {Position}
      */
     subtract (position, y) {
-        return this.calc((x, y) => x - y, position, y);
+        return this.calc((a, b) => a - b, position, y);
     }
 
     /**
@@ -86,7 +86,7 @@ export default class Position {
      * @return {Number}
      */
     crossProduct (position) {
-        return this.x * position.y - position.x * this.y;
+        return (this.x * position.y) - (position.x * this.y);
     }
 
     /**
@@ -95,7 +95,7 @@ export default class Position {
      * @return {Number}
      */
     distance (position) {
-        return Math.sqrt(Math.pow(position.x - this.x, 2) + Math.pow(position.y - this.y, 2));
+        return Math.sqrt(((position.x - this.x) ** 2) + ((position.y - this.y) ** 2));
     }
 
     /**
@@ -104,11 +104,11 @@ export default class Position {
      * @return {Position}
      */
     static average (positions) {
-        let result = new Position();
+        const result = new Position();
         positions.forEach(position => result.add(position));
-        let length = positions.length;
-        result.x /= length;
-        result.y /= length;
+        const nbPositions = positions.length;
+        result.x /= nbPositions;
+        result.y /= nbPositions;
         return result;
     }
 }

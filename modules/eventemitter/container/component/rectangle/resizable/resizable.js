@@ -17,11 +17,11 @@ import MouseEvent from "@pencil.js/mouseevent";
  * @param {ResizableOptions} options - Additional options
  * @return {DraggableAPI}
  */
-Rectangle.prototype.resizable = function (options) {
+Rectangle.prototype.resizable = function resizable (options) {
     this.isResizable = true;
-    let mergedOptions = Object.assign({
+    const mergedOptions = Object.assign({
         x: true,
-        y: true
+        y: true,
     }, options);
 
     if (!(mergedOptions.x && mergedOptions.y) && this instanceof Square) {
@@ -29,7 +29,7 @@ Rectangle.prototype.resizable = function (options) {
     }
 
     const size = 15;
-    let bottomRight = (new Position(this.width, this.height)).subtract(size);
+    const bottomRight = (new Position(this.width, this.height)).subtract(size);
     // let points = [
     //     bottomRight,
     //     bottomRight.subtract(new Position(0, size)),
@@ -39,24 +39,24 @@ Rectangle.prototype.resizable = function (options) {
     //     fill: "gold",
     //     cursor: "se-resize"
     // });
-    let handle = new Square(bottomRight, size, {
+    const handle = new Square(bottomRight, size, {
         fill: "gold",
-        cursor: "se-resize"
+        cursor: "se-resize",
     });
     this.addChild(handle);
-    let api = handle.draggable({
+    const api = handle.draggable({
         x: mergedOptions.x,
         y: mergedOptions.y,
-        constrain: mergedOptions.constrain
+        constrain: mergedOptions.constrain,
     });
-    let shape = this;
-    handle.on("drag", function(event) {
-        let before = {
+    const shape = this;
+    handle.on("drag", function resizableDragCallback (event) {
+        const before = {
             width: shape.width,
-            height: shape.height
+            height: shape.height,
         };
         if (shape instanceof Square) {
-            shape.size = (this.position.x + this.position.y) / 2 + size;
+            shape.size = ((this.position.x + this.position.y) / 2) + size;
             this.position.x = shape.size - size;
             this.position.y = shape.size - size;
         }
@@ -70,7 +70,7 @@ Rectangle.prototype.resizable = function (options) {
         }
 
         if (shape.width !== before.width || shape.height !== before.height) {
-            shape.fire(new MouseEvent(shape, "resize", event))
+            shape.fire(new MouseEvent(shape, "resize", event));
         }
     }, true);
 

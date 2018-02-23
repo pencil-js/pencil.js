@@ -11,7 +11,8 @@ import Container from "@pencil.js/container";
  */
 
 /**
- * Basic class for visual component
+ * Abstract class for visual component
+ * @abstract
  * @class
  * @extends Container
  */
@@ -30,13 +31,14 @@ export default class Component extends Container {
         this.isShown = this.options.shown === undefined || this.options.shown;
         this.isHovered = false;
     }
+
     /**
      * Draw it on a context
      * @param {CanvasRenderingContext2D} ctx - Context to use
      * @return {Component} Itself
      */
     render (ctx) {
-        return super.render(ctx, function() {
+        return super.render(ctx, function componentRender () {
             ctx.beginPath();
             ctx.globalAlpha = this.options.alpha;
 
@@ -56,17 +58,32 @@ export default class Component extends Container {
         });
     }
 
+    /**
+     * Every component should have a trace function
+     * @throws {ReferenceError}
+     */
     trace () {
-        throw new ReferenceError("Unimplemented trace function in " + this.constructor.name);
+        throw new ReferenceError(`Unimplemented trace function in ${this.constructor.name}`);
     }
 
-    isHover (position) {
+    /**
+     * Define if is hover a position
+     * @returns {Boolean}
+     */
+    isHover () {
         return this.isShown;
     }
 
+    /**
+     * Display this component
+     */
     show () {
         this.isShown = true;
     }
+
+    /**
+     * Hide this component
+     */
     hide () {
         this.isShown = false;
     }
@@ -80,7 +97,7 @@ export default class Component extends Container {
             fill: "#000",
             stroke: null,
             strokeWidth: 1,
-            cursor: null
+            cursor: null,
         }, super.defaultOptions);
     }
 }

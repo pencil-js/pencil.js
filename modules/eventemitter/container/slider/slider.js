@@ -10,6 +10,7 @@ import BaseEvent from "@pencil.js/baseevent";
  * @extends ContainerOptions
  * @prop {Number} [min=0] - Minimum value when the slider is at lowest
  * @prop {Number} [max=10] - Maximum value when the slider is at highest
+ * @prop {Number} [value=0] - Initial value
  * @prop {Number [width=200] - Size of the slider
  * @prop {String} [fill="#F00"] - Color of the round handle
  * @prop {String} [background="#FFF"] - Color of the rectangle background
@@ -29,9 +30,9 @@ export default class Slider extends Container {
     constructor (position, options) {
         super(position, options);
 
-        let sliderHeight = Slider.HEIGHT;
+        const sliderHeight = Slider.HEIGHT;
         this.background = new Rectangle(undefined, this.width, sliderHeight, {
-            fill: this.options.background
+            fill: this.options.background,
         });
         this.addChild(this.background);
 
@@ -39,13 +40,25 @@ export default class Slider extends Container {
         this.addChild(this.container);
         this.handle = new Circle(new Position(0, 0), sliderHeight / 2, {
             fill: this.options.fill,
-            cursor: "ew-resize"
+            cursor: "ew-resize",
         });
         this.container.addChild(this.handle);
         this.handleDragAPI = this.handle.draggable({
-            constrain: new Vector(new Position(0, 0), new Position(this.width - sliderHeight, 0))
+            constrain: new Vector(new Position(0, 0), new Position(this.width - sliderHeight, 0)),
         });
         this.handle.on("drag", () => this.fire(new BaseEvent(this, "change")), true);
+
+        if (this.options.value) {
+            this.moveHandle(this.options.value);
+        }
+    }
+
+    /**
+     * Move the handle to a specified value
+     * @param {Number} value - New value to use
+     */
+    moveHandle (value) {
+        this.handle.position.x = (this.width - Slider.HEIGHT) * (value / (this.options.max - this.options.min));
     }
 
     /**
@@ -57,11 +70,11 @@ export default class Slider extends Container {
             throw new RangeError(`Slider is too small, minimum is ${Slider.HEIGHT}`);
         }
 
-        let value = this.value;
         this.options.width = newWidth;
         this.background.width = newWidth;
         this.handleDragAPI.constrain = new Vector(new Position(0, 0), new Position(this.width - Slider.HEIGHT, 0));
-        this.value = value;
+
+        this.moveHandle(this.value);
     }
 
     /**
@@ -77,7 +90,9 @@ export default class Slider extends Container {
      * @return {Number}
      */
     get value () {
-        return this.options.min + (this.options.max - this.options.min) * (this.handle.position.x / (this.width - Slider.HEIGHT));
+        const range = this.options.max - this.options.min;
+        const relativePosition = this.handle.position.x / (this.width - Slider.HEIGHT);
+        return this.options.min + (range * relativePosition);
     }
 
     /**
@@ -86,8 +101,8 @@ export default class Slider extends Container {
      * @return {Number} Real value used (between min and max)
      */
     set value (newValue) {
-        let minmaxValue = Math.max(this.options.min, Math.min(this.options.max, newValue));
-        this.handle.position.x = (this.width - Slider.HEIGHT) * (minmaxValue / (this.options.max - this.options.min));
+        const minmaxValue = Math.max(this.options.min, Math.min(this.options.max, newValue));
+        this.moveHandle(minmaxValue);
         this.fire(new BaseEvent(this, "change"));
         return minmaxValue;
     }
@@ -100,8 +115,8 @@ export default class Slider extends Container {
             min: 0,
             max: 10,
             width: 200,
-            fill: "#F00",
-            background: "#FFF"
+            fill: "#ff7269",
+            background: "#f6f6f6",
         }, super.defaultOptions);
     }
 

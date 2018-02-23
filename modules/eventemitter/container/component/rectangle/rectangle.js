@@ -15,8 +15,8 @@ export default class Rectangle extends Component {
      */
     constructor (position, width = 0, height = 0, options) {
         super(position, options);
-        this.width = width;
-        this.height = height;
+        this.width = Math.floor(width);
+        this.height = Math.floor(height);
     }
 
     /**
@@ -24,20 +24,7 @@ export default class Rectangle extends Component {
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      */
     trace (ctx) {
-        let x = 0;
-        let y = 0;
-        let width = this.width;
-        let height = this.height;
-
-        if (this.options.stroke && this.options.strokeWidth) {
-            const halfStroke = this.options.strokeWidth / 2;
-            x += halfStroke;
-            y += halfStroke;
-            width -= halfStroke;
-            height -= halfStroke;
-        }
-
-        ctx.rect(x << 0, y << 0, width << 0, height << 0);
+        ctx.rect(0, 0, this.width, this.height);
     }
 
     /**
@@ -46,8 +33,13 @@ export default class Rectangle extends Component {
      * @return {Boolean}
      */
     isHover (position) {
+        const strokeModifier = this.options.stroke ? this.options.strokeWidth / 2 : 0;
+        const x = this.position.x - strokeModifier;
+        const y = this.position.y + strokeModifier;
+        const width = this.width + strokeModifier;
+        const height = this.height + strokeModifier;
         return super.isHover(position) &&
-            this.position.x <= position.x && position.x <= this.position.x + this.width &&
-            this.position.y <= position.y && position.y <= this.position.y + this.height;
+            x <= position.x && position.x <= this.position.x + width &&
+            y <= position.y && position.y <= this.position.y + height;
     }
 }

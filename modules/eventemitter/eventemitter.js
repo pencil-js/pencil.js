@@ -1,5 +1,6 @@
 import MouseEvent from "@pencil.js/mouseevent";
 import Position from "@pencil.js/position";
+import Scene from "./container/scene";
 
 /**
  * Able to listen and fire events
@@ -16,13 +17,17 @@ export default class EventEmitter {
 
     /**
      * Start listening to outside events
-     * @param {Container} container -
+     * @param {Scene} scene -
      */
-    static bindEvents (container) {
+    static bindEvents (scene) {
+        /**
+         * Add a listener for a mouse event
+         * @param {String} eventName - Any mouse event name
+         */
         function listenMouseEvent (eventName) {
-            window.addEventListener(eventName, function (event) {
-                let eventPosition = new Position(event.clientX, event.clientY);
-                let target = container.getTarget(eventPosition);
+            window.addEventListener(eventName, (event) => {
+                const eventPosition = (new Position(event.clientX, event.clientY)).subtract(scene.containerPosition);
+                const target = scene.getTarget(eventPosition);
                 if (target) {
                     // console.log(target);
                     target.fire(new MouseEvent(target, eventName, eventPosition));
@@ -37,12 +42,12 @@ export default class EventEmitter {
                         target.isClicked = false;
                     }
                 }
-            }.bind(this));
+            });
         }
         [
             "mousedown",
             "mousemove",
-            "mouseup"
+            "mouseup",
         ].forEach(listenMouseEvent, this);
     }
 
@@ -58,9 +63,9 @@ export default class EventEmitter {
             this.eventListeners[eventName] = [];
         }
         this.eventListeners[eventName].push({
-            callback: callback,
+            callback,
             element: this,
-            bubble: !capture
+            bubble: !capture,
         });
         return this;
     }
@@ -71,9 +76,13 @@ export default class EventEmitter {
      * @return {EventEmitter} Itself
      */
     fire (event) {
-        let listeners = this.eventListeners[event.name];
+        const listeners = this.eventListeners[event.name];
         if (listeners && listeners.length) {
-            listeners.forEach(listener => (listener.bubble || listener.element === event.target) && listener.callback.call(this, event));
+            listeners.forEach((listener) => {
+                if (listener.bubble || listener.element === event.target) {
+                    listener.callback.call(this, event);
+                }
+            });
         }
         return this;
     }

@@ -11,6 +11,10 @@
                ClassDeclaration: true
             }
         }],
+        no-param-reassign: [error, {
+            props: false
+        }],
+        no-return-assign: off,
         max-len: [error, {
             code: 120
         }],

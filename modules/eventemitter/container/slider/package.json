@@ -1,22 +1,23 @@
 {
-  "name": "@pencil.js/scene",
+  "name": "@pencil.js/slider",
   "version": "0.1.0",
-  "description": "Scene renderer for Pencil.js package.",
-  "main": "scene.js",
+  "description": "Slider user input for Pencil.js package.",
+  "main": "slider.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
   },
   "keywords": [
     "pencil.js",
-    "renderer"
+    "UI"
   ],
   "dependencies": {
     "@pencil.js/container": "^0.1.0",
-    "@pencil.js/eventemitter": "^0.1.0",
-    "@pencil.js/mouseevent": "^0.1.0",
-    "@pencil.js/baseevent": "^0.1.0",
-    "@pencil.js/position": "^0.1.0"
+    "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/circle": "^0.1.0",
+    "@pencil.js/vector": "^0.1.0",
+    "@pencil.js/position": "^0.1.0",
+    "@pencil.js/baseevent": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

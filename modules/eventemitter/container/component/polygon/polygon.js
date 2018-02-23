@@ -38,7 +38,9 @@ export default class Polygon extends Component {
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      */
     trace (ctx) {
-        this.points.concat(this.points.slice(0, 2)).forEach((point, index) => ctx[index ? "lineTo" : "moveTo"](point.x << 0, point.y << 0));
+        this.points.concat(this.points.slice(0, 2)).forEach((point, index) => {
+            ctx[index ? "lineTo" : "moveTo"](point.x, point.y);
+        });
     }
 
     /**
@@ -46,12 +48,12 @@ export default class Polygon extends Component {
      * @param {Position} position -
      * @return {Boolean}
      */
-    isHover(position) {
+    isHover (position) {
         return false;
 
         // FIXME
         if (super.isHover(position)) {
-            let testVector = new Vector(position, position.add(Infinity, 0));
+            const testVector = new Vector(position, position.add(Infinity, 0));
             let intersection = 0;
             for (let i = 1; i < this.nbPoints; ++i) {
                 if (testVector.intersect(new Vector(this.points[i - 1], this.points[i]))) {
@@ -60,8 +62,7 @@ export default class Polygon extends Component {
             }
             return Boolean(intersection % 2);
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
 }

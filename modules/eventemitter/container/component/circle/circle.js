@@ -14,7 +14,7 @@ export default class Circle extends Component {
      */
     constructor (position, radius, options) {
         super(position, options);
-        this.radius = radius;
+        this.radius = Math.floor(radius);
     }
 
     /**
@@ -22,13 +22,7 @@ export default class Circle extends Component {
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      */
     trace (ctx) {
-        let radius = this.radius;
-
-        if (this.options.stroke && this.options.strokeWidth) {
-            radius -= this.options.strokeWidth / 2;
-        }
-
-        ctx.arc(0, 0, radius << 0, 0, Math.PI * 2);
+        ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
     }
 
     /**

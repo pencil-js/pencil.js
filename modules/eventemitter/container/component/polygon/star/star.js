@@ -20,13 +20,13 @@ export default class Star extends Polygon {
             throw new RangeError(`Star can't have less than ${Star.MIN_NB_BRANCHES} branches, ${nbBranches} asked.`);
         }
 
-        let innerRadius = outerRadius * bevelRatio;
-        let points = [];
+        const innerRadius = outerRadius * bevelRatio;
+        const points = [];
 
-        let nbPoints = nbBranches * 2;
+        const nbPoints = nbBranches * 2;
         for (let i = 0; i < nbPoints; ++i) {
-            let distance = i % 2 ? innerRadius : outerRadius;
-            let rotation = (i / nbPoints - 1 / 4) * Math.PI * 2;
+            const distance = i % 2 ? innerRadius : outerRadius;
+            const rotation = ((i / nbPoints) - (1 / 4)) * Math.PI * 2;
             points.push(new Position(Math.cos(rotation) * distance, Math.sin(rotation) * distance));
         }
 

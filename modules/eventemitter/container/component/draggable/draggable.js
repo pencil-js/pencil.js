@@ -20,32 +20,32 @@ import MouseEvent from "@pencil.js/mouseevent";
  * @param {DraggableOptions} options - Additional options
  * @return {DraggableAPI}
  */
-Component.prototype.draggable = function (options) {
+Component.prototype.draggable = function draggable (options) {
     this.isDraggable = true;
     if (!this.options.cursor) {
         this.options.cursor = "-webkit-grab";
     }
-    let mergedOptions = Object.assign({
+    const mergedOptions = Object.assign({
         x: true,
-        y: true
+        y: true,
     }, options);
 
     let startPosition = null;
-    this.on("mousedown", function(event) {
+    this.on("mousedown", function draggableMouseDownCallback (event) {
         startPosition = event.position.subtract(this.position);
         this.isDragged = true;
 
         this.fire(new MouseEvent(this, "grab", event.position));
     }, true);
 
-    this.getRoot().on("mousemove", function(event) {
+    this.getRoot().on("mousemove", (event) => {
         if (this.isDragged && startPosition) {
-            let newPosition = event.position.subtract(startPosition);
+            const newPosition = event.position.subtract(startPosition);
 
             if (mergedOptions.constrain) {
-                const constrain = mergedOptions.constrain;
-                this.position.x = Math.max(constrain.start.x, Math.min(newPosition.x, constrain.end.x));
-                this.position.y = Math.max(constrain.start.y, Math.min(newPosition.y, constrain.end.y));
+                const constrainer = mergedOptions.constrain;
+                this.position.x = Math.max(constrainer.start.x, Math.min(newPosition.x, constrainer.end.x));
+                this.position.y = Math.max(constrainer.start.y, Math.min(newPosition.y, constrainer.end.y));
             }
             else {
                 if (mergedOptions.x) {
@@ -58,12 +58,12 @@ Component.prototype.draggable = function (options) {
 
             this.fire(new MouseEvent(this, "drag", event.position));
         }
-    }.bind(this)).on("mouseup", function (event) {
+    }).on("mouseup", (event) => {
         this.isDragged = false;
         startPosition = null;
 
         this.fire(new MouseEvent(this, "drop", event.position));
-    }.bind(this));
+    });
 
     return {
         /**
@@ -88,6 +88,6 @@ Component.prototype.draggable = function (options) {
          */
         set constrain (constrain) {
             mergedOptions.constrain = constrain;
-        }
+        },
     };
 };

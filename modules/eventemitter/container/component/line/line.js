@@ -31,12 +31,16 @@ export default class Line extends Component {
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      */
     trace (ctx) {
-        let delta = this.vector.getDelta();
+        const delta = this.vector.getDelta();
         ctx.moveTo(0, 0);
-        ctx.lineTo(delta.x << 0, delta.y << 0);
+        ctx.lineTo(delta.x, delta.y);
     }
 
-    isHover (position) {
+    /**
+     * Can't hover a line
+     * @returns {Boolean}
+     */
+    isHover () { // eslint-disable-line class-methods-use-this
         return false;
     }
 
@@ -48,7 +52,7 @@ export default class Line extends Component {
             shown: true,
             alpha: 1,
             stroke: "#000",
-            strokeWidth: 1
+            strokeWidth: 1,
         };
     }
 }

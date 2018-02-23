@@ -38,7 +38,7 @@ export default class Container extends EventEmitter {
      * Container can't be hovered
      * @return {Boolean}
      */
-    isHover () {
+    isHover () { // eslint-disable-line class-methods-use-this
         return false;
     }
 
@@ -63,8 +63,8 @@ export default class Container extends EventEmitter {
      */
     removeChild (child) {
         if (this.children.includes(child)) {
-            let removed = this.children.splice(this.children.indexOf(child), 1);
-            removed.forEach(child => child.parent = null);
+            const removed = this.children.splice(this.children.indexOf(child), 1)[0];
+            removed.parent = null;
         }
         return this;
     }
@@ -86,9 +86,8 @@ export default class Container extends EventEmitter {
         if (this.parent) {
             return this.parent.getRoot();
         }
-        else {
-            return this;
-        }
+
+        return this;
     }
 
     /**
@@ -108,7 +107,7 @@ export default class Container extends EventEmitter {
      * @return {Container}
      */
     getTarget (position) {
-        let relativePosition = position.subtract(this.position);
+        const relativePosition = position.subtract(this.position);
 
         let lastHovered = null;
         let lookup = this.children.length - 1;
@@ -119,15 +118,13 @@ export default class Container extends EventEmitter {
 
         if (lastHovered) {
             if (lastHovered.options.zIndex < 0 && this === lastHovered.parent) {
-                return this.isHover(position) && this || lastHovered;
+                return (this.isHover(position) && this) || lastHovered;
             }
-            else {
-                return lastHovered;
-            }
+
+            return lastHovered;
         }
-        else {
-            return this.isHover(position) && this || null;
-        }
+
+        return (this.isHover(position) && this) || null;
     }
 
     /**
@@ -139,7 +136,7 @@ export default class Container extends EventEmitter {
     render (ctx, drawing) {
         if (this.options.shown) {
             ctx.save();
-            ctx.translate(this.position.x << 0, this.position.y << 0);
+            ctx.translate((this.position.x), (this.position.y));
 
             if (this.options.rotation) {
                 ctx.translate(this.options.rotationAnchor.x, this.options.rotationAnchor.y);
@@ -148,7 +145,7 @@ export default class Container extends EventEmitter {
             }
 
             this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
-            let pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
+            const pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
             this.children.slice(0, pivotIndex).forEach(child => child.render(ctx));
 
             if (drawing) {
@@ -170,7 +167,7 @@ export default class Container extends EventEmitter {
             shown: true,
             rotation: 0,
             rotationAnchor: new Position(),
-            zIndex: 0
+            zIndex: 0,
         };
     }
 }

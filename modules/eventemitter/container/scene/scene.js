@@ -2,6 +2,7 @@ import Container from "@pencil.js/container";
 import EventEmitter from "@pencil.js/eventemitter";
 import MouseEvent from "@pencil.js/mouseevent";
 import BaseEvent from "@pencil.js/baseevent";
+import Position from "@pencil.js/position";
 
 /**
  * @typedef {Object} SceneOptions
@@ -23,13 +24,15 @@ export default class Scene extends Container {
      */
     constructor (container, options) {
         super(undefined, options);
-        let canvas = document.createElement("canvas");
-        let measures = container.getBoundingClientRect();
+        const canvas = document.createElement("canvas");
+        const measures = container.getBoundingClientRect();
         canvas.width = measures.width;
         canvas.height = measures.height;
         this.ctx = canvas.getContext("2d");
         container.innerHTML = "";
         container.appendChild(canvas);
+
+        this.containerPosition = new Position(measures.left, measures.top);
 
         this.isLooped = false;
         this.fps = 0;
@@ -38,7 +41,7 @@ export default class Scene extends Container {
         EventEmitter.bindEvents(this);
 
         let hovered = null;
-        this.on("mousemove", function (event) {
+        this.on("mousemove", function globalMouseMoveCallback (event) {
             event.target.isHovered = true;
             if (event.target !== hovered) {
                 if (hovered) {
@@ -57,7 +60,7 @@ export default class Scene extends Container {
      * @return {Scene} Itself
      */
     render () {
-        let animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this)) : null;
+        const animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this)) : null;
 
         this.clear();
 
@@ -78,10 +81,10 @@ export default class Scene extends Container {
     }
 
     /**
-     * Define if is hovered (always true as a fallback)
+     * Define if is hovered (always true on scene as a fallback)
      * @return {Boolean}
      */
-    isHover () {
+    isHover () { // eslint-disable-line class-methods-use-this
         return true;
     }
 
@@ -133,7 +136,7 @@ export default class Scene extends Container {
     static get defaultOptions () {
         return Object.assign({
             fill: null,
-            cursor: "default"
+            cursor: "default",
         }, super.defaultOptions);
     }
 }

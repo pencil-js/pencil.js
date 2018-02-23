@@ -61,7 +61,7 @@ export default class Vector {
      * @return {Vector}
      */
     translate (vector) {
-        let delta = vector.getDelta();
+        const delta = vector.getDelta();
         return new Vector(this.start.add(delta), this.end.add(delta));
     }
 
@@ -71,8 +71,8 @@ export default class Vector {
      * @return {Boolean}
      */
     isHover (position) {
-        let delta = this.getDelta();
-        let zero = new Position();
+        const delta = this.getDelta();
+        const zero = new Position();
         return delta.crossProduct(position) < Number.EPSILON && zero.distance(position) < zero.distance(delta);
     }
 
@@ -82,8 +82,8 @@ export default class Vector {
      * @return {Boolean}
      */
     intersect (vector) {
-        let thisDelta = this.getDelta();
-        let otherDelta = vector.getDelta();
+        const thisDelta = this.getDelta();
+        const otherDelta = vector.getDelta();
         return Math.sign(thisDelta.crossProduct(vector.start)) !== Math.sign(thisDelta.crossProduct(vector.end)) &&
             Math.sign(otherDelta.crossProduct(this.start)) !== Math.sign(otherDelta.crossProduct(this.end));
     }
