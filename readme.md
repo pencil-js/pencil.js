@@ -1,6 +1,8 @@
 # Pencil.js
+[![dependencies Status](https://david-dm.org/GMartigny/pencil.js/status.svg)](https://david-dm.org/GMartigny/pencil.js)
+[![devDependencies Status](https://david-dm.org/GMartigny/pencil.js/dev-status.svg)](https://david-dm.org/GMartigny/pencil.js?type=dev)
 
-A modular 2D drawing library for Javascript.
+Modular 2D drawing library.
 
 
 ## Installation
@@ -13,28 +15,51 @@ But, each part is a JS module and can be used independently, ex:
 
     npm install @pencil.js/scene
 
+# CDN
+
+If you want to go old-school, you can fetch the script with [unpkg](https://unpkg.com/) or [jsdelivr](https://www.jsdelivr.com/).
+
+```html
+    <script src="https://unpkg.com/pencil.js"></script>
+    <!-- or -->
+    <script src="https://cdn.jsdelivr.net/npm/pencil.js"></script>
+    
+    <script>
+        var scene = new Pencil.Scene();
+    </script>
+```
+
+
 ## Usage
 
 Once you have installed it, you can start to import it using common.js or ES6 syntax.
 
-Either, the whole package (good to wrap it in a namespace) :
+There's multiple ways to rely on the project for your, pick the one that fits you need or preference :
+
 ```js
-    const Pencil = require("pencil.js");
-    // or
+    // The whole package under a namespace
     import Pencil from "pencil.js";
     
-    let scene = new Pencil.Scene();
-```
-
-Or, just the package you need (good for simplicity) :
-
-```js
-    const Scene = require("@pencil.js/scene");
-    // or
-    import Scene from "@pencil.js/scene";
+    const scene = new Pencil.scene();
     
-    let scene = new Scene();
+    / *** /
+    
+    // Just the part you need
+    import Scene from "@pencil.js/scene";
+    // or
+    import Scene from "pencil.js";
+    
+    const scene = new Scene();
+    
+    / *** /
+    
+    // Works the same way with common.js syntax
+    const Scene = require("pencil.js").Scene;
+    // or
+    const Scene = require("@pencil.js/scene");
 ```
+
+Since today's web browser don't support module requirements yet, you need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
 
 
 ## Examples
@@ -44,20 +69,21 @@ Or, just the package you need (good for simplicity) :
     import Rectangle from "pencil.js"; // or "@pencil.js/rectangle"
     import Position from "pencil.js"; // or "@pencil.js/position"
     
-    let scene = new Scene(document.body);
-    
+    const scene = new Scene(); // create a new scene
     
     const width = 80;
     const height = 50;
     let rectangle = new Rectangle(new Position(100, 200), width, height, {
         fill: "red"
-    });
-    scene.addChild(rectangle);
+    }); // Create a new rectangle with few parameters
+    scene.addChild(rectangle); // Add the rectangle to the scene
     
-    scene.render();
+    scene.render(); // Render the scene once
 ```
     
 Take a look at [more advanced examples]().
+
+Or read [the full documentation]().
 
 ## Modules
 
