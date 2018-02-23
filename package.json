@@ -1,14 +1,21 @@
 {
   "name": "pencil.js",
   "version": "0.1.0",
-  "description": "Modular drawing library",
+  "description": "Modular 2D drawing library.",
   "main": "pencil.js",
+  "files": [
+    "dist/"
+  ],
+  "unpkg": "dist/pencil.min.js",
+  "jsdelivr": "dist/pencil.min.js",
   "scripts": {
-    "check": "eslint modules"
+    "lint": "eslint *.js",
+    "build": "webpack",
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GMartigny/pencilJS.git"
+    "url": "git+https://github.com/GMartigny/pencil.js.git"
   },
   "keywords": [
     "canvas",
@@ -18,33 +25,39 @@
     "toolbelt"
   ],
   "dependencies": {
-    "@pencil.js/eventemitter": "^0.1.0",
-    "@pencil.js/container": "^0.1.0",
-    "@pencil.js/scene": "^0.1.0",
-    "@pencil.js/component": "^0.1.0",
-    "@pencil.js/circle": "^0.1.0",
-    "@pencil.js/line": "^0.1.0",
-    "@pencil.js/polygon": "^0.1.0",
-    "@pencil.js/star": "^0.1.0",
-    "@pencil.js/rectangle": "^0.1.0",
-    "@pencil.js/square": "^0.1.0",
-    "@pencil.js/text": "^0.1.0",
-    "@pencil.js/draggable": "^0.1.0",
-    "@pencil.js/resizable": "^0.1.0",
-    "@pencil.js/position": "^0.1.0",
-    "@pencil.js/vector": "^0.1.0",
     "@pencil.js/basevent": "^0.1.0",
+    "@pencil.js/circle": "^0.1.0",
+    "@pencil.js/component": "^0.1.0",
+    "@pencil.js/container": "^0.1.0",
+    "@pencil.js/draggable": "^0.1.0",
+    "@pencil.js/eventemitter": "^0.1.0",
+    "@pencil.js/line": "^0.1.0",
     "@pencil.js/mouseevent": "^0.1.0",
-    "@pencil.js/slider": "^0.1.0"
+    "@pencil.js/polygon": "^0.1.0",
+    "@pencil.js/position": "^0.1.0",
+    "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/resizable": "^0.1.0",
+    "@pencil.js/scene": "^0.1.0",
+    "@pencil.js/slider": "^0.1.0",
+    "@pencil.js/square": "^0.1.0",
+    "@pencil.js/star": "^0.1.0",
+    "@pencil.js/text": "^0.1.0",
+    "@pencil.js/vector": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GMartigny/pencilJS/issues"
+    "url": "https://github.com/GMartigny/pencil.js/issues"
   },
-  "homepage": "https://github.com/GMartigny/pencilJS#readme",
+  "homepage": "https://github.com/GMartigny/pencil.js#readme",
   "devDependencies": {
-    "babel-eslint": "^8.2.1",
-    "eslint": "^4.18.0"
+    "@babel/core": "^7.0.0-beta.40",
+    "@babel/preset-env": "^7.0.0-beta.40",
+    "babel-loader": "^8.0.0-beta.0",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "uglifyjs-webpack-plugin": "^1.2.1",
+    "webpack": "^3.11.0"
   }
 }

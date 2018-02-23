@@ -1,99 +1,27 @@
-# Browser environment
-env:
-    browser: true
-    es6: true
-
-# Parser Options
-parser: "babel-eslint"
-parserOptions:
-    ecmaVersion: 6
-    sourceType: "module"
-
-
-# Default rules
-extends: eslint:recommended
-
-# Rules override
-rules:
-    # Possible Errors
-    require-jsdoc:
-        - error
-        - require:
-            FunctionDeclaration: true
-            MethodDefinition: true
-            ClassDeclaration: true
-    valid-jsdoc:
-        - error
-        - requireReturn: false # We can ignore return if void
-          requireReturnDescription: false # We can ignore description sometimes
-
-    # Best Practices
-    array-callback-return: error # Always have a return in array modifying methods
-    block-scoped-var: error # Use var inside its block
-    complexity: error # Less than 20
-    consistent-return: error # All "return" have same type
-    curly: error # Always
-    dot-notation: warn # Better but ok
-    eqeqeq: warn # Better but ok
-    guard-for-in: error # "for in" operator need a hasOwnProperty check
-    no-alert: error
-    no-eval: error
-    no-implicit-coercion: error
-    no-labels: error
-    no-magic-numbers:
-        - warn
-        -
-            ignore:
-                - 0
-                - 1
-                - 2
-            ignoreArrayIndexes: true
-    no-multi-spaces: error
-    no-multi-str: error # Multi line string
-    no-self-compare: error # 5 == 5
-    no-sequences: error # Use of "," operator
-    no-throw-literal: error # throw "error";
-    no-useless-call: error
-    no-useless-concat: warn # "Hello " + "world"
-    no-with: error
-    wrap-iife:
-        - error
-        - inside # (function ())()
-
-    # Stylistic Issues
-    brace-style:
-        - error
-        - stroustrup # Brace on same line, else/catch statement on new line
-    camelcase: error # Use camelCase
-    comma-spacing: error # before: false, after: true
-    comma-style: error # Coma on end of a line
-    eol-last: error # Empty line on end of file
-    indent:
-        - error
-        - 4
-        -
-            SwitchCase: 1
-            MemberExpression: 0
-    key-spacing: error # Before color: false, after colon: true
-    keyword-spacing: error # Before and after
-    max-len:
-        - error
-        - 120 # 120 chars per lines
-        -
-            ignoreComments: true
-    max-statements:
-        - error
-        - 20
-    max-statements-per-line: error # Max 1
-    new-cap: error # Class should have capital letter
-    no-continue: error
-    no-nested-ternary: error
-    no-negated-condition: error
-    no-trailing-spaces: error
-    object-property-newline: error
-    quotes: error # Only double quotes
-    semi: error # Semicolon everywhere
-    space-before-blocks: error
-    space-before-function-paren: error
-    space-infix-ops: error
-    space-unary-ops: error
+{
+    extends: "airbnb-base",
+    env: {
+        "browser": true
+    },
+    rules: {
+        require-jsdoc: [error, {
+            require: {
+               FunctionDeclaration: true,
+               MethodDefinition: true,
+               ClassDeclaration: true
+            }
+        }],
+        max-len: [error, {
+            code: 120
+        }],
+        no-plusplus: off,
+        brace-style: [error, "stroustrup"],
+        quotes: [error, "double"],
+        valid-jsdoc: [error, {
+            requireReturn: false,
+            requireReturnDescription: false
+        }],
+        indent: [error, 4],
+        space-before-function-paren: [error, "always"]
+    }
+}
