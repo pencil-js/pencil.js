@@ -9,7 +9,7 @@
   "unpkg": "dist/pencil.min.js",
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
-    "lint": "eslint *.js",
+    "lint": "eslint pencil.js modules/**/*.js",
     "build": "webpack",
     "prepublishOnly": "npm run lint && npm run build"
   },
@@ -53,10 +53,9 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.40",
+    "@gmartigny/eslint-config": "^1.0.0",
     "babel-loader": "^8.0.0-beta.0",
     "eslint": "^4.18.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.9.0",
     "uglifyjs-webpack-plugin": "^1.2.1",
     "webpack": "^3.11.0"
   }
