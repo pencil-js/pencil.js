@@ -17,7 +17,7 @@ module.exports = {
         }],
     },
     output: {
-        filename: "dist/text-direction.min.js",
+        filename: "dist/pencil.min.js",
         library: "Pencil",
         libraryTarget: "this",
         libraryExport: "default",

@@ -1,6 +1,5 @@
 import MouseEvent from "@pencil.js/mouseevent";
 import Position from "@pencil.js/position";
-import Scene from "./container/scene";
 
 /**
  * Able to listen and fire events
