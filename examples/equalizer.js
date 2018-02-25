@@ -6,51 +6,51 @@ import Container from "@pencil.js/container";
 import Position from "@pencil.js/position";
 
 
-let scene = new Scene(document.body, {
-    fill: "#CCC"
+const scene = new Scene(document.body, {
+    fill: "#CCC",
 });
 scene.startLoop();
 
-let nbSliders = 3;
-let sliderHeight = Slider.HEIGHT + 20;
-let equalizer = new Rectangle(new Position(200, 100), 50 + 200 + 10, nbSliders * sliderHeight + 10 + 20, {
+const nbSliders = 3;
+const sliderHeight = Slider.HEIGHT + 20;
+const equalizer = new Rectangle(new Position(200, 100), 50 + 200 + 10, nbSliders * sliderHeight + 10 + 20, {
     fill: "#666",
-    stroke: "#333"
+    stroke: "#333",
 });
 scene.addChild(equalizer);
 equalizer.draggable();
 equalizer.resizable({
-    constrain: new Vector(50 + Slider.HEIGHT + 10, sliderHeight + 20, Infinity, 10 * sliderHeight + 20)
+    constrain: new Vector(50 + Slider.HEIGHT + 10, sliderHeight + 20, Infinity, 10 * sliderHeight + 20),
 });
 
 equalizer.addChild(new Text(new Position(10, 5), "Equalizer", {
     fill: "#FFF",
-    fontSize: 15
+    fontSize: 15,
 }));
 
-let sliderList = [];
+const sliderList = [];
 function addSlider (index) {
-    let y = 10 + 20 + index * sliderHeight;
+    const y = 10 + 20 + (index * sliderHeight);
 
-    let wrapper = new Container(new Position(10, y));
-    let valueText = new Text(new Position(), "0", {
+    const wrapper = new Container(new Position(10, y));
+    const valueText = new Text(new Position(), "0", {
         fontSize: Slider.HEIGHT,
-        fill: "#FFF"
+        fill: "#FFF",
     });
     wrapper.addChild(valueText);
 
-    let slider = new Slider(new Position(40, 0), {
+    const slider = new Slider(new Position(40, 0), {
         max: 99,
-        width: 200
+        width: 200,
     });
     wrapper.addChild(slider);
-    slider.on("change", () => valueText.text = slider.value << 0);
+    slider.on("change", () => valueText.text = Math.floor(slider.value));
     sliderList.push(wrapper);
     return wrapper;
 }
 
 equalizer.on("resize", function () {
-    let nbChildren = (this.height - 10 - 20) / sliderHeight;
+    const nbChildren = (this.height - 10 - 20) / sliderHeight;
 
     if (sliderList.length > nbChildren) {
         sliderList.pop().remove();
