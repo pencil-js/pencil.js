@@ -8,8 +8,8 @@ export default class Vector {
      * Vector constructor
      * @param {Position|Number} start - Starting vector's position
      * @param {Position|Number} end - Ending vector's position
-     * @param {Number} [xEnd] -
-     * @param {Number} [yEnd] -
+     * @param {Number} [xEnd] - Horizontal position of the end point (if "start" and "end" are Number)
+     * @param {Number} [yEnd] - Vertical position of the end point
      */
     constructor (start, end, xEnd, yEnd) {
         if (start instanceof Position && end instanceof Position) {
@@ -82,9 +82,6 @@ export default class Vector {
      * @return {Boolean}
      */
     intersect (vector) {
-        const thisDelta = this.getDelta();
-        const otherDelta = vector.getDelta();
-        return Math.sign(thisDelta.crossProduct(vector.start)) !== Math.sign(thisDelta.crossProduct(vector.end)) &&
-            Math.sign(otherDelta.crossProduct(this.start)) !== Math.sign(otherDelta.crossProduct(this.end));
+        return !this.start.isOnSameSide(this.end, vector) && !vector.start.isOnSameSide(vector.end, this);
     }
 }

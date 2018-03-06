@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/circle",
+  "name": "@pencil.js/arc",
   "version": "0.1.0",
-  "description": "Circle shape for Pencil.js package.",
-  "main": "circle.js",
+  "description": "Arc shape for Pencil.js package.",
+  "main": "arc.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
@@ -15,8 +15,9 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/arc": "^0.1.0",
-    "@pencil.js/component": "^0.1.0"
+    "@pencil.js/component": "^0.1.0",
+    "@pencil.js/position": "^0.1.0",
+    "@pencil.js/vector": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

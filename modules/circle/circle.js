@@ -1,28 +1,20 @@
+import Arc from "@pencil.js/arc";
 import Component from "@pencil.js/component";
 
 /**
- * Basic circle class
+ * Circle class
  * @class
  * @extends Component
  */
-export default class Circle extends Component {
+export default class Circle extends Arc {
     /**
      * Circle constructor
-     * @param {Position} position - Center of arc
+     * @param {Position} position - Center of circle
      * @param {Number} radius - Distance from center to outer edge
      * @param {ComponentOptions} options - Drawing options
      */
     constructor (position, radius, options) {
-        super(position, options);
-        this.radius = Math.floor(radius);
-    }
-
-    /**
-     * Draw the circle
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
-     */
-    trace (ctx) {
-        ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
+        super(position, radius, 0, 1, options);
     }
 
     /**
@@ -31,6 +23,6 @@ export default class Circle extends Component {
      * @return {Boolean}
      */
     isHover (position) {
-        return super.isHover(position) && this.position.distance(position) <= this.radius;
+        return Component.prototype.isHover.call(this, position) && this.position.distance(position) <= this.radius;
     }
 }

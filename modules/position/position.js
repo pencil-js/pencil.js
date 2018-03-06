@@ -81,12 +81,16 @@ export default class Position {
     }
 
     /**
-     * Cross product
-     * @param {Position} position - Another position
-     * @return {Number}
+     * Rotate the position around the origin
+     * @param {Number} angle - Angle of rotation in ratio of full circle (0 means no rotation, 1 means go full circle back to same position)
+     * @return {Position}
      */
-    crossProduct (position) {
-        return (this.x * position.y) - (position.x * this.y);
+    rotate (angle) {
+        const { cos, sin } = Math;
+        const degree = angle * 360;
+        const x = (this.x * cos(degree)) - (this.y * sin(degree));
+        const y = (this.y * cos(degree)) + (this.x * sin(degree));
+        return new Position(x, y);
     }
 
     /**
@@ -96,6 +100,29 @@ export default class Position {
      */
     distance (position) {
         return Math.sqrt(((position.x - this.x) ** 2) + ((position.y - this.y) ** 2));
+    }
+
+    /**
+     * Cross product
+     * @param {Position} position - Another position
+     * @return {Number}
+     */
+    crossProduct (position) {
+        return (this.x * position.y) - (position.x * this.y);
+    }
+
+    /**
+     * Define if this is on the same side of a vector as another position
+     * @param {Position} position - Another position
+     * @param {Vector} vector - Any vector
+     * @return {Boolean}
+     */
+    isOnSameSide (position, vector) {
+        const { sign } = Math;
+        const thisMoved = this.subtract(vector.start);
+        const positionMoved = position.subtract(vector.start);
+        const delta = vector.getDelta();
+        return sign(thisMoved.crossProduct(delta)) === sign(positionMoved.crossProduct(delta));
     }
 
     /**
