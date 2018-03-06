@@ -5,6 +5,7 @@ import Vector from "@pencil.js/vector";
 // Events
 import BaseEvent from "@pencil.js/baseevent";
 import MouseEvent from "@pencil.js/mouseevent";
+import KeyboardEvent from "@pencil.js/keyboardevent";
 
 // Trunk
 import EventEmitter from "@pencil.js/eventemitter";
@@ -13,6 +14,7 @@ import Scene from "@pencil.js/scene";
 import Component from "@pencil.js/component";
 
 // Shapes
+import Arc from "@pencil.js/arc";
 import Circle from "@pencil.js/circle";
 import Line from "@pencil.js/line";
 import Polygon from "@pencil.js/polygon";
@@ -34,6 +36,7 @@ export default {
     Container,
     Scene,
     Component,
+    Arc,
     Circle,
     Line,
     Polygon,
@@ -46,6 +49,7 @@ export default {
     Vector,
     BaseEvent,
     MouseEvent,
+    KeyboardEvent,
     Slider,
 };
 export {
@@ -53,6 +57,7 @@ export {
     Container,
     Scene,
     Component,
+    Arc,
     Circle,
     Line,
     Polygon,
@@ -65,5 +70,6 @@ export {
     Vector,
     BaseEvent,
     MouseEvent,
+    KeyboardEvent,
     Slider,
 };

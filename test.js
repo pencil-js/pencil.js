@@ -1,14 +1,18 @@
 /* global test expect */
 
+/* eslint-disable import/no-duplicates */
 import Pencil from "./pencil";
 import {
-    BaseEvent, MouseEvent, Position, Vector, Line, EventEmitter, Container, Scene,
-    Component, Polygon, RegularPolygon, Star, Rectangle, Square, Circle, Text, Slider
+    BaseEvent, MouseEvent, KeyboardEvent, Position, Vector, Line, EventEmitter, Container, Scene,
+    Component, Polygon, RegularPolygon, Star, Rectangle, Square, Arc, Circle, Text, Slider,
 } from "./pencil";
+/* eslint-enable */
 
 test("Pencil namespace", () => {
+    /* eslint-disable import/no-named-as-default-member */
     expect(Pencil.BaseEvent).toBeDefined();
     expect(Pencil.MouseEvent).toBeDefined();
+    expect(Pencil.KeyboardEvent).toBeDefined();
     expect(Pencil.Position).toBeDefined();
     expect(Pencil.Vector).toBeDefined();
     expect(Pencil.Line).toBeDefined();
@@ -21,14 +25,17 @@ test("Pencil namespace", () => {
     expect(Pencil.Star).toBeDefined();
     expect(Pencil.Rectangle).toBeDefined();
     expect(Pencil.Square).toBeDefined();
+    expect(Pencil.Arc).toBeDefined();
     expect(Pencil.Circle).toBeDefined();
     expect(Pencil.Text).toBeDefined();
     expect(Pencil.Slider).toBeDefined();
+    /* eslint-enable */
 });
 
 test("Named imports", () => {
     expect(BaseEvent).toBeDefined();
     expect(MouseEvent).toBeDefined();
+    expect(KeyboardEvent).toBeDefined();
     expect(Position).toBeDefined();
     expect(Vector).toBeDefined();
     expect(Line).toBeDefined();
@@ -41,6 +48,7 @@ test("Named imports", () => {
     expect(Star).toBeDefined();
     expect(Rectangle).toBeDefined();
     expect(Square).toBeDefined();
+    expect(Arc).toBeDefined();
     expect(Circle).toBeDefined();
     expect(Text).toBeDefined();
     expect(Slider).toBeDefined();
