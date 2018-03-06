@@ -15,12 +15,12 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/container": "^0.1.0",
-    "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/baseevent": "^0.1.0",
     "@pencil.js/circle": "^0.1.0",
-    "@pencil.js/vector": "^0.1.0",
+    "@pencil.js/container": "^0.1.0",
     "@pencil.js/position": "^0.1.0",
-    "@pencil.js/baseevent": "^0.1.0"
+    "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/vector": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

@@ -16,8 +16,8 @@
   ],
   "dependencies": {
     "@pencil.js/component": "^0.1.0",
-    "@pencil.js/rectangle": "^0.1.0",
     "@pencil.js/container": "^0.1.0",
+    "@pencil.js/rectangle": "^0.1.0",
     "@pencil.js/scene": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

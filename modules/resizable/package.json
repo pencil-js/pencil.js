@@ -15,11 +15,11 @@
     "interaction"
   ],
   "dependencies": {
-    "@pencil.js/rectangle": "^0.1.0",
-    "@pencil.js/square": "^0.1.0",
-    "@pencil.js/position": "^0.1.0",
     "@pencil.js/draggable": "^0.1.0",
-    "@pencil.js/mouseevent": "^0.1.0"
+    "@pencil.js/mouseevent": "^0.1.0",
+    "@pencil.js/position": "^0.1.0",
+    "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/square": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

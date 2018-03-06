@@ -15,8 +15,8 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/regular-polygon": "^0.1.0",
-    "@pencil.js/position": "^0.1.0"
+    "@pencil.js/position": "^0.1.0",
+    "@pencil.js/regular-polygon": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

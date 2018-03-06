@@ -9,7 +9,7 @@
   "unpkg": "dist/pencil.min.js",
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
-    "lint": "eslint pencil.js modules/**/*.js --ignore-pattern test.js",
+    "lint": "eslint pencil.js modules/**/*.js",
     "test": "jest-webpack",
     "build": "webpack",
     "prepublishOnly": "npm run lint && npm run build"
@@ -32,12 +32,14 @@
   },
   "homepage": "https://github.com/GMartigny/pencil.js#readme",
   "dependencies": {
+    "@pencil.js/arc": "^0.1.0",
     "@pencil.js/baseevent": "^0.1.0",
     "@pencil.js/circle": "^0.1.0",
     "@pencil.js/component": "^0.1.0",
     "@pencil.js/container": "^0.1.0",
     "@pencil.js/draggable": "^0.1.0",
     "@pencil.js/eventemitter": "^0.1.0",
+    "@pencil.js/keyboardevent": "^0.1.0",
     "@pencil.js/line": "^0.1.0",
     "@pencil.js/mouseevent": "^0.1.0",
     "@pencil.js/polygon": "^0.1.0",
@@ -55,14 +57,14 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.40",
-    "@gmartigny/eslint-config": "^1.0.0",
-    "babel-loader": "^8.0.0-beta.0",
+    "@gmartigny/eslint-config": "^1.0.2",
+    "babel-loader": "^8.0.0-beta.2",
     "eslint": "^4.18.1",
     "eslint-plugin-import": "^2.9.0",
     "jest": "^22.4.2",
     "jest-webpack": "^0.4.0",
     "lerna": "^2.9.0",
-    "uglifyjs-webpack-plugin": "^1.2.1",
+    "uglifyjs-webpack-plugin": "^1.2.2",
     "webpack": "^3.11.0"
   }
 }
