@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/position",
+  "name": "@pencil.js/line",
   "version": "0.1.0",
-  "description": "2D space position for Pencil.js package.",
-  "main": "position.js",
+  "description": "Line stroke for Pencil.js package.",
+  "main": "line.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
@@ -12,9 +12,12 @@
   },
   "keywords": [
     "pencil.js",
-    "2d"
+    "shape"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@pencil.js/component": "^0.1.0",
+    "@pencil.js/vector": "^0.1.0"
+  },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

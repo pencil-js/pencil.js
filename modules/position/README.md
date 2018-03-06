@@ -11,8 +11,8 @@
 ## Examples
 
 ```js
-    import Position from "@pencil.js/position";
-    
-    let position = new Position(100, 200);
-    let doublePosition = position.add(position);
+import Position from "@pencil.js/position";
+
+let position = new Position(100, 200);
+let doublePosition = position.add(position);
 ```

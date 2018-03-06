@@ -7,12 +7,14 @@
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "pencil.js",
     "event"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

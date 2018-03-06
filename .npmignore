@@ -1,3 +1,5 @@
+examples/
+modules/
+
 .eslintrc
 webpack.config.js
-examples/

@@ -20,13 +20,13 @@ But, each part is a JS module and can be used independently, ex:
 If you want to go old-school, you can fetch the script with [unpkg](https://unpkg.com/) or [jsdelivr](https://www.jsdelivr.com/).
 
 ```html
-    <script src="https://unpkg.com/pencil.js"></script>
-    <!-- or -->
-    <script src="https://cdn.jsdelivr.net/npm/pencil.js"></script>
-    
-    <script>
-        var scene = new Pencil.Scene();
-    </script>
+<script src="https://unpkg.com/pencil.js"></script>
+<!-- or -->
+<script src="https://cdn.jsdelivr.net/npm/pencil.js"></script>
+
+<script>
+    var scene = new Pencil.Scene();
+</script>
 ```
 
 
@@ -37,26 +37,26 @@ Once you have installed it, you can start to import it using common.js or ES6 sy
 There's multiple ways to rely on the project for your, pick the one that fits you need or preference :
 
 ```js
-    // The whole package under a namespace
-    import Pencil from "pencil.js";
-    
-    const scene = new Pencil.scene();
-    
-    / *** /
-    
-    // Just the part you need
-    import Scene from "@pencil.js/scene";
-    // or
-    import Scene from "pencil.js";
-    
-    const scene = new Scene();
-    
-    / *** /
-    
-    // Works the same way with common.js syntax
-    const Scene = require("pencil.js").Scene;
-    // or
-    const Scene = require("@pencil.js/scene");
+// The whole package under a namespace
+import Pencil from "pencil.js";
+
+const scene = new Pencil.scene();
+
+/ *** /
+
+// Just the part you need
+import Scene from "@pencil.js/scene";
+// or
+import Scene from "pencil.js";
+
+const scene = new Scene();
+
+/ *** /
+
+// Works the same way with common.js syntax
+const Scene = require("pencil.js").Scene;
+// or
+const Scene = require("@pencil.js/scene");
 ```
 
 Since today's web browser don't support module requirements yet, you need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
@@ -65,20 +65,20 @@ Since today's web browser don't support module requirements yet, you need to use
 ## Examples
 
 ```js
-    import Scene from "pencil.js"; // or "@pencil.js/scene"
-    import Rectangle from "pencil.js"; // or "@pencil.js/rectangle"
-    import Position from "pencil.js"; // or "@pencil.js/position"
-    
-    const scene = new Scene(); // create a new scene
-    
-    const width = 80;
-    const height = 50;
-    let rectangle = new Rectangle(new Position(100, 200), width, height, {
-        fill: "red"
-    }); // Create a new rectangle with few parameters
-    scene.addChild(rectangle); // Add the rectangle to the scene
-    
-    scene.render(); // Render the scene once
+import Scene from "pencil.js"; // or "@pencil.js/scene"
+import Rectangle from "pencil.js"; // or "@pencil.js/rectangle"
+import Position from "pencil.js"; // or "@pencil.js/position"
+
+const scene = new Scene(); // create a new scene
+
+const width = 80;
+const height = 50;
+let rectangle = new Rectangle(new Position(100, 200), width, height, {
+    fill: "red"
+}); // Create a new rectangle with few parameters
+scene.addChild(rectangle); // Add the rectangle to the scene
+
+scene.render(); // Render the scene once
 ```
     
 Take a look at [more advanced examples]().
@@ -93,7 +93,8 @@ Or read [the full documentation]().
      * [Component](/modules/eventemitter/container/component)
        * [.draggable()](/modules/eventemitter/container/component/draggable)
        * [Polygon](/modules/eventemitter/container/component/polygon)
-         * [Star](/modules/eventemitter/container/component/polygon/star)
+         * [RegularPolygon](/modules/eventemitter/container/component/polygon/regular-polygon)
+           * [Star](/modules/eventemitter/container/component/polygon/regular-polygon/star)
        * [Rectangle](/modules/eventemitter/container/component/rectangle)
          * [.resizable()](/modules/eventemitter/container/component/rectangle/resizable)
          * [Square](/modules/eventemitter/container/component/rectangle/square)
@@ -118,8 +119,8 @@ Others library exists, but none with a beautiful OOP syntax.
 
 ### Modularity
 Splitting the whole code into modules make everything looks cleaner.
-It also allow you to grab only what you need.
+It also allow you to grab only what you need or replace what you don't like.
 
 ### Documentation
 A complete documentation goes a long way to help devs.
-All functions are assured to have a description and typed arguments and returns.
+All functions are assured to have a description also typed arguments and returns.

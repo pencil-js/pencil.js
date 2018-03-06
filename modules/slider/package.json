@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/position",
+  "name": "@pencil.js/slider",
   "version": "0.1.0",
-  "description": "2D space position for Pencil.js package.",
-  "main": "position.js",
+  "description": "Slider user input for Pencil.js package.",
+  "main": "slider.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
@@ -12,9 +12,16 @@
   },
   "keywords": [
     "pencil.js",
-    "2d"
+    "UI"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@pencil.js/container": "^0.1.0",
+    "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/circle": "^0.1.0",
+    "@pencil.js/vector": "^0.1.0",
+    "@pencil.js/position": "^0.1.0",
+    "@pencil.js/baseevent": "^0.1.0"
+  },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

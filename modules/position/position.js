@@ -25,8 +25,8 @@ export default class Position {
             this.y = position.y;
         }
         else if (position !== undefined && y !== undefined) {
-            this.x = position;
-            this.y = y;
+            this.x = Math.floor(position);
+            this.y = Math.floor(y);
         }
         return this;
     }
@@ -82,7 +82,7 @@ export default class Position {
 
     /**
      * Cross product
-     * @param {Position} position -
+     * @param {Position} position - Another position
      * @return {Number}
      */
     crossProduct (position) {
@@ -104,11 +104,9 @@ export default class Position {
      * @return {Position}
      */
     static average (positions) {
-        const result = new Position();
-        positions.forEach(position => result.add(position));
+        let result = new Position();
+        positions.forEach(position => result = result.add(position));
         const nbPositions = positions.length;
-        result.x /= nbPositions;
-        result.y /= nbPositions;
-        return result;
+        return result.calc((self, other) => self / other, nbPositions);
     }
 }

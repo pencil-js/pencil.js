@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/position",
+  "name": "@pencil.js/regular-polygon",
   "version": "0.1.0",
-  "description": "2D space position for Pencil.js package.",
-  "main": "position.js",
+  "description": "Equiangular and equilateral convex polygon for Pencil.js package.",
+  "main": "regular-polygon.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
@@ -12,9 +12,12 @@
   },
   "keywords": [
     "pencil.js",
-    "2d"
+    "shape"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@pencil.js/polygon": "^0.1.0",
+    "@pencil.js/position": "^0.1.0"
+  },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

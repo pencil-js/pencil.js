@@ -9,7 +9,8 @@
   "unpkg": "dist/pencil.min.js",
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
-    "lint": "eslint pencil.js modules/**/*.js",
+    "lint": "eslint pencil.js modules/**/*.js --ignore-pattern test.js",
+    "test": "jest-webpack",
     "build": "webpack",
     "prepublishOnly": "npm run lint && npm run build"
   },
@@ -24,8 +25,14 @@
     "modular",
     "toolbelt"
   ],
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencil.js/issues"
+  },
+  "homepage": "https://github.com/GMartigny/pencil.js#readme",
   "dependencies": {
-    "@pencil.js/basevent": "^0.1.0",
+    "@pencil.js/baseevent": "^0.1.0",
     "@pencil.js/circle": "^0.1.0",
     "@pencil.js/component": "^0.1.0",
     "@pencil.js/container": "^0.1.0",
@@ -36,6 +43,7 @@
     "@pencil.js/polygon": "^0.1.0",
     "@pencil.js/position": "^0.1.0",
     "@pencil.js/rectangle": "^0.1.0",
+    "@pencil.js/regular-polygon": "^0.1.0",
     "@pencil.js/resizable": "^0.1.0",
     "@pencil.js/scene": "^0.1.0",
     "@pencil.js/slider": "^0.1.0",
@@ -44,21 +52,17 @@
     "@pencil.js/text": "^0.1.0",
     "@pencil.js/vector": "^0.1.0"
   },
-  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/GMartigny/pencil.js/issues"
-  },
-  "homepage": "https://github.com/GMartigny/pencil.js#readme",
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.40",
     "@babel/preset-env": "^7.0.0-beta.40",
+    "@gmartigny/eslint-config": "^1.0.0",
     "babel-loader": "^8.0.0-beta.0",
+    "eslint": "^4.18.1",
+    "eslint-plugin-import": "^2.9.0",
+    "jest": "^22.4.2",
+    "jest-webpack": "^0.4.0",
+    "lerna": "^2.9.0",
     "uglifyjs-webpack-plugin": "^1.2.1",
     "webpack": "^3.11.0"
-  },
-  "peerDependencies": {
-    "eslint": "^4.18.1",
-    "@gmartigny/eslint-config": "^1.0.0"
   }
 }

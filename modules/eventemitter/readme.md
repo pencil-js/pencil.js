@@ -11,15 +11,15 @@ Abstract class for event listener and triggerer.
 ## Examples
 
 ```js
-    import EventEmitter from "@pencil.js/eventemitter";
-    
-    class MyEmitter extends EventEmitter {
-        /**
-         * @override EventEmitter.prototype.fire
-         */
-        fire (eventName, target) {
-            super.fire(eventName);
-            target.someAction(eventName);
-        }
+import EventEmitter from "@pencil.js/eventemitter";
+
+class MyEmitter extends EventEmitter {
+    /**
+     * @override EventEmitter.prototype.fire
+     */
+    fire (eventName, target) {
+        super.fire(eventName);
+        target.someAction(eventName);
     }
+}
 ```
