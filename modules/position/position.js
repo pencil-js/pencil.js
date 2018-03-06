@@ -95,7 +95,7 @@ export default class Position {
 
     /**
      * Compute distance with another position
-     * @param {Position} position -
+     * @param {Position} position - Any position
      * @return {Number}
      */
     distance (position) {

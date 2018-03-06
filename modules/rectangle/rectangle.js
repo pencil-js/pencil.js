@@ -22,9 +22,11 @@ export default class Rectangle extends Component {
     /**
      * Draw the rectangle
      * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Rectangle} Itself
      */
     trace (ctx) {
         ctx.rect(0, 0, this.width, this.height);
+        return this;
     }
 
     /**

@@ -29,11 +29,13 @@ export default class Line extends Component {
     /**
      * Draw the line
      * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Line} Itself
      */
     trace (ctx) {
         const delta = this.vector.getDelta();
         ctx.moveTo(0, 0);
         ctx.lineTo(delta.x, delta.y);
+        return this;
     }
 
     /**

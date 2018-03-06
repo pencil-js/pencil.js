@@ -40,11 +40,13 @@ export default class Polygon extends Component {
     /**
      * Draw the polygon
      * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Polygon} Itself
      */
     trace (ctx) {
         this.points.concat(this.points.slice(0, 2)).forEach((point, index) => {
             ctx[index ? "lineTo" : "moveTo"](point.x, point.y);
         });
+        return this;
     }
 
     /**
