@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Slider user input for Pencil.js package.",
   "main": "slider.js",
+  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"

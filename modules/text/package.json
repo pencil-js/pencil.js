@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Text writing for Pencil.js package.",
   "main": "text.js",
+  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"

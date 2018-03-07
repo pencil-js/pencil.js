@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Square shape for Pencil.js package.",
   "main": "square.js",
+  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"

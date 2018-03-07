@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Allow rectangle to be resized in Pencil.js package.",
   "main": "resizable.js",
+  "files": [],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
