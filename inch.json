@@ -1,0 +1,11 @@
+{
+    "files": {
+        "included": [
+            "pencils.js",
+            "modules/**/*.js"
+        ],
+        "excluded": [
+            "**/test.js"
+        ]
+    }
+}
