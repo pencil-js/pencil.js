@@ -43,8 +43,10 @@ export default class Polygon extends Component {
      * @return {Polygon} Itself
      */
     trace (ctx) {
-        this.points.concat(this.points.slice(0, 2)).forEach((point, index) => {
-            ctx[index ? "lineTo" : "moveTo"](point.x, point.y);
+        ctx.moveTo(0, 0);
+        this.points.slice(1).concat(this.points.slice(0, 2)).forEach((point) => {
+            const pos = point.subtract(this.position);
+            ctx.lineTo(pos.x, pos.y);
         });
         return this;
     }
