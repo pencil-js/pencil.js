@@ -5,7 +5,7 @@
             "modules/**/*.js"
         ],
         "excluded": [
-            "**/test.js"
+            "**/*.test.js"
         ]
     }
 }
