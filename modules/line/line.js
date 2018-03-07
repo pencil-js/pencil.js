@@ -17,8 +17,8 @@ import Vector from "@pencil.js/vector";
 export default class Line extends Component {
     /**
      * Line constructor
-     * @param {Position} start -
-     * @param {Position} end -
+     * @param {Position} start - Start point
+     * @param {Position} end - End point
      * @param {LineOptions} [options] - Drawing options
      */
     constructor (start, end, options) {
