@@ -33,7 +33,6 @@ export default class Line extends Component {
      */
     trace (ctx) {
         const delta = this.vector.getDelta();
-        ctx.moveTo(0, 0);
         ctx.lineTo(delta.x, delta.y);
         return this;
     }

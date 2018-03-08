@@ -137,6 +137,7 @@ export default class Container extends EventEmitter {
         if (this.options.shown) {
             ctx.save();
             ctx.translate((this.position.x), (this.position.y));
+            ctx.moveTo(0, 0);
 
             if (this.options.rotation) {
                 ctx.translate(this.options.rotationAnchor.x, this.options.rotationAnchor.y);
