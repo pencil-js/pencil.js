@@ -20,6 +20,7 @@ import Line from "@pencil.js/line";
 import Spline from "@pencil.js/spline";
 import Polygon from "@pencil.js/polygon";
 import RegularPolygon from "@pencil.js/regular-polygon";
+import Triangle from "@pencil.js/triangle";
 import Star from "@pencil.js/star";
 import Rectangle from "@pencil.js/rectangle";
 import Square from "@pencil.js/square";
@@ -43,6 +44,7 @@ export default {
     Spline,
     Polygon,
     RegularPolygon,
+    Triangle,
     Star,
     Rectangle,
     Square,
@@ -65,6 +67,7 @@ export {
     Spline,
     Polygon,
     RegularPolygon,
+    Triangle,
     Star,
     Rectangle,
     Square,
