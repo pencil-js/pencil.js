@@ -2,7 +2,7 @@
 
 import BaseEvent from "./baseevent";
 
-test("Creation", () => {
+test("BaseEvent creation", () => {
     const target = null;
     const name = "TestEvent";
     const fakeEvent = new BaseEvent(target, name);

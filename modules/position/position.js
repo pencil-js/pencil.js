@@ -1,3 +1,6 @@
+// eslint-disable-next-line no-bitwise
+const floor = x => x << 0;
+
 /**
  * Pair of value in 2d space
  * @class
@@ -9,8 +12,8 @@ export default class Position {
      * @param {Number} y - Horizontal component
      */
     constructor (x = 0, y = 0) {
-        this.x = Math.floor(x);
-        this.y = Math.floor(y);
+        this.x = floor(x);
+        this.y = floor(y);
     }
 
     /**
@@ -25,8 +28,8 @@ export default class Position {
             this.y = position.y;
         }
         else if (position !== undefined && y !== undefined) {
-            this.x = Math.floor(position);
-            this.y = Math.floor(y);
+            this.x = floor(position);
+            this.y = floor(y);
         }
         return this;
     }
@@ -37,6 +40,15 @@ export default class Position {
      */
     clone () {
         return new Position(this.x, this.y);
+    }
+
+    /**
+     * Determine if is equal to another position
+     * @param {Position} position - Any position
+     * @return {Boolean}
+     */
+    equal (position) {
+        return this.x === position.x && this.y === position.y;
     }
 
     /**
@@ -83,7 +95,7 @@ export default class Position {
     /**
      * Multiply by another position or number
      * @param {Position|Number} position - Another position or a number
-     * @param {Number} y - Value for "y" if "position" is a number
+     * @param {Number} [y] - Value for "y" if "position" is a number
      * @return {Position} New instance
      */
     multiply (position, y) {
@@ -93,7 +105,7 @@ export default class Position {
     /**
      * Divide by another position or number
      * @param {Position|Number} position - Another position or a number
-     * @param {Number} y - Value for "y" if "position" is a number
+     * @param {Number} [y] - Value for "y" if "position" is a number
      * @return {Position} New instance
      */
     divide (position, y) {
@@ -119,7 +131,7 @@ export default class Position {
      * @return {Number}
      */
     distance (position) {
-        return Math.sqrt(((position.x - this.x) ** 2) + ((position.y - this.y) ** 2));
+        return Math.hypot(position.x - this.x, position.y - this.y);
     }
 
     /**

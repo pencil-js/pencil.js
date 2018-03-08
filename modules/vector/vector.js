@@ -39,6 +39,15 @@ export default class Vector {
     }
 
     /**
+     * Determine if is equal to another vector
+     * @param {Vector} vector - Any vector
+     * @return {Boolean}
+     */
+    equal (vector) {
+        return this.start.equal(vector.start) && this.end.equal(vector.end);
+    }
+
+    /**
      * Get the vector move with start at (0, 0)
      * @return {Position}
      */
@@ -49,7 +58,7 @@ export default class Vector {
     /**
      * Add a vector to this
      * @param {Vector} vector - Any vector
-     * @return {Vector}
+     * @return {Vector} New instance
      */
     add (vector) {
         return new Vector(this.start.clone(), this.end.add(vector.getDelta()));
@@ -58,22 +67,11 @@ export default class Vector {
     /**
      * Move this vector by another vector
      * @param {Vector} vector - Any vector
-     * @return {Vector}
+     * @return {Vector} New instance
      */
     translate (vector) {
         const delta = vector.getDelta();
         return new Vector(this.start.add(delta), this.end.add(delta));
-    }
-
-    /**
-     * Define if it's hover a position
-     * @param {Position} position - Any position
-     * @return {Boolean}
-     */
-    isHover (position) {
-        const delta = this.getDelta();
-        const zero = new Position();
-        return delta.crossProduct(position) < Number.EPSILON && zero.distance(position) < zero.distance(delta);
     }
 
     /**

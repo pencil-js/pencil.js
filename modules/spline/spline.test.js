@@ -3,7 +3,7 @@
 import Position from "@pencil.js/position";
 import Spline from "./spline";
 
-test("Creation", () => {
+test("Spline creation and trace", () => {
     const n = 5;
     const points = (new Array(n)).fill().map((x, index) => new Position(index, index));
     const spline = new Spline(points, 0.7);
@@ -23,7 +23,7 @@ test("Creation", () => {
     expect(ctx.lineTo.mock.calls.length).toBe(n - 1);
 });
 
-test("Static", () => {
+test("Spline static", () => {
     expect(Spline.prototype.hasOwnProperty("trace")).toBe(true);
 
     const points = [new Position(10, 10), new Position(0, 20), new Position(20, 30)];

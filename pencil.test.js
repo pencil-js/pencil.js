@@ -33,7 +33,7 @@ test("Pencil namespace", () => {
     /* eslint-enable */
 });
 
-test("Named imports", () => {
+test("Pencil named imports", () => {
     expect(BaseEvent).toBeDefined();
     expect(MouseEvent).toBeDefined();
     expect(KeyboardEvent).toBeDefined();

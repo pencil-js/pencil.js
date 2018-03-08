@@ -2,7 +2,7 @@
 
 import KeyboardEvent from "./keyboardevent";
 
-test("Creation", () => {
+test("KeyboardEvent creation", () => {
     const target = null;
     const name = "TestEvent";
     const key = "shift";
