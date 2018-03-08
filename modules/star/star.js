@@ -3,7 +3,7 @@ import RegularPolygon from "@pencil.js/regular-polygon";
 /**
  * Star class
  * @class
- * @extends Polygon
+ * @extends RegularPolygon
  */
 export default class Star extends RegularPolygon {
     /**

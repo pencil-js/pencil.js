@@ -1,4 +1,4 @@
-/* global test expect jest */
+/* global test expect */
 
 import Position from "@pencil.js/position";
 import Vector from "./vector";

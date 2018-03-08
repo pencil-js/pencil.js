@@ -114,7 +114,8 @@ export default class Position {
 
     /**
      * Rotate the position around the origin
-     * @param {Number} angle - Angle of rotation in ratio of full circle (0 means no rotation, 1 means go full circle back to same position)
+     * @param {Number} angle - Angle of rotation in ratio of full circle
+     * (0 means no rotation, 1 means go full circle back to same position)
      * @return {Position}
      */
     rotate (angle) {
