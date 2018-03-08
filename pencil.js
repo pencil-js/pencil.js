@@ -17,6 +17,7 @@ import Component from "@pencil.js/component";
 import Arc from "@pencil.js/arc";
 import Circle from "@pencil.js/circle";
 import Line from "@pencil.js/line";
+import Spline from "@pencil.js/spline";
 import Polygon from "@pencil.js/polygon";
 import RegularPolygon from "@pencil.js/regular-polygon";
 import Star from "@pencil.js/star";
@@ -39,6 +40,7 @@ export default {
     Arc,
     Circle,
     Line,
+    Spline,
     Polygon,
     RegularPolygon,
     Star,
@@ -60,6 +62,7 @@ export {
     Arc,
     Circle,
     Line,
+    Spline,
     Polygon,
     RegularPolygon,
     Star,

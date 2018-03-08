@@ -3,7 +3,7 @@
 /* eslint-disable import/no-duplicates */
 import Pencil from "./pencil";
 import {
-    BaseEvent, MouseEvent, KeyboardEvent, Position, Vector, Line, EventEmitter, Container, Scene,
+    BaseEvent, MouseEvent, KeyboardEvent, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
     Component, Polygon, RegularPolygon, Star, Rectangle, Square, Arc, Circle, Text, Slider,
 } from "./pencil";
 /* eslint-enable */
@@ -16,6 +16,7 @@ test("Pencil namespace", () => {
     expect(Pencil.Position).toBeDefined();
     expect(Pencil.Vector).toBeDefined();
     expect(Pencil.Line).toBeDefined();
+    expect(Pencil.Spline).toBeDefined();
     expect(Pencil.EventEmitter).toBeDefined();
     expect(Pencil.Container).toBeDefined();
     expect(Pencil.Scene).toBeDefined();
@@ -39,6 +40,7 @@ test("Named imports", () => {
     expect(Position).toBeDefined();
     expect(Vector).toBeDefined();
     expect(Line).toBeDefined();
+    expect(Spline).toBeDefined();
     expect(EventEmitter).toBeDefined();
     expect(Container).toBeDefined();
     expect(Scene).toBeDefined();
