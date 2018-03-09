@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/keyboardevent",
+  "name": "@pencil.js/keyboard-event",
   "version": "0.1.0",
   "description": "Keyboard related event for Pencil.js package.",
-  "main": "keyboardevent.js",
+  "main": "keyboard-event.js",
   "files": [],
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "@pencil.js/arc": "^0.1.0",
-    "@pencil.js/baseevent": "^0.1.0"
+    "@pencil.js/base-event": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

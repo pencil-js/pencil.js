@@ -5,13 +5,13 @@ Class for Pencil.js keyboard related events.
 
 ## Installation
 
-    npm install @pencil.js/keyboardevent
+    npm install @pencil.js/keyboard-event
 
 
 ## Examples
 
 ```js
-import KeyboardEvent from "@pencil.js/keyboardevent";
+import KeyboardEvent from "@pencil.js/keyboard-event";
 
 component.fire(new KeyboardEvent(component, "eventName", "ctrl"));
 ```

@@ -1,4 +1,4 @@
-import BaseEvent from "@pencil.js/baseevent";
+import BaseEvent from "@pencil.js/base-event";
 
 /**
  * Keyboard event class

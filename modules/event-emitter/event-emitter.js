@@ -1,4 +1,4 @@
-import MouseEvent from "@pencil.js/mouseevent";
+import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 
 /**

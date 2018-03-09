@@ -1,5 +1,5 @@
 import Component from "@pencil.js/component";
-import MouseEvent from "@pencil.js/mouseevent";
+import MouseEvent from "@pencil.js/mouse-event";
 
 /**
  * @typedef {Object} DraggableOptions

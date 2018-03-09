@@ -16,7 +16,7 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/baseevent": "^0.1.0",
+    "@pencil.js/base-event": "^0.1.0",
     "@pencil.js/circle": "^0.1.0",
     "@pencil.js/container": "^0.1.0",
     "@pencil.js/position": "^0.1.0",

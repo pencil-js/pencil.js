@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "@pencil.js/draggable": "^0.1.0",
-    "@pencil.js/mouseevent": "^0.1.0",
+    "@pencil.js/mouse-event": "^0.1.0",
     "@pencil.js/position": "^0.1.0",
     "@pencil.js/rectangle": "^0.1.0",
     "@pencil.js/square": "^0.1.0"

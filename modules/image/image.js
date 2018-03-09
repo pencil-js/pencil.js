@@ -1,6 +1,6 @@
 import { truncate } from "@pencil.js/math";
 import Rectangle from "@pencil.js/rectangle";
-import BaseEvent from "@pencil.js/baseevent";
+import BaseEvent from "@pencil.js/base-event";
 
 /**
  * Image class

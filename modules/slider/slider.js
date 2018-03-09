@@ -3,7 +3,7 @@ import Rectangle from "@pencil.js/rectangle";
 import Circle from "@pencil.js/circle";
 import Vector from "@pencil.js/vector";
 import Position from "@pencil.js/position";
-import BaseEvent from "@pencil.js/baseevent";
+import BaseEvent from "@pencil.js/base-event";
 
 /**
  * @typedef {Object} SliderOptions

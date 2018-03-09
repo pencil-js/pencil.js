@@ -1,7 +1,7 @@
 /* global test expect */
 
 import Position from "@pencil.js/position";
-import MouseEvent from "./mouseevent";
+import MouseEvent from "./mouse-event";
 
 test("MouseEvent creation", () => {
     const target = null;

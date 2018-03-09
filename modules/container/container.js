@@ -1,4 +1,4 @@
-import EventEmitter from "@pencil.js/eventemitter";
+import EventEmitter from "@pencil.js/event-emitter";
 import Position from "@pencil.js/position";
 import { truncate } from "@pencil.js/math";
 

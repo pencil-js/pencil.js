@@ -1,17 +1,18 @@
 # BaseEvent
 
-Main class for Pencil.js events.
+Vector between two point in 2D space.
 
 
 ## Installation
 
-    npm install @pencil.js/baseevent
+    npm install @pencil.js/vector
 
 
 ## Examples
 
 ```js
-import BaseEvent from "@pencil.js/baseevent";
+import Vector from "@pencil.js/vector";
 
-component.fire(new BaseEvent(component, "eventName"));
+const vector = new Vector(10, 20, 30, 40);
+vector.length();
 ```

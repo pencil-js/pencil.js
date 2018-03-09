@@ -1,6 +1,6 @@
 /* global test expect */
 
-import BaseEvent from "./baseevent";
+import BaseEvent from "./base-event";
 
 test("BaseEvent creation", () => {
     const target = null;

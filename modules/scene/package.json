@@ -16,10 +16,10 @@
     "renderer"
   ],
   "dependencies": {
-    "@pencil.js/baseevent": "^0.1.0",
+    "@pencil.js/base-event": "^0.1.0",
     "@pencil.js/container": "^0.1.0",
-    "@pencil.js/eventemitter": "^0.1.0",
-    "@pencil.js/mouseevent": "^0.1.0",
+    "@pencil.js/event-emitter": "^0.1.0",
+    "@pencil.js/mouse-event": "^0.1.0",
     "@pencil.js/position": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

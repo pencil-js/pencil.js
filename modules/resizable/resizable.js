@@ -3,7 +3,7 @@ import Square from "@pencil.js/square";
 // import Polygon from "@pencil.js/polygon";
 import Position from "@pencil.js/position";
 import "@pencil.js/draggable";
-import MouseEvent from "@pencil.js/mouseevent";
+import MouseEvent from "@pencil.js/mouse-event";
 
 /**
  * @typedef {Object} ResizableOptions

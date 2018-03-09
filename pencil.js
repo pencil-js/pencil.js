@@ -4,12 +4,12 @@ import Vector from "@pencil.js/vector";
 import * as Math from "@pencil.js/math";
 
 // Events
-import BaseEvent from "@pencil.js/baseevent";
-import MouseEvent from "@pencil.js/mouseevent";
-import KeyboardEvent from "@pencil.js/keyboardevent";
+import BaseEvent from "@pencil.js/base-event";
+import MouseEvent from "@pencil.js/mouse-event";
+import KeyboardEvent from "@pencil.js/keyboard-event";
 
 // Trunk
-import EventEmitter from "@pencil.js/eventemitter";
+import EventEmitter from "@pencil.js/event-emitter";
 import Container from "@pencil.js/container";
 import Scene from "@pencil.js/scene";
 import Component from "@pencil.js/component";

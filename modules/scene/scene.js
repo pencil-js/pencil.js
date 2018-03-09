@@ -1,7 +1,7 @@
 import Container from "@pencil.js/container";
-import EventEmitter from "@pencil.js/eventemitter";
-import MouseEvent from "@pencil.js/mouseevent";
-import BaseEvent from "@pencil.js/baseevent";
+import EventEmitter from "@pencil.js/event-emitter";
+import MouseEvent from "@pencil.js/mouse-event";
+import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 
 /**

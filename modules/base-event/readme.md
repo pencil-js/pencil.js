@@ -5,13 +5,13 @@ Main class for Pencil.js events.
 
 ## Installation
 
-    npm install @pencil.js/baseevent
+    npm install @pencil.js/base-event
 
 
 ## Examples
 
 ```js
-import BaseEvent from "@pencil.js/baseevent";
+import BaseEvent from "@pencil.js/base-event";
 
 component.fire(new BaseEvent(component, "eventName"));
 ```

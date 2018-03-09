@@ -33,7 +33,6 @@ If you want to go old-school, you can fetch the script with [unpkg](https://unpk
 
 
 ## Usage
-
 Once you have installed it, you can start to import it using common.js or ES6 syntax.
 
 There's multiple ways to rely on the project for your, pick the one that fits you need or preference :
@@ -65,7 +64,6 @@ Since today's web browser don't support module requirements yet, you need to use
 
 
 ## Examples
-
 ```js
 import Scene from "pencil.js"; // or "@pencil.js/scene"
 import Rectangle from "pencil.js"; // or "@pencil.js/rectangle"
@@ -87,9 +85,10 @@ Take a look at [more advanced examples]().
 
 Or read [the full documentation]().
 
+
 ## Modules
 
- * [EventEmitter](modules/eventemitter)
+ * [EventEmitter](modules/event-emitter)
    * [Container](modules/container)
      * [Scene](modules/scene)
      * [Component](modules/component)
@@ -110,8 +109,9 @@ Or read [the full documentation]().
  * [Position](modules/position)
  * [Vector](modules/vector)
  * [Math](modules/math)
- * [BaseEvent](modules/baseevent)
-   * [MouseEvent](modules/mouseevent)
+ * [BaseEvent](modules/base-event)
+   * [MouseEvent](modules/mouse-event)
+   * [KeyboardEvent](modules/keyboard-event)
 
 ## Pitfalls
 
@@ -134,13 +134,16 @@ If you want clean, easy to use syntax, be welcome my friend.
 Drawing in a canvas is not trivial.
 First of all, the goal is to ease the use of canvas in a browser.
 
+
 ### OOP
 OOP is great, OOP is almighty, OOP saves lives !
 Others library exists, but none with a beautiful OOP syntax.
 
+
 ### Modularity
 Splitting the whole code into modules make everything looks cleaner.
 It also allow you to grab only what you need or replace what you don't like.
+
 
 ### Documentation
 A complete documentation goes a long way to help devs.

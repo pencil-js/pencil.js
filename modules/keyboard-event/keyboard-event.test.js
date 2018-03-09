@@ -1,6 +1,6 @@
 /* global test expect */
 
-import KeyboardEvent from "./keyboardevent";
+import KeyboardEvent from "./keyboard-event";
 
 test("KeyboardEvent creation", () => {
     const target = null;

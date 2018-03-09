@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/eventemitter",
+  "name": "@pencil.js/event-emitter",
   "version": "0.1.0",
   "description": "Event emitter for Pencil.js package.",
-  "main": "eventemitter.js",
+  "main": "event-emitter.js",
   "files": [],
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "listener"
   ],
   "dependencies": {
-    "@pencil.js/mouseevent": "^0.1.0",
+    "@pencil.js/mouse-event": "^0.1.0",
     "@pencil.js/position": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

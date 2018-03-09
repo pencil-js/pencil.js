@@ -16,7 +16,7 @@
     "asset"
   ],
   "dependencies": {
-    "@pencil.js/baseevent": "^0.1.0",
+    "@pencil.js/base-event": "^0.1.0",
     "@pencil.js/math": "^0.1.0",
     "@pencil.js/rectangle": "^0.1.0"
   },
