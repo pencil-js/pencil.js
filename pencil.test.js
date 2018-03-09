@@ -4,7 +4,7 @@
 import Pencil from "./pencil";
 import {
     BaseEvent, MouseEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
-    Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Arc, Circle, Text, Slider,
+    Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Circle, Text, Slider,
 } from "./pencil";
 /* eslint-enable */
 
@@ -28,6 +28,7 @@ test("Pencil namespace", () => {
     expect(Pencil.Star).toBeDefined();
     expect(Pencil.Rectangle).toBeDefined();
     expect(Pencil.Square).toBeDefined();
+    expect(Pencil.Image).toBeDefined();
     expect(Pencil.Arc).toBeDefined();
     expect(Pencil.Circle).toBeDefined();
     expect(Pencil.Text).toBeDefined();
@@ -54,6 +55,7 @@ test("Pencil named imports", () => {
     expect(Star).toBeDefined();
     expect(Rectangle).toBeDefined();
     expect(Square).toBeDefined();
+    expect(Image).toBeDefined();
     expect(Arc).toBeDefined();
     expect(Circle).toBeDefined();
     expect(Text).toBeDefined();

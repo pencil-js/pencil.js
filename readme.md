@@ -99,16 +99,33 @@ Or read [the full documentation]().
        * [Polygon](modules/polygon)
          * [RegularPolygon](modules/regular-polygon)
            * [Star](modules/star)
+           * [Triangle](modules/triangle)
        * [Rectangle](modules/rectangle)
          * [.resizable()](modules/resizable)
          * [Square](modules/square)
+         * [Image](modules/image)
        * [Circle](modules/circle)
        * [Text](modules/text)
      * [Slider](modules/slider)
  * [Position](modules/position)
  * [Vector](modules/vector)
+ * [Math](modules/math)
  * [BaseEvent](modules/baseevent)
    * [MouseEvent](modules/mouseevent)
+
+## Pitfalls
+
+### Naming
+Some module have the same name as some Javascript global (eg: Image, Math). Importing them without namespace will overrides these globals and lead to potential bugs.
+
+In any case, I recommend you use a namespace (eg: ``import Pencil from "pencil.js"``, ``import * as Pencil from "@pencil.js/math"``)
+
+
+### Performance
+Even if it's ok, this package is not built around performance.
+
+If you're looking to draw thousand of shapes in your particle generator, try [Processing](https://processing.org/) instead. 
+If you want clean, easy to use syntax, be welcome my friend.
 
 
 ## Purpose

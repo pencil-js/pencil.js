@@ -25,6 +25,7 @@ import Triangle from "@pencil.js/triangle";
 import Star from "@pencil.js/star";
 import Rectangle from "@pencil.js/rectangle";
 import Square from "@pencil.js/square";
+import Image from "@pencil.js/image";
 import Text from "@pencil.js/text";
 
 // Complex
@@ -49,6 +50,7 @@ export default {
     Star,
     Rectangle,
     Square,
+    Image,
     Text,
     Math,
     Position,
@@ -73,6 +75,7 @@ export {
     Star,
     Rectangle,
     Square,
+    Image,
     Text,
     Math,
     Position,

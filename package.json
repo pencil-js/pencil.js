@@ -39,6 +39,7 @@
     "@pencil.js/container": "^0.1.0",
     "@pencil.js/draggable": "^0.1.0",
     "@pencil.js/eventemitter": "^0.1.0",
+    "@pencil.js/image": "^0.1.0",
     "@pencil.js/keyboardevent": "^0.1.0",
     "@pencil.js/line": "^0.1.0",
     "@pencil.js/math": "^0.1.0",
