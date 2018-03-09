@@ -1,6 +1,7 @@
 // Basics
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
+import * as Math from "@pencil.js/math";
 
 // Events
 import BaseEvent from "@pencil.js/baseevent";
@@ -49,6 +50,7 @@ export default {
     Rectangle,
     Square,
     Text,
+    Math,
     Position,
     Vector,
     BaseEvent,
@@ -72,6 +74,7 @@ export {
     Rectangle,
     Square,
     Text,
+    Math,
     Position,
     Vector,
     BaseEvent,

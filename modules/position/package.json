@@ -15,7 +15,9 @@
     "pencil.js",
     "2d"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "@pencil.js/math": "^0.1.0"
+  },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

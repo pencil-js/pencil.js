@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "@pencil.js/component": "^0.1.0",
+    "@pencil.js/math": "^0.1.0",
     "@pencil.js/position": "^0.1.0",
     "@pencil.js/vector": "^0.1.0"
   },

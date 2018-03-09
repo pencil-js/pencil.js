@@ -1,4 +1,5 @@
 import Component from "@pencil.js/component";
+import { truncate } from "@pencil.js/math";
 
 /**
  * Basic rectangle
@@ -15,8 +16,8 @@ export default class Rectangle extends Component {
      */
     constructor (position, width = 0, height = 0, options) {
         super(position, options);
-        this.width = Math.floor(width);
-        this.height = Math.floor(height);
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -25,7 +26,7 @@ export default class Rectangle extends Component {
      * @return {Rectangle} Itself
      */
     trace (ctx) {
-        ctx.rect(0, 0, this.width, this.height);
+        ctx.rect(0, 0, truncate(this.width), truncate(this.height));
         return this;
     }
 
@@ -35,8 +36,12 @@ export default class Rectangle extends Component {
      * @return {Boolean}
      */
     isHover (position) {
+        const x = truncate(this.position.x);
+        const y = truncate(this.position.y);
+        const width = truncate(this.width);
+        const height = truncate(this.height);
         return super.isHover(position) &&
-            this.position.x <= position.x && position.x <= this.position.x + this.width &&
-            this.position.y <= position.y && position.y <= this.position.y + this.height;
+            x <= position.x && position.x <= x + width &&
+            y <= position.y && position.y <= y + height;
     }
 }

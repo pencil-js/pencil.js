@@ -1,6 +1,7 @@
 import Component from "@pencil.js/component";
 import Vector from "@pencil.js/vector";
 import Position from "@pencil.js/position";
+import { truncate } from "@pencil.js/math";
 
 const pi2 = Math.PI * 2;
 
@@ -20,7 +21,7 @@ export default class Arc extends Component {
      */
     constructor (position, radius, startAngle = 0, endAngle = 1, options) {
         super(position, options);
-        this.radius = Math.floor(radius);
+        this.radius = radius;
         this.startAngle = startAngle;
         this.endAngle = endAngle;
     }
@@ -31,7 +32,7 @@ export default class Arc extends Component {
      * @return {Arc} Itself
      */
     trace (ctx) {
-        ctx.arc(0, 0, this.radius, this.startAngle * pi2, this.endAngle * pi2);
+        ctx.arc(0, 0, truncate(this.radius), this.startAngle * pi2, this.endAngle * pi2);
         return this;
     }
 
@@ -41,9 +42,10 @@ export default class Arc extends Component {
      * @return {Boolean}
      */
     isHover (position) {
-        const top = new Position(0, this.radius);
+        const radius = truncate(this.radius);
+        const top = new Position(0, radius);
         const flatPart = new Vector(top.rotate(this.startAngle), top.rotate(this.endAngle));
         return super.isHover(position) &&
-            this.position.distance(position) < this.radius && this.position.isOnSameSide(position, flatPart);
+            this.position.distance(position) < radius && this.position.isOnSameSide(position, flatPart);
     }
 }

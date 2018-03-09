@@ -1,4 +1,4 @@
-/* global test expect */
+/* global test expect describe  beforeEach afterEach */
 
 import Position from "./position";
 
@@ -8,22 +8,22 @@ test("Position creation", () => {
     expect(pos.x).toBe(0);
     expect(pos.y).toBe(0);
 
-    const pos2 = new Position(42, 55.55);
+    const pos2 = new Position(-42, 55.55);
 
-    expect(pos2.x).toBe(42);
-    expect(pos2.y).toBe(55);
+    expect(pos2.x).toBe(-42);
+    expect(pos2.y).toBe(55.55);
 });
 
 test("Position set values", () => {
     const pos = new Position();
-    pos.set(42, 55.55);
+    pos.set(-42, 55.55);
 
-    expect(pos.x).toBe(42);
-    expect(pos.y).toBe(55);
+    expect(pos.x).toBe(-42);
+    expect(pos.y).toBe(55.55);
 
     pos.set(new Position(99.99, 1));
 
-    expect(pos.x).toBe(99);
+    expect(pos.x).toBe(99.99);
     expect(pos.y).toBe(1);
 });
 
@@ -35,70 +35,84 @@ test("Position clone and equal", () => {
     expect(pos.equal(clone)).toBe(true);
 });
 
-test("Position Calculations", () => {
-    const one = new Position(80, 90);
-    const two = new Position(60, 70);
-    // eslint-disable-next-line no-bitwise
-    const floor = x => x << 0;
+describe("Position calculations", () => {
+    let one;
+    let two;
 
-    // Subtract
-    const subPos = one.subtract(two);
-    expect(subPos.x).toBe(floor(one.x - two.x));
-    expect(subPos.y).toBe(floor(one.y - two.y));
+    beforeEach(() => {
+        one = new Position(80, 90);
+        two = new Position(60, 70);
+    });
 
-    const subVal = one.subtract(33);
-    expect(subVal.x).toBe(floor(one.x - 33));
-    expect(subVal.y).toBe(floor(one.y - 33));
+    afterEach(() => {
+        // Original unchanged
+        expect(one.x).toBe(80);
+        expect(one.y).toBe(90);
 
-    const subTwoVal = one.subtract(100.5, 0.8);
-    expect(subTwoVal.x).toBe(floor(one.x - 100.5));
-    expect(subTwoVal.y).toBe(floor(one.y - 0.8));
+        expect(two.x).toBe(60);
+        expect(two.y).toBe(70);
+    });
 
-    // Add
-    const addPos = one.add(two);
-    expect(addPos.x).toBe(floor(one.x + two.x));
-    expect(addPos.y).toBe(floor(one.y + two.y));
+    test("Position subtract", () => {
 
-    const addVal = one.add(5);
-    expect(addVal.x).toBe(floor(one.x + 5));
-    expect(addVal.y).toBe(floor(one.y + 5));
+        // Subtract
+        const subPos = one.subtract(two);
+        expect(subPos.x).toBe(one.x - two.x);
+        expect(subPos.y).toBe(one.y - two.y);
 
-    const addTwoVal = one.add(10, 0.9);
-    expect(addTwoVal.x).toBe(floor(one.x + 10));
-    expect(addTwoVal.y).toBe(floor(one.y + 0.9));
+        const subVal = one.subtract(33);
+        expect(subVal.x).toBe(one.x - 33);
+        expect(subVal.y).toBe(one.y - 33);
 
-    // Divide
-    const divPos = one.divide(two);
-    expect(divPos.x).toBe(floor(one.x / two.x));
-    expect(divPos.y).toBe(floor(one.y / two.y));
+        const subTwoVal = one.subtract(100.5, 0.8);
+        expect(subTwoVal.x).toBe(one.x - 100.5);
+        expect(subTwoVal.y).toBe(one.y - 0.8);
+    });
 
-    const divVal = one.divide(0.2);
-    expect(divVal.x).toBe(floor(one.x / 0.2));
-    expect(divVal.y).toBe(floor(one.y / 0.2));
+    test("Position add", () => {
+        // Add
+        const addPos = one.add(two);
+        expect(addPos.x).toBe(one.x + two.x);
+        expect(addPos.y).toBe(one.y + two.y);
 
-    const divTwoVal = one.divide(3, 20);
-    expect(divTwoVal.x).toBe(floor(one.x / 3));
-    expect(divTwoVal.y).toBe(floor(one.y / 20));
+        const addVal = one.add(5);
+        expect(addVal.x).toBe(one.x + 5);
+        expect(addVal.y).toBe(one.y + 5);
 
-    // Multiply
-    const multPos = one.multiply(two);
-    expect(multPos.x).toBe(floor(one.x * two.x));
-    expect(multPos.y).toBe(floor(one.y * two.y));
+        const addTwoVal = one.add(10, 0.9);
+        expect(addTwoVal.x).toBe(one.x + 10);
+        expect(addTwoVal.y).toBe(one.y + 0.9);
+    });
 
-    const multVal = one.multiply(10);
-    expect(multVal.x).toBe(floor(one.x * 10));
-    expect(multVal.y).toBe(floor(one.y * 10));
+    test("Position divide", () => {
+        // Divide
+        const divPos = one.divide(two);
+        expect(divPos.x).toBe(one.x / two.x);
+        expect(divPos.y).toBe(one.y / two.y);
 
-    const multTwoVal = one.multiply(0.5, 20);
-    expect(multTwoVal.x).toBe(floor(one.x * 0.5));
-    expect(multTwoVal.y).toBe(floor(one.y * 20));
+        const divVal = one.divide(0.2);
+        expect(divVal.x).toBe(one.x / 0.2);
+        expect(divVal.y).toBe(one.y / 0.2);
 
-    // Original unchanged
-    expect(one.x).toBe(80);
-    expect(one.y).toBe(90);
+        const divTwoVal = one.divide(3, 20);
+        expect(divTwoVal.x).toBe(one.x / 3);
+        expect(divTwoVal.y).toBe(one.y / 20);
+    });
 
-    expect(two.x).toBe(60);
-    expect(two.y).toBe(70);
+    test("Position multiply", () => {
+        // Multiply
+        const multPos = one.multiply(two);
+        expect(multPos.x).toBe(one.x * two.x);
+        expect(multPos.y).toBe(one.y * two.y);
+
+        const multVal = one.multiply(10);
+        expect(multVal.x).toBe(one.x * 10);
+        expect(multVal.y).toBe(one.y * 10);
+
+        const multTwoVal = one.multiply(0.5, 20);
+        expect(multTwoVal.x).toBe(one.x * 0.5);
+        expect(multTwoVal.y).toBe(one.y * 20);
+    });
 });
 
 test("Position distance", () => {
@@ -116,6 +130,6 @@ test("Position average", () => {
 
     expect(average instanceof Position).toBe(true);
     const avr = 4.5;
-    expect(average.x).toBe(Math.floor(avr));
-    expect(average.y).toBe(Math.floor(avr * 7));
+    expect(average.x).toBe(avr);
+    expect(average.y).toBe(avr * 7);
 });

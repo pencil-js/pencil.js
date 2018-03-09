@@ -1,13 +1,6 @@
 import EventEmitter from "@pencil.js/eventemitter";
 import Position from "@pencil.js/position";
-
-/**
- * @typedef {Object} ContainerOptions
- * @prop {Boolean} [shown=true] - Is shown
- * @prop {Number} [rotation=0] - Rotation in degree (clockwise)
- * @prop {Position} [rotationAnchor=new Position(0, 0)] - Center of rotation relative to this position
- * @prop {Number} [zIndex=0] -
- */
+import { truncate } from "@pencil.js/math";
 
 /**
  * Container class
@@ -22,6 +15,9 @@ export default class Container extends EventEmitter {
      */
     constructor (position = new Position(), options) {
         super();
+        /**
+         * @type {Position}
+         */
         this.position = position;
         /**
          * @type {ContainerOptions}
@@ -31,6 +27,9 @@ export default class Container extends EventEmitter {
          * @type {Array<Container>}
          */
         this.children = [];
+        /**
+         * @type {Container}
+         */
         this.parent = null;
     }
 
@@ -136,7 +135,7 @@ export default class Container extends EventEmitter {
     render (ctx, drawing) {
         if (this.options.shown) {
             ctx.save();
-            ctx.translate((this.position.x), (this.position.y));
+            ctx.translate(truncate(this.position.x), truncate(this.position.y));
             ctx.moveTo(0, 0);
 
             if (this.options.rotation) {
@@ -160,6 +159,13 @@ export default class Container extends EventEmitter {
         return this;
     }
 
+    /**
+     * @typedef {Object} ContainerOptions
+     * @prop {Boolean} [shown=true] - Is shown
+     * @prop {Number} [rotation=0] - Rotation in degree (clockwise)
+     * @prop {Position} [rotationAnchor=new Position(0, 0)] - Center of rotation relative to this position
+     * @prop {Number} [zIndex=0] -
+     */
     /**
      * @return {ContainerOptions}
      */

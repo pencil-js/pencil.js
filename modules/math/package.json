@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/spline",
+  "name": "@pencil.js/math",
   "version": "0.1.0",
-  "description": "Curve with multiple point for Pencil.js package.",
-  "main": "spline.js",
+  "description": "Math wrapper for Pencil.js package.",
+  "main": "math.js",
   "files": [],
   "repository": {
     "type": "git",
@@ -13,12 +13,11 @@
   },
   "keywords": [
     "pencil.js",
-    "line"
+    "utilities",
+    "mathematic",
+    "arithmetic"
   ],
   "dependencies": {
-    "@pencil.js/line": "^0.1.0",
-    "@pencil.js/math": "^0.1.0",
-    "@pencil.js/position": "^0.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

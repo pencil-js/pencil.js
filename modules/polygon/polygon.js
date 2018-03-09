@@ -1,5 +1,6 @@
 import Component from "@pencil.js/component";
 import Vector from "@pencil.js/vector";
+import { truncate } from "@pencil.js/math";
 
 /**
  * Polygon class
@@ -9,17 +10,23 @@ import Vector from "@pencil.js/vector";
 export default class Polygon extends Component {
     /**
      * Polygon constructor
-     * @param {Array<Position>} points -
+     * @param {Array<Position>} points - Set of vertices defining the polygon
      * @param {ComponentOptions} options - Drawing options
      */
     constructor (points, options) {
         const min = Polygon.MIN_NB_POINTS;
         if (points.length < min) {
-            throw new RangeError(`Regular polygons can't have less than ${min} branches, but ${points.length} asked.`);
+            throw new RangeError(`Regular polygons can't have less than ${min} branches, but ${points.length} given.`);
         }
         super(points[0], options);
 
+        /**
+         * @type {Array<Position>}
+         */
         this.points = points;
+        /**
+         * @type {Number}
+         */
         this.nbPoints = points.length;
     }
 
@@ -45,7 +52,7 @@ export default class Polygon extends Component {
     trace (ctx) {
         this.points.slice(1).concat(this.points.slice(0, 2)).forEach((point) => {
             const pos = point.subtract(this.position);
-            ctx.lineTo(pos.x, pos.y);
+            ctx.lineTo(truncate(pos.x), truncate(pos.y));
         });
         return this;
     }

@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-bitwise
-const floor = x => x << 0;
+import { equal } from "@pencil.js/math";
 
 /**
  * Pair of value in 2d space
@@ -12,8 +11,8 @@ export default class Position {
      * @param {Number} y - Horizontal component
      */
     constructor (x = 0, y = 0) {
-        this.x = floor(x);
-        this.y = floor(y);
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -28,8 +27,8 @@ export default class Position {
             this.y = position.y;
         }
         else if (position !== undefined && y !== undefined) {
-            this.x = floor(position);
-            this.y = floor(y);
+            this.x = position;
+            this.y = y;
         }
         return this;
     }
@@ -48,7 +47,7 @@ export default class Position {
      * @return {Boolean}
      */
     equal (position) {
-        return this.x === position.x && this.y === position.y;
+        return equal(this.x, position.x) && equal(this.y, position.y);
     }
 
     /**

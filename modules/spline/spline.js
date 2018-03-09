@@ -1,5 +1,6 @@
 import Line from "@pencil.js/line";
 import Position from "@pencil.js/position";
+import { equal } from "@pencil.js/math";
 
 /**
  * Spline class
@@ -30,7 +31,7 @@ export default class Spline extends Line {
         }
         else {
             const points = this.points.map(point => point.subtract(this.position));
-            if (this.tension === 0) {
+            if (equal(this.tension, 0)) {
                 points.slice(1).forEach(point => ctx.lineTo(point.x, point.y));
             }
             else {
