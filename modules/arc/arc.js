@@ -1,9 +1,7 @@
 import Component from "@pencil.js/component";
 import Vector from "@pencil.js/vector";
 import Position from "@pencil.js/position";
-import { truncate } from "@pencil.js/math";
-
-const pi2 = Math.PI * 2;
+import { truncate, radianCircle } from "@pencil.js/math";
 
 /**
  * Arc class
@@ -16,10 +14,10 @@ export default class Arc extends Component {
      * @param {Position} position - Center of arc
      * @param {Number} radius - Distance from center to outer edge
      * @param {Number} [startAngle=0] - Angle to start from (0 is top, 0.5 is bottom and 1 is full circle back to top)
-     * @param {Number} [endAngle=1] - Angle to end to
+     * @param {Number} [endAngle=0.5] - Angle to end to
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, radius, startAngle = 0, endAngle = 1, options) {
+    constructor (position, radius, startAngle = 0, endAngle = 0.5, options) {
         super(position, options);
         this.radius = radius;
         this.startAngle = startAngle;
@@ -32,7 +30,7 @@ export default class Arc extends Component {
      * @return {Arc} Itself
      */
     trace (ctx) {
-        ctx.arc(0, 0, truncate(this.radius), this.startAngle * pi2, this.endAngle * pi2);
+        ctx.arc(0, 0, truncate(this.radius), this.startAngle * radianCircle, this.endAngle * radianCircle);
         return this;
     }
 
@@ -46,6 +44,6 @@ export default class Arc extends Component {
         const top = new Position(0, radius);
         const flatPart = new Vector(top.rotate(this.startAngle), top.rotate(this.endAngle));
         return super.isHover(position) &&
-            this.position.distance(position) < radius && this.position.isOnSameSide(position, flatPart);
+            this.position.distance(position) <= radius && position.isOnSameSide(this.position, flatPart);
     }
 }

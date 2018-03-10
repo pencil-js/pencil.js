@@ -28,3 +28,15 @@ export const constain = (value, min, max) => Math.min(Math.max(value, min), max)
  * @returns {Boolean}
  */
 export const equal = (number1, number2) => Math.abs(number1 - number2) < Number.EPSILON;
+
+/**
+ * Full rotation on radian circle
+ * @type {Number}
+ */
+export const radianCircle = Math.PI * 2;
+
+/**
+ * Full rotation on degree circle
+ * @type {Number}
+ */
+export const degreeCircle = 360;

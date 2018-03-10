@@ -21,3 +21,8 @@ test("Math truncate", () => {
     expect(M.truncate(1.99)).toBe(1);
     expect(M.truncate(-11.99)).toBe(-11);
 });
+
+test("Math trigo", () => {
+    expect(M.radianCircle).toBeCloseTo(Math.PI * 2);
+    expect(M.degreeCircle).toBe(360);
+});
