@@ -118,7 +118,7 @@ Or read [the full documentation]().
 ### Naming
 Some module have the same name as some Javascript global (eg: Image, Math). Importing them without namespace will overrides these globals and lead to potential bugs.
 
-In any case, I recommend you use a namespace (eg: ``import Pencil from "pencil.js"``, ``import * as Pencil from "@pencil.js/math"``)
+In any case, I recommend you use a namespace (eg: ``import Namespace from "pencil.js"``, ``import * as Namespace from "@pencil.js/math"``)
 
 
 ### Performance
