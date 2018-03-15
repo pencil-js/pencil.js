@@ -1,4 +1,4 @@
-import { equal } from "@pencil.js/math";
+import { equal, radianCircle } from "@pencil.js/math";
 
 /**
  * Pair of value in 2d space
@@ -119,7 +119,7 @@ export default class Position {
      */
     rotate (angle) {
         const { cos, sin } = Math;
-        const degree = angle * 360;
+        const degree = -angle * radianCircle;
         const x = (this.x * cos(degree)) - (this.y * sin(degree));
         const y = (this.y * cos(degree)) + (this.x * sin(degree));
         return new Position(x, y);
