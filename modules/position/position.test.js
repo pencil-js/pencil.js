@@ -32,6 +32,8 @@ test("Position clone and equal", () => {
     const clone = pos.clone();
 
     expect(clone).not.toBe(pos);
+    expect(pos.x).toBe(clone.x);
+    expect(pos.y).toBe(clone.y);
     expect(pos.equal(clone)).toBe(true);
 });
 
@@ -113,6 +115,18 @@ describe("Position calculations", () => {
         expect(multTwoVal.x).toBe(one.x * 0.5);
         expect(multTwoVal.y).toBe(one.y * 20);
     });
+});
+
+test("Position rotate", () => {
+    const pos = new Position(10, 0);
+
+    const half = pos.rotate(0.5);
+    expect(half.x).toBeCloseTo(-10);
+    expect(half.y).toBeCloseTo(0);
+
+    const quart = pos.rotate(-0.25);
+    expect(quart.x).toBeCloseTo(0);
+    expect(quart.y).toBeCloseTo(10);
 });
 
 test("Position distance", () => {
