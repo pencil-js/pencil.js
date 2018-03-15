@@ -27,35 +27,33 @@ export default class Text extends Component {
          * @type {Object}
          * @private
          */
-        this._cachedWidth = {};
+        this._cachedMeasures = {};
     }
 
     /**
-     * Render the text into a drawing context
+     * Draw the text into a drawing context
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Text} Itself
      */
-    render (ctx) {
-        return Container.prototype.render.call(this, ctx, function textRender () {
-            const text = this.text.toString();
-            if (text) {
-                ctx.globalAlpha = this.options.alpha;
-                ctx.font = `${this.options.fontSize}px ${this.options.font}`;
-                ctx.textAlign = this.options.align;
-                ctx.textBaseline = "top";
+    trace (ctx) {
+        const text = this.text.toString();
+        if (text.length) {
+            ctx.font = `${this.options.fontSize}px ${this.options.font}`;
+            ctx.textAlign = this.options.align;
+            ctx.textBaseline = "top"; // TODO: user could want to change this, but fonts em-box can have crazy values
 
-                if (this.options.fill) {
-                    ctx.fillStyle = this.options.fill;
-                    ctx.fillText(text, 0, 0);
-                }
-
-                if (this.options.stroke) {
-                    ctx.strokeStyle = this.options.stroke;
-                    ctx.lineWidth = this.options.strokeWidth;
-                    ctx.strokeText(text, 0, 0);
-                }
+            if (this.options.fill) {
+                ctx.fillStyle = this.options.fill;
+                ctx.fillText(text, 0, 0);
             }
-        });
+
+            if (this.options.stroke) {
+                ctx.strokeStyle = this.options.stroke;
+                ctx.lineWidth = this.options.strokeWidth;
+                ctx.strokeText(text, 0, 0);
+            }
+        }
+        return this;
     }
 
     /**
@@ -88,27 +86,42 @@ export default class Text extends Component {
         return false;
     }
 
+    get hash () {
+        return btoa([this.options.font, this.options.fontSize, this.text].join(","));
+    }
+
     /**
-     * Width of the text
-     * @return {Number}
+     * Measure the text with current options and cache the result
+     * @return {{width: Number, height: Number}}
      */
-    get width () {
-        const key = [this.options.font, this.options.fontSize, this.text].join("-");
-        if (this._cachedWidth[key]) {
-            return this._cachedWidth[key];
+    getMeasures () {
+        const key = this.hash;
+        if (this._cachedMeasures[key]) {
+            return this._cachedMeasures[key];
         }
 
         const root = this.getRoot();
         if (root instanceof Scene) {
             root.ctx.font = `${this.options.fontSize}px ${this.options.font}`;
-            const { width } = root.ctx.measureText(this.text);
-            this._cachedWidth = {
-                [key]: width,
+            const measured = root.ctx.measureText(this.text);
+            this._cachedMeasures = {
+                [key]: measured,
             };
-            return width;
+            return measured;
         }
 
-        return 0;
+        return {
+            width: 0,
+            height: 0,
+        };
+    }
+
+    /**
+     * Width of the text
+     * @return {Number}
+     */
+    get width () {
+        return this.getMeasures().width;
     }
 
     /**
@@ -116,7 +129,7 @@ export default class Text extends Component {
      * @return {Number}
      */
     get height () {
-        return this.options.fontSize;
+        return this.getMeasures().height;
     }
 
     /**
@@ -125,7 +138,6 @@ export default class Text extends Component {
      * @prop {String} [font="sans-serif"] - Font to use
      * @prop {Number} [fontSize=10] - Size of the text in pixels
      * @prop {String} [align=Text.alignments.start] - Text horizontal alignment
-     * @prop {String} [baseline=Text.baselines.top] - Text vertical alignment
      */
     /**
      * @return {TextOptions}
@@ -147,7 +159,6 @@ export default class Text extends Component {
      * @prop {String} end - The text is aligned at the normal end of the line. (regarding locales)
      */
     /**
-     *
      * @returns {TextAlignments}
      */
     static get alignments () {
