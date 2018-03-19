@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/base-event",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Basic event for Pencil.js package.",
   "main": "base-event.js",
   "files": [],
@@ -15,7 +15,6 @@
     "pencil.js",
     "event"
   ],
-  "dependencies": {},
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

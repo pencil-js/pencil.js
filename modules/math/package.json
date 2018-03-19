@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/math",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Math wrapper for Pencil.js package.",
   "main": "math.js",
   "files": [],
@@ -17,8 +17,6 @@
     "mathematic",
     "arithmetic"
   ],
-  "dependencies": {
-  },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

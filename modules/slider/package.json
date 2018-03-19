@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/slider",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Slider user input for Pencil.js package.",
   "main": "slider.js",
   "files": [],
@@ -16,12 +16,12 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/base-event": "^0.1.0",
-    "@pencil.js/circle": "^0.1.0",
-    "@pencil.js/container": "^0.1.0",
-    "@pencil.js/position": "^0.1.0",
-    "@pencil.js/rectangle": "^0.1.0",
-    "@pencil.js/vector": "^0.1.0"
+    "@pencil.js/base-event": "^0.2.0",
+    "@pencil.js/circle": "^0.2.0",
+    "@pencil.js/container": "^0.2.0",
+    "@pencil.js/position": "^0.2.0",
+    "@pencil.js/rectangle": "^0.2.0",
+    "@pencil.js/vector": "^0.2.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
