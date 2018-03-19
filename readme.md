@@ -43,7 +43,7 @@ import Pencil from "pencil.js";
 
 const scene = new Pencil.scene();
 
-/ *** /
+/***/
 
 // Just the part you need
 import Scene from "@pencil.js/scene";
@@ -52,7 +52,7 @@ import Scene from "pencil.js";
 
 const scene = new Scene();
 
-/ *** /
+/***/
 
 // Works the same way with common.js syntax
 const Scene = require("pencil.js").Scene;
@@ -81,9 +81,9 @@ scene.addChild(rectangle); // Add the rectangle to the scene
 scene.render(); // Render the scene once
 ```
     
-Take a look at [more advanced examples]().
+Take a look at [more advanced examples](https://gmartigny.github.io/pencil.js/).
 
-Or read [the full documentation]().
+Or read [the full documentation](documentation.md).
 
 
 ## Modules
@@ -103,7 +103,8 @@ Or read [the full documentation]().
          * [.resizable()](modules/resizable)
          * [Square](modules/square)
          * [Image](modules/image)
-       * [Circle](modules/circle)
+       * [Arc](modules/arc)
+         * [Circle](modules/circle)
        * [Text](modules/text)
      * [Slider](modules/slider)
  * [Position](modules/position)
