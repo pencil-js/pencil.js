@@ -56,7 +56,6 @@ describe("Position calculations", () => {
     });
 
     test("Position subtract", () => {
-
         // Subtract
         const subPos = one.subtract(two);
         expect(subPos.x).toBe(one.x - two.x);

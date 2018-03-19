@@ -50,7 +50,7 @@ test("Text measures", () => {
     };
     expect(text.width).toBe(42);
     expect(text.height).toBe(55);
-})
+});
 
 test("Text statics", () => {
     const aligns = Text.alignments;

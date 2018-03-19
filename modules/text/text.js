@@ -1,7 +1,6 @@
 import Component from "@pencil.js/component";
 import Rectangle from "@pencil.js/rectangle";
 import Scene from "@pencil.js/scene";
-import Container from "@pencil.js/container";
 import Position from "@pencil.js/position";
 import textDirection from "text-direction";
 
@@ -86,6 +85,10 @@ export default class Text extends Component {
         return false;
     }
 
+    /**
+     * Return a hash of the current string (with options)
+     * @returns {String}
+     */
     get hash () {
         return btoa([this.options.font, this.options.fontSize, this.text].join(","));
     }
