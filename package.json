@@ -12,7 +12,7 @@
     "lint": "eslint pencil.js modules/**/*.js",
     "test": "jest-webpack",
     "build": "webpack",
-    "prepublishOnly": "npm run lint && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
