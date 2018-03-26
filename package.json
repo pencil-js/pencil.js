@@ -14,7 +14,9 @@
     "build": "webpack",
     "prepublishOnly": "npm run build"
   },
-  "eslintIgnore": ["**/node_modules/*"],
+  "eslintIgnore": [
+    "**/node_modules/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
@@ -60,16 +62,16 @@
     "@pencil.js/vector": "^0.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.40",
-    "@babel/preset-env": "^7.0.0-beta.40",
-    "@gmartigny/eslint-config": "^1.0.2",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@gmartigny/eslint-config": "^1.1.1",
     "babel-loader": "^8.0.0-beta.2",
-    "eslint": "^4.18.1",
+    "eslint": "^4.19.1",
     "eslint-plugin-import": "^2.9.0",
-    "jest": "^22.4.2",
+    "jest": "^22.4.3",
     "jest-webpack": "^0.4.0",
     "lerna": "^2.9.0",
-    "uglifyjs-webpack-plugin": "^1.2.2",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^3.11.0"
   }
 }
