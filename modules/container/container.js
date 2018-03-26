@@ -139,9 +139,10 @@ export default class Container extends EventEmitter {
             ctx.moveTo(0, 0);
 
             if (this.options.rotation) {
-                ctx.translate(this.options.rotationAnchor.x, this.options.rotationAnchor.y);
+                const { x, y } = this.options.rotationAnchor;
+                ctx.translate(x, y);
                 ctx.rotate(this.options.rotation * (Math.PI / 180));
-                ctx.translate(-this.options.rotationAnchor.x, -this.options.rotationAnchor.y);
+                ctx.translate(-x, -y);
             }
 
             this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);

@@ -31,28 +31,13 @@ export default class Polygon extends Component {
     }
 
     /**
-     *
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @return {Polygon} Itself
-     */
-    render (ctx) {
-        ctx.beginPath();
-
-        super.render(ctx);
-        ctx.closePath();
-
-        return this;
-    }
-
-    /**
      * Draw the polygon
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Polygon} Itself
      */
     trace (ctx) {
         this.points.slice(1).concat(this.points.slice(0, 2)).forEach((point) => {
-            const pos = point.subtract(this.position);
-            ctx.lineTo(truncate(pos.x), truncate(pos.y));
+            ctx.lineTo(truncate(point.x), truncate(point.y));
         });
         return this;
     }
