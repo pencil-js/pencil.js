@@ -2,14 +2,6 @@ import Component from "@pencil.js/component";
 import Vector from "@pencil.js/vector";
 
 /**
- * @typedef {Object} LineOptions
- * @prop {Boolean} [shown=true] - Is shown
- * @prop {Number} [alpha=1] - Opacity value
- * @prop {String} [stroke="#000"] -
- * @prop {Number} [strokeWidth=1] -
- */
-
-/**
  * Line class
  * @class
  * @extends Component
@@ -33,6 +25,7 @@ export default class Line extends Component {
      */
     trace (ctx) {
         const delta = this.vector.getDelta();
+        ctx.moveTo(0, 0);
         ctx.lineTo(delta.x, delta.y);
         return this;
     }
@@ -46,14 +39,14 @@ export default class Line extends Component {
     }
 
     /**
-     * @return {LineOptions}
+     * @return {ComponentOptions}
      */
     static get defaultOptions () {
-        return {
-            shown: true,
-            alpha: 1,
-            stroke: "#000",
-            strokeWidth: 1,
-        };
+        const options = Object.assign({}, super.defaultOptions);
+        options.stroke = options.fill;
+        options.strokeWidth = 1;
+        delete options.fill;
+        delete options.cursor;
+        return options;
     }
 }

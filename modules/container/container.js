@@ -136,7 +136,6 @@ export default class Container extends EventEmitter {
         if (this.options.shown) {
             ctx.save();
             ctx.translate(truncate(this.position.x), truncate(this.position.y));
-            ctx.moveTo(0, 0);
 
             if (this.options.rotation) {
                 const { x, y } = this.options.rotationAnchor;
@@ -175,7 +174,7 @@ export default class Container extends EventEmitter {
             shown: true,
             rotation: 0,
             rotationAnchor: new Position(),
-            zIndex: 0,
+            zIndex: 1,
         };
     }
 }
