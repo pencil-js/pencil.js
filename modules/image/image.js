@@ -11,18 +11,19 @@ export default class Image extends Rectangle {
     /**
      * Image constructor
      * @param {Position} position - Top-left corner of the image
-     * @param {String} url - Link to the image file
+     * @param {String} [url] - Link to an image file
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, url, options) {
+    constructor (position, url = null, options) {
         super(position, 0, 0, options);
-        this.url = url;
+
         this.file = null;
-        Image.load(url).then((img) => {
-            this.file = img;
-            this.restoreSize();
-            this.fire(new BaseEvent(this, "load"));
-        });
+        /**
+         * @type {String}
+         * @private
+         */
+        this._url = null;
+        this.url = url;
     }
 
     /**
@@ -31,6 +32,30 @@ export default class Image extends Rectangle {
      */
     isLoaded () {
         return this.file !== null;
+    }
+
+    /**
+     * Change the image URL
+     * @param {String} url - Link to an image file
+     */
+    set url (url) {
+        this.file = null;
+        if (url) {
+            this._url = url;
+            Image.load(url).then((img) => {
+                this.file = img;
+                this.restoreSize();
+                this.fire(new BaseEvent(this, "load"));
+            });
+        }
+    }
+
+    /**
+     * Get the image URL
+     * @return {String}
+     */
+    get url () {
+        return this._url;
     }
 
     /**
@@ -63,9 +88,15 @@ export default class Image extends Rectangle {
      */
     static load (url) {
         if (Array.isArray(url)) {
-            return Promise.all(url.map(u => Image.load(u)));
+            return Promise.all(url.map(singleUrl => Image.load(singleUrl)));
         }
 
-        return fetch(url);
+        return fetch(url)
+        .then(response => response.ok ? response.blob() : Promise.reject(new URIError(`Fail to load ${url}.`)))
+        .then((blob) => {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(blob);
+            return img;
+        });
     }
 }
