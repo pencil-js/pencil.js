@@ -14,7 +14,7 @@ export default class Text extends Component {
      * Text constructor
      * @param {Position} position - Top most point of the line start (depend on align option)
      * @param {String} text - Text to display
-     * @param {TextOptions} options - Drawing options
+     * @param {TextOptions} [options] - Drawing options
      */
     constructor (position, text, options) {
         super(position, options);
@@ -106,7 +106,13 @@ export default class Text extends Component {
         const root = this.getRoot();
         if (root instanceof Scene) {
             root.ctx.font = `${this.options.fontSize}px ${this.options.font}`;
-            const measured = root.ctx.measureText(this.text);
+            const { width } = root.ctx.measureText(this.text);
+            // Hack to get the em box's height
+            const height = root.ctx.measureText("M").width;
+            const measured = {
+                width,
+                height,
+            };
             this._cachedMeasures = {
                 [key]: measured,
             };
