@@ -79,7 +79,7 @@ export default class Text extends Component {
             }
 
             const diff = new Position(horizontal, 0);
-            return Rectangle.prototype.isHover.call(this, position.subtract(diff));
+            return Rectangle.prototype.isHover.call(this, position.add(diff));
         }
 
         return false;
