@@ -4,6 +4,7 @@ import Circle from "@pencil.js/circle";
 import Vector from "@pencil.js/vector";
 import Position from "@pencil.js/position";
 import BaseEvent from "@pencil.js/base-event";
+import { constrain } from "@pencil.js/math";
 
 /**
  * @typedef {Object} SliderOptions
@@ -102,10 +103,10 @@ export default class Slider extends Container {
      * @return {Number} Real value used (between min and max)
      */
     set value (newValue) {
-        const minmaxValue = Math.max(this.options.min, Math.min(this.options.max, newValue));
-        this.moveHandle(minmaxValue);
+        const constrainedValue = constrain(newValue, this.options.min, this.options.max);
+        this.moveHandle(constrainedValue);
         this.fire(new BaseEvent(this, "change"));
-        return minmaxValue;
+        return constrainedValue;
     }
 
     /**
