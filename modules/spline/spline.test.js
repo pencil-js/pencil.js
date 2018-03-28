@@ -12,6 +12,7 @@ test("Spline creation and trace", () => {
     expect(spline.points.length).toBe(n);
 
     const ctx = {
+        moveTo: jest.fn(),
         bezierCurveTo: jest.fn(),
         lineTo: jest.fn(),
     };
@@ -24,8 +25,6 @@ test("Spline creation and trace", () => {
 });
 
 test("Spline static", () => {
-    expect(Spline.prototype.hasOwnProperty("trace")).toBe(true);
-
     const points = [new Position(10, 10), new Position(0, 20), new Position(20, 30)];
     const ctrls = Spline.getControlPoint(points, 0.5);
     expect(ctrls.length).toBe(2);
