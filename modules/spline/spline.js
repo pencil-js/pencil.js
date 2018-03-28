@@ -12,11 +12,14 @@ export default class Spline extends Line {
      * Spline constructor
      * @param {Array<Position>} points - Set of points to go through
      * @param {Number} [tension=0.5] - Ratio of tension between points (0 means straight line, can go higher than 1, but with weird results)
-     * @param {LineOptions} [options] - Drawing options
+     * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (points, tension = 0.5, options) {
-        super(points[0], points[points.length - 1], options);
-        this.points = points;
+        super(points, options);
+
+        /**
+         * @type {Number}
+         */
         this.tension = tension;
     }
 
@@ -26,17 +29,12 @@ export default class Spline extends Line {
      * @return {Spline} Itself
      */
     trace (ctx) {
-        if (this.points.length < 3) {
+        if (this.points.length < 3 || equal(this.tension, 0)) {
             super.trace(ctx);
         }
         else {
-            const points = this.points.map(point => point.subtract(this.position));
-            if (equal(this.tension, 0)) {
-                points.slice(1).forEach(point => ctx.lineTo(point.x, point.y));
-            }
-            else {
-                Spline.splineThrough(points, this.tension, ctx);
-            }
+            ctx.moveTo(0, 0);
+            Spline.splineThrough(this.points.map(point => point.subtract(this.position)), this.tension, ctx);
         }
         return this;
     }
@@ -68,7 +66,7 @@ export default class Spline extends Line {
      */
     static getControlPoint (points, tension) {
         if (points.length < 3) {
-            throw new RangeError(`Need at least 3 points to compute control points, only ${points.length} given.`);
+            throw new RangeError(`Need exactly 3 points to compute control points, but ${points.length} given.`);
         }
 
         const diff = points[2].subtract(points[0]).multiply(tension);

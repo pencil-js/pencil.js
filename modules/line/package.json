@@ -16,8 +16,7 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.3.0",
-    "@pencil.js/vector": "^0.3.0"
+    "@pencil.js/component": "^0.3.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

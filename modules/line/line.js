@@ -1,5 +1,4 @@
 import Component from "@pencil.js/component";
-import Vector from "@pencil.js/vector";
 
 /**
  * Line class
@@ -9,13 +8,20 @@ import Vector from "@pencil.js/vector";
 export default class Line extends Component {
     /**
      * Line constructor
-     * @param {Position} start - Start point
-     * @param {Position} end - End point
-     * @param {LineOptions} [options] - Drawing options
+     * @param {Array<Position>} points -
+     * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (start, end, options) {
-        super(start, options);
-        this.vector = new Vector(start, end);
+    constructor (points, options) {
+        if (points.length < 2) {
+            throw new RangeError(`A line need at least 2 points, only ${points.length} given.`);
+        }
+
+        super(points[0], options);
+
+        /**
+         * @type {Array<Position>}
+         */
+        this.points = points;
     }
 
     /**
@@ -24,9 +30,11 @@ export default class Line extends Component {
      * @return {Line} Itself
      */
     trace (ctx) {
-        const delta = this.vector.getDelta();
         ctx.moveTo(0, 0);
-        ctx.lineTo(delta.x, delta.y);
+        this.points.slice(1).forEach((point) => {
+            const diff = point.subtract(this.position);
+            ctx.lineTo(diff.x, diff.y);
+        });
         return this;
     }
 
@@ -44,7 +52,6 @@ export default class Line extends Component {
     static get defaultOptions () {
         const options = Object.assign({}, super.defaultOptions);
         options.stroke = options.fill;
-        options.strokeWidth = 1;
         delete options.fill;
         delete options.cursor;
         return options;
