@@ -163,6 +163,22 @@ export default class Scene extends Container {
     }
 
     /**
+     * Return this scene width
+     * @returns {Number}
+     */
+    get width () {
+        return this.ctx.canvas.width;
+    }
+
+    /**
+     * Return this scene height
+     * @returns {Number}
+     */
+    get height () {
+        return this.ctx.canvas.height;
+    }
+
+    /**
      * @return {SceneOptions}
      */
     static get defaultOptions () {
