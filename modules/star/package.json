@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/star",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Star shape for Pencil.js package.",
   "main": "star.js",
   "files": [],
@@ -16,8 +16,8 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/position": "^0.2.0",
-    "@pencil.js/regular-polygon": "^0.2.0"
+    "@pencil.js/position": "^0.3.0",
+    "@pencil.js/regular-polygon": "^0.3.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
