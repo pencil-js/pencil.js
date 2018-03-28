@@ -3,9 +3,9 @@
 import * as M from "./math";
 
 test("Math constrain", () => {
-    expect(M.constain(7.77, 0, 10)).toBe(7.77);
-    expect(M.constain(99, 0, 1)).toBe(1);
-    expect(M.constain(-20, -5, 5)).toBe(-5);
+    expect(M.constrain(7.77, 0, 10)).toBe(7.77);
+    expect(M.constrain(99, 0, 1)).toBe(1);
+    expect(M.constrain(-20, -5, 5)).toBe(-5);
 });
 
 test("Math equal", () => {
@@ -14,6 +14,19 @@ test("Math equal", () => {
     expect(M.equal(0.1 + 0.2, 0.3)).toBe(true);
     expect(M.equal(0.6 / 6, 0.1)).toBe(true);
     expect(M.equal(Math.PI, 3.14159)).toBe(false);
+});
+
+test("Math random", () => {
+    for (let i = 0; i < 100; ++i) {
+        const pick = M.random(10, 15);
+        expect(pick).toBeGreaterThan(10);
+        expect(pick).toBeLessThan(15);
+    }
+    for (let i = 0; i < 100; ++i) {
+        const pick = M.random(15);
+        expect(pick).toBeGreaterThan(0);
+        expect(pick).toBeLessThan(15);
+    }
 });
 
 test("Math truncate", () => {

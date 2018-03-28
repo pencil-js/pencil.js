@@ -1,13 +1,3 @@
-/**
- * Truncate a floating number to its integer part.
- * @param {Number} value - Any number
- * @returns {Number}
- * @example
- * truncate(12.3); // 12
- * truncate(-4.9); // -4
- */
-// eslint-disable-next-line no-bitwise
-export const truncate = value => value << 0;
 
 /**
  * Constrain a number between two limits.
@@ -16,10 +6,10 @@ export const truncate = value => value << 0;
  * @param {Number} max - Maximal limit for the value
  * @returns {Number}
  * @example
- * constain(999, 0, 50); // 50
- * constain(-999, 0, 50); // 0
+ * constrain(999, 0, 50); // 50
+ * constrain(-999, 0, 50); // 0
  */
-export const constain = (value, min, max) => Math.min(Math.max(value, min), max);
+export const constrain = (value, min, max) => Math.min(Math.max(value, min), max);
 
 /**
  * Determine if two number can considered equals accounting for JS precision.
@@ -28,18 +18,6 @@ export const constain = (value, min, max) => Math.min(Math.max(value, min), max)
  * @returns {Boolean}
  */
 export const equal = (number1, number2) => Math.abs(number1 - number2) < Number.EPSILON;
-
-/**
- * Full rotation on radian circle
- * @type {Number}
- */
-export const radianCircle = Math.PI * 2;
-
-/**
- * Full rotation on degree circle
- * @type {Number}
- */
-export const degreeCircle = 360;
 
 /**
  * Return a random number between limits
@@ -56,3 +34,26 @@ export const random = (min = 1, max) => {
     }
     return (Math.random() * (to - from)) + from;
 };
+
+/**
+ * Truncate a floating number to its integer part.
+ * @param {Number} value - Any number
+ * @returns {Number}
+ * @example
+ * truncate(12.3); // 12
+ * truncate(-4.9); // -4
+ */
+// eslint-disable-next-line no-bitwise
+export const truncate = value => value << 0;
+
+/**
+ * Full rotation on radian circle
+ * @type {Number}
+ */
+export const radianCircle = Math.PI * 2;
+
+/**
+ * Full rotation on degree circle
+ * @type {Number}
+ */
+export const degreeCircle = 360;

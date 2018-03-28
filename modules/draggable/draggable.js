@@ -1,6 +1,6 @@
 import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
-import { constain } from "@pencil.js/math";
+import { constrain } from "@pencil.js/math";
 
 /**
  * @typedef {Object} DraggableOptions
@@ -52,8 +52,8 @@ Component.prototype.draggable = function draggable (options) {
             if (mergedOptions.constrain) {
                 const limit = mergedOptions.constrain;
                 this.position.set(originPosition.add(
-                    constain(difference.x, limit.start.x, limit.end.x),
-                    constain(difference.y, limit.start.y, limit.end.y),
+                    constrain(difference.x, limit.start.x, limit.end.x),
+                    constrain(difference.y, limit.start.y, limit.end.y),
                 ));
             }
             else {
