@@ -23,11 +23,16 @@ export default class Component extends Container {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position, options) {
-        const realOptions = options;
-        realOptions.alpha = realOptions.alpha || realOptions.opacity;
-        super(position, realOptions);
+        super(position, options);
+        this.options.alpha = this.options.opacity || this.options.alpha;
 
+        /**
+         * @type {Boolean}
+         */
         this.isShown = this.options.shown === undefined || this.options.shown;
+        /**
+         * @type {Boolean}
+         */
         this.isHovered = false;
     }
 
