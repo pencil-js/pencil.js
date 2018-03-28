@@ -25,7 +25,15 @@ export default class Scene extends Container {
     constructor (container = document.body, options) {
         super(undefined, options);
 
-        const canvas = document.createElement("canvas");
+        container.innerHTML = "";
+        let canvas;
+        if (container instanceof HTMLCanvasElement) {
+            canvas = container;
+        }
+        else {
+            canvas = document.createElement("canvas");
+            container.appendChild(canvas);
+        }
         const measures = container.getBoundingClientRect();
         canvas.width = measures.width;
         canvas.height = measures.height;
@@ -33,8 +41,6 @@ export default class Scene extends Container {
          * @type {CanvasRenderingContext2D}
          */
         this.ctx = canvas.getContext("2d");
-        container.innerHTML = "";
-        container.appendChild(canvas);
 
         /**
          * @type {Position}
