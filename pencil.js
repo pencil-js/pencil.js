@@ -59,6 +59,7 @@ export default {
     MouseEvent,
     KeyboardEvent,
     Slider,
+    default: undefined,
 };
 export {
     EventEmitter,
