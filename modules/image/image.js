@@ -11,13 +11,28 @@ export default class Image extends Rectangle {
     /**
      * Image constructor
      * @param {Position} position - Top-left corner of the image
-     * @param {String} [url] - Link to an image file
+     * @param {String} url - Link to an image file
+     * @param {Number} [width] - Width to draw the image, or width and height if height omitted
+     * @param {Number} [height] - Height to draw the image, use file height and width if both omitted
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, url = null, options) {
-        super(position, 0, 0, options);
+    constructor (position, url, width, height, options) {
+        let realWidth = width;
+        let realHeight = height;
+        let realOptions = options;
+        if (typeof realWidth === "object") {
+            realOptions = width;
+            realWidth = null;
+            realHeight = null;
+        }
+        else if (typeof realHeight === "object") {
+            realOptions = height;
+            realHeight = width;
+        }
+        super(position, realWidth, realHeight, realOptions);
 
         this.file = null;
+        this.isLoaded = false;
         /**
          * @type {String}
          * @private
@@ -27,24 +42,20 @@ export default class Image extends Rectangle {
     }
 
     /**
-     * Tell if the image is loaded
-     * @return {Boolean}
-     */
-    isLoaded () {
-        return this.file !== null;
-    }
-
-    /**
      * Change the image URL
      * @param {String} url - Link to an image file
      */
     set url (url) {
         this.file = null;
+        this.isLoaded = false;
         if (url) {
             this._url = url;
             Image.load(url).then((img) => {
                 this.file = img;
-                this.restoreSize();
+                this.isLoaded = true;
+                if (this.width === null && this.height === null) {
+                    this.restoreSize();
+                }
                 this.fire(new BaseEvent(this, "load"));
             });
         }
@@ -64,9 +75,27 @@ export default class Image extends Rectangle {
      * @return {Image} Itself
      */
     trace (ctx) {
-        if (this.isLoaded()) {
+        if (this.isLoaded) {
             super.trace(ctx);
-            ctx.drawImage(this.file, 0, 0, truncate(this.width), truncate(this.height));
+        }
+        return this;
+    }
+
+    /**
+     * Draw it on a context
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Image} Itself
+     */
+    render (ctx) {
+        super.render(ctx);
+        if (this.isLoaded) {
+            ctx.drawImage(
+                this.file,
+                truncate(this.position.x),
+                truncate(this.position.y),
+                truncate(this.width),
+                truncate(this.height),
+            );
         }
         return this;
     }
@@ -75,7 +104,7 @@ export default class Image extends Rectangle {
      * Use image width and height for drawing width and height
      */
     restoreSize () {
-        if (this.isLoaded()) {
+        if (this.isLoaded) {
             this.width = this.file.width;
             this.height = this.file.height;
         }
@@ -91,12 +120,20 @@ export default class Image extends Rectangle {
             return Promise.all(url.map(singleUrl => Image.load(singleUrl)));
         }
 
-        return fetch(url)
-        .then(response => response.ok ? response.blob() : Promise.reject(new URIError(`Fail to load ${url}.`)))
-        .then((blob) => {
+        return new Promise((resolve, reject) => {
             const img = document.createElement("img");
-            img.src = URL.createObjectURL(blob);
-            return img;
+            img.src = url;
+            img.addEventListener("load", () => resolve(img));
+            img.addEventListener("error", () => reject(new URIError(`Fail to load ${url}.`)));
+        });
+    }
+
+    /**
+     * @return {ComponentOptions}
+     */
+    static get defaultOptions () {
+        return Object.assign({}, super.defaultOptions, {
+            fill: null,
         });
     }
 }
