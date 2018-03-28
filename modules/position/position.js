@@ -1,4 +1,4 @@
-import { equal, radianCircle } from "@pencil.js/math";
+import { constrain, equal, radianCircle } from "@pencil.js/math";
 
 /**
  * Pair of value in 2d space
@@ -123,6 +123,14 @@ export default class Position {
         const x = (this.x * cos(degree)) - (this.y * sin(degree));
         const y = (this.y * cos(degree)) + (this.x * sin(degree));
         return new Position(x, y);
+    }
+
+    /**
+     *
+     * @param {Vector} vector -
+     */
+    constrain (vector) {
+        this.set(constrain(this.x, vector.start.x, vector.end.x), constrain(this.y, vector.start.y, vector.end.y));
     }
 
     /**
