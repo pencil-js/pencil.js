@@ -39,7 +39,7 @@ Component.prototype.draggable = function draggable (options) {
             this.options.cursor = "-webkit-grabbing";
         }
         startPosition = event.position;
-        originPosition = this.position;
+        originPosition = this.position.clone();
         this.isDragged = true;
 
         this.fire(new MouseEvent(this, "grab", event.position));
@@ -51,13 +51,13 @@ Component.prototype.draggable = function draggable (options) {
 
             if (mergedOptions.constrain) {
                 const limit = mergedOptions.constrain;
-                this.position = originPosition.add(
+                this.position.set(originPosition.add(
                     constain(difference.x, limit.start.x, limit.end.x),
                     constain(difference.y, limit.start.y, limit.end.y),
-                );
+                ));
             }
             else {
-                this.position = originPosition.add(mergedOptions.x && difference.x, mergedOptions.y && difference.y);
+                this.position.set(originPosition.add(mergedOptions.x && difference.x, mergedOptions.y && difference.y));
             }
 
             this.fire(new MouseEvent(this, "drag", event.position));
