@@ -145,6 +145,7 @@ export default class Scene extends Container {
      */
     stopLoop () {
         this.isLooped = false;
+        this.fps = 0;
     }
 
     /**
