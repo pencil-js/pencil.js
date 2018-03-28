@@ -1,12 +1,11 @@
 import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
-import { constrain } from "@pencil.js/math";
 
 /**
  * @typedef {Object} DraggableOptions
  * @prop {Boolean} [x=true] - Can move along vertical axis
  * @prop {Boolean} [y=true] - Can move along horizontal axis
- * @prop {Vector} [constrain] - Relative limit of freedom (if set, will ignore x and y options)
+ * @prop {Vector} [constrain] - Relative limit of freedom
  */
 
 /**
@@ -49,15 +48,9 @@ Component.prototype.draggable = function draggable (options) {
         if (this.isDragged && startPosition) {
             const difference = event.position.subtract(startPosition);
 
+            this.position.set(originPosition.add(mergedOptions.x && difference.x, mergedOptions.y && difference.y));
             if (mergedOptions.constrain) {
-                const limit = mergedOptions.constrain;
-                this.position.set(originPosition.add(
-                    constrain(difference.x, limit.start.x, limit.end.x),
-                    constrain(difference.y, limit.start.y, limit.end.y),
-                ));
-            }
-            else {
-                this.position.set(originPosition.add(mergedOptions.x && difference.x, mergedOptions.y && difference.y));
+                this.position.constrain(mergedOptions.constrain);
             }
 
             this.fire(new MouseEvent(this, "drag", event.position));
