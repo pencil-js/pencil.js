@@ -3,7 +3,7 @@ import Container from "@pencil.js/container";
 /**
  * @typedef {Object} ComponentOptions
  * @extends ContainerOptions
- * @prop {Number} [alpha=1] - Opacity level
+ * @prop {Number} [alpha=1] - Opacity level (alias: opacity)
  * @prop {String} [fill="#000"] - Color used to fill, set to null for transparent
  * @prop {String} [stroke=null] - Color used to stroke, set to null for transparent
  * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
@@ -23,18 +23,17 @@ export default class Component extends Container {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position, options) {
-        super(position, options);
-        /**
-         * @type {ComponentOptions}
-         */
-        this.options = Object.assign(this.constructor.defaultOptions, options);
+        const realOptions = options;
+        realOptions.alpha = realOptions.alpha || realOptions.opacity;
+        super(position, realOptions);
+
         this.isShown = this.options.shown === undefined || this.options.shown;
         this.isHovered = false;
     }
 
     /**
      * Draw it on a context
-     * @param {CanvasRenderingContext2D} ctx - Context to use
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Component} Itself
      */
     render (ctx) {
