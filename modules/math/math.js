@@ -40,3 +40,19 @@ export const radianCircle = Math.PI * 2;
  * @type {Number}
  */
 export const degreeCircle = 360;
+
+/**
+ * Return a random number between limits
+ * @param {Number} [min=1] - Lower limit, or upper limit if max is omitted
+ * @param {Number} [max] - Upper limit, can be omitted
+ * @returns {Number}
+ */
+export const random = (min = 1, max) => {
+    let from = min;
+    let to = max;
+    if (max === undefined) {
+        from = 0;
+        to = min;
+    }
+    return (Math.random() * (to - from)) + from;
+};
