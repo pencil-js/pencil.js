@@ -11,10 +11,10 @@ export default class Spline extends Line {
     /**
      * Spline constructor
      * @param {Array<Position>} points - Set of points to go through
-     * @param {Number} [tension=0.5] - Ratio of tension between points (0 means straight line, can go higher than 1, but with weird results)
+     * @param {Number} [tension=0.2] - Ratio of tension between points (0 means straight line, can take any value, but with weird results above 1)
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (points, tension = 0.5, options) {
+    constructor (points, tension = 0.2, options) {
         super(points, options);
 
         /**
@@ -33,7 +33,6 @@ export default class Spline extends Line {
             super.trace(ctx);
         }
         else {
-            ctx.moveTo(0, 0);
             Spline.splineThrough(this.points.map(point => point.subtract(this.position)), this.tension, ctx);
         }
         return this;
@@ -47,22 +46,25 @@ export default class Spline extends Line {
      */
     static splineThrough (points, tension, ctx) {
         const getCtrlPts = Spline.getControlPoint;
-        let previousControls = [null, new Position()];
-        for (let i = 0, l = points.length; i < l - 1; ++i) {
-            const controlPoints = i + 2 < l ? getCtrlPts(points.slice(i, i + 3), tension) : [points[i], null];
+        let previousControls = [null, points[0]];
+        ctx.moveTo(points[0].x, points[0].y);
+
+        for (let i = 1, l = points.length; i < l; ++i) {
+            const controlPoints = i < l - 1 ? getCtrlPts(points.slice(i - 1, i + 2), tension) : [points[i], null];
             ctx.bezierCurveTo(
                 previousControls[1].x, previousControls[1].y, controlPoints[0].x, controlPoints[0].y,
                 points[i].x, points[i].y,
             );
+
             previousControls = controlPoints;
         }
     }
 
     /**
-     * Returns control points for a point in a spline (needs 3 points in total)
+     * Returns control points for a point in a spline (needs before and after, 3 points in total)
      * @param {Array<Position>} points - 3 points to use (before, target, after)
      * @param {Number} tension - Ratio of tension
-     * @return {Array<Position>}
+     * @return {[Position, Position]}
      */
     static getControlPoint (points, tension) {
         if (points.length < 3) {
