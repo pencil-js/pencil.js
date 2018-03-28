@@ -19,29 +19,46 @@ import Position from "@pencil.js/position";
 export default class Scene extends Container {
     /**
      * Scene constructor
-     * @param {HTMLElement} container - Container of the renderer
+     * @param {HTMLElement} [container=document.body] - Container of the renderer
      * @param {SceneOptions} [options] -
      */
-    constructor (container, options) {
+    constructor (container = document.body, options) {
         super(undefined, options);
+
         const canvas = document.createElement("canvas");
         const measures = container.getBoundingClientRect();
         canvas.width = measures.width;
         canvas.height = measures.height;
+        /**
+         * @type {CanvasRenderingContext2D}
+         */
         this.ctx = canvas.getContext("2d");
         container.innerHTML = "";
         container.appendChild(canvas);
 
+        /**
+         * @type {Position}
+         */
         this.containerPosition = new Position(measures.left, measures.top);
 
+        this.isScene = true;
+        /**
+         * @type {Boolean}
+         */
         this.isLooped = false;
+        /**
+         * @type {Number}
+         */
         this.fps = 0;
+        /**
+         * @type {Number}
+         */
         this.lastTick = null;
 
         EventEmitter.bindEvents(this);
 
         let hovered = null;
-        this.on("mousemove", function globalMouseMoveCallback (event) {
+        this.on("mousemove", (event) => {
             event.target.isHovered = true;
             if (event.target !== hovered) {
                 if (hovered) {
@@ -51,8 +68,16 @@ export default class Scene extends Container {
                 hovered = event.target;
             }
             hovered.fire(new MouseEvent(hovered, "hover", event.position));
-            this.ctx.canvas.style.cursor = hovered.options.cursor || "";
+            this.setCursor(event.target.options.cursor);
         });
+    }
+
+    /**
+     *
+     * @param {String} cursor -
+     */
+    setCursor (cursor = "") {
+        this.ctx.canvas.style.cursor = cursor;
     }
 
     /**
@@ -74,9 +99,9 @@ export default class Scene extends Container {
             this.fire(new BaseEvent(this, "draw"));
             return super.render(this.ctx);
         }
-        catch (e) {
+        catch (error) {
             cancelAnimationFrame(animationId);
-            throw e;
+            throw error;
         }
     }
 

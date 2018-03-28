@@ -1,4 +1,5 @@
 import EventEmitter from "@pencil.js/event-emitter";
+import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 import { truncate } from "@pencil.js/math";
 
@@ -31,6 +32,18 @@ export default class Container extends EventEmitter {
          * @type {Container}
          */
         this.parent = null;
+
+        this._scenePromise = new Promise((resolve) => {
+            this.on("attach", () => {
+                const root = this.getRoot();
+                if (root.isScene) {
+                    resolve(root);
+                }
+                else {
+                    root.getScene().then(scene => resolve(scene));
+                }
+            });
+        });
     }
 
     /**
@@ -47,11 +60,21 @@ export default class Container extends EventEmitter {
      * @return {Container} Itself
      */
     addChild (child) {
+        if (child === this) {
+            throw new EvalError("A container can't contain itself.");
+        }
+
+        if (child.isScene) {
+            throw new EvalError("A scene can't be contained in another container.");
+        }
+
         if (child.parent) {
             child.parent.removeChild(child);
         }
         child.parent = this;
         this.children.push(child);
+        child.fire(new BaseEvent(child, "attach"));
+
         return this;
     }
 
@@ -64,8 +87,18 @@ export default class Container extends EventEmitter {
         if (this.children.includes(child)) {
             const removed = this.children.splice(this.children.indexOf(child), 1)[0];
             removed.parent = null;
+            removed.fire(new BaseEvent(removed, "detach"));
         }
+
         return this;
+    }
+
+    /**
+     * Remove all its children
+     */
+    empty () {
+        this.children.forEach(child => child.parent = null);
+        this.children = [];
     }
 
     /**
@@ -75,6 +108,23 @@ export default class Container extends EventEmitter {
         if (this.parent) {
             this.parent.removeChild(this);
         }
+    }
+
+    /**
+     * Return the associated scene or null if none
+     * @return {Scene}
+     */
+    hasScene () {
+        const root = this.getRoot();
+        return root.isScene ? root : null;
+    }
+
+    /**
+     * Return a promise for the associated scene
+     * @return {Promise<Scene>}
+     */
+    getScene () {
+        return this._scenePromise;
     }
 
     /**

@@ -16,6 +16,7 @@
     "wrapper"
   ],
   "dependencies": {
+    "@pencil.js/base-event": "^0.2.0",
     "@pencil.js/event-emitter": "^0.2.0",
     "@pencil.js/math": "^0.2.0",
     "@pencil.js/position": "^0.2.0"

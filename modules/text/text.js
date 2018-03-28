@@ -61,9 +61,9 @@ export default class Text extends Component {
      * @return {Boolean}
      */
     isHover (position) {
-        const root = this.getRoot();
-        if (root instanceof Scene) {
-            const dir = textDirection(root.ctx.canvas);
+        const scene = this.hasScene();
+        if (scene) {
+            const dir = textDirection(scene.ctx.canvas);
             const { width } = this;
             const { align } = this.options;
 
@@ -103,12 +103,12 @@ export default class Text extends Component {
             return this._cachedMeasures[key];
         }
 
-        const root = this.getRoot();
-        if (root instanceof Scene) {
-            root.ctx.font = `${this.options.fontSize}px ${this.options.font}`;
-            const { width } = root.ctx.measureText(this.text);
+        const scene = this.hasScene();
+        if (scene) {
+            scene.ctx.font = `${this.options.fontSize}px ${this.options.font}`;
+            const { width } = scene.ctx.measureText(this.text);
             // Hack to get the em box's height
-            const height = root.ctx.measureText("M").width;
+            const height = scene.ctx.measureText("M").width;
             const measured = {
                 width,
                 height,

@@ -1,5 +1,6 @@
 import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
+import { constain } from "@pencil.js/math";
 
 /**
  * @typedef {Object} DraggableOptions
@@ -21,49 +22,55 @@ import MouseEvent from "@pencil.js/mouse-event";
  * @return {DraggableAPI}
  */
 Component.prototype.draggable = function draggable (options) {
-    this.isDraggable = true;
-    if (!this.options.cursor) {
+    const cursorNotSet = !this.options.cursor;
+    if (cursorNotSet) {
         this.options.cursor = "-webkit-grab";
     }
+    this.isDraggable = true;
     const mergedOptions = Object.assign({
         x: true,
         y: true,
     }, options);
 
     let startPosition = null;
-    this.on("mousedown", function draggableMouseDownCallback (event) {
-        startPosition = event.position.subtract(this.position);
+    let originPosition = null;
+    this.on("mousedown", (event) => {
+        if (cursorNotSet) {
+            this.options.cursor = "-webkit-grabbing";
+        }
+        startPosition = event.position;
+        originPosition = this.position;
         this.isDragged = true;
 
         this.fire(new MouseEvent(this, "grab", event.position));
     }, true);
 
-    this.getRoot().on("mousemove", (event) => {
+    this.getScene().then(scene => scene.on("mousemove", (event) => {
         if (this.isDragged && startPosition) {
-            const newPosition = event.position.subtract(startPosition);
+            const difference = event.position.subtract(startPosition);
 
             if (mergedOptions.constrain) {
-                const constrainer = mergedOptions.constrain;
-                this.position.x = Math.max(constrainer.start.x, Math.min(newPosition.x, constrainer.end.x));
-                this.position.y = Math.max(constrainer.start.y, Math.min(newPosition.y, constrainer.end.y));
+                const limit = mergedOptions.constrain;
+                this.position = originPosition.add(
+                    constain(difference.x, limit.start.x, limit.end.x),
+                    constain(difference.y, limit.start.y, limit.end.y),
+                );
             }
             else {
-                if (mergedOptions.x) {
-                    this.position.x = newPosition.x;
-                }
-                if (mergedOptions.y) {
-                    this.position.y = newPosition.y;
-                }
+                this.position = originPosition.add(mergedOptions.x && difference.x, mergedOptions.y && difference.y);
             }
 
             this.fire(new MouseEvent(this, "drag", event.position));
         }
     }).on("mouseup", (event) => {
+        if (cursorNotSet) {
+            this.options.cursor = "-webkit-grab";
+        }
         this.isDragged = false;
         startPosition = null;
 
         this.fire(new MouseEvent(this, "drop", event.position));
-    });
+    }));
 
     return {
         /**

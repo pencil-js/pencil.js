@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "@pencil.js/component": "^0.2.0",
+    "@pencil.js/math": "^0.2.0",
     "@pencil.js/mouse-event": "^0.2.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
