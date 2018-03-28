@@ -31,6 +31,7 @@ export default class Line extends Component {
      */
     trace (ctx) {
         ctx.moveTo(0, 0);
+        ctx.lineJoin = "round"; // TODO: option
         this.points.slice(1).forEach((point) => {
             const diff = point.subtract(this.position);
             ctx.lineTo(diff.x, diff.y);

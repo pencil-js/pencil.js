@@ -48,7 +48,7 @@ export default class Slider extends Container {
         });
         this.handle.on("drag", () => this.fire(new BaseEvent(this, "change")), true);
 
-        if (this.options.value) {
+        if (this.options.value !== undefined) {
             this.moveHandle(this.options.value);
         }
     }
@@ -58,7 +58,8 @@ export default class Slider extends Container {
      * @param {Number} value - New value to use
      */
     moveHandle (value) {
-        this.handle.position.x = (this.width - Slider.HEIGHT) * (value / (this.options.max - this.options.min));
+        const range = this.options.max - this.options.min;
+        this.handle.position.x = (this.width - Slider.HEIGHT) * ((value - this.options.min) / range);
     }
 
     /**
