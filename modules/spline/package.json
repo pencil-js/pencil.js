@@ -17,8 +17,7 @@
   ],
   "dependencies": {
     "@pencil.js/line": "^0.3.0",
-    "@pencil.js/math": "^0.2.0",
-    "@pencil.js/position": "^0.3.0"
+    "@pencil.js/math": "^0.2.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

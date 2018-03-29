@@ -1,5 +1,4 @@
 import Line from "@pencil.js/line";
-import Position from "@pencil.js/position";
 import { equal } from "@pencil.js/math";
 
 /**
@@ -12,7 +11,7 @@ export default class Spline extends Line {
      * Spline constructor
      * @param {Array<Position>} points - Set of points to go through
      * @param {Number} [tension=0.2] - Ratio of tension between points (0 means straight line, can take any value, but with weird results above 1)
-     * @param {ComponentOptions} [options] - Drawing options
+     * @param {LineOptions} [options] - Drawing options
      */
     constructor (points, tension = 0.2, options) {
         super(points, options);
@@ -33,6 +32,7 @@ export default class Spline extends Line {
             super.trace(ctx);
         }
         else {
+            ctx.lineCap = this.options.cap;
             Spline.splineThrough(this.points.map(point => point.subtract(this.position)), this.tension, ctx);
         }
         return this;
@@ -76,5 +76,19 @@ export default class Spline extends Line {
             points[1].subtract(diff),
             points[1].add(diff),
         ];
+    }
+
+    /**
+     * @return {LineCaps}
+     */
+    static get caps () {
+        return super.caps;
+    }
+
+    /**
+     * @return {LineJoins}
+     */
+    static get joins () {
+        return super.joins;
     }
 }
