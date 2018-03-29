@@ -76,7 +76,7 @@ const height = 50;
 let rectangle = new Rectangle(new Position(100, 200), width, height, {
     fill: "red"
 }); // Create a new rectangle with few parameters
-scene.addChild(rectangle); // Add the rectangle to the scene
+scene.add(rectangle); // Add the rectangle to the scene
 
 scene.render(); // Render the scene once
 ```

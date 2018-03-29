@@ -42,7 +42,7 @@ export default class Component extends Container {
      * @return {Component} Itself
      */
     render (ctx) {
-        return super.render(ctx, function componentRender () {
+        return super.render(ctx, () => {
             ctx.beginPath();
             ctx.globalAlpha = this.options.alpha;
 

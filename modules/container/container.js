@@ -59,7 +59,7 @@ export default class Container extends EventEmitter {
      * @param {Container} child - Another container
      * @return {Container} Itself
      */
-    addChild (child) {
+    add (child) {
         if (child === this) {
             throw new EvalError("A container can't contain itself.");
         }
@@ -199,7 +199,7 @@ export default class Container extends EventEmitter {
             this.children.slice(0, pivotIndex).forEach(child => child.render(ctx));
 
             if (drawing) {
-                drawing.call(this);
+                drawing();
             }
 
             this.children.slice(pivotIndex).forEach(child => child.render(ctx));

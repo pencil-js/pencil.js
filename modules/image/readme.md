@@ -15,7 +15,7 @@ import Image from "@pencil.js/image";
 
 const img = new Image(aPosition, "url/to/my/file.png");
 img.on("load", () => {
-    myScene.addChild(img);
+    myScene.add(img);
 });
 
 // Can be use to preload a bunch of images

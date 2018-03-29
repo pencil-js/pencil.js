@@ -14,5 +14,5 @@ Simple wrapper for others component in you scene.
 import Container from "@pencil.js/container";
 
 let container = new Container();
-container.addChild(someComponent);
+container.add(someComponent);
 ```

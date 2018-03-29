@@ -35,15 +35,15 @@ export default class Slider extends Container {
         this.background = new Rectangle(undefined, this.width, sliderHeight, {
             fill: this.options.background,
         });
-        this.addChild(this.background);
+        this.add(this.background);
 
         this.container = new Container(new Position(sliderHeight / 2, sliderHeight / 2));
-        this.addChild(this.container);
+        this.add(this.container);
         this.handle = new Circle(new Position(0, 0), sliderHeight / 2, {
             fill: this.options.fill,
             cursor: "ew-resize",
         });
-        this.container.addChild(this.handle);
+        this.container.add(this.handle);
         this.handleDragAPI = this.handle.draggable({
             constrain: new Vector(new Position(0, 0), new Position(this.width - sliderHeight, 0)),
         });
