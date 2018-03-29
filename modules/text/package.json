@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/text",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Text writing for Pencil.js package.",
   "main": "text.js",
   "files": [],
@@ -16,11 +16,11 @@
     "writing"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.3.0",
-    "@pencil.js/container": "^0.3.0",
-    "@pencil.js/position": "^0.3.0",
-    "@pencil.js/rectangle": "^0.3.0",
-    "@pencil.js/scene": "^0.3.0",
+    "@pencil.js/component": "^0.4.0",
+    "@pencil.js/container": "^0.4.0",
+    "@pencil.js/position": "^0.4.0",
+    "@pencil.js/rectangle": "^0.4.0",
+    "@pencil.js/scene": "^0.4.0",
     "text-direction": "^1.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

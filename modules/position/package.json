@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/position",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "2D space position for Pencil.js package.",
   "main": "position.js",
   "files": [],
@@ -16,7 +16,7 @@
     "2d"
   ],
   "dependencies": {
-    "@pencil.js/math": "^0.2.0"
+    "@pencil.js/math": "^0.4.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
