@@ -1,6 +1,5 @@
 import Component from "@pencil.js/component";
 import Rectangle from "@pencil.js/rectangle";
-import Scene from "@pencil.js/scene";
 import Position from "@pencil.js/position";
 import textDirection from "text-direction";
 
