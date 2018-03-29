@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/scene",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Scene renderer for Pencil.js package.",
   "main": "scene.js",
   "files": [],
