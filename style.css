@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    background: #CCC;
+    font-family: sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #ff7b00;
+}
+a:visited {
+    color: #e27f2f;
+}
+
+p{
+    padding: 0.5em 1em;
+    background-color: #AAA;
+}
+
+strong {
+    color: white;
+    text-shadow: 0 1px 0 #333;
+}
+
+h1 {
+    text-align: center;
+    text-shadow: 0 1px 0 #333, 0 2px 0 #333;
+}
+h2, h3 {
+    margin: 1em;
+}
+
+.example {
+    display: flex;
+}
+
+.example > * {
+    width: 50%;
+}
+
+.example pre {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.example .scene {
+    border: solid #272822;
+    border-width: 1px 0;
+}
+
+canvas {
+    display: block;
+}
