@@ -153,7 +153,7 @@ export default class Text extends Component {
     static get defaultOptions () {
         return Object.assign({
             font: "sans-serif",
-            fontSize: 10,
+            fontSize: 20,
             align: Text.alignments.start,
         }, super.defaultOptions);
     }

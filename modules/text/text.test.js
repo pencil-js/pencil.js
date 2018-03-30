@@ -44,6 +44,7 @@ test("Text measures", () => {
     expect(text.height).toBe(0);
     // TODO: test with root
 
+    // eslint-disable-next-line no-underscore-dangle, mess with cache on purpose
     text._cachedMeasures[text.hash] = {
         width: 42,
         height: 55,
@@ -62,6 +63,6 @@ test("Text statics", () => {
 
     const opts = Text.defaultOptions;
     expect(opts.font).toBe("sans-serif");
-    expect(opts.fontSize).toBe(10);
+    expect(opts.fontSize).toBe(20);
     expect(opts.align).toBe("start");
 });
