@@ -37,7 +37,7 @@ export default class Text extends Component {
         const text = this.text.toString();
         if (text.length) {
             const opts = this.options;
-            ctx.font = `${opts.bold && "bold "}${opts.italic && "italic "}${opts.fontSize}px ${opts.font}`;
+            ctx.font = `${opts.bold ? "bold " : ""}${opts.italic ? "italic " : ""}${opts.fontSize}px ${opts.font}`;
             ctx.textAlign = opts.align;
             ctx.textBaseline = "top"; // TODO: user could want to change this, but fonts em-box can have crazy values
 
