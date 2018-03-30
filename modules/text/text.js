@@ -36,18 +36,19 @@ export default class Text extends Component {
     trace (ctx) {
         const text = this.text.toString();
         if (text.length) {
-            ctx.font = `${this.options.fontSize}px ${this.options.font}`;
-            ctx.textAlign = this.options.align;
+            const opts = this.options;
+            ctx.font = `${opts.bold && "bold "}${opts.italic && "italic "}${opts.fontSize}px ${opts.font}`;
+            ctx.textAlign = opts.align;
             ctx.textBaseline = "top"; // TODO: user could want to change this, but fonts em-box can have crazy values
 
-            if (this.options.fill) {
-                ctx.fillStyle = this.options.fill;
+            if (opts.fill) {
+                ctx.fillStyle = opts.fill;
                 ctx.fillText(text, 0, 0);
             }
 
-            if (this.options.stroke) {
-                ctx.strokeStyle = this.options.stroke;
-                ctx.lineWidth = this.options.strokeWidth;
+            if (opts.stroke) {
+                ctx.strokeStyle = opts.stroke;
+                ctx.lineWidth = opts.strokeWidth;
                 ctx.strokeText(text, 0, 0);
             }
         }
@@ -146,6 +147,8 @@ export default class Text extends Component {
      * @prop {String} [font="sans-serif"] - Font to use
      * @prop {Number} [fontSize=10] - Size of the text in pixels
      * @prop {String} [align=Text.alignments.start] - Text horizontal alignment
+     * @prop {Boolean} [bold=false] - Use bold font-weight
+     * @prop {Boolean} [italic=false] - Use italic font-style
      */
     /**
      * @return {TextOptions}
@@ -155,6 +158,8 @@ export default class Text extends Component {
             font: "sans-serif",
             fontSize: 20,
             align: Text.alignments.start,
+            bold: false,
+            italic: false,
         }, super.defaultOptions);
     }
 

@@ -65,4 +65,6 @@ test("Text statics", () => {
     expect(opts.font).toBe("sans-serif");
     expect(opts.fontSize).toBe(20);
     expect(opts.align).toBe("start");
+    expect(opts.bold).toBe(false);
+    expect(opts.italic).toBe(false);
 });
