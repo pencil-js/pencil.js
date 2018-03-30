@@ -25,7 +25,9 @@ export default class EventEmitter {
          */
         function listenMouseEvent (eventName) {
             window.addEventListener(eventName, (event) => {
-                const eventPosition = (new Position(event.clientX, event.clientY)).subtract(scene.containerPosition);
+                const eventPosition = (new Position(event.clientX, event.clientY))
+                .subtract(scene.containerPosition)
+                .add(window.scrollX, window.scrollY);
                 const target = scene.getTarget(eventPosition);
                 if (target) {
                     // console.log(target);
