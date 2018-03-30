@@ -1,6 +1,6 @@
 {
   "name": "pencil.js",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Modular 2D drawing library.",
   "main": "pencil.js",
   "files": [
@@ -37,7 +37,7 @@
   "dependencies": {
     "@pencil.js/arc": "^0.5.0",
     "@pencil.js/base-event": "^0.2.0",
-    "@pencil.js/circle": "^0.5.0",
+    "@pencil.js/circle": "^0.5.1",
     "@pencil.js/component": "^0.5.0",
     "@pencil.js/container": "^0.5.0",
     "@pencil.js/draggable": "^0.5.0",
@@ -53,7 +53,7 @@
     "@pencil.js/regular-polygon": "^0.5.0",
     "@pencil.js/resizable": "^0.5.0",
     "@pencil.js/scene": "^0.5.0",
-    "@pencil.js/slider": "^0.5.0",
+    "@pencil.js/slider": "^0.5.1",
     "@pencil.js/spline": "^0.5.0",
     "@pencil.js/square": "^0.5.0",
     "@pencil.js/star": "^0.5.0",

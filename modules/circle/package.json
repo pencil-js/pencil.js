@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/circle",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Circle shape for Pencil.js package.",
   "main": "circle.js",
   "files": [],
