@@ -16,20 +16,17 @@ export default class Image extends Rectangle {
      * @param {Number} [height] - Height to draw the image, use file height and width if both omitted
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, url, width, height, options) {
-        let realWidth = width;
+    constructor (position, url, width = null, height = null, options) {
         let realHeight = height;
         let realOptions = options;
-        if (typeof realWidth === "object") {
+        if (typeof width === "object") {
             realOptions = width;
-            realWidth = null;
-            realHeight = null;
         }
         else if (typeof realHeight === "object") {
             realOptions = height;
             realHeight = width;
         }
-        super(position, realWidth, realHeight, realOptions);
+        super(position, width, realHeight, realOptions);
 
         this.file = null;
         this.isLoaded = false;
