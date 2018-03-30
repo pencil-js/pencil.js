@@ -25,4 +25,11 @@ export default class Circle extends Arc {
     isHover (position) {
         return Component.prototype.isHover.call(this, position) && this.position.distance(position) <= this.radius;
     }
+
+    /**
+     * @return {ComponentOptions}
+     */
+    static get defaultOptions () {
+        return Component.defaultOptions;
+    }
 }
