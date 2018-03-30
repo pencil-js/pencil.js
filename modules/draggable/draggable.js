@@ -23,7 +23,7 @@ import MouseEvent from "@pencil.js/mouse-event";
 Component.prototype.draggable = function draggable (options) {
     const cursorNotSet = !this.options.cursor;
     if (cursorNotSet) {
-        this.options.cursor = "-webkit-grab";
+        this.options.cursor = Component.cursors.grab;
     }
     this.isDraggable = true;
     const mergedOptions = Object.assign({
@@ -35,7 +35,7 @@ Component.prototype.draggable = function draggable (options) {
     let originPosition = null;
     this.on("mousedown", (event) => {
         if (cursorNotSet) {
-            this.options.cursor = "-webkit-grabbing";
+            this.options.cursor = Component.cursors.grabbing;
         }
         startPosition = event.position;
         originPosition = this.position.clone();
@@ -57,7 +57,7 @@ Component.prototype.draggable = function draggable (options) {
         }
     }).on("mouseup", (event) => {
         if (cursorNotSet) {
-            this.options.cursor = "-webkit-grab";
+            this.options.cursor = Component.cursors.grab;
         }
         this.isDragged = false;
         startPosition = null;

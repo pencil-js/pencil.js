@@ -1,10 +1,11 @@
-import Container from "@pencil.js/container";
-import Rectangle from "@pencil.js/rectangle";
-import Circle from "@pencil.js/circle";
-import Vector from "@pencil.js/vector";
-import Position from "@pencil.js/position";
 import BaseEvent from "@pencil.js/base-event";
+import Circle from "@pencil.js/circle";
+import Component from "@pencil.js/component";
+import Container from "@pencil.js/container";
 import { constrain } from "@pencil.js/math";
+import Position from "@pencil.js/position";
+import Rectangle from "@pencil.js/rectangle";
+import Vector from "@pencil.js/vector";
 
 /**
  * @typedef {Object} SliderOptions
@@ -41,7 +42,7 @@ export default class Slider extends Container {
         this.add(this.container);
         this.handle = new Circle(new Position(0, 0), sliderHeight / 2, {
             fill: this.options.fill,
-            cursor: "ew-resize",
+            cursor: Component.cursors.ewResize,
         });
         this.container.add(this.handle);
         this.handleDragAPI = this.handle.draggable({

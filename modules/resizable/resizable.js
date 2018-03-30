@@ -1,9 +1,9 @@
+import Component from "@pencil.js/component";
+import MouseEvent from "@pencil.js/mouse-event";
+import Position from "@pencil.js/position";
 import Rectangle from "@pencil.js/rectangle";
 import Square from "@pencil.js/square";
-// import Polygon from "@pencil.js/polygon";
-import Position from "@pencil.js/position";
 import "@pencil.js/draggable";
-import MouseEvent from "@pencil.js/mouse-event";
 
 /**
  * @typedef {Object} ResizableOptions
@@ -30,20 +30,12 @@ Rectangle.prototype.resizable = function resizable (options) {
 
     const size = 15;
     const bottomRight = (new Position(this.width, this.height)).subtract(size);
-    // let points = [
-    //     bottomRight,
-    //     bottomRight.subtract(new Position(0, size)),
-    //     bottomRight.subtract(new Position(size, 0))
-    // ];
-    // let handle = new Polygon(points, {
-    //     fill: "gold",
-    //     cursor: "se-resize"
-    // });
+    // Fixme: handle should be a triangle (but ishover broken for now)
     const handle = new Square(bottomRight, size, {
         fill: "gold",
-        cursor: "se-resize",
+        cursor: Component.cursors.seResize,
     });
-    this.addChild(handle);
+    this.add(handle);
     const api = handle.draggable({
         x: mergedOptions.x,
         y: mergedOptions.y,

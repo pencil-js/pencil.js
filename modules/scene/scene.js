@@ -1,7 +1,8 @@
+import BaseEvent from "@pencil.js/base-event";
 import Container from "@pencil.js/container";
+import Component from "@pencil.js/component";
 import EventEmitter from "@pencil.js/event-emitter";
 import MouseEvent from "@pencil.js/mouse-event";
-import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 
 /**
@@ -80,14 +81,14 @@ export default class Scene extends Container {
 
     /**
      *
-     * @param {String} cursor -
+     * @param {String} [cursor=Component.cursors.default] - Cursor string
      */
-    setCursor (cursor = "") {
+    setCursor (cursor = Component.cursors.default) {
         this.ctx.canvas.style.cursor = cursor;
     }
 
     /**
-     *
+     * Draw the whole scene
      * @return {Scene} Itself
      */
     render () {
@@ -123,12 +124,10 @@ export default class Scene extends Container {
      * Erase everything on scene
      */
     clear () {
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         if (this.options.fill) {
             this.ctx.fillStyle = this.options.fill;
             this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        }
-        else {
-            this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
         }
     }
 
@@ -184,7 +183,7 @@ export default class Scene extends Container {
     static get defaultOptions () {
         return Object.assign({
             fill: null,
-            cursor: "default",
+            cursor: Component.cursors.defaultOptions,
         }, super.defaultOptions);
     }
 }

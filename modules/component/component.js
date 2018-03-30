@@ -100,8 +100,70 @@ export default class Component extends Container {
             alpha: 1,
             fill: "#000",
             stroke: null,
-            strokeWidth: 1,
+            strokeWidth: 2,
             cursor: null,
         }, super.defaultOptions);
+    }
+
+    /**
+     * All available cursors
+     * https://www.w3.org/TR/2017/WD-css-ui-4-20171222/#cursor
+     * @return {Object}
+     */
+    static get cursors () {
+        const cursors = {
+            default: "default",
+            none: "none",
+            contextMenu: "context-menu",
+            help: "help",
+            pointer: "pointer",
+            progress: "progress",
+            wait: "wait",
+            cell: "cell",
+            crosshair: "crosshair",
+            text: "text",
+            textVertical: "vertical-text",
+            alias: "alias",
+            copy: "copy",
+            move: "move",
+            noDrop: "no-drop",
+            notAllowed: "not-allowed",
+            grab: "grab",
+            grabbing: "grabbing",
+            allScroll: "all-scroll",
+            colResize: "col-resize",
+            rowResize: "row-resize",
+            nResize: "n-resize",
+            eResize: "e-resize",
+            sResize: "s-resize",
+            wResize: "w-resize",
+            neResize: "ne-resize",
+            seResize: "se-resize",
+            swResize: "sw-resize",
+            nwResize: "nw-resize",
+            ewResize: "ew-resize",
+            nsResize: "ns-resize",
+            neswResize: "nesw-resize",
+            nwseResize: "nwse-resize",
+            zoomIn: "zoom-in",
+            zoomOut: "zoom-out",
+        };
+
+        // While Blink don't support "grab" and "grabbing", let's //FIXME
+        if (!CSS.supports("cursor", cursors.grab)) {
+            cursors.grab = "-webkit-grab";
+        }
+        if (!CSS.supports("cursor", cursors.grabbing)) {
+            cursors.grabbing = "-webkit-grabbing";
+        }
+
+        cursors.link = cursors.alias;
+        cursors.verticalResize = cursors.rowResize;
+        cursors.horizontalResize = cursors.colResize;
+        cursors.topResize = cursors.nResize;
+        cursors.rightResize = cursors.eResize;
+        cursors.bottomResize = cursors.sResize;
+        cursors.leftResize = cursors.wResize;
+        return cursors;
     }
 }
