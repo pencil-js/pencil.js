@@ -22,11 +22,9 @@ export default class Scene extends Container {
      * @param {HTMLElement} [container=document.body] - Container of the renderer
      * @param {SceneOptions} [options] -
      */
-    constructor (container, options) {
+    constructor (container = document.body, options) {
         super(undefined, options);
 
-        // eslint-disable-next-line no-param-reassign
-        container = container || document.body; // Force in-flight check
         container.innerHTML = "";
         let canvas;
         if (container instanceof HTMLCanvasElement) {
