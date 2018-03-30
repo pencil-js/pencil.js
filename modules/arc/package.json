@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/arc",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Arc shape for Pencil.js package.",
   "main": "arc.js",
   "files": [],
@@ -16,8 +16,8 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.4.0",
-    "@pencil.js/line": "^0.4.0",
+    "@pencil.js/component": "^0.5.0",
+    "@pencil.js/line": "^0.5.0",
     "@pencil.js/math": "^0.4.0",
     "@pencil.js/position": "^0.4.0",
     "@pencil.js/vector": "^0.4.0"
