@@ -29,10 +29,12 @@ scene.add(line);
 const spline = new Pencil.Spline(line.points.map(p => p.add(0, 60)), 0.5);
 scene.add(spline);
 
-const text = new Pencil.Text(spline.position.add(0, 80), "Text");
+const text = new Pencil.Text(spline.position.add(0, 70), "Text");
 scene.add(text);
 
-image = new Pencil.Image(text.position.add(0, 50), "./megusta.png");
+image = new Pencil.Image(text.position.add(0, 40), "./megusta.png");
 scene.add(image);
+
+// And more ...
 
 image.on("load", () => scene.render());
