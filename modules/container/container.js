@@ -56,24 +56,26 @@ export default class Container extends EventEmitter {
 
     /**
      * Add another container as a child
-     * @param {Container} child - Another container
+     * @param {...Container} child - Another container
      * @return {Container} Itself
      */
-    add (child) {
-        if (child === this) {
-            throw new EvalError("A container can't contain itself.");
-        }
+    add (...child) {
+        child.forEach((one) => {
+            if (one === this) {
+                throw new EvalError("A container can't contain itself.");
+            }
 
-        if (child.isScene) {
-            throw new EvalError("A scene can't be contained in another container.");
-        }
+            if (one.isScene) {
+                throw new EvalError("A scene can't be contained in another container.");
+            }
 
-        if (child.parent) {
-            child.parent.removeChild(child);
-        }
-        child.parent = this;
-        this.children.push(child);
-        child.fire(new BaseEvent(child, "attach"));
+            if (one.parent) {
+                one.parent.removeChild(one);
+            }
+            one.parent = this;
+            this.children.push(one);
+            one.fire(new BaseEvent(one, "attach"));
+        });
 
         return this;
     }
