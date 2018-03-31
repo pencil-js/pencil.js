@@ -39,7 +39,23 @@ test("Vector getDelta", () => {
     expect(delta.equal(new Position(42, 31))).toBe(true);
 });
 
-test("Vector add and translate", () => {
+test("Vector add", () => {
+    const vector = new Vector(10, 20, 100, 150);
+
+    const addValue = vector.clone().add(10);
+    expect(addValue.start.equal(vector.start)).toBe(true);
+    expect(addValue.end.equal(new Position(vector.end.x + 10, vector.end.y + 10))).toBe(true);
+
+    const addPosition = vector.clone().add(new Position(10, 20));
+    expect(addPosition.start.equal(vector.start)).toBe(true);
+    expect(addPosition.end.equal(new Position(vector.end.x + 10, vector.end.y + 20))).toBe(true);
+
+    const addVector = vector.clone().add(new Vector(10, 20, 100, 200));
+    expect(addVector.start.equal(vector.start)).toBe(true);
+    expect(addVector.end.equal(new Position(vector.end.x + (100 - 10), vector.end.y + (200 - 20)))).toBe(true);
+});
+
+test("Vector translate", () => {
 });
 
 test("Vector intersect", () => {
