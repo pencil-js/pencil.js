@@ -33,7 +33,7 @@ export default class Spline extends Line {
         }
         else {
             ctx.lineCap = this.options.cap;
-            Spline.splineThrough(this.points.map(point => point.subtract(this.position)), this.tension, ctx);
+            Spline.splineThrough(this.points.map(point => point.clone().subtract(this.position)), this.tension, ctx);
         }
         return this;
     }
@@ -71,10 +71,10 @@ export default class Spline extends Line {
             throw new RangeError(`Need exactly 3 points to compute control points, but ${points.length} given.`);
         }
 
-        const diff = points[2].subtract(points[0]).multiply(tension);
+        const diff = points[2].clone().subtract(points[0]).multiply(tension);
         return [
-            points[1].subtract(diff),
-            points[1].add(diff),
+            points[1].clone().subtract(diff),
+            points[1].clone().add(diff),
         ];
     }
 

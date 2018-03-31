@@ -46,9 +46,10 @@ Component.prototype.draggable = function draggable (options) {
 
     this.getScene().then(scene => scene.on("mousemove", (event) => {
         if (this.isDragged && startPosition) {
-            const difference = event.position.subtract(startPosition);
+            const difference = event.position.clone().subtract(startPosition);
 
-            this.position.set(originPosition.add(mergedOptions.x && difference.x, mergedOptions.y && difference.y));
+            const move = originPosition.clone().add(mergedOptions.x && difference.x, mergedOptions.y && difference.y);
+            this.position.set(move);
             if (mergedOptions.constrain) {
                 this.position.constrain(mergedOptions.constrain);
             }

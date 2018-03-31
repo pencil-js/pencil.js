@@ -49,7 +49,7 @@ export default class Polygon extends Component {
      */
     isHover (position) {
         if (super.isHover(position)) {
-            const testVector = new Vector(position, position.add(Infinity, 0));
+            const testVector = new Vector(position.clone(), position.clone().add(Infinity, 0));
             let intersection = 0;
             for (let i = 1; i < this.nbPoints; ++i) {
                 if (testVector.intersect(new Vector(this.points[i - 1], this.points[i]))) {

@@ -1,6 +1,7 @@
 /* global test expect describe  beforeEach afterEach */
 
 import Position from "./position";
+import Vector from "@pencil.js/vector";
 
 test("Position creation", () => {
     const pos = new Position();
@@ -57,60 +58,60 @@ describe("Position calculations", () => {
 
     test("Position subtract", () => {
         // Subtract
-        const subPos = one.subtract(two);
+        const subPos = one.clone().subtract(two);
         expect(subPos.x).toBe(one.x - two.x);
         expect(subPos.y).toBe(one.y - two.y);
 
-        const subVal = one.subtract(33);
+        const subVal = one.clone().subtract(33);
         expect(subVal.x).toBe(one.x - 33);
         expect(subVal.y).toBe(one.y - 33);
 
-        const subTwoVal = one.subtract(100.5, 0.8);
+        const subTwoVal = one.clone().subtract(100.5, 0.8);
         expect(subTwoVal.x).toBe(one.x - 100.5);
         expect(subTwoVal.y).toBe(one.y - 0.8);
     });
 
     test("Position add", () => {
         // Add
-        const addPos = one.add(two);
+        const addPos = one.clone().add(two);
         expect(addPos.x).toBe(one.x + two.x);
         expect(addPos.y).toBe(one.y + two.y);
 
-        const addVal = one.add(5);
+        const addVal = one.clone().add(5);
         expect(addVal.x).toBe(one.x + 5);
         expect(addVal.y).toBe(one.y + 5);
 
-        const addTwoVal = one.add(10, 0.9);
+        const addTwoVal = one.clone().add(10, 0.9);
         expect(addTwoVal.x).toBe(one.x + 10);
         expect(addTwoVal.y).toBe(one.y + 0.9);
     });
 
     test("Position divide", () => {
         // Divide
-        const divPos = one.divide(two);
+        const divPos = one.clone().divide(two);
         expect(divPos.x).toBe(one.x / two.x);
         expect(divPos.y).toBe(one.y / two.y);
 
-        const divVal = one.divide(0.2);
+        const divVal = one.clone().divide(0.2);
         expect(divVal.x).toBe(one.x / 0.2);
         expect(divVal.y).toBe(one.y / 0.2);
 
-        const divTwoVal = one.divide(3, 20);
+        const divTwoVal = one.clone().divide(3, 20);
         expect(divTwoVal.x).toBe(one.x / 3);
         expect(divTwoVal.y).toBe(one.y / 20);
     });
 
     test("Position multiply", () => {
         // Multiply
-        const multPos = one.multiply(two);
+        const multPos = one.clone().multiply(two);
         expect(multPos.x).toBe(one.x * two.x);
         expect(multPos.y).toBe(one.y * two.y);
 
-        const multVal = one.multiply(10);
+        const multVal = one.clone().multiply(10);
         expect(multVal.x).toBe(one.x * 10);
         expect(multVal.y).toBe(one.y * 10);
 
-        const multTwoVal = one.multiply(0.5, 20);
+        const multTwoVal = one.clone().multiply(0.5, 20);
         expect(multTwoVal.x).toBe(one.x * 0.5);
         expect(multTwoVal.y).toBe(one.y * 20);
     });
@@ -119,13 +120,23 @@ describe("Position calculations", () => {
 test("Position rotate", () => {
     const pos = new Position(10, 0);
 
-    const half = pos.rotate(0.5);
-    expect(half.x).toBeCloseTo(-10);
-    expect(half.y).toBeCloseTo(0);
+    pos.rotate(0.5);
+    expect(pos.x).toBeCloseTo(-10);
+    expect(pos.y).toBeCloseTo(0);
 
-    const quart = pos.rotate(-0.25);
-    expect(quart.x).toBeCloseTo(0);
-    expect(quart.y).toBeCloseTo(10);
+    pos.rotate(1);
+    expect(pos.x).toBeCloseTo(-10);
+    expect(pos.y).toBeCloseTo(0);
+
+    pos.rotate(0.5);
+    expect(pos.x).toBeCloseTo(10);
+    expect(pos.y).toBeCloseTo(0);
+});
+
+test("Position constrain", () => {
+    const pos = new Position(0, 0);
+
+
 });
 
 test("Position distance", () => {
@@ -138,11 +149,12 @@ test("Position distance", () => {
 });
 
 test("Position average", () => {
-    const points = (new Array(10)).fill().map((p, index) => new Position(index, index * 7));
-    const average = Position.average(points);
+    const n = 10;
+    const points = (new Array(n)).fill().map((p, index) => new Position(index, index * 7));
+    const average = Position.average.apply(null, points);
 
     expect(average instanceof Position).toBe(true);
-    const avr = 4.5;
-    expect(average.x).toBe(avr);
-    expect(average.y).toBe(avr * 7);
+    const avr = (n - 1) / 2;
+    expect(average.x).toBeCloseTo(avr);
+    expect(average.y).toBeCloseTo(avr * 7);
 });

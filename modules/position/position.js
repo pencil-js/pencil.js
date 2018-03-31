@@ -51,11 +51,11 @@ export default class Position {
     }
 
     /**
-     * Return a new position instance after applying an operation
+     * Apply an operation to this position values
      * @param {Function} operation - Function to apply on value
      * @param {Position|Number} position - Another position or a number
      * @param {Number} [diffY] - Value to apply on "y" if "position" is a number
-     * @return {Position} New instance
+     * @return {Position} Itself
      */
     calc (operation, position, diffY) {
         let x = 0;
@@ -68,14 +68,14 @@ export default class Position {
             x = operation(this.x, position);
             y = operation(this.y, diffY === undefined ? position : diffY);
         }
-        return new Position(x, y);
+        return this.set(x, y);
     }
 
     /**
      * Add another position or number
      * @param {Position|Number} position - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
-     * @return {Position} New instance
+     * @return {Position} Itself
      */
     add (position, y) {
         return this.calc((a, b) => a + b, position, y);
@@ -85,7 +85,7 @@ export default class Position {
      * Subtract another position or number
      * @param {Position|Number} position - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
-     * @return {Position} New instance
+     * @return {Position} Itself
      */
     subtract (position, y) {
         return this.calc((a, b) => a - b, position, y);
@@ -95,7 +95,7 @@ export default class Position {
      * Multiply by another position or number
      * @param {Position|Number} position - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
-     * @return {Position} New instance
+     * @return {Position} Itself
      */
     multiply (position, y) {
         return this.calc((self, other) => self * other, position, y);
@@ -105,7 +105,7 @@ export default class Position {
      * Divide by another position or number
      * @param {Position|Number} position - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
-     * @return {Position} New instance
+     * @return {Position} Itself
      */
     divide (position, y) {
         return this.calc((self, other) => self / other, position, y);
@@ -115,22 +115,25 @@ export default class Position {
      * Rotate the position around the origin
      * @param {Number} angle - Angle of rotation in ratio of full circle
      * (0 means no rotation, 1 means go full circle back to same position)
-     * @return {Position}
+     * @return {Position} Itself
      */
     rotate (angle) {
         const { cos, sin } = Math;
         const degree = -angle * radianCircle;
         const x = (this.x * cos(degree)) - (this.y * sin(degree));
         const y = (this.y * cos(degree)) + (this.x * sin(degree));
-        return new Position(x, y);
+        return this.set(x, y);
     }
 
     /**
-     *
-     * @param {Vector} vector -
+     * Constrain the position to a rectangle define by two positions
+     * @param {Vector} vector - Vector holding the two positions
+     * @return {Position} Itself
      */
     constrain (vector) {
-        this.set(constrain(this.x, vector.start.x, vector.end.x), constrain(this.y, vector.start.y, vector.end.y));
+        const x = constrain(this.x, vector.start.x, vector.end.x);
+        const y = constrain(this.y, vector.start.y, vector.end.y);
+        return this.set(x, y);
     }
 
     /**
@@ -159,21 +162,21 @@ export default class Position {
      */
     isOnSameSide (position, vector) {
         const { sign } = Math;
-        const thisMoved = this.subtract(vector.start);
-        const positionMoved = position.subtract(vector.start);
+        const thisMoved = this.clone().subtract(vector.start);
+        const positionMoved = position.clone().subtract(vector.start);
         const delta = vector.getDelta();
         return sign(thisMoved.crossProduct(delta)) === sign(positionMoved.crossProduct(delta));
     }
 
     /**
      * Compute the average for a set of positions
-     * @param {Array<Position>} positions -
+     * @param {...Position} position -
      * @return {Position}
      */
-    static average (positions) {
+    static average (...position) {
         let result = new Position();
-        positions.forEach(position => result = result.add(position));
-        const nbPositions = positions.length;
+        position.forEach(one => result = result.add(one));
+        const nbPositions = position.length;
         return result.divide(nbPositions);
     }
 }

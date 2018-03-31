@@ -34,7 +34,7 @@ export default class Line extends Component {
         ctx.lineJoin = this.options.join;
         ctx.lineCap = this.options.cap;
         this.points.slice(1).forEach((point) => {
-            const diff = point.subtract(this.position);
+            const diff = point.clone().subtract(this.position);
             ctx.lineTo(diff.x, diff.y);
         });
         return this;

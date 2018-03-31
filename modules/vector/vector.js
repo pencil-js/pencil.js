@@ -52,26 +52,30 @@ export default class Vector {
      * @return {Position}
      */
     getDelta () {
-        return this.end.subtract(this.start);
+        return this.end.clone().subtract(this.start);
     }
 
     /**
      * Add a vector to this
-     * @param {Vector} vector - Any vector
-     * @return {Vector} New instance
+     * @param {Vector|Position|Number} modification - Any Vector or Position or Number
+     * @return {Vector} Itself
      */
-    add (vector) {
-        return new Vector(this.start.clone(), this.end.add(vector.getDelta()));
+    add (modification) {
+        const toAdd = modification instanceof Vector ? modification.getDelta() : modification;
+        this.end.add(toAdd);
+        return this;
     }
 
     /**
-     * Move this vector by another vector
-     * @param {Vector} vector - Any vector
-     * @return {Vector} New instance
+     * Move this vector
+     * @param {Vector|Position|Number} modification - Any Vector or Position or Number
+     * @return {Vector} Itself
      */
-    translate (vector) {
-        const delta = vector.getDelta();
-        return new Vector(this.start.add(delta), this.end.add(delta));
+    translate (modification) {
+        const toAdd = modification instanceof Vector ? modification.getDelta() : modification;
+        this.start.add(toAdd);
+        this.end.add(toAdd);
+        return this;
     }
 
     /**
@@ -80,6 +84,6 @@ export default class Vector {
      * @return {Boolean}
      */
     intersect (vector) {
-        return !this.start.isOnSameSide(this.end, vector) && !vector.start.isOnSameSide(vector.end, this);
+        return !(this.start.isOnSameSide(this.end, vector) || vector.start.isOnSameSide(vector.end, this));
     }
 }
