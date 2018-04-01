@@ -11,13 +11,13 @@ Single line stroke.
 ## Examples
 
 ```js
-    import Line from "@pencil.js/line";
-    
-    const from = aPosition;
-    const to = aComponent.position;
-    const options = {
-        stroke: "red",
-        strokeWidth: 9
-    };
-    let line = new Line(from, to, options);
+import Line from "@pencil.js/line";
+
+const from = aPosition;
+const to = anotherPosition;
+const options = {
+    stroke: "red",
+    strokeWidth: 9
+};
+let line = new Line([from, to], options);
 ```
