@@ -10,10 +10,10 @@ export default class Spline extends Line {
     /**
      * Spline constructor
      * @param {Array<Position>} points - Set of points to go through
-     * @param {Number} [tension=0.2] - Ratio of tension between points (0 means straight line, can take any value, but with weird results above 1)
+     * @param {Number} [tension=Spline.defaultTension] - Ratio of tension between points (0 means straight line, can take any value, but with weird results above 1)
      * @param {LineOptions} [options] - Drawing options
      */
-    constructor (points, tension = 0.2, options) {
+    constructor (points, tension = Spline.defaultTension, options) {
         super(points, options);
 
         /**
@@ -33,18 +33,26 @@ export default class Spline extends Line {
         }
         else {
             ctx.lineCap = this.options.cap;
-            Spline.splineThrough(this.points.map(point => point.clone().subtract(this.position)), this.tension, ctx);
+            Spline.splineThrough(ctx, this.points.map(point => point.clone().subtract(this.position)), this.tension);
         }
         return this;
     }
 
     /**
-     * Draw a spline through points using a tension
-     * @param {Array<Position>} points - Points to use
-     * @param {Number} tension - Ratio of tension
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * Default ratio of tension
+     * @return {Number}
      */
-    static splineThrough (points, tension, ctx) {
+    static get defaultTension () {
+        return 0.2;
+    }
+
+    /**
+     * Draw a spline through points using a tension
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {Array<Position>} points - Points to use
+     * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
+     */
+    static splineThrough (ctx, points, tension = Spline.defaultTension) {
         const getCtrlPts = Spline.getControlPoint;
         let previousControls = [null, points[0]];
         ctx.moveTo(points[0].x, points[0].y);
