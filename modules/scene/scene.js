@@ -46,6 +46,10 @@ export default class Scene extends Container {
         /**
          * @type {Position}
          */
+        this.center = new Position(this.width / 2, this.height / 2);
+        /**
+         * @type {Position}
+         */
         this.containerPosition = new Position(measures.left + window.scrollX, measures.top + window.scrollY);
 
         this.isScene = true;
