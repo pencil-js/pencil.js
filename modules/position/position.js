@@ -115,14 +115,16 @@ export default class Position {
      * Rotate the position around the origin
      * @param {Number} angle - Angle of rotation in ratio of full circle
      * (0 means no rotation, 1 means go full circle back to same position)
+     * @param {Position} [origin=new Position()] - Point of origin to rotate around (by default (0, 0))
      * @return {Position} Itself
      */
-    rotate (angle) {
+    rotate (angle, origin = new Position()) {
         const { cos, sin } = Math;
         const degree = -angle * radianCircle;
-        const x = (this.x * cos(degree)) - (this.y * sin(degree));
-        const y = (this.y * cos(degree)) + (this.x * sin(degree));
-        return this.set(x, y);
+        const clone = this.clone().subtract(origin);
+        const x = (clone.x * cos(degree)) - (clone.y * sin(degree));
+        const y = (clone.y * cos(degree)) + (clone.x * sin(degree));
+        return this.set(x, y).add(origin);
     }
 
     /**
