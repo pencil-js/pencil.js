@@ -55,7 +55,6 @@ export default class Spline extends Line {
     static splineThrough (ctx, points, tension = Spline.defaultTension) {
         const getCtrlPts = Spline.getControlPoint;
         let previousControls = [null, points[0]];
-        ctx.moveTo(points[0].x, points[0].y);
 
         for (let i = 1, l = points.length; i < l; ++i) {
             const controlPoints = i < l - 1 ? getCtrlPts(points.slice(i - 1, i + 2), tension) : [points[i], null];

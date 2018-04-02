@@ -27,6 +27,7 @@ import Rectangle from "@pencil.js/rectangle";
 import Square from "@pencil.js/square";
 import Image from "@pencil.js/image";
 import Text from "@pencil.js/text";
+import Path from "@pencil.js/path";
 
 // Complex
 import Slider from "@pencil.js/slider";
@@ -52,6 +53,7 @@ export default {
     Square,
     Image,
     Text,
+    Path,
     Math,
     Position,
     Vector,
@@ -78,6 +80,7 @@ export {
     Square,
     Image,
     Text,
+    Path,
     Math,
     Position,
     Vector,

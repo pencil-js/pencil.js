@@ -80,7 +80,7 @@ scene.add(rectangle); // Add the rectangle to the scene
 
 scene.render(); // Render the scene once
 ```
-    
+
 Take a look at [more advanced examples](https://gmartigny.github.io/pencil.js/).
 
 Or read [the full documentation](documentation.md).
@@ -93,6 +93,7 @@ Or read [the full documentation](documentation.md).
      * [Scene](modules/scene)
      * [Component](modules/component)
        * [.draggable()](modules/draggable)
+       * [Path](modules/path)
        * [Line](modules/line)
          * [Spline](modules/spline)
        * [Polygon](modules/polygon)
@@ -124,8 +125,8 @@ In any case, I recommend you use a namespace (eg: ``import Namespace from "penci
 
 ### Performance
 Even if it's ok, this package is not built around performance.
+If you're looking to draw thousand of shapes in your particle generator, try [Processing](https://processing.org/) instead.
 
-If you're looking to draw thousand of shapes in your particle generator, try [Processing](https://processing.org/) instead. 
 If you want clean, easy to use syntax, be welcome my friend.
 
 
