@@ -142,6 +142,19 @@ export default class Container extends EventEmitter {
     }
 
     /**
+     * Get this container's absolute position (up to it's utmost parent)
+     * @return {Position}
+     */
+    getAbsolutePosition () {
+        if (this.parent) {
+            const parentAbsolutePosition = this.parent.getAbsolutePosition();
+            return parentAbsolutePosition.add(this.position);
+        }
+
+        return new Position();
+    }
+
+    /**
      * Bubble the event to its parent
      * @param {BaseEvent} event -
      */
