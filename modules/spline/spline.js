@@ -84,18 +84,4 @@ export default class Spline extends Line {
             points[1].clone().add(diff),
         ];
     }
-
-    /**
-     * @return {LineCaps}
-     */
-    static get caps () {
-        return super.caps;
-    }
-
-    /**
-     * @return {LineJoins}
-     */
-    static get joins () {
-        return super.joins;
-    }
 }
