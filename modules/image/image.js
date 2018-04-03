@@ -86,10 +86,11 @@ export default class Image extends Rectangle {
     render (ctx) {
         super.render(ctx);
         if (this.isLoaded) {
+            const originPos = this.getOriginPosition();
             ctx.drawImage(
                 this.file,
-                truncate(this.position.x),
-                truncate(this.position.y),
+                truncate(this.position.x - originPos.x),
+                truncate(this.position.y - originPos.y),
                 truncate(this.width),
                 truncate(this.height),
             );
@@ -126,7 +127,7 @@ export default class Image extends Rectangle {
     }
 
     /**
-     * @return {ComponentOptions}
+     * @return {RectangleOptions}
      */
     static get defaultOptions () {
         return Object.assign({}, super.defaultOptions, {
