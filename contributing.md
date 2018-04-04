@@ -18,7 +18,7 @@ Following our [issue template](.github/issue_template.md) allow for a better und
 
 ### Suggesting features
 
-We are eager to listen to the users, so if you feel like something misssing or not working as you expect, you can fill a [feature request](https://github.com/GMartigny/pencil.js/issues/new).
+We are eager to listen to the users, so if you feel like something missing or not working as you expect, you can fill a [feature request](https://github.com/GMartigny/pencil.js/issues/new).
 As always, take a look first at the [list of requests](https://github.com/GMartigny/pencil.js/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement+) and upvote what you want most.
 
 ### Code contribution
@@ -69,7 +69,7 @@ There should be a test file for each modules. You can run all the tests with the
 
 #### Committing
 
-Once you're done editing the code, checking you forget no lint and running the tests successfuly, you can create your pull resquest.
+Once you're done editing the code, checking you forget no lint and running the tests successful, you can create your pull request.
 
 Commit your code, part by part, using meaningful commit message with git.
 
