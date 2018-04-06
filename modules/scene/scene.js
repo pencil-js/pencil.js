@@ -106,8 +106,8 @@ export default class Scene extends Container {
         }
         this.lastTick = now;
 
+        this.fire(new BaseEvent(this, "draw"));
         try {
-            this.fire(new BaseEvent(this, "draw"));
             return super.render(this.ctx);
         }
         catch (error) {
