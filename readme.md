@@ -150,3 +150,13 @@ It also allow you to grab only what you need or replace what you don't like.
 ### Documentation
 A complete documentation goes a long way to help devs.
 All functions are assured to have a description also typed arguments and returns.
+
+
+## Contributions
+
+You want to help us improve ? Please read [the contributing manual](contributing.md).
+
+### Contributors
+
+| [![Guillaume Martigny](https://github.com/GMartigny.png?size=60)<br>GMartigny](https://github.com/GMartigny) |
+| --- |
