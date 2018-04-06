@@ -14,7 +14,7 @@ export default class RegularPolygon extends Polygon {
      * @param {Number} radius - Distance between center and outer points
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, nbSides, radius, options) {
+    constructor (position = new Position(), nbSides, radius, options) {
         super(RegularPolygon.getRotatingPoint(nbSides, radius), options);
 
         this.radius = radius;
