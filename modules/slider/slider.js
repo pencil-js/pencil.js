@@ -114,13 +114,13 @@ export default class Slider extends Container {
      * @return {SliderOptions}
      */
     static get defaultOptions () {
-        return Object.assign({
+        return Object.assign(super.defaultOptions, {
             min: 0,
             max: 10,
             width: 200,
             fill: "#ff7269",
             background: "#f6f6f6",
-        }, super.defaultOptions);
+        });
     }
 
     /**

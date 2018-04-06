@@ -58,10 +58,10 @@ export default class Line extends Component {
      * @return {LineOptions}
      */
     static get defaultOptions () {
-        const options = Object.assign({
+        const options = Object.assign(super.defaultOptions, {
             cap: Line.caps.round,
             join: Line.joins.round,
-        }, super.defaultOptions);
+        });
         options.stroke = options.fill;
         delete options.fill;
         delete options.cursor;
