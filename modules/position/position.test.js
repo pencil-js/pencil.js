@@ -1,7 +1,8 @@
 /* global test expect describe  beforeEach afterEach */
 
-import Position from "./position";
 import Vector from "@pencil.js/vector";
+import { random } from "@pencil.js/math";
+import Position from "./position";
 
 test("Position creation", () => {
     const pos = new Position();
@@ -56,64 +57,43 @@ describe("Position calculations", () => {
         expect(two.y).toBe(70);
     });
 
+    const calculation = (functionName, operation) => {
+        const subPos = one.clone()[functionName](two);
+        expect(subPos.x).toBeCloseTo(operation(one.x, two.x));
+        expect(subPos.y).toBeCloseTo(operation(one.y, two.y));
+
+        const oneValue = +random(1, 100).toFixed(2);
+        const subVal = one.clone()[functionName](oneValue);
+        expect(subVal.x).toBeCloseTo(operation(one.x, oneValue));
+        expect(subVal.y).toBeCloseTo(operation(one.y, oneValue));
+
+        const twoValues = [
+            +random(1, 100).toFixed(2),
+            +random(1, 100).toFixed(2),
+        ];
+        const subTwoVal = one.clone()[functionName](...twoValues);
+        expect(subTwoVal.x).toBeCloseTo(operation(one.x, twoValues[0]));
+        expect(subTwoVal.y).toBeCloseTo(operation(one.y, twoValues[1]));
+    };
+
     test("Position subtract", () => {
         // Subtract
-        const subPos = one.clone().subtract(two);
-        expect(subPos.x).toBe(one.x - two.x);
-        expect(subPos.y).toBe(one.y - two.y);
-
-        const subVal = one.clone().subtract(33);
-        expect(subVal.x).toBe(one.x - 33);
-        expect(subVal.y).toBe(one.y - 33);
-
-        const subTwoVal = one.clone().subtract(100.5, 0.8);
-        expect(subTwoVal.x).toBe(one.x - 100.5);
-        expect(subTwoVal.y).toBe(one.y - 0.8);
+        calculation("subtract", (a, b) => a - b);
     });
 
     test("Position add", () => {
         // Add
-        const addPos = one.clone().add(two);
-        expect(addPos.x).toBe(one.x + two.x);
-        expect(addPos.y).toBe(one.y + two.y);
-
-        const addVal = one.clone().add(5);
-        expect(addVal.x).toBe(one.x + 5);
-        expect(addVal.y).toBe(one.y + 5);
-
-        const addTwoVal = one.clone().add(10, 0.9);
-        expect(addTwoVal.x).toBe(one.x + 10);
-        expect(addTwoVal.y).toBe(one.y + 0.9);
+        calculation("add", (a, b) => a + b);
     });
 
     test("Position divide", () => {
         // Divide
-        const divPos = one.clone().divide(two);
-        expect(divPos.x).toBe(one.x / two.x);
-        expect(divPos.y).toBe(one.y / two.y);
-
-        const divVal = one.clone().divide(0.2);
-        expect(divVal.x).toBe(one.x / 0.2);
-        expect(divVal.y).toBe(one.y / 0.2);
-
-        const divTwoVal = one.clone().divide(3, 20);
-        expect(divTwoVal.x).toBe(one.x / 3);
-        expect(divTwoVal.y).toBe(one.y / 20);
+        calculation("divide", (a, b) => a / b);
     });
 
     test("Position multiply", () => {
         // Multiply
-        const multPos = one.clone().multiply(two);
-        expect(multPos.x).toBe(one.x * two.x);
-        expect(multPos.y).toBe(one.y * two.y);
-
-        const multVal = one.clone().multiply(10);
-        expect(multVal.x).toBe(one.x * 10);
-        expect(multVal.y).toBe(one.y * 10);
-
-        const multTwoVal = one.clone().multiply(0.5, 20);
-        expect(multTwoVal.x).toBe(one.x * 0.5);
-        expect(multTwoVal.y).toBe(one.y * 20);
+        calculation("multiply", (a, b) => a * b);
     });
 });
 
