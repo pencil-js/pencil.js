@@ -130,7 +130,7 @@ export default class Image extends Rectangle {
      * @return {RectangleOptions}
      */
     static get defaultOptions () {
-        return Object.assign({}, super.defaultOptions, {
+        return Object.assign(super.defaultOptions, {
             fill: null,
         });
     }

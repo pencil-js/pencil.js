@@ -185,9 +185,9 @@ export default class Scene extends Container {
      * @return {SceneOptions}
      */
     static get defaultOptions () {
-        return Object.assign({
+        return Object.assign(super.defaultOptions, {
             fill: null,
             cursor: Component.cursors.defaultOptions,
-        }, super.defaultOptions);
+        });
     }
 }

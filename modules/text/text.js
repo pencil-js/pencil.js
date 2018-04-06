@@ -154,13 +154,13 @@ export default class Text extends Component {
      * @return {TextOptions}
      */
     static get defaultOptions () {
-        return Object.assign({
+        return Object.assign(super.defaultOptions, {
             font: "sans-serif",
             fontSize: 20,
             align: Text.alignments.start,
             bold: false,
             italic: false,
-        }, super.defaultOptions);
+        });
     }
 
     /**
