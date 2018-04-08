@@ -1,16 +1,16 @@
 window.addEventListener("load", () => {
     const examples = document.querySelectorAll(".example");
 
-    const scripts = [];
-    Promise.all(Array.prototype.map.call(examples, (example) => {
+    let promiseChain = Promise.resolve();
+    Array.prototype.forEach.call(examples, (example) => {
         const url = `./examples/${example.id}.js`;
-        return fetch(url).then((response) => {
+        promiseChain = promiseChain.then(() => fetch(url).then((response) => {
             if (response.ok) {
                 return response.text();
             }
 
             return Promise.reject(new URIError(`Unreachable url ${url}`));
-        }).then((code) => {
+        })).then((code) => {
             const codeElm = document.createElement("pre");
             codeElm.textContent = code;
             example.appendChild(codeElm);
@@ -24,12 +24,9 @@ window.addEventListener("load", () => {
                 const wrapper = document.querySelector("#${example.id} .scene");
                 ${code}
             }`;
-            scripts.push({
-                tag: scriptTag,
-                wrapper,
-            });
-        });
-    })).then(() => {
-        scripts.forEach(script => script.wrapper.appendChild(script.tag));
+            wrapper.appendChild(scriptTag);
+        }).then(() => new Promise((resolve) => {
+            setTimeout(resolve, 100);
+        }));
     });
 });
