@@ -101,7 +101,7 @@ export default class Component extends Container {
             fill: "#000",
             stroke: null,
             strokeWidth: 2,
-            cursor: null,
+            cursor: Component.cursors.default,
         });
     }
 
