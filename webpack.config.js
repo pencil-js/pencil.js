@@ -1,10 +1,5 @@
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-
 module.exports = {
     entry: "./pencil.js",
-    plugins: [
-        new UglifyJsPlugin(),
-    ],
     module: {
         rules: [{
             test: /\.js$/,
