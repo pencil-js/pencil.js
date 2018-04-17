@@ -17,9 +17,11 @@ export default class Text extends Component {
      */
     constructor (position, text, options) {
         super(position, options);
+
         /**
-         * @type {String}
+         * @type {Array<String>}
          */
+        this.lines = [];
         this.text = text;
         /**
          * @type {Object}
@@ -29,13 +31,35 @@ export default class Text extends Component {
     }
 
     /**
+     * Returns the text
+     * @return {String}
+     */
+    get text () {
+        return this.lines.join("\n");
+    }
+
+    /**
+     * Change the text
+     * @param {String|Array<String>} lines - New text value
+     * @example this.text = "Single line text";
+     * @example this.text = "Multi\nLine text";
+     * @example this.text = ["Multi", "Line text"];
+     * @example this.text = ["Multi", "Line\ntext"];
+     */
+    set text (lines) {
+        const separator = "\n";
+        this.lines = Array.isArray(lines) ?
+            lines.reduce((acc, line) => acc.concat(line.split(separator)), []) :
+            lines.split(separator);
+    }
+
+    /**
      * Draw the text into a drawing context
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Text} Itself
      */
     trace (ctx) {
-        const text = this.text.toString();
-        if (text.length) {
+        if (this.lines.length) {
             const opts = this.options;
             ctx.font = `${opts.bold ? "bold " : ""}${opts.italic ? "italic " : ""}${opts.fontSize}px ${opts.font}`;
             ctx.textAlign = opts.align;
@@ -43,14 +67,23 @@ export default class Text extends Component {
 
             if (opts.fill) {
                 ctx.fillStyle = opts.fill;
-                ctx.fillText(text, 0, 0);
             }
-
             if (opts.stroke) {
                 ctx.strokeStyle = opts.stroke;
                 ctx.lineWidth = opts.strokeWidth;
-                ctx.strokeText(text, 0, 0);
             }
+
+            const lineHeight = this.height / this.lines.length; // TODO: could be user defined
+
+            this.lines.forEach((line, index) => {
+                const y = index * lineHeight;
+                if (opts.fill) {
+                    ctx.fillText(line, 0, y);
+                }
+                if (opts.stroke) {
+                    ctx.strokeText(line, 0, y);
+                }
+            });
         }
         return this;
     }
@@ -106,11 +139,11 @@ export default class Text extends Component {
         const scene = this.hasScene();
         if (scene) {
             scene.ctx.font = `${this.options.fontSize}px ${this.options.font}`;
-            const { width } = scene.ctx.measureText(this.text);
+            const maxLineWidth = Math.max(...this.lines.map(line => scene.ctx.measureText(line).width));
             // Hack to get the em box's height
-            const height = scene.ctx.measureText("M").width;
+            const height = scene.ctx.measureText("M").width * this.lines.length * 1.5;
             const measured = {
-                width,
+                width: maxLineWidth,
                 height,
             };
             this._cachedMeasures = {

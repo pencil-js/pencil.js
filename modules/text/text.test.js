@@ -4,7 +4,7 @@ import Position from "@pencil.js/position";
 import Component from "@pencil.js/component";
 import Text from "./text";
 
-const str = "Hello world";
+const str = ["Hello\nworld"];
 let text;
 beforeAll(() => {
     text = new Text(new Position(55, 22.5), str);
@@ -20,17 +20,16 @@ test("Text render", () => {
     };
     text.trace(ctx);
 
-    expect(ctx.fillText.mock.calls.length).toBe(1);
+    expect(ctx.fillText.mock.calls.length).toBe(2);
     expect(ctx.font).toBe(`${Text.defaultOptions.fontSize}px ${Text.defaultOptions.font}`);
     expect(ctx.textAlign).toBe(Text.defaultOptions.align);
     expect(ctx.textBaseline).toBe("top");
     expect(ctx.fillStyle).toBe(Component.defaultOptions.fill);
-    expect(ctx.fillText.mock.calls[0]).toEqual([str, 0, 0]);
 });
 
 test("Text isHover", () => {
     // Text is without root therefore can't be hovered
-    expect(text.isHover(new Position(0, 0))).toBe(false);
+    expect(text.isHover(text.position)).toBe(false);
     // TODO: test with root
 });
 
@@ -44,6 +43,7 @@ test("Text measures", () => {
     expect(text.height).toBe(0);
     // TODO: test with root
 
+    // Text measures returns cache
     // eslint-disable-next-line no-underscore-dangle, mess with cache on purpose
     text._cachedMeasures[text.hash] = {
         width: 42,
