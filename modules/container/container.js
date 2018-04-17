@@ -2,6 +2,7 @@ import EventEmitter from "@pencil.js/event-emitter";
 import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 import { truncate } from "@pencil.js/math";
+import stableSort from "stable";
 
 /**
  * Container class
@@ -210,7 +211,8 @@ export default class Container extends EventEmitter {
                 ctx.translate(-anchorX, -anchorY);
             }
 
-            this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
+            stableSort.inplace(this.children, (a, b) => a.options.zIndex - b.options.zIndex);
+
             const pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
             this.children.slice(0, pivotIndex).forEach(child => child.render(ctx));
 
