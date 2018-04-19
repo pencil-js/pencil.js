@@ -129,6 +129,19 @@ test("Position constrain", () => {
     expect(pos.y).toBe(-8);
 });
 
+test("Position lerp", () => {
+    const pos = new Position();
+    const target = new Position(10, 100);
+
+    pos.lerp(target, 0.5);
+    expect(pos.x).toBeCloseTo(5);
+    expect(pos.y).toBeCloseTo(50);
+
+    pos.lerp(target, 0.5);
+    expect(pos.x).toBeCloseTo(7.5);
+    expect(pos.y).toBeCloseTo(75);
+});
+
 test("Position distance", () => {
     const pos = new Position(20, -10);
     const pos2 = new Position(pos.x + 30, pos.y + 40); // 3² + 4² = 5²
