@@ -19,7 +19,6 @@
     "@pencil.js/base-event": "^0.2.0",
     "@pencil.js/component": "^0.6.0",
     "@pencil.js/container": "^0.6.0",
-    "@pencil.js/event-emitter": "^0.6.0",
     "@pencil.js/mouse-event": "^0.6.0",
     "@pencil.js/position": "^0.6.0"
   },

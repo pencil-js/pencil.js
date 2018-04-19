@@ -1,7 +1,6 @@
 import BaseEvent from "@pencil.js/base-event";
 import Container from "@pencil.js/container";
 import Component from "@pencil.js/component";
-import EventEmitter from "@pencil.js/event-emitter";
 import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 
@@ -125,6 +124,8 @@ export default class Scene extends Container {
                     target.fire(new MouseEvent(target, eventName, eventPosition));
                     listeners[eventName](target, eventPosition, event);
                 }
+            }, {
+                passive: true,
             });
         });
     }
