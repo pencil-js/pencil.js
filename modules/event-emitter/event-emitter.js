@@ -9,7 +9,6 @@ export default class EventEmitter {
      */
     constructor () {
         this.eventListeners = {};
-        this.isClicked = false;
     }
 
     /**

@@ -45,6 +45,11 @@ export default class Container extends EventEmitter {
                 }
             });
         });
+
+        /**
+         * @type {Boolean}
+         */
+        this.isClicked = false;
     }
 
     /**
