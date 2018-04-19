@@ -158,12 +158,14 @@ export default class Container extends EventEmitter {
     /**
      * Bubble the event to its parent
      * @param {BaseEvent} event -
+     * @return {Container} Itself
      */
     fire (event) {
         super.fire(event);
         if (this.parent) {
             this.parent.fire(event);
         }
+        return this;
     }
 
     /**
