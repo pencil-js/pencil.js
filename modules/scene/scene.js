@@ -66,20 +66,66 @@ export default class Scene extends Container {
          */
         this.lastTick = null;
 
-        EventEmitter.bindEvents(this);
+        this._listenForEvents();
+
+        /**
+         * @type {Boolean}
+         */
+        this.isReady = true;
+    }
+
+    /**
+     * Bind window event and call them on targets (can't be called twice)
+     */
+    _listenForEvents () {
+        if (this.isReady) {
+            throw new EvalError("Can't rebind event a second time.");
+        }
 
         let hovered = null;
-        this.on("mousemove", (event) => {
-            event.target.isHovered = true;
-            if (event.target !== hovered) {
-                if (hovered) {
-                    hovered.isHovered = false;
-                    hovered.fire(new MouseEvent(hovered, "leave", event.position));
+        const listeners = {
+            mousedown: target => target.isClicked = true,
+            mousemove: (target, eventPosition) => {
+                target.isClicked = false;
+                target.isHovered = true;
+                if (target !== hovered) {
+                    if (hovered) {
+                        hovered.isHovered = false;
+                        hovered.fire(new MouseEvent(hovered, "leave", eventPosition));
+                    }
+                    hovered = target;
                 }
-                hovered = event.target;
-            }
-            hovered.fire(new MouseEvent(hovered, "hover", event.position));
-            this.setCursor(event.target.options.cursor);
+                hovered.fire(new MouseEvent(hovered, "hover", eventPosition));
+                this.setCursor(target.options.cursor);
+            },
+            mouseup: (target, eventPosition) => {
+                if (target.isClicked) {
+                    target.fire(new MouseEvent(target, "click", eventPosition));
+                }
+                target.isClicked = false;
+            },
+            mousewheel: (target, eventPosition, event) => {
+                if (event.deltaY > 0) {
+                    target.fire(new MouseEvent(target, "scrolldown", eventPosition))
+                        .fire(new MouseEvent(target, "zoomout", eventPosition));
+                }
+                else if (event.deltaY < 0) {
+                    target.fire(new MouseEvent(target, "scrollup", eventPosition))
+                        .fire(new MouseEvent(target, "zoomin", eventPosition));
+                }
+            },
+        };
+        Object.keys(listeners).forEach((eventName) => {
+            window.addEventListener(eventName, (event) => {
+                const eventPosition = (new Position(event.clientX, event.clientY))
+                    .subtract(this.containerPosition)
+                    .add(window.scrollX, window.scrollY);
+                const target = this.getTarget(eventPosition);
+                if (target) {
+                    target.fire(new MouseEvent(target, eventName, eventPosition));
+                    listeners[eventName](target, eventPosition, event);
+                }
+            });
         });
     }
 

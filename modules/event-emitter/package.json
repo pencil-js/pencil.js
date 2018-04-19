@@ -16,8 +16,6 @@
     "listener"
   ],
   "dependencies": {
-    "@pencil.js/mouse-event": "^0.6.0",
-    "@pencil.js/position": "^0.6.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
