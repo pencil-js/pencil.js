@@ -1,6 +1,7 @@
 import Component from "@pencil.js/component";
 import Spline from "@pencil.js/spline";
-import { truncate, radianCircle } from "@pencil.js/math";
+import Line from "@pencil.js/line";
+import { truncate } from "@pencil.js/math";
 
 /**
  * Instruction class
@@ -40,10 +41,15 @@ export default class Path extends Component {
      * @param {Position} position - Starting position of the Path
      * @param {Array<Instruction>} instructions - Set of instructions to follow to draw it
      * @param {Boolean} [isClosed=true] - Should the path close itself (add a line to the starting position)
-     * @param {ComponentOptions} [options] - Drawing options
+     * @param {ComponentOptions|LineOptions} [options] - Drawing options
      */
     constructor (position, instructions, isClosed = true, options) {
         super(position, options);
+
+        if (!isClosed) {
+            this.options = Object.assign(Line.defaultOptions, options);
+        }
+
         this.instructions = instructions;
         this.isClosed = isClosed;
         this.closing = Path.lineTo(this.position);
@@ -54,8 +60,6 @@ export default class Path extends Component {
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      */
     trace (ctx) {
-        ctx.moveTo(0, 0);
-
         ctx.save();
         ctx.translate(-truncate(this.position.x), -truncate(this.position.y));
         let lastCoordinates = this.position;
@@ -74,6 +78,11 @@ export default class Path extends Component {
         });
 
         ctx.restore();
+
+        if (!this.isClosed) {
+            ctx.lineJoin = this.options.join;
+            ctx.lineCap = this.options.cap;
+        }
     }
 
     /**

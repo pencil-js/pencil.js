@@ -30,7 +30,6 @@ export default class Line extends Component {
      * @return {Line} Itself
      */
     trace (ctx) {
-        ctx.moveTo(0, 0);
         ctx.lineJoin = this.options.join;
         ctx.lineCap = this.options.cap;
         this.points.slice(1).forEach((point) => {

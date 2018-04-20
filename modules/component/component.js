@@ -46,6 +46,7 @@ export default class Component extends Container {
             ctx.beginPath();
             ctx.globalAlpha = this.options.alpha;
 
+            ctx.moveTo(0, 0);
             this.trace(ctx);
 
             if (this.options.fill) {

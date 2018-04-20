@@ -15,10 +15,9 @@ export default class RegularPolygon extends Polygon {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position = new Position(), nbSides, radius, options) {
-        super(RegularPolygon.getRotatingPoint(nbSides, radius), options);
+        super(RegularPolygon.getRotatingPoint(nbSides, radius).map(point => point.add(position)), options);
 
         this.radius = radius;
-        this.position = position;
     }
 
     /**

@@ -37,7 +37,8 @@ export default class Polygon extends Component {
      */
     trace (ctx) {
         this.points.slice(1).concat(this.points.slice(0, 2)).forEach((point) => {
-            ctx.lineTo(truncate(point.x), truncate(point.y));
+            const diff = point.clone().subtract(this.position);
+            ctx.lineTo(truncate(diff.x), truncate(diff.y));
         });
         return this;
     }
@@ -46,6 +47,7 @@ export default class Polygon extends Component {
      *
      * @param {Position} position -
      * @return {Boolean}
+     * FIXME
      */
     isHover (position) {
         if (super.isHover(position)) {
