@@ -57,3 +57,11 @@ export const radianCircle = Math.PI * 2;
  * @type {Number}
  */
 export const degreeCircle = 360;
+
+/**
+ * Return with the same sign as the divisor (Floored division)
+ * @param {Number} value - Dividend
+ * @param {Number} divisor - Divisor
+ * @return {Number}
+ */
+export const modulo = (value, divisor) => (value + divisor) % divisor;
