@@ -1,5 +1,5 @@
 const scene = new Pencil.Scene(wrapper, {
-    fill: "rgba(255, 0, 255, 0.1)",
+    fill: "#ffdaf8",
 });
 
 const width = 100;
@@ -12,13 +12,15 @@ for (let i = 0; i < 5; ++i) {
     );
     const rectangle = new Pencil.Rectangle(randomPosition, width, height, {
         fill: "#49a8eb",
-        stroke: "#fff277",
+        stroke: "gold",
         strokeWidth: 5,
-        opacity: 0.5,
+        alpha: 0.5,
     });
     rectangle.draggable({
         constrain: new Pencil.Vector(0, 0, scene.width - width, scene.height - height),
     });
+    rectangle.on("grab", () => rectangle.options.alpha = 1)
+        .on("drop", () => rectangle.options.alpha = 0.5);
     scene.add(rectangle);
 }
 
