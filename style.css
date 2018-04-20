@@ -1,20 +1,18 @@
 body {
     margin: 0;
-    background: #CCC;
+    background: #EEE;
     font-family: sans-serif;
 }
 
 a {
     text-decoration: none;
-    color: #ff7b00;
-}
-a:visited {
-    color: #e27f2f;
+    color: #ff9629;
+    font-weight: bold;
 }
 
 p{
     padding: 0.5em 1em;
-    background-color: #AAA;
+    background-color: #999;
 }
 
 strong {
@@ -24,7 +22,7 @@ strong {
 
 h1 {
     text-align: center;
-    text-shadow: 0 1px 0 #333, 0 2px 0 #333;
+    text-shadow: 0 1px 0 #555, 0 2px 0 #555;
 }
 h2, h3 {
     margin: 1em;
@@ -32,6 +30,7 @@ h2, h3 {
 
 .example {
     display: flex;
+    padding-bottom: 1em;
 }
 
 .example > * {
