@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/event-emitter",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Event emitter for Pencil.js package.",
   "main": "event-emitter.js",
   "files": [],
@@ -15,8 +15,6 @@
     "pencil.js",
     "listener"
   ],
-  "dependencies": {
-  },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
