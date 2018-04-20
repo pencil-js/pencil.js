@@ -21,7 +21,7 @@ import MouseEvent from "@pencil.js/mouse-event";
  * @return {DraggableAPI}
  */
 Component.prototype.draggable = function draggable (options) {
-    const cursorNotSet = !this.options.cursor;
+    const cursorNotSet = this.options.cursor === Component.cursors.default;
     if (cursorNotSet) {
         this.options.cursor = Component.cursors.grab;
     }
