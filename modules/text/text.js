@@ -94,28 +94,37 @@ export default class Text extends Component {
      * @return {Boolean}
      */
     isHover (position) {
-        const scene = this.hasScene();
-        if (scene) {
-            const dir = textDirection(scene.ctx.canvas);
-            const { width } = this;
-            const { align } = this.options;
+        return Rectangle.prototype.isHover.call(this, position);
+    }
 
-            let horizontal = 0;
+    /**
+     * Get this origin position relative to the top-left corner
+     * @return {Position}
+     */
+    getOriginPosition () {
+        const { align } = this.options;
 
-            if (align === Text.alignments.center) {
-                horizontal = width / 2;
-            }
-            else if (align === Text.alignments.right ||
-                (align === Text.alignments.start && dir === "rtl") ||
-                (align === Text.alignments.end && dir === "ltr")) {
-                horizontal = width;
-            }
+        let horizontal = 0;
 
-            const diff = new Position(horizontal, 0);
-            return Rectangle.prototype.isHover.call(this, position.clone().add(diff));
+        if (align === Text.alignments.center) {
+            horizontal = this.width / 2;
+        }
+        else if (align === Text.alignments.right) {
+            horizontal = this.width;
         }
 
-        return false;
+        if (align === Text.alignments.start || align === Text.alignments.end) {
+            const scene = this.hasScene();
+            if (scene) {
+                const dir = textDirection(scene.ctx.canvas);
+                if ((align === Text.alignments.start && dir === "rtl") ||
+                    (align === Text.alignments.end && dir === "ltr")) {
+                    horizontal = this.width;
+                }
+            }
+        }
+
+        return new Position(horizontal, 0);
     }
 
     /**

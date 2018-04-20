@@ -18,6 +18,7 @@ export default class RegularPolygon extends Polygon {
         super(RegularPolygon.getRotatingPoint(nbSides, radius).map(point => point.add(position)), options);
 
         this.radius = radius;
+        this.position = position;
     }
 
     /**
