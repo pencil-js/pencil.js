@@ -37,6 +37,7 @@ export default class Scene extends Container {
         const measures = container.getBoundingClientRect();
         canvas.width = measures.width;
         canvas.height = measures.height;
+        canvas.style.display = "block";
         /**
          * @type {CanvasRenderingContext2D}
          */
