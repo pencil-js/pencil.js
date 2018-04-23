@@ -44,9 +44,7 @@ export default class Polygon extends Component {
     }
 
     /**
-     *
-     * @param {Position} position -
-     * @return {Boolean}
+     * @inheritDoc
      * FIXME
      */
     isHover (position) {

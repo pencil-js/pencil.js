@@ -58,6 +58,7 @@ export default class Path extends Component {
     /**
      * Draw the path
      * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Path} Itself
      */
     trace (ctx) {
         ctx.save();
@@ -83,11 +84,13 @@ export default class Path extends Component {
             ctx.lineJoin = this.options.join;
             ctx.lineCap = this.options.cap;
         }
+
+        return this;
     }
 
     /**
      * // Fixme: Should work like Polygon.isHover and ask every instructions for intersection
-     * Can't hover a path
+     * Can't hover an open path
      * @return {Boolean}
      */
     isHover () { // eslint-disable-line class-methods-use-this

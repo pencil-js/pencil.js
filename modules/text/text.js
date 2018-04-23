@@ -89,9 +89,7 @@ export default class Text extends Component {
     }
 
     /**
-     * Define if it's hover a position
-     * @param {Position} position - Any position
-     * @return {Boolean}
+     * @inheritDoc
      */
     isHover (position) {
         return Rectangle.prototype.isHover.call(this, position);

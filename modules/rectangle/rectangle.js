@@ -33,7 +33,7 @@ export default class Rectangle extends Component {
     }
 
     /**
-     * Get this rectangle origin position relative to the top-left corner
+     * Get this origin position relative to the top-left corner
      * @return {Position}
      */
     getOriginPosition () {
@@ -55,9 +55,7 @@ export default class Rectangle extends Component {
     }
 
     /**
-     * Define if is hover a position
-     * @param {Position} position - Any position
-     * @return {Boolean}
+     * @inheritDoc
      */
     isHover (position) {
         const originPos = this.getOriginPosition();

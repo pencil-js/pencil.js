@@ -26,9 +26,7 @@ export default class Star extends RegularPolygon {
     }
 
     /**
-     * Define if position in over this
-     * @param {Position} position - Any position
-     * @return {Boolean}
+     * @inheritDoc
      */
     isHover (position) {
         return position.distance(this.position) < (this.radius * this.bevelRatio) || super.isHover(position);

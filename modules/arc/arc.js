@@ -43,9 +43,7 @@ export default class Arc extends Component {
     }
 
     /**
-     * Define if position in over this
-     * @param {Position} position - Any position
-     * @return {Boolean}
+     * @inheritDoc
      */
     isHover (position) {
         // TODO: does it make sens to hover an arc ?

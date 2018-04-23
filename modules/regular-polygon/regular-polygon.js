@@ -22,9 +22,7 @@ export default class RegularPolygon extends Polygon {
     }
 
     /**
-     * Define if position in over this
-     * @param {Position} position - Any position
-     * @return {Boolean}
+     * @inheritDoc
      */
     isHover (position) {
         return position.distance(this.position) < this.radius && super.isHover(position);

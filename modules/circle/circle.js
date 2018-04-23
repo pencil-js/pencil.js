@@ -18,9 +18,7 @@ export default class Circle extends Arc {
     }
 
     /**
-     * Define if position in over this
-     * @param {Position} position - Any position
-     * @return {Boolean}
+     * @inheritDoc
      */
     isHover (position) {
         return Component.prototype.isHover.call(this, position) && this.position.distance(position) <= this.radius;

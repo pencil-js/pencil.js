@@ -1,16 +1,6 @@
 import Container from "@pencil.js/container";
 
 /**
- * @typedef {Object} ComponentOptions
- * @extends ContainerOptions
- * @prop {Number} [alpha=1] - Opacity level (alias: opacity)
- * @prop {String} [fill="#000"] - Color used to fill, set to null for transparent
- * @prop {String} [stroke=null] - Color used to stroke, set to null for transparent
- * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
- * @prop {String} [cursor=null] - Cursor to use when hover
- */
-
-/**
  * Abstract class for visual component
  * @abstract
  * @class
@@ -93,6 +83,14 @@ export default class Component extends Container {
         this.isShown = false;
     }
 
+    /**
+     * @typedef {Object} ComponentOptions
+     * @extends ContainerOptions
+     * @prop {String} [fill="#000"] - Color used to fill, set to null for transparent
+     * @prop {String} [stroke=null] - Color used to stroke, set to null for transparent
+     * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
+     * @prop {String} [cursor=null] - Cursor to use when hover
+     */
     /**
      * @return {ComponentOptions}
      */
