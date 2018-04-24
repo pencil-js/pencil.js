@@ -12,7 +12,7 @@ module.exports = {
         }],
     },
     output: {
-        filename: "pencil.js",
+        filename: "pencil.min.js",
         library: "Pencil",
         libraryTarget: "this",
         libraryExport: "default",

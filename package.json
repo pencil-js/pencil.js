@@ -6,8 +6,8 @@
   "files": [
     "dist/"
   ],
-  "unpkg": "dist/pencil.js",
-  "jsdelivr": "dist/pencil.js",
+  "unpkg": "dist/pencil.min.js",
+  "jsdelivr": "dist/pencil.min.js",
   "scripts": {
     "lint": "eslint pencil.js modules/**/*.js",
     "test": "jest-webpack",
