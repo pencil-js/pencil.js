@@ -38,6 +38,11 @@ export default class Rectangle extends Component {
      */
     getOriginPosition () {
         const { origin } = this.options;
+
+        if (origin instanceof Position) {
+            return origin;
+        }
+
         const position = new Position();
         if (origin === Rectangle.origins.center) {
             position.x = this.width / 2;
