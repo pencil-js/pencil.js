@@ -60,8 +60,10 @@ export default class Text extends Component {
      */
     trace (ctx) {
         if (this.lines.length) {
+            const lineHeight = this.height / this.lines.length; // TODO: could be user defined
+
             const opts = this.options;
-            ctx.font = `${opts.bold ? "bold " : ""}${opts.italic ? "italic " : ""}${opts.fontSize}px ${opts.font}`;
+            ctx.font = this.getFontDefinition();
             ctx.textAlign = opts.align;
             ctx.textBaseline = "top"; // TODO: user could want to change this, but fonts em-box can have crazy values
 
@@ -72,8 +74,6 @@ export default class Text extends Component {
                 ctx.strokeStyle = opts.stroke;
                 ctx.lineWidth = opts.strokeWidth;
             }
-
-            const lineHeight = this.height / this.lines.length; // TODO: could be user defined
 
             this.lines.forEach((line, index) => {
                 const y = index * lineHeight;
@@ -86,6 +86,15 @@ export default class Text extends Component {
             });
         }
         return this;
+    }
+
+    /**
+     *
+     * @return {String}
+     */
+    getFontDefinition () {
+        const opts = this.options;
+        return `${opts.bold ? "bold " : ""}${opts.italic ? "italic " : ""}${opts.fontSize}px ${opts.font}`;
     }
 
     /**
@@ -130,7 +139,7 @@ export default class Text extends Component {
      * @returns {String}
      */
     get hash () {
-        return btoa([this.options.font, this.options.fontSize, this.text].join(","));
+        return btoa(unescape(encodeURIComponent([this.options.font, this.options.fontSize, this.text].join(","))));
     }
 
     /**
@@ -145,7 +154,7 @@ export default class Text extends Component {
 
         const scene = this.hasScene();
         if (scene) {
-            scene.ctx.font = `${this.options.fontSize}px ${this.options.font}`;
+            scene.ctx.font = this.getFontDefinition();
             const maxLineWidth = Math.max(...this.lines.map(line => scene.ctx.measureText(line).width));
             // Hack to get the em box's height
             const height = scene.ctx.measureText("M").width * this.lines.length * 1.5;
