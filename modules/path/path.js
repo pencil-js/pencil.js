@@ -118,21 +118,21 @@ export default class Path extends Component {
     /**
      * Draw an quarter circle arc to a position
      * @param {Position} position - Any position
-     * @param {Boolean} [antiClockwise=false] - Should the arc be clockwise or not
+     * @param {Boolean} [clockwise=true] - Should the arc be clockwise or not
      * @return {Instruction}
      */
-    static quarterTo (position, antiClockwise = false) {
-        return Path.arcTo(position, 0.25, (4 / 3) * (Math.sqrt(2) - 1), antiClockwise);
+    static quarterTo (position, clockwise) {
+        return Path.arcTo(position, 0.25, (4 / 3) * (Math.sqrt(2) - 1), clockwise);
     }
 
     /**
      * Draw an quarter circle arc to a position
      * @param {Position} position - Any position
-     * @param {Boolean} [antiClockwise=false] - Should the arc be clockwise or not
+     * @param {Boolean} [clockwise=true] - Should the arc be clockwise or not
      * @return {Instruction}
      */
-    static halfTo (position, antiClockwise = false) {
-        return Path.arcTo(position, 0.5, 4 / 3, antiClockwise);
+    static halfTo (position, clockwise) {
+        return Path.arcTo(position, 0.5, 4 / 3, clockwise);
     }
 
     /**
@@ -140,15 +140,15 @@ export default class Path extends Component {
      * @param {Position} position - Any position
      * @param {Number} angle - Arc angle in ratio of a full circle (should be less than 0.5)
      * @param {Number} magicRatio - Control points ratio to approximate a circle
-     * @param {Boolean} [antiClockwise=false] - Should the arc be clockwise or not
+     * @param {Boolean} [clockwise=true] - Should the arc be clockwise or not
      * @return {Instruction}
      */
-    static arcTo (position, angle, magicRatio, antiClockwise = false) {
+    static arcTo (position, angle, magicRatio, clockwise = true) {
         return new Instruction((ctx, pos, lc) => {
             const distance = lc.distance(pos);
             const radius = distance / 2;
 
-            const direction = antiClockwise ? 1 : -1;
+            const direction = clockwise ? -1 : 1;
             const alpha = (angle / 2) * direction;
             const ctrl1 = pos.clone()
                 .subtract(lc).rotate(-alpha)
