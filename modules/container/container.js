@@ -211,8 +211,8 @@ export default class Container extends EventEmitter {
             ctx.translate(truncate(this.position.x), truncate(this.position.y));
 
             if (this.options.rotation) {
-                const anchorX = truncate(this.options.rotationAnchor);
-                const anchorY = truncate(this.options.rotationAnchor);
+                const anchorX = truncate(this.options.rotationAnchor.x);
+                const anchorY = truncate(this.options.rotationAnchor.y);
                 ctx.translate(anchorX, anchorY);
                 ctx.rotate(this.options.rotation * radianCircle);
                 ctx.translate(-anchorX, -anchorY);
