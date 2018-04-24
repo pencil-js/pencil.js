@@ -3,13 +3,7 @@ import Container from "@pencil.js/container";
 import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
-
-/**
- * @typedef {Object} SceneOptions
- * @extends {ContainerOptions}
- * @prop {String} [fill=null] -
- * @prop {String} [cursor="default"] -
- */
+import { random } from "@pencil.js/math";
 
 /**
  * Wrapper
@@ -230,7 +224,15 @@ export default class Scene extends Container {
     }
 
     /**
-     * @return {SceneOptions}
+     * Return a random position within the scene
+     * @return {Position}
+     */
+    getRandomPosition () {
+        return new Position(random(this.width), random(this.height));
+    }
+
+    /**
+     * @return {ContainerOptions}
      */
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {
