@@ -235,6 +235,7 @@ export default class Scene extends Container {
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {
             fill: null,
+            opacity: 1,
             cursor: Component.cursors.defaultOptions,
         });
     }

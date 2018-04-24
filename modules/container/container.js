@@ -220,6 +220,10 @@ export default class Container extends EventEmitter {
 
             stableSort.inplace(this.children, (a, b) => a.options.zIndex - b.options.zIndex);
 
+            if (this.options.opacity !== null) {
+                ctx.globalAlpha = this.options.opacity;
+            }
+
             const pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
             this.children.slice(0, pivotIndex).forEach(child => child.render(ctx));
 
@@ -237,9 +241,10 @@ export default class Container extends EventEmitter {
     /**
      * @typedef {Object} ContainerOptions
      * @prop {Boolean} [shown=true] - Is shown
-     * @prop {Number} [rotation=0] - Rotation in degree (clockwise)
+     * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
+     * @prop {Number} [rotation=0] - Rotation ratio from 0 to 1 (clockwise)
      * @prop {Position} [rotationAnchor=new Position(0, 0)] - Center of rotation relative to this position
-     * @prop {Number} [zIndex=0] -
+     * @prop {Number} [zIndex=1] - Depth ordering
      */
     /**
      * @return {ContainerOptions}
@@ -247,6 +252,7 @@ export default class Container extends EventEmitter {
     static get defaultOptions () {
         return {
             shown: true,
+            opacity: null,
             rotation: 0,
             rotationAnchor: new Position(),
             zIndex: 1,

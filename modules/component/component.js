@@ -14,7 +14,6 @@ export default class Component extends Container {
      */
     constructor (position, options) {
         super(position, options);
-        this.options.alpha = this.options.opacity || this.options.alpha;
 
         /**
          * @type {Boolean}
@@ -34,7 +33,6 @@ export default class Component extends Container {
     render (ctx) {
         return super.render(ctx, () => {
             ctx.beginPath();
-            ctx.globalAlpha = this.options.alpha;
 
             ctx.moveTo(0, 0);
             this.trace(ctx);
@@ -96,7 +94,6 @@ export default class Component extends Container {
      */
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {
-            alpha: 1,
             fill: "#000",
             stroke: null,
             strokeWidth: 2,
