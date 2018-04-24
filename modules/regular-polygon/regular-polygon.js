@@ -15,7 +15,7 @@ export default class RegularPolygon extends Polygon {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position = new Position(), nbSides, radius, options) {
-        super(RegularPolygon.getRotatingPoint(nbSides, radius).map(point => point.add(position)), options);
+        super(RegularPolygon.getRotatingPoint(nbSides, radius), options);
 
         this.radius = radius;
         this.position = position;
@@ -26,6 +26,15 @@ export default class RegularPolygon extends Polygon {
      */
     isHover (position) {
         return position.distance(this.position) < this.radius && super.isHover(position);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    trace (ctx) {
+        const firstPoint = this.points[0];
+        ctx.moveTo(firstPoint.x, firstPoint.y);
+        return super.trace(ctx);
     }
 
     /**
