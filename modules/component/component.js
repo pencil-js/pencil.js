@@ -47,6 +47,7 @@ export default class Component extends Container {
                 ctx.lineWidth = this.options.strokeWidth;
                 ctx.stroke();
             }
+
             ctx.closePath();
         });
     }

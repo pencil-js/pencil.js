@@ -220,18 +220,23 @@ export default class Container extends EventEmitter {
 
             stableSort.inplace(this.children, (a, b) => a.options.zIndex - b.options.zIndex);
 
-            if (this.options.opacity !== null) {
+            if (this.options.opacity !== null && ctx.globalAlpha !== this.options.opacity) {
                 ctx.globalAlpha = this.options.opacity;
             }
 
             const pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
-            this.children.slice(0, pivotIndex).forEach(child => child.render(ctx));
+            for (let i = 0, l = pivotIndex; i < l; ++i) {
+                this.children[i].render(ctx);
+            }
 
             if (drawing) {
                 drawing();
             }
 
-            this.children.slice(pivotIndex).forEach(child => child.render(ctx));
+            for (let i = pivotIndex, l = this.children.length; i < l; ++i) {
+                this.children[i].render(ctx);
+            }
+
             ctx.restore();
         }
 
