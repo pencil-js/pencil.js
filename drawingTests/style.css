@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+}
+
+.test {
+    border-bottom: 1px solid #333;
+}
+
+.test .expected, .test .scene {
+    display: inline-block;
+}
