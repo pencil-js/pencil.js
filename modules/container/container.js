@@ -1,7 +1,7 @@
 import EventEmitter from "@pencil.js/event-emitter";
 import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
-import { truncate } from "@pencil.js/math";
+import { truncate, radianCircle } from "@pencil.js/math";
 import stableSort from "stable";
 
 /**
@@ -214,7 +214,7 @@ export default class Container extends EventEmitter {
                 const anchorX = truncate(this.options.rotationAnchor);
                 const anchorY = truncate(this.options.rotationAnchor);
                 ctx.translate(anchorX, anchorY);
-                ctx.rotate(this.options.rotation * (Math.PI / 180));
+                ctx.rotate(this.options.rotation * radianCircle);
                 ctx.translate(-anchorX, -anchorY);
             }
 
