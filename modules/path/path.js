@@ -1,6 +1,7 @@
 import Component from "@pencil.js/component";
-import Spline from "@pencil.js/spline";
 import Line from "@pencil.js/line";
+import Position from "@pencil.js/position";
+import Spline from "@pencil.js/spline";
 import { truncate } from "@pencil.js/math";
 
 /**
@@ -9,23 +10,29 @@ import { truncate } from "@pencil.js/math";
  */
 class Instruction {
     /**
+     * @callback InstructionCallback
+     * @param {CanvasRenderingContext2D} ctx
+     * @param {Position} target
+     * @param {Position} previousPosition
+     */
+    /**
      * Instruction constructor
-     * @param {Function} action - Function to execute
-     * @param {Position} target - Position to go to
+     * @param {InstructionCallback} action - Function to execute
+     * @param {PositionDefinition} target - Position to go to
      */
     constructor (action, target) {
         this.action = action.bind(this);
-        this.target = target;
+        this.target = Position.from(target);
     }
 
     /**
      * Follow the instruction
      * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @param {Position} previousCoordinates - Position from where the instruction start
+     * @param {Position} previousPosition - Position from where the instruction start
      * @return {Position} The position reached
      */
-    execute (ctx, previousCoordinates) {
-        this.action(ctx, this.target, previousCoordinates);
+    execute (ctx, previousPosition) {
+        this.action(ctx, this.target, previousPosition);
         return this.target;
     }
 }
@@ -38,7 +45,7 @@ class Instruction {
 export default class Path extends Component {
     /**
      * Path constructor
-     * @param {Position} position - Starting position of the Path
+     * @param {PositionDefinition} position - Starting position of the Path
      * @param {Array<Instruction>} instructions - Set of instructions to follow to draw it
      * @param {Boolean} [isClosed=true] - Should the path close itself (add a line to the starting position)
      * @param {ComponentOptions|LineOptions} [options] - Drawing options
@@ -63,7 +70,7 @@ export default class Path extends Component {
     trace (ctx) {
         ctx.save();
         ctx.translate(-truncate(this.position.x), -truncate(this.position.y));
-        let lastCoordinates = this.position;
+        let lastPosition = this.position;
         const instructions = this.instructions.slice();
 
         if (this.isClosed) {
@@ -71,12 +78,10 @@ export default class Path extends Component {
             ctx.moveTo(lastTarget.x, lastTarget.y);
             instructions.unshift(this.closing);
             instructions.push(this.closing);
-            lastCoordinates = lastTarget;
+            lastPosition = lastTarget;
         }
 
-        instructions.forEach((instruction) => {
-            lastCoordinates = instruction.execute(ctx, lastCoordinates);
-        });
+        instructions.forEach(instruction => lastPosition = instruction.execute(ctx, lastPosition));
 
         ctx.restore();
 
@@ -103,7 +108,7 @@ export default class Path extends Component {
      * @return {Instruction}
      */
     static lineTo (position) {
-        return new Instruction(ctx => ctx.lineTo(position.x, position.y), position);
+        return new Instruction((ctx, pos) => ctx.lineTo(pos.x, pos.y), position);
     }
 
     /**
@@ -112,7 +117,7 @@ export default class Path extends Component {
      * @return {Instruction}
      */
     static moveTo (position) {
-        return new Instruction(ctx => ctx.moveTo(position.x, position.y), position);
+        return new Instruction((ctx, pos) => ctx.moveTo(pos.x, pos.y), position);
     }
 
     /**
@@ -144,18 +149,18 @@ export default class Path extends Component {
      * @return {Instruction}
      */
     static arcTo (position, angle, magicRatio, clockwise = true) {
-        return new Instruction((ctx, pos, lc) => {
-            const distance = lc.distance(pos);
+        return new Instruction((ctx, pos, lp) => {
+            const distance = lp.distance(pos);
             const radius = distance / 2;
 
             const direction = clockwise ? -1 : 1;
             const alpha = (angle / 2) * direction;
             const ctrl1 = pos.clone()
-                .subtract(lc).rotate(-alpha)
+                .subtract(lp).rotate(-alpha)
                 .divide(distance)
                 .multiply(magicRatio * radius)
-                .add(lc);
-            const ctrl2 = lc.clone()
+                .add(lp);
+            const ctrl2 = lp.clone()
                 .subtract(pos).rotate(alpha)
                 .divide(distance)
                 .multiply(magicRatio * radius)
@@ -173,8 +178,9 @@ export default class Path extends Component {
      * @return {Instruction}
      */
     static quadTo (position, controlPoint) {
-        return new Instruction((ctx) => {
-            ctx.quadraticCurveTo(controlPoint.x, controlPoint.y, position.x, position.y);
+        const control = Position.from(controlPoint);
+        return new Instruction((ctx, pos) => {
+            ctx.quadraticCurveTo(control.x, control.y, pos.x, pos.y);
         }, position);
     }
 
@@ -186,25 +192,27 @@ export default class Path extends Component {
      * @return {Instruction}
      */
     static bezierTo (position, firstControlPoint, secondControlPoint) {
-        return new Instruction((ctx) => {
+        const control1 = Position.from(firstControlPoint);
+        const control2 = Position.from(secondControlPoint);
+        return new Instruction((ctx, pos) => {
             ctx.bezierCurveTo(
-                firstControlPoint.x, firstControlPoint.y,
-                secondControlPoint.x, secondControlPoint.y,
-                position.x, position.y,
+                control1.x, control1.y,
+                control2.x, control2.y,
+                pos.x, pos.y,
             );
         }, position);
     }
 
     /**
      *
-     * @param {Array<Position>} positions - Any position
+     * @param {Array<Position>} points - Any position
      * @param {Number} [tension] - Ratio of tension
      * @return {Instruction}
      */
-    static splineThrough (positions, tension) {
-        return new Instruction((ctx, pos, ls) => {
-            Spline.splineThrough(ctx, [ls].concat(positions), tension);
-        }, positions[positions.length - 1]);
+    static splineThrough (points, tension) {
+        return new Instruction((ctx, pos, lp) => {
+            Spline.splineThrough(ctx, [lp].concat(points), tension);
+        }, points[points.length - 1]);
     }
 
     /**
@@ -215,7 +223,7 @@ export default class Path extends Component {
      */
     static waveTo (position, nbWaves) {
         throw new ReferenceError("This function has yet to be implemented.");
-        return new Instruction((ctx, pos, lc) => {
+        return new Instruction((ctx, pos, lp) => {
             // TODO
         }, position);
     }
@@ -229,7 +237,7 @@ export default class Path extends Component {
      */
     static sinTo (position, nbSins, sinsHeight) {
         throw new ReferenceError("This function has yet to be implemented.");
-        return new Instruction((ctx, pos, lc, nb) => {
+        return new Instruction((ctx, pos, lp) => {
             // TODO
         }, position);
     }

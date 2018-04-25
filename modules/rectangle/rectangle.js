@@ -10,7 +10,7 @@ import { truncate } from "@pencil.js/math";
 export default class Rectangle extends Component {
     /**
      * Rectangle constructor
-     * @param {Position} position - Position in space
+     * @param {PositionDefinition} position - Position in space
      * @param {Number} [width=0] - Horizontal size
      * @param {Number} [height=0] - Vertical size
      * @param {ComponentOptions} [options] - Drawing options

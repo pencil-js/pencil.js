@@ -12,7 +12,7 @@ import { truncate, radianCircle } from "@pencil.js/math";
 export default class Arc extends Component {
     /**
      * Arc constructor
-     * @param {Position} position - Center of arc
+     * @param {PositionDefinition} position - Center of arc
      * @param {Number} radius - Distance from center to outer edge
      * @param {Number} [startAngle=0] - Angle to start from (0 is top, 0.5 is bottom and 1 is full circle back to top)
      * @param {Number} [endAngle=0.5] - Angle to end to (from startAngle and in clockwise rotation)

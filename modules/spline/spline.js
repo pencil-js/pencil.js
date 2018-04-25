@@ -1,4 +1,5 @@
 import Line from "@pencil.js/line";
+import Position from "@pencil.js/position";
 import { equal } from "@pencil.js/math";
 
 /**
@@ -9,7 +10,7 @@ import { equal } from "@pencil.js/math";
 export default class Spline extends Line {
     /**
      * Spline constructor
-     * @param {Array<Position>} points - Set of points to go through
+     * @param {Array<PositionDefinition>} points - Set of points to go through
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension between points (0 means straight line, can take any value, but with weird results above 1)
      * @param {LineOptions} [options] - Drawing options
      */
@@ -49,18 +50,19 @@ export default class Spline extends Line {
     /**
      * Draw a spline through points using a tension
      * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @param {Array<Position>} points - Points to use
+     * @param {Array<PositionDefinition>} points - Points to use
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
      */
     static splineThrough (ctx, points, tension = Spline.defaultTension) {
         const getCtrlPts = Spline.getControlPoint;
-        let previousControls = [null, points[0]];
+        const positions = points.map(point => Position.from(point));
+        let previousControls = [null, positions[0]];
 
-        for (let i = 1, l = points.length; i < l; ++i) {
-            const controlPoints = i < l - 1 ? getCtrlPts(points.slice(i - 1, i + 2), tension) : [points[i], null];
+        for (let i = 1, l = positions.length; i < l; ++i) {
+            const controlPoints = i < l - 1 ? getCtrlPts(positions.slice(i - 1, i + 2), tension) : [positions[i], null];
             ctx.bezierCurveTo(
                 previousControls[1].x, previousControls[1].y, controlPoints[0].x, controlPoints[0].y,
-                points[i].x, points[i].y,
+                positions[i].x, positions[i].y,
             );
 
             previousControls = controlPoints;
@@ -78,10 +80,11 @@ export default class Spline extends Line {
             throw new RangeError(`Need exactly 3 points to compute control points, but ${points.length} given.`);
         }
 
-        const diff = points[2].clone().subtract(points[0]).multiply(tension);
+        const positions = points.map(point => Position.from(point));
+        const diff = positions[2].clone().subtract(positions[0]).multiply(tension);
         return [
-            points[1].clone().subtract(diff),
-            points[1].clone().add(diff),
+            positions[1].clone().subtract(diff),
+            positions[1].clone().add(diff),
         ];
     }
 }

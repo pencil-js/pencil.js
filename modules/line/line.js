@@ -1,4 +1,5 @@
 import Component from "@pencil.js/component";
+import Position from "@pencil.js/position";
 
 /**
  * Line class
@@ -8,20 +9,21 @@ import Component from "@pencil.js/component";
 export default class Line extends Component {
     /**
      * Line constructor
-     * @param {Array<Position>} points -
+     * @param {Array<PositionDefinition>} points -
      * @param {LineOptions} [options] - Drawing options
      */
     constructor (points, options) {
         if (points.length < 2) {
-            throw new RangeError(`A line need at least 2 points, only ${points.length} given.`);
+            throw new RangeError(`A Line need at least 2 points, only ${points.length} given.`);
         }
 
-        super(points[0], options);
+        const positions = points.map(point => Position.from(point));
+        super(positions[0], options);
 
         /**
          * @type {Array<Position>}
          */
-        this.points = points;
+        this.points = positions;
     }
 
     /**

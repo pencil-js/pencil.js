@@ -10,7 +10,7 @@ import BaseEvent from "@pencil.js/base-event";
 export default class Image extends Rectangle {
     /**
      * Image constructor
-     * @param {Position} position - Top-left corner of the image
+     * @param {PositionDefinition} position - Top-left corner of the image
      * @param {String} url - Link to an image file
      * @param {Number} [width] - Width to draw the image, or width and height if height omitted
      * @param {Number} [height] - Height to draw the image, use file height and width if both omitted

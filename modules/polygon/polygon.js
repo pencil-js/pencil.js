@@ -1,4 +1,5 @@
 import Component from "@pencil.js/component";
+import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
 import { truncate } from "@pencil.js/math";
 
@@ -10,24 +11,21 @@ import { truncate } from "@pencil.js/math";
 export default class Polygon extends Component {
     /**
      * Polygon constructor
-     * @param {Array<Position>} points - Set of vertices defining the polygon
+     * @param {Array<PositionDefinition>} points - Set of vertices defining the polygon
      * @param {ComponentOptions} options - Drawing options
      */
     constructor (points, options) {
-        const min = Polygon.MIN_NB_POINTS;
-        if (points.length < min) {
-            throw new RangeError(`Regular polygons can't have less than ${min} branches, but ${points.length} given.`);
+        if (points.length < 3) {
+            throw new RangeError(`A polygon can't have less than 3 branches, but only ${points.length} given.`);
         }
-        super(points[0], options);
+
+        const positions = points.map(point => Position.from(point));
+        super(positions[0], options);
 
         /**
          * @type {Array<Position>}
          */
-        this.points = points;
-        /**
-         * @type {Number}
-         */
-        this.nbPoints = points.length;
+        this.points = positions;
     }
 
     /**
@@ -50,7 +48,7 @@ export default class Polygon extends Component {
         if (super.isHover(position)) {
             const testVector = new Vector(position.clone(), position.clone().add(Infinity, 0));
             let intersection = 0;
-            for (let i = 1; i < this.nbPoints; ++i) {
+            for (let i = 1, l = this.points.length; i < l; ++i) {
                 if (testVector.intersect(new Vector(this.points[i - 1], this.points[i]))) {
                     ++intersection;
                 }
@@ -59,14 +57,5 @@ export default class Polygon extends Component {
         }
 
         return false;
-    }
-
-    /**
-     * Define minimal number of points (or vertex) for a polygon
-     * @return {Number}
-     * @constant
-     */
-    static get MIN_NB_POINTS () {
-        return 3;
     }
 }

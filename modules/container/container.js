@@ -12,15 +12,16 @@ import stableSort from "stable";
 export default class Container extends EventEmitter {
     /**
      * Container constructor
-     * @param {Position} [position] - Position in its container
+     * @param {PositionDefinition} [position] - Position in its container
      * @param {ContainerOptions} [options] -
      */
     constructor (position = new Position(), options) {
         super();
+
         /**
          * @type {Position}
          */
-        this.position = position;
+        this.position = Position.from(position);
         /**
          * @type {ContainerOptions}
          */

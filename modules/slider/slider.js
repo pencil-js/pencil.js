@@ -26,7 +26,7 @@ import Vector from "@pencil.js/vector";
 export default class Slider extends Container {
     /**
      * Slider constructor
-     * @param {Position} position -
+     * @param {PositionDefinition} position -
      * @param {SliderOptions} options -
      */
     constructor (position, options) {

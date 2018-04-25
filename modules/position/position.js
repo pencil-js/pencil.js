@@ -64,7 +64,7 @@ export default class Position {
             x = operation(this.x, position.x);
             y = operation(this.y, position.y);
         }
-        else if (x !== undefined) {
+        else if (position !== undefined) {
             x = operation(this.x, position);
             y = operation(this.y, diffY === undefined ? position : diffY);
         }
@@ -179,6 +179,33 @@ export default class Position {
         const positionMoved = position.clone().subtract(vector.start);
         const delta = vector.getDelta();
         return sign(thisMoved.crossProduct(delta)) === sign(positionMoved.crossProduct(delta));
+    }
+
+    /**
+     * @typedef {Object} AbstractPosition
+     * @prop {Number} [x=0] - Vertical position
+     * @prop {Number} [y=0] - Horizontal position
+     */
+    /**
+     * @typedef {Position|Array|AbstractPosition} PositionDefinition
+     */
+    /**
+     * Create a position from a Position, an Array ([x, y]) or any object with x and y values
+     * @param {PositionDefinition} definition - Anything parsable to a Position
+     * @return {Position}
+     */
+    static from (definition) {
+        if (definition instanceof Position) {
+            return definition;
+        }
+        else if (Array.isArray(definition)) {
+            return new Position(definition[0], definition[1]);
+        }
+        else if (typeof definition === "object") {
+            return new Position(definition.x, definition.y);
+        }
+
+        throw new TypeError(`Unexpected type for position [${typeof position}]`);
     }
 
     /**

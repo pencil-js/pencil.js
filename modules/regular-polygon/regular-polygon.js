@@ -9,7 +9,7 @@ import Position from "@pencil.js/position";
 export default class RegularPolygon extends Polygon {
     /**
      * Regular polygon constructor
-     * @param {Position} position - Center of the polygon
+     * @param {PositionDefinition} position - Center of the polygon
      * @param {Number} nbSides - Number of sides
      * @param {Number} radius - Distance between center and outer points
      * @param {ComponentOptions} [options] - Drawing options
@@ -17,8 +17,14 @@ export default class RegularPolygon extends Polygon {
     constructor (position = new Position(), nbSides, radius, options) {
         super(RegularPolygon.getRotatingPoint(nbSides, radius), options);
 
+        /**
+         * @type {Position}
+         */
+        this.position = Position.from(position);
+        /**
+         * @type {Number}
+         */
         this.radius = radius;
-        this.position = position;
     }
 
     /**
