@@ -1,10 +1,10 @@
-# Pencil.js
+# 🖉 Pencil.js
 [![dependencies Status](https://david-dm.org/GMartigny/pencil.js/status.svg)](https://david-dm.org/GMartigny/pencil.js)
 [![devDependencies Status](https://david-dm.org/GMartigny/pencil.js/dev-status.svg)](https://david-dm.org/GMartigny/pencil.js?type=dev)
 [![Maintainability](https://api.codeclimate.com/v1/badges/77637abd58fe1c7323ee/maintainability)](https://codeclimate.com/github/GMartigny/pencil.js/maintainability)
 [![Inline docs](http://inch-ci.org/github/GMartigny/pencil.js.svg?branch=master)](http://inch-ci.org/github/GMartigny/pencil.js)
 
-Modular 2D drawing library.
+Nice modular interactive 2D drawing library.
 
 
 ## Installation
@@ -75,7 +75,7 @@ const width = 80;
 const height = 50;
 let rectangle = new Rectangle(new Position(100, 200), width, height, {
     fill: "red"
-}); // Create a new rectangle with few parameters
+}); // Create a new red rectangle
 scene.add(rectangle); // Add the rectangle to the scene
 
 scene.render(); // Render the scene once
@@ -124,10 +124,10 @@ In any case, I recommend you use a namespace (eg: ``import Namespace from "penci
 
 
 ### Performance
-Even if it's ok, this package is not built around performance.
-If you're looking to draw thousand of shapes in your particle generator, try [Processing](https://processing.org/) instead.
+Even if Pencil can draw thousand of shapes, it's not built around performance.
+If you want to code an efficient particle generator, try [Processing](https://processing.org/) instead.
 
-If you want clean, easy to use syntax, be welcome my friend.
+However, if you want a clean and easy to use syntax, be welcomed my friend.
 
 
 ## Purpose
