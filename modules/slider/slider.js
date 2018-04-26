@@ -2,28 +2,18 @@ import BaseEvent from "@pencil.js/base-event";
 import Circle from "@pencil.js/circle";
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
+import Input from "@pencil.js/input";
 import { constrain } from "@pencil.js/math";
 import Position from "@pencil.js/position";
 import Rectangle from "@pencil.js/rectangle";
 import Vector from "@pencil.js/vector";
 
 /**
- * @typedef {Object} SliderOptions
- * @extends ContainerOptions
- * @prop {Number} [min=0] - Minimum value when the slider is at lowest
- * @prop {Number} [max=10] - Maximum value when the slider is at highest
- * @prop {Number} [value=0] - Initial value
- * @prop {Number [width=200] - Size of the slider
- * @prop {String} [fill="#F00"] - Color of the round handle
- * @prop {String} [background="#FFF"] - Color of the rectangle background
- */
-
-/**
  * Slider class
  * @class
  * @extends Container
  */
-export default class Slider extends Container {
+export default class Slider extends Input {
     /**
      * Slider constructor
      * @param {PositionDefinition} position -
@@ -33,25 +23,34 @@ export default class Slider extends Container {
         super(position, options);
 
         const sliderHeight = Slider.HEIGHT;
+        this.constrainer = new Vector(new Position(0, 0), new Position(this.width - sliderHeight, 0));
+
         this.background = new Rectangle(undefined, this.width, sliderHeight, {
             fill: this.options.background,
+            stroke: this.options.border,
+            strokeWidth: 2,
+        });
+        this.background.on("click", (event) => {
+            this.handle.position.set(event.position.x - this.position.x - (sliderHeight / 2), 0)
+                .constrain(this.constrainer);
+            this.fire(new BaseEvent(this, "change"));
         });
         this.add(this.background);
 
-        this.container = new Container(new Position(sliderHeight / 2, sliderHeight / 2));
-        this.add(this.container);
-        this.handle = new Circle(new Position(0, 0), sliderHeight / 2, {
+        const container = new Container(new Position(sliderHeight / 2, sliderHeight / 2));
+        this.add(container);
+        this.handle = new Circle(new Position(0, 0), (sliderHeight - 2) / 2, {
             fill: this.options.fill,
             cursor: Component.cursors.ewResize,
         });
-        this.container.add(this.handle);
-        this.handleDragAPI = this.handle.draggable({
-            constrain: new Vector(new Position(0, 0), new Position(this.width - sliderHeight, 0)),
+        container.add(this.handle);
+        this.handle.draggable({
+            constrain: this.constrainer,
         });
         this.handle.on("drag", () => this.fire(new BaseEvent(this, "change")), true);
 
-        if (this.options.value !== undefined) {
-            this.moveHandle(this.options.value);
+        if (this.options.value !== null) {
+            this._moveHandle(this.options.value);
         }
     }
 
@@ -59,7 +58,7 @@ export default class Slider extends Container {
      * Move the handle to a specified value
      * @param {Number} value - New value to use
      */
-    moveHandle (value) {
+    _moveHandle (value) {
         const range = this.options.max - this.options.min;
         this.handle.position.x = (this.width - Slider.HEIGHT) * ((value - this.options.min) / range);
     }
@@ -75,9 +74,9 @@ export default class Slider extends Container {
 
         this.options.width = newWidth;
         this.background.width = newWidth;
-        this.handleDragAPI.constrain = new Vector(new Position(0, 0), new Position(this.width - Slider.HEIGHT, 0));
+        this.constrainer.end = new Position(this.width - Slider.HEIGHT, 0);
 
-        this.moveHandle(this.value);
+        this._moveHandle(this.value);
     }
 
     /**
@@ -105,11 +104,18 @@ export default class Slider extends Container {
      */
     set value (newValue) {
         const constrainedValue = constrain(newValue, this.options.min, this.options.max);
-        this.moveHandle(constrainedValue);
-        this.fire(new BaseEvent(this, "change"));
+        this._moveHandle(constrainedValue);
         return constrainedValue;
     }
 
+    /**
+     * @typedef {Object} SliderOptions
+     * @extends InputOptions
+     * @prop {Number} [min=0] - Minimum value when the slider is at lowest
+     * @prop {Number} [max=10] - Maximum value when the slider is at highest
+     * @prop {Number} [value=0] - Initial value
+     * @prop {Number [width=200] - Size of the slider
+     */
     /**
      * @return {SliderOptions}
      */
@@ -118,8 +124,6 @@ export default class Slider extends Container {
             min: 0,
             max: 10,
             width: 200,
-            fill: "#ff7269",
-            background: "#f6f6f6",
         });
     }
 
@@ -129,6 +133,6 @@ export default class Slider extends Container {
      * @constant
      */
     static get HEIGHT () {
-        return 30;
+        return 20;
     }
 }

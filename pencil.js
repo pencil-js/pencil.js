@@ -30,7 +30,9 @@ import Text from "@pencil.js/text";
 import Path from "@pencil.js/path";
 
 // Complex
+import Input from "@pencil.js/input";
 import Slider from "@pencil.js/slider";
+import Checkbox from "@pencil.js/checkbox";
 
 // Interactions
 import "@pencil.js/draggable";
@@ -60,7 +62,9 @@ export default {
     BaseEvent,
     MouseEvent,
     KeyboardEvent,
+    Input,
     Slider,
+    Checkbox,
     default: undefined,
 };
 export {
@@ -87,5 +91,7 @@ export {
     BaseEvent,
     MouseEvent,
     KeyboardEvent,
+    Input,
     Slider,
+    Checkbox,
 };

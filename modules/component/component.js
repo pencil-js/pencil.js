@@ -18,10 +18,6 @@ export default class Component extends Container {
         /**
          * @type {Boolean}
          */
-        this.isShown = this.options.shown === undefined || this.options.shown;
-        /**
-         * @type {Boolean}
-         */
         this.isHovered = false;
     }
 
@@ -65,21 +61,7 @@ export default class Component extends Container {
      * @returns {Boolean}
      */
     isHover () {
-        return this.isShown;
-    }
-
-    /**
-     * Display this component
-     */
-    show () {
-        this.isShown = true;
-    }
-
-    /**
-     * Hide this component
-     */
-    hide () {
-        this.isShown = false;
+        return this.options.shown;
     }
 
     /**

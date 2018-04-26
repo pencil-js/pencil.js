@@ -245,6 +245,20 @@ export default class Container extends EventEmitter {
     }
 
     /**
+     * Display it
+     */
+    show () {
+        this.options.shown = true;
+    }
+
+    /**
+     * Hide it
+     */
+    hide () {
+        this.options.shown = false;
+    }
+
+    /**
      * @typedef {Object} ContainerOptions
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
