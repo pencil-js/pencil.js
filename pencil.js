@@ -31,8 +31,9 @@ import Path from "@pencil.js/path";
 
 // Complex
 import Input from "@pencil.js/input";
-import Slider from "@pencil.js/slider";
+import Button from "@pencil.js/button";
 import Checkbox from "@pencil.js/checkbox";
+import Slider from "@pencil.js/slider";
 
 // Interactions
 import "@pencil.js/draggable";
@@ -65,6 +66,7 @@ export default {
     Input,
     Slider,
     Checkbox,
+    Button,
     default: undefined,
 };
 export {
@@ -94,4 +96,5 @@ export {
     Input,
     Slider,
     Checkbox,
+    Button,
 };

@@ -29,6 +29,7 @@ export default class Slider extends Input {
             fill: this.options.background,
             stroke: this.options.border,
             strokeWidth: 2,
+            cursor: Component.cursors.pointer,
         });
         this.background.on("click", (event) => {
             this.handle.position.set(event.position.x - this.position.x - (sliderHeight / 2), 0)
@@ -48,10 +49,6 @@ export default class Slider extends Input {
             constrain: this.constrainer,
         });
         this.handle.on("drag", () => this.fire(new BaseEvent(this, "change")), true);
-
-        if (this.options.value !== null) {
-            this._moveHandle(this.options.value);
-        }
     }
 
     /**

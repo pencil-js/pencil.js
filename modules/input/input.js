@@ -1,10 +1,22 @@
 import Container from "@pencil.js/container";
 
 /**
+ * Abstract Input class
+ * @abstract
  * @class
  * @extends Container
  */
 export default class Input extends Container {
+    /**
+     * Input constructor
+     * @param {PositionDefinition} position - Any position
+     * @param {InputOptions} options -
+     */
+    constructor (position, options) {
+        super(position, options);
+
+        this.on("attach", () => this.value = this.options.value, true);
+    }
     /**
      * Return the value of the input
      */

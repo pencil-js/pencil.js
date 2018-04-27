@@ -2,6 +2,7 @@ import Square from "@pencil.js/square";
 import Input from "@pencil.js/input";
 import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
+import Component from "@pencil.js/component";
 
 /**
  * Checkbox class
@@ -21,13 +22,15 @@ export default class Checkbox extends Input {
             fill: this.options.background,
             stroke: this.options.border,
             strokeWidth: 2,
+            cursor: Component.cursors.pointer,
         });
         this.add(this.background);
 
         const margin = this.options.size * Checkbox.MARGIN;
         this.fill = new Square(new Position(margin, margin), this.options.size - (2 * margin), {
             fill: this.options.fill,
-            shown: this.options.checked,
+            shown: this.options.value,
+            cursor: Component.cursors.pointer,
         });
         this.background.add(this.fill);
 
@@ -35,8 +38,6 @@ export default class Checkbox extends Input {
             this.toggle();
             this.fire(new BaseEvent(this, "change"));
         });
-
-        this.value = this.options.value;
     }
 
     /**
@@ -75,9 +76,6 @@ export default class Checkbox extends Input {
      * @typedef {Object} CheckboxOptions
      * @extends InputOptions
      * @prop {Number} [size=20]
-     * @prop {Boolean} [checked=false]
-     * @prop {String} [background="#f6f6f6"]
-     * @prop {String} [fill="#333"]
      */
     /**
      * @return {CheckboxOptions}
