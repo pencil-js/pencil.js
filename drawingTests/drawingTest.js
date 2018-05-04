@@ -1,16 +1,25 @@
 const tests = [
     "allShapes",
+    "allInputs",
 ];
 
+/**
+ * Wait next tick to call a function
+ * @param {Function} func - Any function to defer
+ * @param {*} ctx - This context of the function
+ * @param {...*} params - Some params
+ */
 function defer (func, ctx, ...params) {
     requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-            func.call(ctx, ...params);
+            func.apply(ctx, params);
         });
     });
 }
 
 window.addEventListener("load", () => {
+    let chain = Promise.resolve();
+
     tests.forEach((name) => {
         const container = document.createElement("div");
         container.id = name;
@@ -26,16 +35,27 @@ window.addEventListener("load", () => {
 
         const expected = document.createElement("img");
         expected.className = "expected";
-        expected.src = `./${name}/expected.png`;
-        expected.addEventListener("load", () => {
-            scene.style.height = `${expected.height}px`;
-            scene.style.width = `${expected.width}px`;
-            defer(container.appendChild, container, scriptTag);
-        });
-        expected.addEventListener("error", () => {
-            scene.style.height = "200px";
-            scene.style.width = "300px";
-            container.appendChild(scriptTag);
+        chain = chain.then(() => {
+            return new Promise((resolve) => {
+                console.log(`Load ${name}`);
+                expected.src = `./${name}/expected.png`;
+                expected.addEventListener("load", () => {
+                    scene.style.height = `${expected.height}px`;
+                    scene.style.width = `${expected.width}px`;
+                    defer(() => {
+                        container.appendChild(scriptTag);
+                        console.log(`Resolve ${name}`);
+                        resolve();
+                    });
+                });
+                expected.addEventListener("error", () => {
+                    scene.style.height = "200px";
+                    scene.style.width = "50%";
+                    container.appendChild(scriptTag);
+                    console.log(`Fail ${name}`);
+                    resolve();
+                });
+            });
         });
         container.appendChild(expected);
 
