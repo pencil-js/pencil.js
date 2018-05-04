@@ -259,6 +259,23 @@ export default class Container extends EventEmitter {
     }
 
     /**
+     * Define if this is an ancestor of another container
+     * @param {Container} container - Any container
+     * @return {Boolean}
+     */
+    isAncestorOf (container) {
+        if (container.parent) {
+            if (container.parent === this) {
+                return true;
+            }
+
+            return this.isAncestorOf(container.parent);
+        }
+
+        return false;
+    }
+
+    /**
      * @typedef {Object} ContainerOptions
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
