@@ -28,23 +28,21 @@ export default class Component extends Container {
      */
     render (ctx) {
         return super.render(ctx, () => {
-            ctx.beginPath();
-
-            ctx.moveTo(0, 0);
-            this.trace(ctx);
+            const path = new Path2D();
+            this.trace(path);
 
             if (this.options.fill) {
                 ctx.fillStyle = this.options.fill;
-                ctx.fill();
+                ctx.fill(path);
             }
 
             if (this.options.stroke) {
+                ctx.lineJoin = this.options.join;
+                ctx.lineCap = this.options.cap;
                 ctx.strokeStyle = this.options.stroke;
                 ctx.lineWidth = this.options.strokeWidth;
-                ctx.stroke();
+                ctx.stroke(path);
             }
-
-            ctx.closePath();
         });
     }
 
@@ -81,6 +79,7 @@ export default class Component extends Container {
             stroke: null,
             strokeWidth: 2,
             cursor: Component.cursors.default,
+            join: Component.joins.miter,
         });
     }
 
@@ -144,5 +143,22 @@ export default class Component extends Container {
         cursors.bottomResize = cursors.sResize;
         cursors.leftResize = cursors.wResize;
         return cursors;
+    }
+
+    /**
+     * @typedef {Object} LineJoins
+     * @prop {String} miter - Join segment by extending the line edges until they meet
+     * @prop {String} round - Join with a circle tangent to line edges
+     * @prop {String} bevel - Join with a straight line between the line edges
+     */
+    /**
+     * @return {LineJoins}
+     */
+    static get joins () {
+        return {
+            miter: "miter",
+            round: "round",
+            bevel: "bevel",
+        };
     }
 }

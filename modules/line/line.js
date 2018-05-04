@@ -28,15 +28,14 @@ export default class Line extends Component {
 
     /**
      * Draw the line
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {path} path - Drawing context
      * @return {Line} Itself
      */
-    trace (ctx) {
-        ctx.lineJoin = this.options.join;
-        ctx.lineCap = this.options.cap;
+    trace (path) {
+        path.moveTo(0, 0);
         this.points.slice(1).forEach((point) => {
             const diff = point.clone().subtract(this.position);
-            ctx.lineTo(diff.x, diff.y);
+            path.lineTo(diff.x, diff.y);
         });
         return this;
     }
@@ -83,23 +82,6 @@ export default class Line extends Component {
             butt: "butt",
             round: "round",
             square: "square",
-        };
-    }
-
-    /**
-     * @typedef {Object} LineJoins
-     * @prop {String} miter - Join segment by extending the line edges until they meet
-     * @prop {String} round - Join with a circle tangent to line edges
-     * @prop {String} bevel - Join with a straight line between the line edges
-     */
-    /**
-     * @return {LineJoins}
-     */
-    static get joins () {
-        return {
-            miter: "miter",
-            round: "round",
-            bevel: "bevel",
         };
     }
 }

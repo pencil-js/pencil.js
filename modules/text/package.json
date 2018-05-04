@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "@pencil.js/component": "^0.7.1",
+    "@pencil.js/container": "^0.7.1",
     "@pencil.js/position": "^0.7.1",
     "@pencil.js/rectangle": "^0.7.1",
     "text-direction": "^1.1.0"

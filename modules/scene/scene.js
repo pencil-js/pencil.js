@@ -14,7 +14,7 @@ export default class Scene extends Container {
     /**
      * Scene constructor
      * @param {HTMLElement} [container=document.body] - Container of the renderer
-     * @param {SceneOptions} [options] -
+     * @param {SceneOptions} [options] - Specific options
      */
     constructor (container = document.body, options) {
         super(undefined, options);
@@ -28,10 +28,10 @@ export default class Scene extends Container {
             canvas = document.createElement("canvas");
             container.appendChild(canvas);
         }
+        canvas.style.display = "block";
         const measures = container.getBoundingClientRect();
         canvas.width = measures.width;
         canvas.height = measures.height;
-        canvas.style.display = "block";
         /**
          * @type {CanvasRenderingContext2D}
          */
@@ -236,7 +236,14 @@ export default class Scene extends Container {
     }
 
     /**
-     * @return {ContainerOptions}
+     * @typedef {Object} SceneOptions
+     * @extends {ContainerOptions}
+     * @prop {String} [fill=null] - Background of the scene
+     * @prop {Number} [opacity=1] - Global opacity
+     * @prop {String} [cursor=Component.cursors.defaultOptions] - Cursor on hover
+     */
+    /**
+     * @return {SceneOptions}
      */
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {

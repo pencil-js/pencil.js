@@ -25,16 +25,16 @@ export default class Spline extends Line {
 
     /**
      * Draw the spline
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {Path2D} path - Current drawing path
      * @return {Spline} Itself
      */
-    trace (ctx) {
+    trace (path) {
         if (this.points.length < 3 || equal(this.tension, 0)) {
-            super.trace(ctx);
+            super.trace(path);
         }
         else {
-            ctx.lineCap = this.options.cap;
-            Spline.splineThrough(ctx, this.points.map(point => point.clone().subtract(this.position)), this.tension);
+            path.lineCap = this.options.cap;
+            Spline.splineThrough(path, this.points.map(point => point.clone().subtract(this.position)), this.tension);
         }
         return this;
     }
@@ -49,18 +49,18 @@ export default class Spline extends Line {
 
     /**
      * Draw a spline through points using a tension
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {Path2D} path - Current drawing path
      * @param {Array<PositionDefinition>} points - Points to use
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
      */
-    static splineThrough (ctx, points, tension = Spline.defaultTension) {
+    static splineThrough (path, points, tension = Spline.defaultTension) {
         const getCtrlPts = Spline.getControlPoint;
         const positions = points.map(point => Position.from(point));
         let previousControls = [null, positions[0]];
 
         for (let i = 1, l = positions.length; i < l; ++i) {
             const controlPoints = i < l - 1 ? getCtrlPts(positions.slice(i - 1, i + 2), tension) : [positions[i], null];
-            ctx.bezierCurveTo(
+            path.bezierCurveTo(
                 previousControls[1].x, previousControls[1].y, controlPoints[0].x, controlPoints[0].y,
                 positions[i].x, positions[i].y,
             );

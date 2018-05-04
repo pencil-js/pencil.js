@@ -23,12 +23,12 @@ export default class Rectangle extends Component {
 
     /**
      * Draw the rectangle
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {path} path - Drawing context
      * @return {Rectangle} Itself
      */
-    trace (ctx) {
+    trace (path) {
         const originPos = this.getOriginPosition();
-        ctx.rect(truncate(-originPos.x), truncate(-originPos.y), truncate(this.width), truncate(this.height));
+        path.rect(-originPos.x, -originPos.y, this.width, this.height);
         return this;
     }
 

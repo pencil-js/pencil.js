@@ -27,18 +27,16 @@ export default class Arc extends Component {
 
     /**
      * Draw the arc
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {path} path - Drawing context
      * @return {Arc} Itself
      */
-    trace (ctx) {
-        ctx.lineCap = this.options.cap;
+    trace (path) {
+        path.lineCap = this.options.cap;
         const radius = truncate(this.radius);
         const correction = -0.25;
         const startAngle = (this.startAngle + correction) * radianCircle;
         const endAngle = (this.endAngle + correction) * radianCircle;
-        const startPosition = (new Position(0, -radius)).rotate(this.startAngle).rotate();
-        ctx.moveTo(startPosition.x, startPosition.y);
-        ctx.arc(0, 0, radius, startAngle, endAngle);
+        path.arc(0, 0, radius, startAngle, endAngle);
         return this;
     }
 
@@ -58,7 +56,9 @@ export default class Arc extends Component {
      * @return {LineOptions}
      */
     static get defaultOptions () {
-        return Line.defaultOptions;
+        const options = Line.defaultOptions;
+        delete options.join;
+        return options;
     }
 
     /**

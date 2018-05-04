@@ -211,6 +211,16 @@ export default class Container extends EventEmitter {
             ctx.save();
             ctx.translate(truncate(this.position.x), truncate(this.position.y));
 
+            if (this.options.clip) {
+                const clipping = new Path2D();
+                const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
+                const { x, y } = clipper.position;
+                ctx.translate(x, y);
+                clipper.trace(clipping);
+                ctx.clip(clipping);
+                ctx.translate(-x, -y);
+            }
+
             if (this.options.rotation) {
                 const anchorX = truncate(this.options.rotationAnchor.x);
                 const anchorY = truncate(this.options.rotationAnchor.y);
@@ -282,6 +292,7 @@ export default class Container extends EventEmitter {
      * @prop {Number} [rotation=0] - Rotation ratio from 0 to 1 (clockwise)
      * @prop {Position} [rotationAnchor=new Position(0, 0)] - Center of rotation relative to this position
      * @prop {Number} [zIndex=1] - Depth ordering
+     * @prop {Component} [clip=null] -
      */
     /**
      * @return {ContainerOptions}
@@ -293,6 +304,11 @@ export default class Container extends EventEmitter {
             rotation: 0,
             rotationAnchor: new Position(),
             zIndex: 1,
+            clip: null,
         };
+    }
+
+    static get ITSELF () {
+        return "itself";
     }
 }

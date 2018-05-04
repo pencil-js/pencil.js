@@ -1,7 +1,6 @@
 import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
-import { truncate } from "@pencil.js/math";
 
 /**
  * Polygon class
@@ -16,7 +15,7 @@ export default class Polygon extends Component {
      */
     constructor (points, options) {
         if (points.length < 3) {
-            throw new RangeError(`A polygon can't have less than 3 branches, but only ${points.length} given.`);
+            throw new RangeError(`A polygon can't have less than 3 vertices, but only ${points.length} given.`);
         }
 
         const positions = points.map(point => Position.from(point));
@@ -30,13 +29,14 @@ export default class Polygon extends Component {
 
     /**
      * Draw the polygon
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {Path2D} path - Current drawing path
      * @return {Polygon} Itself
      */
-    trace (ctx) {
-        this.points.slice(1).concat(this.points.slice(0, 2)).forEach((point) => {
-            ctx.lineTo(truncate(point.x), truncate(point.y));
+    trace (path) {
+        this.points.forEach((point) => {
+            path.lineTo(point.x - this.position.x, point.y - this.position.y);
         });
+        path.closePath();
         return this;
     }
 

@@ -18,7 +18,6 @@
   "dependencies": {
     "@pencil.js/component": "^0.7.1",
     "@pencil.js/line": "^0.7.1",
-    "@pencil.js/math": "^0.7.1",
     "@pencil.js/position": "^0.7.1",
     "@pencil.js/spline": "^0.7.1",
     "@pencil.js/vector": "^0.7.1"

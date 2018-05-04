@@ -28,19 +28,23 @@ export default class RegularPolygon extends Polygon {
     }
 
     /**
-     * @inheritDoc
+     * Draw the regular-polygon
+     * @param {Path2D} path - Current drawing path
+     * @return {RegularPolygon} Itself
      */
-    isHover (position) {
-        return position.distance(this.position) < this.radius && super.isHover(position);
+    trace (path) {
+        this.points.forEach((point) => {
+            path.lineTo(point.x, point.y);
+        });
+        path.closePath();
+        return this;
     }
 
     /**
      * @inheritDoc
      */
-    trace (ctx) {
-        const firstPoint = this.points[0];
-        ctx.moveTo(firstPoint.x, firstPoint.y);
-        return super.trace(ctx);
+    isHover (position) {
+        return position.distance(this.position) < this.radius && super.isHover(position);
     }
 
     /**
