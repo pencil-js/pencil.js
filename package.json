@@ -37,6 +37,7 @@
   "dependencies": {
     "@pencil.js/arc": "^0.7.1",
     "@pencil.js/base-event": "^0.2.0",
+    "@pencil.js/button": "^0.1.0",
     "@pencil.js/checkbox": "^0.1.0",
     "@pencil.js/circle": "^0.7.1",
     "@pencil.js/component": "^0.7.1",
@@ -65,16 +66,16 @@
     "@pencil.js/vector": "^0.7.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.44",
-    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
     "@gmartigny/eslint-config": "^1.1.2",
     "babel-loader": "^8.0.0-beta.2",
     "eslint": "^4.19.1",
     "eslint-plugin-import": "^2.11.0",
     "jest": "^22.4.3",
     "jest-webpack": "^0.4.0",
-    "lerna": "^2.10.2",
-    "webpack": "^4.5.0",
-    "webpack-cli": "^2.0.14"
+    "lerna": "^2.11.0",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
   }
 }
