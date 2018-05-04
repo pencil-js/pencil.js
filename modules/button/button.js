@@ -1,7 +1,7 @@
+import Component from "@pencil.js/component";
 import Input from "@pencil.js/input";
 import Rectangle from "@pencil.js/rectangle";
 import Text from "@pencil.js/text";
-import Component from "@pencil.js/component";
 
 /**
  * Button class
@@ -17,13 +17,18 @@ export default class Button extends Input {
     constructor (position, options) {
         super(position, options);
 
-        this.bakground = new Rectangle(undefined, 0, 0, {
+        this.background = new Rectangle(undefined, 0, 0, {
             fill: this.options.background,
             stroke: this.options.border,
             strokeWidth: 2,
             cursor: Component.cursors.pointer,
         });
-        this.add(this.bakground);
+        this.background.on("hover", () => {
+            this.background.options.fill = this.options.hover;
+        }).on("leave", () => {
+            this.background.options.fill = this.options.background;
+        });
+        this.add(this.background);
 
         this.text = new Text(undefined, this.options.value, {
             fill: this.options.fill,
@@ -33,23 +38,7 @@ export default class Button extends Input {
             bold: this.options.bold,
             italic: this.options.italic,
         });
-        this.add(this.text);
-
-        this.isPressed = false;
-        this.on("mousedown", () => {
-            if (!this.isPressed) {
-                this.text.position.add(0, 1);
-                this.isPressed = true;
-            }
-        });
-        this.getScene().then((scene) => {
-            scene.on("mouseup", () => {
-                if (this.isPressed) {
-                    this.text.position.subtract(0, 1);
-                    this.isPressed = false;
-                }
-            });
-        });
+        this.background.add(this.text);
     }
 
     /**
@@ -68,8 +57,8 @@ export default class Button extends Input {
         this.text.text = value;
         const measures = this.text.getMeasures();
         const margin = measures.height * Button.MARGIN;
-        this.bakground.height = measures.height + margin;
-        this.bakground.width = measures.width + (margin * 4);
+        this.background.width = measures.width + (margin * 4);
+        this.background.height = measures.height + margin;
         this.text.position.set(margin * 2, margin);
     }
 

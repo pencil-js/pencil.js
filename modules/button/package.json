@@ -16,6 +16,7 @@
     "UI"
   ],
   "dependencies": {
+    "@pencil.js/circle": "^0.7.1",
     "@pencil.js/component": "^0.7.1",
     "@pencil.js/input": "^0.1.0",
     "@pencil.js/rectangle": "^0.7.1",

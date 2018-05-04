@@ -31,7 +31,11 @@ export default class Slider extends Input {
             strokeWidth: 2,
             cursor: Component.cursors.pointer,
         });
-        this.background.on("click", (event) => {
+        this.background.on("hover", () => {
+            this.background.options.fill = this.options.hover;
+        }).on("leave", () => {
+            this.background.options.fill = this.options.background;
+        }).on("click", (event) => {
             this.handle.position.set(event.position.x - this.position.x - (sliderHeight / 2), 0)
                 .constrain(this.constrainer);
             this.fire(new BaseEvent(this, "change"));

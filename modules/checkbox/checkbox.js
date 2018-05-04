@@ -34,7 +34,11 @@ export default class Checkbox extends Input {
         });
         this.background.add(this.fill);
 
-        this.background.on("click", () => {
+        this.background.on("hover", () => {
+            this.background.options.fill = this.options.hover;
+        }).on("leave", () => {
+            this.background.options.fill = this.options.background;
+        }).on("click", () => {
             this.toggle();
             this.fire(new BaseEvent(this, "change"));
         });

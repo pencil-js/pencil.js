@@ -38,6 +38,7 @@ export default class Input extends Container {
      * @prop {String} [fill="#444"] - Color of the filling
      * @prop {String} [background="#f6f6f6"] - Color of the background
      * @prop {String} [border="#aaa"] - Color of the border
+     * @prop {String} [hover="#d0d0d0"] - Color of the background when hovered
      */
     /**
      * @return {InputOptions}
@@ -48,6 +49,7 @@ export default class Input extends Container {
             fill: "#444",
             background: "#f6f6f6",
             border: "#aaa",
+            hover: "#dcdcdc",
         });
     }
 }
