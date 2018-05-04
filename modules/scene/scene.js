@@ -81,15 +81,19 @@ export default class Scene extends Container {
             mousedown: target => target.isClicked = true,
             mousemove: (target, eventPosition) => {
                 target.isClicked = false;
-                target.isHovered = true;
                 if (target !== hovered) {
                     if (hovered) {
                         hovered.isHovered = false;
-                        hovered.fire(new MouseEvent(hovered, "leave", eventPosition));
+                        if (!hovered.isAncestorOf(target)) {
+                            hovered.fire(new MouseEvent(hovered, "leave", eventPosition));
+                        }
                     }
                     hovered = target;
                 }
-                hovered.fire(new MouseEvent(hovered, "hover", eventPosition));
+                if (!target.isHovered) {
+                    target.isHovered = true;
+                    target.fire(new MouseEvent(target, "hover", eventPosition));
+                }
                 this.setCursor(target.options.cursor);
             },
             mouseup: (target, eventPosition) => {
