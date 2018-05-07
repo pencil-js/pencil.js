@@ -6,20 +6,28 @@ import Position from "@pencil.js/position";
 export default class Vector {
     /**
      * Vector constructor
-     * @param {Position|Number} start - Starting vector's position
-     * @param {Position|Number} end - Ending vector's position
-     * @param {Number} [xEnd] - Horizontal position of the end point (if "start" and "end" are Number)
-     * @param {Number} [yEnd] - Vertical position of the end point
+     * @param {PositionDefinition} start - Starting vector's position
+     * @param {PositionDefinition} end - Ending vector's position
      */
-    constructor (start, end, xEnd, yEnd) {
-        if (start instanceof Position && end instanceof Position) {
-            this.start = start;
-            this.end = end;
-        }
-        else if (xEnd !== undefined && yEnd !== undefined) {
-            this.start = new Position(start, end);
-            this.end = new Position(xEnd, yEnd);
-        }
+    constructor (start, end) {
+        this.start = Position.from(start);
+        this.end = Position.from(end);
+    }
+
+    /**
+     * Get this vector horizontal component
+     * @return {Number}
+     */
+    get width () {
+        return Math.abs(this.start.x - this.end.x);
+    }
+
+    /**
+     * Get this vector vertical component
+     * @return {Number}
+     */
+    get height () {
+        return Math.abs(this.start.y - this.end.y);
     }
 
     /**
