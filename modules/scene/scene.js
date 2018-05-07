@@ -201,6 +201,7 @@ export default class Scene extends Container {
      * Hide the scene
      */
     hide () {
+        super.hide();
         this.ctx.canvas.style.visibility = "hidden";
     }
 
@@ -208,7 +209,33 @@ export default class Scene extends Container {
      * Show the scene
      */
     show () {
+        super.show();
         this.ctx.canvas.style.visibility = "";
+    }
+
+    /**
+     * Returns an image from the scene
+     * @param {Vector} [vector] - Define a range or the scene for the image
+     * @return {HTMLImageElement}
+     */
+    toImg (vector) {
+        const { width, height } = this.ctx.canvas;
+        if (vector) {
+            this.ctx.canvas.width = vector.width;
+            this.ctx.canvas.height = vector.height;
+        }
+        this.clear();
+        if (vector) {
+            this.ctx.translate(-vector.start.x, -vector.start.y);
+        }
+        super.render(this.ctx);
+        const img = document.createElement("img");
+        img.src = this.ctx.canvas.toDataURL();
+        if (vector) {
+            this.ctx.canvas.width = width;
+            this.ctx.canvas.height = height;
+        }
+        return img;
     }
 
     /**
