@@ -1,4 +1,3 @@
-import { truncate } from "@pencil.js/math";
 import Rectangle from "@pencil.js/rectangle";
 import BaseEvent from "@pencil.js/base-event";
 
@@ -83,6 +82,7 @@ export default class Image extends Rectangle {
         if (this.isLoaded) {
             super.trace(ctx);
         }
+
         return this;
     }
 
@@ -97,10 +97,10 @@ export default class Image extends Rectangle {
             const originPos = this.getOriginPosition();
             ctx.drawImage(
                 this.file,
-                truncate(this.position.x - originPos.x),
-                truncate(this.position.y - originPos.y),
-                truncate(this.width),
-                truncate(this.height),
+                this.position.x - originPos.x,
+                this.position.y - originPos.y,
+                this.width,
+                this.height,
             );
         }
         return this;

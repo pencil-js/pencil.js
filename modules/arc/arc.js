@@ -30,11 +30,10 @@ export default class Arc extends Component {
      */
     trace (path) {
         path.lineCap = this.options.cap;
-        const radius = truncate(this.radius);
         const correction = -0.25;
         const startAngle = (this.startAngle + correction) * radianCircle;
         const endAngle = (this.endAngle + correction) * radianCircle;
-        path.arc(0, 0, radius, startAngle, endAngle);
+        path.arc(0, 0, this.radius, startAngle, endAngle);
         return this;
     }
 

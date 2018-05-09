@@ -1,7 +1,7 @@
 import EventEmitter from "@pencil.js/event-emitter";
 import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
-import { truncate, radianCircle } from "@pencil.js/math";
+import { radianCircle } from "@pencil.js/math";
 import stableSort from "stable";
 
 /**
@@ -210,7 +210,7 @@ export default class Container extends EventEmitter {
     render (ctx, drawing) {
         if (this.options.shown) {
             ctx.save();
-            ctx.translate(truncate(this.position.x), truncate(this.position.y));
+            ctx.translate(this.position.x, this.position.y);
 
             if (this.options.clip) {
                 const clipping = new Path2D();
@@ -223,8 +223,8 @@ export default class Container extends EventEmitter {
             }
 
             if (this.options.rotation) {
-                const anchorX = truncate(this.options.rotationAnchor.x);
-                const anchorY = truncate(this.options.rotationAnchor.y);
+                const anchorX = this.options.rotationAnchor.x;
+                const anchorY = this.options.rotationAnchor.y;
                 ctx.translate(anchorX, anchorY);
                 ctx.rotate(this.options.rotation * radianCircle);
                 ctx.translate(-anchorX, -anchorY);
