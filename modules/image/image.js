@@ -103,6 +103,7 @@ export default class Image extends Rectangle {
                 this.height,
             );
         }
+
         return this;
     }
 
@@ -114,6 +115,24 @@ export default class Image extends Rectangle {
             this.width = this.file.width;
             this.height = this.file.height;
         }
+    }
+
+    /**
+     * @inheritDoc
+     */
+    toJSON () {
+        return Object.assign(super.toJSON(), {
+            url: this.url,
+        });
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Image definition
+     * @return {Image}
+     */
+    static from (definition) {
+        return new Image(definition.position, definition.url, definition.width, definition.height, definition.options);
     }
 
     /**

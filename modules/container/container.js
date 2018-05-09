@@ -287,6 +287,41 @@ export default class Container extends EventEmitter {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const { defaultOptions } = this.constructor;
+        const optionsCopy = {};
+
+        Object.keys(this.options).forEach((key) => {
+            const value = this.options[key];
+            if (!(value && value.equals ? value.equals(defaultOptions[key]) : Object.is(value, defaultOptions[key]))) {
+                optionsCopy[key] = value && value.toJSON ? value.toJSON() : value;
+            }
+        });
+
+        const json = Object.assign(super.toJSON(), {
+            position: this.position.toJSON(),
+        });
+        if (this.children.length) {
+            json.children = this.children.map(child => child.toJSON());
+        }
+        if (Object.keys(optionsCopy).length) {
+            json.options = optionsCopy;
+        }
+        return json;
+    }
+
+    /**
+     * Return an instance from a generic object
+     * @param {Object} definition - Container definition
+     * @return {Container}
+     */
+    static from (definition) {
+        return new Container(definition.position, definition.options);
+    }
+
+    /**
      * @typedef {Object} ContainerOptions
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)

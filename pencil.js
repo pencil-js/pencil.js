@@ -39,11 +39,22 @@ import Slider from "@pencil.js/slider";
 import "@pencil.js/draggable";
 import "@pencil.js/resizable";
 
-export default {
-    EventEmitter,
+/**
+ * Construct Pencil objects from a JSON
+ * @param {Object} json - Valid JSON
+ * @return {*}
+ */
+function from (json) {
+    const instance = classes[json.constructor].from(json);
+    if (json.children) {
+        instance.add(...json.children.map(child => from(child)));
+    }
+    return instance;
+}
+
+const classes = {
     Container,
     Scene,
-    Component,
     Arc,
     Circle,
     Line,
@@ -57,18 +68,27 @@ export default {
     Image,
     Text,
     Path,
-    Math,
     Position,
     Vector,
-    BaseEvent,
-    MouseEvent,
-    KeyboardEvent,
-    Input,
     Slider,
     Checkbox,
     Button,
-    default: undefined,
 };
+
+// Export all under namespace
+export default Object.assign({
+    EventEmitter,
+    Component,
+    Input,
+    BaseEvent,
+    MouseEvent,
+    KeyboardEvent,
+    default: undefined,
+    from,
+    Math,
+}, classes);
+
+// Named exports
 export {
     EventEmitter,
     Container,
@@ -97,4 +117,5 @@ export {
     Slider,
     Checkbox,
     Button,
+    from,
 };

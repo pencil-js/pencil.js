@@ -49,6 +49,26 @@ export default class Line extends Component {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = Object.assign(super.toJSON(), {
+            points: this.points,
+        });
+        delete json.position;
+        return json;
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition -Line definition
+     * @return {Line}
+     */
+    static from (definition) {
+        return new Line(definition.points, definition.options);
+    }
+
+    /**
      * @typedef {Object} LineOptions
      * @extends ComponentOptions
      * @prop {String} [cap=Line.caps.round] - How the line end points looks

@@ -263,6 +263,15 @@ export default class Scene extends Container {
     }
 
     /**
+     * @inheritDoc
+     * @param {Object} definition - Scene definition
+     * @return {Scene}
+     */
+    static from (definition) {
+        return new Scene(undefined, definition.options);
+    }
+
+    /**
      * @typedef {Object} SceneOptions
      * @extends {ContainerOptions}
      * @prop {String} [fill=null] - Background of the scene

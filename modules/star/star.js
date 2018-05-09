@@ -23,4 +23,29 @@ export default class Star extends RegularPolygon {
 
         this.bevelRatio = bevelRatio;
     }
+
+    /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = Object.assign(super.toJSON(), {
+            nbBranches: this.points.length / 2,
+            bevelRatio: this.bevelRatio,
+        });
+        delete json.nbSides;
+        return json;
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Star definition
+     * @return {Star}
+     */
+    static from (definition) {
+        return new Star(
+            definition.position,
+            definition.radius, definition.nbBranches, definition.bevelRatio,
+            definition.options,
+        );
+    }
 }

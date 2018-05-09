@@ -38,4 +38,22 @@ export default class Polygon extends Component {
         path.closePath();
         return this;
     }
+
+    /**
+     * @inheritDoc
+     */
+    toJSON () {
+        return Object.assign(super.toJSON(), {
+            points: this.points,
+        });
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Polygon definition
+     * @return {Polygon}
+     */
+    static from (definition) {
+        return new Polygon(definition.points, definition.options);
+    }
 }

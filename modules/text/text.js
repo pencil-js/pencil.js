@@ -208,6 +208,23 @@ export default class Text extends Component {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        return Object.assign(super.toJSON(), {
+            text: this.text,
+        });
+    }
+
+    /**
+     * @param {Object} definition - Text definition
+     * @return {Text}
+     */
+    static from (definition) {
+        return new Text(definition.position, definition.text, definition.options);
+    }
+
+    /**
      * @typedef {Object} TextOptions
      * @extends ComponentOptions
      * @prop {String} [font="sans-serif"] - Font to use

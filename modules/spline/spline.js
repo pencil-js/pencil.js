@@ -40,6 +40,24 @@ export default class Spline extends Line {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        return Object.assign(super.toJSON(), {
+            tension: this.tension,
+        });
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Spline definition
+     * @return {Spline}
+     */
+    static from (definition) {
+        return new Spline(definition.points, definition.tension, definition.options);
+    }
+
+    /**
      * Default ratio of tension
      * @return {Number}
      */

@@ -182,6 +182,14 @@ export default class Position {
     }
 
     /**
+     *
+     * @return {Array}
+     */
+    toJSON () {
+        return [truncate(this.x), truncate(this.y)];
+    }
+
+    /**
      * @typedef {Object} AbstractPosition
      * @prop {Number} [x=0] - Vertical position
      * @prop {Number} [y=0] - Horizontal position
@@ -190,16 +198,16 @@ export default class Position {
      * @typedef {Position|Array|AbstractPosition} PositionDefinition
      */
     /**
-     * Create a position from a Position, an Array ([x, y]) or any object with x and y values
-     * @param {PositionDefinition} definition - Anything parsable to a Position
+     * Create a Position from a generic definition
+     * @param {PositionDefinition} [definition] - Position definition
      * @return {Position}
      */
-    static from (definition) {
+    static from (definition = new Position()) {
         if (definition instanceof Position) {
             return definition;
         }
         else if (Array.isArray(definition)) {
-            return new Position(definition[0], definition[1]);
+            return new Position(...definition);
         }
         else if (typeof definition === "object") {
             return new Position(definition.x, definition.y);

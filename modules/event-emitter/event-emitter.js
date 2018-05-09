@@ -47,4 +47,22 @@ export default class EventEmitter {
         }
         return this;
     }
+
+    /**
+     * Create a copy of any descendant of Container
+     * @return {Container}
+     */
+    clone () {
+        return this.constructor.from(this.toJSON());
+    }
+
+    /**
+     * Return a json ready object
+     * @return {Object}
+     */
+    toJSON () {
+        return {
+            constructor: this.constructor.name,
+        };
+    }
 }

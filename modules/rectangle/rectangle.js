@@ -59,6 +59,25 @@ export default class Rectangle extends Component {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        return Object.assign(super.toJSON(), {
+            width: this.width,
+            height: this.height,
+        });
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Rectangle definition
+     * @return {Rectangle}
+     */
+    static from (definition) {
+        return new Rectangle(definition.position, definition.width, definition.height, definition.options);
+    }
+
+    /**
      * @typedef {Object} RectangleOptions
      * @extends ComponentOptions
      * @prop {String} [origin=Rectangle.origins.topLeft] - Origin of the rectangle's position

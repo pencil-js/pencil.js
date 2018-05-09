@@ -94,4 +94,42 @@ export default class Vector {
     intersect (vector) {
         return !(this.start.isOnSameSide(this.end, vector) || vector.start.isOnSameSide(vector.end, this));
     }
+
+    /**
+     *
+     * @return {Array}
+     */
+    toJSON () {
+        return [
+            this.start.toJSON(),
+            this.end.toJSON(),
+        ];
+    }
+
+    /**
+     * @typedef {Object} AbstractVector
+     * @prop {PositionDefinition} [start] - Start coordinates
+     * @prop {PositionDefinition} [end] - End coordinates
+     */
+    /**
+     * @typedef {Position|Array|AbstractVector} VectorDefinition
+     */
+    /**
+     * Create a Vector from a generic definition
+     * @param {VectorDefinition} definition - Vector definition
+     * @return {Vector}
+     */
+    static from (definition = new Vector()) {
+        if (definition instanceof Vector) {
+            return definition;
+        }
+        else if (Array.isArray(definition)) {
+            return new Vector(...definition);
+        }
+        else if (typeof definition === "object") {
+            return new Vector(definition.start, definition.end);
+        }
+
+        throw new TypeError(`Unexpected type for position [${typeof position}]`);
+    }
 }

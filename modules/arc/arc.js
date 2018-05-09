@@ -38,6 +38,30 @@ export default class Arc extends Component {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        return Object.assign(super.toJSON(), {
+            radius: this.radius,
+            startAngle: this.startAngle,
+            endAngle: this.endAngle,
+        });
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Arc definition
+     * @return {Arc}
+     */
+    static from (definition) {
+        return new Arc(
+            definition.position, definition.radius,
+            definition.startAngle, definition.endAngle,
+            definition.options,
+        );
+    }
+
+    /**
      * @return {LineOptions}
      */
     static get defaultOptions () {

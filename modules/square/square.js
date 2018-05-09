@@ -32,4 +32,22 @@ export default class Square extends Rectangle {
     get size () {
         return this.width;
     }
+
+    /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = super.toJSON();
+        delete json.height;
+        return json;
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Square definition
+     * @return {Square}
+     */
+    static from (definition) {
+        return new Square(definition.position, definition.width, definition.options);
+    }
 }

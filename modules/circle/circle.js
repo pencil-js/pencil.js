@@ -18,6 +18,25 @@ export default class Circle extends Arc {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = super.toJSON();
+        delete json.startAngle;
+        delete json.endAngle;
+        return json;
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Circle definition
+     * @return {Circle}
+     */
+    static from (definition) {
+        return new Circle(definition.position, definition.radius, definition.options);
+    }
+
+    /**
      * @return {ComponentOptions}
      */
     static get defaultOptions () {

@@ -36,6 +36,22 @@ class Instruction {
         this.action.call(this, path, correctedPosition, previousPosition);
         return correctedPosition;
     }
+
+    /**
+     * Unimplemented
+     * FIXME: How to serialize a wrapper of a function
+     */
+    toJSON () {
+        throw new ReferenceError("Unimplemented toJSON function in Instruction");
+    }
+
+    /**
+     * Unimplemented
+     * FIXME
+     */
+    static from () {
+        throw new ReferenceError("Unimplemented from function in Instruction");
+    }
 }
 
 /**
@@ -106,6 +122,30 @@ export default class Path extends Component {
         }
 
         return false;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    toJSON () {
+        return Object.assign(super.toJSON(), {
+            instructions: this.instructions.map(instruction => instruction.toJSON()),
+            isClosed: this.isClosed,
+        });
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Path definition
+     * @return {Path}
+     */
+    static from (definition) {
+        return new Path(
+            definition.position,
+            definition.instructions.map(instruction => Instruction.from(instruction)),
+            definition.isClosed,
+            definition.options,
+        );
     }
 
     /**

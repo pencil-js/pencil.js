@@ -5,7 +5,7 @@ import Pencil from "./pencil";
 import {
     BaseEvent, MouseEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
     Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Circle, Text, Slider, Path,
-    Checkbox, Input, Button,
+    Checkbox, Input, Button, from,
 } from "./pencil";
 /* eslint-enable */
 
@@ -38,6 +38,7 @@ test("Pencil namespace", () => {
     expect(Pencil.Checkbox).toBeDefined();
     expect(Pencil.Input).toBeDefined();
     expect(Pencil.Button).toBeDefined();
+    expect(Pencil.from).toBeDefined();
     /* eslint-enable */
 });
 
@@ -69,4 +70,5 @@ test("Pencil named imports", () => {
     expect(Checkbox).toBeDefined();
     expect(Input).toBeDefined();
     expect(Button).toBeDefined();
+    expect(from).toBeDefined();
 });

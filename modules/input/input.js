@@ -71,6 +71,25 @@ export default class Input extends Container {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = super.toJSON();
+        json.options.value = this.value;
+        json.children = json.children.slice(1);
+        return json;
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Input definition
+     * @return {Input}
+     */
+    static from (definition) {
+        return new this(definition.position, definition.options);
+    }
+
+    /**
      * @typedef {Object} InputOptions
      * @extends ContainerOptions
      * @prop {String} [fill="#444"] - Color of the filling

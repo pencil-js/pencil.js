@@ -41,6 +41,27 @@ export default class RegularPolygon extends Polygon {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = Object.assign(super.toJSON(), {
+            radius: this.radius,
+            nbSides: this.points.length,
+        });
+        delete json.points;
+        return json;
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Regular polygon definition
+     * @return {RegularPolygon}
+     */
+    static from (definition) {
+        return new RegularPolygon(definition.position, definition.nbSides, definition.radius, definition.options);
+    }
+
+    /**
      * Return positions at regular intervals around a circle
      * @param {Number} nbPoints - Number of points
      * @param {Number} radius - Distance from origin
