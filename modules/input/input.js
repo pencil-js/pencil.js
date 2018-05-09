@@ -45,7 +45,7 @@ export default class Input extends Container {
 
     /**
      * Set the value of the input
-     * @param {*} value -
+     * @param {*} value - Any value
      */
     set value (value) {
         throw new ReferenceError(`Unimplemented set value function in ${this.constructor.name}`);

@@ -309,6 +309,11 @@ export default class Container extends EventEmitter {
         };
     }
 
+    /**
+     * Keyword to mean itself
+     * @return {String}
+     * @const
+     */
     static get ITSELF () {
         return "itself";
     }

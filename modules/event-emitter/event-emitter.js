@@ -1,6 +1,7 @@
 
 /**
  * Able to listen and fire events
+ * @abstract
  * @class
  */
 export default class EventEmitter {
