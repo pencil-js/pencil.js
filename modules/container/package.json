@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/container",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Simple container for Pencil.js package.",
   "main": "container.js",
   "files": [],
@@ -16,10 +16,10 @@
     "wrapper"
   ],
   "dependencies": {
-    "@pencil.js/base-event": "^0.2.0",
-    "@pencil.js/event-emitter": "^0.7.0",
-    "@pencil.js/math": "^0.7.1",
-    "@pencil.js/position": "^0.7.1",
+    "@pencil.js/base-event": "^0.8.0",
+    "@pencil.js/event-emitter": "^0.8.0",
+    "@pencil.js/math": "^0.8.0",
+    "@pencil.js/position": "^0.8.0",
     "stable": "^0.1.7"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/circle",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Circle shape for Pencil.js package.",
   "main": "circle.js",
   "files": [],
@@ -16,8 +16,8 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/arc": "^0.7.1",
-    "@pencil.js/component": "^0.7.1"
+    "@pencil.js/arc": "^0.8.0",
+    "@pencil.js/component": "^0.8.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

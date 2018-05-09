@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/vector",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Vector in 2D space Pencil.js package.",
   "main": "vector.js",
   "files": [],
@@ -16,7 +16,7 @@
     "2d"
   ],
   "dependencies": {
-    "@pencil.js/position": "^0.7.1"
+    "@pencil.js/position": "^0.8.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
