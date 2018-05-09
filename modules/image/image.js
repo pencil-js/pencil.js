@@ -17,19 +17,20 @@ export default class Image extends Rectangle {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position, url, width = null, height = null, options) {
-        let realHeight = height;
-        let realOptions = options;
-        if (typeof width === "object") {
-            realOptions = width;
-        }
-        else if (typeof realHeight === "object") {
-            realOptions = height;
-            realHeight = width;
-        }
-        super(position, width, realHeight, realOptions);
+        super(position, width, height, options);
 
+        /**
+         * @type {HTMLImageElement}
+         */
         this.file = null;
+        /**
+         * @type {Boolean}
+         */
         this.isLoaded = false;
+        /**
+         * @type {Number}
+         */
+        this.ratio = 0;
         /**
          * @type {String}
          * @private
@@ -50,8 +51,15 @@ export default class Image extends Rectangle {
             Image.load(url).then((img) => {
                 this.file = img;
                 this.isLoaded = true;
+                this.ratio = img.width / img.height;
                 if (this.width === null && this.height === null) {
                     this.restoreSize();
+                }
+                else if (this.width === null) {
+                    this.width = this.height * this.ratio;
+                }
+                else if (this.height === null) {
+                    this.height = this.width / this.ratio;
                 }
                 this.fire(new BaseEvent(this, "load"));
             });
