@@ -56,10 +56,19 @@ export default class Component extends Container {
 
     /**
      * Define if is hover a position
+     * @param {Position} position - Any position
+     * @param {CanvasRenderingContext2D} ctx -
      * @returns {Boolean}
      */
-    isHover () {
-        return this.options.shown;
+    isHover (position, ctx) {
+        if (!this.options.shown) {
+            return false;
+        }
+
+        const path = new Path2D();
+        this.trace(path);
+        const relative = position.clone().subtract(this.position);
+        return ctx.isPointInPath(path, relative.x, relative.y);
     }
 
     /**

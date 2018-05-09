@@ -1,6 +1,5 @@
 import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
-import { truncate } from "@pencil.js/math";
 
 /**
  * Basic rectangle
@@ -57,20 +56,6 @@ export default class Rectangle extends Component {
             }
         }
         return position;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    isHover (position) {
-        const originPos = this.getOriginPosition();
-        const x = truncate(this.position.x - originPos.x);
-        const y = truncate(this.position.y - originPos.y);
-        const width = truncate(this.width);
-        const height = truncate(this.height);
-        return super.isHover(position) &&
-            x <= position.x && position.x <= x + width &&
-            y <= position.y && position.y <= y + height;
     }
 
     /**

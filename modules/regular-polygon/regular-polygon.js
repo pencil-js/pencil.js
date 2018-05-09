@@ -41,13 +41,6 @@ export default class RegularPolygon extends Polygon {
     }
 
     /**
-     * @inheritDoc
-     */
-    isHover (position) {
-        return position.distance(this.position) < this.radius && super.isHover(position);
-    }
-
-    /**
      * Return positions at regular intervals around a circle
      * @param {Number} nbPoints - Number of points
      * @param {Number} radius - Distance from origin

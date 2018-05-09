@@ -1,4 +1,7 @@
 import Container from "@pencil.js/container";
+import Rectangle from "@pencil.js/rectangle";
+import Component from "@pencil.js/component";
+import BaseEvent from "@pencil.js/base-event";
 
 /**
  * Abstract Input class
@@ -15,6 +18,22 @@ export default class Input extends Container {
     constructor (position, options) {
         super(position, options);
 
+        this.background = new Rectangle(undefined, 0, 0, {
+            fill: this.options.background,
+            stroke: this.options.border,
+            strokeWidth: 2,
+            cursor: Component.cursors.pointer,
+        });
+        this.add(this.background);
+
+        this.background.on("hover", () => {
+            this.background.options.fill = this.options.hover;
+        }).on("leave", () => {
+            this.background.options.fill = this.options.background;
+        }).on("click", (event) => {
+            this.click(event.position.clone().subtract(this.position));
+        });
+
         this.on("attach", () => this.value = this.options.value, true);
     }
     /**
@@ -30,6 +49,25 @@ export default class Input extends Container {
      */
     set value (value) {
         throw new ReferenceError(`Unimplemented set value function in ${this.constructor.name}`);
+    }
+
+    /**
+     * Action to execute on click
+     * @param {Position} position - Relative position of the click
+     */
+    click (position) {
+        this.fire(new BaseEvent(this, "change"));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    isHover (position, ctx) {
+        if (!this.options.shown) {
+            return false;
+        }
+
+        return this.background.isHover(position.clone().add(this.position), ctx);
     }
 
     /**

@@ -177,27 +177,28 @@ export default class Container extends EventEmitter {
     /**
      * Find the target at a position
      * @param {Position} position - Any position
+     * @param {CanvasRenderingContext2D} ctx - Drawing context to apply paths
      * @return {Container}
      */
-    getTarget (position) {
+    getTarget (position, ctx) {
         const relativePosition = position.clone().subtract(this.position);
 
         let lastHovered = null;
         let lookup = this.children.length - 1;
         while (!lastHovered && lookup >= 0) {
-            lastHovered = this.children[lookup].getTarget(relativePosition);
+            lastHovered = this.children[lookup].getTarget(relativePosition, ctx);
             --lookup;
         }
 
         if (lastHovered) {
             if (lastHovered.options.zIndex < 0 && this === lastHovered.parent) {
-                return (this.isHover(position) && this) || lastHovered;
+                return (this.isHover(position, ctx) && this) || lastHovered;
             }
 
             return lastHovered;
         }
 
-        return (this.isHover(position) && this) || null;
+        return (this.isHover(position, ctx) && this) || null;
     }
 
     /**

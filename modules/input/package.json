@@ -16,7 +16,10 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/container": "^0.7.1"
+    "@pencil.js/base-event": "^0.2.0",
+    "@pencil.js/component": "^0.7.1",
+    "@pencil.js/container": "^0.7.1",
+    "@pencil.js/rectangle": "^0.7.1"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

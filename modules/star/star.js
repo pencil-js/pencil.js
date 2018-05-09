@@ -23,11 +23,4 @@ export default class Star extends RegularPolygon {
 
         this.bevelRatio = bevelRatio;
     }
-
-    /**
-     * @inheritDoc
-     */
-    isHover (position) {
-        return position.distance(this.position) < (this.radius * this.bevelRatio) || super.isHover(position);
-    }
 }

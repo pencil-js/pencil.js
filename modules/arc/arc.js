@@ -1,7 +1,5 @@
 import Component from "@pencil.js/component";
 import Line from "@pencil.js/line";
-import Position from "@pencil.js/position";
-import Vector from "@pencil.js/vector";
 import { truncate, radianCircle } from "@pencil.js/math";
 
 /**
@@ -38,18 +36,6 @@ export default class Arc extends Component {
         const endAngle = (this.endAngle + correction) * radianCircle;
         path.arc(0, 0, radius, startAngle, endAngle);
         return this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    isHover (position) {
-        // TODO: does it make sens to hover an arc ?
-        const radius = truncate(this.radius);
-        const top = new Position(0, -radius);
-        const flatPart = new Vector(top.rotate(this.startAngle), top.rotate(this.endAngle));
-        return super.isHover(position) &&
-            this.position.distance(position) <= radius && position.isOnSameSide(this.position, flatPart);
     }
 
     /**

@@ -98,11 +98,13 @@ export default class Path extends Component {
     }
 
     /**
-     * // Fixme: Should work like Polygon.isHover and ask every instructions for intersection
-     * Can't hover an open path
-     * @return {Boolean}
+     * @inheritDoc
      */
-    isHover () { // eslint-disable-line class-methods-use-this
+    isHover (position, ctx) {
+        if (this.isClosed) {
+            return super.isHover(position, ctx);
+        }
+
         return false;
     }
 

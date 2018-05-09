@@ -118,7 +118,7 @@ export default class Scene extends Container {
                 const eventPosition = (new Position(event.clientX, event.clientY))
                     .subtract(this.containerPosition)
                     .add(window.scrollX, window.scrollY);
-                const target = this.getTarget(eventPosition);
+                const target = this.getTarget(eventPosition, this.ctx);
                 if (target) {
                     target.fire(new MouseEvent(target, eventName, eventPosition));
                     listeners[eventName](target, eventPosition, event);

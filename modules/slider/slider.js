@@ -3,10 +3,9 @@ import Circle from "@pencil.js/circle";
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
 import Input from "@pencil.js/input";
-import { constrain } from "@pencil.js/math";
 import Position from "@pencil.js/position";
-import Rectangle from "@pencil.js/rectangle";
 import Vector from "@pencil.js/vector";
+import { constrain } from "@pencil.js/math";
 
 /**
  * Slider class
@@ -16,43 +15,36 @@ import Vector from "@pencil.js/vector";
 export default class Slider extends Input {
     /**
      * Slider constructor
-     * @param {PositionDefinition} position -
+     * @param {PositionDefinition} position - Any position
      * @param {SliderOptions} options -
      */
     constructor (position, options) {
         super(position, options);
 
-        const sliderHeight = Slider.HEIGHT;
-        this.constrainer = new Vector(new Position(0, 0), new Position(this.width - sliderHeight, 0));
+        this.background.width = this.width;
+        this.background.height = Slider.HEIGHT;
 
-        this.background = new Rectangle(undefined, this.width, sliderHeight, {
-            fill: this.options.background,
-            stroke: this.options.border,
-            strokeWidth: 2,
-            cursor: Component.cursors.pointer,
-        });
-        this.background.on("hover", () => {
-            this.background.options.fill = this.options.hover;
-        }).on("leave", () => {
-            this.background.options.fill = this.options.background;
-        }).on("click", (event) => {
-            this.handle.position.set(event.position.x - this.position.x - (sliderHeight / 2), 0)
-                .constrain(this.constrainer);
-            this.fire(new BaseEvent(this, "change"));
-        });
-        this.add(this.background);
-
-        const container = new Container(new Position(sliderHeight / 2, sliderHeight / 2));
-        this.add(container);
-        this.handle = new Circle(new Position(0, 0), (sliderHeight - 2) / 2, {
+        const container = new Container(new Position(Slider.HEIGHT / 2, Slider.HEIGHT / 2));
+        this.background.add(container);
+        this.handle = new Circle(new Position(0, 0), (Slider.HEIGHT - 2) / 2, {
             fill: this.options.fill,
             cursor: Component.cursors.ewResize,
         });
         container.add(this.handle);
+        this.constrainer = new Vector(new Position(0, 0), new Position(this.width - Slider.HEIGHT, 0));
         this.handle.draggable({
             constrain: this.constrainer,
         });
         this.handle.on("drag", () => this.fire(new BaseEvent(this, "change")), true);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    click (position) {
+        this.handle.position.set(position.x - (Slider.HEIGHT / 2), 0)
+            .constrain(this.constrainer);
+        super.click();
     }
 
     /**

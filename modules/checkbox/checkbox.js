@@ -1,8 +1,7 @@
-import Square from "@pencil.js/square";
-import Input from "@pencil.js/input";
-import BaseEvent from "@pencil.js/base-event";
-import Position from "@pencil.js/position";
 import Component from "@pencil.js/component";
+import Input from "@pencil.js/input";
+import Position from "@pencil.js/position";
+import Square from "@pencil.js/square";
 
 /**
  * Checkbox class
@@ -18,13 +17,8 @@ export default class Checkbox extends Input {
     constructor (position, options) {
         super(position, options);
 
-        this.background = new Square(undefined, this.options.size, {
-            fill: this.options.background,
-            stroke: this.options.border,
-            strokeWidth: 2,
-            cursor: Component.cursors.pointer,
-        });
-        this.add(this.background);
+        this.background.width = this.options.size;
+        this.background.height = this.options.size;
 
         const margin = this.options.size * Checkbox.MARGIN;
         this.fill = new Square(new Position(margin, margin), this.options.size - (2 * margin), {
@@ -33,15 +27,14 @@ export default class Checkbox extends Input {
             cursor: Component.cursors.pointer,
         });
         this.background.add(this.fill);
+    }
 
-        this.background.on("hover", () => {
-            this.background.options.fill = this.options.hover;
-        }).on("leave", () => {
-            this.background.options.fill = this.options.background;
-        }).on("click", () => {
-            this.toggle();
-            this.fire(new BaseEvent(this, "change"));
-        });
+    /**
+     * @inheritDoc
+     */
+    click () {
+        this.toggle();
+        super.click();
     }
 
     /**

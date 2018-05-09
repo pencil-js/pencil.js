@@ -1,6 +1,5 @@
 import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
-import Vector from "@pencil.js/vector";
 
 /**
  * Polygon class
@@ -38,24 +37,5 @@ export default class Polygon extends Component {
         });
         path.closePath();
         return this;
-    }
-
-    /**
-     * @inheritDoc
-     * FIXME
-     */
-    isHover (position) {
-        if (super.isHover(position)) {
-            const testVector = new Vector(position.clone(), position.clone().add(Infinity, 0));
-            let intersection = 0;
-            for (let i = 1, l = this.points.length; i < l; ++i) {
-                if (testVector.intersect(new Vector(this.points[i - 1], this.points[i]))) {
-                    ++intersection;
-                }
-            }
-            return Boolean(intersection % 2);
-        }
-
-        return false;
     }
 }

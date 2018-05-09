@@ -1,6 +1,5 @@
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
-import Rectangle from "@pencil.js/rectangle";
 import Position from "@pencil.js/position";
 import textDirection from "text-direction";
 
@@ -113,7 +112,13 @@ export default class Text extends Component {
      * @inheritDoc
      */
     isHover (position) {
-        return Rectangle.prototype.isHover.call(this, position);
+        if (!this.options.shown) {
+            return false;
+        }
+
+        const { width, height } = this.getMeasures();
+        return this.position.x <= position.x && position.x <= this.position.x + width &&
+            this.position.y <= position.y && position.y <= this.position.y + height;
     }
 
     /**
