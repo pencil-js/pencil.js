@@ -17,7 +17,7 @@ export const constrain = (value, min, max) => Math.min(Math.max(value, min), max
  * @param {Number} number2 - Any number
  * @returns {Boolean}
  */
-export const equal = (number1, number2) => Math.abs(number1 - number2) < Number.EPSILON;
+export const equals = (number1, number2) => Math.abs(number1 - number2) < Number.EPSILON;
 
 /**
  * Return a random number between limits

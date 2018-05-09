@@ -1,4 +1,4 @@
-import { constrain, equal, radianCircle } from "@pencil.js/math";
+import { constrain, equals, radianCircle, truncate } from "@pencil.js/math";
 
 /**
  * Pair of value in 2d space
@@ -46,8 +46,8 @@ export default class Position {
      * @param {Position} position - Any position
      * @return {Boolean}
      */
-    equal (position) {
-        return equal(this.x, position.x) && equal(this.y, position.y);
+    equals (position) {
+        return equals(this.x, position.x) && equals(this.y, position.y);
     }
 
     /**

@@ -1,6 +1,6 @@
 import Line from "@pencil.js/line";
 import Position from "@pencil.js/position";
-import { equal } from "@pencil.js/math";
+import { equals } from "@pencil.js/math";
 
 /**
  * Spline class
@@ -29,7 +29,7 @@ export default class Spline extends Line {
      * @return {Spline} Itself
      */
     trace (path) {
-        if (this.points.length < 3 || equal(this.tension, 0)) {
+        if (this.points.length < 3 || equals(this.tension, 0)) {
             super.trace(path);
         }
         else {

@@ -29,14 +29,14 @@ test("Position set values", () => {
     expect(pos.y).toBe(1);
 });
 
-test("Position clone and equal", () => {
+test("Position clone and equals", () => {
     const pos = new Position(42, 55.55);
     const clone = pos.clone();
 
     expect(clone).not.toBe(pos);
     expect(pos.x).toBe(clone.x);
     expect(pos.y).toBe(clone.y);
-    expect(pos.equal(clone)).toBe(true);
+    expect(pos.equals(clone)).toBe(true);
 });
 
 describe("Position calculations", () => {

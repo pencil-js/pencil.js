@@ -16,11 +16,11 @@ constrain(99, 0, 10); // 10
 | max | ``Number`` | Required | Maximal limit for the value |
 
 
-### equal
+### equals
 Determine if two number can considered equals accounting for JS precision.
 
 ```js
-equal(0.2+0.1, 0.3); // true
+equals(0.2+0.1, 0.3); // true
 ```
 
 | Name | Type | Default | Comment |

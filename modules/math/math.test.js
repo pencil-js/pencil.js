@@ -8,12 +8,12 @@ test("Math constrain", () => {
     expect(M.constrain(-20, -5, 5)).toBe(-5);
 });
 
-test("Math equal", () => {
-    expect(M.equal(0, 0)).toBe(true);
-    expect(M.equal(1, 9)).toBe(false);
-    expect(M.equal(0.1 + 0.2, 0.3)).toBe(true);
-    expect(M.equal(0.6 / 6, 0.1)).toBe(true);
-    expect(M.equal(Math.PI, 3.14159)).toBe(false);
+test("Math equals", () => {
+    expect(M.equals(0, 0)).toBe(true);
+    expect(M.equals(1, 9)).toBe(false);
+    expect(M.equals(0.1 + 0.2, 0.3)).toBe(true);
+    expect(M.equals(0.6 / 6, 0.1)).toBe(true);
+    expect(M.equals(Math.PI, 3.14159)).toBe(false);
 });
 
 test("Math random", () => {

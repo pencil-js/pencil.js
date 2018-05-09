@@ -51,8 +51,8 @@ export default class Vector {
      * @param {Vector} vector - Any vector
      * @return {Boolean}
      */
-    equal (vector) {
-        return this.start.equal(vector.start) && this.end.equal(vector.end);
+    equals (vector) {
+        return this.start.equals(vector.start) && this.end.equals(vector.end);
     }
 
     /**
