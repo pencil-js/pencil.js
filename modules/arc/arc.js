@@ -1,6 +1,6 @@
 import Component from "@pencil.js/component";
 import Line from "@pencil.js/line";
-import { truncate, radianCircle } from "@pencil.js/math";
+import { radianCircle } from "@pencil.js/math";
 
 /**
  * Arc class

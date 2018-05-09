@@ -1,7 +1,6 @@
 /* global test expect jest */
 
 import Position from "@pencil.js/position";
-import { truncate } from "@pencil.js/math";
 import Rectangle from "./rectangle";
 
 test("Rectangle creation and trace", () => {
@@ -17,7 +16,7 @@ test("Rectangle creation and trace", () => {
     };
     rect.trace(ctx);
     expect(ctx.rect.mock.calls.length).toBe(1);
-    expect(ctx.rect.mock.calls[0]).toEqual([0, 0, truncate(w), truncate(h)]);
+    expect(ctx.rect.mock.calls[0]).toEqual([0, 0, w, h]);
 });
 
 
