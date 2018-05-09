@@ -11,10 +11,10 @@ export default class RegularPolygon extends Polygon {
      * Regular polygon constructor
      * @param {PositionDefinition} position - Center of the polygon
      * @param {Number} nbSides - Number of sides
-     * @param {Number} radius - Distance between center and outer points
+     * @param {Number} [radius=0] - Distance between center and outer points
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position = new Position(), nbSides, radius, options) {
+    constructor (position = new Position(), nbSides, radius = 0, options) {
         super(RegularPolygon.getRotatingPoint(nbSides, radius), options);
 
         /**

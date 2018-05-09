@@ -17,7 +17,7 @@ export default class Star extends RegularPolygon {
     constructor (position, outerRadius, nbBranches = 5, bevelRatio = 0.5, options) {
         super(position, nbBranches, outerRadius, options);
 
-        const innerRadius = outerRadius * bevelRatio;
+        const innerRadius = this.radius * bevelRatio;
         const innerPoints = RegularPolygon.getRotatingPoint(nbBranches, innerRadius, 0.5 / nbBranches);
         innerPoints.forEach((point, index) => this.points.splice((index * 2) + 1, 0, point));
 
