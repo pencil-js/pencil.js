@@ -156,7 +156,7 @@ export default class Text extends Component {
      * @returns {String}
      */
     get hash () {
-        return btoa(unescape(encodeURIComponent([this.options.font, this.options.fontSize, this.text].join(","))));
+        return btoa(encodeURIComponent([this.options.font, this.options.fontSize, this.text].join(",")));
     }
 
     /**
