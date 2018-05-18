@@ -61,6 +61,8 @@ export default class Image extends Rectangle {
                     this.height = this.width / this.ratio;
                 }
                 this.fire(new BaseEvent(this, "load"));
+            }).catch(() => {
+                this.fire(new BaseEvent(this, "error"));
             });
         }
     }
