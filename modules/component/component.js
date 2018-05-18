@@ -68,7 +68,7 @@ export default class Component extends Container {
         const path = new Path2D();
         this.trace(path);
         const relative = position.clone().subtract(this.position);
-        return ctx.isPointInPath(path, relative.x, relative.y);
+        return ctx.isPointInPath(path, relative.x, relative.y) && ctx.isPointInStroke(path, relative.x, relative.y);
     }
 
     /**
