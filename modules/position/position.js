@@ -11,25 +11,29 @@ export default class Position {
      * @param {Number} y - Horizontal component
      */
     constructor (x = 0, y = 0) {
-        this.x = x;
-        this.y = y;
+        this.x = +x;
+        this.y = +y;
     }
 
     /**
      * Define this position value
-     * @param {Position|Number} position - Horizontal position or another position
-     * @param {Number} y - Vertical position if position is a number
+     * @param {PositionDefinition|Number} definition - Horizontal position or another position
+     * @param {Number} [diffY] - Vertical position if "definition" is a number
      * @return {Position} Itself
      */
-    set (position, y) {
-        if (position instanceof Position) {
-            this.x = position.x;
-            this.y = position.y;
+    set (definition, diffY) {
+        let x;
+        let y;
+        try {
+            const position = Position.from(definition);
+            ({ x, y } = position);
         }
-        else if (position !== undefined && y !== undefined) {
-            this.x = position;
-            this.y = y;
+        catch (error) {
+            x = +definition;
+            y = diffY === undefined ? x : +diffY;
         }
+        this.x = x;
+        this.y = y;
         return this;
     }
 
@@ -43,84 +47,87 @@ export default class Position {
 
     /**
      * Determine if is equal to another position
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} definition - Any position
      * @return {Boolean}
      */
-    equals (position) {
+    equals (definition) {
+        const position = Position.from(definition);
         return equals(this.x, position.x) && equals(this.y, position.y);
     }
 
     /**
      * Apply an operation to this position values
      * @param {Function} operation - Function to apply on value
-     * @param {Position|Number} position - Another position or a number
-     * @param {Number} [diffY] - Value to apply on "y" if "position" is a number
+     * @param {PositionDefinition|Number} definition - Another position or a number
+     * @param {Number} [diffY] - Value to apply on "y" if "definition" is a number
      * @return {Position} Itself
      */
-    calc (operation, position, diffY) {
+    calc (operation, definition, diffY) {
         let x = 0;
         let y = 0;
-        if (position instanceof Position) {
+        try {
+            const position = Position.from(definition);
             x = operation(this.x, position.x);
             y = operation(this.y, position.y);
         }
-        else if (position !== undefined) {
-            x = operation(this.x, position);
-            y = operation(this.y, diffY === undefined ? position : diffY);
+        catch (error) {
+            x = operation(this.x, +definition);
+            y = operation(this.y, diffY === undefined ? +definition : +diffY);
         }
         return this.set(x, y);
     }
 
     /**
      * Add another position or number
-     * @param {Position|Number} position - Another position or a number
+     * @param {PositionDefinition|Number} definition - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
      * @return {Position} Itself
      */
-    add (position, y) {
-        return this.calc((a, b) => a + b, position, y);
+    add (definition, y) {
+        return this.calc((a, b) => a + b, definition, y);
     }
 
     /**
      * Subtract another position or number
-     * @param {Position|Number} position - Another position or a number
+     * @param {PositionDefinition|Number} definition - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
      * @return {Position} Itself
      */
-    subtract (position, y) {
-        return this.calc((a, b) => a - b, position, y);
+    subtract (definition, y) {
+        return this.calc((a, b) => a - b, definition, y);
     }
 
     /**
      * Multiply by another position or number
-     * @param {Position|Number} position - Another position or a number
+     * @param {PositionDefinition|Number} definition - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
      * @return {Position} Itself
      */
-    multiply (position, y) {
-        return this.calc((self, other) => self * other, position, y);
+    multiply (definition, y) {
+        return this.calc((self, other) => self * other, definition, y);
     }
 
     /**
      * Divide by another position or number
-     * @param {Position|Number} position - Another position or a number
+     * @param {PositionDefinition|Number} definition - Another position or a number
      * @param {Number} [y] - Value for "y" if "position" is a number
      * @return {Position} Itself
      */
-    divide (position, y) {
-        return this.calc((self, other) => self / other, position, y);
+    divide (definition, y) {
+        return this.calc((self, other) => self / other, definition, y);
     }
 
     /**
      * Rotate the position around the origin clockwise
      * @param {Number} [angle=0] - Angle of rotation in ratio of full circle
      * (0 means no rotation, 1 means go full circle back to same position)
-     * @param {Position} [origin=new Position()] - Point of origin to rotate around (by default (0, 0))
+     * @param {PositionDefinition} [originDefinition] - Point of origin to rotate around (by default (0, 0))
      * @return {Position} Itself
      */
-    rotate (angle = 0, origin = new Position()) {
+    rotate (angle = 0, originDefinition) {
         const { cos, sin } = Math;
         const degree = angle * radianCircle;
+        const origin = Position.from(originDefinition);
         const clone = this.clone().subtract(origin);
         const x = (clone.x * cos(degree)) - (clone.y * sin(degree));
         const y = (clone.y * cos(degree)) + (clone.x * sin(degree));
@@ -140,40 +147,44 @@ export default class Position {
 
     /**
      * Move the position towards another by a ratio
-     * @param {Position} position - Any other position
+     * @param {PositionDefinition} definition - Any other position
      * @param {Function|Number} ratio - Ratio of distance to move, 0 mean no change, 1 mean arrive at position
      * @return {Position} Itself
      */
-    lerp (position, ratio) {
-        const difference = position.clone().subtract(this).multiply(typeof ratio === "function" ? ratio() : ratio);
+    lerp (definition, ratio) {
+        const difference = Position.from(definition)
+            .clone().subtract(this).multiply(typeof ratio === "function" ? ratio() : ratio);
         return this.add(difference);
     }
 
     /**
      * Compute distance with another position
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} definition - Any position
      * @return {Number}
      */
-    distance (position) {
+    distance (definition) {
+        const position = Position.from(definition);
         return Math.hypot(position.x - this.x, position.y - this.y);
     }
 
     /**
      * Cross product
-     * @param {Position} position - Another position
+     * @param {PositionDefinition} definition - Another position
      * @return {Number}
      */
-    crossProduct (position) {
+    crossProduct (definition) {
+        const position = Position.from(definition);
         return (this.x * position.y) - (position.x * this.y);
     }
 
     /**
      * Define if this is on the same side of a vector as another position
-     * @param {Position} position - Another position
+     * @param {PositionDefinition} definition - Another position
      * @param {Vector} vector - Any vector
      * @return {Boolean}
      */
-    isOnSameSide (position, vector) {
+    isOnSameSide (definition, vector) {
+        const position = Position.from(definition);
         const { sign } = Math;
         const thisMoved = this.clone().subtract(vector.start);
         const positionMoved = position.clone().subtract(vector.start);
@@ -182,8 +193,8 @@ export default class Position {
     }
 
     /**
-     *
-     * @return {Array}
+     * Return a JSON ready Position definition
+     * @return {[Number, Number]}
      */
     toJSON () {
         return [truncate(this.x), truncate(this.y)];
@@ -198,7 +209,7 @@ export default class Position {
      * @typedef {Position|Array|AbstractPosition} PositionDefinition
      */
     /**
-     * Create a Position from a generic definition
+     * Create a Position from a generic definition or do nothing if already a Position
      * @param {PositionDefinition} [definition] - Position definition
      * @return {Position}
      */
@@ -213,18 +224,18 @@ export default class Position {
             return new Position(definition.x, definition.y);
         }
 
-        throw new TypeError(`Unexpected type for position [${typeof position}]`);
+        throw new TypeError(`Unexpected type for position [${typeof position}].`);
     }
 
     /**
      * Compute the average for a set of positions
-     * @param {...Position} position -
+     * @param {...PositionDefinition} definitions -
      * @return {Position}
      */
-    static average (...position) {
+    static average (...definitions) {
         let result = new Position();
-        position.forEach(one => result = result.add(one));
-        const nbPositions = position.length;
+        definitions.forEach(one => result = result.add(Position.from(one)));
+        const nbPositions = definitions.length;
         return result.divide(nbPositions);
     }
 }

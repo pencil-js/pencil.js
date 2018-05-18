@@ -48,10 +48,11 @@ export default class Vector {
 
     /**
      * Determine if is equal to another vector
-     * @param {Vector} vector - Any vector
+     * @param {VectorDefinition} definition - Any vector
      * @return {Boolean}
      */
-    equals (vector) {
+    equals (definition) {
+        const vector = Vector.from(definition);
         return this.start.equals(vector.start) && this.end.equals(vector.end);
     }
 
@@ -69,7 +70,7 @@ export default class Vector {
      * @return {Vector} Itself
      */
     add (modification) {
-        const toAdd = modification instanceof Vector ? modification.getDelta() : modification;
+        const toAdd = modification.getDelta ? modification.getDelta() : modification;
         this.end.add(toAdd);
         return this;
     }
@@ -80,7 +81,7 @@ export default class Vector {
      * @return {Vector} Itself
      */
     translate (modification) {
-        const toAdd = modification instanceof Vector ? modification.getDelta() : modification;
+        const toAdd = modification.getDelta ? modification.getDelta() : modification;
         this.start.add(toAdd);
         this.end.add(toAdd);
         return this;
@@ -88,16 +89,17 @@ export default class Vector {
 
     /**
      * Define if this vector intersect another
-     * @param {Vector} vector - Any vector
+     * @param {VectorDefinition} definition - Any vector
      * @return {Boolean}
      */
-    intersect (vector) {
+    intersect (definition) {
+        const vector = Vector.from(definition);
         return !(this.start.isOnSameSide(this.end, vector) || vector.start.isOnSameSide(vector.end, this));
     }
 
     /**
-     *
-     * @return {Array}
+     * Return a JSON ready Vector definition
+     * @return {[[Number, Number], [Number, Number]]}
      */
     toJSON () {
         return [
