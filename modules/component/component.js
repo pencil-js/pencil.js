@@ -1,4 +1,5 @@
 import Container from "@pencil.js/container";
+import {radianCircle} from "../math";
 
 /**
  * Abstract class for visual component
@@ -65,10 +66,19 @@ export default class Component extends Container {
             return false;
         }
 
+        const relative = position.clone().subtract(this.position);
+        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationAnchor);
+
         const path = new Path2D();
         this.trace(path);
-        const relative = position.clone().subtract(this.position);
-        return ctx.isPointInPath(path, relative.x, relative.y) && ctx.isPointInStroke(path, relative.x, relative.y);
+        let result = ctx.isPointInPath(path, rotated.x, rotated.y) && ctx.isPointInStroke(path, rotated.x, rotated.y);
+
+        if (this.options.clip) {
+            const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
+            result = result && clipper.isHover(relative, ctx);
+        }
+
+        return result;
     }
 
     /**
