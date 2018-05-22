@@ -1,5 +1,5 @@
 const scene = new Pencil.Scene(wrapper, {
-    fill: "#ffdaf8",
+    fill: "#b3f0ff",
 });
 
 const width = 100;
@@ -11,8 +11,8 @@ for (let i = 0; i < 5; ++i) {
         Pencil.Math.random(scene.height - (height * 2)),
     );
     const rectangle = new Pencil.Rectangle(randomPosition, width, height, {
-        fill: "#49a8eb",
-        stroke: "gold",
+        fill: "#ebc31b",
+        stroke: "teal",
         strokeWidth: 5,
         alpha: 0.5,
     });

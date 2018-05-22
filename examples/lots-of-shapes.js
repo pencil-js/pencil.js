@@ -32,7 +32,7 @@ scene.add(spline);
 const text = new Pencil.Text(spline.position.clone().add(0, 70), "Text");
 scene.add(text);
 
-image = new Pencil.Image(text.position.clone().add(0, 40), "./megusta.png");
+image = new Pencil.Image(text.position.clone().add(0, 40), "./res/megusta.png");
 scene.add(image);
 
 // And more ...
