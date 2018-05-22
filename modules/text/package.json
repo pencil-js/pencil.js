@@ -16,6 +16,7 @@
     "writing"
   ],
   "dependencies": {
+    "@pencil.js/base-event": "^0.8.0",
     "@pencil.js/component": "^0.8.0",
     "@pencil.js/container": "^0.8.0",
     "@pencil.js/position": "^0.8.0",

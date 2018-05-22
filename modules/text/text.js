@@ -1,3 +1,4 @@
+import BaseEvent from "@pencil.js/base-event";
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
 import Position from "@pencil.js/position";
@@ -28,6 +29,18 @@ export default class Text extends Component {
          * @private
          */
         this._cachedMeasures = {};
+
+        // if font is an URL
+        const isReadyEvent = new BaseEvent(this, "ready");
+        if (/^(\w+:)?\/\//.test(this.options.font)) {
+            Text.load(this.options.font).then((name) => {
+                this.options.font = name;
+                this.fire(isReadyEvent);
+            });
+        }
+        else {
+            this.fire(isReadyEvent);
+        }
     }
 
     /**
@@ -222,6 +235,22 @@ export default class Text extends Component {
      */
     static from (definition) {
         return new Text(definition.position, definition.text, definition.options);
+    }
+
+    /**
+     * Load a font URL
+     * @param {String} url - URL to the font file
+     * @return {Promise<String>} Promise for the generated font-family
+     */
+    static load (url) {
+        if (Array.isArray(url)) {
+            return Promise.all(url.map(singleUrl => Text.load(singleUrl)));
+        }
+
+        const name = url.replace(/\W/g, "-");
+        const fontFace = new FontFace(name, `url(${url})`);
+        document.fonts.add(fontFace);
+        return fontFace.load().then(() => name);
     }
 
     /**
