@@ -14,13 +14,13 @@ for (let i = 0; i < 5; ++i) {
         fill: "#ebc31b",
         stroke: "teal",
         strokeWidth: 5,
-        alpha: 0.5,
+        opacity: 0.5,
     });
     rectangle.draggable({
-        constrain: new Pencil.Vector(0, 0, scene.width - width, scene.height - height),
+        constrain: new Pencil.Vector([0, 0], [scene.width - width, scene.height - height]),
     });
-    rectangle.on("grab", () => rectangle.options.alpha = 1)
-        .on("drop", () => rectangle.options.alpha = 0.5);
+    rectangle.on("grab", () => rectangle.options.opacity = 1)
+        .on("drop", () => rectangle.options.opacity = 0.5);
     scene.add(rectangle);
 }
 
