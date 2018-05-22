@@ -1,3 +1,5 @@
+![Pencil.js logo](media/animated-logo.gif)
+
 # 🖉 Pencil.js
 [![dependencies Status](https://david-dm.org/GMartigny/pencil.js/status.svg)](https://david-dm.org/GMartigny/pencil.js)
 [![devDependencies Status](https://david-dm.org/GMartigny/pencil.js/dev-status.svg)](https://david-dm.org/GMartigny/pencil.js?type=dev)
