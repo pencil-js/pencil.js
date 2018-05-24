@@ -65,6 +65,30 @@ const Scene = require("@pencil.js/scene");
 Since today's web browser don't support module requirements yet, you need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
 
 
+## Purpose
+
+### Abstraction
+Drawing in a canvas is not trivial.
+First of all, the goal is to ease the use of canvas in a browser;
+allowing anyone to use it with its comprehensible syntax and extensible options.
+
+
+### OOP
+OOP is great, OOP is almighty, OOP saves lives !
+Others library exists, but none with a beautiful OOP syntax.
+It makes code look natural.
+
+
+### Modularity
+Splitting the whole code into modules make everything cleaner.
+It also allow you to grab only what you need or replace what you don't like.
+
+
+### Documentation
+A complete documentation goes a long way to help developers.
+All functions are assured to have a description and also typed arguments and returns.
+
+
 ## Examples
 ```js
 import Scene from "pencil.js"; // or "@pencil.js/scene"
@@ -122,39 +146,15 @@ Or read [the full documentation](documentation.md).
 
 ## Pitfalls
 
-### Naming
-Some module have the same name as some Javascript global (eg: Image, Math). Importing them without namespace will overrides these globals and lead to potential bugs.
-
-In any case, I recommend you use a namespace (eg: ``import Namespace from "pencil.js"``, ``import * as Namespace from "@pencil.js/math"``)
-
-
-### Performance
-Even if Pencil can draw thousand of shapes, it's not built around performance.
+### Scaling
+Even if Pencil.js can draw thousand of shapes, it's not built around performance nor memory management.
 If you want to code an efficient particle generator, try [Processing](https://processing.org/) instead.
 
-However, if you want a clean and easy to use syntax, be welcomed my friend.
+### Naming
+Some module have the same name as some Javascript global (eg: Image, Math).
+Importing them without namespace will overrides these globals and lead to potential bugs.
 
-
-## Purpose
-
-### Abstraction
-Drawing in a canvas is not trivial.
-First of all, the goal is to ease the use of canvas in a browser.
-
-
-### OOP
-OOP is great, OOP is almighty, OOP saves lives !
-Others library exists, but none with a beautiful OOP syntax.
-
-
-### Modularity
-Splitting the whole code into modules make everything looks cleaner.
-It also allow you to grab only what you need or replace what you don't like.
-
-
-### Documentation
-A complete documentation goes a long way to help devs.
-All functions are assured to have a description also typed arguments and returns.
+In any case, we recommend you use a namespace (eg: ``import Namespace from "pencil.js"``, ``import * as Namespace from "@pencil.js/math"``)
 
 
 ## Contributions
