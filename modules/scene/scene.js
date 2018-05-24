@@ -58,6 +58,10 @@ export default class Scene extends Container {
         /**
          * @type {Number}
          */
+        this.frameCount = 0;
+        /**
+         * @type {Number}
+         */
         this.lastTick = null;
 
         this._listenForEvents();
@@ -152,14 +156,17 @@ export default class Scene extends Container {
         }
         this.lastTick = now;
 
-        this.fire(new BaseEvent(this, "draw"));
         try {
-            return super.render(this.ctx);
+            super.render(this.ctx);
         }
         catch (error) {
             cancelAnimationFrame(animationId);
             throw error;
         }
+
+        ++this.frameCount;
+        this.fire(new BaseEvent(this, "draw"));
+        return this;
     }
 
     /**
