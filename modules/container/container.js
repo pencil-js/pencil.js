@@ -3,6 +3,8 @@ import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 import { radianCircle } from "@pencil.js/math";
 import stableSort from "stable";
+import OffScreenCanvas from "@pencil.js/offscreen-canvas";
+import Vector from "@pencil.js/vector";
 
 /**
  * Container class
@@ -285,6 +287,57 @@ export default class Container extends EventEmitter {
         }
 
         return false;
+    }
+
+    /**
+     * @callback ancestryCallback
+     * @param {Container} ancestor
+     */
+    /**
+     * Execute an action on every ancestor of this
+     * @param {ancestryCallback} callback - Function to execute on each ancestor
+     * @param {Container} [until=null] - Define a ancestor where to stop the climbing
+     */
+    climbAncestry (callback, until) {
+        if (this.parent && this.parent !== until) {
+            this.parent.climbAncestry(callback);
+        }
+
+        callback(this);
+    }
+
+    /**
+     * Returns a off-screen canvas painted with this
+     * @param {VectorDefinition} [vectorDefinition] - Define a range, use its width and height if available by default
+     * @return {OffScreenCanvas}
+     */
+    getTaintedCanvas (vectorDefinition) {
+        let vector;
+        if (vectorDefinition) {
+            vector = Vector.from(vectorDefinition);
+        }
+        else if (this.width && this.height) {
+            vector = new Vector(new Position(), [this.width, this.height]);
+        }
+        if (vector) {
+            const size = vector.getDelta();
+            const offScreen = new OffScreenCanvas(size.x, size.y);
+            offScreen.ctx.translate(-this.position.x, -this.position.y);
+            this.render(offScreen.ctx);
+            return offScreen;
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns an image of this container
+     * @param {VectorDefinition} [vectorDefinition] - Define a range for the image, use its width and height if available by default
+     * @return {HTMLImageElement}
+     */
+    toImg (vectorDefinition) {
+        const offScreen = this.getTaintedCanvas(vectorDefinition);
+        return offScreen ? offScreen.toImg() : null;
     }
 
     /**

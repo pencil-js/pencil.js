@@ -19,7 +19,9 @@
     "@pencil.js/base-event": "^0.8.0",
     "@pencil.js/event-emitter": "^0.8.0",
     "@pencil.js/math": "^0.8.0",
+    "@pencil.js/offscreen-canvas": "^0.1.0",
     "@pencil.js/position": "^0.8.0",
+    "@pencil.js/vector": "^0.8.0",
     "stable": "^0.1.7"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

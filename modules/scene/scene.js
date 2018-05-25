@@ -144,25 +144,27 @@ export default class Scene extends Container {
     /**
      * Draw the whole scene
      * @return {Scene} Itself
+     * @param {CanvasRenderingContext2D|OffScreenCanvas} [onto] -
      */
-    render () {
+    render (onto) {
         const animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this)) : null;
 
-        this.clear();
+        const context = (onto && onto.ctx) || onto || this.ctx;
+        this.clear(context);
+
+        try {
+            super.render(context);
+        }
+        catch (error) {
+            cancelAnimationFrame(animationId);
+            throw error;
+        }
 
         const now = performance.now();
         if (this.isLooped && this.lastTick) {
             this.fps = 1000 / (now - this.lastTick);
         }
         this.lastTick = now;
-
-        try {
-            super.render(this.ctx);
-        }
-        catch (error) {
-            cancelAnimationFrame(animationId);
-            throw error;
-        }
 
         ++this.frameCount;
         this.fire(new BaseEvent(this, "draw"));
@@ -179,12 +181,13 @@ export default class Scene extends Container {
 
     /**
      * Erase everything on scene
+     * @param {CanvasRenderingContext2D} [context=this.ctx] -
      */
-    clear () {
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    clear (context = this.ctx) {
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         if (this.options.fill) {
-            this.ctx.fillStyle = this.options.fill;
-            this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+            context.fillStyle = this.options.fill;
+            context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         }
     }
 
@@ -218,31 +221,6 @@ export default class Scene extends Container {
     show () {
         super.show();
         this.ctx.canvas.style.visibility = "";
-    }
-
-    /**
-     * Returns an image from the scene
-     * @param {Vector} [vector] - Define a range or the scene for the image
-     * @return {HTMLImageElement}
-     */
-    toImg (vector) {
-        const { width, height } = this.ctx.canvas;
-        if (vector) {
-            this.ctx.canvas.width = vector.width;
-            this.ctx.canvas.height = vector.height;
-        }
-        this.clear();
-        if (vector) {
-            this.ctx.translate(-vector.start.x, -vector.start.y);
-        }
-        super.render(this.ctx);
-        const img = document.createElement("img");
-        img.src = this.ctx.canvas.toDataURL();
-        if (vector) {
-            this.ctx.canvas.width = width;
-            this.ctx.canvas.height = height;
-        }
-        return img;
     }
 
     /**
