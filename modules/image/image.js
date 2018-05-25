@@ -149,6 +149,7 @@ export default class Image extends Rectangle {
 
         return new Promise((resolve, reject) => {
             const img = document.createElement("img");
+            img.crossOrigin = "Anonymous";
             img.src = url;
             img.addEventListener("load", () => resolve(img));
             img.addEventListener("error", () => reject(new URIError(`Fail to load ${url}.`)));
