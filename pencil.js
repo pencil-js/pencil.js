@@ -2,6 +2,7 @@
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
 import * as Math from "@pencil.js/math";
+import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 
 // Events
 import BaseEvent from "@pencil.js/base-event";
@@ -86,6 +87,7 @@ export default Object.assign({
     default: undefined,
     from,
     Math,
+    OffScreenCanvas,
 }, classes);
 
 // Named exports
@@ -117,5 +119,6 @@ export {
     Slider,
     Checkbox,
     Button,
+    OffScreenCanvas,
     from,
 };

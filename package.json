@@ -50,6 +50,7 @@
     "@pencil.js/line": "^0.8.0",
     "@pencil.js/math": "^0.8.0",
     "@pencil.js/mouse-event": "^0.8.0",
+    "@pencil.js/offscreen-canvas": "^0.1.0",
     "@pencil.js/path": "^0.8.0",
     "@pencil.js/polygon": "^0.8.0",
     "@pencil.js/position": "^0.8.0",
