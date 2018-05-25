@@ -27,8 +27,8 @@ export default class Scene extends Container {
         else {
             canvas = document.createElement("canvas");
             container.appendChild(canvas);
+            canvas.style.display = "block";
         }
-        canvas.style.display = "block";
         const measures = container.getBoundingClientRect();
         canvas.width = measures.width;
         canvas.height = measures.height;

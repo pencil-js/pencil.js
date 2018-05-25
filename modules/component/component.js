@@ -1,5 +1,4 @@
 import Container from "@pencil.js/container";
-import {radianCircle} from "../math";
 
 /**
  * Abstract class for visual component
