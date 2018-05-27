@@ -140,6 +140,7 @@ Or read [the full documentation](documentation.md).
  * [Position](modules/position)
  * [Vector](modules/vector)
  * [Math](modules/math)
+ * [OffScreenCanvas](modules/offscreen-canvas)
  * [BaseEvent](modules/base-event)
    * [MouseEvent](modules/mouse-event)
    * [KeyboardEvent](modules/keyboard-event)
