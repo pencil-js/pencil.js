@@ -70,7 +70,7 @@ export default class Component extends Container {
 
         const path = new Path2D();
         this.trace(path);
-        let result = ctx.isPointInPath(path, rotated.x, rotated.y) && ctx.isPointInStroke(path, rotated.x, rotated.y);
+        let result = ctx.isPointInPath(path, rotated.x, rotated.y) || ctx.isPointInStroke(path, rotated.x, rotated.y);
 
         if (this.options.clip) {
             const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
