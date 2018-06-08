@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/offscreen-canvas",
-  "version": "0.1.0",
+  "version": "0.8.1",
   "description": "Off-screen canvas for Pencil.js package.",
   "main": "offscreen-canvas.js",
   "files": [],
@@ -15,8 +15,6 @@
     "pencil.js",
     "tool"
   ],
-  "dependencies": {
-  },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {

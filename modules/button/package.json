@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/button",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Button user input for Pencil.js package.",
   "main": "button.js",
   "files": [],
@@ -16,9 +16,9 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.8.0",
-    "@pencil.js/input": "^0.8.0",
-    "@pencil.js/text": "^0.8.0"
+    "@pencil.js/component": "^0.8.1",
+    "@pencil.js/input": "^0.8.1",
+    "@pencil.js/text": "^0.8.1"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
