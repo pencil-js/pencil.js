@@ -147,7 +147,7 @@ export default class Scene extends Container {
      * @param {CanvasRenderingContext2D|OffScreenCanvas} [onto] -
      */
     render (onto) {
-        const animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this)) : null;
+        const animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this, undefined)) : null;
 
         const context = (onto && onto.ctx) || onto || this.ctx;
         this.clear(context);
