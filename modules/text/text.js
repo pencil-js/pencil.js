@@ -12,12 +12,12 @@ import textDirection from "text-direction";
 export default class Text extends Component {
     /**
      * Text constructor
-     * @param {PositionDefinition} position - Top most point of the line start (depend on align option)
+     * @param {PositionDefinition} positionDefinition - Top most point of the line start (depend on align option)
      * @param {String} text - Text to display
      * @param {TextOptions} [options] - Drawing options
      */
-    constructor (position, text, options) {
-        super(position, options);
+    constructor (positionDefinition, text, options) {
+        super(positionDefinition, options);
 
         /**
          * @type {Array<String>}

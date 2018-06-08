@@ -8,12 +8,12 @@ import Rectangle from "@pencil.js/rectangle";
 export default class Square extends Rectangle {
     /**
      * Square constructor
-     * @param {PositionDefinition} position - Any position
+     * @param {PositionDefinition} positionDefinition - Top-left corner
      * @param {Number} size - Side's length
      * @param {ComponentOptions} options - Drawing options
      */
-    constructor (position, size, options) {
-        super(position, size, size, options);
+    constructor (positionDefinition, size, options) {
+        super(positionDefinition, size, size, options);
     }
 
     /**

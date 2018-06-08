@@ -9,13 +9,13 @@ import Position from "@pencil.js/position";
 export default class Rectangle extends Component {
     /**
      * Rectangle constructor
-     * @param {PositionDefinition} position - Position in space
+     * @param {PositionDefinition} positionDefinition - Position in space
      * @param {Number} [width=0] - Horizontal size
      * @param {Number} [height=0] - Vertical size
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, width = 0, height = 0, options) {
-        super(position, options);
+    constructor (positionDefinition, width = 0, height = 0, options) {
+        super(positionDefinition, options);
         this.width = width;
         this.height = height;
     }

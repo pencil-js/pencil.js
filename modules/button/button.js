@@ -10,11 +10,11 @@ import Text from "@pencil.js/text";
 export default class Button extends Input {
     /**
      * Button constructor
-     * @param {PositionDefinition} position - Any position
+     * @param {PositionDefinition} positionDefinition - Top-left corner
      * @param {ButtonOptions} options -
      */
-    constructor (position, options) {
-        super(position, options);
+    constructor (positionDefinition, options) {
+        super(positionDefinition, options);
 
         this.text = new Text(undefined, this.options.value, {
             fill: this.options.fill,

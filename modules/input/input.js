@@ -12,11 +12,11 @@ import BaseEvent from "@pencil.js/base-event";
 export default class Input extends Container {
     /**
      * Input constructor
-     * @param {PositionDefinition} position - Any position
+     * @param {PositionDefinition} positionDefinition - Any position
      * @param {InputOptions} options -
      */
-    constructor (position, options) {
-        super(position, options);
+    constructor (positionDefinition, options) {
+        super(positionDefinition, options);
 
         this.background = new Rectangle(undefined, 0, 0, {
             fill: this.options.background,

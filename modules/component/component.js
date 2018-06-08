@@ -9,11 +9,11 @@ import Container from "@pencil.js/container";
 export default class Component extends Container {
     /**
      * Component constructor
-     * @param {Position} position - Position in space
+     * @param {PositionDefinition} positionDefinition - Position in space
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, options) {
-        super(position, options);
+    constructor (positionDefinition, options) {
+        super(positionDefinition, options);
 
         /**
          * @type {Boolean}

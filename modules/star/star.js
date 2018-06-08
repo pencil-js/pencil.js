@@ -8,14 +8,14 @@ import RegularPolygon from "@pencil.js/regular-polygon";
 export default class Star extends RegularPolygon {
     /**
      * Star constructor
-     * @param {Position} position - Center of the star
+     * @param {PositionDefinition} positionDefinition - Center of the star
      * @param {Number} outerRadius - Distance of branches from center
      * @param {Number} [nbBranches=5] - Number of branches to create (can't be less than 2)
      * @param {Number} [bevelRatio=0.5] - Ratio between branches length and bevel between them
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, outerRadius, nbBranches = 5, bevelRatio = 0.5, options) {
-        super(position, nbBranches, outerRadius, options);
+    constructor (positionDefinition, outerRadius, nbBranches = 5, bevelRatio = 0.5, options) {
+        super(positionDefinition, nbBranches, outerRadius, options);
 
         const innerRadius = this.radius * bevelRatio;
         const innerPoints = RegularPolygon.getRotatingPoint(nbBranches, innerRadius, 0.5 / nbBranches);

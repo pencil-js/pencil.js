@@ -8,12 +8,12 @@ import RegularPolygon from "@pencil.js/regular-polygon";
 export default class Triangle extends RegularPolygon {
     /**
      * Triangle constructor
-     * @param {PositionDefinition} position - Center of the triangle
+     * @param {PositionDefinition} positionDefinition - Center of the triangle
      * @param {Number} radius - Distance of branches from center
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position, radius, options) {
-        super(position, 3, radius, options);
+    constructor (positionDefinition, radius, options) {
+        super(positionDefinition, 3, radius, options);
     }
 
     /**

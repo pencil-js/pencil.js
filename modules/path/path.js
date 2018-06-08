@@ -62,13 +62,13 @@ class Instruction {
 export default class Path extends Component {
     /**
      * Path constructor
-     * @param {PositionDefinition} position - Starting position of the Path
+     * @param {PositionDefinition} positionDefinition - Starting position of the Path
      * @param {Array<Instruction>|String} instructions - Set of instructions to follow to draw it
      * @param {Boolean} [isClosed=true] - Should the path close itself (add a line to the starting position)
      * @param {ComponentOptions|LineOptions} [options] - Drawing options
      */
-    constructor (position, instructions, isClosed = true, options) {
-        super(position, options);
+    constructor (positionDefinition, instructions, isClosed = true, options) {
+        super(positionDefinition, options);
 
         if (!isClosed) {
             // Overrides options to work like a line if not closed

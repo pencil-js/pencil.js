@@ -9,12 +9,12 @@ import Component from "@pencil.js/component";
 export default class Circle extends Arc {
     /**
      * Circle constructor
-     * @param {PositionDefinition} position - Center of circle
+     * @param {PositionDefinition} positionDefinition - Center of circle
      * @param {Number} radius - Distance from center to outer edge
      * @param {ComponentOptions} options - Drawing options
      */
-    constructor (position, radius, options) {
-        super(position, radius, 0, 1, options);
+    constructor (positionDefinition, radius, options) {
+        super(positionDefinition, radius, 0, 1, options);
     }
 
     /**

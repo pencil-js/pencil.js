@@ -15,11 +15,11 @@ import { constrain } from "@pencil.js/math";
 export default class Slider extends Input {
     /**
      * Slider constructor
-     * @param {PositionDefinition} position - Any position
+     * @param {PositionDefinition} positionDefinition - Top-left corner
      * @param {SliderOptions} options -
      */
-    constructor (position, options) {
-        super(position, options);
+    constructor (positionDefinition, options) {
+        super(positionDefinition, options);
 
         this.background.width = this.width;
         this.background.height = Slider.HEIGHT;

@@ -11,11 +11,11 @@ import Square from "@pencil.js/square";
 export default class Checkbox extends Input {
     /**
      * Checkbox constructor
-     * @param {PositionDefinition} position - Any position
+     * @param {PositionDefinition} positionDefinition - Top-left corner
      * @param {CheckboxOptions} options -
      */
-    constructor (position, options) {
-        super(position, options);
+    constructor (positionDefinition, options) {
+        super(positionDefinition, options);
 
         this.background.width = this.options.size;
         this.background.height = this.options.size;

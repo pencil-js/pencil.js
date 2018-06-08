@@ -14,16 +14,16 @@ import Vector from "@pencil.js/vector";
 export default class Container extends EventEmitter {
     /**
      * Container constructor
-     * @param {PositionDefinition} [position] - Position in its container
+     * @param {PositionDefinition} [positionDefinition] - Position in its container
      * @param {ContainerOptions} [options] -
      */
-    constructor (position = new Position(), options) {
+    constructor (positionDefinition = new Position(), options) {
         super();
 
         /**
          * @type {Position}
          */
-        this.position = Position.from(position);
+        this.position = Position.from(positionDefinition);
         /**
          * @type {ContainerOptions}
          */
