@@ -47,11 +47,11 @@ export default class Position {
 
     /**
      * Determine if is equal to another position
-     * @param {PositionDefinition} definition - Any position
+     * @param {PositionDefinition} positionDefinition - Any other position
      * @return {Boolean}
      */
-    equals (definition) {
-        const position = Position.from(definition);
+    equals (positionDefinition) {
+        const position = Position.from(positionDefinition);
         return equals(this.x, position.x) && equals(this.y, position.y);
     }
 
@@ -147,44 +147,44 @@ export default class Position {
 
     /**
      * Move the position towards another by a ratio
-     * @param {PositionDefinition} definition - Any other position
+     * @param {PositionDefinition} positionDefinition - Any other position
      * @param {Function|Number} ratio - Ratio of distance to move, 0 mean no change, 1 mean arrive at position
      * @return {Position} Itself
      */
-    lerp (definition, ratio) {
-        const difference = Position.from(definition)
+    lerp (positionDefinition, ratio) {
+        const difference = Position.from(positionDefinition)
             .clone().subtract(this).multiply(typeof ratio === "function" ? ratio() : ratio);
         return this.add(difference);
     }
 
     /**
      * Compute distance with another position
-     * @param {PositionDefinition} definition - Any position
+     * @param {PositionDefinition} positionDefinition - Any position
      * @return {Number}
      */
-    distance (definition) {
-        const position = Position.from(definition);
+    distance (positionDefinition) {
+        const position = Position.from(positionDefinition);
         return Math.hypot(position.x - this.x, position.y - this.y);
     }
 
     /**
      * Cross product
-     * @param {PositionDefinition} definition - Another position
+     * @param {PositionDefinition} positionDefinition - Another position
      * @return {Number}
      */
-    crossProduct (definition) {
-        const position = Position.from(definition);
+    crossProduct (positionDefinition) {
+        const position = Position.from(positionDefinition);
         return (this.x * position.y) - (position.x * this.y);
     }
 
     /**
      * Define if this is on the same side of a vector as another position
-     * @param {PositionDefinition} definition - Another position
+     * @param {PositionDefinition} positionDefinition - Another position
      * @param {Vector} vector - Any vector
      * @return {Boolean}
      */
-    isOnSameSide (definition, vector) {
-        const position = Position.from(definition);
+    isOnSameSide (positionDefinition, vector) {
+        const position = Position.from(positionDefinition);
         const { sign } = Math;
         const thisMoved = this.clone().subtract(vector.start);
         const positionMoved = position.clone().subtract(vector.start);
@@ -210,18 +210,18 @@ export default class Position {
      */
     /**
      * Create a Position from a generic definition or do nothing if already a Position
-     * @param {PositionDefinition} [definition] - Position definition
+     * @param {PositionDefinition} [positionDefinition] - Position definition
      * @return {Position}
      */
-    static from (definition = new Position()) {
-        if (definition instanceof Position) {
-            return definition;
+    static from (positionDefinition = new Position()) {
+        if (positionDefinition instanceof Position) {
+            return positionDefinition;
         }
-        else if (Array.isArray(definition)) {
-            return new Position(...definition);
+        else if (Array.isArray(positionDefinition)) {
+            return new Position(...positionDefinition);
         }
-        else if (typeof definition === "object") {
-            return new Position(definition.x, definition.y);
+        else if (typeof positionDefinition === "object") {
+            return new Position(positionDefinition.x, positionDefinition.y);
         }
 
         throw new TypeError(`Unexpected type for position [${typeof position}].`);
@@ -229,13 +229,13 @@ export default class Position {
 
     /**
      * Compute the average for a set of positions
-     * @param {...PositionDefinition} definitions -
+     * @param {...PositionDefinition} positionDefinitions - List of positions to average
      * @return {Position}
      */
-    static average (...definitions) {
+    static average (...positionDefinitions) {
         let result = new Position();
-        definitions.forEach(one => result = result.add(Position.from(one)));
-        const nbPositions = definitions.length;
+        positionDefinitions.forEach(one => result = result.add(Position.from(one)));
+        const nbPositions = positionDefinitions.length;
         return result.divide(nbPositions);
     }
 }

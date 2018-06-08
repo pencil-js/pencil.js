@@ -48,11 +48,11 @@ export default class Vector {
 
     /**
      * Determine if is equal to another vector
-     * @param {VectorDefinition} definition - Any vector
+     * @param {VectorDefinition} vectorDefinition - Any vector
      * @return {Boolean}
      */
-    equals (definition) {
-        const vector = Vector.from(definition);
+    equals (vectorDefinition) {
+        const vector = Vector.from(vectorDefinition);
         return this.start.equals(vector.start) && this.end.equals(vector.end);
     }
 
@@ -89,11 +89,11 @@ export default class Vector {
 
     /**
      * Define if this vector intersect another
-     * @param {VectorDefinition} definition - Any vector
+     * @param {VectorDefinition} vectorDefinition - Any vector
      * @return {Boolean}
      */
-    intersect (definition) {
-        const vector = Vector.from(definition);
+    intersect (vectorDefinition) {
+        const vector = Vector.from(vectorDefinition);
         return !(this.start.isOnSameSide(this.end, vector) || vector.start.isOnSameSide(vector.end, this));
     }
 
@@ -118,18 +118,18 @@ export default class Vector {
      */
     /**
      * Create a Vector from a generic definition
-     * @param {VectorDefinition} definition - Vector definition
+     * @param {VectorDefinition} vectorDefinition - Vector definition
      * @return {Vector}
      */
-    static from (definition = new Vector()) {
-        if (definition instanceof Vector) {
-            return definition;
+    static from (vectorDefinition = new Vector()) {
+        if (vectorDefinition instanceof Vector) {
+            return vectorDefinition;
         }
-        else if (Array.isArray(definition)) {
-            return new Vector(...definition);
+        else if (Array.isArray(vectorDefinition)) {
+            return new Vector(...vectorDefinition);
         }
-        else if (typeof definition === "object") {
-            return new Vector(definition.start, definition.end);
+        else if (typeof vectorDefinition === "object") {
+            return new Vector(vectorDefinition.start, vectorDefinition.end);
         }
 
         throw new TypeError(`Unexpected type for position [${typeof position}]`);
