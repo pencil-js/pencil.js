@@ -11,7 +11,7 @@ Hand-free drawing tool.
 ## Examples
 
 ```js
-import Line from "@pencil.js/path";
+import Path from "@pencil.js/path";
 
 const from = startingPosition;
 const path = new Path(from, [
