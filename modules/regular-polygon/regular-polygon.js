@@ -15,7 +15,7 @@ export default class RegularPolygon extends Polygon {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position = new Position(), nbSides, radius = 0, options) {
-        super(RegularPolygon.getRotatingPoint(nbSides, radius), options);
+        super(RegularPolygon.getRotatingPoints(nbSides, radius), options);
 
         /**
          * @type {Position}
@@ -68,7 +68,7 @@ export default class RegularPolygon extends Polygon {
      * @param {Number} [startAngle=0] -
      * @return {Array<Position>}
      */
-    static getRotatingPoint (nbPoints, radius, startAngle = 0) {
+    static getRotatingPoints (nbPoints, radius, startAngle = 0) {
         const angle = startAngle - (1 / 4);
         const points = [];
         for (let i = 0; i < nbPoints; ++i) {
