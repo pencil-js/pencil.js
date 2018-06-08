@@ -9,21 +9,21 @@ import Position from "@pencil.js/position";
 export default class Polygon extends Component {
     /**
      * Polygon constructor
-     * @param {Array<PositionDefinition>} points - Set of vertices defining the polygon
+     * @param {PositionDefinition} positionDefinition - Any position
+     * @param {Array<PositionDefinition>} points - Set of vertices relative to position defining the polygon
      * @param {ComponentOptions} options - Drawing options
      */
-    constructor (points, options) {
+    constructor (positionDefinition, points, options) {
         if (points.length < 3) {
             throw new RangeError(`A polygon can't have less than 3 vertices, but only ${points.length} given.`);
         }
 
-        const positions = points.map(point => Position.from(point));
-        super(positions[0], options);
+        super(positionDefinition, options);
 
         /**
          * @type {Array<Position>}
          */
-        this.points = positions;
+        this.points = points.map(point => Position.from(point));
     }
 
     /**
@@ -32,9 +32,7 @@ export default class Polygon extends Component {
      * @return {Polygon} Itself
      */
     trace (path) {
-        this.points.forEach((point) => {
-            path.lineTo(point.x - this.position.x, point.y - this.position.y);
-        });
+        this.points.forEach(point => path.lineTo(point.x, point.y));
         path.closePath();
         return this;
     }

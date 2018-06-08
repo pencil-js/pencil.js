@@ -15,7 +15,7 @@ export default class RegularPolygon extends Polygon {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (position = new Position(), nbSides, radius = 0, options) {
-        super(RegularPolygon.getRotatingPoints(nbSides, radius), options);
+        super(position, RegularPolygon.getRotatingPoints(nbSides, radius), options);
 
         /**
          * @type {Position}
@@ -25,19 +25,6 @@ export default class RegularPolygon extends Polygon {
          * @type {Number}
          */
         this.radius = radius;
-    }
-
-    /**
-     * Draw the regular-polygon
-     * @param {Path2D} path - Current drawing path
-     * @return {RegularPolygon} Itself
-     */
-    trace (path) {
-        this.points.forEach((point) => {
-            path.lineTo(point.x, point.y);
-        });
-        path.closePath();
-        return this;
     }
 
     /**

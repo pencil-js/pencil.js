@@ -9,16 +9,25 @@ import Position from "@pencil.js/position";
 export default class Line extends Component {
     /**
      * Line constructor
-     * @param {Array<PositionDefinition>} points -
+     * @param {PositionDefinition} positionDefinition - First point
+     * @param {PositionDefinition|Array<PositionDefinition>} points - List of points or a single end point
      * @param {LineOptions} [options] - Drawing options
      */
-    constructor (points, options) {
+    constructor (positionDefinition, points, options) {
         if (points.length < 2) {
             throw new RangeError(`A Line need at least 2 points, only ${points.length} given.`);
         }
 
-        const positions = points.map(point => Position.from(point));
-        super(positions[0], options);
+        super(positionDefinition, options);
+
+        let positions;
+        try {
+            // Try to treat it as one position definition
+            positions = [Position.from(points)];
+        }
+        catch (e) {
+            positions = points.map(point => Position.from(point));
+        }
 
         /**
          * @type {Array<Position>}
@@ -28,15 +37,12 @@ export default class Line extends Component {
 
     /**
      * Draw the line
-     * @param {path} path - Drawing context
+     * @param {Path2D} path - Drawing context
      * @return {Line} Itself
      */
     trace (path) {
         path.moveTo(0, 0);
-        this.points.slice(1).forEach((point) => {
-            const diff = point.clone().subtract(this.position);
-            path.lineTo(diff.x, diff.y);
-        });
+        this.points.forEach(point => path.lineTo(point.x, point.y));
         return this;
     }
 

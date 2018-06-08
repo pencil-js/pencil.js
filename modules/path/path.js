@@ -27,14 +27,12 @@ class Instruction {
     /**
      * Follow the instruction
      * @param {Path2D} path - Current drawing path
-     * @param {Position} pathOrigin - Starting position of the Path
      * @param {Position} previousPosition - Position from where the instruction start
      * @return {Position} The position reached
      */
-    execute (path, pathOrigin, previousPosition) {
-        const correctedPosition = this.target.clone().subtract(pathOrigin);
-        this.action.call(this, path, correctedPosition, previousPosition);
-        return correctedPosition;
+    execute (path, previousPosition) {
+        this.action.call(this, path, this.target, previousPosition);
+        return this.target;
     }
 
     /**
@@ -77,7 +75,7 @@ export default class Path extends Component {
 
         this.instructions = instructions;
         this.isClosed = isClosed;
-        this.closing = Path.lineTo(this.position);
+        this.closing = Path.lineTo(new Position());
     }
 
     /**
@@ -90,7 +88,6 @@ export default class Path extends Component {
         let instructions = this.instructions.slice();
 
         if (Array.isArray(instructions)) {
-            path.moveTo(0, 0);
             if (this.isClosed) {
                 const lastTarget = this.instructions[this.instructions.length - 1].target;
                 path.moveTo(lastTarget.x, lastTarget.y);
@@ -98,8 +95,11 @@ export default class Path extends Component {
                 instructions.push(this.closing);
                 lastPosition = lastTarget;
             }
+            else {
+                path.moveTo(0, 0);
+            }
 
-            instructions.forEach(instruction => lastPosition = instruction.execute(path, this.position, lastPosition));
+            instructions.forEach(instruction => lastPosition = instruction.execute(path, lastPosition));
         }
         else if (typeof instructions === "string") {
             if (this.isClosed) {
@@ -199,7 +199,7 @@ export default class Path extends Component {
             const distance = lp.distance(pos);
             const radius = distance / 2;
 
-            const direction = clockwise ? -1 : 1;
+            const direction = clockwise ? 1 : -1;
             const alpha = (angle / 2) * direction;
             const ctrl1 = pos.clone()
                 .subtract(lp).rotate(-alpha)
