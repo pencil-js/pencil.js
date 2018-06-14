@@ -20,7 +20,6 @@ But, each part is a JS module and can be used independently, ex:
     npm install @pencil.js/scene
 
 # CDN
-
 If you want to go old-school, you can fetch the script with [unpkg](https://unpkg.com/) or [jsdelivr](https://www.jsdelivr.com/).
 
 ```html
@@ -107,13 +106,12 @@ scene.add(rectangle); // Add the rectangle to the scene
 scene.render(); // Render the scene once
 ```
 
-Take a look at [more advanced examples](https://gmartigny.github.io/pencil.js/).
+Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 
 Or read [the full documentation](documentation.md).
 
 
 ## Modules
-
  * [EventEmitter](modules/event-emitter)
    * [Container](modules/container)
      * [Scene](modules/scene)
@@ -159,10 +157,8 @@ In any case, we recommend you use a namespace (eg: ``import Namespace from "penc
 
 
 ## Contributions
-
 You want to help us improve ? Please read [the contributing manual](contributing.md).
 
 ### Contributors
-
 | [![Guillaume Martigny](https://github.com/GMartigny.png?size=60)<br>GMartigny](https://github.com/GMartigny) |
 | --- |
