@@ -39,7 +39,7 @@ class Instruction {
 
     /**
      * Unimplemented
-     * FIXME: How to serialize a wrapper of a function
+     * FIXME: How to serialize a wrapper of a function ?
      */
     toJSON () {
         throw new ReferenceError("Unimplemented toJSON function in Instruction");
@@ -150,7 +150,7 @@ export default class Path extends Component {
 
     /**
      * Draw a line to a position
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} position - Any position
      * @return {Instruction}
      */
     static lineTo (position) {
@@ -159,7 +159,7 @@ export default class Path extends Component {
 
     /**
      * Move the pencil without drawing
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} position - Any position
      * @return {Instruction}
      */
     static moveTo (position) {
@@ -168,7 +168,7 @@ export default class Path extends Component {
 
     /**
      * Draw an quarter circle arc to a position
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} position - Any position
      * @param {Boolean} [clockwise=true] - Should the arc be clockwise or not
      * @return {Instruction}
      */
@@ -178,7 +178,7 @@ export default class Path extends Component {
 
     /**
      * Draw an quarter circle arc to a position
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} position - Any position
      * @param {Boolean} [clockwise=true] - Should the arc be clockwise or not
      * @return {Instruction}
      */
@@ -188,9 +188,9 @@ export default class Path extends Component {
 
     /**
      * Try to approximate an arc between two points
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} position - Any position
      * @param {Number} angle - Arc angle in ratio of a full circle (should be less than 0.5)
-     * @param {Number} magicRatio - Control points ratio to approximate a circle
+     * @param {Number} magicRatio - Control points "openness" ratio
      * @param {Boolean} [clockwise=true] - Should the arc be clockwise or not
      * @return {Instruction}
      */
@@ -219,8 +219,8 @@ export default class Path extends Component {
 
     /**
      * Draw a quadratic curve to a position
-     * @param {Position} position - Any position
-     * @param {Position} controlPoint - Point that control the curve
+     * @param {PositionDefinition} position - Any position
+     * @param {PositionDefinition} controlPoint - Point that control the curve
      * @return {Instruction}
      */
     static quadTo (position, controlPoint) {
@@ -232,9 +232,9 @@ export default class Path extends Component {
 
     /**
      * Draw a bezier curve to a position
-     * @param {Position} position - Any position
-     * @param {Position} firstControlPoint - First point to control the curve
-     * @param {Position} secondControlPoint - Second point to control the curve
+     * @param {PositionDefinition} position - Any position
+     * @param {PositionDefinition} firstControlPoint - First point to control the curve
+     * @param {PositionDefinition} secondControlPoint - Second point to control the curve
      * @return {Instruction}
      */
     static bezierTo (position, firstControlPoint, secondControlPoint) {
@@ -267,7 +267,7 @@ export default class Path extends Component {
 
     /**
      *
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} position - Any position
      * @param {Number} nbWaves - Number of waves to draw
      * @return {Instruction}
      */
@@ -280,7 +280,7 @@ export default class Path extends Component {
 
     /**
      *
-     * @param {Position} position - Any position
+     * @param {PositionDefinition} position - Any position
      * @param {Number} nbSins - Number of sinusoid to draw
      * @param {Number} sinsHeight - Height of the sinusoid
      * @return {Instruction}
