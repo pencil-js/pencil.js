@@ -1,6 +1,6 @@
 import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
-import Position from "@pencil.js/position";
+import Polygon from "@pencil.js/polygon";
 import Rectangle from "@pencil.js/rectangle";
 import Square from "@pencil.js/square";
 import "@pencil.js/draggable";
@@ -29,9 +29,11 @@ Rectangle.prototype.resizable = function resizable (options) {
     }
 
     const size = 15;
-    const bottomRight = (new Position(this.width, this.height)).subtract(size);
-    // Fixme: handle should be a triangle (but ishover broken for now)
-    const handle = new Square(bottomRight, size, {
+    const handle = new Polygon([this.width, this.height], [
+        [0, 0],
+        [-size, 0],
+        [0, -size],
+    ], {
         fill: "gold",
         cursor: Component.cursors.seResize,
     });
@@ -41,28 +43,27 @@ Rectangle.prototype.resizable = function resizable (options) {
         y: mergedOptions.y,
         constrain: mergedOptions.constrain,
     });
-    const shape = this;
-    handle.on("drag", function resizableDragCallback (event) {
+    handle.on("drag", (event) => {
         const before = {
-            width: shape.width,
-            height: shape.height,
+            width: this.width,
+            height: this.height,
         };
-        if (shape instanceof Square) {
-            shape.size = ((this.position.x + this.position.y) / 2) + size;
-            this.position.x = shape.size - size;
-            this.position.y = shape.size - size;
+        if (this instanceof Square) {
+            this.size = ((handle.position.x + handle.position.y) / 2) + size;
+            handle.position.x = this.size;
+            handle.position.y = this.size;
         }
         else {
             if (mergedOptions.x) {
-                shape.width = this.position.x + size;
+                this.width = handle.position.x;
             }
             if (mergedOptions.y) {
-                shape.height = this.position.y + size;
+                this.height = handle.position.y;
             }
         }
 
-        if (shape.width !== before.width || shape.height !== before.height) {
-            shape.fire(new MouseEvent(shape, "resize", event));
+        if (this.width !== before.width || this.height !== before.height) {
+            this.fire(new MouseEvent(this, "resize", event));
         }
     }, true);
 
