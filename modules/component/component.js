@@ -15,6 +15,11 @@ export default class Component extends Container {
     constructor (positionDefinition, options) {
         super(positionDefinition, options);
 
+
+        /**
+         * @type {Boolean}
+         */
+        this.isClicked = false;
         /**
          * @type {Boolean}
          */
