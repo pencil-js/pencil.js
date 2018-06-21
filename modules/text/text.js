@@ -84,7 +84,7 @@ export default class Text extends Component {
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Text} Itself
      */
-    trace (ctx) {
+    makePath (ctx) {
         const lineHeight = this.height / this.lines.length; // TODO: could be user defined
 
         const opts = this.options;

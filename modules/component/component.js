@@ -27,28 +27,28 @@ export default class Component extends Container {
     }
 
     /**
-     * Draw it on a context
+     * Make the path and trace it
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Component} Itself
      */
-    render (ctx) {
-        return super.render(ctx, () => {
-            const path = new Path2D();
-            this.trace(path);
+    makePath (ctx) {
+        const path = new Path2D();
+        this.trace(path);
 
-            if (this.options.fill) {
-                ctx.fillStyle = this.options.fill;
-                ctx.fill(path);
-            }
+        if (this.options.fill) {
+            ctx.fillStyle = this.options.fill;
+            ctx.fill(path);
+        }
 
-            if (this.options.stroke) {
-                ctx.lineJoin = this.options.join;
-                ctx.lineCap = this.options.cap;
-                ctx.strokeStyle = this.options.stroke;
-                ctx.lineWidth = this.options.strokeWidth;
-                ctx.stroke(path);
-            }
-        });
+        if (this.options.stroke) {
+            ctx.lineJoin = this.options.join;
+            ctx.lineCap = this.options.cap;
+            ctx.strokeStyle = this.options.stroke;
+            ctx.lineWidth = this.options.strokeWidth;
+            ctx.stroke(path);
+        }
+
+        return this;
     }
 
     /**

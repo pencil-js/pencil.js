@@ -76,34 +76,15 @@ export default class Image extends Rectangle {
     }
 
     /**
-     * Draw the image
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @return {Image} Itself
-     */
-    trace (ctx) {
-        if (this.isLoaded) {
-            super.trace(ctx);
-        }
-
-        return this;
-    }
-
-    /**
      * Draw it on a context
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Image} Itself
      */
-    render (ctx) {
-        super.render(ctx);
+    makePath (ctx) {
         if (this.isLoaded) {
+            super.makePath(ctx);
             const originPos = this.getOriginPosition();
-            ctx.drawImage(
-                this.file,
-                this.position.x - originPos.x,
-                this.position.y - originPos.y,
-                this.width,
-                this.height,
-            );
+            ctx.drawImage(this.file, -originPos.x, -originPos.y, this.width, this.height);
         }
 
         return this;

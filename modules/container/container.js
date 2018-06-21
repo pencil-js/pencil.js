@@ -202,10 +202,9 @@ export default class Container extends EventEmitter {
     /**
      * Call the render method of all children
      * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @param {Function} [drawing] - Callback that draw the child
      * @return {Container} Itself
      */
-    render (ctx, drawing) {
+    render (ctx) {
         if (this.options.shown) {
             this.fire(new BaseEvent(this, "draw"));
             ctx.save();
@@ -240,9 +239,7 @@ export default class Container extends EventEmitter {
                 this.children[i].render(ctx);
             }
 
-            if (drawing) {
-                drawing();
-            }
+            this.makePath(ctx);
 
             for (let i = pivotIndex, l = this.children.length; i < l; ++i) {
                 this.children[i].render(ctx);
@@ -251,6 +248,14 @@ export default class Container extends EventEmitter {
             ctx.restore();
         }
 
+        return this;
+    }
+
+    /**
+     * Do nothing on Container, override it to add behavior
+     * @return {Container} Itself
+     */
+    makePath () {
         return this;
     }
 
