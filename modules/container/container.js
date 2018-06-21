@@ -207,6 +207,7 @@ export default class Container extends EventEmitter {
      */
     render (ctx, drawing) {
         if (this.options.shown) {
+            this.fire(new BaseEvent(this, "draw"));
             ctx.save();
             ctx.translate(this.position.x, this.position.y);
 

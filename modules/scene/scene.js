@@ -167,7 +167,6 @@ export default class Scene extends Container {
         this.lastTick = now;
 
         ++this.frameCount;
-        this.fire(new BaseEvent(this, "draw"));
         return this;
     }
 
