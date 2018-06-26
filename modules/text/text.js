@@ -130,8 +130,9 @@ export default class Text extends Component {
         }
 
         const { width, height } = this.getMeasures();
-        return this.position.x <= position.x && position.x <= this.position.x + width &&
-            this.position.y <= position.y && position.y <= this.position.y + height;
+        const relativePosition = position.clone().add(this.getOriginPosition());
+        return this.position.x <= relativePosition.x && relativePosition.x <= this.position.x + width &&
+            this.position.y <= relativePosition.y && relativePosition.y <= this.position.y + height;
     }
 
     /**
@@ -149,8 +150,7 @@ export default class Text extends Component {
         else if (align === Text.alignments.right) {
             horizontal = this.width;
         }
-
-        if (align === Text.alignments.start || align === Text.alignments.end) {
+        else if (align === Text.alignments.start || align === Text.alignments.end) {
             const scene = this.hasScene();
             if (scene) {
                 const dir = textDirection(scene.ctx.canvas);
