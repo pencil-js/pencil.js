@@ -1,7 +1,8 @@
-import Container from "@pencil.js/container";
-import Rectangle from "@pencil.js/rectangle";
-import Component from "@pencil.js/component";
 import BaseEvent from "@pencil.js/base-event";
+import Component from "@pencil.js/component";
+import Container from "@pencil.js/container";
+import MouseEvent from "@pencil.js/mouse-event";
+import Rectangle from "@pencil.js/rectangle";
 
 /**
  * Abstract Input class
@@ -26,11 +27,11 @@ export default class Input extends Container {
         });
         this.add(this.background);
 
-        this.background.on("hover", () => {
+        this.background.on(MouseEvent.events.hover, () => {
             this.background.options.fill = this.options.hover;
-        }).on("leave", () => {
+        }).on(MouseEvent.events.leave, () => {
             this.background.options.fill = this.options.background;
-        }).on("click", (event) => {
+        }).on(MouseEvent.events.click, (event) => {
             this.click(event.position.clone().subtract(this.position));
         });
 
@@ -53,9 +54,8 @@ export default class Input extends Container {
 
     /**
      * Action to execute on click
-     * @param {Position} position - Relative position of the click
      */
-    click (position) {
+    click () {
         this.fire(new BaseEvent(this, "change"));
     }
 

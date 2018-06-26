@@ -43,7 +43,7 @@ Rectangle.prototype.resizable = function resizable (options) {
         y: mergedOptions.y,
         constrain: mergedOptions.constrain,
     });
-    handle.on("drag", (event) => {
+    handle.on(MouseEvent.events.drag, (event) => {
         const before = {
             width: this.width,
             height: this.height,
@@ -63,7 +63,7 @@ Rectangle.prototype.resizable = function resizable (options) {
         }
 
         if (this.width !== before.width || this.height !== before.height) {
-            this.fire(new MouseEvent(this, "resize", event));
+            this.fire(new MouseEvent(this, MouseEvent.events.resize, event));
         }
     }, true);
 

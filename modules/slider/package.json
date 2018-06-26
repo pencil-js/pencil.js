@@ -22,6 +22,7 @@
     "@pencil.js/container": "^0.8.1",
     "@pencil.js/input": "^0.8.1",
     "@pencil.js/math": "^0.8.0",
+    "@pencil.js/mouse-event": "^0.8.1",
     "@pencil.js/position": "^0.8.1",
     "@pencil.js/vector": "^0.8.1"
   },

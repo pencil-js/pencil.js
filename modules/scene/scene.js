@@ -82,38 +82,38 @@ export default class Scene extends Container {
 
         let hovered = null;
         const listeners = {
-            mousedown: target => target.isClicked = true,
-            mousemove: (target, eventPosition) => {
+            [MouseEvent.events.down]: target => target.isClicked = true,
+            [MouseEvent.events.move]: (target, eventPosition) => {
                 target.isClicked = false;
                 if (target !== hovered) {
                     if (hovered) {
                         hovered.isHovered = false;
                         if (!hovered.isAncestorOf(target)) {
-                            hovered.fire(new MouseEvent(hovered, "leave", eventPosition));
+                            hovered.fire(new MouseEvent(hovered, MouseEvent.events.leave, eventPosition));
                         }
                     }
                     hovered = target;
                 }
                 if (!target.isHovered) {
                     target.isHovered = true;
-                    target.fire(new MouseEvent(target, "hover", eventPosition));
+                    target.fire(new MouseEvent(target, MouseEvent.events.hover, eventPosition));
                 }
                 this.setCursor(target.options.cursor);
             },
-            mouseup: (target, eventPosition) => {
+            [MouseEvent.events.up]: (target, eventPosition) => {
                 if (target.isClicked) {
-                    target.fire(new MouseEvent(target, "click", eventPosition));
+                    target.fire(new MouseEvent(target, MouseEvent.events.click, eventPosition));
                 }
                 target.isClicked = false;
             },
-            mousewheel: (target, eventPosition, event) => {
+            [MouseEvent.events.wheel]: (target, eventPosition, event) => {
                 if (event.deltaY > 0) {
-                    target.fire(new MouseEvent(target, "scrolldown", eventPosition))
-                        .fire(new MouseEvent(target, "zoomout", eventPosition));
+                    target.fire(new MouseEvent(target, MouseEvent.events.scrollDown, eventPosition))
+                        .fire(new MouseEvent(target, MouseEvent.events.zoomOut, eventPosition));
                 }
                 else if (event.deltaY < 0) {
-                    target.fire(new MouseEvent(target, "scrollup", eventPosition))
-                        .fire(new MouseEvent(target, "zoomin", eventPosition));
+                    target.fire(new MouseEvent(target, MouseEvent.events.scrollUp, eventPosition))
+                        .fire(new MouseEvent(target, MouseEvent.events.zoomIn, eventPosition));
                 }
             },
         };

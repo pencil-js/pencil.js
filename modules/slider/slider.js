@@ -3,6 +3,7 @@ import Circle from "@pencil.js/circle";
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
 import Input from "@pencil.js/input";
+import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
 import { constrain } from "@pencil.js/math";
@@ -35,7 +36,7 @@ export default class Slider extends Input {
         this.handle.draggable({
             constrain: this.constrainer,
         });
-        this.handle.on("drag", () => this.fire(new BaseEvent(this, "change")), true);
+        this.handle.on(MouseEvent.events.drag, () => this.fire(new BaseEvent(this, "change")), true);
     }
 
     /**
