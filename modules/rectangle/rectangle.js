@@ -36,10 +36,11 @@ export default class Rectangle extends Component {
      * @return {Position}
      */
     getOriginPosition () {
-        const { origin } = this.options;
-
-        if (origin instanceof Position) {
-            return origin;
+        try {
+            return Position.from(this.options.origin);
+        }
+        catch (e) {
+            const { origin } = this.options;
         }
 
         const position = new Position();
@@ -80,7 +81,7 @@ export default class Rectangle extends Component {
     /**
      * @typedef {Object} RectangleOptions
      * @extends ComponentOptions
-     * @prop {String} [origin=Rectangle.origins.topLeft] - Origin of the rectangle's position
+     * @prop {String|PositionDefinition} [origin=Rectangle.origins.topLeft] - Origin of the rectangle's position
      */
     /**
      * @return {RectangleOptions}
