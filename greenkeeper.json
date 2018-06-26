@@ -1,0 +1,39 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "modules/arc/package.json",
+        "modules/base-event/package.json",
+        "modules/button/package.json",
+        "modules/checkbox/package.json",
+        "modules/circle/package.json",
+        "modules/component/package.json",
+        "modules/container/package.json",
+        "modules/draggable/package.json",
+        "modules/event-emitter/package.json",
+        "modules/image/package.json",
+        "modules/input/package.json",
+        "modules/keyboard-event/package.json",
+        "modules/line/package.json",
+        "modules/math/package.json",
+        "modules/mouse-event/package.json",
+        "modules/offscreen-canvas/package.json",
+        "modules/path/package.json",
+        "modules/polygon/package.json",
+        "modules/position/package.json",
+        "modules/rectangle/package.json",
+        "modules/regular-polygon/package.json",
+        "modules/resizable/package.json",
+        "modules/scene/package.json",
+        "modules/slider/package.json",
+        "modules/spline/package.json",
+        "modules/square/package.json",
+        "modules/star/package.json",
+        "modules/text/package.json",
+        "modules/triangle/package.json",
+        "modules/vector/package.json",
+        "package.json"
+      ]
+    }
+  }
+}

@@ -5,6 +5,7 @@
 [![devDependencies Status](https://david-dm.org/GMartigny/pencil.js/dev-status.svg)](https://david-dm.org/GMartigny/pencil.js?type=dev)
 [![Maintainability](https://api.codeclimate.com/v1/badges/77637abd58fe1c7323ee/maintainability)](https://codeclimate.com/github/GMartigny/pencil.js/maintainability)
 [![Inline docs](http://inch-ci.org/github/GMartigny/pencil.js.svg?branch=master)](http://inch-ci.org/github/GMartigny/pencil.js)
+[![Greenkeeper badge](https://badges.greenkeeper.io/GMartigny/pencil.js.svg)](https://greenkeeper.io/)
 
 Nice modular interactive 2D drawing library.
 
