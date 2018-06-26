@@ -64,12 +64,12 @@ export default class Scene extends Container {
          */
         this.lastTick = null;
 
-        this._listenForEvents();
-
         /**
          * @type {Boolean}
          */
-        this.isReady = true;
+        this.isReady = false;
+
+        this._listenForEvents();
     }
 
     /**
@@ -131,20 +131,23 @@ export default class Scene extends Container {
                 passive: true,
             });
         });
+        this.isReady = true;
     }
 
     /**
      *
      * @param {String} [cursor=Component.cursors.default] - Cursor string
+     * @return {Scene} Itself
      */
     setCursor (cursor = Component.cursors.default) {
         this.ctx.canvas.style.cursor = cursor;
+        return this;
     }
 
     /**
      * Draw the whole scene
-     * @return {Scene} Itself
      * @param {CanvasRenderingContext2D|OffScreenCanvas} [onto] -
+     * @return {Scene} Itself
      */
     render (onto) {
         const animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this, undefined)) : null;
@@ -181,6 +184,7 @@ export default class Scene extends Container {
     /**
      * Erase everything on scene
      * @param {CanvasRenderingContext2D} [context=this.ctx] -
+     * @return {Scene} Itself
      */
     clear (context = this.ctx) {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -188,38 +192,47 @@ export default class Scene extends Container {
             context.fillStyle = this.options.fill;
             context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         }
+        return this;
     }
 
     /**
      * Start to render the scene each frame
+     * @return {Scene} Itself
      */
     startLoop () {
         this.isLooped = true;
         this.render();
+        return this;
     }
 
     /**
      * Stop scene from being rendered
+     * @return {Scene} Itself
      */
     stopLoop () {
         this.isLooped = false;
         this.fps = 0;
+        return this;
     }
 
     /**
      * Hide the scene
+     * @return {Scene} Itself
      */
     hide () {
         super.hide();
         this.ctx.canvas.style.visibility = "hidden";
+        return this;
     }
 
     /**
      * Show the scene
+     * @return {Scene} Itself
      */
     show () {
         super.show();
         this.ctx.canvas.style.visibility = "";
+        return this;
     }
 
     /**
