@@ -10,7 +10,8 @@
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
     "lint": "eslint pencil.js modules/**/*.js",
-    "test": "jest-webpack",
+    "link": "lerna bootstrap",
+    "test": "jest-webpack && npm run lint",
     "build": "webpack --mode=development",
     "prepublishOnly": "webpack --mode=production"
   },
