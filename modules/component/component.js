@@ -109,6 +109,7 @@ export default class Component extends Container {
     /**
      * All available cursors
      * https://www.w3.org/TR/2017/WD-css-ui-4-20171222/#cursor
+     * @enum {String}
      * @return {Object}
      */
     static get cursors () {
@@ -175,6 +176,7 @@ export default class Component extends Container {
      * @prop {String} bevel - Join with a straight line between the line edges
      */
     /**
+     * @enum {String}
      * @return {LineJoins}
      */
     static get joins () {

@@ -290,6 +290,7 @@ export default class Text extends Component {
      * @prop {String} end - The text is aligned at the normal end of the line. (regarding locales)
      */
     /**
+     * @enum {String}
      * @returns {TextAlignments}
      */
     static get alignments () {

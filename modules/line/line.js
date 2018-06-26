@@ -101,6 +101,7 @@ export default class Line extends Component {
      * @prop {String} square - Square caps by adding a square at end points, with a size of lineWidth
      */
     /**
+     * @enum {String}
      * @return {LineCaps}
      */
     static get caps () {

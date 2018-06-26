@@ -101,6 +101,7 @@ export default class Rectangle extends Component {
      * @prop {String} center
      */
     /**
+     * @enum {String}
      * @return {RectangleOrigins}
      */
     static get origins () {
