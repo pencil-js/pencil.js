@@ -40,20 +40,7 @@ import Slider from "@pencil.js/slider";
 import "@pencil.js/draggable";
 import "@pencil.js/resizable";
 
-/**
- * Construct Pencil objects from a JSON
- * @param {Object} json - Valid JSON
- * @return {*}
- */
-function from (json) {
-    const instance = classes[json.constructor].from(json);
-    if (json.children) {
-        instance.add(...json.children.map(child => from(child)));
-    }
-    return instance;
-}
-
-const classes = {
+const exportableClasses = {
     Container,
     Scene,
     Arc,
@@ -76,6 +63,19 @@ const classes = {
     Button,
 };
 
+/**
+ * Construct Pencil objects from a JSON
+ * @param {Object} json - Valid JSON
+ * @return {*}
+ */
+function from (json) {
+    const instance = exportableClasses[json.constructor].from(json);
+    if (json.children) {
+        instance.add(...json.children.map(child => from(child)));
+    }
+    return instance;
+}
+
 // Export all under namespace
 export default Object.assign({
     EventEmitter,
@@ -88,7 +88,7 @@ export default Object.assign({
     from,
     Math,
     OffScreenCanvas,
-}, classes);
+}, exportableClasses);
 
 // Named exports
 export {

@@ -41,22 +41,20 @@ export default class Rectangle extends Component {
         }
         catch (e) {
             const { origin } = this.options;
-        }
-
-        const position = new Position();
-        if (origin === Rectangle.origins.center) {
-            position.x = this.width / 2;
-            position.y = this.height / 2;
-        }
-        else {
-            if (origin === Rectangle.origins.topRight || origin === Rectangle.origins.bottomRight) {
-                position.x = this.width;
+            const position = new Position();
+            if (origin === Rectangle.origins.center) {
+                position.set(this.width / 2, this.height / 2);
             }
-            if (origin === Rectangle.origins.bottomLeft || origin === Rectangle.origins.bottomRight) {
-                position.y = this.height;
+            else {
+                if (origin === Rectangle.origins.topRight || origin === Rectangle.origins.bottomRight) {
+                    position.x = this.width;
+                }
+                if (origin === Rectangle.origins.bottomLeft || origin === Rectangle.origins.bottomRight) {
+                    position.y = this.height;
+                }
             }
+            return position;
         }
-        return position;
     }
 
     /**

@@ -30,8 +30,8 @@ export default class Button extends Input {
     /**
      * @inheritDoc
      */
-    click () {
-        // TODO: need feedback
+    click () { // eslint-disable-line class-methods-use-this
+        // TODO: need visual feedback
         // do not call super.click on purpose, don't need to fire "change" on a button
     }
 
