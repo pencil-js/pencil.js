@@ -37,17 +37,16 @@
     }));
 
     const points = [
-        new P.Position(20, 130),
-        new P.Position(50, 180),
-        new P.Position(70, 160),
-        new P.Position(20, 170),
+        new P.Position(30, 50),
+        new P.Position(50, 30),
+        new P.Position(0, 40),
     ];
 
-    shapes.push(new P.Line(points, {
+    shapes.push(new P.Line(new P.Position(20, 130), points, {
         strokeWidth: 4,
         cap: P.Line.caps.butt,
     }));
-    shapes.push(new P.Spline(points.map(point => point.clone().add(50, 0)), 0.5, {
+    shapes.push(new P.Spline(new P.Position(70, 130), points, 0.5, {
         strokeWidth: 4,
     }));
 
