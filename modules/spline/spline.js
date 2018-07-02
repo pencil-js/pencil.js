@@ -10,12 +10,13 @@ import { equals } from "@pencil.js/math";
 export default class Spline extends Line {
     /**
      * Spline constructor
-     * @param {Array<PositionDefinition>} points - Set of points to go through
+     * @param {PositionDefinition} positionDefinition - First point
+     * @param {Array<PositionDefinition>|PositionDefinition} points - Set of points to go through or a single target point
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension between points (0 means straight line, can take any value, but with weird results above 1)
      * @param {LineOptions} [options] - Drawing options
      */
-    constructor (points, tension = Spline.defaultTension, options) {
-        super(points, options);
+    constructor (positionDefinition, points, tension = Spline.defaultTension, options) {
+        super(positionDefinition, points, options);
 
         /**
          * @type {Number}
@@ -29,12 +30,13 @@ export default class Spline extends Line {
      * @return {Spline} Itself
      */
     trace (path) {
-        if (this.points.length < 3 || equals(this.tension, 0)) {
+        path.moveTo(0, 0);
+        if (this.points.length === 1 || equals(this.tension, 0)) {
             super.trace(path);
         }
         else {
-            path.lineCap = this.options.cap;
-            Spline.splineThrough(path, this.points.map(point => point.clone().subtract(this.position)), this.tension);
+            const points = this.points.map(point => point.clone().add(this.position)).unshift(this.position);
+            Spline.splineThrough(path, points, this.tension);
         }
         return this;
     }
