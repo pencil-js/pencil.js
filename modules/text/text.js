@@ -13,10 +13,10 @@ export default class Text extends Component {
     /**
      * Text constructor
      * @param {PositionDefinition} positionDefinition - Top most point of the line start (depend on align option)
-     * @param {String} text - Text to display
+     * @param {String} [text=""] - Text to display
      * @param {TextOptions} [options] - Drawing options
      */
-    constructor (positionDefinition, text, options) {
+    constructor (positionDefinition, text = "", options) {
         super(positionDefinition, options);
 
         /**
