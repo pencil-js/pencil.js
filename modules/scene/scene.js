@@ -1,5 +1,6 @@
-import Container from "@pencil.js/container";
 import Component from "@pencil.js/component";
+import Container from "@pencil.js/container";
+import KeyboardEvent from "@pencil.js/keyboard-event";
 import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 import { random } from "@pencil.js/math";
@@ -80,7 +81,7 @@ export default class Scene extends Container {
         }
 
         let hovered = null;
-        const listeners = {
+        const mouseListeners = {
             [MouseEvent.events.down]: target => target.isClicked = true,
             [MouseEvent.events.move]: (target, eventPosition) => {
                 target.isClicked = false;
@@ -116,7 +117,7 @@ export default class Scene extends Container {
                 }
             },
         };
-        Object.keys(listeners).forEach((eventName) => {
+        Object.keys(mouseListeners).forEach((eventName) => {
             window.addEventListener(eventName, (event) => {
                 const eventPosition = (new Position(event.clientX, event.clientY))
                     .subtract(this.containerPosition)
@@ -124,10 +125,24 @@ export default class Scene extends Container {
                 const target = this.getTarget(eventPosition, this.ctx);
                 if (target) {
                     target.fire(new MouseEvent(target, eventName, eventPosition));
-                    listeners[eventName](target, eventPosition, event);
+                    if (mouseListeners[eventName] instanceof Function) {
+                        mouseListeners[eventName](target, eventPosition, event);
+                    }
                 }
             }, {
                 passive: true,
+            });
+        });
+        const keyboardListener = {
+            [KeyboardEvent.events.down]: null,
+            [KeyboardEvent.events.up]: null,
+        };
+        Object.keys(keyboardListener).forEach((eventName) => {
+            window.addEventListener(eventName, (event) => {
+                this.fire(new KeyboardEvent(this, eventName, event.key));
+                if (keyboardListener[eventName] instanceof Function) {
+                    keyboardListener[eventName](event);
+                }
             });
         });
         this.isReady = true;
