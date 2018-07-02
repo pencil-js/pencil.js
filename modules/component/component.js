@@ -107,10 +107,55 @@ export default class Component extends Container {
     }
 
     /**
+     * @typedef {Object} Cursors
+     * @enum {String}
+     * @prop {String} default - Normal behavior
+     * @prop {String} none - No visible cursor
+     * @prop {String} contextMenu - Possible to extends context-menu
+     * @prop {String} help - Display help
+     * @prop {String} pointer - Can be clicked
+     * @prop {String} progress - Process running in background
+     * @prop {String} wait - Process running in foreground
+     * @prop {String} cell - Table cell selection
+     * @prop {String} crosshair - Precise selection
+     * @prop {String} text - Text selection
+     * @prop {String} textVertical - Vertical test selection
+     * @prop {String} alias - Can create a shortcut
+     * @prop {String} copy - Can be copied
+     * @prop {String} move - Move around
+     * @prop {String} noDrop - Drop not allowed
+     * @prop {String} notAllowed - Action not allowed
+     * @prop {String} grab - Can be grabbed
+     * @prop {String} grabbing - Currently grabbing
+     * @prop {String} allScroll - Scroll in all direction
+     * @prop {String} colResize - Horizontal resize
+     * @prop {String} rowResize - Vertical resize
+     * @prop {String} nResize - Resize the north border
+     * @prop {String} eResize - Resize the east border
+     * @prop {String} sResize - Resize the south border
+     * @prop {String} wResize - Resize the west border
+     * @prop {String} neResize - Resize the north-east corner
+     * @prop {String} seResize - Resize the south-east corner
+     * @prop {String} swResize - Resize the north-west corner
+     * @prop {String} nwResize - Resize the north-west corner
+     * @prop {String} ewResize - Horizontal resize
+     * @prop {String} nsResize - Vertical resize
+     * @prop {String} neswResize - Diagonal resize (top-right to bottom-left)
+     * @prop {String} nwseResize - Diagonal resize (top-left to bottom-right)
+     * @prop {String} zoomIn - Zoom in
+     * @prop {String} zoomOut - Zoom out
+     * @prop {String} link - Alias for "alias"
+     * @prop {String} verticalResize - Alias for "rowResize"
+     * @prop {String} horizontalResize - Alias for "colResize"
+     * @prop {String} topResize - Alias for "nResize"
+     * @prop {String} rightResize - Alias for "eResize"
+     * @prop {String} bottomResize - Alias for "sResize"
+     * @prop {String} leftResize - Alias for "wResize"
+     */
+    /**
      * All available cursors
      * https://www.w3.org/TR/2017/WD-css-ui-4-20171222/#cursor
-     * @enum {String}
-     * @return {Object}
+     * @return {Cursors}
      */
     static get cursors () {
         const cursors = {
@@ -130,8 +175,6 @@ export default class Component extends Container {
             move: "move",
             noDrop: "no-drop",
             notAllowed: "not-allowed",
-            grab: "grab",
-            grabbing: "grabbing",
             allScroll: "all-scroll",
             colResize: "col-resize",
             rowResize: "row-resize",
@@ -151,14 +194,11 @@ export default class Component extends Container {
             zoomOut: "zoom-out",
         };
 
-        // While Blink don't support "grab" and "grabbing", let's //FIXME
-        if (!CSS.supports("cursor", cursors.grab)) {
-            cursors.grab = "-webkit-grab";
-        }
-        if (!CSS.supports("cursor", cursors.grabbing)) {
-            cursors.grabbing = "-webkit-grabbing";
-        }
+        // While Blink don't support "grab" and "grabbing"
+        cursors.grab = CSS.supports("cursor", "grab") ? "grab" : "-webkit-grab";
+        cursors.grabbing = CSS.supports("cursor", "grabbing") ? "grabbing" : "-webkit-grab";
 
+        // Aliases
         cursors.link = cursors.alias;
         cursors.verticalResize = cursors.rowResize;
         cursors.horizontalResize = cursors.colResize;
