@@ -35,8 +35,7 @@ export default class Spline extends Line {
             super.trace(path);
         }
         else {
-            const points = this.points.map(point => point.clone().add(this.position)).unshift(this.position);
-            Spline.splineThrough(path, points, this.tension);
+            Spline.splineThrough(path, [[0, 0]].concat(this.points), this.tension);
         }
         return this;
     }

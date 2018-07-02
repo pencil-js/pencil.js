@@ -14,10 +14,6 @@ export default class Line extends Component {
      * @param {LineOptions} [options] - Drawing options
      */
     constructor (positionDefinition, points, options) {
-        if (points.length < 2) {
-            throw new RangeError(`A Line need at least 2 points, only ${points.length} given.`);
-        }
-
         super(positionDefinition, options);
 
         let positions;
