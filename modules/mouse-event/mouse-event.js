@@ -19,6 +19,7 @@ export default class MouseEvent extends BaseEvent {
 
     /**
      * @typedef {Object} MouseEvents
+     * @enum {String}
      * @prop {String} down - Mouse button is pressed
      * @prop {String} up - Mouse button is released
      * @prop {String} click - Mouse button is pressed then released without moving
@@ -36,7 +37,6 @@ export default class MouseEvent extends BaseEvent {
      * @prop {String} resize - Mouse is moved while holding the handle of a resizable component
      */
     /**
-     * @enum {String}
      * @return {MouseEvents}
      */
     static get events () {

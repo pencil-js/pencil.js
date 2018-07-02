@@ -171,12 +171,12 @@ export default class Component extends Container {
 
     /**
      * @typedef {Object} LineJoins
+     * @enum {String}
      * @prop {String} miter - Join segment by extending the line edges until they meet
      * @prop {String} round - Join with a circle tangent to line edges
      * @prop {String} bevel - Join with a straight line between the line edges
      */
     /**
-     * @enum {String}
      * @return {LineJoins}
      */
     static get joins () {

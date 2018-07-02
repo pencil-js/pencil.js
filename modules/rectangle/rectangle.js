@@ -92,6 +92,7 @@ export default class Rectangle extends Component {
 
     /**
      * @typedef {Object} RectangleOrigins
+     * @enum {String}
      * @prop {String} topLeft
      * @prop {String} topRight
      * @prop {String} bottomLeft
@@ -99,7 +100,6 @@ export default class Rectangle extends Component {
      * @prop {String} center
      */
     /**
-     * @enum {String}
      * @return {RectangleOrigins}
      */
     static get origins () {

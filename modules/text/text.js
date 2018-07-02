@@ -283,6 +283,7 @@ export default class Text extends Component {
 
     /**
      * @typedef {Object} TextAlignments
+     * @enum {String}
      * @prop {String} left - The text is left-aligned.
      * @prop {String} right - The text is right-aligned.
      * @prop {String} center - The text is centered.
@@ -290,7 +291,6 @@ export default class Text extends Component {
      * @prop {String} end - The text is aligned at the normal end of the line. (regarding locales)
      */
     /**
-     * @enum {String}
      * @returns {TextAlignments}
      */
     static get alignments () {

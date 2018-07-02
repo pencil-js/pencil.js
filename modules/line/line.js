@@ -96,12 +96,12 @@ export default class Line extends Component {
 
     /**
      * @typedef {Object} LineCaps
+     * @enum {String}
      * @prop {String} butt - Caps cut straight at end points
      * @prop {String} round - Round caps by adding a circle at end points, with a radius of lineWidth
      * @prop {String} square - Square caps by adding a square at end points, with a size of lineWidth
      */
     /**
-     * @enum {String}
      * @return {LineCaps}
      */
     static get caps () {
