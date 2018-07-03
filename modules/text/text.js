@@ -1,6 +1,5 @@
 import BaseEvent from "@pencil.js/base-event";
 import Component from "@pencil.js/component";
-import Container from "@pencil.js/container";
 import Position from "@pencil.js/position";
 import textDirection from "text-direction";
 
@@ -67,48 +66,37 @@ export default class Text extends Component {
     }
 
     /**
-     *
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @return {Text}
-     */
-    render (ctx) {
-        return Container.prototype.render.call(this, ctx, () => {
-            if (this.lines.length) {
-                this.trace(ctx);
-            }
-        });
-    }
-
-    /**
      * Draw the text into a drawing context
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Text} Itself
      */
     makePath (ctx) {
-        const lineHeight = this.height / this.lines.length; // TODO: could be user defined
+        if (this.lines.length) {
+            const lineHeight = this.height / this.lines.length; // TODO: could be user defined
 
-        const opts = this.options;
-        ctx.font = this.getFontDefinition();
-        ctx.textAlign = opts.align;
-        ctx.textBaseline = "top"; // TODO: user could want to change this, but fonts em-box can have crazy values
+            const opts = this.options;
+            ctx.font = this.getFontDefinition();
+            ctx.textAlign = opts.align;
+            ctx.textBaseline = "top"; // TODO: user could want to change this, but fonts em-box can have crazy values
 
-        if (opts.fill) {
-            ctx.fillStyle = opts.fill;
-        }
-        if (opts.stroke) {
-            ctx.strokeStyle = opts.stroke;
-            ctx.lineWidth = opts.strokeWidth;
-        }
-
-        this.lines.forEach((line, index) => {
-            const y = index * lineHeight;
             if (opts.fill) {
-                ctx.fillText(line, 0, y);
+                ctx.fillStyle = opts.fill;
             }
             if (opts.stroke) {
-                ctx.strokeText(line, 0, y);
+                ctx.strokeStyle = opts.stroke;
+                ctx.lineWidth = opts.strokeWidth;
             }
-        });
+
+            this.lines.forEach((line, index) => {
+                const y = index * lineHeight;
+                if (opts.fill) {
+                    ctx.fillText(line, 0, y);
+                }
+                if (opts.stroke) {
+                    ctx.strokeText(line, 0, y);
+                }
+            });
+        }
         return this;
     }
 
