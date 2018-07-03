@@ -136,12 +136,15 @@ export default class Position {
 
     /**
      * Constrain the position to a rectangle define by two positions
-     * @param {Vector} vector - Vector holding the two positions
+     * @param {PositionDefinition} startDefinition -
+     * @param {PositionDefinition} endDefinition -
      * @return {Position} Itself
      */
-    constrain (vector) {
-        const x = constrain(this.x, vector.start.x, vector.end.x);
-        const y = constrain(this.y, vector.start.y, vector.end.y);
+    constrain (startDefinition, endDefinition) {
+        const start = Position.from(startDefinition);
+        const end = Position.from(endDefinition);
+        const x = constrain(this.x, start.x, end.x);
+        const y = constrain(this.y, start.y, end.y);
         return this.set(x, y);
     }
 

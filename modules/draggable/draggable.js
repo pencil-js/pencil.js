@@ -51,7 +51,7 @@ Component.prototype.draggable = function draggable (options) {
             const move = originPosition.clone().add(mergedOptions.x && difference.x, mergedOptions.y && difference.y);
             this.position.set(move);
             if (mergedOptions.constrain) {
-                this.position.constrain(mergedOptions.constrain);
+                this.position.constrain(mergedOptions.constrain.start, mergedOptions.constrain.end);
             }
 
             this.fire(new MouseEvent(this, MouseEvent.events.drag, event.position));

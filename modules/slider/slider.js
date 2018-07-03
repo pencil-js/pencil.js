@@ -44,7 +44,7 @@ export default class Slider extends Input {
      */
     click (position) {
         this.handle.position.set(position.x - (Slider.HEIGHT / 2), 0)
-            .constrain(this.constrainer);
+            .constrain(this.constrainer.start, this.constrainer.end);
         super.click();
     }
 
