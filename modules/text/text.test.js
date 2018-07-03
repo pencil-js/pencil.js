@@ -1,36 +1,15 @@
-/* global beforeAll test expect jest */
+/* global beforeAll test expect */
 
-import Position from "@pencil.js/position";
-import Component from "@pencil.js/component";
 import Text from "./text";
 
-const str = ["Hello\nworld"];
+const str = "Hello\nworld";
 let text;
 beforeAll(() => {
-    text = new Text(new Position(55, 22.5), str);
+    text = new Text([55, 22.5], str);
 });
 
 test("Text creation", () => {
     expect(text.text).toBe(str);
-});
-
-test("Text render", () => {
-    const ctx = {
-        fillText: jest.fn(),
-    };
-    text.trace(ctx);
-
-    expect(ctx.fillText.mock.calls.length).toBe(2);
-    expect(ctx.font).toBe(`${Text.defaultOptions.fontSize}px ${Text.defaultOptions.font}`);
-    expect(ctx.textAlign).toBe(Text.defaultOptions.align);
-    expect(ctx.textBaseline).toBe("top");
-    expect(ctx.fillStyle).toBe(Component.defaultOptions.fill);
-});
-
-test("Text isHover", () => {
-    // Text is without root therefore can't be hovered
-    expect(text.isHover(text.position)).toBe(false);
-    // TODO: test with root
 });
 
 test("Text measures", () => {

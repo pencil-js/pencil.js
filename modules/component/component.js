@@ -1,4 +1,6 @@
 import Container from "@pencil.js/container";
+import Position from "@pencil.js/position";
+import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 
 /**
  * Abstract class for visual component
@@ -29,7 +31,7 @@ export default class Component extends Container {
     /**
      * Make the path and trace it
      * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @return {Component} Itself
+     * @return {Path2D}
      */
     makePath (ctx) {
         const path = new Path2D();
@@ -48,7 +50,7 @@ export default class Component extends Container {
             ctx.stroke(path);
         }
 
-        return this;
+        return path;
     }
 
     /**
@@ -61,20 +63,19 @@ export default class Component extends Container {
 
     /**
      * Define if is hover a position
-     * @param {Position} position - Any position
-     * @param {CanvasRenderingContext2D} ctx -
+     * @param {PositionDefinition} positionDefinition - Any position
+     * @param {CanvasRenderingContext2D} [ctx] - Context use for calculation
      * @returns {Boolean}
      */
-    isHover (position, ctx) {
+    isHover (positionDefinition, ctx = (new OffScreenCanvas()).ctx) {
         if (!this.options.shown) {
             return false;
         }
 
-        const relative = position.clone().subtract(this.position);
+        const relative = Position.from(positionDefinition).clone().subtract(this.position);
         const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationAnchor);
 
-        const path = new Path2D();
-        this.trace(path);
+        const path = this.makePath(ctx);
         let result = ctx.isPointInPath(path, rotated.x, rotated.y) || ctx.isPointInStroke(path, rotated.x, rotated.y);
 
         if (this.options.clip) {
@@ -91,7 +92,8 @@ export default class Component extends Container {
      * @prop {String} [fill="#000"] - Color used to fill, set to null for transparent
      * @prop {String} [stroke=null] - Color used to stroke, set to null for transparent
      * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
-     * @prop {String} [cursor=null] - Cursor to use when hover
+     * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
+     * @prop {String} [join=Component.joins.miter] - How lines join between them
      */
     /**
      * @return {ComponentOptions}

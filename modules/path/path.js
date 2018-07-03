@@ -39,7 +39,7 @@ class Instruction {
      * Unimplemented
      * FIXME: How to serialize a wrapper of a function ?
      */
-    toJSON () {
+    toJSON () { // eslint-disable-line class-methods-use-this
         throw new ReferenceError("Unimplemented toJSON function in Instruction");
     }
 
@@ -265,6 +265,7 @@ export default class Path extends Component {
         }, last);
     }
 
+    /* eslint-disable */
     /**
      *
      * @param {PositionDefinition} position - Any position
@@ -291,4 +292,5 @@ export default class Path extends Component {
             // TODO
         }, position);
     }
+    /* eslint-enable */
 }

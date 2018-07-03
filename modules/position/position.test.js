@@ -1,6 +1,5 @@
 /* global test expect describe  beforeEach afterEach */
 
-import Vector from "@pencil.js/vector";
 import { random } from "@pencil.js/math";
 import Position from "./position";
 
@@ -116,15 +115,15 @@ test("Position rotate", () => {
 test("Position constrain", () => {
     const pos = new Position(0, 0);
 
-    pos.constrain(new Vector([-10, -10], [10, 10]));
+    pos.constrain([-10, -10], [10, 10]);
     expect(pos.x).toBe(0);
     expect(pos.y).toBe(0);
 
-    pos.constrain(new Vector([-10, -10], [10, -5]));
+    pos.constrain([-10, -10], [10, -5]);
     expect(pos.x).toBe(0);
     expect(pos.y).toBe(-5);
 
-    pos.constrain(new Vector([-10, -10], [-8, -8]));
+    pos.constrain([-10, -10], [-8, -8]);
     expect(pos.x).toBe(-8);
     expect(pos.y).toBe(-8);
 });

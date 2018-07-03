@@ -5,10 +5,10 @@
 export default class OffScreenCanvas {
     /**
      * Off-screen canvas constructor
-     * @param {Number} width - Width of the canvas
-     * @param {Number} height - Height of the canvas
+     * @param {Number} [width=1] - Width of the canvas
+     * @param {Number} [height=1] - Height of the canvas
      */
-    constructor (width, height) {
+    constructor (width = 1, height = 1) {
         this.canvas = document.createElement("canvas");
         this.setSize(width, height);
 
@@ -16,13 +16,13 @@ export default class OffScreenCanvas {
     }
 
     /**
-     *
+     * Change this canvas size
      * @param {Number} width - New width for the canvas
      * @param {Number} height - New height for the canvas
      */
     setSize (width, height) {
-        this.canvas.width = width;
-        this.canvas.height = height;
+        this.canvas.width = +width;
+        this.canvas.height = +height;
     }
 
     /**

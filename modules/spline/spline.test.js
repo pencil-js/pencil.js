@@ -1,27 +1,23 @@
-/* global test expect jest */
+/* global test expect */
 
 import Position from "@pencil.js/position";
 import Spline from "./spline";
 
 test("Spline creation and trace", () => {
     const n = 5;
-    const points = (new Array(n)).fill().map((x, index) => new Position(index, index));
-    const spline = new Spline(points, 0.7);
+    const points = (new Array(n)).fill().map((x, index) => new Position(index + 1, index + 1));
+    const spline = new Spline([0, 0], points, 0.7);
 
     expect(spline.tension).toBe(0.7);
     expect(spline.points.length).toBe(n);
 
-    const ctx = {
-        moveTo: jest.fn(),
-        bezierCurveTo: jest.fn(),
-        lineTo: jest.fn(),
-    };
-    spline.trace(ctx);
-    expect(ctx.bezierCurveTo.mock.calls.length).toBe(n - 1);
+    const path = new Path2D();
+    spline.trace(path);
+    expect(path.bezierCurveTo.mock.calls.length).toBe(n);
 
     spline.tension = 0;
-    spline.trace(ctx);
-    expect(ctx.lineTo.mock.calls.length).toBe(n - 1);
+    spline.trace(path);
+    expect(path.lineTo.mock.calls.length).toBe(n);
 });
 
 test("Spline static", () => {
