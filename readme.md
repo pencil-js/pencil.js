@@ -6,6 +6,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/77637abd58fe1c7323ee/maintainability)](https://codeclimate.com/github/GMartigny/pencil.js/maintainability)
 [![Inline docs](http://inch-ci.org/github/GMartigny/pencil.js.svg?branch=master)](http://inch-ci.org/github/GMartigny/pencil.js)
 [![Greenkeeper badge](https://badges.greenkeeper.io/GMartigny/pencil.js.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/GMartigny/pencil.js.svg?branch=master)](https://travis-ci.org/GMartigny/pencil.js)
 
 Nice modular interactive 2D drawing library.
 
