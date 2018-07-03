@@ -9,8 +9,8 @@
   "unpkg": "dist/pencil.min.js",
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
+    "init": "lerna bootstrap",
     "lint": "eslint pencil.js modules/**/*.js",
-    "link": "lerna bootstrap",
     "test": "jest-webpack && npm run lint",
     "build": "webpack --mode=development",
     "prepublishOnly": "webpack --mode=production"
