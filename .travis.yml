@@ -1,3 +1,7 @@
 language: node_js
 node_js:
     - "v10.5"
+before_install:
+    - npm i lerna
+install:
+    - npm run init
