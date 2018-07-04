@@ -10,7 +10,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 after_script:
-  - ./cc-test-reporter after-build -t lcov -p ./.cache/jest-webpack/ --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build -t lcov -p ".cache/jest-webpack/" -d --exit-code $TRAVIS_TEST_RESULT
 
 # Lerna install
 before_install:
