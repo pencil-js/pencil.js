@@ -18,7 +18,9 @@
   "jest": {
     "setupFiles": [
       "jest-canvas-mock"
-    ]
+    ],
+    "collectCoverage": true,
+    "coverageReporters": ["lcov"]
   },
   "eslintIgnore": [
     "**/node_modules/*"
