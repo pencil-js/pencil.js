@@ -10,7 +10,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 after_script:
-  - ./cc-test-reporter after-build -t lcov -p /home/travis/build/GMartigny/pencil.js/.cache/jest-webpack/ -d --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter format-coverage -t lcov .cache/jest-webpack/coverage/lcov.info
+  - ./cc-test-reporter upload-coverage
 
 # Lerna install
 before_install:
