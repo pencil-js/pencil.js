@@ -20,6 +20,7 @@
       "jest-canvas-mock"
     ],
     "collectCoverage": true,
+    "coveragePathIgnorePatterns": ["/node_modules/", "test"],
     "coverageReporters": ["lcov"]
   },
   "eslintIgnore": [
