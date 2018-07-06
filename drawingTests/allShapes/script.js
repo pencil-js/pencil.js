@@ -65,12 +65,12 @@
     }));
 
     shapes.push(new P.Path(new P.Position(140, 30), [
-        P.Path.lineTo(new P.Position(160, 30)),
-        P.Path.halfTo(new P.Position(180, 30), false),
-        P.Path.quarterTo(new P.Position(200, 10)),
+        P.Path.lineTo(new P.Position(20, 0)),
+        P.Path.halfTo(new P.Position(40, 0)),
+        P.Path.quarterTo(new P.Position(60, -20), false),
         P.Path.splineThrough([
-            new P.Position(200, 80),
-            new P.Position(140, 80),
+            new P.Position(60, 50),
+            new P.Position(0, 50),
         ], 0.4),
     ], false, {
         stroke: "hsl(210, 100%, 50%)",
