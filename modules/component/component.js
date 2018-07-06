@@ -75,7 +75,8 @@ export default class Component extends Container {
         const relative = Position.from(positionDefinition).clone().subtract(this.position);
         const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationAnchor);
 
-        const path = this.makePath(ctx);
+        const path = new Path2D();
+        this.trace(path);
         let result = ctx.isPointInPath(path, rotated.x, rotated.y) || ctx.isPointInStroke(path, rotated.x, rotated.y);
 
         if (this.options.clip) {
