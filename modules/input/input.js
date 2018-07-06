@@ -109,4 +109,18 @@ export default class Input extends Container {
             hover: "#dcdcdc",
         });
     }
+
+    /**
+     * @typedef {Object} InputEvents
+     * @enum {String}
+     * @prop {String} change - Input value has changed
+     */
+    /**
+     * @return {InputEvents}
+     */
+    static get events () {
+        return {
+            change: "change",
+        };
+    }
 }
