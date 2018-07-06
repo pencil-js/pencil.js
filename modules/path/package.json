@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/path",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Hand-free drawing tool for Pencil.js package.",
   "main": "path.js",
   "files": [],
@@ -16,10 +16,10 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.8.2",
-    "@pencil.js/line": "^0.8.2",
+    "@pencil.js/component": "^0.8.3",
+    "@pencil.js/line": "^0.8.3",
     "@pencil.js/position": "^0.8.2",
-    "@pencil.js/spline": "^0.8.2",
+    "@pencil.js/spline": "^0.8.3",
     "@pencil.js/vector": "^0.8.2"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

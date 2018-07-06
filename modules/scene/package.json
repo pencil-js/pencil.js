@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/scene",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Scene renderer for Pencil.js package.",
   "main": "scene.js",
   "files": [],
@@ -16,9 +16,9 @@
     "renderer"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.8.2",
+    "@pencil.js/component": "^0.8.3",
     "@pencil.js/container": "^0.8.2",
-    "@pencil.js/keyboard-event": "^0.8.2",
+    "@pencil.js/keyboard-event": "^0.8.3",
     "@pencil.js/math": "^0.8.0",
     "@pencil.js/mouse-event": "^0.8.2",
     "@pencil.js/position": "^0.8.2"
