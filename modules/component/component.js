@@ -37,12 +37,12 @@ export default class Component extends Container {
         const path = new Path2D();
         this.trace(path);
 
-        if (this.options.fill) {
+        if (this.options.fill !== null) {
             ctx.fillStyle = this.options.fill;
             ctx.fill(path);
         }
 
-        if (this.options.stroke) {
+        if (this.options.stroke !== null) {
             ctx.lineJoin = this.options.join;
             ctx.lineCap = this.options.cap;
             ctx.strokeStyle = this.options.stroke;
