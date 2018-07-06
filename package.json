@@ -1,6 +1,6 @@
 {
   "name": "pencil.js",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Modular 2D drawing library.",
   "main": "pencil.js",
   "files": [
@@ -20,8 +20,13 @@
       "jest-canvas-mock"
     ],
     "collectCoverage": true,
-    "coveragePathIgnorePatterns": ["/node_modules/", "test"],
-    "coverageReporters": ["lcov"]
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "test"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ]
   },
   "eslintIgnore": [
     "**/node_modules/*"
@@ -44,36 +49,36 @@
   },
   "homepage": "https://github.com/GMartigny/pencil.js#readme",
   "dependencies": {
-    "@pencil.js/arc": "^0.8.1",
+    "@pencil.js/arc": "^0.8.2",
     "@pencil.js/base-event": "^0.8.0",
-    "@pencil.js/button": "^0.8.1",
-    "@pencil.js/checkbox": "^0.8.1",
-    "@pencil.js/circle": "^0.8.1",
-    "@pencil.js/component": "^0.8.1",
-    "@pencil.js/container": "^0.8.1",
-    "@pencil.js/draggable": "^0.8.1",
+    "@pencil.js/button": "^0.8.2",
+    "@pencil.js/checkbox": "^0.8.2",
+    "@pencil.js/circle": "^0.8.2",
+    "@pencil.js/component": "^0.8.2",
+    "@pencil.js/container": "^0.8.2",
+    "@pencil.js/draggable": "^0.8.2",
     "@pencil.js/event-emitter": "^0.8.0",
-    "@pencil.js/image": "^0.8.1",
-    "@pencil.js/input": "^0.8.1",
-    "@pencil.js/keyboard-event": "^0.8.1",
-    "@pencil.js/line": "^0.8.1",
+    "@pencil.js/image": "^0.8.2",
+    "@pencil.js/input": "^0.8.2",
+    "@pencil.js/keyboard-event": "^0.8.2",
+    "@pencil.js/line": "^0.8.2",
     "@pencil.js/math": "^0.8.0",
-    "@pencil.js/mouse-event": "^0.8.1",
-    "@pencil.js/offscreen-canvas": "^0.8.1",
-    "@pencil.js/path": "^0.8.1",
-    "@pencil.js/polygon": "^0.8.1",
-    "@pencil.js/position": "^0.8.1",
-    "@pencil.js/rectangle": "^0.8.1",
-    "@pencil.js/regular-polygon": "^0.8.1",
-    "@pencil.js/resizable": "^0.8.1",
-    "@pencil.js/scene": "^0.8.1",
-    "@pencil.js/slider": "^0.8.1",
-    "@pencil.js/spline": "^0.8.1",
-    "@pencil.js/square": "^0.8.1",
-    "@pencil.js/star": "^0.8.1",
-    "@pencil.js/text": "^0.8.1",
-    "@pencil.js/triangle": "^0.8.1",
-    "@pencil.js/vector": "^0.8.1"
+    "@pencil.js/mouse-event": "^0.8.2",
+    "@pencil.js/offscreen-canvas": "^0.8.2",
+    "@pencil.js/path": "^0.8.2",
+    "@pencil.js/polygon": "^0.8.2",
+    "@pencil.js/position": "^0.8.2",
+    "@pencil.js/rectangle": "^0.8.2",
+    "@pencil.js/regular-polygon": "^0.8.2",
+    "@pencil.js/resizable": "^0.8.2",
+    "@pencil.js/scene": "^0.8.2",
+    "@pencil.js/slider": "^0.8.2",
+    "@pencil.js/spline": "^0.8.2",
+    "@pencil.js/square": "^0.8.2",
+    "@pencil.js/star": "^0.8.2",
+    "@pencil.js/text": "^0.8.2",
+    "@pencil.js/triangle": "^0.8.2",
+    "@pencil.js/vector": "^0.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.46",
