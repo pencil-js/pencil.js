@@ -54,11 +54,9 @@ export default class Line extends Component {
      * @inheritDoc
      */
     toJSON () {
-        const json = Object.assign(super.toJSON(), {
-            points: this.points,
+        return Object.assign(super.toJSON(), {
+            points: this.points.map(point => point.toJSON()),
         });
-        delete json.position;
-        return json;
     }
 
     /**
