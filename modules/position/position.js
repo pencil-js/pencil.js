@@ -188,10 +188,10 @@ export default class Position {
      */
     isOnSameSide (positionDefinition, vector) {
         const position = Position.from(positionDefinition);
-        const { sign } = Math;
         const thisMoved = this.clone().subtract(vector.start);
         const positionMoved = position.clone().subtract(vector.start);
         const delta = vector.getDelta();
+        const { sign } = Math;
         return sign(thisMoved.crossProduct(delta)) === sign(positionMoved.crossProduct(delta));
     }
 
@@ -228,7 +228,7 @@ export default class Position {
             return new Position(positionDefinition.x, positionDefinition.y);
         }
 
-        throw new TypeError(`Unexpected type for position [${typeof position}].`);
+        throw new TypeError(`Unexpected type for position [${typeof positionDefinition}].`);
     }
 
     /**
