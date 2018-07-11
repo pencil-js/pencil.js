@@ -4,5 +4,10 @@
     "modules/*",
     "./"
   ],
-  "version": "0.8.3"
+  "version": "0.8.3",
+  "command": {
+    "publish": {
+      "message": ":bookmark: Releasing / Version tags.\nPublish %s"
+    }
+  }
 }
