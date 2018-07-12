@@ -36,7 +36,7 @@ export const random = (min = 1, max) => {
 };
 
 /**
- * Truncate a floating number to its integer part.
+ * Truncate (quickly) a number to its integer part.
  * @param {Number} value - Any number
  * @returns {Number}
  * @example
@@ -64,4 +64,4 @@ export const degreeCircle = 360;
  * @param {Number} divisor - Divisor
  * @return {Number}
  */
-export const modulo = (value, divisor) => (value + divisor) % divisor;
+export const modulo = (value, divisor) => (value % divisor) * Math.sign(value) * Math.sign(divisor);
