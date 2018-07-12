@@ -54,4 +54,3 @@ describe("Math", () => {
         expect(M.modulo(-10, -3)).toBe(-1);
     });
 });
-
