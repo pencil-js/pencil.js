@@ -30,12 +30,12 @@ export default class Spline extends Line {
      * @return {Spline} Itself
      */
     trace (path) {
-        path.moveTo(0, 0);
         if (this.points.length === 1 || equals(this.tension, 0)) {
             super.trace(path);
         }
         else {
-            Spline.splineThrough(path, [[0, 0]].concat(this.points), this.tension);
+            path.moveTo(0, 0);
+            Spline.splineThrough(path, [new Position(0, 0)].concat(this.points), this.tension);
         }
         return this;
     }
@@ -67,14 +67,22 @@ export default class Spline extends Line {
     }
 
     /**
-     * Draw a spline through points using a tension
+     * Draw a spline through points using a tension (first point should be current position)
      * @param {Path2D} path - Current drawing path
-     * @param {Array<PositionDefinition>} points - Points to use
+     * @param {Array<PositionDefinition>} points - Points to use (need at least 2 points)
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
      */
     static splineThrough (path, points, tension = Spline.defaultTension) {
-        const getCtrlPts = Spline.getControlPoint;
+        if (points.length < 2) {
+            throw new RangeError(`Need at least 2 points to spline, but only ${points.length} given.`);
+        }
+
         const positions = points.map(point => Position.from(point));
+        if (points.length === 2) {
+            path.lineTo(positions[1].x, positions[1].y);
+        }
+
+        const getCtrlPts = Spline.getControlPoint;
         let previousControls = [null, positions[0]];
 
         for (let i = 1, l = positions.length; i < l; ++i) {
@@ -90,11 +98,11 @@ export default class Spline extends Line {
 
     /**
      * Returns control points for a point in a spline (needs before and after, 3 points in total)
-     * @param {Array<Position>} points - 3 points to use (before, target, after)
-     * @param {Number} tension - Ratio of tension
+     * @param {Array<PositionDefinition>} points - 3 points to use (before, target, after)
+     * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
      * @return {[Position, Position]}
      */
-    static getControlPoint (points, tension) {
+    static getControlPoint (points, tension = Spline.defaultTension) {
         if (points.length < 3) {
             throw new RangeError(`Need exactly 3 points to compute control points, but ${points.length} given.`);
         }
