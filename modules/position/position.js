@@ -220,11 +220,11 @@ export default class Position {
         if (positionDefinition instanceof Position) {
             return positionDefinition;
         }
-        else if (Array.isArray(positionDefinition) && positionDefinition.length === 2 &&
+        if (Array.isArray(positionDefinition) && positionDefinition.length === 2 &&
             typeof positionDefinition[0] === "number" && typeof positionDefinition[1] === "number") {
             return new Position(...positionDefinition);
         }
-        else if (typeof positionDefinition === "object" && !Array.isArray(positionDefinition)) {
+        if (typeof positionDefinition === "object" && !Array.isArray(positionDefinition)) {
             return new Position(positionDefinition.x, positionDefinition.y);
         }
 

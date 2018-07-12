@@ -37,6 +37,7 @@ export default class Input extends Container {
 
         this.on("attach", () => this.value = this.options.value, true);
     }
+
     /**
      * Return the value of the input
      */

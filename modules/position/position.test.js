@@ -174,7 +174,7 @@ describe("Position", () => {
         test("average", () => {
             const n = 10;
             const points = (new Array(n)).fill().map((p, index) => new Position(index, index * 7));
-            const average = Position.average.apply(null, points);
+            const average = Position.average(...points);
 
             expect(average instanceof Position).toBe(true);
             const avr = (n - 1) / 2;
@@ -183,4 +183,3 @@ describe("Position", () => {
         });
     });
 });
-

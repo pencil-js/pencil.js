@@ -125,13 +125,13 @@ export default class Vector {
         if (vectorDefinition instanceof Vector) {
             return vectorDefinition;
         }
-        else if (Array.isArray(vectorDefinition)) {
+        if (Array.isArray(vectorDefinition) && vectorDefinition.length === 2) {
             return new Vector(...vectorDefinition);
         }
-        else if (typeof vectorDefinition === "object") {
+        if (typeof vectorDefinition === "object") {
             return new Vector(vectorDefinition.start, vectorDefinition.end);
         }
 
-        throw new TypeError(`Unexpected type for position [${typeof position}]`);
+        throw new TypeError(`Unexpected type for vector [${typeof vectorDefinition}]`);
     }
 }
