@@ -107,14 +107,12 @@ export default class Scene extends Container {
                 target.isClicked = false;
             },
             [MouseEvent.events.wheel]: (target, eventPosition, event) => {
-                if (event.deltaY > 0) {
-                    target.fire(new MouseEvent(target, MouseEvent.events.scrollDown, eventPosition))
-                        .fire(new MouseEvent(target, MouseEvent.events.zoomOut, eventPosition));
-                }
-                else if (event.deltaY < 0) {
-                    target.fire(new MouseEvent(target, MouseEvent.events.scrollUp, eventPosition))
-                        .fire(new MouseEvent(target, MouseEvent.events.zoomIn, eventPosition));
-                }
+                const mouseEvents = MouseEvent.events;
+                const events = event.deltaY > 0 ?
+                    [mouseEvents.scrollDown, mouseEvents.zoomOut] :
+                    [mouseEvents.scrollUp, mouseEvents.zoomIn];
+                target.fire(new MouseEvent(target, events[0], eventPosition))
+                    .fire(new MouseEvent(target, events[1], eventPosition));
             },
         };
         Object.keys(mouseListeners).forEach((eventName) => {
@@ -230,23 +228,21 @@ export default class Scene extends Container {
     }
 
     /**
-     * Hide the scene
+     * @inheritDoc
      * @return {Scene} Itself
      */
     hide () {
-        super.hide();
         this.ctx.canvas.style.visibility = "hidden";
-        return this;
+        return super.hide();
     }
 
     /**
-     * Show the scene
+     * @inheritDoc
      * @return {Scene} Itself
      */
     show () {
-        super.show();
         this.ctx.canvas.style.visibility = "";
-        return this;
+        return super.show();
     }
 
     /**

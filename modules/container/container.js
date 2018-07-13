@@ -261,16 +261,20 @@ export default class Container extends EventEmitter {
 
     /**
      * Display it
+     * @return {Container} Itself
      */
     show () {
         this.options.shown = true;
+        return this;
     }
 
     /**
      * Hide it
+     * @return {Container} Itself
      */
     hide () {
         this.options.shown = false;
+        return this;
     }
 
     /**
