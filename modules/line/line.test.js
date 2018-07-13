@@ -48,6 +48,9 @@ describe("Line", () => {
     });
 
     describe("statics", () => {
+        test.skip("from", () => {
+        });
+
         test("defaultOptions", () => {
             expect(Line.defaultOptions.fill).not.toBeDefined();
             expect(Line.defaultOptions.cap).toBe(Line.caps.round);

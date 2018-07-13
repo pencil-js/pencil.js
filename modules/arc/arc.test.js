@@ -35,6 +35,9 @@ describe("Arc", () => {
     });
 
     describe("statics", () => {
+        test.skip("from", () => {
+        });
+
         test("defaultOptions", () => {
             expect(Arc.defaultOptions.cap).toBe(Arc.caps.round);
             expect(Arc.defaultOptions.fill).not.toBeDefined();

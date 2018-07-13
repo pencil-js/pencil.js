@@ -1,22 +1,36 @@
-/* global test expect */
+/* global describe beforeEach test expect */
 
 import Square from "./square";
 
-test("Square creation and trace", () => {
-    const s = 123.4;
-    const rect = new Square([-20, 20], s);
+describe("Square", () => {
+    let square;
+    beforeEach(() => {
+        square = new Square([-20, 20], 123.4);
+    });
 
-    expect(rect.width).toBe(s);
-    expect(rect.height).toBe(s);
-});
+    test("creation", () => {
+        expect(square.width).toBeCloseTo(123.4);
+        expect(square.height).toBeCloseTo(123.4);
+    });
 
-test("Square get and set size", () => {
-    let s = 42.1;
-    const rect = new Square([22, -10], s);
+    test("get and set size", () => {
+        expect(square.size).toBeCloseTo(123.4);
 
-    expect(rect.size).toBe(s);
+        const s = 99.9;
+        square.size = s;
+        expect(square.size).toBeCloseTo(s);
+    });
 
-    s = 99.9;
-    rect.size = s;
-    expect(rect.size).toBe(s);
+    test("toJSON", () => {
+        const json = square.toJSON();
+
+        expect(json.size).toBeCloseTo(123.4);
+        expect(json.width).not.toBeDefined();
+        expect(json.height).not.toBeDefined();
+    });
+
+    describe("statics", () => {
+        test.skip("from", () => {
+        });
+    });
 });

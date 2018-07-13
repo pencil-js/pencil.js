@@ -171,6 +171,16 @@ describe("Position", () => {
     });
 
     describe("statics", () => {
+        test("from", () => {
+            expect(Position.from(pos)).toBe(pos);
+
+            const fromArray = Position.from([150, 42]);
+            expect(fromArray.x).toBe(150);
+            expect(fromArray.y).toBe(42);
+
+            expect(() => Position.from([[1, 2], [3, 4]])).toThrow(TypeError);
+        });
+
         test("average", () => {
             const n = 10;
             const points = (new Array(n)).fill().map((p, index) => new Position(index, index * 7));
