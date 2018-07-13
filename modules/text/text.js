@@ -112,13 +112,13 @@ export default class Text extends Component {
     /**
      * @inheritDoc
      */
-    isHover (position) {
+    isHover (positionDefinition) {
         if (!this.options.shown) {
             return false;
         }
 
         const { width, height } = this.getMeasures();
-        const relativePosition = position.clone().add(this.getOriginPosition());
+        const relativePosition = this.getOriginPosition().add(Position.from(positionDefinition));
         return this.position.x <= relativePosition.x && relativePosition.x <= this.position.x + width &&
             this.position.y <= relativePosition.y && relativePosition.y <= this.position.y + height;
     }

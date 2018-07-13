@@ -116,12 +116,8 @@ export default class Path extends Component {
     /**
      * @inheritDoc
      */
-    isHover (position, ctx) {
-        if (this.isClosed) {
-            return super.isHover(position, ctx);
-        }
-
-        return false;
+    isHover (positionDefinition, ctx) {
+        return this.isClosed && super.isHover(positionDefinition, ctx);
     }
 
     /**

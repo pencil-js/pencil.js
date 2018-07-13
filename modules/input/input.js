@@ -63,12 +63,8 @@ export default class Input extends Container {
     /**
      * @inheritDoc
      */
-    isHover (position, ctx) {
-        if (!this.options.shown) {
-            return false;
-        }
-
-        return this.background.isHover(position.clone().add(this.position), ctx);
+    isHover (positionDefinition, ctx) {
+        return this.options.shown && this.background.isHover(this.position.add(positionDefinition), ctx);
     }
 
     /**
