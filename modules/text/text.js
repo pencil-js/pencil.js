@@ -153,7 +153,7 @@ export default class Text extends Component {
     }
 
     /**
-     * Return a hash of the current string (with options)
+     * Return a hash of the current text with its options
      * @returns {String}
      */
     get hash () {
@@ -161,9 +161,21 @@ export default class Text extends Component {
             this.text,
             this.options.font,
             this.options.fontSize,
-            this.options.bold ? "1" : "0",
-            this.options.italic ? "1" : "0",
-        ].join(",")));
+            +this.options.bold,
+            +this.options.italic,
+        ].join(";")));
+    }
+
+    /**
+     * Use a hash to set this params
+     * @param {String} value -
+     */
+    set hash (value) {
+        const options = decodeURIComponent(atob(value)).split(";");
+        [this.text, this.options.font] = options;
+        this.options.fontSize = +options[2];
+        this.options.bold = Boolean(options[3]);
+        this.options.italic = Boolean(options[4]);
     }
 
     /**
@@ -233,7 +245,7 @@ export default class Text extends Component {
 
     /**
      * Load a font URL
-     * @param {String} url - URL to the font file
+     * @param {String|Array<String>} url - URL or an array of URL to font files
      * @return {Promise<String>} Promise for the generated font-family
      */
     static load (url) {
