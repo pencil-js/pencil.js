@@ -37,10 +37,8 @@ export default class Scene extends Container {
          */
         this.ctx = canvas.getContext("2d");
 
-        /**
-         * @type {Position}
-         */
-        this.center = new Position(this.width / 2, this.height / 2);
+        this.cursorPosition = new Position();
+
         /**
          * @type {Position}
          */
@@ -99,6 +97,7 @@ export default class Scene extends Container {
                     target.fire(new MouseEvent(target, MouseEvent.events.hover, eventPosition));
                 }
                 this.setCursor(target.options.cursor);
+                this.cursorPosition.set(eventPosition);
             },
             [MouseEvent.events.up]: (target, eventPosition) => {
                 if (target.isClicked) {
@@ -259,6 +258,14 @@ export default class Scene extends Container {
      */
     get height () {
         return this.ctx.canvas.height;
+    }
+
+    /**
+     * Return this scene center point
+     * @return {Position}
+     */
+    get center () {
+        return new Position(this.width / 2, this.height / 2);
     }
 
     /**
