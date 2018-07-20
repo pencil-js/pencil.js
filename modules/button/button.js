@@ -1,4 +1,3 @@
-import Component from "@pencil.js/component";
 import Input from "@pencil.js/input";
 import Text from "@pencil.js/text";
 
@@ -18,7 +17,7 @@ export default class Button extends Input {
 
         this.text = new Text(undefined, this.options.value, {
             fill: this.options.fill,
-            cursor: Component.cursors.pointer,
+            cursor: this.background.options.cursor,
             font: this.options.font,
             fontSize: this.options.fontSize,
             bold: this.options.bold,

@@ -16,9 +16,7 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.8.3",
     "@pencil.js/input": "^0.8.3",
-    "@pencil.js/position": "^0.8.2",
     "@pencil.js/square": "^0.8.3"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

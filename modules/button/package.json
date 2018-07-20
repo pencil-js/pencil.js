@@ -16,7 +16,6 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.8.3",
     "@pencil.js/input": "^0.8.3",
     "@pencil.js/text": "^0.8.3"
   },

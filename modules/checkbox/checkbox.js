@@ -1,6 +1,4 @@
-import Component from "@pencil.js/component";
 import Input from "@pencil.js/input";
-import Position from "@pencil.js/position";
 import Square from "@pencil.js/square";
 
 /**
@@ -21,10 +19,10 @@ export default class Checkbox extends Input {
         this.background.height = this.options.size;
 
         const margin = this.options.size * Checkbox.MARGIN;
-        this.fill = new Square(new Position(margin, margin), this.options.size - (2 * margin), {
+        this.fill = new Square([margin, margin], this.options.size - (2 * margin), {
             fill: this.options.fill,
             shown: this.options.value,
-            cursor: Component.cursors.pointer,
+            cursor: this.background.options.cursor,
         });
         this.background.add(this.fill);
     }
@@ -39,13 +37,12 @@ export default class Checkbox extends Input {
 
     /**
      * Inverse whether it's checked
-     * @param {Boolean} [force] - If defined, will force the value
+     * @param {Boolean} [newValue] - If defined, will force the value
      * @return {Boolean}
      */
-    toggle (force) {
-        const value = force === undefined ? !this.value : force;
-        this.value = value;
-        return value;
+    toggle (newValue = !this.value) {
+        this.value = newValue;
+        return newValue;
     }
 
     /**
