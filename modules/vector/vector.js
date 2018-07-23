@@ -106,6 +106,22 @@ export default class Vector {
     }
 
     /**
+     * Multiply this vector
+     * @param {VectorDefinition|PositionDefinition|Number} modification - Any Vector or Position or Number
+     * @return {Vector} Itself
+     */
+    multiply (modification) {
+        if (typeof modification === "number") {
+            this.add(this.getDelta().multiply(modification - 1));
+            return this;
+        }
+
+        const toMultiply = sanitizeParameters(modification);
+        this.end.multiply(toMultiply);
+        return this;
+    }
+
+    /**
      * Define if this vector intersect another
      * @param {VectorDefinition} vectorDefinition - Any vector
      * @return {Boolean}
