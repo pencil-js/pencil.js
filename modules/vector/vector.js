@@ -1,6 +1,24 @@
 import Position from "@pencil.js/position";
 
 /**
+ * Accept all kind of type and return only Number or Position
+ * @param {VectorDefinition|PositionDefinition|Number} definition - Value definition
+ * @return {Position|Number}
+ */
+function sanitizeParameters (definition) {
+    let scalar;
+    try {
+        // eslint-disable-next-line no-use-before-define
+        const vector = Vector.from(definition);
+        scalar = vector.getDelta();
+    }
+    catch (e) {
+        scalar = definition.getDelta ? definition.getDelta() : definition;
+    }
+    return scalar;
+}
+
+/**
  * Vector class
  */
 export default class Vector {
@@ -65,23 +83,23 @@ export default class Vector {
     }
 
     /**
-     * Add a vector to this
-     * @param {Vector|Position|Number} modification - Any Vector or Position or Number
+     * Add a vector
+     * @param {VectorDefinition|PositionDefinition|Number} modification - Any Vector or Position or Number
      * @return {Vector} Itself
      */
     add (modification) {
-        const toAdd = modification.getDelta ? modification.getDelta() : modification;
+        const toAdd = sanitizeParameters(modification);
         this.end.add(toAdd);
         return this;
     }
 
     /**
      * Move this vector
-     * @param {Vector|Position|Number} modification - Any Vector or Position or Number
+     * @param {VectorDefinition|PositionDefinition|Number} modification - Any Vector or Position or Number
      * @return {Vector} Itself
      */
     translate (modification) {
-        const toAdd = modification.getDelta ? modification.getDelta() : modification;
+        const toAdd = sanitizeParameters(modification);
         this.start.add(toAdd);
         this.end.add(toAdd);
         return this;
@@ -125,10 +143,11 @@ export default class Vector {
         if (vectorDefinition instanceof Vector) {
             return vectorDefinition;
         }
-        if (Array.isArray(vectorDefinition) && vectorDefinition.length === 2) {
+        if (Array.isArray(vectorDefinition) && vectorDefinition.length === 2 &&
+            Array.isArray(vectorDefinition[0]) && Array.isArray(vectorDefinition[1])) {
             return new Vector(...vectorDefinition);
         }
-        if (typeof vectorDefinition === "object") {
+        if (vectorDefinition.constructor.name === "Object") {
             return new Vector(vectorDefinition.start, vectorDefinition.end);
         }
 
