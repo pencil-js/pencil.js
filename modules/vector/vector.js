@@ -156,7 +156,7 @@ export default class Vector {
      * @return {Vector}
      */
     static from (vectorDefinition = new Vector()) {
-        if (vectorDefinition instanceof Vector) {
+        if (vectorDefinition.constructor && vectorDefinition.constructor.name === "Vector") {
             return vectorDefinition;
         }
         if (Array.isArray(vectorDefinition) && vectorDefinition.length === 2 &&

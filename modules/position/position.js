@@ -217,7 +217,7 @@ export default class Position {
      * @return {Position}
      */
     static from (positionDefinition = new Position()) {
-        if (positionDefinition instanceof Position) {
+        if (positionDefinition.constructor && positionDefinition.constructor.name === "Position") {
             return positionDefinition;
         }
         if (Array.isArray(positionDefinition) && positionDefinition.length === 2 &&
