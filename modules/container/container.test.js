@@ -49,6 +49,21 @@ test.todo("toJSON");
 
 test.todo("from");
 
-test.todo("defaultOptions");
+test("defaultOptions", (t) => {
+    const options = Container.defaultOptions;
+    t.is(options.shown, true);
+    t.is(options.opacity, null);
+    t.is(options.rotation, 0);
+    t.deepEqual(options.rotationAnchor, [0, 0]);
+    t.is(options.zIndex, 1);
+    t.is(options.clip, null);
+});
 
-test.todo("ITSELF");
+test("events", (t) => {
+    t.is(Container.events.attach, "attach");
+    t.is(Container.events.draw, "draw");
+});
+
+test("ITSELF", (t) => {
+    t.is(Container.ITSELF, "itself");
+});

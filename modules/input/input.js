@@ -35,7 +35,7 @@ export default class Input extends Container {
             this.click(event.position.clone().subtract(this.position));
         });
 
-        this.on("attach", () => this.value = this.options.value, true);
+        this.on(Container.events.attach, () => this.value = this.options.value, true);
     }
 
     /**

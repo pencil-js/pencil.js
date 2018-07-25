@@ -39,7 +39,7 @@ export default class Container extends EventEmitter {
         this.parent = null;
 
         this._scenePromise = new Promise((resolve) => {
-            this.on("attach", () => {
+            this.on(Container.events.attach, () => {
                 const root = this.getRoot();
                 if (root.isScene) {
                     resolve(root);
@@ -79,7 +79,7 @@ export default class Container extends EventEmitter {
             }
             one.parent = this;
             this.children.push(one);
-            one.fire(new BaseEvent(one, "attach"));
+            one.fire(new BaseEvent(one, Container.events.attach));
         });
 
         return this;
@@ -206,7 +206,7 @@ export default class Container extends EventEmitter {
      */
     render (ctx) {
         if (this.options.shown) {
-            this.fire(new BaseEvent(this, "draw"));
+            this.fire(new BaseEvent(this, Container.events.draw));
             ctx.save();
             ctx.translate(this.position.x, this.position.y);
 
@@ -397,9 +397,25 @@ export default class Container extends EventEmitter {
             shown: true,
             opacity: null,
             rotation: 0,
-            rotationAnchor: new Position(),
+            rotationAnchor: [0, 0],
             zIndex: 1,
             clip: null,
+        };
+    }
+
+    /**
+     * @typedef {Object} ContainerEvent
+     * @enum {String}
+     * @prop {String} attach - Container is append to a new parent
+     * @prop {String} draw - Container is drawn
+     */
+    /**
+     * @return {ContainerEvent}
+     */
+    static get events () {
+        return {
+            attach: "attach",
+            draw: "draw",
         };
     }
 
