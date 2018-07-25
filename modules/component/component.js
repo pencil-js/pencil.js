@@ -198,8 +198,8 @@ export default class Component extends Container {
         };
 
         // While Blink don't support "grab" and "grabbing"
-        cursors.grab = window.CSS && CSS.supports("cursor", "grab") ? "grab" : "-webkit-grab";
-        cursors.grabbing = window.CSS && CSS.supports("cursor", "grabbing") ? "grabbing" : "-webkit-grab";
+        cursors.grab = window.CSS && window.CSS.supports("cursor", "grab") ? "grab" : "-webkit-grab";
+        cursors.grabbing = window.CSS && window.CSS.supports("cursor", "grabbing") ? "grabbing" : "-webkit-grab";
 
         // Aliases
         cursors.link = cursors.alias;

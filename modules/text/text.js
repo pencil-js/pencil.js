@@ -71,7 +71,7 @@ export default class Text extends Component {
      * @return {Text} Itself
      */
     makePath (ctx) {
-        if (this.lines.length) {
+        if (this.text.trim().length) {
             const lineHeight = this.height / this.lines.length; // TODO: could be user defined
 
             const opts = this.options;
@@ -157,7 +157,7 @@ export default class Text extends Component {
      * @returns {String}
      */
     get hash () {
-        return btoa(encodeURIComponent([
+        return window.btoa(encodeURIComponent([
             this.text,
             this.options.font,
             this.options.fontSize,
@@ -171,7 +171,7 @@ export default class Text extends Component {
      * @param {String} value -
      */
     set hash (value) {
-        const options = decodeURIComponent(atob(value)).split(";");
+        const options = decodeURIComponent(window.atob(value)).split(";");
         [this.text, this.options.font] = options;
         this.options.fontSize = +options[2];
         this.options.bold = Boolean(options[3]);
