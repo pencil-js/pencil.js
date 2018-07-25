@@ -7,6 +7,7 @@ import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
 import { constrain } from "@pencil.js/math";
+import "@pencil.js/draggable";
 
 /**
  * Slider class

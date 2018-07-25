@@ -29,6 +29,7 @@
     "@pencil.js/circle": "^0.8.3",
     "@pencil.js/component": "^0.8.3",
     "@pencil.js/container": "^0.8.2",
+    "@pencil.js/draggable": "^0.8.3",
     "@pencil.js/input": "^0.8.3",
     "@pencil.js/math": "^0.8.0",
     "@pencil.js/mouse-event": "^0.8.2",
