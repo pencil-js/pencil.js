@@ -29,7 +29,7 @@ If you want to go old-school, you can fetch the script with [unpkg](https://unpk
 <script src="https://cdn.jsdelivr.net/npm/pencil.js"></script>
 
 <script>
-    var scene = new Pencil.Scene();
+    const scene = new Pencil.Scene();
 </script>
 ```
 
@@ -99,7 +99,7 @@ const scene = new Scene(); // create a new scene
 
 const width = 80;
 const height = 50;
-let rectangle = new Rectangle(new Position(100, 200), width, height, {
+const rectangle = new Rectangle(new Position(100, 200), width, height, {
     fill: "red"
 }); // Create a new red rectangle
 scene.add(rectangle); // Add the rectangle to the scene
@@ -133,8 +133,8 @@ Or read [the full documentation](documentation.md).
          * [Circle](modules/circle)
        * [Text](modules/text)
    * [Input](modules/input)
-     * [Slider](modules/checkbox)
-     * [Slider](modules/button)
+     * [Button](modules/button)
+     * [Checkbox](modules/checkbox)
      * [Slider](modules/slider)
  * [Position](modules/position)
  * [Vector](modules/vector)
@@ -144,7 +144,7 @@ Or read [the full documentation](documentation.md).
    * [MouseEvent](modules/mouse-event)
    * [KeyboardEvent](modules/keyboard-event)
 
-## Pitfalls
+## Common pitfalls
 
 ### Scaling
 Even if Pencil.js can draw thousand of shapes, it's not built around performance nor memory management.
