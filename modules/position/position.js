@@ -84,7 +84,7 @@ export default class Position {
      * @return {Position} Itself
      */
     add (definition, y) {
-        return this.calc((a, b) => a + b, definition, y);
+        return this.calc((self, other) => self + other, definition, y);
     }
 
     /**
@@ -94,7 +94,7 @@ export default class Position {
      * @return {Position} Itself
      */
     subtract (definition, y) {
-        return this.calc((a, b) => a - b, definition, y);
+        return this.calc((self, other) => self - other, definition, y);
     }
 
     /**
@@ -224,7 +224,7 @@ export default class Position {
             typeof positionDefinition[0] === "number" && typeof positionDefinition[1] === "number") {
             return new Position(...positionDefinition);
         }
-        if (typeof positionDefinition === "object" && !Array.isArray(positionDefinition)) {
+        if (positionDefinition.constructor.name === "Object") {
             return new Position(positionDefinition.x, positionDefinition.y);
         }
 

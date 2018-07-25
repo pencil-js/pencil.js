@@ -77,6 +77,7 @@ export default class Checkbox extends Input {
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {
             size: 20,
+            value: false,
         });
     }
 
