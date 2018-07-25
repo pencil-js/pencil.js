@@ -1,52 +1,45 @@
-/* global describe beforeEach test expect */
-
+import test from "ava";
 import Checkbox from "./checkbox";
 
-describe("Checkbox", () => {
-    let checkbox;
-    beforeEach(() => {
-        checkbox = new Checkbox([100, 100]);
-    });
+test.beforeEach((t) => {
+    t.context = new Checkbox([100, 100]);
+});
 
-    test("creation", () => {
-        expect(checkbox.fill).toBeDefined();
-        expect(!!checkbox.fill.options.shown).toBe(!!checkbox.options.value);
-    });
+test("constructor", (t) => {
+    t.is(!!t.context.fill.options.shown, !!t.context.options.value);
+});
 
-    test("click and toggle", () => {
-        checkbox.value = true;
-        checkbox.click();
-        expect(checkbox.value).toBe(false);
-        checkbox.click();
-        expect(checkbox.value).toBe(true);
+test("click and toggle", (t) => {
+    t.context.value = true;
+    t.context.click();
+    t.false(t.context.value, "should toggle");
+    t.context.click();
+    t.true(t.context.value, "should toggle again");
 
-        checkbox.toggle();
-        expect(checkbox.value).toBe(false);
-        checkbox.toggle();
-        expect(checkbox.value).toBe(true);
+    t.context.toggle();
+    t.false(t.context.value, "invert value");
+    t.context.toggle();
+    t.true(t.context.value, "invert value again");
 
-        checkbox.toggle(true);
-        expect(checkbox.value).toBe(true);
-        checkbox.toggle(false);
-        expect(checkbox.value).toBe(false);
-    });
+    t.context.toggle(true);
+    t.true(t.context.value, "force to true");
+    t.context.toggle(false);
+    t.false(t.context.value, "force to false");
+});
 
-    test("get and set value", () => {
-        expect(!!checkbox.value).toBe(!!checkbox.fill.options.shown);
-        checkbox.value = true;
-        expect(checkbox.fill.options.shown).toBe(true);
-        checkbox.value = false;
-        expect(checkbox.fill.options.shown).toBe(false);
-    });
+test("get and set value", (t) => {
+    t.is(t.context.value, !!t.context.fill.options.shown);
+    t.context.value = true;
+    t.true(t.context.fill.options.shown);
+    t.context.value = false;
+    t.false(t.context.fill.options.shown);
+});
 
-    describe("statics", () => {
-        test("defaultOptions", () => {
-            const options = Checkbox.defaultOptions;
-            expect(options.size).toBe(20);
-        });
+test("defaultOptions", (t) => {
+    const options = Checkbox.defaultOptions;
+    t.is(options.size, 20);
+});
 
-        test("MARGIN", () => {
-            expect(Checkbox.MARGIN).toBeCloseTo(0.2);
-        });
-    });
+test("MARGIN", (t) => {
+    t.is(Checkbox.MARGIN, 0.2);
 });

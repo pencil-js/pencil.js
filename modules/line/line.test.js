@@ -1,66 +1,61 @@
-/* global describe beforeEach test expect */
-
+import test from "ava";
 import Line from "./line";
 
-describe("Line", () => {
-    let line;
-    beforeEach(() => {
-        line = new Line([100, 50], [
-            [150, 150],
-            [200, 200],
-        ]);
-    });
+test.beforeEach((t) => {
+    t.context = new Line([100, 50], [
+        [150, 150],
+        [200, 200],
+    ]);
+});
 
-    test("creation", () => {
-        expect(line.position.x).toBe(100);
-        expect(line.position.y).toBe(50);
-        expect(Array.isArray(line.points)).toBe(true);
-        expect(line.points.length).toBe(2);
-        const expected = [
-            [150, 150],
-            [200, 200],
-        ];
-        line.points.forEach((point, index) => {
-            expect(point.x).toBe(expected[index][0]);
-            expect(point.y).toBe(expected[index][1]);
-        });
-    });
+test("constructor", (t) => {
+    t.is(t.context.position.x, 100);
+    t.is(t.context.position.y, 50);
+    t.is(t.context.points.length, 2);
+});
 
-    test("trace", () => {
-        const path = new Path2D();
-        line.trace(path);
+test("trace", (t) => {
+    const expected = [
+        [150, 150],
+        [200, 200],
+    ];
+    const path = {
+        moveTo: (...params) => {
+            t.deepEqual(params, [0, 0]);
+        },
+        lineTo: (...params) => {
+            t.deepEqual(params, expected[path.call++]);
+        },
+        call: 0,
+    };
+    t.plan(3);
+    t.context.trace(path);
+});
 
-        expect(path.moveTo).toHaveBeenCalledTimes(1);
-        expect(path.moveTo).toHaveBeenCalledWith(0, 0);
-        expect(path.lineTo).toHaveBeenCalledTimes(2);
-        expect(path.lineTo).toHaveBeenNthCalledWith(1, 150, 150);
-        expect(path.lineTo).toHaveBeenNthCalledWith(2, 200, 200);
-    });
+test("ishover", (t) => {
+    t.false(t.context.isHover([0, 0]));
+});
 
-    test("toJSON", () => {
-        const json = line.toJSON();
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
 
-        expect(json.position).toEqual([100, 50]);
-        expect(json.points).toEqual([
-            [150, 150],
-            [200, 200],
-        ]);
-    });
+    t.deepEqual(json.position, [100, 50]);
+    t.deepEqual(json.points, [
+        [150, 150],
+        [200, 200],
+    ]);
+});
 
-    describe("statics", () => {
-        test.skip("from", () => {
-        });
+test.todo("from");
 
-        test("defaultOptions", () => {
-            expect(Line.defaultOptions.fill).not.toBeDefined();
-            expect(Line.defaultOptions.cap).toBe(Line.caps.round);
-            expect(Line.defaultOptions.join).toBe(Line.joins.round);
-        });
+test("defaultOptions", (t) => {
+    t.is(Line.defaultOptions.fill, undefined);
+    t.is(Line.defaultOptions.cap, Line.caps.round);
+    t.is(Line.defaultOptions.join, Line.joins.round);
+});
 
-        test("caps", () => {
-            expect(Line.caps.butt).toBe("butt");
-            expect(Line.caps.round).toBe("round");
-            expect(Line.caps.square).toBe("square");
-        });
-    });
+test("caps", (t) => {
+    t.is(Line.caps.butt, "butt");
+    t.is(Line.caps.round, "round");
+    t.is(Line.caps.square, "square");
 });

@@ -1,53 +1,50 @@
-/* global describe beforeEach test expect */
-
+import test from "ava";
 import Arc from "./arc";
 
-describe("Arc", () => {
-    let arc;
-    beforeEach(() => {
-        arc = new Arc([100, 50], 20, 0.1, 0.6);
-    });
+test.beforeEach((t) => {
+    t.context = new Arc([100, 50], 20, 0.1, 0.6);
+});
 
-    test("creation", () => {
-        expect(arc.position.x).toBe(100);
-        expect(arc.position.y).toBe(50);
-        expect(arc.radius).toBe(20);
-        expect(arc.startAngle).toBeCloseTo(0.1);
-        expect(arc.endAngle).toBeCloseTo(0.6);
-    });
+test("constructor", (t) => {
+    t.is(t.context.radius, 20, "init radius");
+    t.is(t.context.startAngle, 0.1, "init start angle");
+    t.is(t.context.endAngle, 0.6, "init end angle");
 
-    test("trace", () => {
-        const path = new Path2D();
-        arc.trace(path);
+    const defaultArc = new Arc();
+    t.is(defaultArc.radius, 0, "default radius");
+    t.is(defaultArc.startAngle, 0, "default start angle");
+    t.is(defaultArc.endAngle, 0.5, "default end angle");
+});
 
-        expect(path.arc).toHaveBeenCalledTimes(1);
-        const PI2 = Math.PI * 2;
-        const expected = [0, 0, 20, (0.1 - 0.25) * PI2, (0.6 - 0.25) * PI2];
-        path.arc.mock.calls[0].forEach((value, index) => expect(value).toBeCloseTo(expected[index]));
-    });
+test("trace", (t) => {
+    const path = {
+        arc: (...params) => {
+            const PI2 = Math.PI * 2;
+            t.deepEqual(params, [0, 0, 20, (0.1 - 0.25) * PI2, (0.6 - 0.25) * PI2], "call 'arc' with right params");
+        },
+    };
+    t.plan(1);
+    t.context.trace(path);
+});
 
-    test("toJSON", () => {
-        const json = arc.toJSON();
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
 
-        expect(json.radius).toBe(20);
-        expect(json.startAngle).toBeCloseTo(0.1);
-        expect(json.endAngle).toBeCloseTo(0.6);
-    });
+    t.is(json.radius, 20, "retrieved radius");
+    t.is(json.startAngle, 0.1, "retrieved start angle");
+    t.is(json.endAngle, 0.6, "retrieved end angle");
+});
 
-    describe("statics", () => {
-        test.skip("from", () => {
-        });
+test.todo("from");
 
-        test("defaultOptions", () => {
-            expect(Arc.defaultOptions.cap).toBe(Arc.caps.round);
-            expect(Arc.defaultOptions.fill).not.toBeDefined();
-            expect(Arc.defaultOptions.join).not.toBeDefined();
-        });
+test("defaultOptions", (t) => {
+    t.is(Arc.defaultOptions.cap, Arc.caps.round, "default cap is round");
+    t.is(Arc.defaultOptions.fill, undefined, "no default fill");
+    t.is(Arc.defaultOptions.join, undefined, "no default join");
+});
 
-        test("caps", () => {
-            expect(Arc.caps.butt).toBe("butt");
-            expect(Arc.caps.round).toBe("round");
-            expect(Arc.caps.square).toBe("square");
-        });
-    });
+test("caps", (t) => {
+    t.is(Arc.caps.butt, "butt");
+    t.is(Arc.caps.round, "round");
+    t.is(Arc.caps.square, "square");
 });

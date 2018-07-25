@@ -1,36 +1,31 @@
-/* global describe test expect */
-
+import test from "ava";
 import MouseEvent from "./mouse-event";
 
-describe("MouseEvent", () => {
-    test("creation", () => {
-        const target = null;
-        const name = "TestEvent";
-        const fakeEvent = new MouseEvent(target, name, [120, 42]);
+test("constructor", (t) => {
+    const target = null;
+    const name = "TestEvent";
+    const fakeEvent = new MouseEvent(target, name, [120, 42]);
 
-        expect(fakeEvent.target).toBe(target);
-        expect(fakeEvent.name).toBe(name);
-        expect(fakeEvent.position.x).toBe(120);
-        expect(fakeEvent.position.y).toBe(42);
-    });
+    t.is(fakeEvent.target, target);
+    t.is(fakeEvent.name, name);
+    t.is(fakeEvent.position.x, 120);
+    t.is(fakeEvent.position.y, 42);
+});
 
-    describe("statics", () => {
-        test("events", () => {
-            expect(MouseEvent.events.down).toBe("mousedown");
-            expect(MouseEvent.events.up).toBe("mouseup");
-            expect(MouseEvent.events.click).toBe("click");
-            expect(MouseEvent.events.move).toBe("mousemove");
-            expect(MouseEvent.events.hover).toBe("hover");
-            expect(MouseEvent.events.leave).toBe("leave");
-            expect(MouseEvent.events.wheel).toBe("mousewheel");
-            expect(MouseEvent.events.scrollDown).toBe("scrolldown");
-            expect(MouseEvent.events.scrollUp).toBe("scrollup");
-            expect(MouseEvent.events.zoomOut).toBe("zoomout");
-            expect(MouseEvent.events.zoomIn).toBe("zoomin");
-            expect(MouseEvent.events.grab).toBe("grab");
-            expect(MouseEvent.events.drag).toBe("drag");
-            expect(MouseEvent.events.drop).toBe("drop");
-            expect(MouseEvent.events.resize).toBe("resize");
-        });
-    });
+test("events", (t) => {
+    t.is(MouseEvent.events.down, "mousedown");
+    t.is(MouseEvent.events.up, "mouseup");
+    t.is(MouseEvent.events.click, "click");
+    t.is(MouseEvent.events.move, "mousemove");
+    t.is(MouseEvent.events.hover, "hover");
+    t.is(MouseEvent.events.leave, "leave");
+    t.is(MouseEvent.events.wheel, "mousewheel");
+    t.is(MouseEvent.events.scrollDown, "scrolldown");
+    t.is(MouseEvent.events.scrollUp, "scrollup");
+    t.is(MouseEvent.events.zoomOut, "zoomout");
+    t.is(MouseEvent.events.zoomIn, "zoomin");
+    t.is(MouseEvent.events.grab, "grab");
+    t.is(MouseEvent.events.drag, "drag");
+    t.is(MouseEvent.events.drop, "drop");
+    t.is(MouseEvent.events.resize, "resize");
 });

@@ -1,24 +1,24 @@
-/* global describe beforeAll test expect */
-
+import test from "ava";
 import Circle from "./circle";
 
-describe("Circle", () => {
-    let circle;
-    beforeAll(() => {
-        circle = new Circle(undefined, 10);
-    });
-
-    test("creation", () => {
-        expect(circle.radius).toBe(10);
-        expect(circle.startAngle).toBe(0);
-        expect(circle.endAngle).toBe(1);
-    });
-
-    test("toJSON", () => {
-        const json = circle.toJSON();
-
-        expect(json.radius).toBe(10);
-        expect(json.startAngle).not.toBeDefined();
-        expect(json.endAngle).not.toBeDefined();
-    });
+test.beforeEach((t) => {
+    t.context = new Circle([0, 0], 10);
 });
+
+test("constructor", (t) => {
+    t.is(t.context.radius, 10);
+    t.is(t.context.startAngle, 0);
+    t.is(t.context.endAngle, 1);
+});
+
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
+
+    t.is(json.radius, 10);
+    t.is(json.startAngle, undefined);
+    t.is(json.endAngle, undefined);
+});
+
+test.todo("from");
+
+test.todo("defaultOptions");

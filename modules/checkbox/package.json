@@ -4,6 +4,15 @@
   "description": "Checkbox user input for Pencil.js package.",
   "main": "checkbox.js",
   "files": [],
+  "scripts": {
+    "test": "nyc --reporter=lcov ava"
+  },
+  "ava": {
+    "require": [
+      "esm",
+      "../../test/helpers/browser-env-setup.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
@@ -23,5 +32,10 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencil.js/issues"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "esm": "^3.0.71",
+    "nyc": "^12.0.2"
   }
 }

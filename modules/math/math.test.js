@@ -1,56 +1,54 @@
-/* global describe test expect */
-
+import test from "ava";
 import * as M from "./math";
+import almostEqual from "../../test/helpers/almost-equal";
 
-describe("Math", () => {
-    test("constrain", () => {
-        expect(M.constrain(7.77, 0, 10)).toBe(7.77);
-        expect(M.constrain(99, 0, 1)).toBe(1);
-        expect(M.constrain(-20, -5, 5)).toBe(-5);
-    });
+test("constrain", (t) => {
+    t.is(M.constrain(7.77, 0, 10), 7.77);
+    t.is(M.constrain(99, 0, 1), 1);
+    t.is(M.constrain(-20, -5, 5), -5);
+});
 
-    test("equals", () => {
-        expect(M.equals(0, 0)).toBe(true);
-        expect(M.equals(1, 9)).toBe(false);
-        expect(M.equals(0.1 + 0.2, 0.3)).toBe(true);
-        expect(M.equals(0.6 / 6, 0.1)).toBe(true);
-        expect(M.equals(Math.PI, 3.14159)).toBe(false);
-    });
+test("equals", (t) => {
+    t.true(M.equals(0, 0));
+    t.false(M.equals(1, 9));
+    t.true(M.equals(0.1 + 0.2, 0.3));
+    t.true(M.equals(0.6 / 6, 0.1));
+    t.false(M.equals(Math.PI, 3.14159));
+});
 
-    test("random", () => {
-        for (let i = 0; i < 100; ++i) {
-            const pick = M.random();
-            expect(pick).toBeGreaterThan(0);
-            expect(pick).toBeLessThan(1);
-        }
-        for (let i = 0; i < 100; ++i) {
-            const pick = M.random(15);
-            expect(pick).toBeGreaterThan(0);
-            expect(pick).toBeLessThan(15);
-        }
-        for (let i = 0; i < 100; ++i) {
-            const pick = M.random(10, 15);
-            expect(pick).toBeGreaterThan(10);
-            expect(pick).toBeLessThan(15);
-        }
-    });
+test("random", (t) => {
+    for (let i = 0; i < 100; ++i) {
+        const pick = M.random();
+        t.true(pick > 0);
+        t.true(pick < 1);
+    }
+    for (let i = 0; i < 100; ++i) {
+        const pick = M.random(15);
+        t.true(pick > 0);
+        t.true(pick < 15);
+    }
+    for (let i = 0; i < 100; ++i) {
+        const pick = M.random(10, 15);
+        t.true(pick > 10);
+        t.true(pick < 15);
+    }
+});
 
-    test("truncate", () => {
-        expect(M.truncate(1)).toBe(1);
-        expect(M.truncate(1.99)).toBe(1);
-        expect(M.truncate(-11.99)).toBe(-11);
-    });
+test("truncate", (t) => {
+    t.is(M.truncate(1), 1);
+    t.is(M.truncate(1.99), 1);
+    t.is(M.truncate(-11.99), -11);
+});
 
-    test("trigonometry", () => {
-        expect(M.radianCircle).toBeCloseTo(Math.PI * 2);
-        expect(M.degreeCircle).toBe(360);
-    });
+test("trigonometry", (t) => {
+    t.true(almostEqual(M.radianCircle, Math.PI * 2));
+    t.is(M.degreeCircle, 360);
+});
 
-    test("modulo", () => {
-        expect(M.modulo(10, 1)).toBe(0);
-        expect(M.modulo(10, 3)).toBe(1);
-        expect(M.modulo(-10, 3)).toBe(1);
-        expect(M.modulo(10, -3)).toBe(-1);
-        expect(M.modulo(-10, -3)).toBe(-1);
-    });
+test("modulo", (t) => {
+    t.is(M.modulo(10, 1), 0);
+    t.is(M.modulo(10, 3), 1);
+    t.is(M.modulo(-10, 3), 1);
+    t.is(M.modulo(10, -3), -1);
+    t.is(M.modulo(-10, -3), -1);
 });

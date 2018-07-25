@@ -1,73 +1,110 @@
-/* global test expect */
-
-import Position from "@pencil.js/position";
+import test from "ava";
 import Vector from "./vector";
 
-test("Vector creation", () => {
-    const start = new Position(-22, 37);
-    const end = new Position(41, -9);
-
-    let vector = new Vector(start, end);
-    expect(vector.start).toBe(start);
-    expect(vector.end).toBe(end);
-
-    vector = new Vector([start.x, start.y], [end.x, end.y]);
-    expect(vector.start.equals(start)).toBe(true);
-    expect(vector.end.equals(end)).toBe(true);
+test.beforeEach((t) => {
+    t.context = new Vector([10, 100], [40, 140]);
 });
 
-test("Vector length", () => {
-    const vector = new Vector([100, -20], [130, 20]);
-    expect(vector.length()).toBe(50);
+test("constructor", (t) => {
+    t.is(t.context.start.x, 10);
+    t.is(t.context.start.y, 100);
+    t.is(t.context.end.x, 40);
+    t.is(t.context.end.y, 140);
 });
 
-test("Vector clone and equal", () => {
-    const vector = new Vector([42, -9], [55, 12.3]);
-    const clone = vector.clone();
-
-    expect(clone).not.toBe(vector);
-    expect(clone.start).not.toBe(vector.start);
-    expect(clone.end).not.toBe(vector.end);
-    expect(clone.equals(vector)).toBe(true);
+test("length", (t) => {
+    t.is(t.context.length(), 50);
 });
 
-test("Vector getDelta", () => {
-    const vector = new Vector([22, -55], [22 + 42, -55 + 31]);
-    const delta = vector.getDelta();
+test("clone and equal", (t) => {
+    const clone = t.context.clone();
 
-    expect(delta instanceof Position).toBe(true);
-    expect(delta.equals(new Position(42, 31))).toBe(true);
+    t.not(t.context, clone);
+    t.not(t.context.start, clone.start);
+    t.not(t.context.end, clone.end);
+
+    t.true(t.context.equals(clone));
+    t.true(t.context.equals([[10, 100], [40, 140]]));
 });
 
-test("Vector add", () => {
-    const vector = new Vector([10, 20], [100, 150]);
+test("getDelta", (t) => {
+    const delta = t.context.getDelta();
 
-    const addValue = vector.clone().add(10);
-    expect(addValue.start.equals(vector.start)).toBe(true);
-    expect(addValue.end.equals(new Position(vector.end.x + 10, vector.end.y + 10))).toBe(true);
-
-    const addPosition = vector.clone().add(new Position(10, 20));
-    expect(addPosition.start.equals(vector.start)).toBe(true);
-    expect(addPosition.end.equals(new Position(vector.end.x + 10, vector.end.y + 20))).toBe(true);
-
-    const addVector = vector.clone().add(new Vector([10, 20], [100, 200]));
-    expect(addVector.start.equals(vector.start)).toBe(true);
-    expect(addVector.end.equals(new Position(vector.end.x + (100 - 10), vector.end.y + (200 - 20)))).toBe(true);
+    t.is(delta.x, 30);
+    t.is(delta.y, 40);
 });
 
-test("Vector translate", () => {
+test("add", (t) => {
+    const addValue = t.context.clone().add(20);
+    t.is(addValue.start.x, 10);
+    t.is(addValue.start.y, 100);
+    t.is(addValue.end.x, 60);
+    t.is(addValue.end.y, 160);
+
+    const addPosition = t.context.clone().add([20, 30]);
+    t.is(addPosition.start.x, 10);
+    t.is(addPosition.start.y, 100);
+    t.is(addPosition.end.x, 60);
+    t.is(addPosition.end.y, 170);
+
+    const addVector = t.context.clone().add([[20, 30], [40, 60]]);
+    t.is(addVector.start.x, 10);
+    t.is(addVector.start.y, 100);
+    t.is(addVector.end.x, 60);
+    t.is(addVector.end.y, 170);
 });
 
-test("Vector intersect", () => {
-    const vector1 = new Vector([2, 1], [3, 5]);
-    const vector2 = new Vector([3, 3], [4, 1]);
-    const vector3 = new Vector([1, 3], [4, 2]);
+test("translate", (t) => {
+    const translateValue = t.context.clone().translate(20);
+    t.is(translateValue.start.x, 30);
+    t.is(translateValue.start.y, 120);
+    t.is(translateValue.end.x, 60);
+    t.is(translateValue.end.y, 160);
 
-    expect(vector1.intersect(vector2)).toBe(false);
-    expect(vector1.intersect(vector3)).toBe(true);
-    expect(vector2.intersect(vector3)).toBe(true);
+    const translatePosition = t.context.clone().translate([20, 30]);
+    t.is(translatePosition.start.x, 30);
+    t.is(translatePosition.start.y, 130);
+    t.is(translatePosition.end.x, 60);
+    t.is(translatePosition.end.y, 170);
 
-    expect(vector2.intersect(vector1)).toBe(false);
-    expect(vector3.intersect(vector1)).toBe(true);
-    expect(vector3.intersect(vector2)).toBe(true);
+    const translateVector = t.context.clone().translate([[20, 30], [40, 60]]);
+    t.is(translateVector.start.x, 30);
+    t.is(translateVector.start.y, 130);
+    t.is(translateVector.end.x, 60);
+    t.is(translateVector.end.y, 170);
 });
+
+test("multiply", (t) => {
+    const multiplyValue = t.context.clone().multiply(3);
+    t.is(multiplyValue.start.x, 10);
+    t.is(multiplyValue.start.y, 100);
+    t.is(multiplyValue.end.x, 100);
+    t.is(multiplyValue.end.y, 220);
+
+    const multiplyPosition = t.context.clone().multiply([2, 3]);
+    t.is(multiplyPosition.start.x, 10);
+    t.is(multiplyPosition.start.y, 100);
+    t.is(multiplyPosition.end.x, 80);
+    t.is(multiplyPosition.end.y, 420);
+
+    const multiplyVector = t.context.clone().multiply([[2, 3], [4, 6]]);
+    t.is(multiplyVector.start.x, 10);
+    t.is(multiplyVector.start.y, 100);
+    t.is(multiplyVector.end.x, 80);
+    t.is(multiplyVector.end.y, 420);
+});
+
+test("intersect", (t) => {
+    const intersect = new Vector([0, 120], [30, 120]);
+    const donnot = new Vector([10, 90], [20, 110]);
+
+    t.true(t.context.intersect(intersect));
+    t.true(t.context.intersect([[0, 120], [30, 120]]));
+    t.false(t.context.intersect(donnot));
+});
+
+test("toJSON", (t) => {
+    t.deepEqual(t.context.toJSON(), [[10, 100], [40, 140]]);
+});
+
+test.todo("from");

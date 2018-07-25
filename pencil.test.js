@@ -1,4 +1,4 @@
-/* global test expect */
+import test from "ava";
 
 /* eslint-disable import/no-duplicates */
 import Pencil from "./pencil";
@@ -9,68 +9,70 @@ import {
 } from "./pencil";
 /* eslint-enable */
 
-test("Pencil namespace", () => {
+test.todo("from");
+
+test("namespace", (t) => {
     /* eslint-disable import/no-named-as-default-member */
-    expect(Pencil.BaseEvent).toBeDefined();
-    expect(Pencil.MouseEvent).toBeDefined();
-    expect(Pencil.KeyboardEvent).toBeDefined();
-    expect(Pencil.Math).toBeDefined();
-    expect(Pencil.Position).toBeDefined();
-    expect(Pencil.Vector).toBeDefined();
-    expect(Pencil.Line).toBeDefined();
-    expect(Pencil.Spline).toBeDefined();
-    expect(Pencil.EventEmitter).toBeDefined();
-    expect(Pencil.Container).toBeDefined();
-    expect(Pencil.Scene).toBeDefined();
-    expect(Pencil.Component).toBeDefined();
-    expect(Pencil.Polygon).toBeDefined();
-    expect(Pencil.RegularPolygon).toBeDefined();
-    expect(Pencil.Triangle).toBeDefined();
-    expect(Pencil.Star).toBeDefined();
-    expect(Pencil.Rectangle).toBeDefined();
-    expect(Pencil.Square).toBeDefined();
-    expect(Pencil.Image).toBeDefined();
-    expect(Pencil.Arc).toBeDefined();
-    expect(Pencil.Circle).toBeDefined();
-    expect(Pencil.Text).toBeDefined();
-    expect(Pencil.Slider).toBeDefined();
-    expect(Pencil.Path).toBeDefined();
-    expect(Pencil.Checkbox).toBeDefined();
-    expect(Pencil.Input).toBeDefined();
-    expect(Pencil.Button).toBeDefined();
-    expect(Pencil.from).toBeDefined();
-    expect(Pencil.OffScreenCanvas).toBeDefined();
+    t.not(Pencil.BaseEvent, undefined);
+    t.not(Pencil.MouseEvent, undefined);
+    t.not(Pencil.KeyboardEvent, undefined);
+    t.not(Pencil.Math, undefined);
+    t.not(Pencil.Position, undefined);
+    t.not(Pencil.Vector, undefined);
+    t.not(Pencil.Line, undefined);
+    t.not(Pencil.Spline, undefined);
+    t.not(Pencil.EventEmitter, undefined);
+    t.not(Pencil.Container, undefined);
+    t.not(Pencil.Scene, undefined);
+    t.not(Pencil.Component, undefined);
+    t.not(Pencil.Polygon, undefined);
+    t.not(Pencil.RegularPolygon, undefined);
+    t.not(Pencil.Triangle, undefined);
+    t.not(Pencil.Star, undefined);
+    t.not(Pencil.Rectangle, undefined);
+    t.not(Pencil.Square, undefined);
+    t.not(Pencil.Image, undefined);
+    t.not(Pencil.Arc, undefined);
+    t.not(Pencil.Circle, undefined);
+    t.not(Pencil.Text, undefined);
+    t.not(Pencil.Slider, undefined);
+    t.not(Pencil.Path, undefined);
+    t.not(Pencil.Checkbox, undefined);
+    t.not(Pencil.Input, undefined);
+    t.not(Pencil.Button, undefined);
+    t.not(Pencil.from, undefined);
+    t.not(Pencil.OffScreenCanvas, undefined);
     /* eslint-enable */
 });
 
-test("Pencil named imports", () => {
-    expect(BaseEvent).toBeDefined();
-    expect(MouseEvent).toBeDefined();
-    expect(KeyboardEvent).toBeDefined();
-    expect(Math).toBeDefined();
-    expect(Position).toBeDefined();
-    expect(Vector).toBeDefined();
-    expect(Line).toBeDefined();
-    expect(Spline).toBeDefined();
-    expect(EventEmitter).toBeDefined();
-    expect(Container).toBeDefined();
-    expect(Scene).toBeDefined();
-    expect(Component).toBeDefined();
-    expect(Polygon).toBeDefined();
-    expect(RegularPolygon).toBeDefined();
-    expect(Triangle).toBeDefined();
-    expect(Star).toBeDefined();
-    expect(Rectangle).toBeDefined();
-    expect(Square).toBeDefined();
-    expect(Image).toBeDefined();
-    expect(Arc).toBeDefined();
-    expect(Circle).toBeDefined();
-    expect(Text).toBeDefined();
-    expect(Slider).toBeDefined();
-    expect(Path).toBeDefined();
-    expect(Checkbox).toBeDefined();
-    expect(Input).toBeDefined();
-    expect(Button).toBeDefined();
-    expect(from).toBeDefined();
-    expect(OffScreenCanvas).toBeDefined();
+test("named imports", (t) => {
+    t.not(BaseEvent, undefined);
+    t.not(MouseEvent, undefined);
+    t.not(KeyboardEvent, undefined);
+    t.not(Math, undefined);
+    t.not(Position, undefined);
+    t.not(Vector, undefined);
+    t.not(Line, undefined);
+    t.not(Spline, undefined);
+    t.not(EventEmitter, undefined);
+    t.not(Container, undefined);
+    t.not(Scene, undefined);
+    t.not(Component, undefined);
+    t.not(Polygon, undefined);
+    t.not(RegularPolygon, undefined);
+    t.not(Triangle, undefined);
+    t.not(Star, undefined);
+    t.not(Rectangle, undefined);
+    t.not(Square, undefined);
+    t.not(Image, undefined);
+    t.not(Arc, undefined);
+    t.not(Circle, undefined);
+    t.not(Text, undefined);
+    t.not(Slider, undefined);
+    t.not(Path, undefined);
+    t.not(Checkbox, undefined);
+    t.not(Input, undefined);
+    t.not(Button, undefined);
+    t.not(from, undefined);
+    t.not(OffScreenCanvas, undefined);
 });

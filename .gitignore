@@ -1,6 +1,6 @@
 .idea/
-.cache/
+**/.nyc_output/
+**/coverage/
 node_modules/
 dist/
-playground/
 package-lock.json

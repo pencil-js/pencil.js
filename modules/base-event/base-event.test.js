@@ -1,14 +1,11 @@
-/* global describe test expect */
-
+import test from "ava";
 import BaseEvent from "./base-event";
 
-describe("BaseEvent", () => {
-    test("creation", () => {
-        const target = null;
-        const name = "TestEvent";
-        const fakeEvent = new BaseEvent(target, name);
+test("constructor", (t) => {
+    const target = null;
+    const name = "TestEvent";
+    const fakeEvent = new BaseEvent(target, name);
 
-        expect(fakeEvent.target).toBe(null);
-        expect(fakeEvent.name).toBe(name);
-    });
+    t.is(fakeEvent.target, null);
+    t.is(fakeEvent.name, name);
 });

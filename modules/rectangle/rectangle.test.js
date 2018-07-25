@@ -1,56 +1,61 @@
-/* global describe beforeEach test expect */
-
+import test from "ava";
 import Rectangle from "./rectangle";
 
-describe("Rectangle", () => {
-    let rect;
-    beforeEach(() => {
-        rect = new Rectangle([-20, 20], 123.4, 22.22);
-    });
+test.beforeEach((t) => {
+    t.context = new Rectangle([-20, 20], 123, 22);
+});
 
-    test("creation and trace", () => {
-        expect(rect.width).toBeCloseTo(123.4);
-        expect(rect.height).toBeCloseTo(22.22);
-    });
+test("constructor", (t) => {
+    t.is(t.context.width, 123);
+    t.is(t.context.height, 22);
 
-    test("trace", () => {
-        const path = new Path2D();
-        rect.trace(path);
-        expect(path.rect).toHaveBeenCalledTimes(1);
-        expect(path.rect).toHaveBeenCalledWith(-0, -0, 123.4, 22.22);
-    });
+    const defaultRectangle = new Rectangle();
+    t.is(defaultRectangle.width, 0);
+    t.is(defaultRectangle.height, 0);
+});
 
-    test("getOriginPosition", () => {
-        const defaultOrigin = rect.getOriginPosition();
-        expect(defaultOrigin.x).toBe(0);
-        expect(defaultOrigin.y).toBe(0);
+test("trace", (t) => {
+    const path = {
+        rect: (...params) => {
+            t.deepEqual(params, [-0, -0, 123, 22]);
+        },
+    };
+    t.plan(1);
+    t.context.trace(path);
+});
 
-        rect.options.origin = Rectangle.origins.center;
-        const centerOrigin = rect.getOriginPosition();
-        expect(centerOrigin.x).toBeCloseTo(123.4 / 2);
-        expect(centerOrigin.y).toBeCloseTo(22.22 / 2);
-    });
+test("getOriginPosition", (t) => {
+    const defaultOrigin = t.context.getOriginPosition();
+    t.is(defaultOrigin.x, 0);
+    t.is(defaultOrigin.y, 0);
 
-    test("toJSON", () => {
-        const json = rect.toJSON();
-        expect(json.width).toBeCloseTo(123.4);
-        expect(json.height).toBeCloseTo(22.22);
-    });
+    t.context.options.origin = Rectangle.origins.center;
+    const centerOrigin = t.context.getOriginPosition();
+    t.is(centerOrigin.x, 123 / 2);
+    t.is(centerOrigin.y, 22 / 2);
 
-    describe("statics", () => {
-        test.skip("from", () => {
-        });
+    t.context.options.origin = Rectangle.origins.bottomRight;
+    const bottomRightOrigin = t.context.getOriginPosition();
+    t.is(bottomRightOrigin.x, 123);
+    t.is(bottomRightOrigin.y, 22);
+});
 
-        test("defaultOptions", () => {
-            expect(Rectangle.defaultOptions.origin).toBe(Rectangle.origins.topLeft);
-        });
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
+    t.is(json.width, 123);
+    t.is(json.height, 22);
+});
 
-        test("origins", () => {
-            expect(Rectangle.origins.topLeft).toBe("topLeft");
-            expect(Rectangle.origins.topRight).toBe("topRight");
-            expect(Rectangle.origins.center).toBe("center");
-            expect(Rectangle.origins.bottomLeft).toBe("bottomLeft");
-            expect(Rectangle.origins.bottomRight).toBe("bottomRight");
-        });
-    });
+test.todo("from");
+
+test("defaultOptions", (t) => {
+    t.is(Rectangle.defaultOptions.origin, Rectangle.origins.topLeft);
+});
+
+test("origins", (t) => {
+    t.is(Rectangle.origins.topLeft, "topLeft");
+    t.is(Rectangle.origins.topRight, "topRight");
+    t.is(Rectangle.origins.center, "center");
+    t.is(Rectangle.origins.bottomLeft, "bottomLeft");
+    t.is(Rectangle.origins.bottomRight, "bottomRight");
 });

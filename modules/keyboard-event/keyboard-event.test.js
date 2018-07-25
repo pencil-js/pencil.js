@@ -1,27 +1,22 @@
-/* global describe test expect */
-
+import test from "ava";
 import KeyboardEvent from "./keyboard-event";
 
-describe("KeyboardEvent", () => {
-    test("creation", () => {
-        const target = null;
-        const name = "TestEvent";
-        const key = "shift";
-        const fakeEvent = new KeyboardEvent(target, name, key);
+test("constructor", (t) => {
+    const target = null;
+    const name = "TestEvent";
+    const key = "shift";
+    const fakeEvent = new KeyboardEvent(target, name, key);
 
-        expect(fakeEvent.target).toBe(null);
-        expect(fakeEvent.name).toBe(name);
-        expect(fakeEvent.key).toBe(key);
-    });
+    t.is(fakeEvent.target, null);
+    t.is(fakeEvent.name, name);
+    t.is(fakeEvent.key, key);
+});
 
-    describe("statics", () => {
-        test("events", () => {
-            expect(KeyboardEvent.events.down).toBe("keydown");
-            expect(KeyboardEvent.events.up).toBe("keyup");
-        });
+test("events", (t) => {
+    t.is(KeyboardEvent.events.down, "keydown");
+    t.is(KeyboardEvent.events.up, "keyup");
+});
 
-        test("keys", () => {
-            expect(KeyboardEvent.keys).toBeDefined();
-        });
-    });
+test("keys", (t) => {
+    t.not(KeyboardEvent.keys, undefined);
 });

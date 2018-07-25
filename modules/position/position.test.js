@@ -1,195 +1,184 @@
-/* global test expect describe beforeEach afterEach */
-
+import test from "ava";
 import Position from "./position";
 import Vector from "../vector/vector";
+import almostEqual from "../../test/helpers/almost-equal";
 
-describe("Position", () => {
-    let pos;
-    beforeEach(() => {
-        pos = new Position();
-    });
+test.beforeEach((t) => {
+    t.context = new Position(-42, 55);
+});
 
-    test("creation", () => {
-        expect(pos.x).toBeCloseTo(0);
-        expect(pos.y).toBeCloseTo(0);
+test("constructor", (t) => {
+    t.is(t.context.x, -42);
+    t.is(t.context.y, 55);
 
-        const pos2 = new Position(-42, 55.55);
+    const defaultPosition = new Position();
 
-        expect(pos2.x).toBeCloseTo(-42);
-        expect(pos2.y).toBeCloseTo(55.55);
-    });
+    t.is(defaultPosition.x, 0);
+    t.is(defaultPosition.y, 0);
+});
 
-    test("set", () => {
-        pos.set(-42, 55.55);
+test("set", (t) => {
+    t.context.set(99, -1);
 
-        expect(pos.x).toBeCloseTo(-42);
-        expect(pos.y).toBeCloseTo(55.55);
+    t.is(t.context.x, 99);
+    t.is(t.context.y, -1);
 
-        pos.set(new Position(99.99, 1));
+    t.context.set(new Position(10, 20));
 
-        expect(pos.x).toBeCloseTo(99.99);
-        expect(pos.y).toBeCloseTo(1);
-    });
+    t.is(t.context.x, 10);
+    t.is(t.context.y, 20);
+});
 
-    test("clone and equals", () => {
-        pos.set(-42, 55.55);
-        const clone = pos.clone();
+test("clone and equals", (t) => {
+    const clone = t.context.clone();
 
-        expect(clone).not.toBe(pos);
-        expect(pos.x).toBeCloseTo(clone.x);
-        expect(pos.y).toBeCloseTo(clone.y);
-        expect(pos.equals([clone.x, clone.y])).toBe(true);
-        expect(pos.equals([123, 5])).toBe(false);
-    });
+    t.not(clone, t.context);
+    t.is(t.context.x, clone.x);
+    t.is(t.context.y, clone.y);
+    t.true(t.context.equals([clone.x, clone.y]), true);
+    t.false(t.context.equals([123, 5]), false);
+});
 
-    describe("calculations", () => {
-        let one;
-        let two;
+let one;
+let two;
+const setup = () => {
+    one = new Position(80, 90);
+    two = new Position(60, 70);
+};
+const check = (t) => {
+    // Original unchanged
+    t.is(one.x, 80);
+    t.is(one.y, 90);
 
-        beforeEach(() => {
-            one = new Position(80, 90);
-            two = new Position(60, 70);
-        });
+    t.is(two.x, 60);
+    t.is(two.y, 70);
+};
 
-        afterEach(() => {
-            // Original unchanged
-            expect(one.x).toBe(80);
-            expect(one.y).toBe(90);
+const calculation = (t, functionName, operation) => {
+    setup();
+    const subPos = one.clone()[functionName](two);
+    t.true(almostEqual(subPos.x, operation(one.x, two.x)));
+    t.true(almostEqual(subPos.y, operation(one.y, two.y)));
 
-            expect(two.x).toBe(60);
-            expect(two.y).toBe(70);
-        });
+    const oneValue = 3.21;
+    const subVal = one.clone()[functionName](oneValue);
+    t.true(almostEqual(subVal.x, operation(one.x, oneValue)));
+    t.true(almostEqual(subVal.y, operation(one.y, oneValue)));
 
-        const calculation = (functionName, operation) => {
-            const subPos = one.clone()[functionName](two);
-            expect(subPos.x).toBeCloseTo(operation(one.x, two.x));
-            expect(subPos.y).toBeCloseTo(operation(one.y, two.y));
+    const twoValues = [
+        5.82,
+        9.07,
+    ];
+    const subTwoVal = one.clone()[functionName](...twoValues);
+    t.true(almostEqual(subTwoVal.x, operation(one.x, twoValues[0])));
+    t.true(almostEqual(subTwoVal.y, operation(one.y, twoValues[1])));
+    check(t);
+};
 
-            const oneValue = 3.21;
-            const subVal = one.clone()[functionName](oneValue);
-            expect(subVal.x).toBeCloseTo(operation(one.x, oneValue));
-            expect(subVal.y).toBeCloseTo(operation(one.y, oneValue));
+test("subtract", (t) => {
+    calculation(t, "subtract", (a, b) => a - b);
+});
 
-            const twoValues = [
-                5.82,
-                9.07,
-            ];
-            const subTwoVal = one.clone()[functionName](...twoValues);
-            expect(subTwoVal.x).toBeCloseTo(operation(one.x, twoValues[0]));
-            expect(subTwoVal.y).toBeCloseTo(operation(one.y, twoValues[1]));
-        };
+test("add", (t) => {
+    calculation(t, "add", (a, b) => a + b);
+});
 
-        test("subtract", () => {
-            // Subtract
-            calculation("subtract", (a, b) => a - b);
-        });
+test("divide", (t) => {
+    calculation(t, "divide", (a, b) => a / b);
+});
 
-        test("add", () => {
-            // Add
-            calculation("add", (a, b) => a + b);
-        });
+test("multiply", (t) => {
+    calculation(t, "multiply", (a, b) => a * b);
+});
 
-        test("divide", () => {
-            // Divide
-            calculation("divide", (a, b) => a / b);
-        });
+test("rotate", (t) => {
+    t.context.set(10, 0);
 
-        test("multiply", () => {
-            // Multiply
-            calculation("multiply", (a, b) => a * b);
-        });
-    });
+    t.context.rotate(0.5);
+    t.true(almostEqual(t.context.x, -10));
+    t.true(almostEqual(t.context.y, 0));
 
-    test("rotate", () => {
-        pos.set(10, 0);
+    t.context.rotate(1);
+    t.true(almostEqual(t.context.x, -10));
+    t.true(almostEqual(t.context.y, 0));
 
-        pos.rotate(0.5);
-        expect(pos.x).toBeCloseTo(-10);
-        expect(pos.y).toBeCloseTo(0);
+    t.context.rotate(0.5);
+    t.true(almostEqual(t.context.x, 10));
+    t.true(almostEqual(t.context.y, 0));
+});
 
-        pos.rotate(1);
-        expect(pos.x).toBeCloseTo(-10);
-        expect(pos.y).toBeCloseTo(0);
+test("constrain", (t) => {
+    t.context.constrain([-10, -10], [10, 10]);
+    t.is(t.context.x, -10);
+    t.is(t.context.y, 10);
 
-        pos.rotate(0.5);
-        expect(pos.x).toBeCloseTo(10);
-        expect(pos.y).toBeCloseTo(0);
-    });
+    t.context.constrain([0, 0], [10, -5]);
+    t.is(t.context.x, 0);
+    t.is(t.context.y, -5);
 
-    test("constrain", () => {
-        pos.constrain([-10, -10], [10, 10]);
-        expect(pos.x).toBe(0);
-        expect(pos.y).toBe(0);
+    t.context.constrain([-10, -10], [-8, -8]);
+    t.is(t.context.x, -8);
+    t.is(t.context.y, -8);
+});
 
-        pos.constrain([-10, -10], [10, -5]);
-        expect(pos.x).toBe(0);
-        expect(pos.y).toBe(-5);
+test("lerp", (t) => {
+    const target = new Position(10, 100);
 
-        pos.constrain([-10, -10], [-8, -8]);
-        expect(pos.x).toBe(-8);
-        expect(pos.y).toBe(-8);
-    });
+    t.context.lerp(target, 0.5);
+    t.true(almostEqual(t.context.x, -16));
+    t.true(almostEqual(t.context.y, 77.5));
 
-    test("lerp", () => {
-        const target = new Position(10, 100);
+    t.context.lerp([10, 100], 0.1);
+    t.true(almostEqual(t.context.x, -13.4));
+    t.true(almostEqual(t.context.y, 79.75));
+});
 
-        pos.lerp(target, 0.5);
-        expect(pos.x).toBeCloseTo(5);
-        expect(pos.y).toBeCloseTo(50);
+test("distance", (t) => {
+    const pos2 = new Position(t.context.x + 30, t.context.y + 40); // 3² + 4² = 5²
 
-        pos.lerp(target, 0.5);
-        expect(pos.x).toBeCloseTo(7.5);
-        expect(pos.y).toBeCloseTo(75);
-    });
+    const dist = t.context.distance(pos2);
+    t.true(almostEqual(dist, 50));
+    t.true(almostEqual(pos2.distance(t.context), dist));
+});
 
-    test("distance", () => {
-        pos.set(20, -10);
-        const pos2 = new Position(pos.x + 30, pos.y + 40); // 3² + 4² = 5²
+test.todo("crossProduct");
 
-        const dist = pos.distance(pos2);
-        expect(dist).toBe(50);
-        expect(pos2.distance(pos)).toBe(dist);
-    });
+test("isOnSameSide", (t) => {
+    const splitter = new Vector([-1, -1], [1, 1]);
+    const onSameSide = new Position(1, 55);
+    const notSameSide = new Position(55, -42);
 
-    test.skip("crossProduct", () => {
-    });
+    t.true(t.context.isOnSameSide(onSameSide, splitter));
+    t.false(t.context.isOnSameSide(notSameSide, splitter));
+});
 
-    test("isOnSameSide", () => {
-        const splitter = new Vector(new Position(10, 0), new Position(0, 10));
-        const onSameSide = new Position(1, 2);
-        const notSameSide = new Position(8, 9);
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
 
-        expect(pos.isOnSameSide(onSameSide, splitter)).toBe(true);
-        expect(pos.isOnSameSide(notSameSide, splitter)).toBe(false);
-    });
+    t.deepEqual(json, [-42, 55]);
+});
 
-    test("toJSON", () => {
-        pos.set(10, 55);
-        const json = pos.toJSON();
+test("from", (t) => {
+    t.is(Position.from(t.context), t.context);
 
-        expect(json).toEqual([10, 55]);
-    });
+    const fromArray = Position.from([150, 42]);
+    t.is(fromArray.x, 150);
+    t.is(fromArray.y, 42);
 
-    describe("statics", () => {
-        test("from", () => {
-            expect(Position.from(pos)).toBe(pos);
+    const fromUndefined = Position.from(undefined);
+    t.is(fromUndefined.x, 0);
+    t.is(fromUndefined.y, 0);
 
-            const fromArray = Position.from([150, 42]);
-            expect(fromArray.x).toBe(150);
-            expect(fromArray.y).toBe(42);
+    t.throws(() => Position.from([[1, 2], [3, 4]]), TypeError);
+});
 
-            expect(() => Position.from([[1, 2], [3, 4]])).toThrow(TypeError);
-        });
+test("average", (t) => {
+    const n = 10;
+    const points = (new Array(n)).fill().map((p, index) => new Position(index, index * 7));
+    const average = Position.average(...points);
 
-        test("average", () => {
-            const n = 10;
-            const points = (new Array(n)).fill().map((p, index) => new Position(index, index * 7));
-            const average = Position.average(...points);
-
-            expect(average instanceof Position).toBe(true);
-            const avr = (n - 1) / 2;
-            expect(average.x).toBeCloseTo(avr);
-            expect(average.y).toBeCloseTo(avr * 7);
-        });
-    });
+    t.true(average instanceof Position);
+    const avr = (n - 1) / 2;
+    t.true(almostEqual(average.x, avr));
+    t.true(almostEqual(average.y, avr * 7));
 });

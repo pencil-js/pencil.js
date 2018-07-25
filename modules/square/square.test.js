@@ -1,36 +1,28 @@
-/* global describe beforeEach test expect */
-
+import test from "ava";
 import Square from "./square";
 
-describe("Square", () => {
-    let square;
-    beforeEach(() => {
-        square = new Square([-20, 20], 123.4);
-    });
-
-    test("creation", () => {
-        expect(square.width).toBeCloseTo(123.4);
-        expect(square.height).toBeCloseTo(123.4);
-    });
-
-    test("get and set size", () => {
-        expect(square.size).toBeCloseTo(123.4);
-
-        const s = 99.9;
-        square.size = s;
-        expect(square.size).toBeCloseTo(s);
-    });
-
-    test("toJSON", () => {
-        const json = square.toJSON();
-
-        expect(json.size).toBeCloseTo(123.4);
-        expect(json.width).not.toBeDefined();
-        expect(json.height).not.toBeDefined();
-    });
-
-    describe("statics", () => {
-        test.skip("from", () => {
-        });
-    });
+test.beforeEach((t) => {
+    t.context = new Square([0, 0], 123);
 });
+
+test("constructor", (t) => {
+    t.is(t.context.width, 123);
+    t.is(t.context.height, 123);
+});
+
+test("get and set size", (t) => {
+    t.is(t.context.size, 123);
+
+    t.context.size = 99;
+    t.is(t.context.size, 99);
+});
+
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
+
+    t.is(json.size, 123);
+    t.is(json.width, undefined);
+    t.is(json.height, undefined);
+});
+
+test.todo("from");
