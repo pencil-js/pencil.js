@@ -13,8 +13,8 @@ export default class Polygon extends Component {
      * @param {Array<PositionDefinition>} points - Set of vertices relative to position defining the polygon
      * @param {ComponentOptions} options - Drawing options
      */
-    constructor (positionDefinition, points, options) {
-        if (points.length < 3) {
+    constructor (positionDefinition, points = [], options) {
+        if (points.length < 2) {
             throw new RangeError(`A polygon can't have less than 3 vertices, but only ${points.length} given.`);
         }
 
@@ -33,7 +33,6 @@ export default class Polygon extends Component {
      */
     trace (path) {
         this.points.forEach(point => path.lineTo(point.x, point.y));
-        path.closePath();
         return this;
     }
 
@@ -42,7 +41,7 @@ export default class Polygon extends Component {
      */
     toJSON () {
         return Object.assign(super.toJSON(), {
-            points: this.points,
+            points: this.points.map(point => point.toJSON()),
         });
     }
 
@@ -52,6 +51,6 @@ export default class Polygon extends Component {
      * @return {Polygon}
      */
     static from (definition) {
-        return new Polygon(definition.points, definition.options);
+        return new Polygon(definition.position, definition.points, definition.options);
     }
 }
