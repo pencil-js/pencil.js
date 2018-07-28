@@ -139,8 +139,8 @@ export default class Text extends Component {
             horizontal = this.width;
         }
         else if (align === Text.alignments.start || align === Text.alignments.end) {
-            const scene = this.hasScene();
-            if (scene) {
+            const scene = this.getRoot();
+            if (scene.isScene) {
                 const dir = textDirection(scene.ctx.canvas);
                 if ((align === Text.alignments.start && dir === "rtl") ||
                     (align === Text.alignments.end && dir === "ltr")) {
@@ -188,8 +188,8 @@ export default class Text extends Component {
             return this._cachedMeasures[key];
         }
 
-        const scene = this.hasScene();
-        if (scene) {
+        const scene = this.getRoot();
+        if (scene.isScene) {
             scene.ctx.font = this.getFontDefinition();
             const maxLineWidth = Math.max(...this.lines.map(line => scene.ctx.measureText(line).width));
             // Hack to get the em box's height

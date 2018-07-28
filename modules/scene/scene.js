@@ -56,10 +56,6 @@ export default class Scene extends Container {
         /**
          * @type {Number}
          */
-        this.frameCount = 0;
-        /**
-         * @type {Number}
-         */
         this.lastTick = null;
 
         /**
@@ -180,7 +176,6 @@ export default class Scene extends Container {
         }
         this.lastTick = now;
 
-        ++this.frameCount;
         return this;
     }
 

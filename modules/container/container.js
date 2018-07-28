@@ -37,7 +37,15 @@ export default class Container extends EventEmitter {
          * @type {Container}
          */
         this.parent = null;
+        /**
+         * @type {Number}
+         */
+        this.frameCount = 0;
 
+        /**
+         * @type {Promise<Scene>}
+         * @private
+         */
         this._scenePromise = new Promise((resolve) => {
             this.on(Container.events.attach, () => {
                 const root = this.getRoot();
@@ -94,7 +102,7 @@ export default class Container extends EventEmitter {
         if (this.children.includes(child)) {
             const removed = this.children.splice(this.children.indexOf(child), 1)[0];
             removed.parent = null;
-            removed.fire(new BaseEvent(removed, "detach"));
+            removed.fire(new BaseEvent(removed, Container.events.detach));
         }
 
         return this;
@@ -115,15 +123,6 @@ export default class Container extends EventEmitter {
         if (this.parent) {
             this.parent.removeChild(this);
         }
-    }
-
-    /**
-     * Return the associated scene or null if none
-     * @return {Scene}
-     */
-    hasScene () {
-        const root = this.getRoot();
-        return root.isScene ? root : null;
     }
 
     /**
@@ -205,48 +204,51 @@ export default class Container extends EventEmitter {
      * @return {Container} Itself
      */
     render (ctx) {
-        if (this.options.shown) {
-            this.fire(new BaseEvent(this, Container.events.draw));
-            ctx.save();
-            ctx.translate(this.position.x, this.position.y);
-
-            if (this.options.clip) {
-                const clipping = new Path2D();
-                const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
-                const { x, y } = clipper.position;
-                ctx.translate(x, y);
-                clipper.trace(clipping);
-                ctx.clip(clipping);
-                ctx.translate(-x, -y);
-            }
-
-            if (this.options.rotation) {
-                const anchorX = this.options.rotationAnchor.x;
-                const anchorY = this.options.rotationAnchor.y;
-                ctx.translate(anchorX, anchorY);
-                ctx.rotate(this.options.rotation * radianCircle);
-                ctx.translate(-anchorX, -anchorY);
-            }
-
-            stableSort.inplace(this.children, (a, b) => a.options.zIndex - b.options.zIndex);
-
-            if (this.options.opacity !== null && ctx.globalAlpha !== this.options.opacity) {
-                ctx.globalAlpha = this.options.opacity;
-            }
-
-            const pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
-            for (let i = 0, l = pivotIndex; i < l; ++i) {
-                this.children[i].render(ctx);
-            }
-
-            this.makePath(ctx);
-
-            for (let i = pivotIndex, l = this.children.length; i < l; ++i) {
-                this.children[i].render(ctx);
-            }
-
-            ctx.restore();
+        if (!this.options.shown) {
+            return this;
         }
+
+        this.frameCount++;
+        this.fire(new BaseEvent(this, Container.events.draw));
+        ctx.save();
+        ctx.translate(this.position.x, this.position.y);
+
+        if (this.options.clip) {
+            const clipping = new Path2D();
+            const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
+            const { x, y } = clipper.position;
+            ctx.translate(x, y);
+            clipper.trace(clipping);
+            ctx.clip(clipping);
+            ctx.translate(-x, -y);
+        }
+
+        if (this.options.rotation) {
+            const anchorX = this.options.rotationAnchor.x;
+            const anchorY = this.options.rotationAnchor.y;
+            ctx.translate(anchorX, anchorY);
+            ctx.rotate(this.options.rotation * radianCircle);
+            ctx.translate(-anchorX, -anchorY);
+        }
+
+        stableSort.inplace(this.children, (a, b) => a.options.zIndex - b.options.zIndex);
+
+        if (this.options.opacity !== null && ctx.globalAlpha !== this.options.opacity) {
+            ctx.globalAlpha = this.options.opacity;
+        }
+
+        const pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
+        for (let i = 0, l = pivotIndex; i < l; ++i) {
+            this.children[i].render(ctx);
+        }
+
+        this.makePath(ctx);
+
+        for (let i = pivotIndex, l = this.children.length; i < l; ++i) {
+            this.children[i].render(ctx);
+        }
+
+        ctx.restore();
 
         return this;
     }
@@ -407,6 +409,7 @@ export default class Container extends EventEmitter {
      * @typedef {Object} ContainerEvent
      * @enum {String}
      * @prop {String} attach - Container is append to a new parent
+     * @prop {String} detach - Container remove from it's parent
      * @prop {String} draw - Container is drawn
      */
     /**
@@ -415,6 +418,7 @@ export default class Container extends EventEmitter {
     static get events () {
         return {
             attach: "attach",
+            detach: "detach",
             draw: "draw",
         };
     }

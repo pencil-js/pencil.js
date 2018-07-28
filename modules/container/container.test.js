@@ -17,8 +17,6 @@ test.todo("empty");
 
 test.todo("remove");
 
-test.todo("hasScene");
-
 test.todo("getScene");
 
 test.todo("getRoot");
@@ -61,6 +59,7 @@ test("defaultOptions", (t) => {
 
 test("events", (t) => {
     t.is(Container.events.attach, "attach");
+    t.is(Container.events.detach, "detach");
     t.is(Container.events.draw, "draw");
 });
 
