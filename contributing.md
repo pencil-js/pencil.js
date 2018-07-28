@@ -33,14 +33,11 @@ You need to [fork the repo](https://help.github.com/articles/fork-a-repo/) to ma
 Then you can clone this copy to your machine.
 
     git clone git@github.com:your-name-here/pencil.js.git
+    cd pencil.js
 
-We use [lerna](https://lernajs.io/) to manage the modular aspect of the project, so you'll need it too.
+We use [lerna](https://lernajs.io/) to manage the modular aspect of the project. So, you just have to run the `init` script.
 
-    npm install -g lerna
-
-Lastly, ask lerna to boot everything up.
-
-    lerna bootstrap
+    npm run init
 
 #### Coding
 
@@ -63,13 +60,13 @@ We use [eslint](https://eslint.org/) to check the code-style. Configure your IDE
 
     npm run lint
 
-There should be a test file for each modules. You can run all the tests with the test script.
+There's a test file for each modules. You can run all the tests with the test script.
 
     npm test
 
 #### Committing
 
-Once you're done editing the code, checking you forget no lint and running the tests successful, you can create your pull request.
+Once you're done editing the code, checking you forget no lint and running the tests successfully, you can create your pull request.
 
 Commit your code, part by part, using meaningful commit message with git.
 
