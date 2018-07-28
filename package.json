@@ -11,9 +11,9 @@
   "scripts": {
     "init": "lerna bootstrap",
     "lint": "eslint **/*.js",
-    "test": "nyc --reporter=lcov ava",
+    "test": "nyc --reporter=lcov ava && npm run lint",
     "build": "webpack --mode=development",
-    "prepublishOnly": "npm test && npm lint && webpack --mode=production"
+    "prepublishOnly": "npm test && webpack --mode=production"
   },
   "ava": {
     "require": [
