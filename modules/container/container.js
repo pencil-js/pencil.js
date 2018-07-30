@@ -150,12 +150,13 @@ export default class Container extends EventEmitter {
      * @return {Position}
      */
     getAbsolutePosition () {
-        if (this.parent) {
-            const parentAbsolutePosition = this.parent.getAbsolutePosition();
-            return parentAbsolutePosition.add(this.position);
-        }
+        const position = new Position();
 
-        return new Position();
+        this.climbAncestry((ancestor) => {
+            position.rotate(ancestor.options.rotation).add(ancestor.position);
+        });
+
+        return position;
     }
 
     /**
@@ -306,11 +307,11 @@ export default class Container extends EventEmitter {
      * @param {Container} [until=null] - Define a ancestor where to stop the climbing
      */
     climbAncestry (callback, until) {
+        callback(this);
+
         if (this.parent && this.parent !== until) {
             this.parent.climbAncestry(callback);
         }
-
-        callback(this);
     }
 
     /**
