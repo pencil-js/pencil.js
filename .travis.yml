@@ -15,4 +15,4 @@ after_script:
 
 # Lerna install
 install:
-    - npx lerna bootstrap -- --only=dev
+    - npx lerna bootstrap
