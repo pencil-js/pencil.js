@@ -10,7 +10,7 @@
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
     "init": "lerna bootstrap",
-    "lint": "eslint **/*.js",
+    "lint": "eslint *.js modules/**/*.js",
     "test": "nyc --reporter=lcov ava && npm run lint",
     "build": "webpack --mode=development",
     "prepublishOnly": "npm test && webpack --mode=production"
