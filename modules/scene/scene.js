@@ -109,6 +109,9 @@ export default class Scene extends Container {
                 target.fire(new MouseEvent(target, events[0], eventPosition))
                     .fire(new MouseEvent(target, events[1], eventPosition));
             },
+            mouseout: (target, eventPosition) => {
+                target.fire(new MouseEvent(target, MouseEvent.events.leave, eventPosition));
+            },
         };
         Object.keys(mouseListeners).forEach((eventName) => {
             window.addEventListener(eventName, (event) => {
