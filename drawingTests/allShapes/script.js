@@ -29,9 +29,9 @@
 
     shapes.push(container);
 
-    shapes.push(new P.Star(new P.Position(80, 100), 20));
+    shapes.push(new P.Star(new P.Position(100, 100), 20));
 
-    shapes.push(new P.RegularPolygon(new P.Position(80, 100), 5, 20, {
+    shapes.push(new P.RegularPolygon(new P.Position(100, 100), 5, 20, {
         fill: null,
         stroke: "rgb(0, 0, 255)",
     }));
@@ -41,6 +41,12 @@
         new P.Position(50, 30),
         new P.Position(0, 40),
     ];
+
+    shapes.push(new P.Polygon([20, 80], points, {
+        fill: null,
+        stroke: "#111",
+        strokeWidth: 8,
+    }));
 
     shapes.push(new P.Line(new P.Position(20, 130), points, {
         strokeWidth: 4,
