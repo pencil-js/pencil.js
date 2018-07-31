@@ -1,6 +1,5 @@
 import test from "ava";
 import Container from "./container";
-import {degreeCircle} from "../math";
 
 test.beforeEach((t) => {
     t.context = new Container([10, 20]);
@@ -9,6 +8,7 @@ test.beforeEach((t) => {
 /**
  * Add a new child and returns it
  * @param {Container} container - Any container
+ * @param {PositionDefinition} position - Position definition for the child
  * @return {Container}
  */
 function addHeir (container, position) {
