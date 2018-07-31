@@ -78,8 +78,9 @@ export default class Spline extends Line {
         }
 
         const positions = points.map(point => Position.from(point));
-        if (points.length === 2) {
+        if (positions.length === 2) {
             path.lineTo(positions[1].x, positions[1].y);
+            return;
         }
 
         const getCtrlPts = Spline.getControlPoint;

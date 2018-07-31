@@ -32,7 +32,8 @@ export default class Polygon extends Component {
      * @return {Polygon} Itself
      */
     trace (path) {
-        this.points.forEach(point => path.lineTo(point.x, point.y));
+        this.points.concat([new Position()]).concat(...this.points.slice(0, 2))
+            .forEach(point => path.lineTo(point.x, point.y));
         return this;
     }
 

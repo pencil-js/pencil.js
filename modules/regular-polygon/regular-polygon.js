@@ -14,13 +14,9 @@ export default class RegularPolygon extends Polygon {
      * @param {Number} [radius=0] - Distance between center and outer points
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (position = new Position(), nbSides, radius = 0, options) {
+    constructor (position, nbSides, radius = 0, options) {
         super(position, RegularPolygon.getRotatingPoints(nbSides, radius), options);
 
-        /**
-         * @type {Position}
-         */
-        this.position = Position.from(position);
         /**
          * @type {Number}
          */
@@ -28,12 +24,22 @@ export default class RegularPolygon extends Polygon {
     }
 
     /**
+     * Draw the polygon
+     * @param {Path2D} path - Current drawing path
+     * @return {Polygon} Itself
+     */
+    trace (path) {
+        this.points.concat(...this.points.slice(0, 2)).forEach(point => path.lineTo(point.x, point.y));
+        return this;
+    }
+
+    /**
      * @inheritDoc
      */
     toJSON () {
         const json = Object.assign(super.toJSON(), {
-            radius: this.radius,
             nbSides: this.points.length,
+            radius: this.radius,
         });
         delete json.points;
         return json;

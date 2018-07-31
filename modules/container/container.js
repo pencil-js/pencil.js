@@ -75,11 +75,11 @@ export default class Container extends EventEmitter {
     add (...child) {
         child.forEach((one) => {
             if (one === this) {
-                throw new EvalError("A container can't contain itself.");
+                throw new RangeError("A container can't contain itself.");
             }
 
             if (one.isScene) {
-                throw new EvalError("A scene can't be contained in another container.");
+                throw new RangeError("A scene can't be contained in another container.");
             }
 
             if (one.parent) {
@@ -95,34 +95,39 @@ export default class Container extends EventEmitter {
 
     /**
      * Remove a child from the list
-     * @param {Container} child -
+     * @param {...Container} child - Child to remove
      * @return {Container} Itself
      */
-    removeChild (child) {
-        if (this.children.includes(child)) {
-            const removed = this.children.splice(this.children.indexOf(child), 1)[0];
-            removed.parent = null;
-            removed.fire(new BaseEvent(removed, Container.events.detach));
-        }
+    removeChild (...child) {
+        child.forEach((one) => {
+            if (this.children.includes(one)) {
+                const removed = this.children.splice(this.children.indexOf(one), 1)[0];
+                removed.parent = null;
+                removed.fire(new BaseEvent(removed, Container.events.detach));
+            }
+        });
 
         return this;
     }
 
     /**
      * Remove all its children
+     * @return {Container} Itself
      */
     empty () {
-        this.children.forEach(child => child.parent = null);
-        this.children = [];
+        return this.removeChild(...this.children);
     }
 
     /**
      * Remove itself from its parent
+     * @return {Container} Itself
      */
     remove () {
         if (this.parent) {
             this.parent.removeChild(this);
         }
+
+        return this;
     }
 
     /**
@@ -153,7 +158,7 @@ export default class Container extends EventEmitter {
         const position = new Position();
 
         this.climbAncestry((ancestor) => {
-            position.rotate(ancestor.options.rotation).add(ancestor.position);
+            position.rotate(ancestor.options.rotation, ancestor.options.rotationAnchor).add(ancestor.position);
         });
 
         return position;
@@ -219,7 +224,9 @@ export default class Container extends EventEmitter {
             const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
             const { x, y } = clipper.position;
             ctx.translate(x, y);
-            clipper.trace(clipping);
+            if (clipper.trace) {
+                clipper.trace(clipping);
+            }
             ctx.clip(clipping);
             ctx.translate(-x, -y);
         }
@@ -286,7 +293,7 @@ export default class Container extends EventEmitter {
      * @return {Boolean}
      */
     isAncestorOf (container) {
-        if (container.parent) {
+        if (container && container.parent) {
             if (container.parent === this) {
                 return true;
             }
@@ -400,7 +407,7 @@ export default class Container extends EventEmitter {
             shown: true,
             opacity: null,
             rotation: 0,
-            rotationAnchor: [0, 0],
+            rotationAnchor: new Position(0, 0),
             zIndex: 1,
             clip: null,
         };
