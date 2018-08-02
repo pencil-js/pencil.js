@@ -6,9 +6,17 @@ test.beforeEach((t) => {
 });
 
 test("constructor", (t) => {
-    t.is(t.context.radius, 10);
     t.is(t.context.startAngle, 0);
     t.is(t.context.endAngle, 1);
+});
+
+test("get and set radius", (t) => {
+    t.is(t.context.radius, 10);
+
+    t.context.radius = 20;
+    t.is(t.context.radius, 20);
+    t.is(t.context.width, 40);
+    t.is(t.context.height, 40);
 });
 
 test("toJSON", (t) => {
@@ -20,5 +28,3 @@ test("toJSON", (t) => {
 });
 
 test.todo("from");
-
-test.todo("defaultOptions");

@@ -81,10 +81,10 @@ export default class Line extends Component {
         const options = Object.assign(super.defaultOptions, {
             cap: Line.caps.round,
             join: Line.joins.round,
+            fill: null,
+            cursor: null,
         });
-        options.stroke = options.fill;
-        delete options.fill;
-        delete options.cursor;
+        options.stroke = super.defaultOptions.fill;
         return options;
     }
 

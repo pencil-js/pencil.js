@@ -9,7 +9,7 @@
 
     const shapes = [];
 
-    shapes.push(new P.Arc(new P.Position(30, 30), 20, 0.25, -0.1, {
+    shapes.push(new P.Arc(new P.Position(40, 30), 30, 20, 0.25, -0.1, {
         fill: "#F00",
         strokeWidth: 8,
     }));

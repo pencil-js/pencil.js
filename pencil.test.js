@@ -4,8 +4,8 @@ import test from "ava";
 import Pencil from "./pencil";
 import {
     BaseEvent, MouseEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
-    Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Circle, Text, Slider, Path,
-    Checkbox, Input, Button, from, OffScreenCanvas,
+    Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text, Path,
+    Input, Checkbox, Slider, Button, from, OffScreenCanvas,
 } from "./pencil";
 /* eslint-enable */
 
@@ -33,6 +33,7 @@ test("namespace", (t) => {
     t.not(Pencil.Square, undefined);
     t.not(Pencil.Image, undefined);
     t.not(Pencil.Arc, undefined);
+    t.not(Pencil.Ellipse, undefined);
     t.not(Pencil.Circle, undefined);
     t.not(Pencil.Text, undefined);
     t.not(Pencil.Slider, undefined);
@@ -66,6 +67,7 @@ test("named imports", (t) => {
     t.not(Square, undefined);
     t.not(Image, undefined);
     t.not(Arc, undefined);
+    t.not(Ellipse, undefined);
     t.not(Circle, undefined);
     t.not(Text, undefined);
     t.not(Slider, undefined);

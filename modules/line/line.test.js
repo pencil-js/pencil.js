@@ -49,7 +49,7 @@ test("toJSON", (t) => {
 test.todo("from");
 
 test("defaultOptions", (t) => {
-    t.is(Line.defaultOptions.fill, undefined);
+    t.is(Line.defaultOptions.fill, null);
     t.is(Line.defaultOptions.cap, Line.caps.round);
     t.is(Line.defaultOptions.join, Line.joins.round);
 });

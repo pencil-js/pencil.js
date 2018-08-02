@@ -17,6 +17,7 @@ import Component from "@pencil.js/component";
 
 // Shapes
 import Arc from "@pencil.js/arc";
+import Ellipse from "@pencil.js/ellipse";
 import Circle from "@pencil.js/circle";
 import Line from "@pencil.js/line";
 import Spline from "@pencil.js/spline";
@@ -44,6 +45,7 @@ const exportableClasses = {
     Container,
     Scene,
     Arc,
+    Ellipse,
     Circle,
     Line,
     Spline,
@@ -97,6 +99,7 @@ export {
     Scene,
     Component,
     Arc,
+    Ellipse,
     Circle,
     Line,
     Spline,

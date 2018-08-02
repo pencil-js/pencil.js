@@ -63,6 +63,7 @@
     "@pencil.js/component": "^0.8.3",
     "@pencil.js/container": "^0.8.2",
     "@pencil.js/draggable": "^0.8.3",
+    "@pencil.js/ellipse": "^0.1.0",
     "@pencil.js/event-emitter": "^0.8.0",
     "@pencil.js/image": "^0.8.3",
     "@pencil.js/input": "^0.8.3",
