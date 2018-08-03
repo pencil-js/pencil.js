@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/mouse-event",
-  "version": "0.8.2",
+  "version": "0.9.1",
   "description": "Mouse related event for Pencil.js package.",
   "main": "mouse-event.js",
   "files": [],
@@ -26,8 +26,8 @@
     "mouse"
   ],
   "dependencies": {
-    "@pencil.js/base-event": "^0.8.0",
-    "@pencil.js/position": "^0.8.2"
+    "@pencil.js/base-event": "^0.9.1",
+    "@pencil.js/position": "^0.9.1"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

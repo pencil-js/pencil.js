@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/polygon",
-  "version": "0.8.3",
+  "version": "0.9.1",
   "description": "Multi points shape for Pencil.js package.",
   "main": "polygon.js",
   "files": [],
@@ -25,8 +25,8 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/component": "^0.8.3",
-    "@pencil.js/position": "^0.8.2"
+    "@pencil.js/component": "^0.9.1",
+    "@pencil.js/position": "^0.9.1"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
