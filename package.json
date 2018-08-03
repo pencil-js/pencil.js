@@ -57,7 +57,7 @@
   "dependencies": {
     "@pencil.js/arc": "^0.8.3",
     "@pencil.js/base-event": "^0.8.0",
-    "@pencil.js/button": "^0.8.3",
+    "@pencil.js/button": "^0.9.1",
     "@pencil.js/checkbox": "^0.8.3",
     "@pencil.js/circle": "^0.8.3",
     "@pencil.js/component": "^0.8.3",
