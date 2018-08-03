@@ -42,11 +42,22 @@ test("getOriginPosition", (t) => {
 
 test("toJSON", (t) => {
     const json = t.context.toJSON();
+
     t.is(json.width, 123);
     t.is(json.height, 22);
+    t.is(json.constructor, "Rectangle");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        width: 42,
+        height: 666,
+    };
+    const rectangle = Rectangle.from(definition);
+
+    t.is(rectangle.width, 42);
+    t.is(rectangle.height, 666);
+});
 
 test("defaultOptions", (t) => {
     t.is(Rectangle.defaultOptions.origin, Rectangle.origins.topLeft);

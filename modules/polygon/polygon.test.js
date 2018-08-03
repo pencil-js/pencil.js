@@ -37,6 +37,21 @@ test("toJSON", (t) => {
         [100, 200],
         [300, 400],
     ]);
+    t.is(json.constructor, "Polygon");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        points: [
+            [10, 20],
+            [100, 200],
+        ],
+    };
+    const polygon = Polygon.from(definition);
+
+    t.is(polygon.points.length, 2);
+    polygon.points.forEach((point, index) => {
+        t.is(point.x, definition.points[index][0]);
+        t.is(point.y, definition.points[index][1]);
+    });
+});

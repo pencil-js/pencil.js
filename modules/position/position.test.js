@@ -161,13 +161,20 @@ test("toJSON", (t) => {
 test("from", (t) => {
     t.is(Position.from(t.context), t.context);
 
+    const fromUndefined = Position.from(undefined);
+    t.is(fromUndefined.x, 0);
+    t.is(fromUndefined.y, 0);
+
     const fromArray = Position.from([150, 42]);
     t.is(fromArray.x, 150);
     t.is(fromArray.y, 42);
 
-    const fromUndefined = Position.from(undefined);
-    t.is(fromUndefined.x, 0);
-    t.is(fromUndefined.y, 0);
+    const fromObject = Position.from({
+        x: 42,
+        y: 666,
+    });
+    t.is(fromObject.x, 42);
+    t.is(fromObject.y, 666);
 
     t.throws(() => Position.from([[1, 2], [3, 4]]), TypeError);
 });

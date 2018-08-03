@@ -25,6 +25,14 @@ test("toJSON", (t) => {
     t.is(json.radius, 10);
     t.is(json.startAngle, undefined);
     t.is(json.endAngle, undefined);
+    t.is(json.constructor, "Circle");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        radius: 10,
+    };
+    const circle = Circle.from(definition);
+
+    t.is(circle.radius, 10);
+});

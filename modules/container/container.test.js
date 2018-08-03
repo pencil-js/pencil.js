@@ -236,6 +236,7 @@ test("toJSON", (t) => {
     t.is(json.children, undefined);
     t.deepEqual(json.position, [10, 20]);
     t.is(json.options, undefined);
+    t.is(json.constructor, "Container");
 
     const specific = new Container([0, 0], {
         opacity: 0.5,
@@ -250,7 +251,15 @@ test("toJSON", (t) => {
     t.is(reJson.children.length, 1);
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        position: [10, 20],
+    };
+    const container = Container.from(definition);
+
+    t.is(container.position.x, 10);
+    t.is(container.position.y, 20);
+});
 
 test("defaultOptions", (t) => {
     const options = Container.defaultOptions;

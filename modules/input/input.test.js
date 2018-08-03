@@ -26,8 +26,10 @@ test("toJSON", (t) => {
         get: () => 42,
     });
     const json = t.context.toJSON();
+
     t.is(json.options.value, t.context.value);
     t.is(json.children.length, 0);
+    t.is(json.constructor, "Input");
 });
 
 test.todo("from");

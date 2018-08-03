@@ -11,5 +11,16 @@ test("constructor", (t) => {
 
 test("toJSON", (t) => {
     const json = t.context.toJSON();
+
     t.is(json.nbSides, undefined);
+    t.is(json.constructor, "Triangle");
+});
+
+test("from", (t) => {
+    const definition = {
+        radius: 20,
+    };
+    const triangle = Triangle.from(definition);
+
+    t.is(triangle.radius, 20);
 });

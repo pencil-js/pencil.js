@@ -23,6 +23,14 @@ test("toJSON", (t) => {
     t.is(json.size, 123);
     t.is(json.width, undefined);
     t.is(json.height, undefined);
+    t.is(json.constructor, "Square");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        size: 123,
+    };
+    const square = Square.from(definition);
+
+    t.is(square.size, 123);
+});

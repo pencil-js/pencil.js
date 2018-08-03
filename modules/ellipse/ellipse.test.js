@@ -14,13 +14,24 @@ test("constructor", (t) => {
 
 test("toJSON", (t) => {
     const json = t.context.toJSON();
+
     t.is(json.width, 50);
     t.is(json.height, 100);
     t.is(json.startAngle, undefined);
     t.is(json.endAngle, undefined);
+    t.is(json.constructor, "Ellipse");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        width: 10,
+        height: 20,
+    };
+    const ellipse = Ellipse.from(definition);
+
+    t.is(ellipse.width, 10);
+    t.is(ellipse.height, 20);
+});
 
 test("defaultOptions", (t) => {
     t.truthy(Ellipse.defaultOptions.fill);

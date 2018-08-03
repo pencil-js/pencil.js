@@ -1,15 +1,33 @@
 import test from "ava";
 
-/* eslint-disable import/no-duplicates */
+/* eslint-disable import/no-duplicates, import/no-named-as-default-member */
 import Pencil from "./pencil";
 import {
     BaseEvent, MouseEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
     Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text, Path,
     Input, Checkbox, Slider, Button, from, OffScreenCanvas,
 } from "./pencil";
-/* eslint-enable */
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        constructor: "Circle",
+        position: [10, 20],
+        radius: 50,
+        children: [
+            {
+                constructor: "Triangle",
+                radius: 5,
+            },
+        ],
+    };
+    const newInstance = Pencil.from(definition);
+    t.true(newInstance instanceof Pencil.Circle);
+    t.is(newInstance.position.x, 10);
+    t.is(newInstance.position.y, 20);
+    t.is(newInstance.radius, definition.radius);
+    t.is(newInstance.children.length, 1);
+    t.true(newInstance.children[0] instanceof Pencil.Triangle);
+});
 
 test("namespace", (t) => {
     /* eslint-disable import/no-named-as-default-member */

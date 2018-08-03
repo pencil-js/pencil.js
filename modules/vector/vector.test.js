@@ -12,6 +12,11 @@ test("constructor", (t) => {
     t.is(t.context.end.y, 140);
 });
 
+test("get width and height", (t) => {
+    t.is(t.context.width, 30);
+    t.is(t.context.height, 40);
+});
+
 test("length", (t) => {
     t.is(t.context.length(), 50);
 });
@@ -107,4 +112,32 @@ test("toJSON", (t) => {
     t.deepEqual(t.context.toJSON(), [[10, 100], [40, 140]]);
 });
 
-test.todo("from");
+test("from", (t) => {
+    t.is(t.context, Vector.from(t.context));
+
+    const fromUndefined = Vector.from();
+    t.is(fromUndefined.start.x, 0);
+    t.is(fromUndefined.start.y, 0);
+    t.is(fromUndefined.end.x, 0);
+    t.is(fromUndefined.end.y, 0);
+
+    const fromArray = Vector.from([
+        [10, 20],
+        [30, 40],
+    ]);
+    t.is(fromArray.start.x, 10);
+    t.is(fromArray.start.y, 20);
+    t.is(fromArray.end.x, 30);
+    t.is(fromArray.end.y, 40);
+
+    const fromObject = Vector.from({
+        start: [1, 2],
+        end: [3, 4],
+    });
+    t.is(fromObject.start.x, 1);
+    t.is(fromObject.start.y, 2);
+    t.is(fromObject.end.x, 3);
+    t.is(fromObject.end.y, 4);
+
+    t.throws(() => Vector.from([]));
+});

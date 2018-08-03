@@ -33,9 +33,22 @@ test("toJSON", (t) => {
 
     t.is(json.points.length, 5);
     t.is(json.tension, 0.7);
+    t.is(json.constructor, "Spline");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        points: [
+            [10, 20],
+            [30, 40],
+        ],
+        tension: 0.5,
+    };
+    const spline = Spline.from(definition);
+
+    t.is(spline.points.length, 2);
+    t.is(spline.tension, 0.5);
+});
 
 test("defaultTension", (t) => {
     t.is(Spline.defaultTension, 0.2);

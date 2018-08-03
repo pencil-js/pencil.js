@@ -173,9 +173,17 @@ test("toJSON", (t) => {
     const json = t.context.toJSON();
 
     t.is(json.text, "Hello\nworld");
+    t.is(json.constructor, "Text");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        text: "whatever",
+    };
+    const text = Text.from(definition);
+
+    t.is(text.text, "whatever");
+});
 
 test.todo("load");
 

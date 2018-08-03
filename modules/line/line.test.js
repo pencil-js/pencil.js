@@ -44,9 +44,24 @@ test("toJSON", (t) => {
         [150, 150],
         [200, 200],
     ]);
+    t.is(json.constructor, "Line");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        points: [
+            [10, 20],
+            [100, 200],
+        ],
+    };
+    const line = Line.from(definition);
+
+    t.is(line.points.length, 2);
+    line.points.forEach((point, index) => {
+        t.is(point.x, definition.points[index][0]);
+        t.is(point.y, definition.points[index][1]);
+    });
+});
 
 test("defaultOptions", (t) => {
     t.is(Line.defaultOptions.fill, null);

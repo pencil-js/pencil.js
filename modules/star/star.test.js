@@ -20,6 +20,16 @@ test("toJSON", (t) => {
     t.is(json.nbBranches, 6);
     t.is(json.bevelRatio, 0.2);
     t.is(json.nbSides, undefined);
+    t.is(json.constructor, "Star");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        nbBranches: 7,
+        bevelRatio: 0.3,
+    };
+    const star = Star.from(definition);
+
+    t.is(star.points.length, 14);
+    t.is(star.bevelRatio, 0.3);
+});

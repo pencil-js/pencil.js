@@ -30,9 +30,19 @@ test("toJSON", (t) => {
     t.is(json.nbSides, 5);
     t.is(json.radius, 20);
     t.is(json.points, undefined);
+    t.is(json.constructor, "RegularPolygon");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        nbSides: 7,
+        radius: 20,
+    };
+    const polygon = RegularPolygon.from(definition);
+
+    t.is(polygon.points.length, 7);
+    t.is(polygon.radius, 20);
+});
 
 test("getRotatingPoints", (t) => {
     const points = RegularPolygon.getRotatingPoints(4, 50);

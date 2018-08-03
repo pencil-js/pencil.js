@@ -36,9 +36,23 @@ test("toJSON", (t) => {
     t.is(json.height, 40, "retrieved height");
     t.is(json.startAngle, 0.1, "retrieved start angle");
     t.is(json.endAngle, 0.6, "retrieved end angle");
+    t.is(json.constructor, "Arc");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        width: 10,
+        height: 20,
+        startAngle: 0.1,
+        endAngle: 0.9,
+    };
+    const arc = Arc.from(definition);
+
+    t.is(arc.width, 10);
+    t.is(arc.height, 20);
+    t.is(arc.startAngle, 0.1);
+    t.is(arc.endAngle, 0.9);
+});
 
 test("defaultOptions", (t) => {
     t.is(Arc.defaultOptions.cap, Arc.caps.round, "default cap is round");
