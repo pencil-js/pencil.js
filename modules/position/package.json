@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/position",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "2D space position for Pencil.js package.",
   "main": "position.js",
   "files": [],
