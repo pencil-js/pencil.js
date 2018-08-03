@@ -217,7 +217,7 @@ export default class Position {
      * @return {Position}
      */
     static from (positionDefinition = new Position()) {
-        if (positionDefinition.constructor && positionDefinition.constructor.name === "Position") {
+        if (positionDefinition instanceof Position) {
             return positionDefinition;
         }
         if (Array.isArray(positionDefinition) && positionDefinition.length === 2 &&
@@ -228,7 +228,7 @@ export default class Position {
             return new Position(positionDefinition.x, positionDefinition.y);
         }
 
-        throw new TypeError(`Unexpected type for position: [${typeof positionDefinition}].`);
+        throw new TypeError(`Unexpected type for position: ${positionDefinition}.`);
     }
 
     /**
