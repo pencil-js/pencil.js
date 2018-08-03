@@ -84,7 +84,7 @@
     "@pencil.js/square": "^0.8.3",
     "@pencil.js/star": "^0.8.3",
     "@pencil.js/text": "^0.8.3",
-    "@pencil.js/triangle": "^0.8.3",
+    "@pencil.js/triangle": "^0.9.1",
     "@pencil.js/vector": "^0.8.2"
   },
   "devDependencies": {
