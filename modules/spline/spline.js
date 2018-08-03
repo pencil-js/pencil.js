@@ -55,7 +55,7 @@ export default class Spline extends Line {
      * @return {Spline}
      */
     static from (definition) {
-        return new Spline(definition.points, definition.tension, definition.options);
+        return new Spline(definition.position, definition.points, definition.tension, definition.options);
     }
 
     /**

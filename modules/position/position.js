@@ -228,7 +228,7 @@ export default class Position {
             return new Position(positionDefinition.x, positionDefinition.y);
         }
 
-        throw new TypeError(`Unexpected type for position [${typeof positionDefinition}].`);
+        throw new TypeError(`Unexpected type for position: [${typeof positionDefinition}].`);
     }
 
     /**

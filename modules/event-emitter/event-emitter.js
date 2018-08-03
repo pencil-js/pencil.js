@@ -19,7 +19,7 @@ export default class EventEmitter {
      * @param {Boolean} [isTargeted=false] - Should only listen to event targeting itself
      * @return {EventEmitter} Itself
      */
-    on (eventName, callback, isTargeted) {
+    on (eventName, callback, isTargeted = false) {
         if (!this.eventListeners[eventName]) {
             this.eventListeners[eventName] = [];
         }
@@ -64,5 +64,12 @@ export default class EventEmitter {
         return {
             constructor: this.constructor.name,
         };
+    }
+
+    /**
+     * Build an instance from a serializable definition
+     */
+    static from () {
+        throw new ReferenceError(`Unimplemented from function in ${this.name}`);
     }
 }

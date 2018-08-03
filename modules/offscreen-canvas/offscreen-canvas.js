@@ -9,7 +9,7 @@ export default class OffScreenCanvas {
      * @param {Number} [height=1] - Height of the canvas
      */
     constructor (width = 1, height = 1) {
-        this.canvas = document.createElement("canvas");
+        this.canvas = window.document.createElement("canvas");
         this.setSize(width, height);
 
         this.ctx = this.canvas.getContext("2d");
@@ -65,7 +65,7 @@ export default class OffScreenCanvas {
      * @return {HTMLImageElement}
      */
     toImg (type = "image/png") {
-        const img = document.createElement("img");
+        const img = window.document.createElement("img");
         img.src = this.canvas.toDataURL(type);
         return img;
     }

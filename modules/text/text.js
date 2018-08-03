@@ -255,7 +255,7 @@ export default class Text extends Component {
 
         const name = url.replace(/\W/g, "-");
         const fontFace = new FontFace(name, `url(${url})`);
-        document.fonts.add(fontFace);
+        window.document.fonts.add(fontFace);
         return fontFace.load().then(() => name);
     }
 

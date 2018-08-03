@@ -16,7 +16,7 @@ export default class Scene extends Container {
      * @param {HTMLElement} [container=document.body] - Container of the renderer
      * @param {SceneOptions} [options] - Specific options
      */
-    constructor (container = document.body, options) {
+    constructor (container = window.document.body, options) {
         super(undefined, options);
 
         container.innerHTML = "";
@@ -25,7 +25,7 @@ export default class Scene extends Container {
             canvas = container;
         }
         else {
-            canvas = document.createElement("canvas");
+            canvas = window.document.createElement("canvas");
             container.appendChild(canvas);
             canvas.style.display = "block";
         }

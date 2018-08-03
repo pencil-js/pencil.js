@@ -65,7 +65,7 @@ export default class Line extends Component {
      * @return {Line}
      */
     static from (definition) {
-        return new Line(definition.points, definition.options);
+        return new Line(definition.position, definition.points, definition.options);
     }
 
     /**
