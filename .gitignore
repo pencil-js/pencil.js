@@ -1,5 +1,7 @@
 .idea/
-**/.nyc_output/
-**/coverage/
-node_modules/
+.nyc_output/
+coverage/
 dist/
+node_modules/
+
+modules/**/package-lock.json

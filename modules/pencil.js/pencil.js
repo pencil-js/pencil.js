@@ -1,3 +1,5 @@
+/* global VERSION */
+
 // Basics
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
@@ -78,6 +80,8 @@ function from (json) {
     return instance;
 }
 
+const version = VERSION;
+
 // Export all under namespace
 export default Object.assign({
     EventEmitter,
@@ -90,6 +94,7 @@ export default Object.assign({
     from,
     Math,
     OffScreenCanvas,
+    version,
 }, exportableClasses);
 
 // Named exports
@@ -124,4 +129,5 @@ export {
     Button,
     OffScreenCanvas,
     from,
+    version,
 };

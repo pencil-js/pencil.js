@@ -1,37 +1,22 @@
 {
-  "name": "pencil.js",
-  "version": "0.9.2",
-  "description": "Modular 2D drawing library.",
-  "main": "pencil.js",
-  "files": [
-    "dist/"
-  ],
-  "unpkg": "dist/pencil.min.js",
-  "jsdelivr": "dist/pencil.min.js",
+  "name": "@pencil.js/root",
+  "version": "1.0.0",
+  "description": "This is the root of the Pencil.js package, it should never be published.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
-    "init": "lerna bootstrap",
-    "lint": "eslint *.js modules/**/*.js",
-    "test": "nyc --reporter=lcov ava && npm run lint",
+    "init": "lerna bootstrap --hoist",
+    "lint": "eslint modules/**/*.js",
+    "test": "nyc --reporter=lcov ava",
     "build": "webpack --mode=development",
-    "prepublishOnly": "npm test && webpack --mode=production"
+    "prepublish": "exit 0"
   },
   "ava": {
     "require": [
       "esm",
       "./test/helpers/browser-env-setup.js"
-    ]
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-canvas-mock"
-    ],
-    "collectCoverage": true,
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "test"
-    ],
-    "coverageReporters": [
-      "lcov"
     ]
   },
   "eslintIgnore": [
@@ -41,64 +26,24 @@
     "type": "git",
     "url": "git+https://github.com/GMartigny/pencil.js.git"
   },
-  "keywords": [
-    "canvas",
-    "drawing",
-    "frontend",
-    "modular",
-    "toolbelt"
-  ],
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GMartigny/pencil.js/issues"
   },
   "homepage": "https://github.com/GMartigny/pencil.js#readme",
-  "dependencies": {
-    "@pencil.js/arc": "^0.9.2",
-    "@pencil.js/base-event": "^0.9.1",
-    "@pencil.js/button": "^0.9.2",
-    "@pencil.js/checkbox": "^0.9.2",
-    "@pencil.js/circle": "^0.9.2",
-    "@pencil.js/component": "^0.9.2",
-    "@pencil.js/container": "^0.9.2",
-    "@pencil.js/draggable": "^0.9.2",
-    "@pencil.js/ellipse": "^0.9.2",
-    "@pencil.js/event-emitter": "^0.9.1",
-    "@pencil.js/image": "^0.9.2",
-    "@pencil.js/input": "^0.9.2",
-    "@pencil.js/keyboard-event": "^0.9.2",
-    "@pencil.js/line": "^0.9.2",
-    "@pencil.js/math": "^0.9.1",
-    "@pencil.js/mouse-event": "^0.9.2",
-    "@pencil.js/offscreen-canvas": "^0.9.1",
-    "@pencil.js/path": "^0.9.2",
-    "@pencil.js/polygon": "^0.9.2",
-    "@pencil.js/position": "^0.9.2",
-    "@pencil.js/rectangle": "^0.9.2",
-    "@pencil.js/regular-polygon": "^0.9.2",
-    "@pencil.js/resizable": "^0.9.2",
-    "@pencil.js/scene": "^0.9.2",
-    "@pencil.js/slider": "^0.9.2",
-    "@pencil.js/spline": "^0.9.2",
-    "@pencil.js/square": "^0.9.2",
-    "@pencil.js/star": "^0.9.2",
-    "@pencil.js/text": "^0.9.2",
-    "@pencil.js/triangle": "^0.9.2",
-    "@pencil.js/vector": "^0.9.2"
-  },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.56",
     "@babel/preset-env": "^7.0.0-beta.56",
-    "@gmartigny/eslint-config": "^1.2.0",
+    "@gmartigny/eslint-config": "^1.2.1",
     "ava": "^0.25.0",
     "babel-loader": "^8.0.0-beta.4",
     "browser-env": "^3.2.5",
-    "eslint": "^5.1.0",
-    "eslint-plugin-ava": "^5.0.0",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint": "^5.3.0",
+    "eslint-plugin-ava": "^5.1.0",
+    "eslint-plugin-import": "^2.13.0",
     "esm": "^3.0.71",
-    "lerna": "^2.11.0",
+    "lerna": "^3.0.0-rc.0",
     "nyc": "^12.0.2",
     "webpack": "^4.16.0",
     "webpack-command": "^0.4.1"

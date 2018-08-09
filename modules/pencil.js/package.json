@@ -1,0 +1,76 @@
+{
+  "name": "pencil.js",
+  "version": "0.9.2",
+  "description": "Modular 2D drawing library.",
+  "main": "pencil.js",
+  "files": [
+    "dist/"
+  ],
+  "unpkg": "dist/pencil.min.js",
+  "jsdelivr": "dist/pencil.min.js",
+  "scripts": {
+    "test": "nyc --reporter=lcov ava",
+    "prepublishOnly": "webpack --mode=production"
+  },
+  "ava": {
+    "require": [
+      "esm",
+      "../../test/helpers/browser-env-setup.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencil.js.git"
+  },
+  "keywords": [
+    "canvas",
+    "drawing",
+    "frontend",
+    "modular",
+    "toolbelt"
+  ],
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencil.js/issues"
+  },
+  "homepage": "https://github.com/GMartigny/pencil.js#readme",
+  "dependencies": {
+    "@pencil.js/arc": "^0.9.2",
+    "@pencil.js/base-event": "^0.9.1",
+    "@pencil.js/button": "^0.9.2",
+    "@pencil.js/checkbox": "^0.9.2",
+    "@pencil.js/circle": "^0.9.2",
+    "@pencil.js/component": "^0.9.2",
+    "@pencil.js/container": "^0.9.2",
+    "@pencil.js/draggable": "^0.9.2",
+    "@pencil.js/ellipse": "^0.9.2",
+    "@pencil.js/event-emitter": "^0.9.1",
+    "@pencil.js/image": "^0.9.2",
+    "@pencil.js/input": "^0.9.2",
+    "@pencil.js/keyboard-event": "^0.9.2",
+    "@pencil.js/line": "^0.9.2",
+    "@pencil.js/math": "^0.9.1",
+    "@pencil.js/mouse-event": "^0.9.2",
+    "@pencil.js/offscreen-canvas": "^0.9.1",
+    "@pencil.js/path": "^0.9.2",
+    "@pencil.js/polygon": "^0.9.2",
+    "@pencil.js/position": "^0.9.2",
+    "@pencil.js/rectangle": "^0.9.2",
+    "@pencil.js/regular-polygon": "^0.9.2",
+    "@pencil.js/resizable": "^0.9.2",
+    "@pencil.js/scene": "^0.9.2",
+    "@pencil.js/slider": "^0.9.2",
+    "@pencil.js/spline": "^0.9.2",
+    "@pencil.js/square": "^0.9.2",
+    "@pencil.js/star": "^0.9.2",
+    "@pencil.js/text": "^0.9.2",
+    "@pencil.js/triangle": "^0.9.2",
+    "@pencil.js/vector": "^0.9.2"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "esm": "^3.0.71",
+    "nyc": "^12.0.2"
+  }
+}
