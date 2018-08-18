@@ -8,6 +8,7 @@
   },
   "scripts": {
     "init": "lerna bootstrap --hoist",
+    "reset": "lerna clean --yes && npm run init",
     "lint": "eslint modules/**/*.js",
     "test": "nyc --reporter=lcov ava",
     "build": "webpack --mode=development",
@@ -39,11 +40,11 @@
     "ava": "^0.25.0",
     "babel-loader": "^8.0.0-beta.4",
     "browser-env": "^3.2.5",
-    "eslint": "^5.3.0",
+    "eslint": "^5.4.0",
     "eslint-plugin-ava": "^5.1.0",
-    "eslint-plugin-import": "^2.13.0",
-    "esm": "^3.0.71",
-    "lerna": "^3.0.0-rc.0",
+    "eslint-plugin-import": "^2.14.0",
+    "esm": "^3.0.77",
+    "lerna": "^3.1.1",
     "nyc": "^12.0.2",
     "webpack": "^4.16.0",
     "webpack-command": "^0.4.1"
