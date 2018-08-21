@@ -1,5 +1,3 @@
-/* global VERSION */
-
 // Basics
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
@@ -43,6 +41,9 @@ import Slider from "@pencil.js/slider";
 import "@pencil.js/draggable";
 import "@pencil.js/resizable";
 
+// Package data
+import { version, author, homepage } from "./package.json";
+
 const exportableClasses = {
     Container,
     Scene,
@@ -80,8 +81,6 @@ function from (json) {
     return instance;
 }
 
-const version = VERSION;
-
 // Export all under namespace
 export default Object.assign({
     EventEmitter,
@@ -95,6 +94,8 @@ export default Object.assign({
     Math,
     OffScreenCanvas,
     version,
+    author,
+    homepage,
 }, exportableClasses);
 
 // Named exports
@@ -130,4 +131,6 @@ export {
     OffScreenCanvas,
     from,
     version,
+    author,
+    homepage,
 };

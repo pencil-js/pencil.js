@@ -1,6 +1,6 @@
-const { DefinePlugin } = require("webpack");
 const { resolve } = require("path");
-const { version } = require("./modules/pencil.js/package.json");
+
+const mainModule = "./modules/pencil.js/";
 
 module.exports = {
     module: {
@@ -17,14 +17,9 @@ module.exports = {
             },
         ],
     },
-    plugins: [
-        new DefinePlugin({
-            VERSION: JSON.stringify(version),
-        }),
-    ],
-    entry: "./modules/pencil.js/pencil.js",
+    entry: `${mainModule}pencil.js`,
     output: {
-        path: resolve(__dirname, "modules/pencil.js/dist"),
+        path: resolve(__dirname, `${mainModule}dist`),
         filename: "pencil.min.js",
         library: "Pencil",
         libraryTarget: "this",

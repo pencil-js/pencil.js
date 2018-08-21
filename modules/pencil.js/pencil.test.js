@@ -5,7 +5,7 @@ import Pencil from "./pencil";
 import {
     BaseEvent, MouseEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
     Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text, Path,
-    Input, Checkbox, Slider, Button, from, OffScreenCanvas,
+    Input, Checkbox, Slider, Button, from, OffScreenCanvas, version, author, homepage,
 } from "./pencil";
 
 test("from", (t) => {
@@ -61,6 +61,9 @@ test("namespace", (t) => {
     t.not(Pencil.Button, undefined);
     t.not(Pencil.from, undefined);
     t.not(Pencil.OffScreenCanvas, undefined);
+    t.not(Pencil.version, undefined);
+    t.not(Pencil.author, undefined);
+    t.not(Pencil.homepage, undefined);
     /* eslint-enable */
 });
 
@@ -95,4 +98,7 @@ test("named imports", (t) => {
     t.not(Button, undefined);
     t.not(from, undefined);
     t.not(OffScreenCanvas, undefined);
+    t.not(version, undefined);
+    t.not(author, undefined);
+    t.not(homepage, undefined);
 });
