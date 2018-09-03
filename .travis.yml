@@ -15,4 +15,4 @@ after_script:
 
 # Lerna install
 install:
-    - npm run init
+    - npx lerna bootstrap --hoist
