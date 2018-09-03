@@ -10,7 +10,7 @@
     "init": "lerna bootstrap --hoist",
     "reset": "lerna clean --yes && npm run init",
     "lint": "eslint modules/**/*.js",
-    "test": "nyc --reporter=lcov ava",
+    "test": "nyc --reporter=clover ava",
     "build": "webpack --mode=development",
     "prepublish": "exit 0"
   },
@@ -43,9 +43,9 @@
     "eslint": "^5.4.0",
     "eslint-plugin-ava": "^5.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "esm": "^3.0.77",
+    "esm": "^3.0.81",
     "lerna": "^3.1.1",
-    "nyc": "^12.0.2",
+    "nyc": "^13.0.1",
     "webpack": "^4.16.0",
     "webpack-command": "^0.4.1"
   }

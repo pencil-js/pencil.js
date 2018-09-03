@@ -10,7 +10,7 @@ before_script:
     - ./cc-test-reporter before-build
 
 after_script:
-    - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
+    - ./cc-test-reporter format-coverage -t clover ./coverage/clover.xml
     - ./cc-test-reporter upload-coverage
 
 # Lerna install
