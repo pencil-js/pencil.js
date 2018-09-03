@@ -10,7 +10,7 @@
     "init": "lerna bootstrap --hoist",
     "reset": "lerna clean --yes && npm run init",
     "lint": "eslint modules/**/*.js",
-    "test": "nyc --reporter=clover ava",
+    "test": "nyc --require esm --reporter=lcovonly ava",
     "build": "webpack --mode=development",
     "prepublish": "exit 0"
   },
