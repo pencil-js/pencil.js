@@ -17,7 +17,7 @@ module.exports = {
             },
         ],
     },
-    entry: `${mainModule}pencil.js`,
+    entry: resolve(__dirname, `${mainModule}pencil.js`),
     output: {
         path: resolve(__dirname, `${mainModule}dist`),
         filename: "pencil.min.js",
