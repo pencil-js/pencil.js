@@ -297,7 +297,7 @@ export default class Scene extends Container {
         return Object.assign(super.defaultOptions, {
             fill: null,
             opacity: 1,
-            cursor: Component.cursors.defaultOptions,
+            cursor: Component.cursors.default,
         });
     }
 }
