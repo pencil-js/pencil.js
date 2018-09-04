@@ -14,9 +14,27 @@ test("constructor", (t) => {
 
 test.todo("get and set url");
 
-test.todo("makePath");
+test("makePath", (t) => {
+    t.context.isLoaded = true;
+    global.Path2D.prototype.rect = () => t.pass();
+    const ctx = {
+        drawImage: () => t.pass(),
+        fill: () => t.pass(),
+        stroke: () => t.fail(),
+    };
+    t.context.makePath(ctx);
+});
 
-test.todo("restoreSize");
+test("restoreSize", (t) => {
+    t.context.file = {
+        width: 42,
+        height: 55,
+    };
+    t.context.isLoaded = true;
+    t.context.restoreSize();
+    t.is(t.context.width, 42);
+    t.is(t.context.height, 55);
+});
 
 test("toJSON", (t) => {
     const json = t.context.toJSON();
