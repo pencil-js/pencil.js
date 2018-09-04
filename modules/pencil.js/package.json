@@ -9,7 +9,7 @@
   "unpkg": "dist/pencil.min.js",
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
-    "test": "nyc --reporter=lcov ava",
+    "test": "nyc --require esm --reporter=text ava",
     "prepublishOnly": "webpack --mode=production"
   },
   "ava": {
