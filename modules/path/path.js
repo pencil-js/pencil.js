@@ -85,7 +85,7 @@ export default class Path extends Component {
      */
     trace (path) {
         let lastPosition = new Position();
-        let instructions = this.instructions.slice();
+        const instructions = this.instructions.slice();
 
         if (Array.isArray(instructions)) {
             if (this.isClosed) {
@@ -102,11 +102,7 @@ export default class Path extends Component {
             instructions.forEach(instruction => lastPosition = instruction.execute(path, lastPosition));
         }
         else if (typeof instructions === "string") {
-            if (this.isClosed) {
-                instructions += " Z";
-            }
-            const svg = new Path2D(instructions);
-
+            const svg = new Path2D(`M0 0 ${instructions}${this.isClosed ? " Z" : ""}`);
             path.addPath(svg);
         }
 

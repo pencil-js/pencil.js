@@ -32,8 +32,11 @@ test("trace instructions string", (t) => {
         addPath: () => t.pass(),
     };
     global.Path2D = class Path2D {
-        constructor(string) {
-            t.is(string, "C 40 10, 65 10, 95 80 S 150 150, 180 80 Z");
+        /**
+         * @param {String} string -
+         */
+        constructor (string) {
+            t.is(string, "M0 0 C 40 10, 65 10, 95 80 S 150 150, 180 80 Z");
         }
     };
     path.trace(ctx);
