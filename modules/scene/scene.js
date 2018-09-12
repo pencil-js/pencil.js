@@ -1,3 +1,4 @@
+import BaseEvent from "@pencil.js/base-event";
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
 import KeyboardEvent from "@pencil.js/keyboard-event";
@@ -44,6 +45,9 @@ export default class Scene extends Container {
          */
         this.containerPosition = new Position(measures.left + window.scrollX, measures.top + window.scrollY);
 
+        /**
+         * @type {Boolean}
+         */
         this.isScene = true;
         /**
          * @type {Boolean}
@@ -142,6 +146,7 @@ export default class Scene extends Container {
             });
         });
         this.isReady = true;
+        this.fire(new BaseEvent(this, Scene.events.ready));
     }
 
     /**
@@ -299,5 +304,19 @@ export default class Scene extends Container {
             opacity: 1,
             cursor: Component.cursors.default,
         });
+    }
+
+    /**
+     * @typedef {Object} SceneEvent
+     * @enum {String}
+     * @prop {String} ready - Scene enter ready state
+     */
+    /**
+     * @return {SceneEvent}
+     */
+    static get events () {
+        return {
+            ready: "ready",
+        };
     }
 }

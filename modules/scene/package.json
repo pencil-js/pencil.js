@@ -25,6 +25,7 @@
     "renderer"
   ],
   "dependencies": {
+    "@pencil.js/base-event": "^1.0.0",
     "@pencil.js/component": "^1.0.0",
     "@pencil.js/container": "^1.0.0",
     "@pencil.js/keyboard-event": "^1.0.0",
