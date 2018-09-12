@@ -1,36 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Marck+Script');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+
+:root {
+  --main-color: #642B73;
+  --second-color: #FFF5AF;
+  --text-color: black;
+  --reverse-text-color: white;
+
+  --main-font: 'Montserrat', sans-serif;
+  --main-title-font:'Marck Script', cursive;
+  --code-font: 'Ubuntu Mono', monospace;
+
+  --main-title-size:96px;
+  --medium-title-size: 48px;
+  --small-title-size: 36px;
+  --text-size: 24px;
+
+  --element-padding-size:24px;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
-    margin: 0;
-    background: #EEE;
-    font-family: sans-serif;
+    font-family: var(--main-font);
+    font-size: var(--text-size);
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+
+  margin: var(--text-size) 0;
+  font-family: var(--main-title-font);
+}
+
+h2 {
+  color: var(--main-color);
+  font-size: var(--medium-title-size);
+}
+
+h3 {
+  font-size: var(--small-title-size);
 }
 
 a {
+    color: black;
     text-decoration: none;
-    color: #ff9629;
-    font-weight: bold;
-}
-
-p{
-    padding: 0.5em 1em;
-    background-color: #999;
 }
 
 strong {
-    color: white;
-    text-shadow: 0 1px 0 #333;
+  color: var(--second-color);
+  font-style: bold;
 }
 
-h1 {
-    text-align: center;
-    text-shadow: 0 1px 0 #555, 0 2px 0 #555;
+.screen {
+  height: 100vh;
+  width: 100vw;
+  padding: 5%;
 }
-h2, h3 {
-    margin: 1em;
+
+.title-screen {
+  background: var(--main-color);
+  background: -webkit-linear-gradient(to left, #C6426E, var(--main-color));
+  background: linear-gradient(to left, #C6426E, var(--main-color));
+}
+
+.title-screen > * {
+    color: var(--reverse-text-color);
+}
+
+.element {
+  margin: var(--element-padding-size) 0;
+
+}
+
+.main-title {
+  padding: var(--main-title-size)  0px;
+}
+
+.main-title > h1 > a{
+  font-size: var(--main-title-size);
+  color: var(--second-color);
+}
+
+.main-title > small{
+  font-family: var(--main-font);
+  font-size: var(--text-size);
+  font-style: italic;
+}
+
+.btn {
+  padding:var(--text-size);
+  color:var(--main-color);
+  background: var(--second-color);
+}
+
+.description {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: var(--element-padding-size);
+}
+
+.description > * {
+  padding:var(--text-size);
+  margin: var(--text-size) 0;
+}
+
+.description > p {
+    text-align: justify;
+    line-height: 1.5;
 }
 
 .example {
-    display: flex;
-    padding-bottom: 1em;
+  font-family: var(--code-font);
+  font-size: 16px;
+  display: flex;
 }
 
 .example > * {
@@ -39,12 +129,12 @@ h2, h3 {
 
 .example pre {
     margin: 0;
-    box-sizing: border-box;
+    line-height: 1.5;
 }
 
 .example .scene {
     border: solid #272822;
-    border-width: 1px 0;
+    border-width: 1px;
 }
 
 canvas {

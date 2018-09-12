@@ -4,37 +4,51 @@
     <meta charset="UTF-8">
     <meta name="google-site-verification" content="BWj9K4LA2V4C8OPEQyLeJFXAMMsxQj-w-ZMztXd7ZoY" />
     <title>Pencil.js playground</title>
+    <link type="text/css" rel="stylesheet" href="res/reset.css"/>
     <link type="text/css" rel="stylesheet" href="res/style.css"/>
     <link type="text/css" rel="stylesheet" href="res/monokai.css"/>
 </head>
 <body>
-    <h1><a href="//github.com/GMartigny/pencil.js">Pencil.js</a></h1>
-    <p>
-        Pencil.js is a nice modular interactive 2D drawing library.
-    </p>
-    <p>
-        It aim to <strong>abstract</strong> drawing with code with a clear <strong>OOP syntax</strong>.<br/>
-        Its <strong>modular</strong> architecture allow to grab or replace every block.<br/>
-        And of course, it has a concise and <strong>complete documentation</strong> to never feel lost.<br/>
-    </p>
-    <p>
-        We promise that it'll always work as you expect.
-    </p>
-    <h2>Documentation</h2>
-    <p>
-        Go check the <a href="//github.com/GMartigny/pencil.js/blob/master/readme.md#penciljs">full documentation</a>.
-    </p>
-    <h2>Examples</h2>
-    <main>
-        <h3><a href="//rampantgames.com/blog/?p=7745">Black triangle</a></h3>
-        <div class="example" id="black-triangle"></div>
+    <div class="screen title-screen">
+      <div class="main-title" >
+        <h1>
+          <a href="//github.com/GMartigny/pencil.js">Pencil.js</a>
+        </h1>
+        <small>
+            A nice modular interactive 2D drawing library...
+        </small>
+      </div>
+      <div class="element description">
+        <p>
+            Pencil.js aims to <strong>abstract</strong> drawing with code with a clear <strong>OOP syntax</strong>.<br/>
+            Its <strong>modular</strong> architecture allow to grab or replace every block.<br/> And of course, it has a concise and
+            <strong>complete documentation</strong> to never feel lost.<br/>
+            This is promise that it'll always work as you expect !
+        </p>
+        <div>
+          <a class="btn" href="#examples">Examples</a>
+          <a class="btn" href="//github.com/GMartigny/pencil.js/blob/master/readme.md#penciljs">Documentation</a>
+        </div>
+      </div>
+    </div>
+    <div class="screen" id="examples">
+          <h2 >Examples</h2>
+          <div class="element">
+            <h3><a href="//rampantgames.com/blog/?p=7745">A simple Black triangle</a></h3>
+            <div class="example" id="black-triangle"></div>
+          </div>
 
-        <h3>Many drawing possibilities</h3>
-        <div class="example" id="many-possibilities"></div>
+          <div class="element">
+            <h3>Many drawing possibilities...</h3>
+            <div class="example" id="many-possibilities"></div>
+          </div>
 
-        <h3>And lots of different shapes</h3>
-        <div class="example" id="lots-of-shapes"></div>
-    </main>
+          <div class="element">
+            <h3>And lots of different shapes !</h3>
+            <div class="example" id="lots-of-shapes"></div>
+          </div>
+    </div>
+
     <script src="//unpkg.com/pencil.js@0.8.0"></script>
     <script src="res/highlight.min.js"></script>
     <script src="res/playground.js"></script>
