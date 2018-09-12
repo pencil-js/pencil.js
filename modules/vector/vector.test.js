@@ -1,5 +1,6 @@
 import test from "ava";
 import Vector from "./vector";
+import Position from "../position";
 
 test.beforeEach((t) => {
     t.context = new Vector([10, 100], [40, 140]);
@@ -129,6 +130,15 @@ test("from", (t) => {
     t.is(fromArray.start.y, 20);
     t.is(fromArray.end.x, 30);
     t.is(fromArray.end.y, 40);
+
+    const formArrayPosition = Vector.from([
+        new Position(11, 22),
+        new Position(33, 44),
+    ]);
+    t.is(formArrayPosition.start.x, 11);
+    t.is(formArrayPosition.start.y, 22);
+    t.is(formArrayPosition.end.x, 33);
+    t.is(formArrayPosition.end.y, 44);
 
     const fromObject = Vector.from({
         start: [1, 2],

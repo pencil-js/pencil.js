@@ -159,9 +159,11 @@ export default class Vector {
         if (vectorDefinition instanceof Vector) {
             return vectorDefinition;
         }
-        if (Array.isArray(vectorDefinition) && vectorDefinition.length === 2 &&
-            Array.isArray(vectorDefinition[0]) && Array.isArray(vectorDefinition[1])) {
-            return new Vector(...vectorDefinition);
+        if (Array.isArray(vectorDefinition) && vectorDefinition.length === 2) {
+            if ((Array.isArray(vectorDefinition[0]) && Array.isArray(vectorDefinition[1])) ||
+                (vectorDefinition[0] instanceof Position && vectorDefinition[1] instanceof Position)) {
+                return new Vector(...vectorDefinition);
+            }
         }
         if (vectorDefinition.constructor.name === "Object") {
             return new Vector(vectorDefinition.start, vectorDefinition.end);
