@@ -2,6 +2,7 @@
 
 # 🖉 Pencil.js
 [![NPM Version](https://badgen.net/npm/v/pencil.js?icon=npm)](https://www.npmjs.com/package/pencil.js)
+[![Dependencies update](https://badgen.net/david/dev/GMartigny/pencil.js)](https://david-dm.org/GMartigny/pencil.js?type=dev)
 [![Maintainability](https://badgen.net/codeclimate/maintainability/GMartigny/pencil.js?icon=codeclimate)](https://codeclimate.com/github/GMartigny/pencil.js/maintainability)
 [![Test Coverage](https://badgen.net/codeclimate/coverage/GMartigny/pencil.js?icon=codeclimate)](https://codeclimate.com/github/GMartigny/pencil.js/test_coverage)
 [![Inline docs](http://inch-ci.org/github/GMartigny/pencil.js.svg?branch=master)](http://inch-ci.org/github/GMartigny/pencil.js)
