@@ -13,7 +13,7 @@ export default class Circle extends Ellipse {
      * @param {ComponentOptions} options - Drawing options
      */
     constructor (positionDefinition, radius, options) {
-        super(positionDefinition, radius * 2, radius * 2, options);
+        super(positionDefinition, radius, radius, options);
     }
 
     /**
@@ -21,7 +21,7 @@ export default class Circle extends Ellipse {
      * @return {Number}
      */
     get radius () {
-        return this.width / 2;
+        return this.horizontalRadius;
     }
 
     /**
@@ -29,8 +29,8 @@ export default class Circle extends Ellipse {
      * @param {Number} radius - New radius value
      */
     set radius (radius) {
-        this.width = radius * 2;
-        this.height = radius * 2;
+        this.horizontalRadius = radius;
+        this.verticalRadius = radius;
     }
 
     /**
@@ -40,8 +40,8 @@ export default class Circle extends Ellipse {
         const json = Object.assign(super.toJSON(), {
             radius: this.radius,
         });
-        delete json.width;
-        delete json.height;
+        delete json.horizontalRadius;
+        delete json.verticalRadius;
         return json;
     }
 

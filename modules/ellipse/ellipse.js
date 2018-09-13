@@ -10,12 +10,12 @@ export default class Ellipse extends Arc {
     /**
      * Ellipse constructor
      * @param {PositionDefinition} positionDefinition -
-     * @param {Number} width -
-     * @param {Number} height -
+     * @param {Number} [horizontalRadius=0] - Horizontal radius
+     * @param {Number} [verticalRadius=0] - Vertical radius
      * @param {ComponentOptions} options - Drawing options
      */
-    constructor (positionDefinition, width, height, options) {
-        super(positionDefinition, width, height, 0, 1, options);
+    constructor (positionDefinition, horizontalRadius, verticalRadius, options) {
+        super(positionDefinition, horizontalRadius, verticalRadius, 0, 1, options);
     }
 
     /**
@@ -34,7 +34,11 @@ export default class Ellipse extends Arc {
      * @return {Ellipse}
      */
     static from (definition) {
-        return new Ellipse(definition.position, definition.width, definition.height, definition.options);
+        return new Ellipse(
+            definition.position,
+            definition.horizontalRadius, definition.verticalRadius,
+            definition.options,
+        );
     }
 
     /**

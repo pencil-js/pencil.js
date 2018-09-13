@@ -6,8 +6,8 @@ test.beforeEach((t) => {
 });
 
 test("constructor", (t) => {
-    t.is(t.context.width, 50);
-    t.is(t.context.height, 100);
+    t.is(t.context.horizontalRadius, 50);
+    t.is(t.context.verticalRadius, 100);
     t.is(t.context.startAngle, 0);
     t.is(t.context.endAngle, 1);
 });
@@ -15,8 +15,8 @@ test("constructor", (t) => {
 test("toJSON", (t) => {
     const json = t.context.toJSON();
 
-    t.is(json.width, 50);
-    t.is(json.height, 100);
+    t.is(json.horizontalRadius, 50);
+    t.is(json.verticalRadius, 100);
     t.is(json.startAngle, undefined);
     t.is(json.endAngle, undefined);
     t.is(json.constructor, "Ellipse");
@@ -24,13 +24,13 @@ test("toJSON", (t) => {
 
 test("from", (t) => {
     const definition = {
-        width: 10,
-        height: 20,
+        horizontalRadius: 10,
+        verticalRadius: 20,
     };
     const ellipse = Ellipse.from(definition);
 
-    t.is(ellipse.width, 10);
-    t.is(ellipse.height, 20);
+    t.is(ellipse.horizontalRadius, 10);
+    t.is(ellipse.verticalRadius, 20);
 });
 
 test("defaultOptions", (t) => {

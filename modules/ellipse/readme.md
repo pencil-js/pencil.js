@@ -13,10 +13,10 @@ Ellipse shape (oval).
 ```js
 import Ellipse from "@pencil.js/ellipse";
 
-const width = 50;
-const height = 100;
+const horizontalRadius = 50;
+const verticalRadius = 20;
 const options = {
     // ...
 };
-const ellipse = new Ellipse(aPosition, width, height, options);
+const ellipse = new Ellipse(aPosition, horizontalRadius, verticalRadius, options);
 ```

@@ -13,12 +13,13 @@ Arc shape.
 ```js
 import Arc from "@pencil.js/arc";
 
-const radius = 50;
+const horizontalRadius = 50;
+const verticalRadius = 20;
 const startAngle = -0.25;
 const endAngle = 0.25;
 const options = {
     fill: "red",
     stroke: "#000"
 };
-let arc = new Arc(aPosition, radius, startAngle, endAngle, options);
+const arc = new Arc(aPosition, horizontalRadius, verticalRadius, startAngle, endAngle, options);
 ```

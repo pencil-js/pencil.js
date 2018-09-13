@@ -15,8 +15,8 @@ test("get and set radius", (t) => {
 
     t.context.radius = 20;
     t.is(t.context.radius, 20);
-    t.is(t.context.width, 40);
-    t.is(t.context.height, 40);
+    t.is(t.context.horizontalRadius, 20);
+    t.is(t.context.verticalRadius, 20);
 });
 
 test("toJSON", (t) => {
