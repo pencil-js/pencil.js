@@ -164,3 +164,7 @@ You want to help us improve ? Please read [the contributing manual](contributing
 ### Contributors
 | [![Guillaume Martigny](https://github.com/GMartigny.png?size=60)<br>GMartigny](https://github.com/GMartigny) |
 | --- |
+
+## License 
+
+[MIT](license)
