@@ -79,10 +79,16 @@ export default class Scene extends Container {
         }
 
         let hovered = null;
+        let startPosition = null;
         const mouseListeners = {
-            [MouseEvent.events.down]: target => target.isClicked = true,
+            [MouseEvent.events.down]: (target, eventPosition) => {
+                target.isClicked = true;
+                startPosition = eventPosition;
+            },
             [MouseEvent.events.move]: (target, eventPosition) => {
-                target.isClicked = false;
+                if (startPosition) {
+                    target.isClicked = eventPosition.distance(startPosition) < 10;
+                }
                 if (target !== hovered) {
                     if (hovered) {
                         hovered.isHovered = false;
@@ -100,6 +106,7 @@ export default class Scene extends Container {
                 this.cursorPosition.set(eventPosition);
             },
             [MouseEvent.events.up]: (target, eventPosition) => {
+                startPosition = null;
                 if (target.isClicked) {
                     target.fire(new MouseEvent(target, MouseEvent.events.click, eventPosition));
                 }
