@@ -20,7 +20,7 @@ export default class Scene extends Container {
     constructor (container = window.document.body, options) {
         super(undefined, options);
 
-        container.innerHTML = "";
+        const measures = container.getBoundingClientRect();
         let canvas;
         if (container instanceof HTMLCanvasElement) {
             canvas = container;
@@ -29,10 +29,10 @@ export default class Scene extends Container {
             canvas = window.document.createElement("canvas");
             container.appendChild(canvas);
             canvas.style.display = "block";
+            canvas.style.position = "absolute";
+            canvas.width = measures.width;
+            canvas.height = measures.height;
         }
-        const measures = container.getBoundingClientRect();
-        canvas.width = measures.width;
-        canvas.height = measures.height;
         /**
          * @type {CanvasRenderingContext2D}
          */
@@ -67,13 +67,14 @@ export default class Scene extends Container {
          */
         this.isReady = false;
 
-        this._listenForEvents();
+        this._listenForEvents(container);
     }
 
     /**
      * Bind window event and call them on targets (can't be called twice)
+     * @param {HTMLElement} container - Container to bind event to
      */
-    _listenForEvents () {
+    _listenForEvents (container) {
         if (this.isReady) {
             throw new EvalError("Can't rebind event a second time.");
         }
@@ -125,15 +126,17 @@ export default class Scene extends Container {
             },
         };
         Object.keys(mouseListeners).forEach((eventName) => {
-            window.addEventListener(eventName, (event) => {
-                const eventPosition = (new Position(event.clientX, event.clientY))
-                    .subtract(this.containerPosition)
-                    .add(window.scrollX, window.scrollY);
-                const target = this.getTarget(eventPosition, this.ctx);
-                if (target) {
-                    target.fire(new MouseEvent(target, eventName, eventPosition));
-                    if (mouseListeners[eventName] instanceof Function) {
-                        mouseListeners[eventName](target, eventPosition, event);
+            container.addEventListener(eventName, (event) => {
+                if (this.options.shown) {
+                    const eventPosition = (new Position(event.clientX, event.clientY))
+                        .subtract(this.containerPosition)
+                        .add(window.scrollX, window.scrollY);
+                    const target = this.getTarget(eventPosition, this.ctx);
+                    if (target) {
+                        target.fire(new MouseEvent(target, eventName, eventPosition));
+                        if (mouseListeners[eventName] instanceof Function) {
+                            mouseListeners[eventName](target, eventPosition, event);
+                        }
                     }
                 }
             }, {
@@ -145,10 +148,12 @@ export default class Scene extends Container {
             [KeyboardEvent.events.up]: null,
         };
         Object.keys(keyboardListener).forEach((eventName) => {
-            window.addEventListener(eventName, (event) => {
-                this.fire(new KeyboardEvent(this, eventName, event.key));
-                if (keyboardListener[eventName] instanceof Function) {
-                    keyboardListener[eventName](event);
+            container.addEventListener(eventName, (event) => {
+                if (this.options.shown) {
+                    this.fire(new KeyboardEvent(this, eventName, event.key));
+                    if (keyboardListener[eventName] instanceof Function) {
+                        keyboardListener[eventName](event);
+                    }
                 }
             });
         });
@@ -195,11 +200,11 @@ export default class Scene extends Container {
     }
 
     /**
-     * Define if is hovered (always true on scene as a fallback)
+     * Define if is hovered
      * @return {Boolean}
      */
-    isHover () { // eslint-disable-line class-methods-use-this
-        return true;
+    isHover () {
+        return this.options.shown;
     }
 
     /**
