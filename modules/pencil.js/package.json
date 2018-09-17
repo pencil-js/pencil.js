@@ -23,10 +23,10 @@
     "url": "git+https://github.com/GMartigny/pencil.js.git"
   },
   "keywords": [
-    "canvas",
-    "drawing",
-    "frontend",
-    "modular",
+    "canvas", "HTML",
+    "drawing", "renderer", "engine",
+    "frontend", "web",
+    "modular", "OOP",
     "toolbelt"
   ],
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
