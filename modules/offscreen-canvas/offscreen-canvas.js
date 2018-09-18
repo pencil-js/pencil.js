@@ -9,20 +9,37 @@ export default class OffScreenCanvas {
      * @param {Number} [height=1] - Height of the canvas
      */
     constructor (width = 1, height = 1) {
-        this.canvas = window.document.createElement("canvas");
-        this.setSize(width, height);
-
-        this.ctx = this.canvas.getContext("2d");
+        this.ctx = window.document.createElement("canvas").getContext("2d");
+        this.width = width;
+        this.height = height;
     }
 
     /**
-     * Change this canvas size
-     * @param {Number} width - New width for the canvas
-     * @param {Number} height - New height for the canvas
+     * @return {Number}
      */
-    setSize (width, height) {
-        this.canvas.width = +width;
-        this.canvas.height = +height;
+    get width () {
+        return this.ctx.canvas.width;
+    }
+
+    /**
+     * @param {Number} width - New width value
+     */
+    set width (width) {
+        this.ctx.canvas.width = +width;
+    }
+
+    /**
+     * @return {Number}
+     */
+    get height () {
+        return this.ctx.canvas.height;
+    }
+
+    /**
+     * @param {Number} height - New height value
+     */
+    set height (height) {
+        this.ctx.canvas.height = +height;
     }
 
     /**
@@ -38,9 +55,11 @@ export default class OffScreenCanvas {
 
     /**
      * Erase the canvas
+     * @return {OffScreenCanvas} Itself
      */
     clear () {
-        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.clearRect(0, 0, this.width, this.height);
+        return this;
     }
 
     /**
@@ -56,7 +75,7 @@ export default class OffScreenCanvas {
      * @return {ImageData}
      */
     get imageData () {
-        return this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height);
+        return this.ctx.getImageData(0, 0, this.width, this.height);
     }
 
     /**
@@ -66,7 +85,9 @@ export default class OffScreenCanvas {
      */
     toImg (type = "image/png") {
         const img = window.document.createElement("img");
-        img.src = this.canvas.toDataURL(type);
+        img.width = this.width;
+        img.height = this.height;
+        img.src = this.ctx.canvas.toDataURL(type);
         return img;
     }
 }
