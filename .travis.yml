@@ -16,3 +16,5 @@ after_script:
 # Lerna install
 install:
     - npx lerna bootstrap --hoist
+script:
+    - npm run testci
