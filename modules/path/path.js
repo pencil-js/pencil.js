@@ -188,7 +188,7 @@ export default class Path extends Component {
      */
     static arcTo (position, angle, magicRatio, clockwise = true) {
         return new Instruction((path, pos, lp) => {
-            const distance = lp.distance(pos);
+            const distance = pos.distance(lp);
             const radius = distance / 2;
 
             const direction = clockwise ? 1 : -1;
@@ -205,7 +205,7 @@ export default class Path extends Component {
                 .add(pos);
 
             // Approximate a arc with a bezier curve
-            path.bezierCurveTo(ctrl1.x, ctrl1.y, ctrl2.x, ctrl2.y, pos.x, pos.y);
+            Path.bezierTo(pos, ctrl1, ctrl2).execute(path, lp);
         }, position);
     }
 

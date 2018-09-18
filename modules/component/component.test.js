@@ -50,7 +50,18 @@ test("trace", (t) => {
     t.throws(() => t.context.trace(), ReferenceError);
 });
 
-test.todo("isHover");
+test("isHover", (t) => {
+    t.context.trace = () => {};
+    const ctx = {
+        isPointInPath: () => true,
+    };
+    t.true(t.context.isHover([0, 0], ctx));
+
+    t.context.options.clip = {
+        isHover: () => false,
+    };
+    t.false(t.context.isHover([0, 0], ctx));
+});
 
 test("isHover not shown", (t) => {
     t.context.options.shown = false;

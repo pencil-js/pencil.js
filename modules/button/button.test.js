@@ -10,25 +10,25 @@ test.beforeEach((t) => {
 test("constructor", (t) => {
     t.not(t.context.text, undefined);
     ["fill", "font", "fontSize", "bold", "italic"].forEach((prop) => {
-        t.is(t.context.text.options[prop], t.context.options[prop], "init default options");
+        t.is(t.context.text.options[prop], t.context.options[prop]);
     });
 });
 
 test("get and set value", (t) => {
-    t.is(t.context.value, t.context.text.text, "get value");
+    t.is(t.context.value, t.context.text.text);
 
     t.context.value = "test";
-    t.is(t.context.text.text, "test", "get value after set");
+    t.is(t.context.text.text, "test");
 });
 
 test("defaultOptions", (t) => {
     const options = Button.defaultOptions;
     t.is(options.value, "");
     ["font", "fontSize", "bold", "italic"].forEach((prop) => {
-        t.is(options[prop], t.context.text.constructor.defaultOptions[prop], "default options are from Text");
+        t.is(options[prop], t.context.text.constructor.defaultOptions[prop]);
     });
 });
 
 test("MARGIN", (t) => {
-    t.is(Button.MARGIN, 0.2, "default margin");
+    t.is(Button.MARGIN, 0.2);
 });

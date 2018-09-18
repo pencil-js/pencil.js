@@ -60,7 +60,7 @@ test("removeChild", (t) => {
     const grandChild = addHeir(child);
 
     t.context.removeChild(grandChild);
-    t.is(t.context.children.length, 1, "Not its child, do nothing");
+    t.is(t.context.children.length, 1);
     t.is(grandChild.parent, child);
     t.context.removeChild(null, child);
     t.is(t.context.children.length, 0);
@@ -226,9 +226,34 @@ test("climbAncestry", (t) => {
     grandChild.climbAncestry(ancestor => t.is(ancestor, expected[pointer++]));
 });
 
-test.todo("getTaintedCanvas");
+test("getTaintedCanvas null", (t) => {
+    const canvas = t.context.getTaintedCanvas();
+    t.is(canvas, null);
+});
 
-test.todo("toImg");
+test("getTaintedCanvas vector", (t) => {
+    const canvas = t.context.getTaintedCanvas([[10, 20], [100, 200]]);
+    t.is(canvas.width, 90);
+    t.is(canvas.height, 180);
+});
+
+test("getTaintedCanvas width and height", (t) => {
+    t.context.width = 10;
+    t.context.height = 20;
+    const canvas = t.context.getTaintedCanvas();
+    t.is(canvas.width, 10);
+    t.is(canvas.height, 20);
+});
+
+test("toImg", (t) => {
+    t.context.width = 10;
+    t.context.height = 20;
+    const img = t.context.toImg();
+    t.true(img instanceof window.HTMLImageElement);
+    t.is(img.width, 10);
+    t.is(img.height, 20);
+    t.truthy(img.src);
+});
 
 test("toJSON", (t) => {
     const json = t.context.toJSON();
