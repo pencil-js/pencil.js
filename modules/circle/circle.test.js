@@ -19,6 +19,14 @@ test("get and set radius", (t) => {
     t.is(t.context.verticalRadius, 20);
 });
 
+test("trace", (t) => {
+    const ctx = {
+        arc: () => t.pass(),
+    };
+    t.plan(2);
+    t.is(t.context.trace(ctx), t.context);
+});
+
 test("toJSON", (t) => {
     const json = t.context.toJSON();
 

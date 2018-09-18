@@ -1,4 +1,5 @@
 import Ellipse from "@pencil.js/ellipse";
+import { radianCircle } from "@pencil.js/math";
 
 /**
  * Circle class
@@ -31,6 +32,15 @@ export default class Circle extends Ellipse {
     set radius (radius) {
         this.horizontalRadius = radius;
         this.verticalRadius = radius;
+    }
+
+    /**
+     * @override
+     * @return {Circle} Itself
+     */
+    trace (path) {
+        path.arc(0, 0, this.radius, 0, radianCircle);
+        return this;
     }
 
     /**
