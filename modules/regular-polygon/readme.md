@@ -19,5 +19,5 @@ const options = {
     fill: "gold",
     stroke: "#000"
 };
-let heptagon = new RegularPolygon(center, nbSides, radius, options);
+const heptagon = new RegularPolygon(center, nbSides, radius, options);
 ```

@@ -17,5 +17,5 @@ const radius = 99;
 const options = {
     fill: "blue"
 };
-let triangle = new Triangle(aPosition, radius, options);
+const triangle = new Triangle(aPosition, radius, options);
 ```

@@ -13,6 +13,6 @@ Simple wrapper for others component in you scene.
 ```js
 import Container from "@pencil.js/container";
 
-let container = new Container();
+const container = new Container();
 container.add(someComponent);
 ```

@@ -1,6 +1,6 @@
 # Line
 
-Single line stroke.
+Line stroke passing through points.
 
 
 ## Installation
@@ -13,11 +13,9 @@ Single line stroke.
 ```js
 import Line from "@pencil.js/line";
 
-const from = aPosition;
-const to = anotherPosition;
 const options = {
     stroke: "red",
-    strokeWidth: 9
+    strokeWidth: 9,
 };
-let line = new Line([from, to], options);
+const line = new Line(from, [firstPoint, secondPoint, lastPoint], options);
 ```

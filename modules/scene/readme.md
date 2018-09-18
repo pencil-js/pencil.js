@@ -16,6 +16,6 @@ import Scene from "@pencil.js/scene";
 const options = {
     fill: "#DDD"
 };
-let scene = new Scene(document.body, options);
+const scene = new Scene(document.body, options);
 scene.startLoop();
 ```

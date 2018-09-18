@@ -1,6 +1,6 @@
 # Image
 
-Class for Pencil.js keyboard related events.
+Image rendering.
 
 
 ## Installation
@@ -13,17 +13,20 @@ Class for Pencil.js keyboard related events.
 ```js
 import Image from "@pencil.js/image";
 
-const img = new Image(aPosition, "url/to/my/file.png");
-img.on("load", () => {
-    myScene.add(img);
+const image = new Image(aPosition, "url/to/my/file.png");
+image.on("load", () => {
+    console.log("Image is loaded");
 });
 
 // Can be use to preload a bunch of images
-Image.load([url1, url2, url3]).then(() => console.log("Images ready"));
+Image.load([url1, url2, url3]).then(() => {
+    console.log("Images ready");
+});
 ```
 
-Be aware that this example overrides Javascript's ``Image`` global. Use namespace to avoid this issue.
+Be aware that this example overrides Javascript's `Image` global. Use namespace to avoid this issue.
 
 ```js
-import * as Pencil from "@pencil.js/image";
+import * as Namespace from "@pencil.js/image";
+new Namespace.Image();
 ```

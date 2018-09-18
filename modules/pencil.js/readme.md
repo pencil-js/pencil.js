@@ -131,7 +131,8 @@ Or read [the full documentation](documentation.md).
          * [Square](modules/square)
          * [Image](modules/image)
        * [Arc](modules/arc)
-         * [Circle](modules/circle)
+         * [Ellipse](modules/ellipse)
+           * [Circle](modules/circle)
        * [Text](modules/text)
    * [Input](modules/input)
      * [Button](modules/button)
@@ -155,7 +156,7 @@ If you want to code an efficient particle generator, try [Processing](https://pr
 Some module have the same name as some Javascript global (eg: Image, Math).
 Importing them without namespace will overrides these globals and lead to potential bugs.
 
-In any case, we recommend you use a namespace (eg: ``import Namespace from "pencil.js"``, ``import * as Namespace from "@pencil.js/math"``)
+In any case, we recommend you use a namespace (eg: `import Namespace from "pencil.js"`, `import * as Namespace from "@pencil.js/math"`)
 
 
 ## Contributions

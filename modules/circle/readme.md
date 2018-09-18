@@ -18,5 +18,5 @@ const options = {
     fill: "red",
     stroke: "#000"
 };
-let circle = new Circle(aPosition, radius, options);
+const circle = new Circle(aPosition, radius, options);
 ```

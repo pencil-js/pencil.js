@@ -18,8 +18,7 @@ const verticalRadius = 20;
 const startAngle = -0.25;
 const endAngle = 0.25;
 const options = {
-    fill: "red",
-    stroke: "#000"
+    stroke: "red",
 };
 const arc = new Arc(aPosition, horizontalRadius, verticalRadius, startAngle, endAngle, options);
 ```

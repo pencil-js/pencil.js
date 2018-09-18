@@ -1,22 +1,23 @@
-# Square
+# Spline
 
-Square shape.
+Continuous curve passing through points.
+The `tension` parameter define the strength of each points over the curve.
+`0` mean it act like a line, `0.2` is the default value and render a smooth curve, value can be be as high as you want or even negative.
 
 
 ## Installation
 
-    npm install @pencil.js/square
+    npm install @pencil.js/spline
 
 
 ## Examples
 
 ```js
-import Square from "@pencil.js/square";
+import Spline from "@pencil.js/spline";
 
-const size = 200;
+const tension = 0.5;
 const options = {
-    fill: "red",
-    stroke: "#000"
+    stroke: "red",
 };
-let square = new Square(aPosition, size, options);
+const spline = new Spline(from, [firstPoint, secondPoint, lastPoint], tension, options);
 ```

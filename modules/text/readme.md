@@ -17,5 +17,17 @@ const options = {
     font: "comic-sans",
     fontSize: 42
 };
-let text = new Text(aPosition, "Hello world !", options);
+const text = new Text(aPosition, "Hello world !", options);
+
+// Can be use to preload a bunch of fonts
+Text.load([url1, url2, url3]).then(() => {
+    console.log("Fonts ready");
+});
+```
+
+Be aware that this example overrides Javascript's `Text` global. Use namespace to avoid this issue.
+
+```js
+import * as Namespace from "@pencil.js/text";
+new Namespace.Text();
 ```

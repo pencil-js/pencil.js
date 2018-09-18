@@ -20,7 +20,7 @@ constrain(99, 0, 10); // 10
 Determine if two number can considered equals accounting for JS precision.
 
 ```js
-equals(0.2+0.1, 0.3); // true
+equals(0.2 + 0.1, 0.3); // true
 ```
 
 | Name | Type | Default | Comment |

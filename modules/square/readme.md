@@ -18,5 +18,5 @@ const options = {
     fill: "red",
     stroke: "#000"
 };
-let square = new Square(aPosition, size, options);
+const square = new Square(aPosition, size, options);
 ```

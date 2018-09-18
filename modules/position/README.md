@@ -13,6 +13,7 @@
 ```js
 import Position from "@pencil.js/position";
 
-let position = new Position(100, 200);
-let doublePosition = position.add(position);
+const position = new Position(100, 200);
+position.multiply(2); // position is mutated
+const other = position.clone().add(10); // Return a new instance
 ```

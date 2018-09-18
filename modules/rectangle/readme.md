@@ -19,5 +19,5 @@ const options = {
     fill: "red",
     stroke: "#000"
 };
-let rectangle = new Rectangle(aPosition, width, height, options);
+const rectangle = new Rectangle(aPosition, width, height, options);
 ```

@@ -18,5 +18,5 @@ const options = {
     fill: "red",
     stroke: "#000"
 };
-let polygon = new Polygon(points, options);
+const polygon = new Polygon(points, options);
 ```

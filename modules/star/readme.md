@@ -20,5 +20,5 @@ const options = {
     fill: "gold",
     stroke: "goldendrod"
 };
-let star = new Star(aPosition, radius, branches, bevel, options);
+const star = new Star(aPosition, radius, branches, bevel, options);
 ```

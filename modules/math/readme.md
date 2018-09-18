@@ -11,9 +11,9 @@ Wrapper for some mathematical helpers.
 ## Examples
 
 ```js
-import * as Math from "@pencil.js/math";
+import * as PMath from "@pencil.js/math";
 
-Math.truncate(-99.9); // -99
+PMath.truncate(-99.9); // -99
 
 // or
 import { constrain } from "@pencil.js/math";
