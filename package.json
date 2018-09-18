@@ -35,19 +35,19 @@
   },
   "homepage": "https://github.com/GMartigny/pencil.js#readme",
   "devDependencies": {
-    "@babel/core": "^7.0.1",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "@gmartigny/eslint-config": "^1.2.1",
     "ava": "^0.25.0",
     "babel-loader": "^8.0.2",
     "browser-env": "^3.2.5",
-    "eslint": "^5.5.0",
+    "eslint": "^5.6.0",
     "eslint-plugin-ava": "^5.1.0",
     "eslint-plugin-import": "^2.14.0",
     "esm": "^3.0.81",
-    "lerna": "^3.3.1",
+    "lerna": "^3.4.0",
     "nyc": "^13.0.1",
-    "webpack": "^4.16.0",
+    "webpack": "^4.19.1",
     "webpack-command": "^0.4.1"
   }
 }
