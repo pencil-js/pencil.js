@@ -6,7 +6,7 @@
 [![Maintainability](https://badgen.net/codeclimate/maintainability/GMartigny/pencil.js?icon=codeclimate)](https://codeclimate.com/github/GMartigny/pencil.js/maintainability)
 [![Test Coverage](https://badgen.net/codeclimate/coverage/GMartigny/pencil.js?icon=codeclimate)](https://codeclimate.com/github/GMartigny/pencil.js/test_coverage)
 [![Inline docs](http://inch-ci.org/github/GMartigny/pencil.js.svg?branch=master)](http://inch-ci.org/github/GMartigny/pencil.js)
-[![Build Status](https://badgen.net/travis/GMartigny/pencil.js?icon=travis)](https://travis-ci.org/GMartigny/pencil.js)
+[![Chat on Gitter](https://badgen.net/badge/chat/on%20gitter/cyan?icon=gitter)](https://gitter.im/Pencil-js)
 
 Nice modular interactive 2D drawing library.
 
