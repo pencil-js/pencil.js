@@ -110,7 +110,10 @@ scene.render(); // Render the scene once
 
 Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 
-Or read [the full documentation](documentation.md).
+
+## Who is using Pencil.js ?
+
+ - [Socialism Simulator](https://gmartigny.github.io/socialismSimulator/)
 
 
 ## Modules

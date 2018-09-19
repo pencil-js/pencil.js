@@ -1,7 +1,7 @@
 {
   "name": "pencil.js",
   "version": "1.1.0",
-  "description": "Modular 2D drawing library.",
+  "description": "Nice modular interactive 2D drawing library.",
   "main": "pencil.js",
   "files": [
     "dist/"
