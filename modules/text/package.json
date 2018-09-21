@@ -27,7 +27,9 @@
   "dependencies": {
     "@pencil.js/base-event": "^1.0.0",
     "@pencil.js/component": "^1.1.0",
+    "@pencil.js/offscreen-canvas": "^1.1.0",
     "@pencil.js/position": "^1.0.0",
+    "@sindresorhus/fnv1a": "^1.0.0",
     "text-direction": "^1.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

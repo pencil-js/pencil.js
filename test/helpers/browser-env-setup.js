@@ -17,6 +17,11 @@ window.HTMLCanvasElement.prototype.getContext = function getContext () {
         translate: noop,
         rotate: noop,
         scale: noop,
+        measureText: () => ({
+            width: 1,
+            emHeightAscent: 2,
+            emHeightDescent: 3,
+        }),
     };
 };
 window.HTMLCanvasElement.prototype.toDataURL = type => type;

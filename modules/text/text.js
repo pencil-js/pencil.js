@@ -1,7 +1,41 @@
 import BaseEvent from "@pencil.js/base-event";
 import Component from "@pencil.js/component";
+import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Position from "@pencil.js/position";
 import textDirection from "text-direction";
+import hash from "@sindresorhus/fnv1a";
+
+function formatString (string) {
+    const separator = "\n";
+    return Array.isArray(string) ?
+        string.reduce((acc, line) => acc.concat(line.split(separator)), []) :
+        string.split(separator);
+}
+
+/**
+ *
+ * @param {String} line - Any text
+ * @param {String} font - Font definition string
+ */
+const measureText = (() => {
+    const { ctx } = new OffScreenCanvas();
+    const cache = {};
+
+    return (line, font) => {
+        const key = hash(`${line}${font}`);
+        if (cache[key] !== undefined) {
+            return cache[key];
+        }
+        ctx.font = font;
+        const measure = ctx.measureText(line);
+        const result = {
+            width: measure.width,
+            height: measure.emHeightAscent + measure.emHeightDescent,
+        };
+        cache[key] = result;
+        return result;
+    };
+})();
 
 /**
  * Text class
@@ -23,11 +57,6 @@ export default class Text extends Component {
          */
         this.lines = [];
         this.text = text;
-        /**
-         * @type {Object}
-         * @private
-         */
-        this._cachedMeasures = {};
 
         // if font is an URL
         const isReadyEvent = new BaseEvent(this, "ready");
@@ -52,17 +81,14 @@ export default class Text extends Component {
 
     /**
      * Change the text
-     * @param {String|Array<String>} lines - New text value
+     * @param {String|Array<String>} text - New text value
      * @example this.text = "Single line text";
      * @example this.text = "Multi\nLine text";
      * @example this.text = ["Multi", "Line text"];
      * @example this.text = ["Multi", "Line\ntext"];
      */
-    set text (lines) {
-        const separator = "\n";
-        this.lines = Array.isArray(lines) ?
-            lines.reduce((acc, line) => acc.concat(line.split(separator)), []) :
-            lines.split(separator);
+    set text (text) {
+        this.lines = formatString(text);
     }
 
     /**
@@ -71,42 +97,50 @@ export default class Text extends Component {
      * @return {Text} Itself
      */
     makePath (ctx) {
-        if (this.text.trim().length) {
-            const lineHeight = this.height / this.lines.length; // TODO: could be user defined
-
+        if (this.text.length) {
             const opts = this.options;
-            ctx.font = this.getFontDefinition();
+            ctx.font = Text.getFontDefinition(opts);
             ctx.textAlign = opts.align;
-            ctx.textBaseline = "top"; // TODO: user could want to change this, but fonts em-box can have crazy values
+            ctx.textBaseline = "top"; // TODO: user could want to change this
+
+            const { height } = measureText("M", ctx.font);
+            const lineHeight = height * opts.lineHeight;
+            const margin = height * ((opts.lineHeight - 1) / 2);
 
             if (opts.fill) {
                 ctx.fillStyle = opts.fill;
             }
+
             if (opts.stroke) {
                 ctx.strokeStyle = opts.stroke;
                 ctx.lineWidth = opts.strokeWidth;
             }
 
+            if (opts.underscore) {
+                ctx.beginPath();
+            }
             this.lines.forEach((line, index) => {
-                const y = index * lineHeight;
+                const y = (index * lineHeight) + margin;
                 if (opts.fill) {
                     ctx.fillText(line, 0, y);
                 }
                 if (opts.stroke) {
                     ctx.strokeText(line, 0, y);
                 }
+                if (opts.underscore) {
+                    const { width } = measureText(line, ctx.font);
+                    ctx.moveTo(0, y + height);
+                    ctx.lineTo(width, y + height);
+                }
             });
+            if (opts.underscore) {
+                ctx.lineWidth = height * 0.05;
+                ctx.strokeStyle = opts.fill || opts.stroke;
+                ctx.stroke();
+                ctx.closePath();
+            }
         }
         return this;
-    }
-
-    /**
-     *
-     * @return {String}
-     */
-    getFontDefinition () {
-        const opts = this.options;
-        return `${opts.bold ? "bold " : ""}${opts.italic ? "italic " : ""}${opts.fontSize}px ${opts.font}`;
     }
 
     /**
@@ -153,61 +187,11 @@ export default class Text extends Component {
     }
 
     /**
-     * Return a hash of the current text with its options
-     * @returns {String}
-     */
-    get hash () {
-        return window.btoa(encodeURIComponent([
-            this.text,
-            this.options.font,
-            this.options.fontSize,
-            +this.options.bold,
-            +this.options.italic,
-        ].join(";")));
-    }
-
-    /**
-     * Use a hash to set this params
-     * @param {String} value -
-     */
-    set hash (value) {
-        const options = decodeURIComponent(window.atob(value)).split(";");
-        [this.text, this.options.font] = options;
-        this.options.fontSize = +options[2];
-        this.options.bold = Boolean(options[3]);
-        this.options.italic = Boolean(options[4]);
-    }
-
-    /**
-     * Measure the text with current options and cache the result
-     * @return {{width: Number, height: Number}}
+     * Measure the text with current options
+     * @return {TextMeasures}
      */
     getMeasures () {
-        const key = this.hash;
-        if (this._cachedMeasures[key]) {
-            return this._cachedMeasures[key];
-        }
-
-        const scene = this.getRoot();
-        if (scene.isScene) {
-            scene.ctx.font = this.getFontDefinition();
-            const maxLineWidth = Math.max(...this.lines.map(line => scene.ctx.measureText(line).width));
-            // Hack to get the em box's height
-            const height = scene.ctx.measureText("M").width * this.lines.length * 1.5;
-            const measured = {
-                width: maxLineWidth,
-                height,
-            };
-            this._cachedMeasures = {
-                [key]: measured,
-            };
-            return measured;
-        }
-
-        return {
-            width: 0,
-            height: 0,
-        };
+        return Text.measure(this.lines, this.options);
     }
 
     /**
@@ -260,6 +244,36 @@ export default class Text extends Component {
     }
 
     /**
+     * Return a font definition from a set of options
+     * @param {TextOptions} options - Chosen options
+     * @returns {String}
+     */
+    static getFontDefinition (options) {
+        return `${options.bold ? "bold " : ""}${options.italic ? "italic " : ""}${options.fontSize}px ${options.font}`;
+    }
+
+    /**
+     * @typedef {Object} TextMeasures
+     * @prop {Number} width - Horizontal size
+     * @prop {Number} height - Vertical size
+     */
+    /**
+     * Compute a text width and height
+     * @param {String|Array<String>} text - Any text
+     * @param {TextOptions} [options] -
+     * @return {TextMeasures}
+     */
+    static measure (text, options) {
+        const opts = Object.assign(this.defaultOptions, options);
+        const lines = formatString(text);
+        const font = this.getFontDefinition(opts);
+        return {
+            width: Math.max(...lines.map(line => measureText(line, font).width)),
+            height: measureText("M", font).height * lines.length * opts.lineHeight,
+        };
+    }
+
+    /**
      * @typedef {Object} TextOptions
      * @extends ComponentOptions
      * @prop {String} [font="sans-serif"] - Font to use
@@ -267,6 +281,8 @@ export default class Text extends Component {
      * @prop {String} [align=Text.alignments.start] - Text horizontal alignment
      * @prop {Boolean} [bold=false] - Use bold font-weight
      * @prop {Boolean} [italic=false] - Use italic font-style
+     * @prop {Number} [lineHeight=1] - Ratio of line height; 1 is normal, 2 is twice the space
+     * @prop {Boolean} [underscore=false] - Draw a line under the text
      */
     /**
      * @return {TextOptions}
@@ -278,6 +294,8 @@ export default class Text extends Component {
             align: Text.alignments.start,
             bold: false,
             italic: false,
+            lineHeight: 1,
+            underscore: false,
         });
     }
 

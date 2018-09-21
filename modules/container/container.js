@@ -232,11 +232,10 @@ export default class Container extends EventEmitter {
         }
 
         if (this.options.rotation) {
-            const anchorX = this.options.rotationAnchor.x;
-            const anchorY = this.options.rotationAnchor.y;
-            ctx.translate(anchorX, anchorY);
+            const anchor = Position.from(this.options.rotationAnchor);
+            ctx.translate(anchor.x, anchor.y);
             ctx.rotate(this.options.rotation * radianCircle);
-            ctx.translate(-anchorX, -anchorY);
+            ctx.translate(-anchor.x, -anchor.y);
         }
 
         stableSort.inplace(this.children, (a, b) => a.options.zIndex - b.options.zIndex);
