@@ -53,6 +53,24 @@ test("makePath", (t) => {
     t.is(ctx.strokeStyle, t.context.options.stroke);
 });
 
+test("makePath with underscore", (t) => {
+    t.context.text = " ";
+    t.context.options.underscore = true;
+
+    const ctx = {
+        beginPath: () => t.pass(),
+        fillText: () => t.pass(),
+        moveTo: () => t.pass(),
+        lineTo: () => t.pass(),
+        stroke: () => t.pass(),
+        closePath: () => t.pass(),
+    };
+    t.plan(7);
+
+    t.context.makePath(ctx);
+    t.is(ctx.strokeStyle, t.context.options.fill);
+});
+
 test("makePath with no text", (t) => {
     const ctx = {
         fillText: () => t.fail(),
