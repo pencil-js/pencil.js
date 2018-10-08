@@ -30,9 +30,7 @@ export default class Select extends Input {
             italic: this.options.italic,
             cursor: Component.cursors.pointer,
         });
-        this.display.on(MouseEvent.events.click, () => {
-            this.click();
-        });
+        this.display.on(MouseEvent.events.click, () => this.click());
         this.background.add(this.display);
 
         this.optionsContainer = new Rectangle([0, 0], 0, 0, this.background.options);
