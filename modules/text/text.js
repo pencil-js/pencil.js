@@ -5,6 +5,11 @@ import Position from "@pencil.js/position";
 import textDirection from "text-direction";
 import hash from "@sindresorhus/fnv1a";
 
+/**
+ * Reformat passed arguments into an array of line string
+ * @param {String|Array<String>} string -
+ * @return {Array<String>}
+ */
 function formatString (string) {
     const separator = "\n";
     return Array.isArray(string) ?

@@ -58,17 +58,14 @@ export default class Button extends Input {
     /**
      * @typedef {Object} ButtonOptions
      * @extends InputOptions
+     * @extends TextOptions
+     * @prop {String} value - Value of the button
      */
     /**
      * @return {ButtonOptions}
      */
     static get defaultOptions () {
-        const TextOptions = Text.defaultOptions;
-        return Object.assign(super.defaultOptions, {
-            font: TextOptions.font,
-            fontSize: TextOptions.fontSize,
-            bold: TextOptions.bold,
-            italic: TextOptions.italic,
+        return Object.assign(super.defaultOptions, Text.defaultOptions, {
             value: "",
         });
     }
