@@ -184,6 +184,10 @@ export default class Container extends EventEmitter {
      * @return {Container}
      */
     getTarget (position, ctx) {
+        if (!this.options.shown) {
+            return null;
+        }
+
         const relativePosition = position.clone().subtract(this.position);
 
         let lastHovered = null;
