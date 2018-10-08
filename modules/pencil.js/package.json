@@ -65,6 +65,7 @@
     "@pencil.js/regular-polygon": "^1.1.0",
     "@pencil.js/resizable": "^1.1.0",
     "@pencil.js/scene": "^1.1.0",
+    "@pencil.js/select": "^1.0.0",
     "@pencil.js/slider": "^1.1.0",
     "@pencil.js/spline": "^1.1.0",
     "@pencil.js/square": "^1.1.0",

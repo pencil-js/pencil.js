@@ -1,0 +1,46 @@
+{
+  "name": "@pencil.js/select",
+  "version": "1.0.0",
+  "description": "Select user input for Pencil.js package.",
+  "main": "select.js",
+  "files": [],
+  "scripts": {
+    "test": "nyc --require esm --reporter=text ava"
+  },
+  "ava": {
+    "require": [
+      "esm",
+      "../../test/helpers/browser-env-setup.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencil.js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "pencil.js",
+    "UI"
+  ],
+  "dependencies": {
+    "@pencil.js/base-event": "^1.0.0",
+    "@pencil.js/component": "^1.1.0",
+    "@pencil.js/input": "^1.1.0",
+    "@pencil.js/math": "^1.0.0",
+    "@pencil.js/mouse-event": "^1.0.0",
+    "@pencil.js/rectangle": "^1.1.0",
+    "@pencil.js/text": "^1.1.0"
+  },
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencil.js/issues"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "esm": "^3.0.81",
+    "nyc": "^13.0.1"
+  }
+}

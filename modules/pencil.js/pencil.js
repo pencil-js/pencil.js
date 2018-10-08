@@ -35,6 +35,7 @@ import Path from "@pencil.js/path";
 import Input from "@pencil.js/input";
 import Button from "@pencil.js/button";
 import Checkbox from "@pencil.js/checkbox";
+import Select from "@pencil.js/select";
 import Slider from "@pencil.js/slider";
 
 // Interactions
@@ -63,6 +64,7 @@ const exportableClasses = {
     Path,
     Position,
     Vector,
+    Select,
     Slider,
     Checkbox,
     Button,
@@ -129,6 +131,7 @@ export {
     Checkbox,
     Button,
     OffScreenCanvas,
+    Select,
     from,
     version,
     author,

@@ -5,7 +5,7 @@ import Pencil from "./pencil";
 import {
     BaseEvent, MouseEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
     Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text, Path,
-    Input, Checkbox, Slider, Button, from, OffScreenCanvas, version, author, homepage,
+    Input, Checkbox, Slider, Button, Select, from, OffScreenCanvas, version, author, homepage,
 } from "./pencil";
 
 test("from", (t) => {
@@ -59,6 +59,7 @@ test("namespace", (t) => {
     t.not(Pencil.Checkbox, undefined);
     t.not(Pencil.Input, undefined);
     t.not(Pencil.Button, undefined);
+    t.not(Pencil.Select, undefined);
     t.not(Pencil.from, undefined);
     t.not(Pencil.OffScreenCanvas, undefined);
     t.not(Pencil.version, undefined);
@@ -96,6 +97,7 @@ test("named imports", (t) => {
     t.not(Checkbox, undefined);
     t.not(Input, undefined);
     t.not(Button, undefined);
+    t.not(Select, undefined);
     t.not(from, undefined);
     t.not(OffScreenCanvas, undefined);
     t.not(version, undefined);

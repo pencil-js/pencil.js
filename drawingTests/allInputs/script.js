@@ -15,6 +15,14 @@
         new P.Button([20, 80], {
             value: "Click",
         }),
+        new P.Select([20, 120], [
+            "Unicorn",
+            "Doggy",
+            "Cat",
+            "Pony",
+        ], {
+            value: 1,
+        }),
     );
 
     scene.startLoop();

@@ -140,6 +140,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
    * [Input](modules/input)
      * [Button](modules/button)
      * [Checkbox](modules/checkbox)
+     * [Select](modules/select)
      * [Slider](modules/slider)
  * [Position](modules/position)
  * [Vector](modules/vector)
