@@ -66,8 +66,7 @@ export default class Text extends Component {
         // if font is an URL
         const isLoadedEvent = new NetworkEvent(NetworkEvent.events.ready, this);
         if (/^(\w+:)?\/\//.test(this.options.font)) {
-            Text.load(this.options.font).then((name) => {
-                this.options.font = name;
+            Text.load(this.options.font).then(() => {
                 this.fire(isLoadedEvent);
             });
         }
@@ -178,9 +177,9 @@ export default class Text extends Component {
             horizontal = this.width;
         }
         else if (align === Text.alignments.start || align === Text.alignments.end) {
-            const scene = this.getRoot();
-            if (scene.isScene) {
-                const dir = textDirection(scene.ctx.canvas);
+            const root = this.getRoot();
+            if (root.isScene) {
+                const dir = textDirection(root.ctx.canvas);
                 if ((align === Text.alignments.start && dir === "rtl") ||
                     (align === Text.alignments.end && dir === "ltr")) {
                     horizontal = this.width;
@@ -245,7 +244,7 @@ export default class Text extends Component {
         const name = url.replace(/\W/g, "-");
         const fontFace = new FontFace(name, `url(${url})`);
         window.document.fonts.add(fontFace);
-        return fontFace.load().then(() => name);
+        return fontFace.load().then(() => url);
     }
 
     /**

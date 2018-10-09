@@ -5,11 +5,18 @@ test.beforeEach((t) => {
     t.context = new Text([0, 0], "Hello\nworld");
 });
 
-test("constructor", (t) => {
+test.cb("constructor", (t) => {
     t.deepEqual(t.context.lines, ["Hello", "world"]);
 
     const defaultText = new Text();
     t.deepEqual(defaultText.lines, [""]);
+
+    const textWithUrl = new Text([0, 0], "test", {
+        font: "http://test.com",
+    });
+    textWithUrl.on("ready", () => {
+        t.end();
+    });
 });
 
 test("get and set text", (t) => {
@@ -136,7 +143,16 @@ test("from", (t) => {
     t.is(text.text, "whatever");
 });
 
-test.todo("load");
+test.cb("load", (t) => {
+    const fontUrls = [
+        "font",
+        "url",
+    ];
+    Text.load(fontUrls).then((names) => {
+        t.deepEqual(names, fontUrls);
+        t.end();
+    });
+});
 
 test("getFontDefinition", (t) => {
     t.is(Text.getFontDefinition(t.context.options), `${t.context.options.fontSize}px ${t.context.options.font}`);

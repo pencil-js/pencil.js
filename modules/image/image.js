@@ -45,8 +45,8 @@ export default class Image extends Rectangle {
     set url (url) {
         this.file = null;
         this.isLoaded = false;
+        this._url = url;
         if (url) {
-            this._url = url;
             Image.load(url).then((img) => {
                 this.file = img;
                 this.isLoaded = true;

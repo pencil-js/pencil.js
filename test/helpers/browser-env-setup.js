@@ -6,6 +6,16 @@ global.Path2D = class Path2D {
     rect () {}
 };
 
+window.document.fonts = new Set();
+
+global.FontFace = class FontFace {
+    load () {
+        return new Promise((resolve) => {
+            setTimeout(resolve, 50);
+        });
+    }
+};
+
 window.HTMLCanvasElement.prototype.getContext = function getContext () {
     const noop = () => {};
     return {
