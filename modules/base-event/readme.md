@@ -13,5 +13,5 @@ Main class for Pencil.js events.
 ```js
 import BaseEvent from "@pencil.js/base-event";
 
-component.fire(new BaseEvent(component, "eventName"));
+component.fire(new BaseEvent("eventName", component));
 ```

@@ -13,5 +13,5 @@ Class for Pencil.js keyboard related events.
 ```js
 import KeyboardEvent from "@pencil.js/keyboard-event";
 
-component.fire(new KeyboardEvent(component, "eventName", "ctrl"));
+component.fire(new KeyboardEvent("eventName", component, "ctrl"));
 ```

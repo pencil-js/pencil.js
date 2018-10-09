@@ -19,7 +19,7 @@ test("constructor", (t) => {
 test("option events", (t) => {
     t.context.value = 1;
     const firstOption = t.context.optionsList[0];
-    firstOption.fire(new MouseEvent(firstOption, MouseEvent.events.click));
+    firstOption.fire(new MouseEvent(MouseEvent.events.click, firstOption));
 
     t.is(t.context.value, 0);
 });
@@ -36,7 +36,7 @@ test("click", (t) => {
 
     t.context.optionsContainer.hide();
 
-    t.context.display.fire(new MouseEvent(t.context.display, MouseEvent.events.click));
+    t.context.display.fire(new MouseEvent(MouseEvent.events.click, t.context.display));
     t.true(t.context.optionsContainer.options.shown);
 });
 

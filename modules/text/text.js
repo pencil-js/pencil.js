@@ -1,4 +1,4 @@
-import BaseEvent from "@pencil.js/base-event";
+import NetworkEvent from "@pencil.js/network-event";
 import Component from "@pencil.js/component";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Position from "@pencil.js/position";
@@ -64,15 +64,15 @@ export default class Text extends Component {
         this.text = text;
 
         // if font is an URL
-        const isReadyEvent = new BaseEvent(this, "ready");
+        const isLoadedEvent = new NetworkEvent(NetworkEvent.events.ready, this);
         if (/^(\w+:)?\/\//.test(this.options.font)) {
             Text.load(this.options.font).then((name) => {
                 this.options.font = name;
-                this.fire(isReadyEvent);
+                this.fire(isLoadedEvent);
             });
         }
         else {
-            this.fire(isReadyEvent);
+            this.fire(isLoadedEvent);
         }
     }
 

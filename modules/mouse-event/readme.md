@@ -13,5 +13,5 @@ Class for Pencil.js mouse related events.
 ```js
 import MouseEvent from "@pencil.js/mouse-event";
 
-component.fire(new MouseEvent(component, "eventName", aPosition));
+component.fire(new MouseEvent("eventName", component, aPosition));
 ```

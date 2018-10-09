@@ -9,12 +9,12 @@ import Position from "@pencil.js/position";
 export default class MouseEvent extends BaseEvent {
     /**
      * MouseEvent constructor
-     * @param {EventEmitter} target - Component concerned by the event
      * @param {String} name - Name of the event
+     * @param {EventEmitter} target - Component concerned by the event
      * @param {PositionDefinition} positionDefinition - Position of the mouse when event trigger
      */
-    constructor (target, name, positionDefinition) {
-        super(target, name);
+    constructor (name, target, positionDefinition) {
+        super(name, target);
         this.position = Position.from(positionDefinition);
     }
 

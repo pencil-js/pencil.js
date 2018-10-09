@@ -25,7 +25,7 @@
     "asset"
   ],
   "dependencies": {
-    "@pencil.js/base-event": "^1.0.0",
+    "@pencil.js/network-event": "^1.0.0",
     "@pencil.js/rectangle": "^1.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

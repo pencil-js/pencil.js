@@ -1,5 +1,5 @@
 import Rectangle from "@pencil.js/rectangle";
-import BaseEvent from "@pencil.js/base-event";
+import NetworkEvent from "@pencil.js/network-event";
 
 /**
  * Image class
@@ -60,9 +60,9 @@ export default class Image extends Rectangle {
                 else if (this.height === null) {
                     this.height = this.width / this.ratio;
                 }
-                this.fire(new BaseEvent(this, "load"));
+                this.fire(new NetworkEvent(NetworkEvent.events.ready, this));
             }).catch(() => {
-                this.fire(new BaseEvent(this, "error"));
+                this.fire(new NetworkEvent(NetworkEvent.events.error, this));
             });
         }
     }

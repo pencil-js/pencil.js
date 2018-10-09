@@ -5,7 +5,7 @@ test("constructor", (t) => {
     const target = null;
     const name = "TestEvent";
     const key = "shift";
-    const fakeEvent = new KeyboardEvent(target, name, key);
+    const fakeEvent = new KeyboardEvent(name, target, key);
 
     t.is(fakeEvent.target, null);
     t.is(fakeEvent.name, name);
@@ -13,8 +13,8 @@ test("constructor", (t) => {
 });
 
 test("events", (t) => {
-    t.is(KeyboardEvent.events.down, "keydown");
-    t.is(KeyboardEvent.events.up, "keyup");
+    t.is(typeof KeyboardEvent.events.down, "string");
+    t.is(typeof KeyboardEvent.events.up, "string");
 });
 
 test("keys", (t) => {

@@ -37,7 +37,7 @@ export default class Slider extends Input {
         this.handle.draggable({
             constrain: this.constrainer,
         });
-        this.handle.on(MouseEvent.events.drag, () => this.fire(new BaseEvent(this, "change")), true);
+        this.handle.on(MouseEvent.events.drag, () => this.fire(new BaseEvent(Slider.events.change, this)), true);
     }
 
     /**

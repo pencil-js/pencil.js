@@ -57,7 +57,7 @@ export default class Input extends Container {
      * Action to execute on click
      */
     click () {
-        this.fire(new BaseEvent(this, Input.events.change));
+        this.fire(new BaseEvent(Input.events.change, this));
     }
 
     /**

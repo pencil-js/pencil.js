@@ -87,7 +87,7 @@ export default class Container extends EventEmitter {
             }
             one.parent = this;
             this.children.push(one);
-            one.fire(new BaseEvent(one, Container.events.attach));
+            one.fire(new BaseEvent(Container.events.attach, one));
         });
 
         return this;
@@ -103,7 +103,7 @@ export default class Container extends EventEmitter {
             if (this.children.includes(one)) {
                 const removed = this.children.splice(this.children.indexOf(one), 1)[0];
                 removed.parent = null;
-                removed.fire(new BaseEvent(removed, Container.events.detach));
+                removed.fire(new BaseEvent(Container.events.detach, removed));
             }
         });
 
@@ -219,7 +219,7 @@ export default class Container extends EventEmitter {
         }
 
         this.frameCount++;
-        this.fire(new BaseEvent(this, Container.events.draw));
+        this.fire(new BaseEvent(Container.events.draw, this));
         ctx.save();
         ctx.translate(this.position.x, this.position.y);
 

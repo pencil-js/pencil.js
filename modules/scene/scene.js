@@ -94,14 +94,14 @@ export default class Scene extends Container {
                     if (hovered) {
                         hovered.isHovered = false;
                         if (!hovered.isAncestorOf(target)) {
-                            hovered.fire(new MouseEvent(hovered, MouseEvent.events.leave, eventPosition));
+                            hovered.fire(new MouseEvent(MouseEvent.events.leave, hovered, eventPosition));
                         }
                     }
                     hovered = target;
                 }
                 if (!target.isHovered) {
                     target.isHovered = true;
-                    target.fire(new MouseEvent(target, MouseEvent.events.hover, eventPosition));
+                    target.fire(new MouseEvent(MouseEvent.events.hover, target, eventPosition));
                 }
                 this.setCursor(target.options.cursor);
                 this.cursorPosition.set(eventPosition);
@@ -109,7 +109,7 @@ export default class Scene extends Container {
             [MouseEvent.events.up]: (target, eventPosition) => {
                 startPosition = null;
                 if (target.isClicked) {
-                    target.fire(new MouseEvent(target, MouseEvent.events.click, eventPosition));
+                    target.fire(new MouseEvent(MouseEvent.events.click, target, eventPosition));
                 }
                 target.isClicked = false;
             },
@@ -118,11 +118,11 @@ export default class Scene extends Container {
                 const events = event.deltaY > 0 ?
                     [mouseEvents.scrollDown, mouseEvents.zoomOut] :
                     [mouseEvents.scrollUp, mouseEvents.zoomIn];
-                target.fire(new MouseEvent(target, events[0], eventPosition))
-                    .fire(new MouseEvent(target, events[1], eventPosition));
+                target.fire(new MouseEvent(events[0], target, eventPosition))
+                    .fire(new MouseEvent(events[1], target, eventPosition));
             },
             mouseout: (target, eventPosition) => {
-                target.fire(new MouseEvent(target, MouseEvent.events.leave, eventPosition));
+                target.fire(new MouseEvent(MouseEvent.events.leave, target, eventPosition));
             },
         };
         Object.keys(mouseListeners).forEach((eventName) => {
@@ -133,7 +133,7 @@ export default class Scene extends Container {
                         .add(window.scrollX, window.scrollY);
                     const target = this.getTarget(eventPosition, this.ctx);
                     if (target) {
-                        target.fire(new MouseEvent(target, eventName, eventPosition));
+                        target.fire(new MouseEvent(eventName, target, eventPosition));
                         if (mouseListeners[eventName] instanceof Function) {
                             mouseListeners[eventName](target, eventPosition, event);
                         }
@@ -150,7 +150,7 @@ export default class Scene extends Container {
         Object.keys(keyboardListener).forEach((eventName) => {
             container.addEventListener(eventName, (event) => {
                 if (this.options.shown) {
-                    this.fire(new KeyboardEvent(this, eventName, event.key));
+                    this.fire(new KeyboardEvent(eventName, this, event.key));
                     if (keyboardListener[eventName] instanceof Function) {
                         keyboardListener[eventName](event);
                     }
@@ -158,7 +158,7 @@ export default class Scene extends Container {
             });
         });
         this.isReady = true;
-        this.fire(new BaseEvent(this, Scene.events.ready));
+        this.fire(new BaseEvent(Scene.events.ready, this));
     }
 
     /**

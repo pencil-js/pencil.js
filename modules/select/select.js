@@ -65,7 +65,7 @@ export default class Select extends Input {
                 .on(MouseEvent.events.leave, () => rect.options.fill = null)
                 .on(MouseEvent.events.click, () => {
                     this.value = index;
-                    this.fire(new BaseEvent(this, Select.events.change));
+                    this.fire(new BaseEvent(Select.events.change, this));
                 });
             rect.add(text);
             this.optionsContainer.add(rect);

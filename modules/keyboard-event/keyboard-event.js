@@ -8,14 +8,14 @@ import BaseEvent from "@pencil.js/base-event";
 export default class KeyboardEvent extends BaseEvent {
     /**
      * MouseEvent constructor
-     * @param {EventEmitter} target - Component concerned by the event
      * @param {String} name - Name of the event
+     * @param {EventEmitter} target - Component concerned by the event
      * @param {String} key - Key that trigger the event
      * For the complete list of key values:
      * https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values
      */
-    constructor (target, name, key) {
-        super(target, name);
+    constructor (name, target, key) {
+        super(name, target);
         this.key = key;
     }
 

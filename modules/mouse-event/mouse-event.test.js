@@ -4,7 +4,7 @@ import MouseEvent from "./mouse-event";
 test("constructor", (t) => {
     const target = null;
     const name = "TestEvent";
-    const fakeEvent = new MouseEvent(target, name, [120, 42]);
+    const fakeEvent = new MouseEvent(name, target, [120, 42]);
 
     t.is(fakeEvent.target, target);
     t.is(fakeEvent.name, name);
@@ -13,19 +13,19 @@ test("constructor", (t) => {
 });
 
 test("events", (t) => {
-    t.is(MouseEvent.events.down, "mousedown");
-    t.is(MouseEvent.events.up, "mouseup");
-    t.is(MouseEvent.events.click, "click");
-    t.is(MouseEvent.events.move, "mousemove");
-    t.is(MouseEvent.events.hover, "hover");
-    t.is(MouseEvent.events.leave, "leave");
-    t.is(MouseEvent.events.wheel, "mousewheel");
-    t.is(MouseEvent.events.scrollDown, "scrolldown");
-    t.is(MouseEvent.events.scrollUp, "scrollup");
-    t.is(MouseEvent.events.zoomOut, "zoomout");
-    t.is(MouseEvent.events.zoomIn, "zoomin");
-    t.is(MouseEvent.events.grab, "grab");
-    t.is(MouseEvent.events.drag, "drag");
-    t.is(MouseEvent.events.drop, "drop");
-    t.is(MouseEvent.events.resize, "resize");
+    t.is(typeof MouseEvent.events.down, "string");
+    t.is(typeof MouseEvent.events.up, "string");
+    t.is(typeof MouseEvent.events.click, "string");
+    t.is(typeof MouseEvent.events.move, "string");
+    t.is(typeof MouseEvent.events.hover, "string");
+    t.is(typeof MouseEvent.events.leave, "string");
+    t.is(typeof MouseEvent.events.wheel, "string");
+    t.is(typeof MouseEvent.events.scrollDown, "string");
+    t.is(typeof MouseEvent.events.scrollUp, "string");
+    t.is(typeof MouseEvent.events.zoomOut, "string");
+    t.is(typeof MouseEvent.events.zoomIn, "string");
+    t.is(typeof MouseEvent.events.grab, "string");
+    t.is(typeof MouseEvent.events.drag, "string");
+    t.is(typeof MouseEvent.events.drop, "string");
+    t.is(typeof MouseEvent.events.resize, "string");
 });

@@ -63,7 +63,7 @@ Rectangle.prototype.resizable = function resizable (options) {
         }
 
         if (this.width !== before.width || this.height !== before.height) {
-            this.fire(new MouseEvent(this, MouseEvent.events.resize, event));
+            this.fire(new MouseEvent(MouseEvent.events.resize, this, event));
         }
     }, true);
 

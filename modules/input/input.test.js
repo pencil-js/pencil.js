@@ -14,10 +14,10 @@ test("events listeners", (t) => {
     const { background } = t.context;
     t.is(background.options.fill, Input.defaultOptions.background);
 
-    background.fire(new MouseEvent(background, MouseEvent.events.hover));
+    background.fire(new MouseEvent(MouseEvent.events.hover, background));
     t.is(background.options.fill, Input.defaultOptions.hover);
 
-    background.fire(new MouseEvent(background, MouseEvent.events.leave));
+    background.fire(new MouseEvent(MouseEvent.events.leave, background));
     t.is(background.options.fill, Input.defaultOptions.background);
 });
 

@@ -17,9 +17,12 @@ class MyEmitter extends EventEmitter {
     /**
      * @override EventEmitter.prototype.fire
      */
-    fire (eventName, target) {
-        super.fire(eventName);
-        target.someAction(eventName);
+    fire (event) {
+        super.fire(event);
+        const trigger = `on${capitalize(event.name)}`;
+        if (target[trigger]) {
+            target[trigger](event);
+        }
     }
 }
 ```

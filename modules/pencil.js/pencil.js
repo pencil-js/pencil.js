@@ -7,6 +7,7 @@ import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 // Events
 import BaseEvent from "@pencil.js/base-event";
 import MouseEvent from "@pencil.js/mouse-event";
+import NetworkEvent from "@pencil.js/network-event";
 import KeyboardEvent from "@pencil.js/keyboard-event";
 
 // Trunk
@@ -90,6 +91,7 @@ export default Object.assign({
     Input,
     BaseEvent,
     MouseEvent,
+    NetworkEvent,
     KeyboardEvent,
     default: undefined,
     from,
@@ -125,6 +127,7 @@ export {
     Vector,
     BaseEvent,
     MouseEvent,
+    NetworkEvent,
     KeyboardEvent,
     Input,
     Slider,

@@ -3,9 +3,9 @@ import test from "ava";
 /* eslint-disable import/no-duplicates, import/no-named-as-default-member */
 import Pencil from "./pencil";
 import {
-    BaseEvent, MouseEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container, Scene,
-    Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text, Path,
-    Input, Checkbox, Slider, Button, Select, from, OffScreenCanvas, version, author, homepage,
+    BaseEvent, MouseEvent, NetworkEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container,
+    Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text,
+    Path, Input, Checkbox, Slider, Button, Select, from, OffScreenCanvas, version, author, homepage,
 } from "./pencil";
 
 test("from", (t) => {
@@ -33,6 +33,7 @@ test("namespace", (t) => {
     /* eslint-disable import/no-named-as-default-member */
     t.not(Pencil.BaseEvent, undefined);
     t.not(Pencil.MouseEvent, undefined);
+    t.not(Pencil.NetworkEvent, undefined);
     t.not(Pencil.KeyboardEvent, undefined);
     t.not(Pencil.Math, undefined);
     t.not(Pencil.Position, undefined);
@@ -71,6 +72,7 @@ test("namespace", (t) => {
 test("named imports", (t) => {
     t.not(BaseEvent, undefined);
     t.not(MouseEvent, undefined);
+    t.not(NetworkEvent, undefined);
     t.not(KeyboardEvent, undefined);
     t.not(Math, undefined);
     t.not(Position, undefined);
