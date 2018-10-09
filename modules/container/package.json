@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/container",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Simple container for Pencil.js package.",
   "main": "container.js",
   "files": [],
@@ -25,8 +25,8 @@
     "wrapper"
   ],
   "dependencies": {
-    "@pencil.js/base-event": "^1.0.0",
-    "@pencil.js/event-emitter": "^1.0.0",
+    "@pencil.js/base-event": "^1.2.0",
+    "@pencil.js/event-emitter": "^1.2.0",
     "@pencil.js/math": "^1.0.0",
     "@pencil.js/offscreen-canvas": "^1.1.0",
     "@pencil.js/position": "^1.0.0",

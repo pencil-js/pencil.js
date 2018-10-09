@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/input",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Abstract user input for Pencil.js package.",
   "main": "input.js",
   "files": [],
@@ -25,11 +25,11 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/base-event": "^1.0.0",
-    "@pencil.js/component": "^1.1.0",
-    "@pencil.js/container": "^1.1.0",
-    "@pencil.js/mouse-event": "^1.0.0",
-    "@pencil.js/rectangle": "^1.1.0"
+    "@pencil.js/base-event": "^1.2.0",
+    "@pencil.js/component": "^1.2.0",
+    "@pencil.js/container": "^1.2.0",
+    "@pencil.js/mouse-event": "^1.2.0",
+    "@pencil.js/rectangle": "^1.2.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
