@@ -32,13 +32,3 @@ test("fire targeted", (t) => {
     });
     t.pass();
 });
-
-test("toJSON", (t) => {
-    const json = t.context.toJSON();
-
-    t.is(json.constructor, "EventEmitter");
-});
-
-test("from", (t) => {
-    t.throws(() => EventEmitter.from(), ReferenceError);
-});

@@ -47,21 +47,4 @@ export default class EventEmitter {
         }
         return this;
     }
-
-    /**
-     * Return a json ready object
-     * @return {Object}
-     */
-    toJSON () {
-        return {
-            constructor: this.constructor.name,
-        };
-    }
-
-    /**
-     * Build an instance from a serializable definition
-     */
-    static from () {
-        throw new ReferenceError(`Unimplemented from function in ${this.name}`);
-    }
 }

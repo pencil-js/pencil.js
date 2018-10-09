@@ -7,7 +7,7 @@ import Position from "@pencil.js/position";
 import { random } from "@pencil.js/math";
 
 /**
- * Wrapper
+ * Scene class
  * @class
  * @extends Container
  */
@@ -71,7 +71,7 @@ export default class Scene extends Container {
     }
 
     /**
-     * Bind window event and call them on targets (can't be called twice)
+     * Bind events and call them on targets (can't be called twice)
      * @param {HTMLElement} container - Container to bind event to
      */
     _listenForEvents (container) {
@@ -173,13 +173,13 @@ export default class Scene extends Container {
 
     /**
      * Draw the whole scene
-     * @param {CanvasRenderingContext2D|OffScreenCanvas} [onto] -
+     * @param {CanvasRenderingContext2D|OffScreenCanvas} [onto=this.ctx] - Context to render scene
      * @return {Scene} Itself
      */
-    render (onto) {
+    render (onto = this.ctx) {
         const animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this, undefined)) : null;
 
-        const context = (onto && onto.ctx) || onto || this.ctx;
+        const context = (onto && onto.ctx) || onto;
         this.clear(context);
 
         try {

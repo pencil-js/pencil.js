@@ -359,7 +359,8 @@ export default class Container extends EventEmitter {
     }
 
     /**
-     * @inheritDoc
+     * Return a json ready object
+     * @return {Object}
      */
     toJSON () {
         const { defaultOptions } = this.constructor;
@@ -372,7 +373,8 @@ export default class Container extends EventEmitter {
             }
         });
 
-        const json = Object.assign(super.toJSON(), {
+        const json = Object.assign({
+            constructor: this.constructor.name,
             position: this.position.toJSON(),
         });
         if (this.children.length) {
