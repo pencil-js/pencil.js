@@ -138,6 +138,9 @@ test("getTarget", (t) => {
     addHeir(t.context);
 
     t.is(t.context.getTarget(t.context.position), child);
+
+    t.context.options.shown = false;
+    t.is(t.context.getTarget(t.context.position), null);
 });
 
 test("render", (t) => {
