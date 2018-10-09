@@ -3,6 +3,7 @@ import browserEnv from "browser-env";
 browserEnv(["window"]);
 
 global.Path2D = class Path2D {
+    rect () {}
 };
 
 window.HTMLCanvasElement.prototype.getContext = function getContext () {

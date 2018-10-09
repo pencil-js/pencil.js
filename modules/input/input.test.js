@@ -1,25 +1,45 @@
 import test from "ava";
 import Input from "./input";
+import MouseEvent from "../mouse-event/mouse-event";
 
 test.beforeEach((t) => {
     t.context = new Input([100, 100]);
 });
 
 test("constructor", (t) => {
-    t.not(t.context.background, undefined);
+    t.truthy(t.context.background);
+});
+
+test("events listeners", (t) => {
+    const { background } = t.context;
+    t.is(background.options.fill, Input.defaultOptions.background);
+
+    background.fire(new MouseEvent(background, MouseEvent.events.hover));
+    t.is(background.options.fill, Input.defaultOptions.hover);
+
+    background.fire(new MouseEvent(background, MouseEvent.events.leave));
+    t.is(background.options.fill, Input.defaultOptions.background);
 });
 
 test("get and set value", (t) => {
-    t.throws(() => t.context.value, ReferenceError, "unimplemented get");
-    t.throws(() => t.context.value = 42, ReferenceError, "unimplemented set");
+    t.throws(() => t.context.value, ReferenceError);
+    t.throws(() => t.context.value = 42, ReferenceError);
 });
 
 test("click", (t) => {
     t.context.click();
-    t.pass("without error");
+    t.pass();
 });
 
-test.todo("isHover");
+test("isHover", (t) => {
+    const ctx = {
+        isPointInPath: () => true,
+    };
+    t.true(t.context.isHover([0, 0], ctx));
+
+    t.context.options.shown = false;
+    t.false(t.context.isHover([0, 0], ctx));
+});
 
 test("toJSON", (t) => {
     Object.defineProperty(Input.prototype, "value", {
@@ -32,7 +52,15 @@ test("toJSON", (t) => {
     t.is(json.constructor, "Input");
 });
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {
+        position: [1, 2],
+        options: {},
+    };
+    const input = Input.from(definition);
+
+    t.true(input instanceof Input);
+});
 
 test("defaultOptions", (t) => {
     const options = Input.defaultOptions;
