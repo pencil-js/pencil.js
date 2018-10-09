@@ -385,6 +385,14 @@ export default class Container extends EventEmitter {
     }
 
     /**
+     * Create a copy of any descendant of Container
+     * @return {Container}
+     */
+    clone () {
+        return this.constructor.from(this.toJSON());
+    }
+
+    /**
      * Return an instance from a generic object
      * @param {Object} definition - Container definition
      * @return {Container}

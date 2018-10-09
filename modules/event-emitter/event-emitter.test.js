@@ -33,10 +33,6 @@ test("fire targeted", (t) => {
     t.pass();
 });
 
-test("clone", (t) => {
-    t.throws(() => t.context.clone(), ReferenceError);
-});
-
 test("toJSON", (t) => {
     const json = t.context.toJSON();
 

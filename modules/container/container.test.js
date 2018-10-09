@@ -279,6 +279,15 @@ test("toJSON", (t) => {
     t.is(reJson.children.length, 1);
 });
 
+test("clone", (t) => {
+    const clone = t.context.clone();
+    t.true(clone instanceof Container);
+
+    t.false(t.context === clone);
+    t.deepEqual(t.context.options, clone.options);
+    t.deepEqual(t.context.position, clone.position);
+});
+
 test("from", (t) => {
     const definition = {
         position: [10, 20],
