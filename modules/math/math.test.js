@@ -52,3 +52,10 @@ test("modulo", (t) => {
     t.is(M.modulo(10, -3), -1);
     t.is(M.modulo(-10, -3), -1);
 });
+
+test("average", (t) => {
+    t.is(M.average(1), 1);
+    t.is(M.average(1, 2, 3), 2);
+    const n = 100;
+    t.is(M.average(...(new Array(n)).fill().map((v, index) => index)), (n - 1) / 2);
+});

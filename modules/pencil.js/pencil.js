@@ -3,6 +3,7 @@ import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
 import * as Math from "@pencil.js/math";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
+import Color from "@pencil.js/color";
 
 // Events
 import BaseEvent from "@pencil.js/base-event";
@@ -69,6 +70,7 @@ const exportableClasses = {
     Slider,
     Checkbox,
     Button,
+    Color,
 };
 
 /**
@@ -139,4 +141,5 @@ export {
     version,
     author,
     homepage,
+    Color,
 };
