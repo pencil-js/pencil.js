@@ -83,7 +83,7 @@ export default class OffScreenCanvas {
      * @param {String} type -
      * @return {HTMLImageElement}
      */
-    toImg (type = "image/png") {
+    toImage (type = "image/png") {
         const img = window.document.createElement("img");
         img.width = this.width;
         img.height = this.height;

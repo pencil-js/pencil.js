@@ -248,10 +248,10 @@ test("getTaintedCanvas width and height", (t) => {
     t.is(canvas.height, 20);
 });
 
-test("toImg", (t) => {
+test("toImage", (t) => {
     t.context.width = 10;
     t.context.height = 20;
-    const img = t.context.toImg();
+    const img = t.context.toImage();
     t.true(img instanceof window.HTMLImageElement);
     t.is(img.width, 10);
     t.is(img.height, 20);

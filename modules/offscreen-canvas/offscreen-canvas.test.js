@@ -40,8 +40,8 @@ test("get and set imageData", (t) => {
     t.pass();
 });
 
-test("toImg", (t) => {
-    const img = t.context.toImg();
+test("toImage", (t) => {
+    const img = t.context.toImage();
     t.is(img.width, 100);
     t.is(img.height, 200);
     t.true(img instanceof window.HTMLImageElement);

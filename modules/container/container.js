@@ -353,9 +353,9 @@ export default class Container extends EventEmitter {
      * @param {VectorDefinition} [vectorDefinition] - Define a range for the image, use its width and height if available by default
      * @return {HTMLImageElement}
      */
-    toImg (vectorDefinition) {
+    toImage (vectorDefinition) {
         const offScreen = this.getTaintedCanvas(vectorDefinition);
-        return offScreen ? offScreen.toImg() : null;
+        return offScreen ? offScreen.toImage() : null;
     }
 
     /**
