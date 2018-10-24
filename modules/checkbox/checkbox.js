@@ -69,7 +69,8 @@ export default class Checkbox extends Input {
     /**
      * @typedef {Object} CheckboxOptions
      * @extends InputOptions
-     * @prop {Number} [size=20]
+     * @prop {Number} [size=20] - Width and height of the checkbox
+     * @prop {Boolean} [value=false] - Whether it's check ot not
      */
     /**
      * @return {CheckboxOptions}

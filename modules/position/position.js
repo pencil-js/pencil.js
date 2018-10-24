@@ -197,7 +197,7 @@ export default class Position {
 
     /**
      * Return a JSON ready Position definition
-     * @return {[Number, Number]}
+     * @return {Array<Number>}
      */
     toJSON () {
         return [truncate(this.x), truncate(this.y)];

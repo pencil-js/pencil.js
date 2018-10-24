@@ -133,7 +133,7 @@ export default class Vector {
 
     /**
      * Return a JSON ready Vector definition
-     * @return {[[Number, Number], [Number, Number]]}
+     * @return {Array<Array<Number>>}
      */
     toJSON () {
         return [

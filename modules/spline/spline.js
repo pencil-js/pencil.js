@@ -101,7 +101,7 @@ export default class Spline extends Line {
      * Returns control points for a point in a spline (needs before and after, 3 points in total)
      * @param {Array<PositionDefinition>} points - 3 points to use (before, target, after)
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
-     * @return {[Position, Position]}
+     * @return {Array<Position>}
      */
     static getControlPoint (points, tension = Spline.defaultTension) {
         if (points.length < 3) {
