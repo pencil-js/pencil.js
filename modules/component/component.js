@@ -1,3 +1,4 @@
+import Color from "@pencil.js/color";
 import Container from "@pencil.js/container";
 import Position from "@pencil.js/position";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
@@ -17,6 +18,8 @@ export default class Component extends Container {
     constructor (positionDefinition, options) {
         super(positionDefinition, options);
 
+        this.options.stroke = Color.from(this.options.stroke);
+        this.options.fill = Color.from(this.options.fill);
 
         /**
          * @type {Boolean}
@@ -88,10 +91,26 @@ export default class Component extends Container {
     }
 
     /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = super.toJSON();
+
+        if (json.stroke && json.stroke.toJSON) {
+            json.stroke = json.stroke.toJSON();
+        }
+        if (json.fill && json.fill.toJSON) {
+            json.fill = json.fill.toJSON();
+        }
+
+        return json;
+    }
+
+    /**
      * @typedef {Object} ComponentOptions
      * @extends ContainerOptions
-     * @prop {String} [fill="#000"] - Color used to fill, set to null for transparent
-     * @prop {String} [stroke=null] - Color used to stroke, set to null for transparent
+     * @prop {String|ColorDefinition} [fill="#000"] - Color used to fill, set to null for transparent
+     * @prop {String|ColorDefinition} [stroke=null] - Color used to stroke, set to null for transparent
      * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
      * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
      * @prop {String} [join=Component.joins.miter] - How lines join between them
@@ -101,7 +120,7 @@ export default class Component extends Container {
      */
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {
-            fill: "#000",
+            fill: new Color(),
             stroke: null,
             strokeWidth: 2,
             cursor: Component.cursors.default,

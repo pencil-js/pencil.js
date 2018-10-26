@@ -1,5 +1,5 @@
 import convert from "color-convert";
-import { constrain, truncate, average } from "@pencil.js/math";
+import { constrain, truncate, average, equals } from "@pencil.js/math";
 
 /**
  *
@@ -220,12 +220,11 @@ export default class Color {
      * @return {String}
      */
     toString () {
-        if (this.alpha === 1) {
+        if (equals(this.alpha, 1)) {
             return this.rgb;
         }
-        else {
-            return this.rgba;
-        }
+
+        return this.rgba;
     }
 
     /**

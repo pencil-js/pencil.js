@@ -11,6 +11,14 @@ test("Object constructor", (t) => {
     t.false(origin === fromObject);
 });
 
+test("Object constructor default", (t) => {
+    const defaultColor = new Color();
+    t.is(defaultColor.red, 0);
+    t.is(defaultColor.green, 0);
+    t.is(defaultColor.blue, 0);
+    t.is(defaultColor.alpha, 1);
+});
+
 test("hex constructor", (t) => {
     const fromHex = new Color(0x3300ff + 0.9);
     t.is(fromHex.red, 0.2);
