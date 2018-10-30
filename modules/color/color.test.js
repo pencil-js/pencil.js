@@ -35,6 +35,14 @@ test("hex string constructor", (t) => {
     t.is(fromHex.alpha, 1);
 });
 
+test("hex short string constructor", (t) => {
+    const fromHex = new Color("#30f");
+    t.is(fromHex.red, 0.2);
+    t.is(fromHex.green, 0);
+    t.is(fromHex.blue, 1);
+    t.is(fromHex.alpha, 1);
+});
+
 test("name string constructor", (t) => {
     const fromName = new Color("rebeccapurple", 0.5);
     t.is(fromName.red, 0.4);

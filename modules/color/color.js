@@ -116,13 +116,17 @@ export default class Color {
                 let hex = param;
                 if (typeof param === "string") {
                     if (param.startsWith("#")) {
-                        hex = Number.parseInt(param.substr(1), 16);
+                        const hexString = param.substr(1);
+                        const str = hexString.length < 4 ?
+                            hexString.split("").map(char => char.repeat(2)).join("") :
+                            hexString;
+                        hex = Number.parseInt(str, 16);
                     }
                     else {
                         const rgb = convert.keyword.rgb(param);
-                        this.red = rgb[0] / 255;
-                        this.green = rgb[1] / 255;
-                        this.blue = rgb[2] / 255;
+                        this.red = rgb[0] / 0xff;
+                        this.green = rgb[1] / 0xff;
+                        this.blue = rgb[2] / 0xff;
                     }
                 }
                 if (typeof hex === "number") {
@@ -241,7 +245,7 @@ export default class Color {
      * @return {Color}
      */
     static from (colorDefinition) {
-        if (colorDefinition instanceof Color) {
+        if (colorDefinition instanceof Color || colorDefinition === null) {
             return colorDefinition;
         }
         const color = new Color();
