@@ -6,6 +6,8 @@ import stableSort from "stable";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Vector from "@pencil.js/vector";
 
+const scenePromiseKey = Symbol("_scenePromise");
+
 /**
  * Container class
  * @class
@@ -46,7 +48,7 @@ export default class Container extends EventEmitter {
          * @type {Promise<Scene>}
          * @private
          */
-        this._scenePromise = new Promise((resolve) => {
+        this[scenePromiseKey] = new Promise((resolve) => {
             this.on(Container.events.attach, () => {
                 const root = this.getRoot();
                 if (root.isScene) {
@@ -135,7 +137,7 @@ export default class Container extends EventEmitter {
      * @return {Promise<Scene>}
      */
     getScene () {
-        return this._scenePromise;
+        return this[scenePromiseKey];
     }
 
     /**

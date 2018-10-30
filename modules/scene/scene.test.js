@@ -7,8 +7,6 @@ test.beforeEach((t) => {
 
 test.todo("constructor");
 
-test.todo("_listenForEvents");
-
 test.todo("setCursor");
 
 test.todo("render");

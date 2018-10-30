@@ -24,8 +24,6 @@ test("constructor", (t) => {
     t.is(t.context.children.length, 0);
     t.is(t.context.parent, null);
     t.is(t.context.frameCount, 0);
-    // eslint-disable-next-line no-underscore-dangle
-    t.true(t.context._scenePromise instanceof Promise);
 });
 
 test("isHover", (t) => {

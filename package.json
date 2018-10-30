@@ -37,7 +37,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
-    "@gmartigny/eslint-config": "^1.2.1",
+    "@gmartigny/eslint-config": "^1.2.2",
     "ava": "^0.25.0",
     "babel-loader": "^8.0.2",
     "browser-env": "^3.2.5",

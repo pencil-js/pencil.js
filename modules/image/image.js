@@ -1,6 +1,8 @@
 import Rectangle from "@pencil.js/rectangle";
 import NetworkEvent from "@pencil.js/network-event";
 
+const urlKey = Symbol("_url");
+
 /**
  * Image class
  * @class
@@ -34,7 +36,7 @@ export default class Image extends Rectangle {
          * @type {String}
          * @private
          */
-        this._url = null;
+        this[urlKey] = null;
         this.url = url;
     }
 
@@ -45,7 +47,7 @@ export default class Image extends Rectangle {
     set url (url) {
         this.file = null;
         this.isLoaded = false;
-        this._url = url;
+        this[urlKey] = url;
         if (url) {
             Image.load(url).then((img) => {
                 this.file = img;
@@ -72,7 +74,7 @@ export default class Image extends Rectangle {
      * @return {String}
      */
     get url () {
-        return this._url;
+        return this[urlKey];
     }
 
     /**
