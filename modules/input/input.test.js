@@ -12,13 +12,17 @@ test("constructor", (t) => {
 
 test("events listeners", (t) => {
     const { background } = t.context;
-    t.is(background.options.fill, Input.defaultOptions.background);
+    t.is(background.options.fill, t.context.options.background);
 
     background.fire(new MouseEvent(MouseEvent.events.hover, background));
-    t.is(background.options.fill, Input.defaultOptions.hover);
+    t.is(background.options.fill, t.context.options.hover);
 
     background.fire(new MouseEvent(MouseEvent.events.leave, background));
-    t.is(background.options.fill, Input.defaultOptions.background);
+    t.is(background.options.fill, t.context.options.background);
+
+    t.context.click = () => t.pass();
+    t.plan(4);
+    background.fire(new MouseEvent(MouseEvent.events.click, background));
 });
 
 test("get and set value", (t) => {
@@ -65,10 +69,10 @@ test("from", (t) => {
 test("defaultOptions", (t) => {
     const options = Input.defaultOptions;
     t.is(options.value, null);
-    t.is(options.fill, "#444");
-    t.is(options.background, "#f6f6f6");
-    t.is(options.border, "#aaa");
-    t.is(options.hover, "#dcdcdc");
+    t.is(options.fill.toString(), "#444444");
+    t.is(options.background.toString(), "#f6f6f6");
+    t.is(options.border.toString(), "#aaaaaa");
+    t.is(options.hover.toString(), "#dcdcdc");
 });
 
 test("events", (t) => {

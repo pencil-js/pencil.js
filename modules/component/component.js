@@ -40,15 +40,17 @@ export default class Component extends Container {
         const path = new Path2D();
         this.trace(path);
 
-        if (this.options.fill) {
-            ctx.fillStyle = this.options.fill;
+        const fillStyle = Color.from(this.options.fill);
+        if (fillStyle && fillStyle.alpha) {
+            ctx.fillStyle = fillStyle.toString();
             ctx.fill(path);
         }
 
-        if (this.options.stroke && this.options.strokeWidth) {
+        const strokeStyle = Color.from(this.options.stroke);
+        if (this.options.strokeWidth && strokeStyle && strokeStyle.alpha) {
             ctx.lineJoin = this.options.join;
             ctx.lineCap = this.options.cap;
-            ctx.strokeStyle = this.options.stroke;
+            ctx.strokeStyle = strokeStyle.toString();
             ctx.lineWidth = this.options.strokeWidth;
             ctx.stroke(path);
         }
@@ -96,11 +98,11 @@ export default class Component extends Container {
     toJSON () {
         const json = super.toJSON();
 
-        if (json.stroke && json.stroke.toJSON) {
-            json.stroke = json.stroke.toJSON();
+        if (json.options && json.options.stroke) {
+            json.options.stroke = Color.from(json.options.stroke).toJSON();
         }
-        if (json.fill && json.fill.toJSON) {
-            json.fill = json.fill.toJSON();
+        if (json.options && json.options.fill) {
+            json.options.fill = Color.from(json.options.fill).toJSON();
         }
 
         return json;

@@ -123,7 +123,7 @@ export default class Color {
                         hex = Number.parseInt(str, 16);
                     }
                     else {
-                        const rgb = convert.keyword.rgb(param);
+                        const rgb = convert.keyword.rgb(param) || [0, 0, 0];
                         this.red = rgb[0] / 0xff;
                         this.green = rgb[1] / 0xff;
                         this.blue = rgb[2] / 0xff;

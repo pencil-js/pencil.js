@@ -142,4 +142,9 @@ test("from", (t) => {
     t.is(other.red, 1);
     t.is(other.green, 0);
     t.is(other.blue, 0.4);
+
+    const fromStr = Color.from("fail");
+    t.is(fromStr.red, 0);
+    t.is(fromStr.green, 0);
+    t.is(fromStr.blue, 0);
 });

@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "@pencil.js/base-event": "^1.2.0",
+    "@pencil.js/color": "^1.0.0",
     "@pencil.js/component": "^1.2.0",
     "@pencil.js/container": "^1.2.0",
     "@pencil.js/mouse-event": "^1.2.0",

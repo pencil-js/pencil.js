@@ -1,4 +1,5 @@
 import BaseEvent from "@pencil.js/base-event";
+import Color from "@pencil.js/color";
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
 import MouseEvent from "@pencil.js/mouse-event";
@@ -101,10 +102,10 @@ export default class Input extends Container {
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {
             value: null,
-            fill: "#444",
-            background: "#f6f6f6",
-            border: "#aaa",
-            hover: "#dcdcdc",
+            fill: new Color("#444"),
+            background: new Color("#f6f6f6"),
+            border: new Color("#aaa"),
+            hover: new Color("#dcdcdc"),
         });
     }
 
