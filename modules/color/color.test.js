@@ -19,6 +19,19 @@ test("Object constructor default", (t) => {
     t.is(defaultColor.alpha, 1);
 });
 
+test("Object constructor all 0", (t) => {
+    const defaultColorHex = new Color("#000000", 0);
+    t.is(defaultColorHex.red, 0);
+    t.is(defaultColorHex.green, 0);
+    t.is(defaultColorHex.blue, 0);
+    t.is(defaultColorHex.alpha, 0);
+    const defaultColorRGB = new Color(0, 0, 0, 0);
+    t.is(defaultColorRGB.red, 0);
+    t.is(defaultColorRGB.green, 0);
+    t.is(defaultColorRGB.blue, 0);
+    t.is(defaultColorRGB.alpha, 0);
+});
+
 test("hex constructor", (t) => {
     const fromHex = new Color(0x3300ff + 0.9);
     t.is(fromHex.red, 0.2);
@@ -129,7 +142,7 @@ test("toJSON", (t) => {
 });
 
 test("from", (t) => {
-    const color = Color.from([1, 0.1, 0, 0.5]);
+    const color = Color.from(1, 0.1, 0, 0.5);
     t.is(color.red, 1);
     t.is(color.green, 0.1);
     t.is(color.blue, 0);

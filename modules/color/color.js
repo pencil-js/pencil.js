@@ -44,8 +44,11 @@ export default class Color {
      * @example
      * new Color("indigo"); // All CSS color names
      * new Color("#123456"); // Hex string definition
+     * new Color("#123"); // Hex shorthand string definition, #123 <=> #112233
      * new Color(0x123456); // Hex number definition
-     * new Color(0.1, 0.2, 0.3, 0.5); // Red, Green, Blue and Alpha definition
+     * new Color(0.1, 0.2, 0.3); // Red, Green, Blue definition
+     * Every definition can have one more optional parameter for alpha (opacity)
+     * new Color("violet", 0.5);
      */
     constructor (...colorDefinition) {
         this.red = 0;
@@ -96,7 +99,7 @@ export default class Color {
         return convert.rgb.keyword(this.array.map(channel => ratioToNum(channel)));
     }
 
-    // TODO: do we need more output ? User only need to interact with Color, not read values.
+    // TODO: do we need more getters ? User only need to interact with Color, not read values.
 
     /**
      * Change this values
@@ -104,7 +107,7 @@ export default class Color {
      * @return {Color} Itself
      */
     set (...colorDefinition) {
-        if (colorDefinition.length > 0 && colorDefinition.length <= 2) {
+        if (colorDefinition.length > 0 && colorDefinition.length < 3) {
             const param = colorDefinition[0];
             if (param instanceof Color) {
                 this.red = param.red;
@@ -123,7 +126,7 @@ export default class Color {
                         hex = Number.parseInt(str, 16);
                     }
                     else {
-                        const rgb = convert.keyword.rgb(param) || [0, 0, 0];
+                        const rgb = convert.keyword.rgb(param.toLocaleLowerCase()) || [0, 0, 0];
                         this.red = rgb[0] / 0xff;
                         this.green = rgb[1] / 0xff;
                         this.blue = rgb[2] / 0xff;
@@ -134,14 +137,20 @@ export default class Color {
                     this.green = hexToRatio(hex, 1);
                     this.blue = hexToRatio(hex, 0);
                 }
+                const alpha = colorDefinition[1];
+                if (alpha !== undefined) {
+                    this.alpha = constrain(alpha, 0, 1);
+                }
             }
-            this.alpha = constrain(colorDefinition[1] || this.alpha, 0, 1);
         }
-        else if (colorDefinition.length >= 3) {
+        else if (colorDefinition.length > 2) {
             this.red = constrain(colorDefinition[0], 0, 1);
             this.green = constrain(colorDefinition[1], 0, 1);
             this.blue = constrain(colorDefinition[2], 0, 1);
-            this.alpha = constrain(colorDefinition[3] || this.alpha, 0, 1);
+            const alpha = colorDefinition[3];
+            if (alpha !== undefined) {
+                this.alpha = constrain(alpha, 0, 1);
+            }
         }
         return this;
     }
@@ -157,13 +166,13 @@ export default class Color {
     }
 
     /**
-     * Change hue value (0 = red, 0.5 = blue, 1 = red)
+     * Change hue value (0 = red, 0.5 = blue, 1 = red, 1.5 = blue ...)
      * @param {Number} value - Any value between 0 and 1
      * @return {Color} Itself
      */
     hue (value) {
         const hsl = convert.rgb.hsl(this.array.map(channel => ratioToNum(channel)));
-        hsl[0] = value * 360;
+        hsl[0] = (value % 1) * 360;
         return this.set(...convert.hsl.rgb(hsl).map(channel => channel / 0xff));
     }
 
@@ -244,12 +253,11 @@ export default class Color {
      * @param {ColorDefinition} colorDefinition - Any valid color definition (see constructor)
      * @return {Color}
      */
-    static from (colorDefinition) {
-        if (colorDefinition instanceof Color || colorDefinition === null) {
-            return colorDefinition;
+    static from (...colorDefinition) {
+        const param = colorDefinition[0];
+        if (param instanceof Color || param === null) {
+            return param;
         }
-        const color = new Color();
-        color.set(...(Array.isArray(colorDefinition) ? colorDefinition : [colorDefinition]));
-        return color;
+        return new Color(...colorDefinition);
     }
 }
