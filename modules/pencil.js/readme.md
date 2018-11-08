@@ -168,8 +168,13 @@ In any case, we recommend you use a namespace (eg: `import Namespace from "penci
 You want to help us improve ? Please read [the contributing manual](contributing.md).
 
 ### Contributors
-| [![Guillaume Martigny](https://github.com/GMartigny.png?size=60)<br>GMartigny](https://github.com/GMartigny) |
+| [![Guillaume Martigny](https://github.com/GMartigny.png?size=99)<br><b>GMartigny</b>](https://github.com/GMartigny) |
 | --- |
+> All contributions are valued, you can add yourself to this list (or request to be added) whatever your contribution is.
+<!--
+Use this pattern to add yourself:
+[![FULL NAME or USERNAME](https://github.com/USERNAME.png?size=99)<br><b>USERNAME</b>](https://github.com/USERNAME)
+-->
 
 ## License 
 
