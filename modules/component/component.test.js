@@ -76,14 +76,6 @@ test("toJSON", (t) => {
     const json = t.context.toJSON();
     t.deepEqual(json.options.fill, [0.2, 0.4, 0.6, 1]);
     t.is(json.options.stroke, undefined);
-
-    t.context.options = {
-        stroke: t.context.options.fill,
-        fill: null,
-    };
-    const reverse = t.context.toJSON();
-    t.is(reverse.options.fill, null);
-    t.deepEqual(reverse.options.stroke, [0.2, 0.4, 0.6, 1]);
 });
 
 test("defaultOptions", (t) => {

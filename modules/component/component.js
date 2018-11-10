@@ -93,22 +93,6 @@ export default class Component extends Container {
     }
 
     /**
-     * @inheritDoc
-     */
-    toJSON () {
-        const json = super.toJSON();
-
-        if (json.options && json.options.stroke) {
-            json.options.stroke = Color.from(json.options.stroke).toJSON();
-        }
-        if (json.options && json.options.fill) {
-            json.options.fill = Color.from(json.options.fill).toJSON();
-        }
-
-        return json;
-    }
-
-    /**
      * @typedef {Object} ComponentOptions
      * @extends ContainerOptions
      * @prop {String|ColorDefinition} [fill="#000"] - Color used to fill, set to null for transparent
