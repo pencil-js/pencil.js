@@ -146,6 +146,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
  * [Position](modules/position)
  * [Vector](modules/vector)
  * [Math](modules/math)
+ * [Color](modules/color)
  * [OffScreenCanvas](modules/offscreen-canvas)
  * [BaseEvent](modules/base-event)
    * [MouseEvent](modules/mouse-event)

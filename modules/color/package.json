@@ -1,8 +1,8 @@
 {
-  "name": "@pencil.js/input",
-  "version": "1.2.0",
-  "description": "Abstract user input for Pencil.js package.",
-  "main": "input.js",
+  "name": "@pencil.js/color",
+  "version": "1.0.0",
+  "description": "Color manager for Pencil.js package.",
+  "main": "color.js",
   "files": [],
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
@@ -22,15 +22,11 @@
   },
   "keywords": [
     "pencil.js",
-    "UI"
+    "color"
   ],
   "dependencies": {
-    "@pencil.js/base-event": "^1.2.0",
-    "@pencil.js/color": "^1.0.0",
-    "@pencil.js/component": "^1.2.0",
-    "@pencil.js/container": "^1.2.0",
-    "@pencil.js/mouse-event": "^1.2.0",
-    "@pencil.js/rectangle": "^1.2.0"
+    "@pencil.js/math": "^1.0.0",
+    "color-convert": "^1.9.3"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

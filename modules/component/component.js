@@ -1,3 +1,4 @@
+import Color from "@pencil.js/color";
 import Container from "@pencil.js/container";
 import Position from "@pencil.js/position";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
@@ -17,6 +18,8 @@ export default class Component extends Container {
     constructor (positionDefinition, options) {
         super(positionDefinition, options);
 
+        this.options.stroke = Color.from(this.options.stroke);
+        this.options.fill = Color.from(this.options.fill);
 
         /**
          * @type {Boolean}
@@ -37,15 +40,17 @@ export default class Component extends Container {
         const path = new Path2D();
         this.trace(path);
 
-        if (this.options.fill) {
-            ctx.fillStyle = this.options.fill;
+        const fillStyle = Color.from(this.options.fill);
+        if (fillStyle && fillStyle.alpha) {
+            ctx.fillStyle = fillStyle.toString();
             ctx.fill(path);
         }
 
-        if (this.options.stroke && this.options.strokeWidth) {
+        const strokeStyle = Color.from(this.options.stroke);
+        if (this.options.strokeWidth && strokeStyle && strokeStyle.alpha) {
             ctx.lineJoin = this.options.join;
             ctx.lineCap = this.options.cap;
-            ctx.strokeStyle = this.options.stroke;
+            ctx.strokeStyle = strokeStyle.toString();
             ctx.lineWidth = this.options.strokeWidth;
             ctx.stroke(path);
         }
@@ -90,8 +95,8 @@ export default class Component extends Container {
     /**
      * @typedef {Object} ComponentOptions
      * @extends ContainerOptions
-     * @prop {String} [fill="#000"] - Color used to fill, set to null for transparent
-     * @prop {String} [stroke=null] - Color used to stroke, set to null for transparent
+     * @prop {String|ColorDefinition} [fill="#000"] - Color used to fill, set to null for transparent
+     * @prop {String|ColorDefinition} [stroke=null] - Color used to stroke, set to null for transparent
      * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
      * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
      * @prop {String} [join=Component.joins.miter] - How lines join between them
@@ -101,7 +106,7 @@ export default class Component extends Container {
      */
     static get defaultOptions () {
         return Object.assign(super.defaultOptions, {
-            fill: "#000",
+            fill: new Color(),
             stroke: null,
             strokeWidth: 2,
             cursor: Component.cursors.default,

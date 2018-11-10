@@ -46,6 +46,7 @@
     "@pencil.js/button": "^1.2.0",
     "@pencil.js/checkbox": "^1.2.0",
     "@pencil.js/circle": "^1.2.0",
+    "@pencil.js/color": "^1.0.0",
     "@pencil.js/component": "^1.2.0",
     "@pencil.js/container": "^1.2.0",
     "@pencil.js/draggable": "^1.2.0",

@@ -25,6 +25,7 @@
     "rendered"
   ],
   "dependencies": {
+    "@pencil.js/color": "^1.0.0",
     "@pencil.js/container": "^1.2.0",
     "@pencil.js/offscreen-canvas": "^1.1.0",
     "@pencil.js/position": "^1.0.0"
