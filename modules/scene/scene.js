@@ -6,6 +6,8 @@ import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 import { random } from "@pencil.js/math";
 
+const listenForEventsKey = Symbol("_listenForEvents");
+
 /**
  * Scene class
  * @class
@@ -67,98 +69,7 @@ export default class Scene extends Container {
          */
         this.isReady = false;
 
-        this._listenForEvents(container);
-    }
-
-    /**
-     * Bind events and call them on targets (can't be called twice)
-     * @param {HTMLElement} container - Container to bind event to
-     */
-    _listenForEvents (container) {
-        if (this.isReady) {
-            throw new EvalError("Can't rebind event a second time.");
-        }
-
-        let hovered = null;
-        let startPosition = null;
-        const mouseListeners = {
-            [MouseEvent.events.down]: (target, eventPosition) => {
-                target.isClicked = true;
-                startPosition = eventPosition;
-            },
-            [MouseEvent.events.move]: (target, eventPosition) => {
-                if (startPosition) {
-                    target.isClicked = eventPosition.distance(startPosition) < 10;
-                }
-                if (target !== hovered) {
-                    if (hovered) {
-                        hovered.isHovered = false;
-                        if (!hovered.isAncestorOf(target)) {
-                            hovered.fire(new MouseEvent(MouseEvent.events.leave, hovered, eventPosition));
-                        }
-                    }
-                    hovered = target;
-                }
-                if (!target.isHovered) {
-                    target.isHovered = true;
-                    target.fire(new MouseEvent(MouseEvent.events.hover, target, eventPosition));
-                }
-                this.setCursor(target.options.cursor);
-                this.cursorPosition.set(eventPosition);
-            },
-            [MouseEvent.events.up]: (target, eventPosition) => {
-                startPosition = null;
-                if (target.isClicked) {
-                    target.fire(new MouseEvent(MouseEvent.events.click, target, eventPosition));
-                }
-                target.isClicked = false;
-            },
-            [MouseEvent.events.wheel]: (target, eventPosition, event) => {
-                const mouseEvents = MouseEvent.events;
-                const events = event.deltaY > 0 ?
-                    [mouseEvents.scrollDown, mouseEvents.zoomOut] :
-                    [mouseEvents.scrollUp, mouseEvents.zoomIn];
-                target.fire(new MouseEvent(events[0], target, eventPosition))
-                    .fire(new MouseEvent(events[1], target, eventPosition));
-            },
-            mouseout: (target, eventPosition) => {
-                target.fire(new MouseEvent(MouseEvent.events.leave, target, eventPosition));
-            },
-        };
-        Object.keys(mouseListeners).forEach((eventName) => {
-            container.addEventListener(eventName, (event) => {
-                if (this.options.shown) {
-                    const eventPosition = (new Position(event.clientX, event.clientY))
-                        .subtract(this.containerPosition)
-                        .add(window.scrollX, window.scrollY);
-                    const target = this.getTarget(eventPosition, this.ctx);
-                    if (target) {
-                        target.fire(new MouseEvent(eventName, target, eventPosition));
-                        if (mouseListeners[eventName] instanceof Function) {
-                            mouseListeners[eventName](target, eventPosition, event);
-                        }
-                    }
-                }
-            }, {
-                passive: true,
-            });
-        });
-        const keyboardListener = {
-            [KeyboardEvent.events.down]: null,
-            [KeyboardEvent.events.up]: null,
-        };
-        Object.keys(keyboardListener).forEach((eventName) => {
-            container.addEventListener(eventName, (event) => {
-                if (this.options.shown) {
-                    this.fire(new KeyboardEvent(eventName, this, event.key));
-                    if (keyboardListener[eventName] instanceof Function) {
-                        keyboardListener[eventName](event);
-                    }
-                }
-            });
-        });
-        this.isReady = true;
-        this.fire(new BaseEvent(Scene.events.ready, this));
+        this[listenForEventsKey](container);
     }
 
     /**
@@ -332,3 +243,95 @@ export default class Scene extends Container {
         };
     }
 }
+
+/**
+ * Bind events and call them on targets (can't be called twice)
+ * @param {HTMLElement} container - Container to bind event to
+ * @memberOf Scene#
+ */
+Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
+    if (this.isReady) {
+        throw new EvalError("Can't rebind event a second time.");
+    }
+
+    let hovered = null;
+    let startPosition = null;
+    const mouseListeners = {
+        [MouseEvent.events.down]: (target, eventPosition) => {
+            target.isClicked = true;
+            startPosition = eventPosition;
+        },
+        [MouseEvent.events.move]: (target, eventPosition) => {
+            if (startPosition) {
+                target.isClicked = eventPosition.distance(startPosition) < 10;
+            }
+            if (target !== hovered) {
+                if (hovered) {
+                    hovered.isHovered = false;
+                    if (!hovered.isAncestorOf(target)) {
+                        hovered.fire(new MouseEvent(MouseEvent.events.leave, hovered, eventPosition));
+                    }
+                }
+                hovered = target;
+            }
+            if (!target.isHovered) {
+                target.isHovered = true;
+                target.fire(new MouseEvent(MouseEvent.events.hover, target, eventPosition));
+            }
+            this.setCursor(target.options.cursor);
+            this.cursorPosition.set(eventPosition);
+        },
+        [MouseEvent.events.up]: (target, eventPosition) => {
+            startPosition = null;
+            if (target.isClicked) {
+                target.fire(new MouseEvent(MouseEvent.events.click, target, eventPosition));
+            }
+            target.isClicked = false;
+        },
+        [MouseEvent.events.wheel]: (target, eventPosition, event) => {
+            const mouseEvents = MouseEvent.events;
+            const events = event.deltaY > 0 ?
+                [mouseEvents.scrollDown, mouseEvents.zoomOut] :
+                [mouseEvents.scrollUp, mouseEvents.zoomIn];
+            target.fire(new MouseEvent(events[0], target, eventPosition))
+                .fire(new MouseEvent(events[1], target, eventPosition));
+        },
+        mouseout: (target, eventPosition) => {
+            target.fire(new MouseEvent(MouseEvent.events.leave, target, eventPosition));
+        },
+    };
+    Object.keys(mouseListeners).forEach((eventName) => {
+        container.addEventListener(eventName, (event) => {
+            if (this.options.shown) {
+                const eventPosition = (new Position(event.clientX, event.clientY))
+                    .subtract(this.containerPosition)
+                    .add(window.scrollX, window.scrollY);
+                const target = this.getTarget(eventPosition, this.ctx);
+                if (target) {
+                    target.fire(new MouseEvent(eventName, target, eventPosition));
+                    if (mouseListeners[eventName] instanceof Function) {
+                        mouseListeners[eventName](target, eventPosition, event);
+                    }
+                }
+            }
+        }, {
+            passive: true,
+        });
+    });
+    const keyboardListener = {
+        [KeyboardEvent.events.down]: null,
+        [KeyboardEvent.events.up]: null,
+    };
+    Object.keys(keyboardListener).forEach((eventName) => {
+        container.addEventListener(eventName, (event) => {
+            if (this.options.shown) {
+                this.fire(new KeyboardEvent(eventName, this, event.key));
+                if (keyboardListener[eventName] instanceof Function) {
+                    keyboardListener[eventName](event);
+                }
+            }
+        });
+    });
+    this.isReady = true;
+    this.fire(new BaseEvent(Scene.events.ready, this));
+};

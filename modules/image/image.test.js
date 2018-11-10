@@ -15,17 +15,15 @@ test.cb("get and set url", (t) => {
     t.is(t.context.url, "url");
 
     const savedLoad = Image.load;
-    Image.load = (url) => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    url,
-                    width: 10,
-                    height: 20,
-                });
-            }, 50);
-        });
-    };
+    Image.load = url => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                url,
+                width: 10,
+                height: 20,
+            });
+        }, 50);
+    });
 
     t.false(t.context.isLoaded);
     t.context.on("ready", () => {

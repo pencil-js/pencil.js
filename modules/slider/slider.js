@@ -9,6 +9,8 @@ import Vector from "@pencil.js/vector";
 import { constrain } from "@pencil.js/math";
 import "@pencil.js/draggable";
 
+const moveHandleKey = Symbol("_moveHandle");
+
 /**
  * Slider class
  * @class
@@ -50,15 +52,6 @@ export default class Slider extends Input {
     }
 
     /**
-     * Move the handle to a specified value
-     * @param {Number} value - New value to use
-     */
-    _moveHandle (value) {
-        const range = this.options.max - this.options.min;
-        this.handle.position.x = (this.width - Slider.HEIGHT) * ((value - this.options.min) / range);
-    }
-
-    /**
      * Change this slider's size
      * @param {Number} newWidth - A new size in pixels
      */
@@ -71,7 +64,7 @@ export default class Slider extends Input {
         this.background.width = newWidth;
         this.constrainer.end = new Position(this.width - Slider.HEIGHT, 0);
 
-        this._moveHandle(this.value);
+        this[moveHandleKey](this.value);
     }
 
     /**
@@ -99,7 +92,7 @@ export default class Slider extends Input {
      */
     set value (newValue) {
         const constrainedValue = constrain(newValue, this.options.min, this.options.max);
-        this._moveHandle(constrainedValue);
+        this[moveHandleKey](constrainedValue);
         return constrainedValue;
     }
 
@@ -131,3 +124,13 @@ export default class Slider extends Input {
         return 20;
     }
 }
+
+/**
+ * Move the handle to a specified value
+ * @param {Number} value - New value to use
+ * @memberOf Slider#
+ */
+Slider.prototype[moveHandleKey] = function moveHandle (value) {
+    const range = this.options.max - this.options.min;
+    this.handle.position.x = (this.width - Slider.HEIGHT) * ((value - this.options.min) / range);
+};

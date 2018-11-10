@@ -7,6 +7,7 @@
 [![Test Coverage](https://badgen.net/codeclimate/coverage/GMartigny/pencil.js?icon=codeclimate)](https://codeclimate.com/github/GMartigny/pencil.js/test_coverage)
 [![Inline docs](http://inch-ci.org/github/GMartigny/pencil.js.svg?branch=master)](http://inch-ci.org/github/GMartigny/pencil.js)
 [![Chat on Gitter](https://badgen.net/badge/chat/on%20gitter/cyan?icon=gitter)](https://gitter.im/Pencil-js)
+[![Code with me](https://badgen.net/runkit/now-coding-with-floobits-nudefhk1jv2q)](https://floobits.com/GMartigny/pencil-js/redirect)
 
 Nice modular interactive 2D drawing library.
 
@@ -168,8 +169,13 @@ In any case, we recommend you use a namespace (eg: `import Namespace from "penci
 You want to help us improve ? Please read [the contributing manual](contributing.md).
 
 ### Contributors
-| [![Guillaume Martigny](https://github.com/GMartigny.png?size=60)<br>GMartigny](https://github.com/GMartigny) |
-| --- |
+| [![Guillaume Martigny](https://github.com/GMartigny.png?size=99)<br><b>GMartigny</b>](https://github.com/GMartigny) | [![Heraclite](https://github.com/heraclite.png?size=99)<br><b>Heraclite</b>](https://github.com/heraclite) |
+| --- | --- |
+> All contributions are valued, you can add yourself to this list (or request to be added) whatever your contribution is.
+<!--
+Use this pattern to add yourself:
+[![FULL NAME or USERNAME](https://github.com/USERNAME.png?size=99)<br><b>USERNAME</b>](https://github.com/USERNAME)
+-->
 
 ## License 
 

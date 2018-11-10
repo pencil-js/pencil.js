@@ -13,8 +13,6 @@ test.todo("constructor");
 
 test.todo("click");
 
-test.todo("_moveHandle");
-
 test.todo("get and set width");
 
 test.todo("get and set value");
