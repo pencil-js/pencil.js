@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/square",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Square shape for Pencil.js package.",
   "main": "square.js",
   "files": [],

@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/line",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Line stroke for Pencil.js package.",
   "main": "line.js",
   "files": [],

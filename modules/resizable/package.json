@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/resizable",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Allow rectangle to be resized in Pencil.js package.",
   "main": "resizable.js",
   "files": [],

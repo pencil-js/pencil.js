@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/spline",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Curve with multiple point for Pencil.js package.",
   "main": "spline.js",
   "files": [],
