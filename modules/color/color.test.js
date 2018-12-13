@@ -72,6 +72,13 @@ test("rgba constructor", (t) => {
     t.is(fromRGBA.alpha, 0.1);
 });
 
+test("clone", (t) => {
+    const origin = new Color(0.1, 0.2, 0.3, 0.4);
+    const clone = origin.clone();
+    t.not(clone, origin);
+    t.deepEqual(clone, origin);
+});
+
 test("get rgb and rgba", (t) => {
     const color = new Color("#0066ff");
     color.alpha = 0.5;

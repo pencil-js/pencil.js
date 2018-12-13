@@ -60,6 +60,14 @@ export default class Color {
     }
 
     /**
+     * Create a new copy of this color
+     * @return {Color}
+     */
+    clone () {
+        return (new Color(this));
+    }
+
+    /**
      * Return an array with red, green and blue value
      * @example [0.1, 0.2, 0.3]
      * @return {Array<Number>}
