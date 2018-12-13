@@ -9,6 +9,7 @@ import Vector from "@pencil.js/vector";
 import { constrain } from "@pencil.js/math";
 import "@pencil.js/draggable";
 
+const constrainerKey = Symbol("_constrainer");
 const moveHandleKey = Symbol("_moveHandle");
 
 /**
@@ -35,9 +36,9 @@ export default class Slider extends Input {
             cursor: Component.cursors.ewResize,
         });
         container.add(this.handle);
-        this.constrainer = new Vector(new Position(0, 0), new Position(this.width - Slider.HEIGHT, 0));
+        this[constrainerKey] = new Vector(new Position(0, 0), new Position(this.width - Slider.HEIGHT, 0));
         this.handle.draggable({
-            constrain: this.constrainer,
+            constrain: this[constrainerKey],
         });
         this.handle.on(MouseEvent.events.drag, () => this.fire(new BaseEvent(Slider.events.change, this)), true);
     }
@@ -47,7 +48,7 @@ export default class Slider extends Input {
      */
     click (position) {
         this.handle.position.set(position.x - (Slider.HEIGHT / 2), 0)
-            .constrain(this.constrainer.start, this.constrainer.end);
+            .constrain(this[constrainerKey].start, this[constrainerKey].end);
         super.click();
     }
 
@@ -62,7 +63,7 @@ export default class Slider extends Input {
 
         this.options.width = newWidth;
         this.background.width = newWidth;
-        this.constrainer.end = new Position(this.width - Slider.HEIGHT, 0);
+        this[constrainerKey].end = new Position(this.width - Slider.HEIGHT, 0);
 
         this[moveHandleKey](this.value);
     }

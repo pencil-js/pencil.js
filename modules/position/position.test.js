@@ -134,14 +134,16 @@ test("lerp", (t) => {
 });
 
 test("distance", (t) => {
-    const pos2 = new Position(t.context.x + 30, t.context.y + 40); // 3² + 4² = 5²
+    const pos2 = new Position(t.context.x + 30, t.context.y - 40); // 3² + 4² = 5²
 
     const dist = t.context.distance(pos2);
     t.true(almostEqual(dist, 50));
     t.true(almostEqual(pos2.distance(t.context), dist));
 });
 
-test.todo("crossProduct");
+test("crossProduct", (t) => {
+    t.is(t.context.crossProduct([-8, 3]), 314);
+});
 
 test("isOnSameSide", (t) => {
     const splitter = new Vector([-1, -1], [1, 1]);
