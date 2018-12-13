@@ -1,0 +1,42 @@
+{
+  "name": "@pencil.js/progress-bar",
+  "version": "1.3.1",
+  "description": "Progress-bar for Pencil.js package.",
+  "main": "progress-bar.js",
+  "files": [],
+  "scripts": {
+    "test": "nyc --require esm --reporter=text ava"
+  },
+  "ava": {
+    "require": [
+      "esm",
+      "../../test/helpers/browser-env-setup.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GMartigny/pencil.js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "pencil.js",
+    "UI"
+  ],
+  "dependencies": {
+    "@pencil.js/input": "^1.3.1",
+    "@pencil.js/math": "^1.3.1",
+    "@pencil.js/rectangle": "^1.3.1"
+  },
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GMartigny/pencil.js/issues"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "esm": "^3.0.81",
+    "nyc": "^13.0.1"
+  }
+}

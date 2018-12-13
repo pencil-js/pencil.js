@@ -118,8 +118,8 @@ export default class Input extends Container {
      * @return {InputEvents}
      */
     static get events () {
-        return {
+        return Object.assign(super.events, {
             change: "change",
-        };
+        });
     }
 }

@@ -39,6 +39,7 @@ import Button from "@pencil.js/button";
 import Checkbox from "@pencil.js/checkbox";
 import Select from "@pencil.js/select";
 import Slider from "@pencil.js/slider";
+import ProgressBar from "@pencil.js/progress-bar";
 
 // Interactions
 import "@pencil.js/draggable";
@@ -71,6 +72,7 @@ const exportableClasses = {
     Checkbox,
     Button,
     Color,
+    ProgressBar,
 };
 
 /**
@@ -142,4 +144,5 @@ export {
     author,
     homepage,
     Color,
+    ProgressBar,
 };

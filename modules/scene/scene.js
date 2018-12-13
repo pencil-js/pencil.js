@@ -238,9 +238,9 @@ export default class Scene extends Container {
      * @return {SceneEvent}
      */
     static get events () {
-        return {
+        return Object.assign(super.events, {
             ready: "ready",
-        };
+        });
     }
 }
 

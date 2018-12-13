@@ -439,11 +439,11 @@ export default class Container extends EventEmitter {
      * @return {ContainerEvent}
      */
     static get events () {
-        return {
+        return Object.assign(super.events, {
             attach: "attach",
             detach: "detach",
             draw: "draw",
-        };
+        });
     }
 
     /**

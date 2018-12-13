@@ -12,10 +12,13 @@
         new P.Slider([20, 50], {
             value: 8,
         }),
-        new P.Button([20, 80], {
+        new P.ProgressBar([20, 80], {
+            value: 0.8,
+        }),
+        new P.Button([20, 110], {
             value: "Click",
         }),
-        new P.Select([20, 120], [
+        new P.Select([90, 110], [
             "Unicorn",
             "Doggy",
             "Cat",

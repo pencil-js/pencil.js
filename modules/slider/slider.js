@@ -57,7 +57,7 @@ export default class Slider extends Input {
      */
     set width (newWidth) {
         if (newWidth < Slider.HEIGHT) {
-            throw new RangeError(`Slider is too small, minimum is ${Slider.HEIGHT}`);
+            throw new RangeError(`Slider is too small, minimum is ${Slider.HEIGHT}px.`);
         }
 
         this.options.width = newWidth;
@@ -88,12 +88,9 @@ export default class Slider extends Input {
     /**
      * Change this current value
      * @param {Number} newValue - A new value to set
-     * @return {Number} Real value used (between min and max)
      */
     set value (newValue) {
-        const constrainedValue = constrain(newValue, this.options.min, this.options.max);
-        this[moveHandleKey](constrainedValue);
-        return constrainedValue;
+        this[moveHandleKey](constrain(newValue, this.options.min, this.options.max));
     }
 
     /**
@@ -102,7 +99,7 @@ export default class Slider extends Input {
      * @prop {Number} [min=0] - Minimum value when the slider is at lowest
      * @prop {Number} [max=10] - Maximum value when the slider is at highest
      * @prop {Number} [value=0] - Initial value
-     * @prop {Number [width=200] - Size of the slider
+     * @prop {Number} [width=200] - Size of the slider
      */
     /**
      * @return {SliderOptions}

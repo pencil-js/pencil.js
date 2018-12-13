@@ -47,4 +47,14 @@ export default class EventEmitter {
         }
         return this;
     }
+
+    /**
+     * @typedef {Object} EventEmitterEvents
+     */
+    /**
+     * @return {EventEmitterEvents}
+     */
+    static get events () {
+        return {};
+    }
 }
