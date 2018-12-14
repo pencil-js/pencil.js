@@ -15,6 +15,7 @@ export const constrain = (value, min, max) => Math.min(Math.max(value, min), max
  * Determine if two number can considered equals accounting for JS precision.
  * @param {Number} number1 - Any number
  * @param {Number} number2 - Any number
+ * @param {Number} [epsilon=Number.EPSILON] - Maximum difference to consider two number equal.
  * @returns {Boolean}
  */
 export const equals = (number1, number2, epsilon = Number.EPSILON) => Math.abs(number1 - number2) < epsilon;

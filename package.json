@@ -12,7 +12,7 @@
     "lint": "eslint modules/**/*.js",
     "test": "nyc --require esm --reporter=html ava",
     "testci": "nyc --require esm --reporter=lcovonly --reporter=text-summary ava",
-    "build": "webpack --mode=development",
+    "build": "webpack --mode=development --watch",
     "prepublish": "exit 0"
   },
   "ava": {
@@ -35,19 +35,19 @@
   },
   "homepage": "https://github.com/GMartigny/pencil.js#readme",
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
     "@gmartigny/eslint-config": "^1.2.2",
-    "ava": "^0.25.0",
+    "ava": "^1.0.1",
     "babel-loader": "^8.0.2",
     "browser-env": "^3.2.5",
-    "eslint": "^5.8.0",
+    "eslint": "^5.10.0",
     "eslint-plugin-ava": "^5.1.0",
     "eslint-plugin-import": "^2.14.0",
     "esm": "^3.0.81",
-    "lerna": "^3.4.0",
-    "nyc": "^13.0.1",
-    "webpack": "^4.25.1",
+    "lerna": "^3.6.0",
+    "nyc": "^13.1.0",
+    "webpack": "^4.27.1",
     "webpack-command": "^0.4.2"
   }
 }

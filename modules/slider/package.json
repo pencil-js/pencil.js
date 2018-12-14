@@ -42,8 +42,8 @@
     "url": "https://github.com/GMartigny/pencil.js/issues"
   },
   "devDependencies": {
-    "ava": "^0.25.0",
+    "ava": "^1.0.1",
     "esm": "^3.0.81",
-    "nyc": "^13.0.1"
+    "nyc": "^13.1.0"
   }
 }
