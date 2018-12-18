@@ -2,7 +2,6 @@ import EventEmitter from "@pencil.js/event-emitter";
 import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 import { radianCircle } from "@pencil.js/math";
-import stableSort from "stable";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Vector from "@pencil.js/vector";
 
@@ -244,7 +243,7 @@ export default class Container extends EventEmitter {
             ctx.translate(-anchor.x, -anchor.y);
         }
 
-        stableSort.inplace(this.children, (a, b) => a.options.zIndex - b.options.zIndex);
+        this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
 
         if (this.options.opacity !== null && ctx.globalAlpha !== this.options.opacity) {
             ctx.globalAlpha = this.options.opacity;
