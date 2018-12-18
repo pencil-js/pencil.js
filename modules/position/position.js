@@ -220,15 +220,14 @@ export default class Position {
         if (positionDefinition instanceof Position) {
             return positionDefinition;
         }
-        if (Array.isArray(positionDefinition) && positionDefinition.length === 2 &&
-            typeof positionDefinition[0] === "number" && typeof positionDefinition[1] === "number") {
+        if (Array.isArray(positionDefinition)) {
             return new Position(...positionDefinition);
         }
         if (positionDefinition.constructor.name === "Object") {
             return new Position(positionDefinition.x, positionDefinition.y);
         }
 
-        throw new TypeError(`Unexpected type for position: ${positionDefinition}.`);
+        throw new TypeError(`Unexpected type for position: ${JSON.stringify(positionDefinition)}.`);
     }
 
     /**
