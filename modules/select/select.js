@@ -5,6 +5,7 @@ import BaseEvent from "@pencil.js/base-event";
 import Rectangle from "@pencil.js/rectangle";
 import Text from "@pencil.js/text";
 import { constrain } from "@pencil.js/math";
+import Triangle from "@pencil.js/triangle";
 
 /**
  * Select class
@@ -19,10 +20,13 @@ export default class Select extends Input {
      * @param {InputOptions} options - Drawing options
      */
     constructor (positionDefinition, optionsList, options) {
+        if (!optionsList.length) {
+            throw new RangeError("Options list should have at least one item.");
+        }
         super(positionDefinition, options);
         this.selected = 0;
 
-        this.display = new Text([0, 0], optionsList[this.selected], {
+        this.display = new Text([0, 0], "", {
             fill: this.options.fill,
             font: this.options.font,
             fontSize: this.options.fontSize,
@@ -30,7 +34,6 @@ export default class Select extends Input {
             italic: this.options.italic,
             cursor: Component.cursors.pointer,
         });
-        this.display.on(MouseEvent.events.click, () => this.click());
         this.background.add(this.display);
 
         this.optionsContainer = new Rectangle([0, 0], 0, 0, this.background.options);
@@ -38,7 +41,7 @@ export default class Select extends Input {
         this.add(this.optionsContainer);
         let maxWidth = 0;
         this.optionsList = optionsList.map((option) => {
-            const text = new Text([0, 0], option, {
+            const text = new Text([0, 0], option || "", {
                 fill: this.options.fill,
                 font: this.options.font,
                 fontSize: this.options.fontSize,
@@ -56,7 +59,7 @@ export default class Select extends Input {
         let pos = 0;
         this.optionsList.forEach((text, index) => {
             const margin = text.height * Select.MARGIN;
-            const rect = new Rectangle([0, pos], maxWidth + (4 * margin), text.height + (2 * margin), {
+            const rect = new Rectangle([0, pos], maxWidth + (6 * margin), text.height + (2 * margin), {
                 fill: null,
                 cursor: Component.cursors.pointer,
             });
@@ -74,10 +77,17 @@ export default class Select extends Input {
 
         this.display.position.set(margin * 2, margin);
 
-        this.background.width = maxWidth + (4 * margin);
+        this.background.width = maxWidth + (6 * margin);
         this.background.height = this.optionsList[0].height + (2 * margin);
-        this.optionsContainer.width = maxWidth + (4 * margin);
+        this.optionsContainer.width = this.background.width;
         this.optionsContainer.height = (this.optionsList[0].height + (2 * margin)) * this.optionsList.length;
+
+        const arrow = new Triangle([maxWidth + (3.5 * margin), this.background.height / 2], margin, {
+            fill: this.options.fill,
+            rotation: 0.5,
+            cursor: Component.cursors.pointer,
+        });
+        this.background.add(arrow);
     }
 
     /**

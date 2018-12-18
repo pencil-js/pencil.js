@@ -13,11 +13,14 @@ Select user input.
 ```js
 import Select from "@pencil.js/select";
 
-const select = new Select(aPosition, [
+const items = [
+    null, // Selectable empty item
     "Unicorn",
     "Pony",
     "Doggy",
-], {
-    value: 1,
-});
+];
+const options = {
+    value: 1, // index of the default value
+}
+const select = new Select(aPosition, items, options);
 ```
