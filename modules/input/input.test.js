@@ -69,10 +69,10 @@ test("from", (t) => {
 test("defaultOptions", (t) => {
     const options = Input.defaultOptions;
     t.is(options.value, null);
-    t.is(options.fill.toString(), "#444444");
-    t.is(options.background.toString(), "#f6f6f6");
-    t.is(options.border.toString(), "#aaaaaa");
-    t.is(options.hover.toString(), "#dcdcdc");
+    t.is(options.fill, "#444");
+    t.is(options.background, "#f6f6f6");
+    t.is(options.border, "#aaa");
+    t.is(options.hover, "#dcdcdc");
 });
 
 test("events", (t) => {
