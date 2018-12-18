@@ -42,7 +42,7 @@ export default class Polygon extends Component {
      */
     toJSON () {
         return Object.assign(super.toJSON(), {
-            points: this.points.map(point => point.toJSON()),
+            points: this.points,
         });
     }
 

@@ -137,8 +137,8 @@ export default class Vector {
      */
     toJSON () {
         return [
-            this.start.toJSON(),
-            this.end.toJSON(),
+            this.start,
+            this.end,
         ];
     }
 

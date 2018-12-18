@@ -26,14 +26,15 @@ export default class Select extends Input {
         super(positionDefinition, options);
         this.selected = 0;
 
-        this.display = new Text([0, 0], "", {
+        const textOptions = {
             fill: this.options.fill,
             font: this.options.font,
             fontSize: this.options.fontSize,
             bold: this.options.bold,
             italic: this.options.italic,
             cursor: Component.cursors.pointer,
-        });
+        };
+        this.display = new Text([0, 0], "", textOptions);
         this.background.add(this.display);
 
         this.optionsContainer = new Rectangle([0, 0], 0, 0, this.background.options);
@@ -41,14 +42,7 @@ export default class Select extends Input {
         this.add(this.optionsContainer);
         let maxWidth = 0;
         this.optionsList = optionsList.map((option) => {
-            const text = new Text([0, 0], option || "", {
-                fill: this.options.fill,
-                font: this.options.font,
-                fontSize: this.options.fontSize,
-                bold: this.options.bold,
-                italic: this.options.italic,
-                cursor: Component.cursors.pointer,
-            });
+            const text = new Text([0, 0], option || "", textOptions);
             const margin = text.height * Select.MARGIN;
             text.position.set(margin * 2, margin);
             if (text.width > maxWidth) {

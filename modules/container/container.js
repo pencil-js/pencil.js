@@ -377,7 +377,7 @@ export default class Container extends EventEmitter {
 
         const json = Object.assign({
             constructor: this.constructor.name,
-            position: this.position.toJSON(),
+            position: this.position,
         });
         if (this.children.length) {
             json.children = this.children.map(child => child.toJSON());
