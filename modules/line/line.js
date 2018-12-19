@@ -16,14 +16,10 @@ export default class Line extends Component {
     constructor (positionDefinition, points, options) {
         super(positionDefinition, options);
 
-        let positions;
-        try {
-            // Try to treat it as one position definition
-            positions = [Position.from(points)];
-        }
-        catch (e) {
-            positions = points.map(point => Position.from(point));
-        }
+        // Try to treat it as one position definition
+        const positions = points.slice(0, 2).every(n => n === undefined || typeof n === "number") ?
+            [Position.from(points)] :
+            points.map(point => Position.from(point));
 
         /**
          * @type {Array<Position>}

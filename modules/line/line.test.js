@@ -39,11 +39,8 @@ test("ishover", (t) => {
 test("toJSON", (t) => {
     const json = t.context.toJSON();
 
-    t.deepEqual(json.position, [100, 50]);
-    t.deepEqual(json.points, [
-        [150, 150],
-        [200, 200],
-    ]);
+    t.deepEqual(json.position, t.context.position);
+    t.deepEqual(json.points, t.context.points);
     t.is(json.constructor, "Line");
 });
 
