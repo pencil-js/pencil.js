@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/resizable",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Allow rectangle to be resized in Pencil.js package.",
   "main": "resizable.js",
   "files": [],
@@ -25,12 +25,12 @@
     "interaction"
   ],
   "dependencies": {
-    "@pencil.js/component": "^1.3.0",
-    "@pencil.js/draggable": "^1.3.0",
-    "@pencil.js/mouse-event": "^1.3.0",
-    "@pencil.js/polygon": "^1.3.0",
-    "@pencil.js/rectangle": "^1.3.0",
-    "@pencil.js/square": "^1.3.0"
+    "@pencil.js/component": "^1.4.0",
+    "@pencil.js/draggable": "^1.4.0",
+    "@pencil.js/mouse-event": "^1.4.0",
+    "@pencil.js/polygon": "^1.4.0",
+    "@pencil.js/rectangle": "^1.4.0",
+    "@pencil.js/square": "^1.4.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
