@@ -95,11 +95,12 @@ export default class ProgressBar extends Input {
      * @return {SliderOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             value: 0,
             width: 200,
             speed: 0.3,
-        });
+        };
     }
 
     /**

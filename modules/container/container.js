@@ -28,7 +28,10 @@ export default class Container extends EventEmitter {
         /**
          * @type {ContainerOptions}
          */
-        this.options = Object.assign(this.constructor.defaultOptions, options);
+        this.options = {
+            ...this.constructor.defaultOptions,
+            ...options,
+        };
         this.options.rotationAnchor = Position.from(this.options.rotationAnchor);
         /**
          * @type {Array<Container>}
@@ -370,14 +373,14 @@ export default class Container extends EventEmitter {
         Object.keys(this.options).forEach((key) => {
             const value = this.options[key];
             if (!(value && value.equals ? value.equals(defaultOptions[key]) : Object.is(value, defaultOptions[key]))) {
-                optionsCopy[key] = value && value.toJSON ? value.toJSON() : value;
+                optionsCopy[key] = value;
             }
         });
 
-        const json = Object.assign({
+        const json = {
             constructor: this.constructor.name,
             position: this.position,
-        });
+        };
         if (this.children.length) {
             json.children = this.children.map(child => child.toJSON());
         }
@@ -438,11 +441,12 @@ export default class Container extends EventEmitter {
      * @return {ContainerEvent}
      */
     static get events () {
-        return Object.assign(super.events, {
+        return {
+            ...super.events,
             attach: "attach",
             detach: "detach",
             draw: "draw",
-        });
+        };
     }
 
     /**

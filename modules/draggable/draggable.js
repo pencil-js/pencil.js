@@ -26,10 +26,11 @@ Component.prototype.draggable = function draggable (options) {
         this.options.cursor = Component.cursors.grab;
     }
     this.isDraggable = true;
-    const mergedOptions = Object.assign({
+    const mergedOptions = {
         x: true,
         y: true,
-    }, options);
+        ...options,
+    };
 
     let startPosition = null;
     let originPosition = null;

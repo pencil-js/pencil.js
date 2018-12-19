@@ -89,7 +89,7 @@ function from (json) {
 }
 
 // Export all under namespace
-export default Object.assign({
+export default {
     EventEmitter,
     Component,
     Input,
@@ -104,7 +104,8 @@ export default Object.assign({
     version,
     author,
     homepage,
-}, exportableClasses);
+    ...exportableClasses,
+};
 
 // Named exports
 export {

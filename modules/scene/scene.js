@@ -222,11 +222,12 @@ export default class Scene extends Container {
      * @return {SceneOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             fill: null,
             opacity: 1,
             cursor: Component.cursors.default,
-        });
+        };
     }
 
     /**
@@ -238,9 +239,10 @@ export default class Scene extends Container {
      * @return {SceneEvent}
      */
     static get events () {
-        return Object.assign(super.events, {
+        return {
+            ...super.events,
             ready: "ready",
-        });
+        };
     }
 }
 

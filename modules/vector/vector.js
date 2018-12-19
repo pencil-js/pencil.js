@@ -136,9 +136,10 @@ export default class Vector {
      * @return {Array<Array<Number>>}
      */
     toJSON () {
+        const { start, end } = this;
         return [
-            this.start,
-            this.end,
+            start,
+            end,
         ];
     }
 

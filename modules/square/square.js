@@ -37,9 +37,11 @@ export default class Square extends Rectangle {
      * @inheritDoc
      */
     toJSON () {
-        const json = Object.assign(super.toJSON(), {
-            size: this.size,
-        });
+        const { size } = this;
+        const json = {
+            ...super.toJSON(),
+            size,
+        };
         delete json.height;
         delete json.width;
         return json;

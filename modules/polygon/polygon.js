@@ -41,9 +41,11 @@ export default class Polygon extends Component {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            points: this.points,
-        });
+        const { points } = this;
+        return {
+            ...super.toJSON(),
+            points,
+        };
     }
 
     /**

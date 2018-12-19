@@ -99,13 +99,14 @@ export default class Input extends Container {
      * @return {InputOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             value: null,
             fill: "#444",
             background: "#f6f6f6",
             border: "#aaa",
             hover: "#dcdcdc",
-        });
+        };
     }
 
     /**
@@ -117,8 +118,9 @@ export default class Input extends Container {
      * @return {InputEvents}
      */
     static get events () {
-        return Object.assign(super.events, {
+        return {
+            ...super.events,
             change: "change",
-        });
+        };
     }
 }

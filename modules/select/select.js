@@ -119,9 +119,11 @@ export default class Select extends Input {
      * @return {ButtonOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, Text.defaultOptions, {
+        return {
+            ...Text.defaultOptions,
+            ...super.defaultOptions,
             value: 0,
-        });
+        };
     }
 
     /**

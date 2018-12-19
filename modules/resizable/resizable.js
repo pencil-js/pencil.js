@@ -19,10 +19,11 @@ import "@pencil.js/draggable";
  */
 Rectangle.prototype.resizable = function resizable (options) {
     this.isResizable = true;
-    const mergedOptions = Object.assign({
+    const mergedOptions = {
         x: true,
         y: true,
-    }, options);
+        ...options,
+    };
 
     if (!(mergedOptions.x && mergedOptions.y) && this instanceof Square) {
         throw new TypeError("Square should be resizable in both x and y axis.");

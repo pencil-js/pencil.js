@@ -106,9 +106,11 @@ export default class Image extends Rectangle {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            url: this.url,
-        });
+        const { url } = this;
+        return {
+            ...super.toJSON(),
+            url,
+        };
     }
 
     /**
@@ -143,8 +145,9 @@ export default class Image extends Rectangle {
      * @return {RectangleOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             fill: null,
-        });
+        };
     }
 }

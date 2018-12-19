@@ -70,7 +70,10 @@ export default class Path extends Component {
 
         if (!isClosed) {
             // Overrides options to work like a line if not closed
-            this.options = Object.assign(Line.defaultOptions, options);
+            this.options = {
+                ...Line.defaultOptions,
+                ...options,
+            };
         }
 
         this.instructions = instructions;
@@ -120,10 +123,12 @@ export default class Path extends Component {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            instructions: this.instructions.map(instruction => instruction.toJSON()),
-            isClosed: this.isClosed,
-        });
+        const { instructions, isClosed } = this;
+        return {
+            ...super.toJSON(),
+            instructions,
+            isClosed,
+        };
     }
 
     /**

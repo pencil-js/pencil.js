@@ -76,10 +76,11 @@ export default class Checkbox extends Input {
      * @return {CheckboxOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             size: 20,
             value: false,
-        });
+        };
     }
 
     /**

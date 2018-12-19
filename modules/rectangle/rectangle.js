@@ -41,17 +41,16 @@ export default class Rectangle extends Component {
         }
         catch (e) {
             const { origin } = this.options;
+            const { origins } = Rectangle;
             const position = new Position();
-            if (origin === Rectangle.origins.center) {
+            if (origin === origins.center) {
                 position.set(this.width / 2, this.height / 2);
             }
             else {
-                if (origin === Rectangle.origins.topRight || origin === Rectangle.origins.bottomRight) {
-                    position.x = this.width;
-                }
-                if (origin === Rectangle.origins.bottomLeft || origin === Rectangle.origins.bottomRight) {
-                    position.y = this.height;
-                }
+                position.set(
+                    [origins.topRight, origins.bottomRight].includes(origin) && this.width,
+                    [origins.bottomLeft, origins.bottomRight].includes(origin) && this.height,
+                );
             }
             return position;
         }
@@ -61,10 +60,12 @@ export default class Rectangle extends Component {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            width: this.width,
-            height: this.height,
-        });
+        const { width, height } = this;
+        return {
+            ...super.toJSON(),
+            width,
+            height,
+        };
     }
 
     /**
@@ -85,9 +86,10 @@ export default class Rectangle extends Component {
      * @return {RectangleOptions}
      */
     static get defaultOptions () {
-        return Object.assign({
+        return {
+            ...super.defaultOptions,
             origin: Rectangle.origins.topLeft,
-        }, super.defaultOptions);
+        };
     }
 
     /**

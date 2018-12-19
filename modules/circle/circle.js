@@ -47,9 +47,11 @@ export default class Circle extends Ellipse {
      * @inheritDoc
      */
     toJSON () {
-        const json = Object.assign(super.toJSON(), {
-            radius: this.radius,
-        });
+        const { radius } = this;
+        const json = {
+            ...super.toJSON(),
+            radius,
+        };
         delete json.horizontalRadius;
         delete json.verticalRadius;
         return json;

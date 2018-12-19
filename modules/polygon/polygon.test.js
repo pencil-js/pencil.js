@@ -33,10 +33,7 @@ test("trace", (t) => {
 test("toJSON", (t) => {
     const json = t.context.toJSON();
 
-    t.deepEqual(json.points, [
-        [100, 200],
-        [300, 400],
-    ]);
+    t.deepEqual(json.points, t.context.points);
     t.is(json.constructor, "Polygon");
 });
 

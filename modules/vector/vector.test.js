@@ -110,7 +110,7 @@ test("intersect", (t) => {
 });
 
 test("toJSON", (t) => {
-    t.deepEqual(t.context.toJSON(), [[10, 100], [40, 140]]);
+    t.deepEqual(t.context.toJSON(), [t.context.start, t.context.end]);
 });
 
 test("from", (t) => {

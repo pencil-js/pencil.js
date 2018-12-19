@@ -200,7 +200,11 @@ export default class Position {
      * @return {Array<Number>}
      */
     toJSON () {
-        return [truncate(this.x), truncate(this.y)];
+        const { x, y } = this;
+        return [
+            truncate(x),
+            truncate(y),
+        ];
     }
 
     /**

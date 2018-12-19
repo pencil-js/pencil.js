@@ -106,11 +106,12 @@ export default class Slider extends Input {
      * @return {SliderOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             min: 0,
             max: 10,
             width: 200,
-        });
+        };
     }
 
     /**

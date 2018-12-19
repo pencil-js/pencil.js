@@ -37,10 +37,12 @@ export default class RegularPolygon extends Polygon {
      * @inheritDoc
      */
     toJSON () {
-        const json = Object.assign(super.toJSON(), {
-            nbSides: this.points.length,
-            radius: this.radius,
-        });
+        const { points, radius } = this;
+        const json = {
+            ...super.toJSON(),
+            nbSides: points.length,
+            radius,
+        };
         delete json.points;
         return json;
     }

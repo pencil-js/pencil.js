@@ -54,9 +54,11 @@ export default class Line extends Component {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            points: this.points,
-        });
+        const { points } = this;
+        return {
+            ...super.toJSON(),
+            points,
+        };
     }
 
     /**
@@ -78,12 +80,13 @@ export default class Line extends Component {
      * @return {LineOptions}
      */
     static get defaultOptions () {
-        const options = Object.assign(super.defaultOptions, {
+        const options = {
+            ...super.defaultOptions,
             cap: Line.caps.round,
             join: Line.joins.round,
             fill: null,
             cursor: null,
-        });
+        };
         options.stroke = super.defaultOptions.fill;
         return options;
     }

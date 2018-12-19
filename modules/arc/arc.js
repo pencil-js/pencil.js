@@ -42,12 +42,14 @@ export default class Arc extends Component {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            horizontalRadius: this.horizontalRadius,
-            verticalRadius: this.verticalRadius,
-            startAngle: this.startAngle,
-            endAngle: this.endAngle,
-        });
+        const { horizontalRadius, verticalRadius, startAngle, endAngle } = this;
+        return {
+            ...super.toJSON(),
+            horizontalRadius,
+            verticalRadius,
+            startAngle,
+            endAngle,
+        };
     }
 
     /**
@@ -68,9 +70,10 @@ export default class Arc extends Component {
      * @return {LineOptions}
      */
     static get defaultOptions () {
-        return Object.assign(Line.defaultOptions, {
+        return {
+            ...Line.defaultOptions,
             join: null,
-        });
+        };
     }
 
     /**

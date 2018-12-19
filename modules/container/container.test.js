@@ -260,7 +260,7 @@ test("toJSON", (t) => {
     const json = t.context.toJSON();
 
     t.is(json.children, undefined);
-    t.deepEqual(json.position, [10, 20]);
+    t.deepEqual(json.position, t.context.position);
     t.is(json.options, undefined);
     t.is(json.constructor, "Container");
 
@@ -272,7 +272,7 @@ test("toJSON", (t) => {
     const reJson = specific.toJSON();
     t.deepEqual(reJson.options, {
         opacity: 0.5,
-        rotationAnchor: [10, 20],
+        rotationAnchor: specific.options.rotationAnchor,
     });
     t.is(reJson.children.length, 1);
 });

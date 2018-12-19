@@ -218,9 +218,11 @@ export default class Text extends Component {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            text: this.text,
-        });
+        const { text } = this;
+        return {
+            ...super.toJSON(),
+            text,
+        };
     }
 
     /**
@@ -268,7 +270,10 @@ export default class Text extends Component {
      * @return {TextMeasures}
      */
     static measure (text, options) {
-        const opts = Object.assign(this.defaultOptions, options);
+        const opts = {
+            ...this.defaultOptions,
+            ...options,
+        };
         const lines = formatString(text);
         const font = this.getFontDefinition(opts);
         return {
@@ -292,7 +297,8 @@ export default class Text extends Component {
      * @return {TextOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             font: "sans-serif",
             fontSize: 20,
             align: Text.alignments.start,
@@ -300,7 +306,7 @@ export default class Text extends Component {
             italic: false,
             lineHeight: 1,
             underscore: false,
-        });
+        };
     }
 
     /**

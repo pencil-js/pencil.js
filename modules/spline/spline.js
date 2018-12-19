@@ -44,9 +44,11 @@ export default class Spline extends Line {
      * @inheritDoc
      */
     toJSON () {
-        return Object.assign(super.toJSON(), {
-            tension: this.tension,
-        });
+        const { tension } = this;
+        return {
+            ...super.toJSON(),
+            tension,
+        };
     }
 
     /**

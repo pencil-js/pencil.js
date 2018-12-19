@@ -99,13 +99,14 @@ export default class Component extends Container {
      * @return {ComponentOptions}
      */
     static get defaultOptions () {
-        return Object.assign(super.defaultOptions, {
+        return {
+            ...super.defaultOptions,
             fill: "#000",
             stroke: null,
             strokeWidth: 2,
             cursor: Component.cursors.default,
             join: Component.joins.miter,
-        });
+        };
     }
 
     /**
