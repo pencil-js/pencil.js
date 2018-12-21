@@ -3,29 +3,29 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
 
 :root {
-  --main-color: #642B73;
-  --second-color: #FFF5AF;
-  --text-color: black;
-  --reverse-text-color: white;
+    --main-color: #642B73;
+    --second-color: #FFF5AF;
+    --text-color: black;
+    --reverse-text-color: white;
 
-  --main-font: 'Montserrat', sans-serif;
-  --main-title-font:'Marck Script', cursive;
-  --code-font: 'Ubuntu Mono', monospace;
+    --main-font: 'Montserrat', sans-serif;
+    --main-title-font: 'Marck Script', cursive;
+    --code-font: 'Ubuntu Mono', monospace;
 
-  --main-title-size:96px;
-  --medium-title-size: 48px;
-  --small-title-size: 36px;
-  --text-size: 24px;
+    --main-title-size: 96px;
+    --medium-title-size: 48px;
+    --small-title-size: 36px;
+    --text-size: 24px;
 
-  --element-padding-size:24px;
+    --element-padding-size: 24px;
 }
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 body {
@@ -35,39 +35,39 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-
-  margin: var(--text-size) 0;
-  font-family: var(--main-title-font);
+    margin: var(--text-size) 0;
+    font-family: var(--main-title-font);
 }
 
 h2 {
-  color: var(--main-color);
-  font-size: var(--medium-title-size);
+    color: var(--main-color);
+    font-size: var(--medium-title-size);
 }
 
 h3 {
-  font-size: var(--small-title-size);
+    font-size: var(--small-title-size);
 }
 
 a {
     color: black;
     text-decoration: none;
 }
+a:hover {
+    text-decoration: underline;
+}
 
 strong {
-  color: var(--second-color);
-  font-style: bold;
+    color: var(--second-color);
 }
 
 .screen {
-  height: 100vh;
-  padding: 5%;
+    height: 100vh;
+    padding: 5%;
 }
 
 .title-screen {
-  background: var(--main-color);
-  background: -webkit-linear-gradient(to left, #C6426E, var(--main-color));
-  background: linear-gradient(to left, #C6426E, var(--main-color));
+    background: var(--main-color);
+    background: linear-gradient(to left, #C6426E, var(--main-color));
 }
 
 .title-screen > * {
@@ -75,40 +75,43 @@ strong {
 }
 
 .element {
-  margin: var(--element-padding-size) 0;
+    margin: var(--element-padding-size) 0;
 
 }
 
 .main-title {
-  padding: var(--main-title-size)  0px;
+    padding: var(--main-title-size) 0;
 }
 
-.main-title > h1 > a{
-  font-size: var(--main-title-size);
-  color: var(--second-color);
+.main-title h1, .main-title h1 a {
+    font-size: var(--main-title-size);
+    color: var(--second-color);
 }
 
-.main-title > small{
-  font-family: var(--main-font);
-  font-size: var(--text-size);
-  font-style: italic;
+.main-title > small {
+    font-family: var(--main-font);
+    font-size: var(--text-size);
+    font-style: italic;
 }
 
 .btn {
-  padding:var(--text-size);
-  color:var(--main-color);
-  background: var(--second-color);
+    padding: var(--text-size);
+    color: var(--main-color);
+    background: var(--second-color);
+}
+.btn:hover {
+    text-decoration: none;
 }
 
 .description {
-  display: inline-block;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: var(--element-padding-size);
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: var(--element-padding-size);
 }
 
 .description > * {
-  padding:var(--text-size);
-  margin: var(--text-size) 0;
+    padding: var(--text-size);
+    margin: var(--text-size) 0;
 }
 
 .description > p {
@@ -117,9 +120,9 @@ strong {
 }
 
 .example {
-  font-family: var(--code-font);
-  font-size: 16px;
-  display: flex;
+    font-family: var(--code-font);
+    font-size: 16px;
+    display: flex;
 }
 
 .example > * {

@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+requestAnimationFrame(() => {
     const examples = document.querySelectorAll(".example");
 
     let promiseChain = Promise.resolve();
@@ -12,6 +12,7 @@ window.addEventListener("load", () => {
             return Promise.reject(new URIError(`Unreachable url ${url}`));
         })).then((code) => {
             const codeElm = document.createElement("pre");
+            codeElm.classList.add("javascript");
             codeElm.textContent = code;
             example.appendChild(codeElm);
             hljs.highlightBlock(codeElm);
