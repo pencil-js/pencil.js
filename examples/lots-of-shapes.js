@@ -12,7 +12,7 @@ scene.add(triangle);
 const polygon = new Pencil.RegularPolygon(triangle.position.clone().add(0, 75), 8, 20);
 scene.add(polygon);
 
-const arc = new Pencil.Arc(polygon.position.clone().add(0, 75), 50, 40, -0.125, 0.625);
+const arc = new Pencil.Arc(polygon.position.clone().add(0, 75), 30, 20, -0.125, 0.625);
 scene.add(arc);
 
 const circle = new Pencil.Circle(arc.position.clone().add(0, 75), 20);
@@ -31,9 +31,9 @@ scene.add(spline);
 const text = new Pencil.Text(spline.position.clone().add(0, 75), "Text");
 scene.add(text);
 
-image = new Pencil.Image(text.position.clone().add(0, 60), "./res/megusta.png");
+const image = new Pencil.Image(text.position.clone().add(0, 60), "./res/megusta.png");
 scene.add(image);
 
 // And more ...
 
-image.on("load", () => scene.render());
+image.on("ready", () => scene.render());
