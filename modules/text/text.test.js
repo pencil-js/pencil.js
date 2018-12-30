@@ -15,6 +15,7 @@ test.cb("constructor", (t) => {
         font: "http://test.com",
     });
     textWithUrl.on("ready", () => {
+        t.is(textWithUrl.options.font, "http---test-com");
         t.end();
     });
 });

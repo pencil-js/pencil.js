@@ -66,7 +66,8 @@ export default class Text extends Component {
         // if font is an URL
         const isLoadedEvent = new NetworkEvent(NetworkEvent.events.ready, this);
         if (/^(\w+:)?\/\//.test(this.options.font)) {
-            Text.load(this.options.font).then(() => {
+            Text.load(this.options.font).then((name) => {
+                this.options.font = name;
                 this.fire(isLoadedEvent);
             });
         }
@@ -246,7 +247,7 @@ export default class Text extends Component {
         const name = url.replace(/\W/g, "-");
         const fontFace = new FontFace(name, `url(${url})`);
         window.document.fonts.add(fontFace);
-        return fontFace.load().then(() => url);
+        return fontFace.load().then(() => name);
     }
 
     /**
