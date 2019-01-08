@@ -48,6 +48,6 @@
     "lerna": "^3.6.0",
     "nyc": "^13.1.0",
     "webpack": "^4.27.1",
-    "webpack-command": "^0.4.2"
+    "webpack-cli": "^3.2.1"
   }
 }
