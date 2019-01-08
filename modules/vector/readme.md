@@ -14,5 +14,5 @@ Vector between two point in 2D space.
 import Vector from "@pencil.js/vector";
 
 const vector = new Vector([10, 20], [30, 40]);
-vector.length();
+console.log(vector.length);
 ```

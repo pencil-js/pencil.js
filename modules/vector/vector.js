@@ -52,7 +52,7 @@ export default class Vector {
      * Return this vector's length
      * @return {Number}
      */
-    length () {
+    get length () {
         return this.start.distance(this.end);
     }
 

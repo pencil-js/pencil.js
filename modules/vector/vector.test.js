@@ -19,7 +19,7 @@ test("get width and height", (t) => {
 });
 
 test("length", (t) => {
-    t.is(t.context.length(), 50);
+    t.is(t.context.length, 50);
 });
 
 test("clone and equal", (t) => {
