@@ -16,8 +16,7 @@
     --medium-title-size: 48px;
     --small-title-size: 36px;
     --text-size: 24px;
-
-    --element-padding-size: 24px;
+    --small-text-size: 18px;
 }
 
 html {
@@ -48,21 +47,46 @@ h3 {
     font-size: var(--small-title-size);
 }
 
+p {
+    line-height: 1.3em;
+}
+
 a {
-    color: black;
+    display: inline-block;
     text-decoration: none;
+    color: blue;
 }
 a:hover {
     text-decoration: underline;
 }
 
 strong {
-    color: var(--second-color);
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+code {
+    font-family: monospace;
+    background: #23241f;
+    color: #FFFFFF;
+    line-height: 1.3em;
+    display: inline;
+    padding: 0.25em 0.5em;
+}
+pre {
+    margin: .5em 0;
+}
+pre code {
+    margin: 0 4em;
 }
 
 .screen {
-    height: 100vh;
+    min-height: 100vh;
     padding: 5%;
+}
+
+.screen:nth-child(odd) {
+    background-color: var(--second-color);
 }
 
 .title-screen {
@@ -70,12 +94,12 @@ strong {
     background: linear-gradient(to left, #C6426E, var(--main-color));
 }
 
-.title-screen > * {
+.title-screen * {
     color: var(--reverse-text-color);
 }
 
 .element {
-    margin: var(--element-padding-size) 0;
+    margin: 1em 0;
 
 }
 
@@ -88,10 +112,30 @@ strong {
     color: var(--second-color);
 }
 
-.main-title > small {
+.main-title small {
     font-family: var(--main-font);
     font-size: var(--text-size);
     font-style: italic;
+}
+
+.description {
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 1em;
+}
+
+.description > * {
+    padding: 1em;
+    margin: 1em 0;
+}
+
+.description strong {
+    color: var(--second-color);
+}
+
+.description p {
+    text-align: justify;
+    line-height: 1.5;
 }
 
 .btn {
@@ -101,22 +145,6 @@ strong {
 }
 .btn:hover {
     text-decoration: none;
-}
-
-.description {
-    display: inline-block;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: var(--element-padding-size);
-}
-
-.description > * {
-    padding: var(--text-size);
-    margin: var(--text-size) 0;
-}
-
-.description > p {
-    text-align: justify;
-    line-height: 1.5;
 }
 
 .example {
