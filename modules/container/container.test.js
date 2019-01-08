@@ -53,14 +53,14 @@ test("add", (t) => {
     }, RangeError);
 });
 
-test("removeChild", (t) => {
+test("remove", (t) => {
     const child = addHeir(t.context);
     const grandChild = addHeir(child);
 
-    t.context.removeChild(grandChild);
+    t.context.remove(grandChild);
     t.is(t.context.children.length, 1);
     t.is(grandChild.parent, child);
-    t.context.removeChild(null, child);
+    t.context.remove(null, child);
     t.is(t.context.children.length, 0);
     t.is(child.parent, null);
 });
@@ -73,13 +73,13 @@ test("empty", (t) => {
     t.is(child.parent, null);
 });
 
-test("remove", (t) => {
+test("delete", (t) => {
     const parent = new Container();
     parent.add(t.context);
 
-    t.context.remove();
+    t.context.delete();
     t.is(t.context.parent, null);
-    t.context.remove();
+    t.context.delete();
 });
 
 test("getScene", (t) => {

@@ -87,7 +87,7 @@ export default class Container extends EventEmitter {
             }
 
             if (one.parent) {
-                one.parent.removeChild(one);
+                one.parent.remove(one);
             }
             one.parent = this;
             this.children.push(one);
@@ -102,7 +102,7 @@ export default class Container extends EventEmitter {
      * @param {...Container} child - Child to remove
      * @return {Container} Itself
      */
-    removeChild (...child) {
+    remove (...child) {
         child.forEach((one) => {
             if (this.children.includes(one)) {
                 const removed = this.children.splice(this.children.indexOf(one), 1)[0];
@@ -119,16 +119,16 @@ export default class Container extends EventEmitter {
      * @return {Container} Itself
      */
     empty () {
-        return this.removeChild(...this.children);
+        return this.remove(...this.children);
     }
 
     /**
      * Remove itself from its parent
      * @return {Container} Itself
      */
-    remove () {
+    delete () {
         if (this.parent) {
-            this.parent.removeChild(this);
+            this.parent.remove(this);
         }
 
         return this;
