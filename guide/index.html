@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="image/png" rel="icon" href="https://raw.githubusercontent.com/GMartigny/pencil.js/master/media/mini-logo.png">
+    <title>Guide - Pencil.js</title>
+    <link type="text/css" rel="stylesheet" href="../res/reset.css"/>
+    <link type="text/css" rel="stylesheet" href="../res/style.css"/>
+    <link type="text/css" rel="stylesheet" href="../res/monokai.css"/>
+</head>
+<body>
+<div class="screen title-screen">
+    <div class="main-title">
+        <h1>
+            Guide
+        </h1>
+        <small>
+            Step-by-step introduction to Pencil.js mastery&nbsp;&hellip;
+        </small>
+    </div>
+    <div class="element description">
+        <p>
+            In this guide, you will discover <strong>most of the features</strong> of the Pencil.js library.<br/>
+            It assumes <strong>basic knowledge</strong> of web technologies (HTML, JavaScript, NPM &hellip;).<br/>
+            by the end of the page, you will be able to build your own <strong>creations with ease</strong>.
+        </p>
+    </div>
+</div>
+<div class="screen">
+    <h2>Getting started</h2>
+    <p>
+        First of all, you need to add the library to your page.<br/>
+        You can quickly doing so by using a CDN:
+    </p>
+    <pre><code class="xml">
+&lt;script src="https://unpkg.com/pencil.js"&gt;&lt;/script&gt;
+&lt;!-- or --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/pencil.js"&gt;&lt;/script&gt;
+    </code></pre>
+    <p>
+        Or you can load it with NPM:
+    </p>
+    <pre><code>
+$ npm install pencil.js
+        </code></pre>
+    <pre><code class="javascript">
+import Pencil from "pencil.js";
+    </code></pre>
+    <p>
+        In either case, you can now use it:
+    </p>
+    <pre><code class="javascript">
+console.log(Pencil.version);
+    </code></pre>
+</div>
+<div class="screen">
+    <h2>Scene</h2>
+    <p>
+        The first and main element of your code should be a {Scene}.
+        A scene is bound to an element or to the whole screen by default.
+    </p>
+    <pre><code class="javascript">
+const myFirstScene = new Pencil.Scene();
+// or
+const myFirstScene = new Pencil.Scene(wrapperElement);
+    </code></pre>
+    <p>
+        When your {Scene} is ready, if you only need a still frame you can render it once.<br/>
+        Or, you can make it alive by refreshing every frames.
+    </p>
+    <pre><code class="javascript">
+// Draw the scene once
+myFirstScene.render();
+// or refresh every frame
+myFirstScene.startLoop();
+    </code></pre>
+</div>
+<div class="screen">
+    <h2>Components</h2>
+    <p>
+        {Component} refers to any drawable part of a scene.
+        As an abstract class, it should not be instantiated by itself, but by any sub-class (ex: Rectangle, Star, Image &hellip;).
+    </p>
+    <pre><code class="javascript">
+const myRectangle = new Pencil.Rectangle();
+    </code></pre>
+    <p>
+        All sub-class constructor parameters are as follows: <code class="inline">(position, [...a number of specific properties], options)</code>.<br/>
+        To continue on our previous example:
+    </p>
+    <pre><code class="javascript">
+const width = 800;
+const height = 600;
+const myRectangle = new Pencil.Rectangle(aPosition, width, height);
+    </code></pre>
+    <p>
+        To know what are the specific properties of any {Component},
+        refer to its <a href="https://github.com/GMartigny/pencil.js#modules">documentation</a>.
+    </p>
+</div>
+<div class="screen">
+    <h2>Container</h2>
+    <p>
+        {Scene} and {Component} both inherit from {Container}. It means that you can includes element to each other by using the <code>add</code> function.
+    </p>
+    <pre><code class="javascript">
+myScene.add(myRectangle);
+
+myRectangle.add(new Pencil.Circle());
+    </code></pre>
+    <p>
+        You can also remove as easily.
+    </p>
+    <pre><code class="javascript">
+myRectangle.remove(); // Remove itself from its parent
+// is equivalent to
+myScene.delete(myRectangle); // Delete myRectangle from myScene
+    </code></pre>
+    <p>
+        Otherwise, {Container} can be hide and show without having to remove and add them.
+    </p>
+    <pre><code class="javascript">
+myRectangle.hide(); // don't render it or any of its children
+myRectangle.show();
+    </code></pre>
+</div>
+<div class="screen">
+    <h2>Position</h2>
+    <p>
+        {Position} is an utility class used all across Pencil.js library.<br/>
+        It serves as a wrapper for a x and y coordinate in 2D space. You can create one using the class constructor.
+    </p>
+    <pre><code class="javascript">
+const x = 100;
+const y = 200;
+const myPosition = new Position(x, y);
+    </code></pre>
+    <p>
+        Alternatively, anywhere a position is needed, you can use an useful array shorthand.
+    </p>
+    <pre><code class="javascript">
+const myRectangle = new Pencil.Rectangle([100, 200]);
+    </code></pre>
+    <p>
+        The {Position} class also comes with a lot of methods that can be chained together.
+    </p>
+    <pre><code>
+console.log(myPosition); // => [100, 200]
+myPosition.add(10, 20).multiply(2).rotate(0.25);
+console.log(myPosition); // => [-440, 220]
+    </code></pre>
+    <p>
+        These functions don't return a new instance, but instead modify the existing one.
+        If you don't want that behavior, you can call <code>clone</code> first.
+    </p>
+    <pre><code>
+console.log(myPosition); // => [100, 200]
+const clonePosition = myPosition.clone().add(10, 20).multiply(2).rotate(0.25);
+console.log(myPosition); // => [100, 200]
+console.log(clonePosition); // => [-440, 220]
+    </code></pre>
+</div>
+<div class="screen">
+    <h2>Vector</h2>
+    <p>
+        Much alike {Position}, {Vector} is an utility wrapper around two {Position}.
+    </p>
+    <pre><code>
+const myVector = new Pencil.Vector(fromPosition, toPosition);
+// alternatively
+const myVector = new Pencil.Vector([startX, startY], [endX, endY]);
+    </code></pre>
+    <p>
+        Of course, instances carries useful chainable methods.
+    </p>
+    <pre><code class="javascript">
+myVector.add(otherVector).multiply(2); // mutate the instance
+if (myVector.intersect(someVector)) {
+    // myVector intersects someVector
+}
+    </code></pre>
+</div>
+<div class="screen">
+    <h2>Events</h2>
+    <p>
+        All classes fire events whenever necessary and you can listen to those.
+    </p>
+    <pre><code class="javascript">
+myRectangle.on(Pencil.MouseEvent.events.hover, () => myRectangle.options.fill = "red");
+// Note that in this case, fill color won't change back when myRectangle is not hovered.
+    </code></pre>
+    <pre><code class="javascript">
+myScene.on(Pencil.KeyboardEvent.events.down, (event) => {
+    switch(event.key) {
+        case Pencil.KeyboardEvent.keys.enter:
+            console.log("Enter key pressed");
+            break;
+        case Pencil.KeyboardEvent.keys.delete:
+            console.log("Delete key pressed");
+            break;
+        // ...
+    }
+});
+    </code></pre>
+    <pre><code class="javascript">
+const myImage = new Pencil.Image([10, 20], url);
+myImage.on(Pencil.NetworkEvent.events.ready, () => myScene.add(myImage).render())
+    .on(Pencil.NetworkEvent.events.error, () => console.warn("Can't load image"));
+    </code></pre>
+    <p>
+        You can even fire ones yourself.
+    </p>
+    <pre><code class="javascript">
+myImage.fire(new Pencil.BaseEvent("something append", myImage);
+    </code></pre>
+    <p>
+        Events bubble to parent container whenever possible.
+        If you want to listen to events only targeting a specific element, you have to set the third parameter to <code>true</code>.
+    </p>
+    <pre><code class="javascript">
+myScene.on(eventName, callback);       // fires at every children of myScene
+myScene.on(eventName, callback, true); // fires only at myScene
+    </code></pre>
+</div>
+<div class="screen">
+    <h2>Interactions</h2>
+    <p>
+        {Component} can be set {draggable} by a simple call of a function.
+    </p>
+    <pre><code class="javascript">
+myRectangle.draggable();
+myRectangle.draggable({
+    x: false, // not along the x axis
+});
+myRectangle.draggable({
+    constrain: new Pencil.Vector(from, to), // stay inside the box [from, to]
+});
+    </code></pre>
+    <p>
+        {Rectangle} can be set {resizable} by a simple call of a function.
+    </p>
+    <pre><code class="javascript">
+myRectangle.resizable();
+myRectangle.resizable({
+    x: false, // not along the x axis
+});
+myRectangle.resizable({
+    constrain: new Pencil.Vector(from, to), // stay inside the box [from, to]
+});
+    </code></pre>
+</div>
+<div class="screen">
+    <h2>Pro-tips</h2>
+    <p></p>
+</div>
+
+<aside id="afix">
+    <ul id="toc"></ul>
+</aside>
+
+<script src="https://unpkg.com/pencil.js@1.4.0"></script>
+<script src="../res/highlight.min.js"></script>
+<script>
+    const codeBlocks = document.querySelectorAll("pre code");
+    for (let code of codeBlocks) {
+        code.innerHTML = code.innerHTML.trim();
+        hljs.highlightBlock(code);
+    }
+
+    const toc = document.getElementById("toc");
+    const h2s = document.querySelectorAll("h2");
+    for (let h2 of h2s) {
+        const id = h2.textContent.toLowerCase().replace(/\W/g, "-");
+        h2.parentElement.id = id;
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `#${id}`;
+        link.textContent = h2.textContent;
+        item.appendChild(link);
+        toc.appendChild(item);
+    }
+
+    const ps = document.querySelectorAll(".screen p");
+    for(let p of ps) {
+        p.innerHTML = p.innerHTML.replace(/{(.+?)}/g, (match, capture) => {
+            return `<a href="https://github.com/GMartigny/pencil.js/blob/master/modules/${capture.toLowerCase()}"><code>${capture}</code></a>`
+        });
+    }
+</script>
+</body>
+</html>

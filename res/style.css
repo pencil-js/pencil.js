@@ -170,3 +170,22 @@ pre code {
 canvas {
     display: block;
 }
+
+#afix {
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: #FFF;
+    padding: 1em;
+    opacity: .3;
+    font-size: var(--small-text-size);
+}
+
+#afix:hover {
+    transition: opacity linear .1s;
+    opacity: 1;
+}
+
+#afix li {
+    margin: .5em 0;
+}
