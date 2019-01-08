@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/progress-bar",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Progress-bar for Pencil.js package.",
   "main": "progress-bar.js",
   "files": [],
@@ -25,9 +25,9 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/input": "^1.4.0",
+    "@pencil.js/input": "^1.4.1",
     "@pencil.js/math": "^1.4.0",
-    "@pencil.js/rectangle": "^1.4.0"
+    "@pencil.js/rectangle": "^1.4.1"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
