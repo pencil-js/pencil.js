@@ -42,7 +42,7 @@ Component.prototype.draggable = function draggable (options) {
         originPosition = this.position.clone();
         this.isDragged = true;
 
-        this.fire(new MouseEvent(MouseEvent.events.grab, this, event.position));
+        this.fire(new MouseEvent(MouseEvent.events.grab, this, this.position));
     }, true);
 
     this.getScene().then(scene => scene.on(MouseEvent.events.move, (event) => {
@@ -55,16 +55,16 @@ Component.prototype.draggable = function draggable (options) {
                 this.position.constrain(mergedOptions.constrain.start, mergedOptions.constrain.end);
             }
 
-            this.fire(new MouseEvent(MouseEvent.events.drag, this, event.position));
+            this.fire(new MouseEvent(MouseEvent.events.drag, this, this.position));
         }
-    }).on(MouseEvent.events.up, (event) => {
+    }).on(MouseEvent.events.up, () => {
         if (cursorNotSet) {
             this.options.cursor = Component.cursors.grab;
         }
         this.isDragged = false;
         startPosition = null;
 
-        this.fire(new MouseEvent(MouseEvent.events.drop, this, event.position));
+        this.fire(new MouseEvent(MouseEvent.events.drop, this, this.position));
     }));
 
     return {
