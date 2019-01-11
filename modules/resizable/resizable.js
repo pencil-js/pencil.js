@@ -7,9 +7,8 @@ import "@pencil.js/draggable";
 
 /**
  * @typedef {Object} ResizableOptions
- * @prop {Boolean} [x=true] - Can be resize horizontally
- * @prop {Boolean} [y=true] - Can be resize vertically
- * @prop {Vector} [constrain] -
+ * @extends DraggableOptions
+ * @prop {Component} [handle] - Draggable shape used as handle (default is a right-triangle at the bottom right angle)
  */
 
 /**
@@ -19,9 +18,17 @@ import "@pencil.js/draggable";
  */
 Rectangle.prototype.resizable = function resizable (options) {
     this.isResizable = true;
+    const size = 15;
     const mergedOptions = {
         x: true,
         y: true,
+        handle: new Polygon([this.width, this.height], [
+            [-size, 0],
+            [0, -size],
+        ], {
+            fill: "gold",
+            cursor: Component.cursors.seResize,
+        }),
         ...options,
     };
 
@@ -29,43 +36,25 @@ Rectangle.prototype.resizable = function resizable (options) {
         throw new TypeError("Square should be resizable in both x and y axis.");
     }
 
-    const size = 15;
-    const handle = new Polygon([this.width, this.height], [
-        [0, 0],
-        [-size, 0],
-        [0, -size],
-    ], {
-        fill: "gold",
-        cursor: Component.cursors.seResize,
-    });
-    this.add(handle);
-    const api = handle.draggable({
-        x: mergedOptions.x,
-        y: mergedOptions.y,
-        constrain: mergedOptions.constrain,
-    });
-    handle.on(MouseEvent.events.drag, (event) => {
-        const before = {
-            width: this.width,
-            height: this.height,
-        };
+    this.add(mergedOptions.handle);
+    const distanceToBottomRight = mergedOptions.handle.position.clone().multiply(-1).add(this.width, this.height);
+    const api = mergedOptions.handle.draggable(mergedOptions);
+    mergedOptions.handle.on(MouseEvent.events.drag, () => {
         if (this instanceof Square) {
-            this.size = ((handle.position.x + handle.position.y) / 2) + size;
-            handle.position.x = this.size;
-            handle.position.y = this.size;
+            mergedOptions.handle.position.add(distanceToBottomRight);
+            this.size = (mergedOptions.handle.position.x + mergedOptions.handle.position.y) / 2;
+            mergedOptions.handle.position.set(this.size).subtract(distanceToBottomRight);
         }
         else {
             if (mergedOptions.x) {
-                this.width = handle.position.x;
+                this.width = mergedOptions.handle.position.x + distanceToBottomRight.x;
             }
             if (mergedOptions.y) {
-                this.height = handle.position.y;
+                this.height = mergedOptions.handle.position.y + distanceToBottomRight.y;
             }
         }
 
-        if (this.width !== before.width || this.height !== before.height) {
-            this.fire(new MouseEvent(MouseEvent.events.resize, this, event));
-        }
+        this.fire(new MouseEvent(MouseEvent.events.resize, this, mergedOptions.handle.position));
     }, true);
 
     return api;
