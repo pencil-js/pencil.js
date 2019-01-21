@@ -7,7 +7,6 @@
 [![Test Coverage](https://badgen.net/codeclimate/coverage/GMartigny/pencil.js?icon=codeclimate)](https://codeclimate.com/github/GMartigny/pencil.js/test_coverage)
 [![Inline docs](http://inch-ci.org/github/GMartigny/pencil.js.svg?branch=master)](http://inch-ci.org/github/GMartigny/pencil.js)
 [![Chat on Gitter](https://badgen.net/badge/chat/on%20gitter/cyan?icon=gitter)](https://gitter.im/Pencil-js)
-[![Code with me](https://badgen.net/runkit/now-coding-with-floobits-nudefhk1jv2q)](https://floobits.com/GMartigny/pencil-js/redirect)
 
 Nice modular interactive 2D drawing library.
 
