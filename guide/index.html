@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="../res/monokai.css"/>
 </head>
 <body>
-<div class="screen title-screen">
+<div class="title-screen">
     <div class="main-title">
         <h1>
             Guide
@@ -26,6 +26,7 @@
         </p>
     </div>
 </div>
+<!-- *** START *** -->
 <div class="screen">
     <h2>Getting started</h2>
     <p>
@@ -47,12 +48,13 @@ $ npm install pencil.js
 import Pencil from "pencil.js";
     </code></pre>
     <p>
-        In either case, you can now use it:
+        In both case, you can now use it:
     </p>
     <pre><code class="javascript">
 console.log(Pencil.version);
     </code></pre>
 </div>
+<!-- *** SCENE *** -->
 <div class="screen">
     <h2>Scene</h2>
     <p>
@@ -75,31 +77,37 @@ myFirstScene.render();
 myFirstScene.startLoop();
     </code></pre>
 </div>
+<!-- *** COMPONENTS *** -->
 <div class="screen">
     <h2>Components</h2>
     <p>
         {Component} refers to any drawable part of a scene.
-        As an abstract class, it should not be instantiated by itself, but by any sub-class (ex: Rectangle, Star, Image &hellip;).
+        As an abstract class, it should not be instantiated by itself, but by any sub-class (ex:&nbsp;Rectangle, Star, Image &hellip;).
     </p>
     <pre><code class="javascript">
 const myRectangle = new Pencil.Rectangle();
     </code></pre>
     <p>
-        All sub-class constructor parameters are as follows: <code class="inline">(position, [...a number of specific properties], options)</code>.<br/>
+        All {Component} can be instantiated using the following signature:<br>
+        <code class="inline">(position, [...a number of specific properties], options)</code>.<br/>
         To continue on our previous example:
     </p>
     <pre><code class="javascript">
 const width = 800;
 const height = 600;
-const myRectangle = new Pencil.Rectangle(aPosition, width, height);
+const drawingOptions = {
+    fill: "red",
+};
+const myRectangle = new Pencil.Rectangle(aPosition, width, height, drawingOptions);
     </code></pre>
     <p>
         To know what are the specific properties of any {Component},
         refer to its <a href="https://github.com/GMartigny/pencil.js#modules">documentation</a>.
     </p>
 </div>
+<!-- *** CONTAINERS *** -->
 <div class="screen">
-    <h2>Container</h2>
+    <h2>Containers</h2>
     <p>
         {Scene} and {Component} both inherit from {Container}. It means that you can includes element to each other by using the <code>add</code> function.
     </p>
@@ -124,6 +132,7 @@ myRectangle.hide(); // don't render it or any of its children
 myRectangle.show();
     </code></pre>
 </div>
+<!-- *** POSITION *** -->
 <div class="screen">
     <h2>Position</h2>
     <p>
@@ -136,7 +145,7 @@ const y = 200;
 const myPosition = new Position(x, y);
     </code></pre>
     <p>
-        Alternatively, anywhere a position is needed, you can use an useful array shorthand.
+        Alternatively, anywhere a position is needed, you can use this intuitive shorthand.
     </p>
     <pre><code class="javascript">
 const myRectangle = new Pencil.Rectangle([100, 200]);
@@ -160,6 +169,7 @@ console.log(myPosition); // => [100, 200]
 console.log(clonePosition); // => [-440, 220]
     </code></pre>
 </div>
+<!-- *** VECTOR *** -->
 <div class="screen">
     <h2>Vector</h2>
     <p>
@@ -180,6 +190,7 @@ if (myVector.intersect(someVector)) {
 }
     </code></pre>
 </div>
+<!-- *** EVENTS *** -->
 <div class="screen">
     <h2>Events</h2>
     <p>
@@ -222,36 +233,96 @@ myScene.on(eventName, callback);       // fires at every children of myScene
 myScene.on(eventName, callback, true); // fires only at myScene
     </code></pre>
 </div>
+<!-- *** INTERACTIONS *** -->
 <div class="screen">
     <h2>Interactions</h2>
     <p>
-        {Component} can be set {draggable} by a simple call of a function.
+        {Component} can be set {draggable} with a simple call of a function.
     </p>
     <pre><code class="javascript">
 myRectangle.draggable();
+// Or
 myRectangle.draggable({
     x: false, // not along the x axis
 });
+// Or
 myRectangle.draggable({
     constrain: new Pencil.Vector(from, to), // stay inside the box [from, to]
 });
     </code></pre>
     <p>
-        {Rectangle} can be set {resizable} by a simple call of a function.
+        {Rectangle} can be set {resizable} with a simple call of a function.
     </p>
     <pre><code class="javascript">
 myRectangle.resizable();
+// Or
 myRectangle.resizable({
     x: false, // not along the x axis
 });
+// Or
 myRectangle.resizable({
     constrain: new Pencil.Vector(from, to), // stay inside the box [from, to]
 });
     </code></pre>
 </div>
+<!-- *** USER INPUTS *** -->
+<div class="screen">
+    <h2>User inputs</h2>
+    <p>
+        Pencil.js provide ways to let your users interacts with common inputs components ({Button}, {Checkbox}, {Select}, {Slider}).
+    </p>
+    <pre><code class="javascript">
+new Slider(aPosition, {
+    value: 1, // Starting value
+});
+
+new Select(aPositionAgain, [
+    "First option",
+    "Second option",
+    "Third option",
+], {
+    value: 1, // Starting selected index
+});
+    </code></pre>
+    <p>
+        These classes have their own set of options for you to customize how they look.
+    </p>
+    <pre><code class="javascript">
+new Button(anotherPosition, {
+    value: "Click me", // Text of the button
+    fill: "red", // Foreground color
+    background: "#222", // Background color
+    border: "gold", // Border color
+    hover: "#444", // Background hovered color
+});
+    </code></pre>
+</div>
+<!-- *** PRO TIPS *** -->
 <div class="screen">
     <h2>Pro-tips</h2>
-    <p></p>
+    <p>
+        1. Keep your code cleaner and lighter by only importing parts of Pencil.js that you need.
+    </p>
+    <pre><code class="javascript">
+import { Star, Position as PencilPosition } from pencil.js;
+new Star();
+new PencilPosition();
+    </code></pre>
+    <p>
+        2. You can make you own class surcharging other existing classes.
+    </p>
+    <pre><code class="javascript">
+import Circle from pencil.js;
+class BlueCircle extends Circle {
+    static get defaultOptions () {
+        return {
+            ...super.defaultOptions,
+            fill: "blue",
+        };
+    }
+}
+new BlueCircle();
+    </code></pre>
 </div>
 
 <aside id="afix">
@@ -283,7 +354,7 @@ myRectangle.resizable({
     const ps = document.querySelectorAll(".screen p");
     for(let p of ps) {
         p.innerHTML = p.innerHTML.replace(/{(.+?)}/g, (match, capture) => {
-            return `<a href="https://github.com/GMartigny/pencil.js/blob/master/modules/${capture.toLowerCase()}"><code>${capture}</code></a>`
+            return `<a href="https://github.com/GMartigny/pencil.js/blob/master/modules/${capture.toLowerCase()}">${capture}</a>`
         });
     }
 </script>

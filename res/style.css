@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
-@import url('https://fonts.googleapis.com/css?family=Marck+Script');
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+@import url('https://fonts.googleapis.com/css?family=Marck+Script|Ubuntu+Mono|Source+Sans+Pro');
 
 :root {
     --main-color: #642B73;
     --second-color: #FFF5AF;
-    --text-color: black;
+    --text-color: #222;
     --reverse-text-color: white;
+    --links-color: #1685d2;
 
-    --main-font: 'Montserrat', sans-serif;
+    --main-font: 'Source Sans Pro', sans-serif;
     --main-title-font: 'Marck Script', cursive;
     --code-font: 'Ubuntu Mono', monospace;
 
@@ -51,13 +50,22 @@ p {
     line-height: 1.3em;
 }
 
+.screen p {
+    max-width: 650px;
+    text-align: justify;
+}
+
 a {
     display: inline-block;
     text-decoration: none;
-    color: blue;
+    color: var(--links-color);
 }
-a:hover {
-    text-decoration: underline;
+
+p a {
+    border-bottom: 1px dashed var(--links-color);
+}
+p a:hover {
+    border-bottom: 1px solid var(--links-color);
 }
 
 strong {
@@ -65,28 +73,25 @@ strong {
     color: var(--main-color);
 }
 
+pre {
+    margin: .5em 0;
+}
 code {
-    font-family: monospace;
+    font-family: var(--code-font);
+    font-size: var(--small-text-size);
     background: #23241f;
     color: #FFFFFF;
     line-height: 1.3em;
     display: inline;
     padding: 0.25em 0.5em;
 }
-pre {
-    margin: .5em 0;
-}
 pre code {
-    margin: 0 4em;
+    margin: 0 150px;
 }
 
-.screen {
+.title-screen, .screen {
     min-height: 100vh;
     padding: 5%;
-}
-
-.screen:nth-child(odd) {
-    background-color: var(--second-color);
 }
 
 .title-screen {
@@ -96,6 +101,12 @@ pre code {
 
 .title-screen * {
     color: var(--reverse-text-color);
+}
+
+.screen {
+    background: #FFF;
+    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 20px 20px rgba(0, 0, 0, 0.8);
 }
 
 .element {
@@ -148,8 +159,6 @@ pre code {
 }
 
 .example {
-    font-family: var(--code-font);
-    font-size: 16px;
     display: flex;
 }
 
@@ -179,6 +188,7 @@ canvas {
     padding: 1em;
     opacity: .3;
     font-size: var(--small-text-size);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
 }
 
 #afix:hover {
@@ -187,5 +197,8 @@ canvas {
 }
 
 #afix li {
-    margin: .5em 0;
+    margin: .8em 0;
+}
+#afix li a::before {
+    content: "> ";
 }
