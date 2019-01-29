@@ -32,8 +32,8 @@ export default class Scene extends Container {
             container.appendChild(canvas);
             canvas.style.display = "block";
             canvas.style.position = "absolute";
-            canvas.width = measures.width;
-            canvas.height = measures.height;
+            canvas.width = container.scrollWidth;
+            canvas.height = container.scrollHeight;
         }
         /**
          * @type {CanvasRenderingContext2D}
