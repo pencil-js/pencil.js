@@ -56,18 +56,20 @@
         strokeWidth: 4,
     }));
 
-    shapes.push(new P.Square(new P.Position(160, 100), 50, {
-        zIndex: 0,
-        origin: new P.Position(25, 0),
-        fill: "green",
-    }));
-
-    shapes.push(new P.Text(new P.Position(160, 100), "test\n🦄", {
+    const text = new P.Text(new P.Position(160, 100), "test\n🦄", {
         fontSize: 40,
         align: P.Text.alignments.center,
         bold: true,
         italic: true,
-        font: "monospace",
+        font: "https://fonts.gstatic.com/s/indieflower/v9/m8JVjfNVeKWVnh3QMuKkFcZVaUuH.woff2",
+        lineHeight: 1.3,
+    });
+    shapes.push(text);
+
+    shapes.push(new P.Square(new P.Position(160, 100), 50, {
+        zIndex: 0,
+        origin: [25, 0],
+        fill: "green",
     }));
 
     shapes.push(new P.Path(new P.Position(140, 30), [
@@ -83,5 +85,7 @@
         strokeWidth: 6,
     }));
 
-    scene.add(...shapes).render();
+    scene.add(...shapes);
+
+    text.on(P.NetworkEvent.events.ready, () => scene.render());
 }
