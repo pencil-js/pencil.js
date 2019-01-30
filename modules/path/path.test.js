@@ -52,7 +52,14 @@ test("trace instructions string", (t) => {
     path.trace(ctx);
 });
 
-test.todo("isHover");
+test("isHover", (t) => {
+    t.context.isClosed = true;
+    t.context.trace = () => {};
+    const ctx = {
+        isPointInPath: () => true,
+    };
+    t.true(t.context.isHover([0, 0], ctx));
+});
 
 test("isHover not closed", (t) => {
     t.false(t.context.isHover());

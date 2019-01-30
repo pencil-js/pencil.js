@@ -1,6 +1,8 @@
 import browserEnv from "browser-env";
 
-browserEnv(["window"]);
+browserEnv(["window"], {
+    pretendToBeVisual: true,
+});
 
 global.Path2D = class Path2D {
     rect () {}

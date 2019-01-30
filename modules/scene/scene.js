@@ -24,7 +24,7 @@ export default class Scene extends Container {
 
         const measures = container.getBoundingClientRect();
         let canvas;
-        if (container instanceof HTMLCanvasElement) {
+        if (container instanceof window.HTMLCanvasElement) {
             canvas = container;
         }
         else {
@@ -64,11 +64,6 @@ export default class Scene extends Container {
          */
         this.lastTick = null;
 
-        /**
-         * @type {Boolean}
-         */
-        this.isReady = false;
-
         this[listenForEventsKey](container);
     }
 
@@ -88,7 +83,7 @@ export default class Scene extends Container {
      * @return {Scene} Itself
      */
     render (onto = this.ctx) {
-        const animationId = this.isLooped ? requestAnimationFrame(this.render.bind(this, undefined)) : null;
+        const animationId = this.isLooped ? window.requestAnimationFrame(this.render.bind(this, undefined)) : null;
 
         const context = (onto && onto.ctx) || onto;
         this.clear(context);
@@ -97,11 +92,12 @@ export default class Scene extends Container {
             super.render(context);
         }
         catch (error) {
-            cancelAnimationFrame(animationId);
+            window.cancelAnimationFrame(animationId);
+            this.stopLoop();
             throw error;
         }
 
-        const now = performance.now();
+        const now = window.performance.now();
         if (this.isLooped && this.lastTick) {
             this.fps = 1000 / (now - this.lastTick);
         }
@@ -229,21 +225,6 @@ export default class Scene extends Container {
             cursor: Component.cursors.default,
         };
     }
-
-    /**
-     * @typedef {Object} SceneEvent
-     * @enum {String}
-     * @prop {String} ready - Scene enter ready state
-     */
-    /**
-     * @return {SceneEvent}
-     */
-    static get events () {
-        return {
-            ...super.events,
-            ready: "ready",
-        };
-    }
 }
 
 /**
@@ -334,6 +315,4 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
             }
         });
     });
-    this.isReady = true;
-    this.fire(new BaseEvent(Scene.events.ready, this));
 };
