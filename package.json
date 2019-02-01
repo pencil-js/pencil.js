@@ -33,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/GMartigny/pencil.js/issues"
   },
-  "homepage": "https://github.com/GMartigny/pencil.js#readme",
+  "homepage": "https://penciljs.org",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
