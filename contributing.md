@@ -11,15 +11,15 @@ Everyone is expected to follow those simples rules. If you see unacceptable beha
 
 ### Report bugs
 
-The easiest way to help us, is by reporting anything fishy about Pencil.js with a [new issue](https://github.com/GMartigny/pencil.js/issues/new).
-But first, be sure to check if it's not already on [the list of known bugs](https://github.com/GMartigny/pencil.js/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
+The easiest way to help us, is by reporting anything fishy about Pencil.js with a [new issue](https://github.com/pencil-js/pencil.js/issues/new).
+But first, be sure to check if it's not already on [the list of known bugs](https://github.com/pencil-js/pencil.js/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
 
 Following our [issue template](.github/issue_template.md) allow for a better understanding and a quicker resolution.
 
 ### Suggesting features
 
-We are eager to listen to the users, so if you feel like something missing or not working as you expect, you can fill a [feature request](https://github.com/GMartigny/pencil.js/issues/new).
-As always, take a look first at the [list of requests](https://github.com/GMartigny/pencil.js/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement+) and upvote what you want most.
+We are eager to listen to the users, so if you feel like something missing or not working as you expect, you can fill a [feature request](https://github.com/pencil-js/pencil.js/issues/new).
+As always, take a look first at the [list of requests](https://github.com/pencil-js/pencil.js/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement+) and upvote what you want most.
 
 ### Code contribution
 

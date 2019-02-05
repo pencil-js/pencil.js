@@ -24,7 +24,7 @@ Remember that we have a limited work bandwidth and are dealing with issue as fas
 
 <!--
 
-There's a chance that someone already report your issue. Start by checking all issues at https://github.com/GMartigny/pencil.js/issues?q=is%3Aissue+label%3Abug.
+There's a chance that someone already report your issue. Start by checking all issues at https://github.com/pencil-js/pencil.js/issues?q=is%3Aissue+label%3Abug.
 
 Try to be as precise as you can. It'll greatly reduce the time to find and fix your bug.
 

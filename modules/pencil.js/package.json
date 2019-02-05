@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GMartigny/pencil.js.git"
+    "url": "git+https://github.com/pencil-js/pencil.js.git"
   },
   "keywords": [
     "canvas",
@@ -37,9 +37,9 @@
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GMartigny/pencil.js/issues"
+    "url": "https://github.com/pencil-js/pencil.js/issues"
   },
-  "homepage": "https://github.com/GMartigny/pencil.js#readme",
+  "homepage": "https://github.com/pencil-js/pencil.js#readme",
   "dependencies": {
     "@pencil.js/arc": "^1.4.1",
     "@pencil.js/base-event": "^1.4.0",

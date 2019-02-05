@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GMartigny/pencil.js.git"
+    "url": "git+https://github.com/pencil-js/pencil.js.git"
   },
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GMartigny/pencil.js/issues"
+    "url": "https://github.com/pencil-js/pencil.js/issues"
   },
   "devDependencies": {
     "ava": "^1.2.0",
