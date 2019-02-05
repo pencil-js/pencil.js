@@ -1,6 +1,6 @@
 ![Pencil.js logo](media/animated-logo.gif)
 
-# 🖉 Pencil.js
+# :pencil2: Pencil.js
 [![NPM Version](https://badgen.net/npm/v/pencil.js?icon=npm)](https://www.npmjs.com/package/pencil.js)
 [![Dependencies update](https://badgen.net/david/dev/GMartigny/pencil.js?icon=npm)](https://david-dm.org/GMartigny/pencil.js?type=dev)
 [![Maintainability](https://badgen.net/codeclimate/maintainability/GMartigny/pencil.js?icon=codeclimate)](https://codeclimate.com/github/GMartigny/pencil.js/maintainability)
