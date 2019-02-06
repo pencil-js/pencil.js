@@ -1,4 +1,4 @@
-import { constrain, equals, radianCircle, truncate } from "@pencil.js/math";
+import { constrain, equals, radianCircle, truncate, modulo } from "@pencil.js/math";
 
 /**
  * Pair of value in 2d space
@@ -115,6 +115,26 @@ export default class Position {
      */
     divide (definition, y) {
         return this.calc((self, other) => self / other, definition, y);
+    }
+
+    /**
+     * Gives the modulo by another position or number
+     * @param {PositionDefinition|Number} definition - Another position or a number
+     * @param {Number} [y] - Value for "y" if "position" is a number
+     * @return {Position} Itself
+     */
+    modulo (definition, y) {
+        return this.calc((self, other) => modulo(self, other), definition, y);
+    }
+
+    /**
+     * Raise to a power
+     * @param {PositionDefinition|Number} definition - Another position or a number
+     * @param {Number} [y] - Value for "y" if "position" is a number
+     * @return {Position} Itself
+     */
+    power (definition, y) {
+        return this.calc((self, other) => self ** other, definition, y);
     }
 
     /**

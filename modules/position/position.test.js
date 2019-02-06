@@ -75,20 +75,28 @@ const calculation = (t, functionName, operation) => {
     check(t);
 };
 
+test("add", (t) => {
+    calculation(t, "add", (a, b) => a + b);
+});
+
 test("subtract", (t) => {
     calculation(t, "subtract", (a, b) => a - b);
 });
 
-test("add", (t) => {
-    calculation(t, "add", (a, b) => a + b);
+test("multiply", (t) => {
+    calculation(t, "multiply", (a, b) => a * b);
 });
 
 test("divide", (t) => {
     calculation(t, "divide", (a, b) => a / b);
 });
 
-test("multiply", (t) => {
-    calculation(t, "multiply", (a, b) => a * b);
+test("modulo", (t) => {
+    calculation(t, "modulo", (a, b) => a % b);
+});
+
+test("power", (t) => {
+    calculation(t, "power", (a, b) => a ** b);
 });
 
 test("rotate", (t) => {
