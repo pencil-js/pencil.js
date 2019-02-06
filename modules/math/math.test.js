@@ -48,8 +48,8 @@ test("trigonometry", (t) => {
 test("modulo", (t) => {
     t.is(M.modulo(10, 1), 0);
     t.is(M.modulo(10, 3), 1);
-    t.is(M.modulo(-10, 3), 1);
-    t.is(M.modulo(10, -3), -1);
+    t.is(M.modulo(-10, 3), 2);
+    t.is(M.modulo(10, -3), -2);
     t.is(M.modulo(-10, -3), -1);
 });
 

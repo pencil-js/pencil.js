@@ -65,7 +65,7 @@ export const degreeCircle = 360;
  * @param {Number} divisor - Divisor
  * @return {Number}
  */
-export const modulo = (value, divisor) => (value % divisor) * Math.sign(value) * Math.sign(divisor);
+export const modulo = (value, divisor) => ((value % divisor) + divisor) % divisor;
 
 /**
  * Return the average
