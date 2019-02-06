@@ -22,16 +22,17 @@ export default class Position {
      * @return {Position} Itself
      */
     set (definition, diffY) {
-        let x;
-        let y;
-        try {
+        let x = 0;
+        let y = 0;
+        if (typeof definition === "number") {
+            x = definition;
+            y = diffY === undefined ? definition : diffY;
+        }
+        else {
             const position = Position.from(definition);
             ({ x, y } = position);
         }
-        catch (error) {
-            x = +definition;
-            y = diffY === undefined ? x : +diffY;
-        }
+
         this.x = x;
         this.y = y;
         return this;
@@ -65,15 +66,16 @@ export default class Position {
     calc (operation, definition, diffY) {
         let x = 0;
         let y = 0;
-        try {
+        if (typeof definition === "number") {
+            x = operation(this.x, definition);
+            y = operation(this.y, diffY === undefined ? definition : diffY);
+        }
+        else {
             const position = Position.from(definition);
             x = operation(this.x, position.x);
             y = operation(this.y, position.y);
         }
-        catch (error) {
-            x = operation(this.x, +definition);
-            y = operation(this.y, diffY === undefined ? +definition : +diffY);
-        }
+
         return this.set(x, y);
     }
 
