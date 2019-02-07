@@ -53,16 +53,12 @@ test("trace instructions string", (t) => {
 });
 
 test("isHover", (t) => {
-    t.context.isClosed = true;
     t.context.trace = () => {};
     const ctx = {
-        isPointInPath: () => true,
+        isPointInPath: () => t.fail(),
+        isPointInStroke: () => true,
     };
     t.true(t.context.isHover([0, 0], ctx));
-});
-
-test("isHover not closed", (t) => {
-    t.false(t.context.isHover());
 });
 
 test.todo("toJSON");
