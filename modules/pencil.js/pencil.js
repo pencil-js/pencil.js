@@ -16,6 +16,7 @@ import EventEmitter from "@pencil.js/event-emitter";
 import Container from "@pencil.js/container";
 import Scene from "@pencil.js/scene";
 import Component from "@pencil.js/component";
+import Particles from "@pencil.js/particles";
 
 // Shapes
 import Arc from "@pencil.js/arc";
@@ -50,6 +51,7 @@ import { version, author, homepage } from "./package.json";
 
 const exportableClasses = {
     Container,
+    Particles,
     Scene,
     Arc,
     Ellipse,
@@ -113,6 +115,7 @@ export {
     Container,
     Scene,
     Component,
+    Particles,
     Arc,
     Ellipse,
     Circle,

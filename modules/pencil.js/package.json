@@ -60,6 +60,7 @@
     "@pencil.js/mouse-event": "^1.4.0",
     "@pencil.js/network-event": "^1.4.0",
     "@pencil.js/offscreen-canvas": "^1.4.0",
+    "@pencil.js/particles": "^1.0.0",
     "@pencil.js/path": "^1.4.1",
     "@pencil.js/polygon": "^1.4.1",
     "@pencil.js/position": "^1.4.0",

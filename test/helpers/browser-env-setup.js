@@ -8,6 +8,9 @@ window.Path2D = class Path2D {
     rect () {}
 };
 
+window.DOMMatrix = class DOMMatrix {
+};
+
 window.document.fonts = new Set();
 
 window.FontFace = class FontFace {
