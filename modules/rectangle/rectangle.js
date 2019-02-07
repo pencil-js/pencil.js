@@ -48,8 +48,8 @@ export default class Rectangle extends Component {
             }
             else {
                 position.set(
-                    [origins.topRight, origins.bottomRight].includes(origin) && this.width,
-                    [origins.bottomLeft, origins.bottomRight].includes(origin) && this.height,
+                    ([origins.topRight, origins.bottomRight].includes(origin) && this.width) || 0,
+                    ([origins.bottomLeft, origins.bottomRight].includes(origin) && this.height) || 0,
                 );
             }
             return position;
