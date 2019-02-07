@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/ellipse",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Ellipse shape for Pencil.js package.",
   "main": "ellipse.js",
   "files": [],
@@ -30,8 +30,8 @@
     "url": "https://github.com/pencil-js/pencil.js/issues"
   },
   "dependencies": {
-    "@pencil.js/arc": "^1.4.1",
-    "@pencil.js/component": "^1.4.1"
+    "@pencil.js/arc": "^1.5.0",
+    "@pencil.js/component": "^1.5.0"
   },
   "devDependencies": {
     "ava": "^1.2.0",
