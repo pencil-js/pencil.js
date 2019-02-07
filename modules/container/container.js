@@ -228,7 +228,7 @@ export default class Container extends EventEmitter {
         ctx.translate(this.position.x, this.position.y);
 
         if (this.options.clip) {
-            const clipping = new Path2D();
+            const clipping = new window.Path2D();
             const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
             const { x, y } = clipper.position;
             ctx.translate(x, y);

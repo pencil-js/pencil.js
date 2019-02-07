@@ -4,13 +4,13 @@ browserEnv(["window"], {
     pretendToBeVisual: true,
 });
 
-global.Path2D = class Path2D {
+window.Path2D = class Path2D {
     rect () {}
 };
 
 window.document.fonts = new Set();
 
-global.FontFace = class FontFace {
+window.FontFace = class FontFace {
     load () {
         return new Promise((resolve) => {
             setTimeout(resolve, 50);

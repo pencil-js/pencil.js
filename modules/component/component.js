@@ -33,7 +33,7 @@ export default class Component extends Container {
      * @return {Path2D}
      */
     makePath (ctx) {
-        const path = new Path2D();
+        const path = new window.Path2D();
         this.trace(path);
 
         if (this.options.fill) {
@@ -74,7 +74,7 @@ export default class Component extends Container {
         const relative = Position.from(positionDefinition).clone().subtract(this.position);
         const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationAnchor);
 
-        const path = new Path2D();
+        const path = new window.Path2D();
         this.trace(path);
         let result = (this.options.fill && ctx.isPointInPath(path, rotated.x, rotated.y)) ||
             (this.options.stroke && this.options.strokeWidth && ctx.isPointInStroke(path, rotated.x, rotated.y));

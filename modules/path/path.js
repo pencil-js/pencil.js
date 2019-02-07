@@ -105,7 +105,7 @@ export default class Path extends Component {
             instructions.forEach(instruction => lastPosition = instruction.execute(path, lastPosition));
         }
         else if (typeof instructions === "string") {
-            const svg = new Path2D(`M0 0 ${instructions}${this.isClosed ? " Z" : ""}`);
+            const svg = new window.Path2D(`M0 0 ${instructions}${this.isClosed ? " Z" : ""}`);
             path.addPath(svg);
         }
 
