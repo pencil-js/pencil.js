@@ -32,6 +32,15 @@ test("isHover", (t) => {
     t.false(t.context.isHover(t.context.position));
 });
 
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
+
+    t.truthy(json.base);
+    t.is(json.data.length, 10);
+});
+
+test.todo("from");
+
 test("defaultOptions", (t) => {
     const { defaultOptions } = Particles;
     t.true(defaultOptions.position.constructor.name === "Position");
