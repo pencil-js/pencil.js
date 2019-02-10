@@ -1,4 +1,3 @@
-import BaseEvent from "@pencil.js/base-event";
 import Component from "@pencil.js/component";
 import Container from "@pencil.js/container";
 import KeyboardEvent from "@pencil.js/keyboard-event";

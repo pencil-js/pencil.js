@@ -73,6 +73,11 @@ export default class Particles extends Component {
         };
     }
 
+    /**
+     * @inheritDoc
+     * @param {Object} definition -
+     * @returns {Particles}
+     */
     static from (definition) {
         const base = from(definition.base);
         const particles = new Particles(definition.position, base, 0);
