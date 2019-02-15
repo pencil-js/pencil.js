@@ -198,10 +198,6 @@ export default class Component extends Container {
             zoomOut: "zoom-out",
         };
 
-        // While Blink don't support "grab" and "grabbing"
-        cursors.grab = window.CSS && window.CSS.supports("cursor", "grab") ? "grab" : "-webkit-grab";
-        cursors.grabbing = window.CSS && window.CSS.supports("cursor", "grabbing") ? "grabbing" : "-webkit-grab";
-
         // Aliases
         cursors.link = cursors.alias;
         cursors.verticalResize = cursors.rowResize;
