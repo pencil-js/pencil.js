@@ -4,6 +4,7 @@
   "description": "Off-screen canvas for Pencil.js package.",
   "main": "offscreen-canvas.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

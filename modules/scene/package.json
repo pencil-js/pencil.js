@@ -4,6 +4,7 @@
   "description": "Scene renderer for Pencil.js package.",
   "main": "scene.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

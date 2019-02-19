@@ -4,6 +4,7 @@
   "description": "Line stroke for Pencil.js package.",
   "main": "line.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

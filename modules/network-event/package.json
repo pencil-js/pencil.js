@@ -4,6 +4,7 @@
   "description": "Network related event for Pencil.js package.",
   "main": "network-event.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

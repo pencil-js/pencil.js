@@ -4,6 +4,7 @@
   "description": "Checkbox user input for Pencil.js package.",
   "main": "checkbox.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

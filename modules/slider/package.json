@@ -4,6 +4,7 @@
   "description": "Slider user input for Pencil.js package.",
   "main": "slider.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

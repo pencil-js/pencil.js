@@ -4,6 +4,7 @@
   "description": "Ellipse shape for Pencil.js package.",
   "main": "ellipse.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

@@ -6,6 +6,7 @@
   "files": [
     "dist/"
   ],
+  "sideEffects": false,
   "unpkg": "dist/pencil.min.js",
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {

@@ -4,6 +4,7 @@
   "description": "Progress-bar for Pencil.js package.",
   "main": "progress-bar.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

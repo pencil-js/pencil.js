@@ -4,6 +4,7 @@
   "description": "Particles generator for Pencil.js package.",
   "main": "particles.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

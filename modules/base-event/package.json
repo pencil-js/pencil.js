@@ -4,6 +4,7 @@
   "description": "Basic event for Pencil.js package.",
   "main": "base-event.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

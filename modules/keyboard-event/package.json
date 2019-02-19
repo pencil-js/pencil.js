@@ -4,6 +4,7 @@
   "description": "Keyboard related event for Pencil.js package.",
   "main": "keyboard-event.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

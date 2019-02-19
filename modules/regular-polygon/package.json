@@ -4,6 +4,7 @@
   "description": "Equiangular and equilateral convex polygon for Pencil.js package.",
   "main": "regular-polygon.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

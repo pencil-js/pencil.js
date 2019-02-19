@@ -4,6 +4,7 @@
   "description": "Rectangle shape for Pencil.js package.",
   "main": "rectangle.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

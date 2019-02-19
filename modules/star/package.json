@@ -4,6 +4,7 @@
   "description": "Star shape for Pencil.js package.",
   "main": "star.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

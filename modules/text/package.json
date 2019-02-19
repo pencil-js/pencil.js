@@ -4,6 +4,7 @@
   "description": "Text writing for Pencil.js package.",
   "main": "text.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

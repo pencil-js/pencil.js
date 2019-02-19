@@ -4,6 +4,7 @@
   "description": "Event emitter for Pencil.js package.",
   "main": "event-emitter.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

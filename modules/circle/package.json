@@ -4,6 +4,7 @@
   "description": "Circle shape for Pencil.js package.",
   "main": "circle.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

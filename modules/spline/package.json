@@ -4,6 +4,7 @@
   "description": "Curve with multiple point for Pencil.js package.",
   "main": "spline.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

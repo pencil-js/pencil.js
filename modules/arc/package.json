@@ -4,6 +4,7 @@
   "description": "Arc shape for Pencil.js package.",
   "main": "arc.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

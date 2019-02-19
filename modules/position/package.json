@@ -4,6 +4,7 @@
   "description": "2D space position for Pencil.js package.",
   "main": "position.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },

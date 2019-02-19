@@ -4,6 +4,7 @@
   "description": "Vector in 2D space Pencil.js package.",
   "main": "vector.js",
   "files": [],
+  "sideEffects": false,
   "scripts": {
     "test": "nyc --require esm --reporter=text ava"
   },
