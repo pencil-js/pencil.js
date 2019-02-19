@@ -81,7 +81,7 @@
   "devDependencies": {
     "ava": "^1.2.0",
     "esm": "^3.2.0",
-    "nyc": "^13.1.0",
+    "nyc": "^13.3.0",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1"
   }
