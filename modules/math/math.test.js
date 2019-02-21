@@ -57,5 +57,14 @@ test("average", (t) => {
     t.is(M.average(1), 1);
     t.is(M.average(1, 2, 3), 2);
     const n = 100;
-    t.is(M.average(...(new Array(n)).fill().map((v, index) => index)), (n - 1) / 2);
+    t.is(M.average(...[...new Array(n)].map((_, index) => index)), (n - 1) / 2);
+});
+
+test("map", (t) => {
+    t.is(M.map(3, 0, 10), 0.3);
+    t.is(M.map(150, 100, 200), 0.5);
+    t.is(M.map(11, 10, 20, 30, 40), 31);
+    t.is(M.map(2, 0, 10, 100, 200), 120);
+    t.is(M.map(9, 0, 10, 10, 0), 1);
+    t.is(M.map(15, 10, 20, -10, -20), -15);
 });

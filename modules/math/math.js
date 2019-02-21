@@ -73,3 +73,16 @@ export const modulo = (value, divisor) => ((value % divisor) + divisor) % diviso
  * @return {Number}
  */
 export const average = (...values) => values.reduce((sum, value) => sum + value, 0) / values.length;
+
+/**
+ * Return the equivalent of a value from a scale to another
+ * @param {Number} value - Value to use
+ * @param {Number} fromMin - Start of the origin scale
+ * @param {Number} fromMax - End of the origin scale
+ * @param {Number} [toMin=0] - Start of the target scale
+ * @param {Number} [toMax=1] - End of the target scale
+ * @return {Number}
+ */
+export const map = (value, fromMin, fromMax, toMin = 0, toMax = 1) => (
+    ((value - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin
+);
