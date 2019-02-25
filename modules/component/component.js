@@ -41,7 +41,7 @@ export default class Component extends Container {
             ctx.fill(path);
         }
 
-        if (this.options.stroke && this.options.strokeWidth) {
+        if (this.options.stroke && this.options.strokeWidth > 0) {
             ctx.lineJoin = this.options.join;
             ctx.lineCap = this.options.cap;
             ctx.strokeStyle = this.options.stroke.toString();
