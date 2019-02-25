@@ -51,6 +51,8 @@ test("modulo", (t) => {
     t.is(M.modulo(-10, 3), 2);
     t.is(M.modulo(10, -3), -2);
     t.is(M.modulo(-10, -3), -1);
+    t.is(M.modulo(42, Infinity), 42);
+    t.is(M.modulo(Infinity, 99), NaN);
 });
 
 test("average", (t) => {

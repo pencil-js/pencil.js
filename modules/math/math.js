@@ -60,12 +60,15 @@ export const radianCircle = Math.PI * 2;
 export const degreeCircle = 360;
 
 /**
- * Return with the same sign as the divisor (Floored division)
+ * Return modulo with the same sign as the divisor (Floored division)
  * @param {Number} value - Dividend
  * @param {Number} divisor - Divisor
- * @return {Number}
+ * @return {Number}t
  */
-export const modulo = (value, divisor) => ((value % divisor) + divisor) % divisor;
+export const modulo = (value, divisor) => {
+    const remainder = value % divisor;
+    return Math.sign(value) === Math.sign(divisor) ? remainder : remainder + divisor;
+};
 
 /**
  * Return the average
