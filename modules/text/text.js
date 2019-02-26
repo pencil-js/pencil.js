@@ -305,8 +305,8 @@ export default class Text extends Component {
             align: Text.alignments.start,
             bold: false,
             italic: false,
-            lineHeight: 1,
             underscore: false,
+            lineHeight: 1,
         };
     }
 

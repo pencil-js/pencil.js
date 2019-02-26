@@ -63,7 +63,7 @@ export const degreeCircle = 360;
  * Return modulo with the same sign as the divisor (Floored division)
  * @param {Number} value - Dividend
  * @param {Number} divisor - Divisor
- * @return {Number}t
+ * @return {Number}
  */
 export const modulo = (value, divisor) => {
     const remainder = value % divisor;
