@@ -412,7 +412,7 @@ export default class Container extends EventEmitter {
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
      * @prop {Number} [rotation=0] - Rotation ratio from 0 to 1 (clockwise)
-     * @prop {PositionDefinition} [rotationAnchor=new Position(0, 0)] - Center of rotation relative to this position
+     * @prop {PositionDefinition} [rotationAnchor=new Position()] - Center of rotation relative to this position
      * @prop {Number} [zIndex=1] - Depth ordering
      * @prop {Component} [clip=null] -
      */
@@ -424,7 +424,7 @@ export default class Container extends EventEmitter {
             shown: true,
             opacity: null,
             rotation: 0,
-            rotationAnchor: new Position(0, 0),
+            rotationAnchor: new Position(),
             zIndex: 1,
             clip: null,
         };

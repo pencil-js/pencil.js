@@ -12,9 +12,23 @@ test("constructor", (t) => {
     t.false(t.context.isHovered);
 });
 
+test("getOrigin", (t) => {
+    const defaultOrigin = t.context.getOrigin();
+    t.is(defaultOrigin.x, 0);
+    t.is(defaultOrigin.y, 0);
+
+    t.context.options.origin = [100, 200];
+    const customOrigin = t.context.getOrigin();
+    t.is(customOrigin.x, 100);
+    t.is(customOrigin.y, 200);
+});
+
 test("makePath", (t) => {
     t.context.trace = () => {};
     const ctx = {
+        save: () => t.pass(),
+        restore: () => t.pass(),
+        translate: () => t.pass(),
         fill: () => t.pass(),
         stroke: () => t.pass(),
     };
@@ -36,6 +50,9 @@ test("makePath", (t) => {
 test("makePath skip", (t) => {
     t.context.trace = () => {};
     const ctx = {
+        save: () => t.pass(),
+        restore: () => t.pass(),
+        translate: () => t.pass(),
         fill: () => t.fail(),
         stroke: () => t.fail(),
     };
@@ -77,6 +94,8 @@ test("defaultOptions", (t) => {
     t.is(options.strokeWidth, 2);
     t.is(options.cursor, Component.cursors.default);
     t.is(options.join, Component.joins.miter);
+    t.is(options.origin.x, 0);
+    t.is(options.origin.y, 0);
 });
 
 test("cursors", (t) => {

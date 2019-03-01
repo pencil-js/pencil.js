@@ -28,11 +28,23 @@ export default class Component extends Container {
     }
 
     /**
+     * Return the relative origin position of draw
+     * @return {Position}
+     */
+    getOrigin () {
+        return Position.from(this.options.origin);
+    }
+
+    /**
      * Make the path and trace it
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Path2D}
      */
     makePath (ctx) {
+        ctx.save();
+        const origin = this.getOrigin();
+        ctx.translate(origin.x, origin.y);
+
         const path = new window.Path2D();
         this.trace(path);
 
@@ -49,6 +61,7 @@ export default class Component extends Container {
             ctx.stroke(path);
         }
 
+        ctx.restore();
         return path;
     }
 
@@ -95,6 +108,7 @@ export default class Component extends Container {
      * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
      * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
      * @prop {String} [join=Component.joins.miter] - How lines join between them
+     * @prop {PositionDefinition} [origin=new Position()] -
      */
     /**
      * @return {ComponentOptions}
@@ -107,6 +121,7 @@ export default class Component extends Container {
             strokeWidth: 2,
             cursor: Component.cursors.default,
             join: Component.joins.miter,
+            origin: new Position(),
         };
     }
 

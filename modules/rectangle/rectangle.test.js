@@ -17,27 +17,27 @@ test("constructor", (t) => {
 test("trace", (t) => {
     const path = {
         rect: (...params) => {
-            t.deepEqual(params, [-0, -0, 123, 22]);
+            t.deepEqual(params, [0, 0, 123, 22]);
         },
     };
     t.plan(1);
     t.context.trace(path);
 });
 
-test("getOriginPosition", (t) => {
-    const defaultOrigin = t.context.getOriginPosition();
+test("getOrigin", (t) => {
+    const defaultOrigin = t.context.getOrigin();
     t.is(defaultOrigin.x, 0);
     t.is(defaultOrigin.y, 0);
 
     t.context.options.origin = Rectangle.origins.center;
-    const centerOrigin = t.context.getOriginPosition();
-    t.is(centerOrigin.x, 123 / 2);
-    t.is(centerOrigin.y, 22 / 2);
+    const centerOrigin = t.context.getOrigin();
+    t.is(centerOrigin.x, -123 / 2);
+    t.is(centerOrigin.y, -22 / 2);
 
     t.context.options.origin = Rectangle.origins.bottomRight;
-    const bottomRightOrigin = t.context.getOriginPosition();
-    t.is(bottomRightOrigin.x, 123);
-    t.is(bottomRightOrigin.y, 22);
+    const bottomRightOrigin = t.context.getOrigin();
+    t.is(bottomRightOrigin.x, -123);
+    t.is(bottomRightOrigin.y, -22);
 });
 
 test("toJSON", (t) => {
@@ -57,10 +57,6 @@ test("from", (t) => {
 
     t.is(rectangle.width, 42);
     t.is(rectangle.height, 666);
-});
-
-test("defaultOptions", (t) => {
-    t.is(Rectangle.defaultOptions.origin, Rectangle.origins.topLeft);
 });
 
 test("origins", (t) => {

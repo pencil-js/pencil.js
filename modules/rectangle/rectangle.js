@@ -26,34 +26,31 @@ export default class Rectangle extends Component {
      * @return {Rectangle} Itself
      */
     trace (path) {
-        const originPos = this.getOriginPosition();
-        path.rect(-originPos.x, -originPos.y, this.width, this.height);
+        path.rect(0, 0, this.width, this.height);
         return this;
     }
 
     /**
-     * Get this origin position relative to the top-left corner
-     * @return {Position}
+     * @inheritDoc
      */
-    getOriginPosition () {
-        try {
-            return Position.from(this.options.origin);
-        }
-        catch (e) {
-            const { origin } = this.options;
+    getOrigin () {
+        const { origin } = this.options;
+        if (typeof origin === "string") {
             const { origins } = Rectangle;
             const position = new Position();
             if (origin === origins.center) {
-                position.set(this.width / 2, this.height / 2);
+                position.set(-this.width / 2, -this.height / 2);
             }
             else {
                 position.set(
-                    ([origins.topRight, origins.bottomRight].includes(origin) && this.width) || 0,
-                    ([origins.bottomLeft, origins.bottomRight].includes(origin) && this.height) || 0,
+                    ([origins.topRight, origins.bottomRight].includes(origin) && -this.width) || 0,
+                    ([origins.bottomLeft, origins.bottomRight].includes(origin) && -this.height) || 0,
                 );
             }
             return position;
         }
+
+        return super.getOrigin();
     }
 
     /**
@@ -75,21 +72,6 @@ export default class Rectangle extends Component {
      */
     static from (definition) {
         return new Rectangle(definition.position, definition.width, definition.height, definition.options);
-    }
-
-    /**
-     * @typedef {Object} RectangleOptions
-     * @extends ComponentOptions
-     * @prop {String|PositionDefinition} [origin=Rectangle.origins.topLeft] - Origin of the rectangle's position
-     */
-    /**
-     * @return {RectangleOptions}
-     */
-    static get defaultOptions () {
-        return {
-            ...super.defaultOptions,
-            origin: Rectangle.origins.topLeft,
-        };
     }
 
     /**
