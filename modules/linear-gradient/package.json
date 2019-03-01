@@ -1,0 +1,41 @@
+{
+  "name": "@pencil.js/linear-gradient",
+  "version": "1.0.0",
+  "description": "Particles generator for Pencil.js package.",
+  "main": "linear-gradient.js",
+  "files": [],
+  "sideEffects": false,
+  "scripts": {
+    "test": "nyc --require esm --reporter=text ava"
+  },
+  "ava": {
+    "require": [
+      "esm",
+      "../../test/helpers/browser-env-setup.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pencil-js/pencil.js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "pencil.js",
+    "wrapper"
+  ],
+  "dependencies": {
+    "@pencil.js/position": "^1.5.0"
+  },
+  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pencil-js/pencil.js/issues"
+  },
+  "devDependencies": {
+    "ava": "^1.2.0",
+    "esm": "^3.2.0",
+    "nyc": "^13.3.0"
+  }
+}

@@ -121,7 +121,7 @@ export default class Scene extends Container {
     clear (context = this.ctx) {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         if (this.options.fill) {
-            context.fillStyle = this.options.fill;
+            context.fillStyle = this.options.fill.toString(context);
             context.fillRect(0, 0, context.canvas.width, context.canvas.height);
         }
         return this;

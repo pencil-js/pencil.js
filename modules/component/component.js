@@ -49,14 +49,14 @@ export default class Component extends Container {
         this.trace(path);
 
         if (this.options.fill) {
-            ctx.fillStyle = this.options.fill.toString();
+            ctx.fillStyle = this.options.fill.toString(ctx);
             ctx.fill(path);
         }
 
         if (this.options.stroke && this.options.strokeWidth > 0) {
             ctx.lineJoin = this.options.join;
             ctx.lineCap = this.options.cap;
-            ctx.strokeStyle = this.options.stroke.toString();
+            ctx.strokeStyle = this.options.stroke.toString(ctx);
             ctx.lineWidth = this.options.strokeWidth;
             ctx.stroke(path);
         }

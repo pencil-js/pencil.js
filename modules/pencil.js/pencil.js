@@ -4,6 +4,7 @@ import Vector from "@pencil.js/vector";
 import * as Math from "@pencil.js/math";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Color from "@pencil.js/color";
+import LinearGradient from "@pencil.js/linear-gradient";
 
 // Events
 import BaseEvent from "@pencil.js/base-event";
@@ -74,6 +75,7 @@ const exportableClasses = {
     Checkbox,
     Button,
     Color,
+    LinearGradient,
     ProgressBar,
 };
 
@@ -148,5 +150,6 @@ export {
     author,
     homepage,
     Color,
+    LinearGradient,
     ProgressBar,
 };

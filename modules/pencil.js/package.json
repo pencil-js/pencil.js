@@ -57,6 +57,7 @@
     "@pencil.js/input": "^1.5.0",
     "@pencil.js/keyboard-event": "^1.5.0",
     "@pencil.js/line": "^1.5.0",
+    "@pencil.js/linear-gradient": "^1.0.0",
     "@pencil.js/math": "^1.5.0",
     "@pencil.js/mouse-event": "^1.5.0",
     "@pencil.js/network-event": "^1.5.0",
