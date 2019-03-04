@@ -6,7 +6,7 @@ import {
     BaseEvent, MouseEvent, NetworkEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container,
     Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text,
     Path, Input, Checkbox, Slider, ProgressBar, Button, Select, from, OffScreenCanvas, version, author, homepage, Color,
-    LinearGradient,
+    LinearGradient, RadialGradient,
 } from "./pencil";
 
 test("from", (t) => {
@@ -70,6 +70,7 @@ test("namespace", (t) => {
     t.not(Pencil.homepage, undefined);
     t.not(Pencil.Color, undefined);
     t.not(Pencil.LinearGradient, undefined);
+    t.not(Pencil.RadialGradient, undefined);
     /* eslint-enable */
 });
 
@@ -112,4 +113,5 @@ test("named imports", (t) => {
     t.not(homepage, undefined);
     t.not(Color, undefined);
     t.not(LinearGradient, undefined);
+    t.not(RadialGradient, undefined);
 });

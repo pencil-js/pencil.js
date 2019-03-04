@@ -5,6 +5,7 @@ import * as Math from "@pencil.js/math";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Color from "@pencil.js/color";
 import LinearGradient from "@pencil.js/linear-gradient";
+import RadialGradient from "@pencil.js/radial-gradient";
 
 // Events
 import BaseEvent from "@pencil.js/base-event";
@@ -74,9 +75,10 @@ const exportableClasses = {
     Slider,
     Checkbox,
     Button,
+    ProgressBar,
     Color,
     LinearGradient,
-    ProgressBar,
+    RadialGradient,
 };
 
 /**
@@ -145,11 +147,12 @@ export {
     Button,
     OffScreenCanvas,
     Select,
+    ProgressBar,
     from,
     version,
     author,
     homepage,
     Color,
     LinearGradient,
-    ProgressBar,
+    RadialGradient,
 };

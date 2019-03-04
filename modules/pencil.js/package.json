@@ -67,6 +67,7 @@
     "@pencil.js/polygon": "^1.5.0",
     "@pencil.js/position": "^1.5.0",
     "@pencil.js/progress-bar": "^1.5.0",
+    "@pencil.js/radial-gradient": "^1.0.0",
     "@pencil.js/rectangle": "^1.5.0",
     "@pencil.js/regular-polygon": "^1.5.0",
     "@pencil.js/resizable": "^1.5.0",
