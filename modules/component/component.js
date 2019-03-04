@@ -84,8 +84,9 @@ export default class Component extends Container {
             return false;
         }
 
+        const origin = this.getOrigin();
         const relative = Position.from(positionDefinition).clone().subtract(this.position);
-        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationAnchor);
+        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationAnchor).subtract(origin);
 
         const path = new window.Path2D();
         this.trace(path);
@@ -194,6 +195,8 @@ export default class Component extends Container {
             move: "move",
             noDrop: "no-drop",
             notAllowed: "not-allowed",
+            grab: "grab",
+            grabbing: "grabbing",
             allScroll: "all-scroll",
             colResize: "col-resize",
             rowResize: "row-resize",
