@@ -68,8 +68,11 @@
 
     shapes.push(new P.Square(new P.Position(160, 100), 50, {
         zIndex: 0,
-        origin: [25, 0],
-        fill: "green",
+        origin: [-25, 0],
+        fill: new P.LinearGradient(undefined, [50, 50], {
+            0: "green",
+            1: "#f78200",
+        }),
     }));
 
     shapes.push(new P.Path(new P.Position(140, 30), [
