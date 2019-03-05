@@ -192,7 +192,9 @@ export default class Container extends EventEmitter {
             return null;
         }
 
-        const relativePosition = position.clone().subtract(this.position);
+        const relativePosition = position.clone()
+            .subtract(this.position)
+            .rotate(-this.options.rotation, this.options.rotationAnchor);
 
         let lastHovered = null;
         let lookup = this.children.length - 1;
