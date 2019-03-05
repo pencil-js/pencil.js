@@ -42,6 +42,9 @@ test("makePath", (t) => {
         ["world", 0, 5],
     ];
     const ctx = {
+        save: () => t.pass(),
+        translate: () => t.pass(),
+        restore: () => t.pass(),
         fillText: (...params) => {
             t.deepEqual(params, expected[ctx.call]);
         },
@@ -50,7 +53,7 @@ test("makePath", (t) => {
         },
         call: 0,
     };
-    t.plan(8);
+    t.plan(11);
     t.context.options.fill = "#123456";
     t.context.options.stroke = "#456789";
     t.context.makePath(ctx);
@@ -66,6 +69,9 @@ test("makePath with underscore", (t) => {
     t.context.options.underscore = true;
 
     const ctx = {
+        save: () => t.pass(),
+        translate: () => t.pass(),
+        restore: () => t.pass(),
         beginPath: () => t.pass(),
         fillText: () => t.pass(),
         moveTo: () => t.pass(),
@@ -73,7 +79,7 @@ test("makePath with underscore", (t) => {
         stroke: () => t.pass(),
         closePath: () => t.pass(),
     };
-    t.plan(7);
+    t.plan(10);
 
     t.context.makePath(ctx);
     t.is(ctx.strokeStyle, t.context.options.fill);
@@ -100,23 +106,23 @@ test("makePath with no fill nor stroke", (t) => {
     t.pass();
 });
 
-test("isHover", (t) => {
-    t.true(t.context.isHover([1, 1]));
-    t.false(t.context.isHover([99, 0]));
-
-    t.context.options.shown = false;
-    t.false(t.context.isHover([1, 1]));
+test("trace", (t) => {
+    const path = {
+        rect: () => t.pass(),
+    };
+    t.context.trace(path);
+    t.plan(1);
 });
 
-test("getOriginPosition", (t) => {
+test("getOrigin", (t) => {
     t.context.options.align = Text.alignments.center;
-    t.is(t.context.getOriginPosition().x, 0.5);
+    t.is(t.context.getOrigin().x, -0.5);
 
     t.context.options.align = Text.alignments.right;
-    t.is(t.context.getOriginPosition().x, 1);
+    t.is(t.context.getOrigin().x, -1);
 
     t.context.options.align = "bad";
-    t.is(t.context.getOriginPosition().x, 0);
+    t.is(t.context.getOrigin().x, 0);
 });
 
 test("measures and width/height", (t) => {

@@ -1,7 +1,6 @@
 import NetworkEvent from "@pencil.js/network-event";
 import Component from "@pencil.js/component";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
-import Position from "@pencil.js/position";
 import textDirection from "text-direction";
 import hash from "@sindresorhus/fnv1a";
 
@@ -18,9 +17,10 @@ function formatString (string) {
 }
 
 /**
- *
+ * Cache based text measurement
  * @param {String} line - Any text
  * @param {String} font - Font definition string
+ * @return {TextMeasures}
  */
 const measureText = (() => {
     const { ctx } = new OffScreenCanvas();
@@ -102,8 +102,12 @@ export default class Text extends Component {
      * @return {Text} Itself
      */
     makePath (ctx) {
-        if (this.text.length) {
-            const opts = this.options;
+        const opts = this.options;
+        if (this.text.length && (opts.fill || (opts.stroke && opts.strokeWidth > 0))) {
+            ctx.save();
+            const origin = this.getOrigin();
+            ctx.translate(origin.x, origin.y);
+
             ctx.font = Text.getFontDefinition(opts);
             ctx.textAlign = opts.align;
             ctx.textBaseline = "top"; // TODO: user could want to change this
@@ -124,58 +128,61 @@ export default class Text extends Component {
             if (opts.underscore) {
                 ctx.beginPath();
             }
+
+            const offset = -this.getAlignOffset();
             this.lines.forEach((line, index) => {
                 const y = (index * lineHeight) + margin;
                 if (opts.fill) {
-                    ctx.fillText(line, 0, y);
+                    ctx.fillText(line, offset * this.width, y);
                 }
                 if (opts.stroke) {
-                    ctx.strokeText(line, 0, y);
+                    ctx.strokeText(line, offset * this.width, y);
                 }
                 if (opts.underscore) {
                     const { width } = measureText(line, ctx.font);
-                    ctx.moveTo(0, y + height);
-                    ctx.lineTo(width, y + height);
+                    const left = offset * (this.width - width);
+                    ctx.moveTo(left, y + height);
+                    ctx.lineTo(left + width, y + height);
                 }
             });
+
             if (opts.underscore) {
-                ctx.lineWidth = height * 0.05;
+                ctx.lineWidth = height * (opts.bold ? 0.07 : 0.05);
                 ctx.strokeStyle = opts.fill || opts.stroke;
                 ctx.stroke();
                 ctx.closePath();
             }
+
+            ctx.restore();
         }
+
         return this;
     }
 
     /**
-     * @inheritDoc
+     *
+     * @param {Path2D} path -
+     * @return {Path2D}
      */
-    isHover (positionDefinition) {
-        if (!this.options.shown) {
-            return false;
-        }
-
-        const { width, height } = this.getMeasures();
-        const relativePosition = this.getOriginPosition().add(Position.from(positionDefinition));
-        return this.position.x <= relativePosition.x && relativePosition.x <= this.position.x + width &&
-            this.position.y <= relativePosition.y && relativePosition.y <= this.position.y + height;
+    trace (path) {
+        path.rect(0, 0, this.width, this.height);
+        return path;
     }
 
     /**
-     * Get this origin position relative to the top-left corner
-     * @return {Position}
+     * Return the position offset according to alignment
+     * @return {Number}
      */
-    getOriginPosition () {
+    getAlignOffset () {
         const { align } = this.options;
 
-        let horizontal = 0;
+        let offset = 0;
 
         if (align === Text.alignments.center) {
-            horizontal = this.width / 2;
+            offset = 0.5;
         }
         else if (align === Text.alignments.right) {
-            horizontal = this.width;
+            offset = 1;
         }
         else if (align === Text.alignments.start || align === Text.alignments.end) {
             const root = this.getRoot();
@@ -183,12 +190,20 @@ export default class Text extends Component {
                 const dir = textDirection(root.ctx.canvas);
                 if ((align === Text.alignments.start && dir === "rtl") ||
                     (align === Text.alignments.end && dir === "ltr")) {
-                    horizontal = this.width;
+                    offset = 1;
                 }
             }
         }
 
-        return new Position(horizontal, 0);
+        return -offset;
+    }
+
+    /**
+     * Get this origin position relative to the top-left corner
+     * @return {Position}
+     */
+    getOrigin () {
+        return super.getOrigin().clone().add(this.getAlignOffset() * this.width, 0);
     }
 
     /**
@@ -267,7 +282,7 @@ export default class Text extends Component {
     /**
      * Compute a text width and height
      * @param {String|Array<String>} text - Any text
-     * @param {TextOptions} [options] -
+     * @param {TextOptions} [options] - Options of the text
      * @return {TextMeasures}
      */
     static measure (text, options) {
