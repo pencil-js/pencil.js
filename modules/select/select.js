@@ -34,47 +34,38 @@ export default class Select extends Input {
             italic: this.options.italic,
             cursor: Component.cursors.pointer,
         };
-        this.display = new Text([0, 0], "", textOptions);
+        const margin = Text.measure("M", textOptions).height * Select.MARGIN;
+        this.display = new Text([margin * 2, margin], "", textOptions);
         this.background.add(this.display);
 
-        this.optionsContainer = new Rectangle([0, 0], 0, 0, this.background.options);
+        this.optionsList = optionsList.map(option => new Text([margin * 2, margin], option || "", textOptions));
+        const maxWidth = Math.max(...this.optionsList.map(text => text.width));
+
+        this.background.width = maxWidth + (6 * margin);
+        this.background.height = this.optionsList[0].height + (2 * margin);
+
+        this.optionsContainer = new Rectangle([0, 0], this.background.width, 0, this.background.options);
         this.optionsContainer.hide();
         this.add(this.optionsContainer);
-        let maxWidth = 0;
-        this.optionsList = optionsList.map((option) => {
-            const text = new Text([0, 0], option || "", textOptions);
-            const margin = text.height * Select.MARGIN;
-            text.position.set(margin * 2, margin);
-            if (text.width > maxWidth) {
-                maxWidth = text.width;
-            }
-            return text;
-        });
-        let pos = 0;
+        let position = 0;
         this.optionsList.forEach((text, index) => {
-            const margin = text.height * Select.MARGIN;
-            const rect = new Rectangle([0, pos], maxWidth + (6 * margin), text.height + (2 * margin), {
-                fill: null,
+            const rect = new Rectangle([1, position + 1], maxWidth + (6 * margin) - 2, text.height + (2 * margin), {
+                fill: this.options.background,
                 cursor: Component.cursors.pointer,
             });
-            pos += text.height + (2 * margin);
+            position += rect.height;
             rect.on(MouseEvent.events.hover, () => rect.options.fill = this.options.hover)
-                .on(MouseEvent.events.leave, () => rect.options.fill = null)
+                .on(MouseEvent.events.leave, () => rect.options.fill = this.options.background)
                 .on(MouseEvent.events.click, () => {
                     this.value = index;
                     this.fire(new BaseEvent(Select.events.change, this));
                 });
             rect.add(text);
+
             this.optionsContainer.add(rect);
         });
-        const margin = this.optionsList[0].height * Select.MARGIN;
 
-        this.display.position.set(margin * 2, margin);
-
-        this.background.width = maxWidth + (6 * margin);
-        this.background.height = this.optionsList[0].height + (2 * margin);
-        this.optionsContainer.width = this.background.width;
-        this.optionsContainer.height = (this.optionsList[0].height + (2 * margin)) * this.optionsList.length;
+        this.optionsContainer.height = position + 2;
 
         const arrow = new Triangle([maxWidth + (3.5 * margin), this.background.height / 2], margin, {
             fill: this.options.fill,
