@@ -61,8 +61,10 @@
         align: P.Text.alignments.center,
         bold: true,
         italic: true,
+        underscore: true,
         font: "https://fonts.gstatic.com/s/indieflower/v9/m8JVjfNVeKWVnh3QMuKkFcZVaUuH.woff2",
         lineHeight: 1.3,
+        rotation: -1 / 15,
     });
     shapes.push(text);
 
