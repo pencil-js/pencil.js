@@ -149,6 +149,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
  * [Math](modules/math)
  * [Color](modules/color)
  * [LinearGradient](modules/linear-gradient)
+ * [RadialGradient](modules/radial-gradient)
  * [OffScreenCanvas](modules/offscreen-canvas)
  * [BaseEvent](modules/base-event)
    * [MouseEvent](modules/mouse-event)
