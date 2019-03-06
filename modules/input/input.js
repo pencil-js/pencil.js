@@ -32,7 +32,7 @@ export default class Input extends Container {
         }).on(MouseEvent.events.leave, () => {
             this.background.options.fill = this.options.background;
         }).on(MouseEvent.events.click, (event) => {
-            this.click(event.position.clone().subtract(this.position));
+            this.click(event.position.clone().subtract(this.getAbsolutePosition()));
         });
 
         this.on(Container.events.attach, () => this.value = this.options.value, true);
