@@ -17,6 +17,15 @@ import "@pencil.js/draggable";
  * @return {DraggableAPI}
  */
 Rectangle.prototype.resizable = function resizable (options) {
+    if (this.options.rotation % 1 !== 0) {
+        throw new EvalError("Resizable don't support rotation.");
+    }
+
+    const origin = this.getOrigin();
+    if (origin.x !== 0 || origin.y !== 0) {
+        throw new EvalError("Resizable don't support other origin than [0, 0] or topLeft.");
+    }
+
     this.isResizable = true;
     const size = 15;
     const mergedOptions = {
