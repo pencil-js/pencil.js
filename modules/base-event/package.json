@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/base-event",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Basic event for Pencil.js package.",
   "main": "base-event.js",
   "files": [],

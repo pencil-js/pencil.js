@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/network-event",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Network related event for Pencil.js package.",
   "main": "network-event.js",
   "files": [],
@@ -36,6 +36,6 @@
     "nyc": "^13.3.0"
   },
   "dependencies": {
-    "@pencil.js/base-event": "^1.5.0"
+    "@pencil.js/base-event": "^1.6.0"
   }
 }
