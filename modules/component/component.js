@@ -91,7 +91,7 @@ export default class Component extends Container {
         const path = new window.Path2D();
         this.trace(path);
         let result = (this.options.fill && ctx.isPointInPath(path, rotated.x, rotated.y)) ||
-            (this.options.stroke && this.options.strokeWidth && ctx.isPointInStroke(path, rotated.x, rotated.y));
+            (this.options.stroke && this.options.strokeWidth > 0 && ctx.isPointInStroke(path, rotated.x, rotated.y));
 
         if (this.options.clip) {
             const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
@@ -109,7 +109,7 @@ export default class Component extends Container {
      * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
      * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
      * @prop {String} [join=Component.joins.miter] - How lines join between them
-     * @prop {PositionDefinition} [origin=new Position()] -
+     * @prop {PositionDefinition} [origin=new Position()] - Relative offset
      */
     /**
      * @return {ComponentOptions}
