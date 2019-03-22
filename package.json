@@ -9,7 +9,7 @@
   "scripts": {
     "init": "lerna bootstrap --hoist",
     "reset": "lerna clean --yes && npm run init",
-    "lint": "eslint modules/ --ignore-pattern \"coverage\"",
+    "lint": "eslint modules/ --ignore-pattern \"coverage\" --ignore-pattern \"*.min.*\"",
     "test": "nyc --require esm --reporter=html ava",
     "testci": "nyc --require esm --reporter=lcovonly --reporter=text-summary ava",
     "build": "webpack --mode=development --watch",
