@@ -24,7 +24,7 @@
 
     container.add(new P.Rectangle(new P.Position(50, 0), 50, 40, {
         rotation: 0.125,
-        rotationAnchor: new P.Position(25, 20),
+        rotationCenter: new P.Position(25, 20),
     }));
 
     shapes.push(container);

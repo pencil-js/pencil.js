@@ -266,13 +266,13 @@ test("toJSON", (t) => {
 
     const specific = new Container([0, 0], {
         opacity: 0.5,
-        rotationAnchor: [10, 20],
+        rotationCenter: [10, 20],
     });
     addHeir(specific);
     const reJson = specific.toJSON();
     t.deepEqual(reJson.options, {
         opacity: 0.5,
-        rotationAnchor: specific.options.rotationAnchor,
+        rotationCenter: specific.options.rotationCenter,
     });
     t.is(reJson.children.length, 1);
 });
@@ -301,8 +301,8 @@ test("defaultOptions", (t) => {
     t.is(options.shown, true);
     t.is(options.opacity, null);
     t.is(options.rotation, 0);
-    t.is(options.rotationAnchor.x, 0);
-    t.is(options.rotationAnchor.y, 0);
+    t.is(options.rotationCenter.x, 0);
+    t.is(options.rotationCenter.y, 0);
     t.is(options.zIndex, 1);
     t.is(options.clip, null);
 });

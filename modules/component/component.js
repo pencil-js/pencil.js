@@ -86,7 +86,7 @@ export default class Component extends Container {
 
         const origin = this.getOrigin();
         const relative = Position.from(positionDefinition).clone().subtract(this.position);
-        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationAnchor).subtract(origin);
+        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationCenter).subtract(origin);
 
         const path = new window.Path2D();
         this.trace(path);

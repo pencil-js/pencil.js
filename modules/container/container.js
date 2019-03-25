@@ -32,7 +32,7 @@ export default class Container extends EventEmitter {
             ...this.constructor.defaultOptions,
             ...options,
         };
-        this.options.rotationAnchor = Position.from(this.options.rotationAnchor);
+        this.options.rotationCenter = Position.from(this.options.rotationCenter);
         /**
          * @type {Array<Container>}
          */
@@ -162,7 +162,7 @@ export default class Container extends EventEmitter {
         const position = new Position();
 
         this.climbAncestry((ancestor) => {
-            position.rotate(ancestor.options.rotation, ancestor.options.rotationAnchor).add(ancestor.position);
+            position.rotate(ancestor.options.rotation, ancestor.options.rotationCenter).add(ancestor.position);
         });
 
         return position;
@@ -194,7 +194,7 @@ export default class Container extends EventEmitter {
 
         const relativePosition = position.clone()
             .subtract(this.position)
-            .rotate(-this.options.rotation, this.options.rotationAnchor);
+            .rotate(-this.options.rotation, this.options.rotationCenter);
 
         let lastHovered = null;
         let lookup = this.children.length - 1;
@@ -242,7 +242,7 @@ export default class Container extends EventEmitter {
         }
 
         if (this.options.rotation) {
-            const anchor = Position.from(this.options.rotationAnchor);
+            const anchor = Position.from(this.options.rotationCenter);
             ctx.translate(anchor.x, anchor.y);
             ctx.rotate(this.options.rotation * radianCircle);
             ctx.translate(-anchor.x, -anchor.y);
@@ -414,7 +414,7 @@ export default class Container extends EventEmitter {
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
      * @prop {Number} [rotation=0] - Rotation ratio from 0 to 1 (clockwise)
-     * @prop {PositionDefinition} [rotationAnchor=new Position()] - Center of rotation relative to this position
+     * @prop {PositionDefinition} [rotationCenter=new Position()] - Center of rotation relative to this position
      * @prop {Number} [zIndex=1] - Depth ordering
      * @prop {Component} [clip=null] -
      */
@@ -426,7 +426,7 @@ export default class Container extends EventEmitter {
             shown: true,
             opacity: null,
             rotation: 0,
-            rotationAnchor: new Position(),
+            rotationCenter: new Position(),
             zIndex: 1,
             clip: null,
         };
