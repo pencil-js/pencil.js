@@ -37,7 +37,7 @@
     "url": "https://github.com/pencil-js/pencil.js/issues"
   },
   "devDependencies": {
-    "ava": "^1.2.0",
+    "ava": "^1.4.0",
     "esm": "^3.2.0",
     "nyc": "^13.3.0"
   }

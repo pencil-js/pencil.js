@@ -35,7 +35,7 @@
     "@pencil.js/component": "^1.6.0"
   },
   "devDependencies": {
-    "ava": "^1.2.0",
+    "ava": "^1.4.0",
     "esm": "^3.2.0",
     "nyc": "^13.3.0"
   }
