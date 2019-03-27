@@ -14,19 +14,22 @@ export default class EventEmitter {
 
     /**
      * Listen to an event
-     * @param {String} eventName - Name of event to listen to
+     * @param {String|Array<String>} eventName - Name of event (or a list of event names) to listen to
      * @param {Function} callback - Function to call when event fire
      * @param {Boolean} [isTargeted=false] - Should only listen to event targeting itself
      * @return {EventEmitter} Itself
      */
     on (eventName, callback, isTargeted = false) {
-        if (!this.eventListeners[eventName]) {
-            this.eventListeners[eventName] = [];
-        }
-        this.eventListeners[eventName].push({
+        const event = {
             callback,
             element: this,
             isTargeted,
+        };
+        (Array.isArray(eventName) ? eventName : [eventName]).forEach((name) => {
+            if (!this.eventListeners[name]) {
+                this.eventListeners[name] = [];
+            }
+            this.eventListeners[name].push(event);
         });
         return this;
     }
