@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/color",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Color manager for Pencil.js package.",
   "main": "color.js",
   "files": [],
@@ -26,7 +26,7 @@
     "color"
   ],
   "dependencies": {
-    "@pencil.js/math": "^1.6.0",
+    "@pencil.js/math": "^1.6.1",
     "color-convert": "^1.9.3"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

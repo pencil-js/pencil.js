@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/text",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Text writing for Pencil.js package.",
   "main": "text.js",
   "files": [],
@@ -26,9 +26,9 @@
     "writing"
   ],
   "dependencies": {
-    "@pencil.js/component": "^1.6.0",
-    "@pencil.js/network-event": "^1.6.0",
-    "@pencil.js/offscreen-canvas": "^1.6.0",
+    "@pencil.js/component": "^1.6.1",
+    "@pencil.js/network-event": "^1.6.1",
+    "@pencil.js/offscreen-canvas": "^1.6.1",
     "@sindresorhus/fnv1a": "^1.0.0",
     "text-direction": "^1.1.0"
   },
