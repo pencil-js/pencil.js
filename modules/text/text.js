@@ -117,11 +117,13 @@ export default class Text extends Component {
             const margin = height * ((opts.lineHeight - 1) / 2);
 
             if (opts.fill) {
-                ctx.fillStyle = opts.fill;
+                ctx.fillStyle = opts.fill.toString(ctx);
             }
 
             if (opts.stroke) {
-                ctx.strokeStyle = opts.stroke;
+                ctx.lineJoin = opts.join;
+                ctx.lineCap = opts.cap;
+                ctx.strokeStyle = opts.stroke.toString(ctx);
                 ctx.lineWidth = opts.strokeWidth;
             }
 
