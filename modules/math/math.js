@@ -60,6 +60,12 @@ export const radianCircle = Math.PI * 2;
 export const degreeCircle = 360;
 
 /**
+ * Golden ratio number
+ * @type {Number}
+ */
+export const phi = (Math.sqrt(5) + 1) / 2;
+
+/**
  * Return modulo with the same sign as the divisor (Floored division)
  * @param {Number} value - Dividend
  * @param {Number} divisor - Divisor
@@ -71,11 +77,31 @@ export const modulo = (value, divisor) => {
 };
 
 /**
- * Return the average
+ * Returns an array of evenly distributed value across a range
+ * @param {Number} nbValue - Number of value to generate
+ * @param {Number} [min=0] - Starting value of the range
+ * @param {Number} [max=1] - Ending value of the range
+ * @returns {Array<Number>}
+ */
+export const distribute = (nbValue, min = 0, max = 1) => {
+    const start = random(min, max);
+    const diff = max - min;
+    return [...new Array(nbValue)].map((_, i) => min + modulo(start + (i * phi * diff), diff));
+};
+
+/**
+ * Add up all values passed as argument
+ * @param {...Number} values - Any set of number
+ * @returns {Number}
+ */
+export const sum = (...values) => values.reduce((acc, value) => acc + value, 0);
+
+/**
+ * Return the average of all values
  * @param {...Number} values - Any set of number
  * @return {Number}
  */
-export const average = (...values) => values.reduce((sum, value) => sum + value, 0) / values.length;
+export const average = (...values) => sum(...values) / values.length;
 
 /**
  * Return the equivalent of a value from a scale to another

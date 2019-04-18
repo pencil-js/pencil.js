@@ -40,9 +40,10 @@ test("truncate", (t) => {
     t.is(M.truncate(-11.99), -11);
 });
 
-test("trigonometry", (t) => {
+test("constants", (t) => {
     t.true(almostEqual(M.radianCircle, Math.PI * 2));
     t.is(M.degreeCircle, 360);
+    t.true(almostEqual(M.phi, 1.61803398875));
 });
 
 test("modulo", (t) => {
@@ -55,7 +56,30 @@ test("modulo", (t) => {
     t.is(M.modulo(Infinity, 99), NaN);
 });
 
+test("distribute", (t) => {
+    const distribution = M.distribute(100, 50, 60);
+    t.true(Math.min(...distribution) > 50);
+    t.true(Math.max(...distribution) < 60);
+    const count = distribution.reduce((acc, val) => {
+        const index = Math.floor(val - 50);
+        if (!acc[index]) {
+            acc[index] = 0;
+        }
+        acc[index]++;
+        return acc;
+    }, []);
+    t.true(count.every(val => Math.abs(val - 10) < 3));
+});
+
+test("sum", (t) => {
+    t.is(M.sum(), 0);
+    t.is(M.sum(5), 5);
+    t.is(M.sum(1, 2, 3, 4), 10);
+    t.is(M.sum(-99, 99), 0);
+});
+
 test("average", (t) => {
+    t.is(M.average(), NaN);
     t.is(M.average(1), 1);
     t.is(M.average(1, 2, 3), 2);
     const n = 100;
