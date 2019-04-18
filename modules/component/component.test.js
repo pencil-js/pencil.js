@@ -4,10 +4,17 @@ import Component from "./component";
 test.beforeEach((t) => {
     t.context = new Component([0, 0], {
         fill: "#369",
+        shadow: {
+            position: [10, 20],
+            color: "#123",
+        },
     });
 });
 
 test("constructor", (t) => {
+    t.is(t.context.options.shadow.position.x, 10);
+    t.is(t.context.options.shadow.position.y, 20);
+
     t.false(t.context.isClicked);
     t.false(t.context.isHovered);
 });
@@ -32,19 +39,21 @@ test("makePath", (t) => {
         fill: () => t.pass(),
         stroke: () => t.pass(),
     };
-    t.context.options = {
-        fill: "#369",
-        stroke: "#abc",
-        strokeWidth: 6,
-        join: "a",
-        cap: "b",
-    };
+    t.context.options.stroke = "#abc";
+    t.context.options.strokeWidth = 6;
+    t.context.options.join = "a";
+    t.context.options.cap = "b";
+
     t.context.makePath(ctx);
     t.is(ctx.fillStyle, "#369");
     t.is(ctx.strokeStyle, "#abc");
     t.is(ctx.lineWidth, 6);
     t.is(ctx.lineJoin, "a");
     t.is(ctx.lineCap, "b");
+    t.is(ctx.shadowColor, "#123");
+    t.is(ctx.shadowBlur, 0);
+    t.is(ctx.shadowOffsetX, 10);
+    t.is(ctx.shadowOffsetY, 20);
 });
 
 test("makePath skip", (t) => {
@@ -96,10 +105,14 @@ test("defaultOptions", (t) => {
     t.is(options.join, Component.joins.miter);
     t.is(options.origin.x, 0);
     t.is(options.origin.y, 0);
+    t.is(options.shadow.color, null);
+    t.is(options.shadow.blur, 0);
+    t.is(options.shadow.position.x, 0);
+    t.is(options.shadow.position.y, 0);
 });
 
 test("cursors", (t) => {
-    t.truthy(Component.cursors);
+    t.true(typeof Component.cursors === "object");
 });
 
 test("joins", (t) => {

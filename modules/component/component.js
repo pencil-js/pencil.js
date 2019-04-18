@@ -14,8 +14,14 @@ export default class Component extends Container {
      * @param {PositionDefinition} positionDefinition - Position in space
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (positionDefinition, options) {
+    constructor (positionDefinition, options = {}) {
         super(positionDefinition, options);
+
+        this.options.shadow = {
+            ...Component.defaultOptions.shadow,
+            ...options.shadow,
+        };
+        this.options.shadow.position = Position.from(this.options.shadow.position);
 
         /**
          * @type {Boolean}
@@ -47,6 +53,13 @@ export default class Component extends Container {
 
         const path = new window.Path2D();
         this.trace(path);
+
+        if (this.options.shadow.color) {
+            ctx.shadowColor = this.options.shadow.color.toString();
+            ctx.shadowBlur = this.options.shadow.blur;
+            ctx.shadowOffsetX = this.options.shadow.position.x;
+            ctx.shadowOffsetY = this.options.shadow.position.y;
+        }
 
         if (this.options.fill) {
             ctx.fillStyle = this.options.fill.toString(ctx);
@@ -102,6 +115,12 @@ export default class Component extends Container {
     }
 
     /**
+     * @typedef {Object} ShadowOptions
+     * @prop {Number} [blur=0] - Spread of the shadow around the component
+     * @prop {PositionDefinition} [position=new Position()] - Position of the shadow relative to the component
+     * @prop {String|ColorDefinition} [color=null] - Color of the shadow
+     */
+    /**
      * @typedef {Object} ComponentOptions
      * @extends ContainerOptions
      * @prop {String|ColorDefinition} [fill="#000"] - Color used to fill, set to null for transparent
@@ -110,6 +129,7 @@ export default class Component extends Container {
      * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
      * @prop {String} [join=Component.joins.miter] - How lines join between them
      * @prop {PositionDefinition} [origin=new Position()] - Relative offset
+     * @prop {ShadowOptions} [shadow] - Set of options to set a shadow
      */
     /**
      * @return {ComponentOptions}
@@ -123,6 +143,11 @@ export default class Component extends Container {
             cursor: Component.cursors.default,
             join: Component.joins.miter,
             origin: new Position(),
+            shadow: {
+                blur: 0,
+                position: new Position(),
+                color: null,
+            },
         };
     }
 
