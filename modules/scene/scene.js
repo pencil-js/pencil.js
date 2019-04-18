@@ -182,11 +182,19 @@ export default class Scene extends Container {
     }
 
     /**
+     * Return the whole scene size
+     * @returns {Position}
+     */
+    get size () {
+        return new Position(this.width, this.height);
+    }
+
+    /**
      * Return this scene center point
      * @return {Position}
      */
     get center () {
-        return new Position(this.width / 2, this.height / 2);
+        return this.size.divide(2);
     }
 
     /**

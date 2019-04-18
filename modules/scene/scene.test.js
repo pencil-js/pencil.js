@@ -74,6 +74,12 @@ test("get width and height", (t) => {
     t.is(t.context.height, 600);
 });
 
+test("get size", (t) => {
+    const { size } = t.context;
+    t.is(size.x, 800);
+    t.is(size.y, 600);
+});
+
 test("get center", (t) => {
     const { center } = t.context;
     t.is(center.x, 400);
