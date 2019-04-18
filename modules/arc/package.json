@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/arc",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Arc shape for Pencil.js package.",
   "main": "arc.js",
   "files": [],
@@ -26,9 +26,9 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/component": "^1.6.1",
-    "@pencil.js/line": "^1.6.1",
-    "@pencil.js/math": "^1.6.1"
+    "@pencil.js/component": "^1.6.2",
+    "@pencil.js/line": "^1.6.2",
+    "@pencil.js/math": "^1.6.2"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
