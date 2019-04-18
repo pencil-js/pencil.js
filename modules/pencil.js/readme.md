@@ -154,6 +154,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
  * [BaseEvent](modules/base-event)
    * [MouseEvent](modules/mouse-event)
    * [KeyboardEvent](modules/keyboard-event)
+   * [NetworkEvent](modules/network-event)
 
 ## Common pitfalls
 
@@ -165,7 +166,7 @@ If you want to code an efficient particle generator, try [Processing](https://pr
 Some module have the same name as some Javascript global (eg: Image, Math).
 Importing them without namespace will overrides these globals and lead to potential bugs.
 
-In any case, we recommend you use a namespace (eg: `import Namespace from "pencil.js"`, `import * as Namespace from "@pencil.js/math"`)
+In any case, we recommend you use a namespace (eg: `import Pencil from "pencil.js"`, `import * as PencilMath from "@pencil.js/math"`)
 
 
 ## Contributions
