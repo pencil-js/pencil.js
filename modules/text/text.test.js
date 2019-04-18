@@ -39,7 +39,7 @@ test("get and set text", (t) => {
 test("makePath", (t) => {
     const expected = [
         ["Hello", 0, 0],
-        ["world", 0, 5],
+        ["world", 0, 20],
     ];
     const ctx = {
         save: () => t.pass(),
@@ -116,10 +116,10 @@ test("trace", (t) => {
 
 test("getOrigin", (t) => {
     t.context.options.align = Text.alignments.center;
-    t.is(t.context.getOrigin().x, -0.5);
+    t.is(t.context.getOrigin().x, -2.5);
 
     t.context.options.align = Text.alignments.right;
-    t.is(t.context.getOrigin().x, -1);
+    t.is(t.context.getOrigin().x, -5);
 
     t.context.options.align = "bad";
     t.is(t.context.getOrigin().x, 0);
@@ -127,11 +127,11 @@ test("getOrigin", (t) => {
 
 test("measures and width/height", (t) => {
     t.deepEqual(t.context.getMeasures(), {
-        width: 1,
-        height: 10,
+        width: 5,
+        height: 40,
     });
-    t.is(t.context.width, 1);
-    t.is(t.context.height, 10);
+    t.is(t.context.width, 5);
+    t.is(t.context.height, 40);
 });
 
 test("toJSON", (t) => {
@@ -172,12 +172,14 @@ test("getFontDefinition", (t) => {
 
 test("measure", (t) => {
     t.deepEqual(Text.measure("whatever"), {
-        width: 1,
-        height: 5,
+        width: 5,
+        height: 20,
     });
-    t.deepEqual(Text.measure("whatever", {}), {
-        width: 1,
-        height: 5,
+    t.deepEqual(Text.measure("whatever", {
+        fontSize: 40,
+    }), {
+        width: 5,
+        height: 40,
     });
 });
 

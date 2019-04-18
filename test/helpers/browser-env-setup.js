@@ -1,6 +1,6 @@
 import browserEnv from "browser-env";
 
-browserEnv(["window"], {
+browserEnv(["window", "document"], {
     pretendToBeVisual: true,
 });
 
@@ -33,10 +33,9 @@ window.HTMLCanvasElement.prototype.getContext = function getContext () {
         translate: noop,
         rotate: noop,
         scale: noop,
+        setTransform: noop,
         measureText: () => ({
-            width: 1,
-            emHeightAscent: 2,
-            emHeightDescent: 3,
+            width: 5,
         }),
     };
 };

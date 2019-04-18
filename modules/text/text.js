@@ -1,8 +1,8 @@
 import NetworkEvent from "@pencil.js/network-event";
 import Component from "@pencil.js/component";
-import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import textDirection from "text-direction";
 import hash from "@sindresorhus/fnv1a";
+import * as textMetrics from "text-metrics";
 
 /**
  * Reformat passed arguments into an array of line string
@@ -18,24 +18,31 @@ function formatString (string) {
 
 /**
  * Cache based text measurement
- * @param {String} line - Any text
- * @param {String} font - Font definition string
+ * @param {String} text - Any text
+ * @param {TextOptions} options - Font definition
  * @return {TextMeasures}
  */
 const measureText = (() => {
-    const { ctx } = new OffScreenCanvas();
     const cache = {};
 
-    return (line, font) => {
-        const key = hash(`${line}${font}`);
+    return (text, options) => {
+        const key = hash(`${text}${JSON.stringify(options)}`);
         if (cache[key] !== undefined) {
             return cache[key];
         }
-        ctx.font = font;
-        const measure = ctx.measureText(line);
+
+        const multiline = {
+            multiline: true,
+        };
+        const measures = textMetrics.init({
+            fontFamily: options.font,
+            fontSize: `${options.fontSize}px`,
+            fontWeight: options.bold ? "700" : "400",
+            lineHeight: `${options.fontSize * options.lineHeight}px`,
+        });
         const result = {
-            width: measure.width,
-            height: measure.emHeightAscent + measure.emHeightDescent,
+            width: measures.width(text, multiline),
+            height: measures.height(text, multiline),
         };
         cache[key] = result;
         return result;
@@ -112,8 +119,8 @@ export default class Text extends Component {
             ctx.textAlign = opts.align;
             ctx.textBaseline = "top"; // TODO: user could want to change this
 
-            const { height } = measureText("M", ctx.font);
-            const lineHeight = height * opts.lineHeight;
+            const lineHeight = Text.measure("M", this.options).height;
+            const height = lineHeight / opts.lineHeight;
             const margin = height * ((opts.lineHeight - 1) / 2);
 
             if (opts.fill) {
@@ -141,7 +148,7 @@ export default class Text extends Component {
                     ctx.strokeText(line, offset * this.width, y);
                 }
                 if (opts.underscore) {
-                    const { width } = measureText(line, ctx.font);
+                    const { width } = Text.measure(line, opts);
                     const left = offset * (this.width - width);
                     ctx.moveTo(left, y + height);
                     ctx.lineTo(left + width, y + height);
@@ -213,7 +220,7 @@ export default class Text extends Component {
      * @return {TextMeasures}
      */
     getMeasures () {
-        return Text.measure(this.lines, this.options);
+        return Text.measure(this.text, this.options);
     }
 
     /**
@@ -288,16 +295,12 @@ export default class Text extends Component {
      * @return {TextMeasures}
      */
     static measure (text, options) {
+        const string = Array.isArray(text) ? text.join("\n") : text;
         const opts = {
             ...this.defaultOptions,
             ...options,
         };
-        const lines = formatString(text);
-        const font = this.getFontDefinition(opts);
-        return {
-            width: Math.max(...lines.map(line => measureText(line, font).width)),
-            height: measureText("M", font).height * lines.length * opts.lineHeight,
-        };
+        return measureText(string, opts);
     }
 
     /**
