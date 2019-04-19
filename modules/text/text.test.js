@@ -106,6 +106,25 @@ test("makePath with no fill nor stroke", (t) => {
     t.pass();
 });
 
+test("setContext", (t) => {
+    const ctx = {
+        translate: (...args) => t.deepEqual(args, [10, 20]),
+    };
+    t.context.options.stroke = "#123";
+    t.context.options.origin = [10, 20];
+    t.context.options.font = "whatever";
+    t.context.options.fontSize = 99;
+    t.context.options.align = "left";
+    t.context.options.bold = true;
+    t.context.options.italic = true;
+
+    const [willFill, willStroke] = t.context.setContext(ctx);
+    t.true(willFill && willStroke);
+    t.is(ctx.font, "bold italic 99px whatever");
+    t.is(ctx.textAlign, "left");
+    t.is(ctx.textBaseline, "top");
+});
+
 test("trace", (t) => {
     const path = {
         rect: () => t.pass(),

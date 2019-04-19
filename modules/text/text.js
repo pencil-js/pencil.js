@@ -112,27 +112,12 @@ export default class Text extends Component {
         const opts = this.options;
         if (this.text.length && (opts.fill || (opts.stroke && opts.strokeWidth > 0))) {
             ctx.save();
-            const origin = this.getOrigin();
-            ctx.translate(origin.x, origin.y);
-
-            ctx.font = Text.getFontDefinition(opts);
-            ctx.textAlign = opts.align;
-            ctx.textBaseline = "top"; // TODO: user could want to change this
 
             const lineHeight = Text.measure("M", this.options).height;
             const height = lineHeight / opts.lineHeight;
             const margin = height * ((opts.lineHeight - 1) / 2);
 
-            if (opts.fill) {
-                ctx.fillStyle = opts.fill.toString(ctx);
-            }
-
-            if (opts.stroke) {
-                ctx.lineJoin = opts.join;
-                ctx.lineCap = opts.cap;
-                ctx.strokeStyle = opts.stroke.toString(ctx);
-                ctx.lineWidth = opts.strokeWidth;
-            }
+            this.setContext(ctx);
 
             if (opts.underscore) {
                 ctx.beginPath();
@@ -166,6 +151,21 @@ export default class Text extends Component {
         }
 
         return this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    setContext (ctx) {
+        const [willFill, willStroke] = super.setContext(ctx);
+
+        if (willFill || willStroke) {
+            ctx.font = Text.getFontDefinition(this.options);
+            ctx.textAlign = this.options.align;
+            ctx.textBaseline = "top"; // TODO: user could want to change this
+        }
+
+        return [willFill, willStroke];
     }
 
     /**

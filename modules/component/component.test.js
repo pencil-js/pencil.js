@@ -31,20 +31,54 @@ test("getOrigin", (t) => {
 });
 
 test("makePath", (t) => {
-    t.context.trace = () => {};
+    t.context.trace = () => t.pass();
     const ctx = {
         save: () => t.pass(),
-        restore: () => t.pass(),
         translate: () => t.pass(),
         fill: () => t.pass(),
         stroke: () => t.pass(),
+        restore: () => t.pass(),
     };
+    t.context.options.stroke = "#abc";
+
+    t.plan(6);
+    t.context.makePath(ctx);
+});
+
+test("makePath skip", (t) => {
+    t.context.trace = () => t.fail();
+    const ctx = {
+        save: () => t.pass(),
+        translate: () => t.fail(),
+        fill: () => t.fail(),
+        stroke: () => t.fail(),
+        restore: () => t.pass(),
+    };
+
+    t.context.options.fill = null;
+    t.context.options.stroke = null;
+    t.context.makePath(ctx);
+    t.context.options.stroke = "any";
+    t.context.options.strokeWidth = 0;
+    t.context.makePath(ctx);
+    t.context.options.strokeWidth = -1;
+    t.context.makePath(ctx);
+    t.pass();
+});
+
+test("setContext", (t) => {
+    t.context.trace = () => {};
+    const ctx = {
+        translate: (...args) => t.deepEqual(args, [10, 20]),
+    };
+    t.context.options.origin = [10, 20];
     t.context.options.stroke = "#abc";
     t.context.options.strokeWidth = 6;
     t.context.options.join = "a";
     t.context.options.cap = "b";
 
-    t.context.makePath(ctx);
+    const [willFill, willStroke] = t.context.setContext(ctx);
+    t.true(willFill && willStroke);
     t.is(ctx.fillStyle, "#369");
     t.is(ctx.strokeStyle, "#abc");
     t.is(ctx.lineWidth, 6);
@@ -54,24 +88,6 @@ test("makePath", (t) => {
     t.is(ctx.shadowBlur, 0);
     t.is(ctx.shadowOffsetX, 10);
     t.is(ctx.shadowOffsetY, 20);
-});
-
-test("makePath skip", (t) => {
-    t.context.trace = () => {};
-    const ctx = {
-        save: () => t.pass(),
-        restore: () => t.pass(),
-        translate: () => t.pass(),
-        fill: () => t.fail(),
-        stroke: () => t.fail(),
-    };
-    t.context.options.fill = null;
-    t.context.options.stroke = null;
-    t.context.makePath(ctx);
-    t.context.options.stroke = "any";
-    t.context.options.strokeWidth = 0;
-    t.context.makePath(ctx);
-    t.pass();
 });
 
 test("trace", (t) => {
