@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/select",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Select user input for Pencil.js package.",
   "main": "select.js",
   "files": [],
@@ -27,13 +27,13 @@
   ],
   "dependencies": {
     "@pencil.js/base-event": "^1.6.2",
-    "@pencil.js/component": "^1.6.2",
-    "@pencil.js/input": "^1.6.2",
-    "@pencil.js/math": "^1.6.2",
-    "@pencil.js/mouse-event": "^1.6.2",
-    "@pencil.js/rectangle": "^1.6.2",
-    "@pencil.js/text": "^1.6.2",
-    "@pencil.js/triangle": "^1.6.2"
+    "@pencil.js/component": "^1.6.3",
+    "@pencil.js/input": "^1.6.3",
+    "@pencil.js/math": "^1.6.3",
+    "@pencil.js/mouse-event": "^1.6.3",
+    "@pencil.js/rectangle": "^1.6.3",
+    "@pencil.js/text": "^1.6.3",
+    "@pencil.js/triangle": "^1.6.3"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
