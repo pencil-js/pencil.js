@@ -88,6 +88,11 @@
     ], false, {
         stroke: "hsl(210, 100%, 50%)",
         strokeWidth: 6,
+        shadow: {
+            blur: 6,
+            color: "red",
+            position: [4, 0],
+        },
     }));
 
     scene.add(...shapes);
