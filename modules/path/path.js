@@ -22,10 +22,7 @@ export default class Path extends Component {
 
         if (!isClosed) {
             // Overrides options to work like a line if not closed
-            this.options = {
-                ...Line.defaultOptions,
-                ...options,
-            };
+            this.options = (new Line(this.position, [], options)).options;
         }
 
         this.instructions = instructions;
