@@ -6,7 +6,7 @@
   "files": [],
   "sideEffects": false,
   "scripts": {
-    "test": "nyc --require esm --reporter=text ava"
+    "test": "nyc --reporter=text ava"
   },
   "ava": {
     "require": [

@@ -10,7 +10,7 @@
   "unpkg": "dist/pencil.min.js",
   "jsdelivr": "dist/pencil.min.js",
   "scripts": {
-    "test": "nyc --require esm --reporter=text ava",
+    "test": "nyc --reporter=text ava",
     "prepublishOnly": "webpack --mode=production"
   },
   "ava": {
@@ -86,6 +86,6 @@
     "esm": "^3.2.22",
     "nyc": "^14.0.0",
     "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.1"
   }
 }

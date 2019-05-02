@@ -1,6 +1,0 @@
-{
-    "extends": [
-        "plugin:ava/recommended",
-        "@gmartigny/eslint-config"
-    ]
-}

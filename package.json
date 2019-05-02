@@ -9,9 +9,9 @@
   "scripts": {
     "init": "lerna bootstrap --hoist",
     "reset": "lerna clean --yes && npm run init",
-    "lint": "eslint modules/ --ignore-pattern \"coverage\" --ignore-pattern \"*.min.*\"",
-    "test": "nyc --require esm --reporter=html ava",
-    "testci": "nyc --require esm --reporter=lcovonly --reporter=text-summary ava",
+    "lint": "eslint modules/",
+    "test": "nyc --reporter=html ava",
+    "testci": "nyc --reporter=lcovonly --reporter=text-summary ava",
     "build": "webpack --mode=development --watch",
     "prepublish": "exit 0"
   },
@@ -21,8 +21,16 @@
       "./test/helpers/browser-env-setup.js"
     ]
   },
+  "eslintConfig": {
+    "extends": [
+      "plugin:ava/recommended",
+      "@gmartigny/eslint-config"
+    ]
+  },
   "eslintIgnore": [
-    "**/node_modules/*"
+    "**/node_modules/*",
+    "**/coverage/*",
+    "**/*.min.*"
   ],
   "repository": {
     "type": "git",
@@ -35,18 +43,18 @@
   },
   "homepage": "https://penciljs.org",
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@gmartigny/eslint-config": "^1.2.2",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@gmartigny/eslint-config": "^1.2.4",
     "ava": "^1.4.0",
     "babel-loader": "^8.0.2",
     "browser-env": "^3.2.5",
     "eslint": "^5.16.0",
     "eslint-plugin-ava": "^6.0.0",
     "esm": "^3.2.22",
-    "lerna": "^3.13.3",
+    "lerna": "^3.13.4",
     "nyc": "^14.0.0",
     "webpack": "^4.30.0",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.1"
   }
 }
