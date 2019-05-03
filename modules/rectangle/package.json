@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/rectangle",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "Rectangle shape for Pencil.js package.",
   "main": "rectangle.js",
   "files": [],
@@ -26,8 +26,8 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/component": "^1.6.3",
-    "@pencil.js/position": "^1.6.3"
+    "@pencil.js/component": "^1.6.4",
+    "@pencil.js/position": "^1.6.4"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
