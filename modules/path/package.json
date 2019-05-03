@@ -3,7 +3,7 @@
   "version": "1.6.3",
   "description": "Hand-free drawing tool for Pencil.js package.",
   "main": "path.js",
-  "files": [],
+  "files": ["instruction.js"],
   "sideEffects": false,
   "scripts": {
     "test": "nyc --reporter=text ava"
