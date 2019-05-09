@@ -149,6 +149,10 @@ test("distance", (t) => {
     t.true(almostEqual(pos2.distance(t.context), dist));
 });
 
+test("dotProduct", (t) => {
+    t.is(t.context.dotProduct([-8, 3]), 501);
+});
+
 test("crossProduct", (t) => {
     t.is(t.context.crossProduct([-8, 3]), 314);
 });
@@ -189,11 +193,14 @@ test("from", (t) => {
     });
     t.is(fromObject.x, 42);
     t.is(fromObject.y, 666);
+
+    t.throws(() => Position.from(false), TypeError);
+    t.throws(() => Position.from(new Vector()), TypeError);
 });
 
 test("average", (t) => {
     const n = 10;
-    const points = (new Array(n)).fill().map((p, index) => new Position(index, index * 7));
+    const points = [...new Array(n)].map((p, index) => new Position(index, index * 7));
     const average = Position.average(...points);
 
     t.true(average instanceof Position);

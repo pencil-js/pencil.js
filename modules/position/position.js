@@ -193,13 +193,23 @@ export default class Position {
     }
 
     /**
+     * Dot product
+     * @param {PositionDefinition} positionDefinition - Another position
+     * @return {Number}
+     */
+    dotProduct (positionDefinition) {
+        const position = Position.from(positionDefinition);
+        return (this.x * position.x) + (this.y * position.y);
+    }
+
+    /**
      * Cross product
      * @param {PositionDefinition} positionDefinition - Another position
      * @return {Number}
      */
     crossProduct (positionDefinition) {
         const position = Position.from(positionDefinition);
-        return (this.x * position.y) - (position.x * this.y);
+        return (this.x * position.y) - (this.y * position.x);
     }
 
     /**
