@@ -109,6 +109,18 @@ test("intersect", (t) => {
     t.false(t.context.intersect(donnot));
 });
 
+test("getClosestToPoint", (t) => {
+    const onAB = t.context.getClosestToPoint([25, 120]);
+    const above = t.context.getClosestToPoint([0, 120]);
+    const outOfA = t.context.getClosestToPoint([-20, 0]);
+    const outOfB = t.context.getClosestToPoint([30, 200]);
+
+    t.deepEqual(above, new Position(16, 108));
+    t.deepEqual(onAB, new Position(25, 120));
+    t.deepEqual(outOfA, t.context.start);
+    t.deepEqual(outOfB, t.context.end);
+});
+
 test("toJSON", (t) => {
     t.deepEqual(t.context.toJSON(), [t.context.start, t.context.end]);
 });

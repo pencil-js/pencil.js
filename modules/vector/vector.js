@@ -132,6 +132,21 @@ export default class Vector {
     }
 
     /**
+     * Find the closest position to a point on this vector
+     * @param {PositionDefinition} positionDefinition - Any position
+     * @returns {Position}
+     */
+    getClosestToPoint (positionDefinition) {
+        const position = Position.from(positionDefinition)
+        const aToP = (new Vector(this.start, position)).getDelta();
+        const aToB = this.getDelta();
+
+        const t = aToP.dotProduct(aToB) / (this.length ** 2);
+
+        return this.start.clone().add(aToB.multiply(t)).constrain(this.start, this.end);
+    }
+
+    /**
      * Return a JSON ready Vector definition
      * @return {Array<Array<Number>>}
      */
