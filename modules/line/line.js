@@ -39,14 +39,6 @@ export default class Line extends Component {
     }
 
     /**
-     * Can't hover a line
-     * @returns {Boolean}
-     */
-    isHover () { // eslint-disable-line class-methods-use-this
-        return false;
-    }
-
-    /**
      * @inheritDoc
      */
     toJSON () {

@@ -63,9 +63,9 @@ export default class Component extends Container {
             if (willStroke) {
                 ctx.stroke(path);
             }
-
-            ctx.restore();
         }
+
+        ctx.restore();
 
         return this;
     }
@@ -128,10 +128,23 @@ export default class Component extends Container {
         const relative = Position.from(positionDefinition).clone().subtract(this.position);
         const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationCenter).subtract(origin);
 
+        const willFill = this.options.fill;
+        const willStroke = this.options.stroke && this.options.strokeWidth > 0;
+
+        if (!willFill && !willStroke) {
+            return false;
+        }
+
+        if (willStroke) {
+            ctx.lineJoin = this.options.join;
+            ctx.lineCap = this.options.cap;
+            ctx.lineWidth = this.options.strokeWidth;
+        }
+
         const path = new window.Path2D();
         this.trace(path);
-        let result = (this.options.fill && ctx.isPointInPath(path, rotated.x, rotated.y)) ||
-            (this.options.stroke && this.options.strokeWidth > 0 && ctx.isPointInStroke(path, rotated.x, rotated.y));
+        let result = (willFill && ctx.isPointInPath(path, rotated.x, rotated.y)) ||
+            (willStroke && ctx.isPointInStroke(path, rotated.x, rotated.y));
 
         if (this.options.clip) {
             const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;

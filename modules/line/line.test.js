@@ -32,10 +32,6 @@ test("trace", (t) => {
     t.context.trace(path);
 });
 
-test("ishover", (t) => {
-    t.false(t.context.isHover([0, 0]));
-});
-
 test("toJSON", (t) => {
     const json = t.context.toJSON();
 
