@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/keyboard-event",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Keyboard related event for Pencil.js package.",
   "main": "keyboard-event.js",
   "files": [],
@@ -27,7 +27,7 @@
     "keyboard"
   ],
   "dependencies": {
-    "@pencil.js/arc": "^1.6.4",
+    "@pencil.js/arc": "^1.6.5",
     "@pencil.js/base-event": "^1.6.4"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
