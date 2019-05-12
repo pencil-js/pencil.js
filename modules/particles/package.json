@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/particles",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "description": "Particles generator for Pencil.js package.",
   "main": "particles.js",
   "files": [],
@@ -26,9 +26,9 @@
     "wrapper"
   ],
   "dependencies": {
-    "@pencil.js/component": "^1.6.5",
-    "@pencil.js/math": "^1.6.4",
-    "@pencil.js/position": "^1.6.5"
+    "@pencil.js/component": "^1.6.6",
+    "@pencil.js/math": "^1.6.6",
+    "@pencil.js/position": "^1.6.6"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

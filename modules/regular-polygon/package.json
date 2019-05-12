@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/regular-polygon",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "description": "Equiangular and equilateral convex polygon for Pencil.js package.",
   "main": "regular-polygon.js",
   "files": [],
@@ -26,10 +26,10 @@
     "shape"
   ],
   "dependencies": {
-    "@pencil.js/arc": "^1.6.5",
-    "@pencil.js/keyboard-event": "^1.6.5",
-    "@pencil.js/polygon": "^1.6.5",
-    "@pencil.js/position": "^1.6.5"
+    "@pencil.js/arc": "^1.6.6",
+    "@pencil.js/keyboard-event": "^1.6.6",
+    "@pencil.js/polygon": "^1.6.6",
+    "@pencil.js/position": "^1.6.6"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",

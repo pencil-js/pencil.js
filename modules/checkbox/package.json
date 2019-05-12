@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/checkbox",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "description": "Checkbox user input for Pencil.js package.",
   "main": "checkbox.js",
   "files": [],
@@ -26,8 +26,8 @@
     "UI"
   ],
   "dependencies": {
-    "@pencil.js/input": "^1.6.5",
-    "@pencil.js/square": "^1.6.5"
+    "@pencil.js/input": "^1.6.6",
+    "@pencil.js/square": "^1.6.6"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
