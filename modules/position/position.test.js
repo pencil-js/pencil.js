@@ -116,17 +116,21 @@ test("rotate", (t) => {
 });
 
 test("constrain", (t) => {
-    t.context.constrain([-10, -10], [10, 10]);
+    t.context.constrain([-100, -100], [100, 100]);
+    t.is(t.context.x, -42);
+    t.is(t.context.y, 55);
+
+    t.context.constrain([100, -100], [-100, 100]);
+    t.is(t.context.x, -42);
+    t.is(t.context.y, 55);
+
+    t.context.constrain([10, -10], [-10, 10]);
     t.is(t.context.x, -10);
     t.is(t.context.y, 10);
 
-    t.context.constrain([0, 0], [10, -5]);
+    t.context.constrain([0, 0], [100, 100]);
     t.is(t.context.x, 0);
-    t.is(t.context.y, -5);
-
-    t.context.constrain([-10, -10], [-8, -8]);
-    t.is(t.context.x, -8);
-    t.is(t.context.y, -8);
+    t.is(t.context.y, 10);
 });
 
 test("lerp", (t) => {

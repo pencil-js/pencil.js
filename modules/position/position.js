@@ -165,8 +165,8 @@ export default class Position {
     constrain (startDefinition, endDefinition) {
         const start = Position.from(startDefinition);
         const end = Position.from(endDefinition);
-        const x = constrain(this.x, start.x, end.x);
-        const y = constrain(this.y, start.y, end.y);
+        const x = constrain(this.x, Math.min(start.x, end.x), Math.max(start.x, end.x));
+        const y = constrain(this.y, Math.min(start.y, end.y), Math.max(start.y, end.y));
         return this.set(x, y);
     }
 
