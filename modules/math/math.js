@@ -6,8 +6,8 @@
  * @param {Number} max - Maximal limit for the value
  * @returns {Number}
  * @example
- * constrain(999, 0, 50); // 50
- * constrain(-999, 0, 50); // 0
+ * constrain(999, 0, 50); // => 50
+ * constrain(-999, 0, 50); // => 0
  */
 export const constrain = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -17,6 +17,8 @@ export const constrain = (value, min, max) => Math.min(Math.max(value, min), max
  * @param {Number} number2 - Any number
  * @param {Number} [epsilon=Number.EPSILON] - Maximum difference to consider two number equal.
  * @returns {Boolean}
+ * @example
+ * equals(0.1 + 0.2, 0.3); // => true
  */
 export const equals = (number1, number2, epsilon = Number.EPSILON) => Math.abs(number1 - number2) < epsilon;
 
@@ -25,6 +27,10 @@ export const equals = (number1, number2, epsilon = Number.EPSILON) => Math.abs(n
  * @param {Number} [min=1] - Lower limit, or upper limit if max is omitted
  * @param {Number} [max] - Upper limit, can be omitted
  * @returns {Number}
+ * @example
+ * random(); // => 0.5918807307648482
+ * random(10); // => 4.4856764978326735
+ * random(100, 200); // => 134.57047268453047
  */
 export const random = (min = 1, max) => {
     let from = min;
@@ -37,12 +43,12 @@ export const random = (min = 1, max) => {
 };
 
 /**
- * Truncate (quickly) a number to its integer part.
+ * Truncate a number to its integer part.
  * @param {Number} value - Any number
  * @returns {Number}
  * @example
- * truncate(12.3); // 12
- * truncate(-4.9); // -4
+ * truncate(12.3); // => 12
+ * truncate(-4.9); // => -4
  */
 // eslint-disable-next-line no-bitwise
 export const truncate = value => value << 0;
@@ -70,6 +76,9 @@ export const phi = (Math.sqrt(5) + 1) / 2;
  * @param {Number} value - Dividend
  * @param {Number} divisor - Divisor
  * @return {Number}
+ * @example
+ * modulo(10, 3); // => 1
+ * modulo(10, -3); // => -2
  */
 export const modulo = (value, divisor) => {
     const remainder = value % divisor;
@@ -82,6 +91,9 @@ export const modulo = (value, divisor) => {
  * @param {Number} [min=0] - Starting value of the range
  * @param {Number} [max=1] - Ending value of the range
  * @returns {Array<Number>}
+ * @example
+ * distribute(10); // => Number[10] evenly distributed across [0, 1]
+ * distribute(5, 10, 20); // => Number[5] evenly distributed across [10, 20]
  */
 export const distribute = (nbValue, min = 0, max = 1) => {
     const start = random(min, max);
@@ -93,6 +105,8 @@ export const distribute = (nbValue, min = 0, max = 1) => {
  * Add up all values passed as argument
  * @param {...Number} values - Any set of number
  * @returns {Number}
+ * @example
+ * sum(1, 2, 3); // => 6
  */
 export const sum = (...values) => values.reduce((acc, value) => acc + value, 0);
 
@@ -100,6 +114,8 @@ export const sum = (...values) => values.reduce((acc, value) => acc + value, 0);
  * Return the average of all values
  * @param {...Number} values - Any set of number
  * @return {Number}
+ * @example
+ * sum(1, 2, 3); // => 2
  */
 export const average = (...values) => sum(...values) / values.length;
 
@@ -111,6 +127,8 @@ export const average = (...values) => sum(...values) / values.length;
  * @param {Number} [toMin=0] - Start of the target scale
  * @param {Number} [toMax=1] - End of the target scale
  * @return {Number}
+ * @example
+ * map(5, 0, 10, 100, 200); // => 150
  */
 export const map = (value, fromMin, fromMax, toMin = 0, toMax = 1) => (
     ((value - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin
