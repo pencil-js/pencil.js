@@ -4,7 +4,7 @@ import Select from "./select";
 
 test.beforeEach((t) => {
     t.context = new Select([0, 0], [
-        "A", "B", "C",
+        undefined, "B", "C",
     ], {
         value: 1,
     });
@@ -14,14 +14,23 @@ test("constructor", (t) => {
     t.is(t.context.optionsList.length, 3);
     t.context.optionsList.forEach(option => t.is(option.constructor.name, "Text"));
     t.false(t.context.optionsContainer.options.shown);
+
+    t.throws(() => new Select([0, 0], []));
 });
 
 test("option events", (t) => {
     t.context.value = 1;
-    const firstOption = t.context.optionsList[0];
-    firstOption.fire(new MouseEvent(MouseEvent.events.click, firstOption));
 
+    const firstOption = t.context.optionsList[0];
+
+    firstOption.fire(new MouseEvent(MouseEvent.events.click, firstOption));
     t.is(t.context.value, 0);
+
+    firstOption.fire(new MouseEvent(MouseEvent.events.hover, firstOption));
+    t.is(firstOption.parent.options.fill, t.context.options.hover);
+
+    firstOption.fire(new MouseEvent(MouseEvent.events.leave, firstOption));
+    t.is(firstOption.parent.options.fill, t.context.options.background);
 });
 
 test("get and set value", (t) => {

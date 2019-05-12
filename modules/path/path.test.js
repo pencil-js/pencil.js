@@ -63,7 +63,10 @@ test("isHover", (t) => {
 
 test.todo("toJSON");
 
-test.todo("from");
+test("from", (t) => {
+    const definition = {};
+    t.throws(() => Path.from(definition));
+});
 
 test("lineTo", (t) => {
     const ctx = {
@@ -83,7 +86,7 @@ test("moveTo", (t) => {
 
 test("quarterTo halfTo arcTo bezierTo", (t) => {
     const ctx = {
-        bezierCurveTo: () => t.pass(),
+        bezierCurveTo: (ctr1x, ctr1y, ctr2x, ctr2y, x, y) => t.true(x === 100 && y === 200),
     };
     t.plan(4);
     [
@@ -104,6 +107,10 @@ test("quadTo", (t) => {
 
 test.todo("splineThrough");
 
-test.todo("waveTo");
+test("waveTo", (t) => {
+    t.throws(() => Path.waveTo([0, 0], 3));
+});
 
-test.todo("sinTo");
+test("sinTo", (t) => {
+    t.throws(() => Path.sinTo([0, 0], 3));
+});

@@ -13,6 +13,11 @@ test("constructor", (t) => {
     t.is(t.context.options.value, 0.8);
 });
 
+test("click", (t) => {
+    t.context.click();
+    t.pass();
+});
+
 test("get and set width", (t) => {
     t.is(t.context.width, 300);
 
