@@ -173,12 +173,11 @@ export default class Position {
     /**
      * Move the position towards another by a ratio
      * @param {PositionDefinition} positionDefinition - Any other position
-     * @param {Function|Number} ratio - Ratio of distance to move, 0 mean no change, 1 mean arrive at position
+     * @param {Number} ratio - Ratio of distance to move, 0 mean no change, 1 mean arrive at position
      * @return {Position} Itself
      */
     lerp (positionDefinition, ratio) {
-        const difference = Position.from(positionDefinition)
-            .clone().subtract(this).multiply(typeof ratio === "function" ? ratio() : ratio);
+        const difference = Position.from(positionDefinition).clone().subtract(this).multiply(ratio);
         return this.add(difference);
     }
 

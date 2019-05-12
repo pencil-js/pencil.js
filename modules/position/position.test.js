@@ -27,6 +27,11 @@ test("set", (t) => {
 
     t.is(t.context.x, 10);
     t.is(t.context.y, 20);
+
+    t.context.set(42);
+
+    t.is(t.context.x, 42);
+    t.is(t.context.y, 42);
 });
 
 test("clone and equals", (t) => {
@@ -101,6 +106,10 @@ test("power", (t) => {
 
 test("rotate", (t) => {
     t.context.set(10, 0);
+
+    t.context.rotate();
+    t.true(almostEqual(t.context.x, 10));
+    t.true(almostEqual(t.context.y, 0));
 
     t.context.rotate(0.5);
     t.true(almostEqual(t.context.x, -10));
