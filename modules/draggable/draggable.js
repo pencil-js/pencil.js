@@ -17,7 +17,7 @@ import MouseEvent from "@pencil.js/mouse-event";
 
 /**
  * Set this component draggable
- * @param {DraggableOptions} options - Additional options
+ * @param {DraggableOptions} [options] - Additional options
  * @return {DraggableAPI}
  */
 Component.prototype.draggable = function draggable (options) {

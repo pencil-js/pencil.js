@@ -10,7 +10,7 @@ export default class Square extends Rectangle {
      * Square constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner
      * @param {Number} size - Side's length
-     * @param {ComponentOptions} options - Drawing options
+     * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (positionDefinition, size, options) {
         super(positionDefinition, size, size, options);

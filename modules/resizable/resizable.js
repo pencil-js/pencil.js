@@ -13,7 +13,7 @@ import "@pencil.js/draggable";
 
 /**
  * Enable resize on a rectangle
- * @param {ResizableOptions} options - Additional options
+ * @param {ResizableOptions} [options] - Additional options
  * @return {DraggableAPI}
  */
 Rectangle.prototype.resizable = function resizable (options) {

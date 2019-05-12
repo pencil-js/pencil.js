@@ -11,7 +11,7 @@ export default class Polygon extends Component {
      * Polygon constructor
      * @param {PositionDefinition} positionDefinition - Any position
      * @param {Array<PositionDefinition>} points - Set of vertices relative to position defining the polygon
-     * @param {ComponentOptions} options - Drawing options
+     * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (positionDefinition, points = [], options) {
         if (points.length < 2) {

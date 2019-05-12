@@ -11,7 +11,7 @@ export default class Circle extends Ellipse {
      * Circle constructor
      * @param {PositionDefinition} positionDefinition - Center of circle
      * @param {Number} radius - Distance from center to outer edge
-     * @param {ComponentOptions} options - Drawing options
+     * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (positionDefinition, radius, options) {
         super(positionDefinition, radius, radius, options);

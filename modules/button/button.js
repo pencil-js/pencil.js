@@ -10,7 +10,7 @@ export default class Button extends Input {
     /**
      * Button constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner
-     * @param {ButtonOptions} options -
+     * @param {ButtonOptions} [options] -
      */
     constructor (positionDefinition, options) {
         super(positionDefinition, options);

@@ -17,7 +17,7 @@ export default class Select extends Input {
      * Select constructor
      * @param {PositionDefinition} positionDefinition - Any position
      * @param {Array<String>} optionsList - List of options to display
-     * @param {InputOptions} options - Drawing options
+     * @param {InputOptions} [options] - Drawing options
      */
     constructor (positionDefinition, optionsList, options) {
         if (!optionsList.length) {
