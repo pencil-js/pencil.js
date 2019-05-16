@@ -253,7 +253,7 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
         },
         [MouseEvent.events.move]: (target, eventPosition) => {
             if (startPosition) {
-                target.isClicked = eventPosition.distance(startPosition) < 10;
+                target.isClicked = target.isClicked && eventPosition.distance(startPosition) < 10;
             }
             if (target !== hovered) {
                 if (hovered) {
