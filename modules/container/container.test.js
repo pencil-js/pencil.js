@@ -149,11 +149,12 @@ test("render", (t) => {
     const ctx = {
         save: () => t.pass(),
         translate: () => t.pass(),
+        scale: () => t.pass(),
         restore: () => t.pass(),
     };
     child.render = param => t.is(param, ctx);
     otherChild.render = param => t.is(param, ctx);
-    t.plan(5);
+    t.plan(6);
     t.context.render(ctx);
 });
 
@@ -165,6 +166,7 @@ test("render with option", (t) => {
         save: () => {},
         translate: () => {},
         rotate: () => t.pass(),
+        scale: () => {},
         restore: () => {},
     };
     t.plan(2);
@@ -180,6 +182,7 @@ test("render with clip", (t) => {
     const ctx = {
         save: () => {},
         translate: () => {},
+        scale: () => {},
         clip: () => t.pass(),
         restore: () => {},
     };
@@ -303,6 +306,8 @@ test("defaultOptions", (t) => {
     t.is(options.rotation, 0);
     t.is(options.rotationCenter.x, 0);
     t.is(options.rotationCenter.y, 0);
+    t.is(options.scale.x, 1);
+    t.is(options.scale.y, 1);
     t.is(options.zIndex, 1);
     t.is(options.clip, null);
 });

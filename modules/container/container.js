@@ -33,6 +33,7 @@ export default class Container extends EventEmitter {
             ...options,
         };
         this.options.rotationCenter = Position.from(this.options.rotationCenter);
+        this.options.scale = Position.from(this.options.scale);
         /**
          * @type {Array<Container>}
          */
@@ -248,6 +249,9 @@ export default class Container extends EventEmitter {
             ctx.translate(-anchor.x, -anchor.y);
         }
 
+        const scale = Position.from(this.options.scale);
+        ctx.scale(scale.x, scale.y);
+
         this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
 
         if (this.options.opacity !== null && ctx.globalAlpha !== this.options.opacity) {
@@ -414,7 +418,8 @@ export default class Container extends EventEmitter {
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
      * @prop {Number} [rotation=0] - Rotation ratio from 0 to 1 (clockwise)
-     * @prop {PositionDefinition} [rotationCenter=new Position()] - Center of rotation relative to this position
+     * @prop {PositionDefinition} [scale=[1, 1]] - Scaling ratio
+     * @prop {PositionDefinition} [rotationCenter=[0, 0]] - Center of rotation relative to this position
      * @prop {Number} [zIndex=1] - Depth ordering
      * @prop {Component} [clip=null] -
      */
@@ -426,6 +431,7 @@ export default class Container extends EventEmitter {
             shown: true,
             opacity: null,
             rotation: 0,
+            scale: new Position(1, 1),
             rotationCenter: new Position(),
             zIndex: 1,
             clip: null,
