@@ -61,10 +61,12 @@ Component.prototype.draggable = function draggable (options) {
         if (cursorNotSet) {
             this.options.cursor = Component.cursors.grab;
         }
-        this.isDragged = false;
-        startPosition = null;
+        if (this.isDragged && startPosition) {
+            this.isDragged = false;
+            startPosition = null;
 
-        this.fire(new MouseEvent(MouseEvent.events.drop, this, this.position));
+            this.fire(new MouseEvent(MouseEvent.events.drop, this, this.position));
+        }
     }));
 
     return {
