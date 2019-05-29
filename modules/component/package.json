@@ -1,6 +1,6 @@
 {
   "name": "@pencil.js/component",
-  "version": "1.6.6",
+  "version": "1.7.0",
   "description": "Abstract component for Pencil.js package.",
   "main": "component.js",
   "files": [],
@@ -26,7 +26,7 @@
     "rendered"
   ],
   "dependencies": {
-    "@pencil.js/container": "^1.6.6",
+    "@pencil.js/container": "^1.7.0",
     "@pencil.js/offscreen-canvas": "^1.6.4",
     "@pencil.js/position": "^1.6.6"
   },
