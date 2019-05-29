@@ -111,11 +111,6 @@ scene.render(); // Render the scene once
 Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 
 
-## Who is using Pencil.js ?
-
- - [Socialism Simulator](https://gmartigny.github.io/socialismSimulator/)
-
-
 ## Modules
  * [EventEmitter](modules/event-emitter)
    * [Container](modules/container)
@@ -156,17 +151,15 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
    * [KeyboardEvent](modules/keyboard-event)
    * [NetworkEvent](modules/network-event)
 
-## Common pitfalls
 
-### Scaling
-Even if Pencil.js can draw thousand of shapes, it's not built around performance nor memory management.
-If you want to code an efficient particle generator, try [Processing](https://processing.org/) instead.
+## Who is using Pencil.js ?
 
-### Naming
-Some module have the same name as some Javascript global (eg: Image, Math).
-Importing them without namespace will overrides these globals and lead to potential bugs.
+ - [Socialism Simulator](https://gmartigny.github.io/socialismSimulator/)
 
-In any case, we recommend you use a namespace (eg: `import Pencil from "pencil.js"`, `import * as PencilMath from "@pencil.js/math"`)
+
+## Sponsors
+
+[![JetBrains logo](https://user-images.githubusercontent.com/2543511/58549723-71160e00-820c-11e9-98c1-9e3d7aafcbb2.png)](https://www.jetbrains.com/?from=Pencil.js)
 
 
 ## Contributions
