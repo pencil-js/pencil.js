@@ -52,9 +52,9 @@
     "eslint": "^5.16.0",
     "eslint-plugin-ava": "^6.0.0",
     "esm": "^3.2.22",
-    "lerna": "^3.13.4",
+    "lerna": "^3.14.1",
     "nyc": "^14.0.0",
-    "webpack": "^4.30.0",
+    "webpack": "^4.32.2",
     "webpack-cli": "^3.3.1"
   }
 }
