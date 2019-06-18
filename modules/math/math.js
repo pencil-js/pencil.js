@@ -133,3 +133,12 @@ export const average = (...values) => sum(...values) / values.length;
 export const map = (value, fromMin, fromMax, toMin = 0, toMax = 1) => (
     ((value - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin
 );
+
+/**
+ * Linear extrapolation computation, useful when doing animation
+ * @param {Number} from - Starting value
+ * @param {Number} to - Ending value
+ * @param {Number} ratio - Extrapolation ratio, 0 is the starting value and 1 the ending value
+ * @return {Number}
+ */
+export const lerp = (from, to, ratio) => from + ((to - from) * ratio);
