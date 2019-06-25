@@ -160,7 +160,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 ## Sponsors
 
 [![JetBrains logo](https://user-images.githubusercontent.com/2543511/58549723-71160e00-820c-11e9-98c1-9e3d7aafcbb2.png)](https://www.jetbrains.com/?from=Pencil.js)
-
+`Gwenaël Provost`
 
 ## Contributions
 You want to help us improve ? Please read [the contributing manual](contributing.md).
