@@ -82,10 +82,10 @@
     "@pencil.js/vector": "^1.6.6"
   },
   "devDependencies": {
-    "ava": "^1.4.0",
+    "ava": "^2.1.0",
     "esm": "^3.2.22",
-    "nyc": "^14.0.0",
-    "webpack": "^4.32.2",
+    "nyc": "^14.1.1",
+    "webpack": "^4.35.2",
     "webpack-cli": "^3.3.1"
   }
 }
