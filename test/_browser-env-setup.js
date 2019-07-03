@@ -6,6 +6,12 @@ browserEnv(["window", "document"], {
 
 window.Path2D = class Path2D {
     rect () {}
+
+    arc () {}
+
+    moveTo () {}
+
+    ellipse () {}
 };
 
 window.DOMMatrix = class DOMMatrix {

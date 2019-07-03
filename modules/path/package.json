@@ -13,7 +13,7 @@
   "ava": {
     "require": [
       "esm",
-      "../../test/helpers/browser-env-setup.js"
+      "../../test/_browser-env-setup.js"
     ]
   },
   "repository": {

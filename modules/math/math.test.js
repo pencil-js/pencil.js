@@ -1,6 +1,6 @@
 import test from "ava";
 import * as M from "./math";
-import almostEqual from "../../test/helpers/almost-equal";
+import almostEqual from "../../test/_almost-equal";
 
 test("constrain", (t) => {
     t.is(M.constrain(7.77, 0, 10), 7.77);

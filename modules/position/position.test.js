@@ -1,7 +1,7 @@
 import test from "ava";
 import Position from "./position";
 import Vector from "../vector/vector";
-import almostEqual from "../../test/helpers/almost-equal";
+import almostEqual from "../../test/_almost-equal";
 
 test.beforeEach((t) => {
     t.context = new Position(-42, 55);
@@ -40,8 +40,8 @@ test("clone and equals", (t) => {
     t.not(clone, t.context);
     t.is(t.context.x, clone.x);
     t.is(t.context.y, clone.y);
-    t.true(t.context.equals([clone.x, clone.y]), true);
-    t.false(t.context.equals([123, 5]), false);
+    t.true(t.context.equals([clone.x, clone.y]));
+    t.false(t.context.equals([123, 5]));
 });
 
 let one;
