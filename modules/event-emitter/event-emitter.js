@@ -13,7 +13,7 @@ export default class EventEmitter {
     }
 
     /**
-     * Listen to an event
+     * Listen to an event or multiple events
      * @param {String|Array<String>} eventName - Name of event (or a list of event names) to listen to
      * @param {Function} callback - Function to call when event fire
      * @param {Boolean} [isTargeted=false] - Should only listen to event targeting itself
@@ -41,13 +41,32 @@ export default class EventEmitter {
      */
     fire (event) {
         const listeners = this.eventListeners[event.name];
-        if (listeners && listeners.length) {
+        if (listeners) {
             listeners.forEach((listener) => {
                 if (!listener.isTargeted || listener.element === event.target) {
                     listener.callback.call(this, event);
                 }
             });
         }
+        return this;
+    }
+
+    /**
+     * Remove an event or multiple events
+     * @param {String|Array<String>} eventName - Name of event (or a list of event names) to remove
+     * @return {EventEmitter} Itself
+     */
+    removeListener (eventName) {
+        (Array.isArray(eventName) ? eventName : [eventName]).forEach(name => delete this.eventListeners[name]);
+        return this;
+    }
+
+    /**
+     * Remove all event listener
+     * @return {EventEmitter} Itself
+     */
+    removeAllListener () {
+        this.eventListeners = {};
         return this;
     }
 
