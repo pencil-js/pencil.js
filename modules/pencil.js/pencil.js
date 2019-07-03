@@ -43,6 +43,7 @@ import Checkbox from "@pencil.js/checkbox";
 import Select from "@pencil.js/select";
 import Slider from "@pencil.js/slider";
 import ProgressBar from "@pencil.js/progress-bar";
+import ProgressPie from "@pencil.js/progress-pie";
 
 // Interactions
 import "@pencil.js/draggable";
@@ -76,6 +77,7 @@ const exportableClasses = {
     Checkbox,
     Button,
     ProgressBar,
+    ProgressPie,
     Color,
     LinearGradient,
     RadialGradient,
@@ -148,6 +150,7 @@ export {
     OffScreenCanvas,
     Select,
     ProgressBar,
+    ProgressPie,
     from,
     version,
     author,

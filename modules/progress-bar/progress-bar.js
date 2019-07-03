@@ -1,6 +1,7 @@
 import Input from "@pencil.js/input";
 import Rectangle from "@pencil.js/rectangle";
-import { constrain, equals } from "@pencil.js/math";
+import MouseEvent from "@pencil.js/mouse-event";
+import { constrain } from "@pencil.js/math";
 
 const valueKey = Symbol("_value");
 
@@ -8,7 +9,7 @@ const valueKey = Symbol("_value");
 /**
  * Slider class
  * @class
- * @extends Container
+ * @extends Input
  */
 export default class ProgressBar extends Input {
     /**
@@ -22,12 +23,14 @@ export default class ProgressBar extends Input {
         this.background.width = this.width;
         this.background.height = ProgressBar.HEIGHT;
         this.background.options.cursor = null;
+        this.background.removeListener([MouseEvent.events.hover, MouseEvent.events.leave]);
 
         this.progress = new Rectangle([1, 1], 0, ProgressBar.HEIGHT - 2, {
             fill: this.options.fill,
         });
         this.background.add(this.progress);
-        if (!equals(this.options.speed, 1, 1e-3)) {
+
+        if (this.options.speed < 1) {
             this.progress.on(ProgressBar.events.draw, () => {
                 const targetWidth = (this.background.width - 2) * this.value;
                 this.progress.width += (targetWidth - this.progress.width) * (this.options.speed ** 2);
@@ -48,7 +51,15 @@ export default class ProgressBar extends Input {
     }
 
     /**
-     * Change this slider's size
+     * Return this size
+     * @return {Number}
+     */
+    get width () {
+        return this.options.width;
+    }
+
+    /**
+     * Change this size
      * @param {Number} newWidth - A new size in pixels
      */
     set width (newWidth) {
@@ -57,15 +68,7 @@ export default class ProgressBar extends Input {
         }
 
         this.options.width = newWidth;
-        this.background.width = newWidth;
-    }
-
-    /**
-     * Return this slider's size
-     * @return {Number}
-     */
-    get width () {
-        return this.options.width;
+        this.background.width = newWidth - 2;
     }
 
     /**
@@ -78,14 +81,18 @@ export default class ProgressBar extends Input {
 
     /**
      * Change this current value
-     * @param {Number} newValue - A new value to be set (in percentage)
+     * @param {Number} newValue - A new value to be set (between 0 and 1)
      */
     set value (newValue) {
         this[valueKey] = constrain(newValue, 0, 1);
+
+        if (this.options.speed >= 1) {
+            this.progress.width = (this.background.width - 2) * this.value;
+        }
     }
 
     /**
-     * @typedef {Object} SliderOptions
+     * @typedef {Object} ProgressOptions
      * @extends InputOptions
      * @prop {Number} [value=0] - Initial value
      * @prop {Number} [width=200] - Size of the slider

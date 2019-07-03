@@ -1,8 +1,8 @@
 {
-    "name": "@pencil.js/progress-bar",
-    "version": "1.7.0",
-    "description": "Progress-bar for Pencil.js package.",
-    "main": "progress-bar.js",
+    "name": "@pencil.js/progress-pie",
+    "version": "1.0.0",
+    "description": "Progress-pie for Pencil.js package.",
+    "main": "progress-pie.js",
     "files": [],
     "sideEffects": false,
     "scripts": {
@@ -10,7 +10,8 @@
     },
     "ava": {
         "require": [
-            "esm"
+            "esm",
+            "../../test/_browser-env-setup.js"
         ]
     },
     "repository": {
@@ -25,10 +26,10 @@
         "UI"
     ],
     "dependencies": {
+        "@pencil.js/arc": "^1.7.0",
+        "@pencil.js/circle": "^1.7.0",
         "@pencil.js/input": "^1.7.0",
-        "@pencil.js/math": "^1.6.6",
-        "@pencil.js/mouse-event": "^1.6.6",
-        "@pencil.js/rectangle": "^1.7.0"
+        "@pencil.js/math": "^1.6.6"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",
