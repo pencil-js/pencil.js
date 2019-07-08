@@ -131,8 +131,8 @@ test("level", (t) => {
 });
 
 test("lerp", (t) => {
-    t.is((new Color(1, 0, 0.2)).lerp(new Color(0, 0.8, 1, 0.6), 0).rgba, "rgba(255,0,51,1)");
-    t.is((new Color(1, 0, 0.2)).lerp(new Color(0, 0.8, 1, 0.6), () => 1 / 2).rgba, "rgba(128,102,153,0.8)");
+    t.is((new Color(1, 0, 0.2)).lerp(new Color(0, 0.8, 1, 0.6), 0).rgb, "#ff0033");
+    t.is((new Color(1, 0, 0.2)).lerp(new Color(0, 0.8, 1, 0.6), 0.5).rgba, "rgba(128,102,153,0.8)");
     t.is((new Color(1, 0, 0.2)).lerp(new Color(0, 0.8, 1, 0.6), 1).rgba, "rgba(0,204,255,0.6)");
 });
 

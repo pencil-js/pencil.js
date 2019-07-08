@@ -1,5 +1,5 @@
 import convert from "color-convert";
-import { constrain, truncate, average, equals } from "@pencil.js/math";
+import { constrain, truncate, average, equals, lerp } from "@pencil.js/math";
 
 /**
  *
@@ -226,15 +226,14 @@ export default class Color {
     /**
      * Change the color toward another color
      * @param {ColorDefinition} colorDefinition - Any other color
-     * @param {Number|Function} ratio - Ratio of distance to move (0 = no change, 0.5 = equal mix, 1 = same as target color)
+     * @param {Number} ratio - Ratio of distance to move (0 = no change, 0.5 = equal mix, 1 = same as target color)
      * @return {Color} Itself
      */
     lerp (colorDefinition, ratio) {
-        const weight = typeof ratio === "function" ? ratio() : ratio;
         const color = Color.from(colorDefinition);
         const thisArray = this.array.concat(this.alpha);
         const colorArray = color.array.concat(color.alpha);
-        return this.set(...thisArray.map((channel, index) => channel * (1 - weight) + colorArray[index] * weight));
+        return this.set(...thisArray.map((channel, index) => lerp(channel, colorArray[index], ratio)));
     }
 
     /**
