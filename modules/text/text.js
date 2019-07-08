@@ -2,7 +2,6 @@ import NetworkEvent from "@pencil.js/network-event";
 import Component from "@pencil.js/component";
 import textDirection from "text-direction";
 import hash from "@sindresorhus/fnv1a";
-import * as textMetrics from "text-metrics";
 
 /**
  * Reformat passed arguments into an array of line string
@@ -23,6 +22,7 @@ function formatString (string) {
  * @return {TextMeasures}
  */
 const measureText = (() => {
+    const sandbox = document.createElement("canvas").getContext("2d");
     const cache = {};
 
     return (text, options) => {
@@ -31,18 +31,13 @@ const measureText = (() => {
             return cache[key];
         }
 
-        const multiline = {
-            multiline: true,
-        };
-        const measures = textMetrics.init({
-            fontFamily: options.font,
-            fontSize: `${options.fontSize}px`,
-            fontWeight: options.bold ? "700" : "400",
-            lineHeight: `${options.fontSize * options.lineHeight}px`,
-        });
+        sandbox.font = Text.getFontDefinition(options);
+        const lines = formatString(text);
+        const height = options.fontSize * options.lineHeight * lines.length;
+        const width = lines.reduce((max, line) => Math.max(max, sandbox.measureText(line).width), 0);
         const result = {
-            width: measures.width(text, multiline),
-            height: measures.height(text, multiline),
+            width,
+            height,
         };
         cache[key] = result;
         return result;

@@ -29,8 +29,7 @@
     "@pencil.js/component": "^1.7.0",
     "@pencil.js/network-event": "^1.6.4",
     "@sindresorhus/fnv1a": "^1.0.0",
-    "text-direction": "^1.1.0",
-    "text-metrics": "^1.0.0"
+    "text-direction": "^1.1.0"
   },
   "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
   "license": "MIT",
