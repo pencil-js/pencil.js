@@ -11,7 +11,6 @@ test.beforeEach((t) => {
 test("constructor", (t) => {
     t.truthy(t.context.ctx);
     t.true(t.context.cursorPosition.constructor.name === "Position");
-    t.true(t.context.containerPosition.constructor.name === "Position");
     t.true(t.context.isScene);
     t.false(t.context.isLooped);
     t.is(t.context.fps, 0);
