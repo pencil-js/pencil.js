@@ -21,7 +21,7 @@ export default class ProgressPie extends Input {
         super(positionDefinition, options);
 
         this.background.delete();
-        this.background = new Circle([0, 0], this.options.radius, {
+        this.background = new Circle(undefined, this.options.radius, {
             fill: this.options.background,
             stroke: this.options.border,
             strokeWidth: 2,
@@ -29,7 +29,7 @@ export default class ProgressPie extends Input {
         });
         this.add(this.background);
 
-        this.progress = new Pie([0, 0], this.background.radius - 1, 0, 0, {
+        this.progress = new Pie(undefined, this.background.radius - 1, 0, 0, {
             fill: this.options.fill,
             stroke: null,
         });

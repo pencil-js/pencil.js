@@ -44,7 +44,7 @@ export default class Select extends Input {
         this.background.width = maxWidth + (6 * margin);
         this.background.height = this.optionsList[0].height + (2 * margin);
 
-        this.optionsContainer = new Rectangle([0, 0], this.background.width, 0, this.background.options);
+        this.optionsContainer = new Rectangle(undefined, this.background.width, 0, this.background.options);
         this.optionsContainer.hide();
         this.add(this.optionsContainer);
         let position = 0;

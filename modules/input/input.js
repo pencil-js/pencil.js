@@ -19,7 +19,7 @@ export default class Input extends Container {
     constructor (positionDefinition, options) {
         super(positionDefinition, options);
 
-        this.background = new Rectangle([0, 0], 0, 0, {
+        this.background = new Rectangle(undefined, 0, 0, {
             fill: this.options.background,
             stroke: this.options.border,
             strokeWidth: 2,
