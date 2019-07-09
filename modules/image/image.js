@@ -86,7 +86,7 @@ export default class Image extends Rectangle {
         if (this.isLoaded) {
             super.makePath(ctx);
             const originPos = this.getOrigin();
-            ctx.drawImage(this.file, -originPos.x, -originPos.y, this.width, this.height);
+            ctx.drawImage(this.file, originPos.x, originPos.y, this.width, this.height);
         }
 
         return this;
