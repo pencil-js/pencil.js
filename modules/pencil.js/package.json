@@ -1,6 +1,6 @@
 {
   "name": "pencil.js",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Nice modular interactive 2D drawing library.",
   "main": "pencil.js",
   "files": [
@@ -66,7 +66,7 @@
     "@pencil.js/polygon": "^1.8.0",
     "@pencil.js/position": "^1.8.0",
     "@pencil.js/progress-bar": "^1.8.0",
-    "@pencil.js/progress-pie": "^1.8.0",
+    "@pencil.js/progress-pie": "^1.8.1",
     "@pencil.js/radial-gradient": "^1.8.0",
     "@pencil.js/rectangle": "^1.8.0",
     "@pencil.js/regular-polygon": "^1.8.0",
