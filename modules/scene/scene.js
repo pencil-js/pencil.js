@@ -19,9 +19,9 @@ export default class Scene extends Container {
      * @param {SceneOptions} [options] - Specific options
      */
     constructor (container = window.document.body, options) {
-        const measures = container.getBoundingClientRect();
-        super([measures.left + window.scrollX, measures.top + window.scrollY], options);
+        super(undefined, options);
 
+        const measures = container.getBoundingClientRect();
         let canvas;
         if (container instanceof window.HTMLCanvasElement) {
             canvas = container;
@@ -42,6 +42,11 @@ export default class Scene extends Container {
          * @type {Position}
          */
         this.cursorPosition = new Position();
+        /**
+         * @type {Position}
+         */
+        this.containerPosition = new Position(measures.left + window.scrollX, measures.top + window.scrollY);
+
         /**
          * @type {Boolean}
          */
@@ -290,7 +295,7 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
         container.addEventListener(eventName, (event) => {
             if (this.options.shown) {
                 const eventPosition = (new Position(event.clientX, event.clientY))
-                    .subtract(this.position)
+                    .subtract(this.containerPosition)
                     .add(window.scrollX, window.scrollY);
                 const target = this.getTarget(eventPosition, this.ctx);
                 if (target) {
