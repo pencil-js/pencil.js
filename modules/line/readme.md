@@ -2,6 +2,8 @@
 
 Line stroke passing through points.
 
+![Line example](../../media/examples/line.png)
+
 
 ## Installation
 

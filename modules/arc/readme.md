@@ -2,6 +2,8 @@
 
 Arc shape.
 
+![Arc example](../../media/examples/arc.png)
+
 
 ## Installation
 

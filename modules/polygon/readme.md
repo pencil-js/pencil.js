@@ -2,6 +2,8 @@
 
 Shape from a bunch of points.
 
+![Polygon example](../../media/examples/polygon.png)
+
 
 ## Installation
 

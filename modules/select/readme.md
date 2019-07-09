@@ -2,6 +2,8 @@
 
 Select user input.
 
+![Select example](../../media/examples/select.png)
+
 
 ## Installation
 
@@ -21,6 +23,6 @@ const items = [
 ];
 const options = {
     value: 1, // index of the default value
-}
+};
 const select = new Select(aPosition, items, options);
 ```

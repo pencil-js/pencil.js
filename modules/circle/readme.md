@@ -2,6 +2,8 @@
 
 Circle shape.
 
+![Circle example](../../media/examples/circle.png)
+
 
 ## Installation
 

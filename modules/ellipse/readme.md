@@ -2,6 +2,8 @@
 
 Ellipse shape (oval).
 
+![Ellipse example](../../media/examples/ellipse.png)
+
 
 ## Installation
 

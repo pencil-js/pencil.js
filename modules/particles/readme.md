@@ -2,6 +2,8 @@
 
 Particle generator optimized to display thousands of instances.
 
+![Particles example](../../media/examples/particles.png)
+
 
 ## Installation
 

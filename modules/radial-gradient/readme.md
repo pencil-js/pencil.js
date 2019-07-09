@@ -2,6 +2,8 @@
 
 Circular gradient transition of color(s) between a center and the radius of a circle.
 
+![Radial-gradient example](../../media/examples/radial-gradient.png)
+
 
 ## Installation
 

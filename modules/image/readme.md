@@ -2,6 +2,8 @@
 
 Image rendering.
 
+![Image example](../../media/examples/image.png)
+
 
 ## Installation
 
@@ -14,7 +16,7 @@ Image rendering.
 import Image from "@pencil.js/image";
 
 const image = new Image(aPosition, "url/to/my/file.png");
-image.on("load", () => {
+image.on("ready", () => {
     console.log("Image is loaded");
 });
 

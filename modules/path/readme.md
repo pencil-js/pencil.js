@@ -2,6 +2,8 @@
 
 Hand-free drawing tool.
 
+![Path example](../../media/examples/path.png)
+
 
 ## Installation
 

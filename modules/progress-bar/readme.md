@@ -2,6 +2,8 @@
 
 Progress-bar component.
 
+![Progress-bar example](../../media/examples/progress-bar.png)
+
 
 ## Installation
 

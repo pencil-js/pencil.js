@@ -2,6 +2,8 @@
 
 Star shape.
 
+![Star example](../../media/examples/star.png)
+
 
 ## Installation
 

@@ -2,6 +2,8 @@
 
 Gradient transition of color(s) between two position.
 
+![Linear-gradient example](../../media/examples/linear-gradient.png)
+
 
 ## Installation
 

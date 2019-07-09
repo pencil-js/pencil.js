@@ -2,6 +2,8 @@
 
 Equiangular and equilateral convex polygon.
 
+![Regular-polygon example](../../media/examples/regular-polygon.png)
+
 
 ## Installation
 

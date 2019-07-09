@@ -2,6 +2,8 @@
 
 Progress-pie component.
 
+![Progress-pie example](../../media/examples/progress-pie.png)
+
 
 ## Installation
 

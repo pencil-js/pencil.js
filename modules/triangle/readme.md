@@ -2,6 +2,8 @@
 
 Regular triangle shape, if you want to draw a random shape with 3 points, use [Polygon](../polygon) instead.
 
+![Triangle example](../../media/examples/triangle.png)
+
 
 ## Installation
 

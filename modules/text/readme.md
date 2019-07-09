@@ -2,6 +2,8 @@
 
 Text writing.
 
+![Text example](../../media/examples/text.png)
+
 
 ## Installation
 

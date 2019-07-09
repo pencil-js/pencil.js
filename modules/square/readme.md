@@ -2,6 +2,8 @@
 
 Square shape.
 
+![Square example](../../media/examples/square.png)
+
 
 ## Installation
 

@@ -2,6 +2,8 @@
 
 Slider user input.
 
+![Slider example](../../media/examples/slider.png)
+
 
 ## Installation
 

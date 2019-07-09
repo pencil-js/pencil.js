@@ -2,6 +2,8 @@
 
 Button user input.
 
+![Button example](../../media/examples/button.png)
+
 
 ## Installation
 

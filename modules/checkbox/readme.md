@@ -2,6 +2,8 @@
 
 Checkbox user input.
 
+![Checkbox example](../../media/examples/checkbox.png)
+
 
 ## Installation
 

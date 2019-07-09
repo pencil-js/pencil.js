@@ -2,6 +2,8 @@
 
 Rectangle shape.
 
+![Rectangle example](../../media/examples/rectangle.png)
+
 
 ## Installation
 
