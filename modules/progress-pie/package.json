@@ -3,7 +3,9 @@
     "version": "1.8.0",
     "description": "Progress-pie for Pencil.js package.",
     "main": "progress-pie.js",
-    "files": [],
+    "files": [
+        "pie.js"
+    ],
     "sideEffects": false,
     "scripts": {
         "test": "nyc --reporter=text ava"
