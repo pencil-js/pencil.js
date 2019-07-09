@@ -20,8 +20,11 @@ export default class Button extends Input {
             cursor: this.background.options.cursor,
             font: this.options.font,
             fontSize: this.options.fontSize,
+            align: this.options.align,
             bold: this.options.bold,
             italic: this.options.italic,
+            underscore: this.options.underscore,
+            lineHeight: this.options.lineHeight,
         });
         this.background.add(this.text);
     }
@@ -53,6 +56,7 @@ export default class Button extends Input {
         this.background.width = measures.width + (margin * 4);
         this.background.height = measures.height + (margin * 2);
         this.text.position.set(margin * 2, margin);
+        this.text.options.origin.set(this.text.getOrigin().multiply(-1));
     }
 
     /**

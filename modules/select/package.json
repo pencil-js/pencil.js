@@ -31,6 +31,7 @@
     "@pencil.js/input": "^1.7.0",
     "@pencil.js/math": "^1.6.6",
     "@pencil.js/mouse-event": "^1.6.6",
+    "@pencil.js/position": "^1.6.6",
     "@pencil.js/rectangle": "^1.7.0",
     "@pencil.js/text": "^1.7.0",
     "@pencil.js/triangle": "^1.7.0"

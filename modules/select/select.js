@@ -1,6 +1,7 @@
 import Component from "@pencil.js/component";
 import Input from "@pencil.js/input";
 import MouseEvent from "@pencil.js/mouse-event";
+import Position from "@pencil.js/position";
 import BaseEvent from "@pencil.js/base-event";
 import Rectangle from "@pencil.js/rectangle";
 import Text from "@pencil.js/text";
@@ -27,12 +28,16 @@ export default class Select extends Input {
         this.selected = 0;
 
         const textOptions = {
+            cursor: Component.cursors.pointer,
             fill: this.options.fill,
             font: this.options.font,
             fontSize: this.options.fontSize,
+            align: this.options.align,
             bold: this.options.bold,
             italic: this.options.italic,
-            cursor: Component.cursors.pointer,
+            underscore: this.options.underscore,
+            lineHeight: this.options.lineHeight,
+            origin: new Position(),
         };
         const margin = Text.measure("M", textOptions).height * Select.MARGIN;
         this.display = new Text([margin * 2, margin], "", textOptions);
@@ -43,6 +48,7 @@ export default class Select extends Input {
 
         this.background.width = maxWidth + (6 * margin);
         this.background.height = this.optionsList[0].height + (2 * margin);
+        textOptions.origin.set(maxWidth * this.display.getAlignOffset(), 0);
 
         this.optionsContainer = new Rectangle(undefined, this.background.width, 0, this.background.options);
         this.optionsContainer.hide();
@@ -88,6 +94,7 @@ export default class Select extends Input {
     set value (value) {
         this.selected = constrain(value, 0, this.optionsList.length - 1);
         this.display.text = this.optionsList[this.selected].text;
+        this.display.options.origin.set(this.optionsList[this.selected].options.origin);
         this.optionsContainer.hide();
         const margin = this.optionsList[0].height * Select.MARGIN;
         this.optionsContainer.position.set(0, -this.selected * (this.optionsList[0].height + (2 * margin)));

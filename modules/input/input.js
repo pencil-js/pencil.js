@@ -39,6 +39,19 @@ export default class Input extends Container {
     }
 
     /**
+     * Add support for origin option
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Input} Itself
+     */
+    makePath (ctx) {
+        this.background.options.origin = this.options.origin;
+        const origin = this.background.getOrigin();
+        this.background.options.origin = undefined;
+        ctx.translate(origin.x, origin.y);
+        return super.makePath();
+    }
+
+    /**
      * Return the value of the input
      */
     get value () {

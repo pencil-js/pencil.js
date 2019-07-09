@@ -118,7 +118,7 @@ export default class Text extends Component {
                 ctx.beginPath();
             }
 
-            const offset = -this.getAlignOffset();
+            const offset = this.getAlignOffset();
             this.lines.forEach((line, index) => {
                 const y = (index * lineHeight) + margin;
                 if (opts.fill) {
@@ -199,7 +199,7 @@ export default class Text extends Component {
             }
         }
 
-        return -offset;
+        return offset;
     }
 
     /**
@@ -207,7 +207,7 @@ export default class Text extends Component {
      * @return {Position}
      */
     getOrigin () {
-        return super.getOrigin().clone().add(this.getAlignOffset() * this.width, 0);
+        return super.getOrigin().clone().add(-this.getAlignOffset() * this.width, 0);
     }
 
     /**
