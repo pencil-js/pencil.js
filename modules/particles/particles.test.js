@@ -7,7 +7,9 @@ test.beforeEach((t) => {
     }, 10, i => ({
         position: [100, 200],
         rotation: i,
-    }));
+    }), (data, i) => {
+        data.called = i;
+    });
 });
 
 test("constructor", (t) => {
@@ -18,6 +20,7 @@ test("constructor", (t) => {
         t.is(data.position.x, 100);
         t.is(data.position.y, 200);
         t.is(data.rotation, i);
+        t.is(data.called, undefined);
     });
 });
 
@@ -25,7 +28,10 @@ test("trace", (t) => {
     t.context.trace({
         addPath: () => t.pass(),
     });
-    t.plan(10);
+    t.plan(20);
+    t.context.data.forEach((data, i) => {
+        t.is(data.called, i);
+    });
 });
 
 test("isHover", (t) => {
@@ -41,13 +47,13 @@ test("toJSON", (t) => {
 
 test.todo("from");
 
-test("defaultOptions", (t) => {
-    const { defaultOptions } = Particles;
-    t.true(defaultOptions.position.constructor.name === "Position");
-    t.is(defaultOptions.position.x, 0);
-    t.is(defaultOptions.position.y, 0);
-    t.is(defaultOptions.rotation, 0);
-    t.true(defaultOptions.scale.constructor.name === "Position");
-    t.is(defaultOptions.scale.x, 1);
-    t.is(defaultOptions.scale.y, 1);
+test("defaultData", (t) => {
+    const { defaultData } = Particles;
+    t.true(defaultData.position.constructor.name === "Position");
+    t.is(defaultData.position.x, 0);
+    t.is(defaultData.position.y, 0);
+    t.is(defaultData.rotation, 0);
+    t.true(defaultData.scale.constructor.name === "Position");
+    t.is(defaultData.scale.x, 1);
+    t.is(defaultData.scale.y, 1);
 });
