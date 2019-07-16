@@ -1,43 +1,43 @@
 {
-  "name": "@pencil.js/regular-polygon",
-  "version": "1.8.0",
-  "description": "Equiangular and equilateral convex polygon for Pencil.js package.",
-  "main": "regular-polygon.js",
-  "files": [],
-  "sideEffects": false,
-  "scripts": {
-    "test": "nyc --reporter=text ava"
-  },
-  "ava": {
-    "require": [
-      "esm"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pencil-js/pencil.js.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "pencil.js",
-    "shape"
-  ],
-  "dependencies": {
-    "@pencil.js/arc": "^1.8.0",
-    "@pencil.js/keyboard-event": "^1.8.0",
-    "@pencil.js/polygon": "^1.8.0",
-    "@pencil.js/position": "^1.8.0"
-  },
-  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pencil-js/pencil.js/issues"
-  },
-  "devDependencies": {
-    "ava": "^2.1.0",
-    "esm": "^3.2.22",
-    "nyc": "^14.1.1"
-  }
+    "name": "@pencil.js/regular-polygon",
+    "version": "1.8.0",
+    "description": "Equiangular and equilateral convex polygon for Pencil.js package.",
+    "main": "regular-polygon.js",
+    "files": [],
+    "sideEffects": false,
+    "scripts": {
+        "test": "nyc --reporter=text ava"
+    },
+    "ava": {
+        "require": [
+            "esm"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pencil-js/pencil.js.git"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "keywords": [
+        "pencil.js",
+        "shape"
+    ],
+    "dependencies": {
+        "@pencil.js/arc": "^1.8.0",
+        "@pencil.js/keyboard-event": "^1.8.0",
+        "@pencil.js/polygon": "^1.8.0",
+        "@pencil.js/position": "^1.8.0"
+    },
+    "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pencil-js/pencil.js/issues"
+    },
+    "devDependencies": {
+        "ava": "^2.2.0",
+        "esm": "^3.2.22",
+        "nyc": "^14.1.1"
+    }
 }

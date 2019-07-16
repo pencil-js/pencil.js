@@ -1,39 +1,39 @@
 {
-  "name": "@pencil.js/offscreen-canvas",
-  "version": "1.8.0",
-  "description": "Off-screen canvas for Pencil.js package.",
-  "main": "offscreen-canvas.js",
-  "files": [],
-  "sideEffects": false,
-  "scripts": {
-    "test": "nyc --reporter=text ava"
-  },
-  "ava": {
-    "require": [
-      "esm",
-      "../../test/_browser-env-setup.js"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pencil-js/pencil.js.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "pencil.js",
-    "tool"
-  ],
-  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pencil-js/pencil.js/issues"
-  },
-  "devDependencies": {
-    "ava": "^2.1.0",
-    "browser-env": "^3.2.5",
-    "esm": "^3.2.22",
-    "nyc": "^14.1.1"
-  }
+    "name": "@pencil.js/offscreen-canvas",
+    "version": "1.8.0",
+    "description": "Off-screen canvas for Pencil.js package.",
+    "main": "offscreen-canvas.js",
+    "files": [],
+    "sideEffects": false,
+    "scripts": {
+        "test": "nyc --reporter=text ava"
+    },
+    "ava": {
+        "require": [
+            "esm",
+            "../../test/_browser-env-setup.js"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pencil-js/pencil.js.git"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "keywords": [
+        "pencil.js",
+        "tool"
+    ],
+    "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pencil-js/pencil.js/issues"
+    },
+    "devDependencies": {
+        "ava": "^2.2.0",
+        "browser-env": "^3.2.5",
+        "esm": "^3.2.22",
+        "nyc": "^14.1.1"
+    }
 }

@@ -1,43 +1,43 @@
 {
-  "name": "@pencil.js/particles",
-  "version": "1.8.0",
-  "description": "Particles generator for Pencil.js package.",
-  "main": "particles.js",
-  "files": [],
-  "sideEffects": false,
-  "scripts": {
-    "test": "nyc --reporter=text ava"
-  },
-  "ava": {
-    "require": [
-      "esm",
-      "../../test/_browser-env-setup.js"
-    ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pencil-js/pencil.js.git"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "keywords": [
-    "pencil.js",
-    "wrapper"
-  ],
-  "dependencies": {
-    "@pencil.js/component": "^1.8.0",
-    "@pencil.js/math": "^1.8.0",
-    "@pencil.js/position": "^1.8.0"
-  },
-  "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pencil-js/pencil.js/issues"
-  },
-  "devDependencies": {
-    "ava": "^2.1.0",
-    "esm": "^3.2.22",
-    "nyc": "^14.1.1"
-  }
+    "name": "@pencil.js/particles",
+    "version": "1.8.0",
+    "description": "Particles generator for Pencil.js package.",
+    "main": "particles.js",
+    "files": [],
+    "sideEffects": false,
+    "scripts": {
+        "test": "nyc --reporter=text ava"
+    },
+    "ava": {
+        "require": [
+            "esm",
+            "../../test/_browser-env-setup.js"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pencil-js/pencil.js.git"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "keywords": [
+        "pencil.js",
+        "wrapper"
+    ],
+    "dependencies": {
+        "@pencil.js/component": "^1.8.0",
+        "@pencil.js/math": "^1.8.0",
+        "@pencil.js/position": "^1.8.0"
+    },
+    "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pencil-js/pencil.js/issues"
+    },
+    "devDependencies": {
+        "ava": "^2.2.0",
+        "esm": "^3.2.22",
+        "nyc": "^14.1.1"
+    }
 }
