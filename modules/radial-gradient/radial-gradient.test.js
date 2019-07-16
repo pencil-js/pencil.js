@@ -1,5 +1,5 @@
 import test from "ava";
-import RadialGradient from "./radial-gradient";
+import RadialGradient from ".";
 
 test.beforeEach((t) => {
     t.context = new RadialGradient([0, 0], 100, {

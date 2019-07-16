@@ -1,5 +1,5 @@
 import test from "ava";
-import Triangle from "./triangle";
+import Triangle from ".";
 
 test.beforeEach((t) => {
     t.context = new Triangle([0, 0], 10);

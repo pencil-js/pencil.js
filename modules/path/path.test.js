@@ -1,6 +1,6 @@
 import test from "ava";
 import Position from "@pencil.js/position";
-import Path from "./path";
+import Path from ".";
 
 test.beforeEach((t) => {
     t.context = new Path([10, 20], [

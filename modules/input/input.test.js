@@ -1,6 +1,6 @@
 import test from "ava";
-import Input from "./input";
-import MouseEvent from "../mouse-event/mouse-event";
+import Input from ".";
+import MouseEvent from "../mouse-event";
 
 test.beforeEach((t) => {
     t.context = new Input([100, 100]);

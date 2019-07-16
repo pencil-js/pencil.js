@@ -1,5 +1,5 @@
 import test from "ava";
-import Vector from "./vector";
+import Vector from ".";
 import Position from "../position";
 
 test.beforeEach((t) => {

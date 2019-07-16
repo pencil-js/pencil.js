@@ -1,5 +1,5 @@
 import test from "ava";
-import Image from "./image";
+import Image from ".";
 
 test.beforeEach((t) => {
     t.context = new Image([10, 20], "url");

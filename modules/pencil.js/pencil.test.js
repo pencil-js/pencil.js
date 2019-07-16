@@ -1,13 +1,13 @@
 import test from "ava";
 
 /* eslint-disable import/no-duplicates, import/no-named-as-default-member */
-import Pencil from "./pencil";
+import Pencil from ".";
 import {
     BaseEvent, MouseEvent, NetworkEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container,
     Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text,
     Path, Input, Checkbox, Slider, ProgressBar, ProgressPie, Button, Select, from, OffScreenCanvas,
     version, author, homepage, Color, LinearGradient, RadialGradient,
-} from "./pencil";
+} from ".";
 
 test("from", (t) => {
     const definition = {

@@ -1,6 +1,6 @@
 import test from "ava";
-import MouseEvent from "../mouse-event/mouse-event";
-import Select from "./select";
+import MouseEvent from "../mouse-event";
+import Select from ".";
 
 test.beforeEach((t) => {
     t.context = new Select([0, 0], [

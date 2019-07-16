@@ -1,5 +1,5 @@
 import test from "ava";
-import ProgressPie from "./progress-pie";
+import ProgressPie from ".";
 
 test.beforeEach((t) => {
     t.context = new ProgressPie([0, 0], {

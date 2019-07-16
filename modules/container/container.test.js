@@ -1,5 +1,5 @@
 import test from "ava";
-import Container from "./container";
+import Container from ".";
 
 test.beforeEach((t) => {
     t.context = new Container([10, 20]);

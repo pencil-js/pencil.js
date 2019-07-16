@@ -1,5 +1,5 @@
 import test from "ava";
-import BaseEvent from "./base-event";
+import BaseEvent from ".";
 
 test("constructor", (t) => {
     const target = null;

@@ -1,5 +1,5 @@
 import test from "ava";
-import Color from "./color";
+import Color from ".";
 
 test("Object constructor", (t) => {
     const origin = new Color(0.5, 0.4, 0.3, 0.2);

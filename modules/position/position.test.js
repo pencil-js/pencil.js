@@ -1,6 +1,6 @@
 import test from "ava";
-import Position from "./position";
-import Vector from "../vector/vector";
+import Position from ".";
+import Vector from "../vector";
 import almostEqual from "../../test/_almost-equal";
 
 test.beforeEach((t) => {

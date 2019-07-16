@@ -1,5 +1,5 @@
 import test from "ava";
-import LinearGradient from "./linear-gradient";
+import LinearGradient from ".";
 
 test.beforeEach((t) => {
     t.context = new LinearGradient([0, 0], [100, 200], {

@@ -1,5 +1,5 @@
 import test from "ava";
-import ProgressBar from "./progress-bar";
+import ProgressBar from ".";
 
 test.beforeEach((t) => {
     t.context = new ProgressBar([0, 0], {

@@ -1,5 +1,5 @@
 import test from "ava";
-import NetworkEvent from "./network-event";
+import NetworkEvent from ".";
 
 test("events", (t) => {
     t.is(typeof NetworkEvent.events.ready, "string");

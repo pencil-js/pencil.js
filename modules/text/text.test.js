@@ -1,5 +1,5 @@
 import test from "ava";
-import Text from "./text";
+import Text from ".";
 
 test.beforeEach((t) => {
     t.context = new Text([0, 0], "Hello\nworld");

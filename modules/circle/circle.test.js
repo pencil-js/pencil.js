@@ -1,5 +1,5 @@
 import test from "ava";
-import Circle from "./circle";
+import Circle from ".";
 
 test.beforeEach((t) => {
     t.context = new Circle([0, 0], 10);

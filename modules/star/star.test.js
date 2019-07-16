@@ -1,5 +1,5 @@
 import test from "ava";
-import Star from "./star";
+import Star from ".";
 
 test.beforeEach((t) => {
     t.context = new Star([10, 20], 11, 6, 0.2);

@@ -1,5 +1,5 @@
 import test from "ava";
-import Polygon from "./polygon";
+import Polygon from ".";
 
 test.beforeEach((t) => {
     t.context = new Polygon([10, 20], [

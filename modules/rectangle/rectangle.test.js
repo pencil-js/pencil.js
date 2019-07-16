@@ -1,5 +1,5 @@
 import test from "ava";
-import Rectangle from "./rectangle";
+import Rectangle from ".";
 
 test.beforeEach((t) => {
     t.context = new Rectangle([-20, 20], 123, 22);

@@ -1,5 +1,5 @@
 import test from "ava";
-import EventEmitter from "./event-emitter";
+import EventEmitter from ".";
 
 test.beforeEach((t) => {
     t.context = new EventEmitter();

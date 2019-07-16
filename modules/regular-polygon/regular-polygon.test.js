@@ -1,5 +1,5 @@
 import test from "ava";
-import RegularPolygon from "./regular-polygon";
+import RegularPolygon from ".";
 
 test.beforeEach((t) => {
     t.context = new RegularPolygon([10, 20], 5, 20);

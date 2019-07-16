@@ -1,5 +1,5 @@
 import test from "ava";
-import Particles from "./particles";
+import Particles from ".";
 
 test.beforeEach((t) => {
     t.context = new Particles([10, 20], {

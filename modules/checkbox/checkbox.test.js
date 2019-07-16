@@ -1,5 +1,5 @@
 import test from "ava";
-import Checkbox from "./checkbox";
+import Checkbox from ".";
 
 test.beforeEach((t) => {
     t.context = new Checkbox([100, 100]);

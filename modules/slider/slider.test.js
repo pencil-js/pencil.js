@@ -1,5 +1,5 @@
 import test from "ava";
-import Slider from "./slider";
+import Slider from ".";
 
 test.beforeEach((t) => {
     t.context = new Slider([0, 0], {

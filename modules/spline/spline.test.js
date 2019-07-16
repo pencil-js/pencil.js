@@ -1,5 +1,5 @@
 import test from "ava";
-import Spline from "./spline";
+import Spline from ".";
 
 test.beforeEach((t) => {
     const points = (new Array(5)).fill().map((x, index) => [index + 1, index + 1]);

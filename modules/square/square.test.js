@@ -1,5 +1,5 @@
 import test from "ava";
-import Square from "./square";
+import Square from ".";
 
 test.beforeEach((t) => {
     t.context = new Square([0, 0], 123);

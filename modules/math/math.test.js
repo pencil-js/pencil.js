@@ -1,5 +1,5 @@
 import test from "ava";
-import * as M from "./math";
+import * as M from ".";
 import almostEqual from "../../test/_almost-equal";
 
 test("constrain", (t) => {

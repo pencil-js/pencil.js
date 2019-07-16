@@ -1,5 +1,5 @@
 import test from "ava";
-import Scene from "./scene";
+import Scene from ".";
 import Component from "../component";
 
 test.beforeEach((t) => {
