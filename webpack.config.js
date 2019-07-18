@@ -6,20 +6,6 @@ const { name, version, homepage, author, license } = require("./modules/pencil.j
 const mainModule = "./modules/pencil.js/";
 
 module.exports = {
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: ["@babel/preset-env"],
-                    },
-                },
-            },
-        ],
-    },
     plugins: [
         new BannerPlugin(`${name} v${version} ${homepage}
 ${license} license - © ${author}`),
