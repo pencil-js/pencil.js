@@ -258,7 +258,7 @@ export default class Container extends EventEmitter {
             ctx.globalAlpha = this.options.opacity;
         }
 
-        const pivotIndex = this.children.filter(child => child.options.zIndex < 0).length;
+        const pivotIndex = this.children.length && this.children.findIndex(child => child.options.zIndex >= 0);
         for (let i = 0, l = pivotIndex; i < l; ++i) {
             this.children[i].render(ctx);
         }

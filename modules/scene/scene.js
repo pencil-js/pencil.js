@@ -56,6 +56,10 @@ export default class Scene extends Container {
          */
         this.isLooped = false;
         /**
+         * @type {Boolean}
+         */
+        this.isClicked = false;
+        /**
          * @type {Number}
          */
         this.fps = 0;
@@ -276,8 +280,8 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
             startPosition = null;
             if (target.isClicked) {
                 target.fire(new MouseEvent(MouseEvent.events.click, target, eventPosition));
+                target.isClicked = false;
             }
-            target.isClicked = false;
         },
         [MouseEvent.events.wheel]: (target, eventPosition, event) => {
             const mouseEvents = MouseEvent.events;
