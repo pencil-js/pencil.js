@@ -6,14 +6,11 @@ import Position from "@pencil.js/position";
  */
 export default class RadialGradient {
     /**
-     * @typedef {Object} ColorStops
-     * @prop {...ColorDefinition} x -
-     */
-    /**
      * Radial-gradient constructor
-     * @param {PositionDefinition} fromPosition -
-     * @param {Number} radius -
-     * @param {ColorStops} colorStops -
+     * @param {PositionDefinition} fromPosition - Center of the gradient
+     * @param {Number} radius - Radius of the gradient
+     * @param {Object} colorStops - Set of colors to go through (key is position, value is the color)
+     * @example new RadialGradient(from, radius, { 0: "red", 1: "green" });
      */
     constructor (fromPosition, radius, colorStops) {
         this.from = Position.from(fromPosition);
@@ -22,8 +19,8 @@ export default class RadialGradient {
     }
 
     /**
-     *
-     * @param {CanvasRenderingContext2D} ctx -
+     * Return a drawing context compatible gradient
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {CanvasGradient}
      */
     toString (ctx) {

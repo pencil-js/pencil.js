@@ -158,8 +158,8 @@ export default class Position {
 
     /**
      * Constrain the position to a rectangle define by two positions
-     * @param {PositionDefinition} startDefinition -
-     * @param {PositionDefinition} endDefinition -
+     * @param {PositionDefinition} startDefinition - Starting position of the constrain (upper-left corner)
+     * @param {PositionDefinition} endDefinition - Ending position of the constrain (lower-right corner)
      * @return {Position} Itself
      */
     constrain (startDefinition, endDefinition) {

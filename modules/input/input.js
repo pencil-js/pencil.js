@@ -14,7 +14,7 @@ export default class Input extends Container {
     /**
      * Input constructor
      * @param {PositionDefinition} positionDefinition - Any position
-     * @param {InputOptions} [options] -
+     * @param {InputOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
         super(positionDefinition, options);

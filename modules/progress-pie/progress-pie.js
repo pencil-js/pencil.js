@@ -14,8 +14,8 @@ const valueKey = Symbol("_value");
 export default class ProgressPie extends Input {
     /**
      * ProgressPie constructor
-     * @param {PositionDefinition} positionDefinition -
-     * @param {ProgressOptions} options -
+     * @param {PositionDefinition} positionDefinition - Position of the progress-pie center
+     * @param {ProgressOptions} options - Specific options
      */
     constructor (positionDefinition, options) {
         super(positionDefinition, options);

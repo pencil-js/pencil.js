@@ -9,7 +9,7 @@ import Component from "@pencil.js/component";
 export default class Ellipse extends Arc {
     /**
      * Ellipse constructor
-     * @param {PositionDefinition} positionDefinition -
+     * @param {PositionDefinition} positionDefinition - Position of the center of the ellipse
      * @param {Number} [horizontalRadius=0] - Horizontal radius
      * @param {Number} [verticalRadius=0] - Vertical radius
      * @param {ComponentOptions} [options] - Drawing options

@@ -2,9 +2,9 @@ import convert from "color-convert";
 import { constrain, truncate, average, equals, lerp } from "@pencil.js/math";
 
 /**
- *
- * @param {Number} hex -
- * @param {Number} n -
+ * Turn 2 bits hexadecimal number into a ratio between 0 and 1
+ * @param {Number} hex - 2 bits hexadecimal number
+ * @param {Number} n - Position of this number in the full chain
  * @return {Number}
  */
 function hexToRatio (hex, n) {
@@ -13,8 +13,8 @@ function hexToRatio (hex, n) {
 }
 
 /**
- *
- * @param {Number} ratio -
+ * Turn a ratio number (between 0 and 1) into a 2 bits hexadecimal integer (between 0 and 255)
+ * @param {Number} ratio - Any number
  * @return {Number}
  */
 function ratioToNum (ratio) {
@@ -22,8 +22,8 @@ function ratioToNum (ratio) {
 }
 
 /**
- *
- * @param {Number} ratio -
+ * Turn a ratio number (between 0 and 1) into a 2 bits hexadecimal string
+ * @param {Number} ratio - Any number
  * @return {String}
  */
 function ratioToHex (ratio) {

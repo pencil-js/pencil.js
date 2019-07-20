@@ -15,7 +15,7 @@ export default class ProgressBar extends Input {
     /**
      * Slider constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner
-     * @param {SliderOptions} [options] -
+     * @param {SliderOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
         super(positionDefinition, options);

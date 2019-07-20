@@ -133,8 +133,8 @@ export default class OffScreenCanvas extends Container {
 
     /**
      * Return an image composed of its content
-     * @param {VectorDefinition} [vectorDefinition] -
-     * @param {String} [type="image/png"] -
+     * @param {VectorDefinition} [vectorDefinition] - Box to restrict exported data
+     * @param {String} [type="image/png"] - Data format. Supported format depend on the browser implementation (png or jpeg are the only safe choices)
      * @return {HTMLImageElement}
      */
     toImage (vectorDefinition, type = "image/png") {

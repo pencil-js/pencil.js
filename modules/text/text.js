@@ -5,7 +5,7 @@ import hash from "@sindresorhus/fnv1a";
 
 /**
  * Reformat passed arguments into an array of line string
- * @param {String|Array<String>} string -
+ * @param {String|Array<String>} string - Multiline string or Array of multiline strings to split
  * @return {Array<String>}
  */
 function formatString (string) {
@@ -164,8 +164,8 @@ export default class Text extends Component {
     }
 
     /**
-     *
-     * @param {Path2D} path -
+     * Draw the text background (used for mouse over detection)
+     * @param {Path2D} path - Drawing context
      * @return {Path2D}
      */
     trace (path) {

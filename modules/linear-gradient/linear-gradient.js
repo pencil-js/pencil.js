@@ -6,14 +6,11 @@ import Position from "@pencil.js/position";
  */
 export default class LinearGradient {
     /**
-     * @typedef {Object} ColorStops
-     * @prop {...ColorDefinition} x -
-     */
-    /**
      * linear-gradient constructor
-     * @param {PositionDefinition} fromPosition -
-     * @param {PositionDefinition} toPosition -
-     * @param {ColorStops} colorStops -
+     * @param {PositionDefinition} fromPosition - Starting position of the gradient
+     * @param {PositionDefinition} toPosition - Ending position of the gradient
+     * @param {Object} colorStops - Set of colors to go through (key is position, value is the color)
+     * @example new LinearGradient(from, to, { 0: "red", 1: "green" });
      */
     constructor (fromPosition, toPosition, colorStops) {
         this.from = Position.from(fromPosition);
@@ -22,8 +19,8 @@ export default class LinearGradient {
     }
 
     /**
-     *
-     * @param {CanvasRenderingContext2D} ctx -
+     * Return a drawing context compatible gradient
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {CanvasGradient}
      */
     toString (ctx) {

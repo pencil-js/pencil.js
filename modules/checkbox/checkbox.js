@@ -10,7 +10,7 @@ export default class Checkbox extends Input {
     /**
      * Checkbox constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner
-     * @param {CheckboxOptions} [options] -
+     * @param {CheckboxOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
         super(positionDefinition, options);

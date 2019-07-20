@@ -60,7 +60,7 @@ export default class RegularPolygon extends Polygon {
      * Return positions at regular intervals around a circle
      * @param {Number} nbPoints - Number of points
      * @param {Number} radius - Distance from origin
-     * @param {Number} [startAngle=0] -
+     * @param {Number} [startAngle=0] - Starting angle of the points (between 0 and 1)
      * @return {Array<Position>}
      */
     static getRotatingPoints (nbPoints, radius, startAngle = 0) {
