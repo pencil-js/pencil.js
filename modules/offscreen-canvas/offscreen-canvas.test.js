@@ -58,7 +58,7 @@ test("getRandomPosition", (t) => {
 });
 
 test("get and set imageData", (t) => {
-    const imgData = t.context.getImageData([10, 10]);
+    const imgData = t.context.getImageData([[10, 10], [20, 20]]);
     t.context.setImageData(imgData, [20, 20]);
     t.pass();
 });
