@@ -2,8 +2,6 @@ import EventEmitter from "@pencil.js/event-emitter";
 import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 import { radianCircle } from "@pencil.js/math";
-import OffScreenCanvas from "@pencil.js/offscreen-canvas";
-import Vector from "@pencil.js/vector";
 
 const scenePromiseKey = Symbol("_scenePromise");
 
@@ -16,7 +14,7 @@ export default class Container extends EventEmitter {
     /**
      * Container constructor
      * @param {PositionDefinition} [positionDefinition] - Position in its container
-     * @param {ContainerOptions} [options] -
+     * @param {ContainerOptions} [options] - Specific options
      */
     constructor (positionDefinition = new Position(), options) {
         super();
@@ -171,7 +169,7 @@ export default class Container extends EventEmitter {
 
     /**
      * Bubble the event to its parent
-     * @param {BaseEvent} event -
+     * @param {BaseEvent} event - Event to fire
      * @return {Container} Itself
      */
     fire (event) {
@@ -254,9 +252,7 @@ export default class Container extends EventEmitter {
 
         this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
 
-        if (this.options.opacity !== null && ctx.globalAlpha !== this.options.opacity) {
-            ctx.globalAlpha = this.options.opacity;
-        }
+        Container.setOpacity(ctx, this.options.opacity);
 
         const pivotIndex = this.children.length && this.children.findIndex(child => child.options.zIndex >= 0);
         for (let i = 0, l = pivotIndex; i < l; ++i) {
@@ -335,40 +331,6 @@ export default class Container extends EventEmitter {
     }
 
     /**
-     * Returns a off-screen canvas painted with this
-     * @param {VectorDefinition} [vectorDefinition] - Define a range, use its width and height if available by default
-     * @return {OffScreenCanvas}
-     */
-    getTaintedCanvas (vectorDefinition) {
-        let vector;
-        if (vectorDefinition) {
-            vector = Vector.from(vectorDefinition);
-        }
-        else if (this.width && this.height) {
-            vector = new Vector(new Position(), [this.width, this.height]);
-        }
-        if (vector) {
-            const size = vector.getDelta();
-            const offScreen = new OffScreenCanvas(size.x, size.y);
-            offScreen.ctx.translate(-this.position.x, -this.position.y);
-            this.render(offScreen.ctx);
-            return offScreen;
-        }
-
-        return null;
-    }
-
-    /**
-     * Returns an image of this container
-     * @param {VectorDefinition} [vectorDefinition] - Define a range for the image, use its width and height if available by default
-     * @return {HTMLImageElement}
-     */
-    toImage (vectorDefinition) {
-        const offScreen = this.getTaintedCanvas(vectorDefinition);
-        return offScreen ? offScreen.toImage() : null;
-    }
-
-    /**
      * Return a json ready object
      * @return {Object}
      */
@@ -405,6 +367,17 @@ export default class Container extends EventEmitter {
     }
 
     /**
+     * Define context opacity
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @param {Number} opacity - Opacity value
+     */
+    static setOpacity (ctx, opacity) {
+        if (opacity !== null && ctx.globalAlpha !== opacity) {
+            ctx.globalAlpha = opacity;
+        }
+    }
+
+    /**
      * Return an instance from a generic object
      * @param {Object} definition - Container definition
      * @return {Container}
@@ -421,7 +394,7 @@ export default class Container extends EventEmitter {
      * @prop {PositionDefinition} [scale=[1, 1]] - Scaling ratio
      * @prop {PositionDefinition} [rotationCenter=[0, 0]] - Center of rotation relative to this position
      * @prop {Number} [zIndex=1] - Depth ordering
-     * @prop {Component} [clip=null] -
+     * @prop {Component} [clip=null] - Other component used to clip the rendering
      */
     /**
      * @return {ContainerOptions}

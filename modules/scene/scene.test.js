@@ -69,31 +69,6 @@ test("hide and show", (t) => {
     t.true(t.context.options.shown);
 });
 
-test("get width and height", (t) => {
-    t.is(t.context.width, 800);
-    t.is(t.context.height, 600);
-});
-
-test("get size", (t) => {
-    const { size } = t.context;
-    t.is(size.x, 800);
-    t.is(size.y, 600);
-});
-
-test("get center", (t) => {
-    const { center } = t.context;
-    t.is(center.x, 400);
-    t.is(center.y, 300);
-});
-
-test("getRandomPosition", (t) => {
-    for (let i = 0; i < 100; ++i) {
-        const position = t.context.getRandomPosition();
-        t.true(position.x > 0 && position.x < 800);
-        t.true(position.y > 0 && position.y < 600);
-    }
-});
-
 test("from", (t) => {
     const scene = Scene.from({
         options: {
@@ -105,7 +80,5 @@ test("from", (t) => {
 });
 
 test("defaultOptions", (t) => {
-    t.is(Scene.defaultOptions.fill, null);
-    t.is(Scene.defaultOptions.opacity, 1);
     t.is(Scene.defaultOptions.cursor, "default");
 });

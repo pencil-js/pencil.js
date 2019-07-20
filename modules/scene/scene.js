@@ -1,18 +1,17 @@
 import Component from "@pencil.js/component";
-import Container from "@pencil.js/container";
+import OffscreenCanvas from "@pencil.js/offscreen-canvas";
 import KeyboardEvent from "@pencil.js/keyboard-event";
 import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
-import { random } from "@pencil.js/math";
 
 const listenForEventsKey = Symbol("_listenForEvents");
 
 /**
  * Scene class
  * @class
- * @extends Container
+ * @extends OffscreenCanvas
  */
-export default class Scene extends Container {
+export default class Scene extends OffscreenCanvas {
     /**
      * Scene constructor
      * @param {HTMLElement} [container=document.body] - Container of the renderer
@@ -22,22 +21,19 @@ export default class Scene extends Container {
         super(undefined, options);
 
         const measures = container.getBoundingClientRect();
-        let canvas;
         if (container instanceof window.HTMLCanvasElement) {
-            canvas = container;
+            super(undefined, undefined, options);
+            this.ctx = container.getContext("2d");
         }
         else {
-            canvas = window.document.createElement("canvas");
-            container.appendChild(canvas);
+            super(container.scrollWidth, container.scrollHeight, options);
+            const { canvas } = this.ctx;
             canvas.style.display = "block";
             canvas.style.position = "absolute";
             canvas.width = container.scrollWidth;
             canvas.height = container.scrollHeight;
+            container.appendChild(canvas);
         }
-        /**
-         * @type {CanvasRenderingContext2D}
-         */
-        this.ctx = canvas.getContext("2d");
         /**
          * @type {Position}
          */
@@ -46,7 +42,6 @@ export default class Scene extends Container {
          * @type {Position}
          */
         this.containerPosition = new Position(measures.left + window.scrollX, measures.top + window.scrollY);
-
         /**
          * @type {Boolean}
          */
@@ -83,17 +78,13 @@ export default class Scene extends Container {
 
     /**
      * Draw the whole scene
-     * @param {CanvasRenderingContext2D|OffScreenCanvas} [onto=this.ctx] - Context to render scene
      * @return {Scene} Itself
      */
-    render (onto = this.ctx) {
+    render () {
         const animationId = this.isLooped ? window.requestAnimationFrame(this.render.bind(this, undefined)) : null;
 
-        const context = (onto && onto.ctx) || onto;
-        this.clear(context);
-
         try {
-            super.render(context);
+            super.render(this.ctx);
         }
         catch (error) {
             window.cancelAnimationFrame(animationId);
@@ -116,20 +107,6 @@ export default class Scene extends Container {
      */
     isHover () {
         return this.options.shown;
-    }
-
-    /**
-     * Erase everything on scene
-     * @param {CanvasRenderingContext2D} [context=this.ctx] -
-     * @return {Scene} Itself
-     */
-    clear (context = this.ctx) {
-        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-        if (this.options.fill) {
-            context.fillStyle = this.options.fill.toString(context);
-            context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-        }
-        return this;
     }
 
     /**
@@ -171,46 +148,6 @@ export default class Scene extends Container {
     }
 
     /**
-     * Return this scene width
-     * @returns {Number}
-     */
-    get width () {
-        return this.ctx.canvas.width;
-    }
-
-    /**
-     * Return this scene height
-     * @returns {Number}
-     */
-    get height () {
-        return this.ctx.canvas.height;
-    }
-
-    /**
-     * Return the whole scene size
-     * @returns {Position}
-     */
-    get size () {
-        return new Position(this.width, this.height);
-    }
-
-    /**
-     * Return this scene center point
-     * @return {Position}
-     */
-    get center () {
-        return this.size.divide(2);
-    }
-
-    /**
-     * Return a random position within the scene
-     * @return {Position}
-     */
-    getRandomPosition () {
-        return new Position(random(this.width), random(this.height));
-    }
-
-    /**
      * @inheritDoc
      * @param {Object} definition - Scene definition
      * @return {Scene}
@@ -221,9 +158,7 @@ export default class Scene extends Container {
 
     /**
      * @typedef {Object} SceneOptions
-     * @extends {ContainerOptions}
-     * @prop {String} [fill=null] - Background of the scene
-     * @prop {Number} [opacity=1] - Global opacity
+     * @extends {OffscreenCanvasOptions}
      * @prop {String} [cursor=Component.cursors.defaultOptions] - Cursor on hover
      */
     /**
@@ -232,8 +167,6 @@ export default class Scene extends Container {
     static get defaultOptions () {
         return {
             ...super.defaultOptions,
-            fill: null,
-            opacity: 1,
             cursor: Component.cursors.default,
         };
     }

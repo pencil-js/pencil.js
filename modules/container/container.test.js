@@ -230,33 +230,16 @@ test("climbAncestry", (t) => {
     grandChild.climbAncestry(ancestor => t.is(ancestor, expected[pointer++]));
 });
 
-test("getTaintedCanvas null", (t) => {
-    const canvas = t.context.getTaintedCanvas();
-    t.is(canvas, null);
-});
+test("setOpacity", (t) => {
+    const ctx = {
+        globalAlpha: 1,
+    };
 
-test("getTaintedCanvas vector", (t) => {
-    const canvas = t.context.getTaintedCanvas([[10, 20], [100, 200]]);
-    t.is(canvas.width, 90);
-    t.is(canvas.height, 180);
-});
+    Container.setOpacity(ctx, null);
+    t.is(ctx.globalAlpha, 1);
 
-test("getTaintedCanvas width and height", (t) => {
-    t.context.width = 10;
-    t.context.height = 20;
-    const canvas = t.context.getTaintedCanvas();
-    t.is(canvas.width, 10);
-    t.is(canvas.height, 20);
-});
-
-test("toImage", (t) => {
-    t.context.width = 10;
-    t.context.height = 20;
-    const img = t.context.toImage();
-    t.true(img instanceof window.HTMLImageElement);
-    t.is(img.width, 10);
-    t.is(img.height, 20);
-    t.truthy(img.src);
+    Container.setOpacity(ctx, 0.5);
+    t.is(ctx.globalAlpha, 0.5);
 });
 
 test("toJSON", (t) => {

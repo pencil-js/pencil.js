@@ -1,17 +1,55 @@
+import Container from "@pencil.js/container";
+import Position from "@pencil.js/position";
+import Vector from "@pencil.js/vector";
+import { random } from "@pencil.js/math";
+
 /**
  * Off-screen canvas class
  * @class
  */
-export default class OffScreenCanvas {
+export default class OffScreenCanvas extends Container {
     /**
      * Off-screen canvas constructor
      * @param {Number} [width=1] - Width of the canvas
      * @param {Number} [height=1] - Height of the canvas
+     * @param {ContainerOptions} options - Specific options
      */
-    constructor (width = 1, height = 1) {
-        this.ctx = window.document.createElement("canvas").getContext("2d");
+    constructor (width = 1, height = 1, options) {
+        super(undefined, options);
+        const canvas = window.document.createElement("canvas");
+        /**
+         * @type {CanvasRenderingContext2D}
+         */
+        this.ctx = canvas.getContext("2d");
         this.width = width;
         this.height = height;
+    }
+
+    /**
+     * Erase the canvas
+     * @return {OffScreenCanvas} Itself
+     */
+    clear () {
+        this.ctx.clearRect(0, 0, this.width, this.height);
+
+        if (this.options.fill) {
+            OffScreenCanvas.setOpacity(this.ctx, this.options.opacity);
+            const { width, height } = this;
+            this.ctx.fillStyle = this.options.fill.toString(this.ctx);
+            this.ctx.fillRect(0, 0, width, height);
+        }
+        return this;
+    }
+
+    /**
+     * Render a container and its children into the canvas
+     * @return {OffScreenCanvas} Itself
+     */
+    render () {
+        this.clear();
+        super.render(this.ctx);
+
+        return this;
     }
 
     /**
@@ -43,51 +81,102 @@ export default class OffScreenCanvas {
     }
 
     /**
-     * Render a container and its children into the canvas
-     * @param {Container} container - Any container
-     * @return {OffScreenCanvas} Itself
+     * Return the whole scene size
+     * @returns {Position}
      */
-    render (container) {
-        this.clear();
-        container.render(this.ctx);
-        return this;
+    get size () {
+        return new Position(this.width, this.height);
     }
 
     /**
-     * Erase the canvas
-     * @return {OffScreenCanvas} Itself
+     * Return this scene center point
+     * @return {Position}
      */
-    clear () {
-        this.ctx.clearRect(0, 0, this.width, this.height);
-        return this;
+    get center () {
+        return this.size.divide(2);
+    }
+
+    /**
+     * Return a random position within the scene
+     * @return {Position}
+     */
+    getRandomPosition () {
+        return new Position(random(this.width), random(this.height));
+    }
+
+    /**
+     * Return the whole canvas as data
+     * @param {VectorDefinition} [vectorDefinition] - Box of data to extract
+     * @return {ImageData}
+     */
+    getImageData (vectorDefinition) {
+        let vector;
+        if (vectorDefinition) {
+            vector = Vector.from(vectorDefinition);
+        }
+        else {
+            vector = new Vector(undefined, [this.width, this.height]);
+        }
+
+        return this.ctx.getImageData(vector.start.x, vector.start.y, vector.end.x, vector.end.y);
     }
 
     /**
      * Put data into the canvas
      * @param {ImageData} imageData - Data to add to the canvas
+     * @param {PositionDefinition} [positionDefinition] - Position of the data
      */
-    set imageData (imageData) {
-        this.ctx.putImageData(imageData, 0, 0);
+    setImageData (imageData, positionDefinition) {
+        const position = Position.from(positionDefinition);
+        this.ctx.putImageData(imageData, position.x, position.y);
     }
 
     /**
-     * Return the whole canvas as data
-     * @return {ImageData}
-     */
-    get imageData () {
-        return this.ctx.getImageData(0, 0, this.width, this.height);
-    }
-
-    /**
-     *
-     * @param {String} type -
+     * Return an image composed of its content
+     * @param {VectorDefinition} [vectorDefinition] -
+     * @param {String} [type="image/png"] -
      * @return {HTMLImageElement}
      */
-    toImage (type = "image/png") {
+    toImage (vectorDefinition, type = "image/png") {
+        let vector;
+        if (vectorDefinition) {
+            vector = Vector.from(vectorDefinition);
+        }
+        else {
+            vector = new Vector(undefined, [this.width, this.height]);
+        }
+
         const img = window.document.createElement("img");
+
+        const { width, height } = this;
+        const size = vector.getDelta();
+        this.width = size.x;
+        this.height = size.y;
         img.width = this.width;
         img.height = this.height;
+        this.ctx.translate(-vector.start.x, -vector.start.y);
+        this.render();
         img.src = this.ctx.canvas.toDataURL(type);
+
+        this.width = width;
+        this.height = height;
+
         return img;
+    }
+
+    /**
+     * @typedef {Object} OffscreenCanvasOptions
+     * @prop {String|Color} [fill=null] - Background color
+     * @prop {Number} [opacity=1] - Global opacity
+     */
+    /**
+     * @return {OffscreenCanvasOptions}
+     */
+    static get defaultOptions () {
+        return {
+            ...super.defaultOptions,
+            fill: null,
+            opacity: 1,
+        };
     }
 }

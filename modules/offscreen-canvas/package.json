@@ -30,6 +30,12 @@
     "bugs": {
         "url": "https://github.com/pencil-js/pencil.js/issues"
     },
+    "dependencies": {
+        "@pencil.js/container": "^1.8.0",
+        "@pencil.js/math": "^1.8.0",
+        "@pencil.js/position": "^1.8.0",
+        "@pencil.js/vector": "^1.8.0"
+    },
     "devDependencies": {
         "ava": "^2.2.0",
         "browser-env": "^3.2.5",

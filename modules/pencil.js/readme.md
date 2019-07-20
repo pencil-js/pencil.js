@@ -114,7 +114,8 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 ## Modules
  * [EventEmitter](modules/event-emitter)
    * [Container](modules/container)
-     * [Scene](modules/scene)
+     * [OffScreenCanvas](modules/offscreen-canvas)
+       * [Scene](modules/scene)
      * [Component](modules/component)
        * [.draggable()](modules/draggable)
        * [Particles](modules/particles)
@@ -146,7 +147,6 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
  * [Color](modules/color)
  * [LinearGradient](modules/linear-gradient)
  * [RadialGradient](modules/radial-gradient)
- * [OffScreenCanvas](modules/offscreen-canvas)
  * [BaseEvent](modules/base-event)
    * [MouseEvent](modules/mouse-event)
    * [KeyboardEvent](modules/keyboard-event)

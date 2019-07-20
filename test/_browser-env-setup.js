@@ -32,6 +32,7 @@ window.HTMLCanvasElement.prototype.getContext = function getContext () {
     return {
         canvas: this,
         clearRect: noop,
+        fillRect: noop,
         getImageData: noop,
         putImageData: noop,
         save: noop,
