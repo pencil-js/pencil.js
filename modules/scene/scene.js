@@ -18,8 +18,6 @@ export default class Scene extends OffscreenCanvas {
      * @param {SceneOptions} [options] - Specific options
      */
     constructor (container = window.document.body, options) {
-        super(undefined, options);
-
         const measures = container.getBoundingClientRect();
         if (container instanceof window.HTMLCanvasElement) {
             super(undefined, undefined, options);
