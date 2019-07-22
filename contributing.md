@@ -34,8 +34,9 @@ Then you can clone this copy to your machine.
 
     git clone git@github.com:your-name-here/pencil.js.git
     cd pencil.js
+    npm install
 
-We use [lerna](https://lernajs.io/) to manage the modular aspect of the project. So, you just have to run the `init` script.
+We use [lerna](https://lernajs.io/) to manage the modular aspect of the project. So, you have to run the `init` script.
 
     npm run init
 
@@ -43,20 +44,18 @@ We use [lerna](https://lernajs.io/) to manage the modular aspect of the project.
 
 You can then start to make modification to the code. Here's a few useful commands.
 
-To build the project, you can simply run the build script once or ask it to run at each modifications you make.
+To build the project, you can simply run the build script. It will automatically re-build each time you make any change.
 
-    npm run build
-    # or
-    npm run build -- --watch
+    npm run play
 
-In the [playground directory](playground/), you'll find a basic HTML page pointing to the build file.
-You can then mess with the result to see your modifications in actions.
+In the [playground Javascript file](playground/playground.js), you'll find a basic setup script.
+You can then mess with it to see your modifications in actions.
 
 #### Check
 
 In order for everyone to work in harmony, we have a few guidelines.
 
-We use [eslint](https://eslint.org/) to check the code-style. Configure your IDE to follow the [code-style](.eslintrc) or run the linting script.
+We use [eslint](https://eslint.org/) to check the code-style with a linting script.
 
     npm run lint
 
