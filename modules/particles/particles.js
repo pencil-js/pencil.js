@@ -22,12 +22,12 @@ export default class Particles extends Component {
      * @param {Component} base - Blueprint for each particle
      * @param {Number} nbInstances - Number of particle to create
      * @param {OptionsGenerator} optionGenerator - Initialization function for all particles data
-     * @param {ParticlesCallback} callback - Function called on each particle draw (should not be computation intensive)
+     * @param {ParticlesCallback} updater - Function called on each particle draw (should not be computation intensive)
      */
-    constructor (positionDefinition, base, nbInstances, optionGenerator, callback) {
+    constructor (positionDefinition, base, nbInstances, optionGenerator, updater) {
         super(positionDefinition, base.options);
         this.base = base;
-        this.callback = callback;
+        this.updater = updater;
         this.data = [...new Array(nbInstances)].map((_, index) => {
             const data = {
                 ...Particles.defaultData,
@@ -48,8 +48,8 @@ export default class Particles extends Component {
         const matrix = new window.DOMMatrix();
         const { cos, sin } = Math;
         this.data.forEach((data, index) => {
-            if (this.callback) {
-                this.callback(data, index);
+            if (this.updater) {
+                this.updater(data, index);
             }
             const { scale, position, rotation } = data;
             const rotationRadian = rotation * radianCircle;

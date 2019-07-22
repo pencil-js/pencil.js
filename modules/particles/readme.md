@@ -28,6 +28,9 @@ const generator = () => {
         // And whatever value you want to define for each individual particle
     };
 };
+const updater = (data) => {
+    data.position.add(data.speed);
+};
 
-const particles = new Particles(aPosition, base, count, generator);
+const particles = new Particles(aPosition, base, count, generator, updater);
 ```
