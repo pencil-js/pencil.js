@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/offscreen-canvas",
-    "version": "1.9.0",
+    "version": "1.9.2",
     "description": "Off-screen canvas for Pencil.js package.",
     "main": "offscreen-canvas.js",
     "files": [],
