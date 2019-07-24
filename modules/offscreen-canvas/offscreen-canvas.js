@@ -118,6 +118,7 @@ export default class OffScreenCanvas extends Container {
             vector = new Vector(undefined, [this.width, this.height]);
         }
 
+        this.render();
         return this.ctx.getImageData(vector.start.x, vector.start.y, vector.end.x, vector.end.y);
     }
 
