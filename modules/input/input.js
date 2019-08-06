@@ -44,9 +44,10 @@ export default class Input extends Container {
      * @return {Input} Itself
      */
     makePath (ctx) {
+        const previousOrigin = this.background.options.origin;
         this.background.options.origin = this.options.origin;
         const origin = this.background.getOrigin();
-        this.background.options.origin = undefined;
+        this.background.options.origin = previousOrigin;
         ctx.translate(origin.x, origin.y);
         return super.makePath();
     }
