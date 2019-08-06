@@ -25,7 +25,7 @@ Component.prototype.rotatable = function rotatable () {
         }
 
         previousAngle = this.options.rotation;
-        startingAngle = event.position.subtract(this.position).angle;
+        startingAngle = event.position.subtract(this.getAbsolutePosition()).angle;
 
         this.isRotated = true;
 
@@ -34,7 +34,8 @@ Component.prototype.rotatable = function rotatable () {
 
     this.getScene().then(scene => scene.on(MouseEvent.events.move, (event) => {
         if (previousAngle !== null) {
-            this.options.rotation = previousAngle + event.position.subtract(this.position).angle - startingAngle;
+            const absolutePosition = this.getAbsolutePosition();
+            this.options.rotation = previousAngle + event.position.subtract(absolutePosition).angle - startingAngle;
             this.fire(new MouseEvent(MouseEvent.events.rotate, this, event.position));
         }
     }).on(MouseEvent.events.up, (event) => {
