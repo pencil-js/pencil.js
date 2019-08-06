@@ -44,6 +44,7 @@ import Select from "@pencil.js/select";
 import Slider from "@pencil.js/slider";
 import ProgressBar from "@pencil.js/progress-bar";
 import ProgressPie from "@pencil.js/progress-pie";
+import Knob from "@pencil.js/knob";
 
 // Interactions
 import "@pencil.js/draggable";
@@ -79,6 +80,7 @@ const exportableClasses = {
     Button,
     ProgressBar,
     ProgressPie,
+    Knob,
     Color,
     LinearGradient,
     RadialGradient,
@@ -152,6 +154,7 @@ export {
     Select,
     ProgressBar,
     ProgressPie,
+    Knob,
     from,
     version,
     author,

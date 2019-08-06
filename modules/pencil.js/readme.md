@@ -138,6 +138,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
    * [Input](modules/input)
      * [Button](modules/button)
      * [Checkbox](modules/checkbox)
+     * [Knob](modules/knob)
      * [ProgressBar](modules/progress-bar)
      * [ProgressPie](modules/progress-pie)
      * [Select](modules/select)

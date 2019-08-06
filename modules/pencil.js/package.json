@@ -55,6 +55,7 @@
         "@pencil.js/image": "^1.9.2",
         "@pencil.js/input": "^1.9.2",
         "@pencil.js/keyboard-event": "^1.9.2",
+        "@pencil.js/knob": "^1.0.0",
         "@pencil.js/line": "^1.9.2",
         "@pencil.js/linear-gradient": "^1.9.0",
         "@pencil.js/math": "^1.9.0",
