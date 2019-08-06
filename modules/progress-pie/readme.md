@@ -16,7 +16,7 @@ Progress-pie component.
 import ProgressPie from "@pencil.js/progress-pie";
 
 const options = {
-    width: 200, // radius in pixel
+    radius: 200, // radius in pixel
     value: 0, // initial value (from 0 to 1)
     speed: 0.3, // transition speed (0 means no changes, 1 mean instant change)
 };
