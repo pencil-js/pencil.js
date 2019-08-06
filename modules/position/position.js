@@ -227,6 +227,14 @@ export default class Position {
     }
 
     /**
+     * Get the angle of a position relative to the horizontal axis
+     * @return {Number}
+     */
+    get angle () {
+        return (Math.atan(this.y / this.x) / radianCircle) + (this.x < 0 ? 0.75 : 0.25);
+    }
+
+    /**
      * Return a JSON ready Position definition
      * @return {Array<Number>}
      */
