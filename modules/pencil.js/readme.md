@@ -118,6 +118,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
        * [Scene](modules/scene)
      * [Component](modules/component)
        * [.draggable()](modules/draggable)
+       * [.rotatable()](modules/rotatable)
        * [Particles](modules/particles)
        * [Path](modules/path)
        * [Line](modules/line)

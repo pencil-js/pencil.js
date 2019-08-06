@@ -36,6 +36,7 @@ export default class MouseEvent extends BaseEvent {
      * @prop {String} drag - Mouse is moved while grabbing a component
      * @prop {String} drop - Mouse is release after dragging a component
      * @prop {String} resize - Mouse is moved while holding the handle of a resizable component
+     * @prop {String} rotate - Mouse is rotating a component
      */
     /**
      * @return {MouseEvents}
@@ -57,6 +58,7 @@ export default class MouseEvent extends BaseEvent {
             drag: "drag",
             drop: "drop",
             resize: "resize",
+            rotate: "rotate",
         };
     }
 }

@@ -71,6 +71,7 @@
         "@pencil.js/rectangle": "^1.9.2",
         "@pencil.js/regular-polygon": "^1.9.2",
         "@pencil.js/resizable": "^1.9.2",
+        "@pencil.js/rotatable": "^1.0.0",
         "@pencil.js/scene": "^1.9.2",
         "@pencil.js/select": "^1.9.2",
         "@pencil.js/slider": "^1.9.2",

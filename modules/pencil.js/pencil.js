@@ -48,6 +48,7 @@ import ProgressPie from "@pencil.js/progress-pie";
 // Interactions
 import "@pencil.js/draggable";
 import "@pencil.js/resizable";
+import "@pencil.js/rotatable";
 
 // Package data
 import { version, author, homepage } from "./package.json";

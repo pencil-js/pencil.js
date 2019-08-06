@@ -21,11 +21,16 @@ import MouseEvent from "@pencil.js/mouse-event";
  * @return {DraggableAPI}
  */
 Component.prototype.draggable = function draggable (options) {
+    if (this.isDraggable) {
+        throw new Error("Component can't be both rotatable and draggable.");
+    }
+
     const cursorNotSet = this.options.cursor === Component.cursors.default;
     if (cursorNotSet) {
         this.options.cursor = Component.cursors.grab;
     }
     this.isDraggable = true;
+    this.isDragged = false;
     const mergedOptions = {
         x: true,
         y: true,
@@ -38,8 +43,10 @@ Component.prototype.draggable = function draggable (options) {
         if (cursorNotSet) {
             this.options.cursor = Component.cursors.grabbing;
         }
+
         startPosition = event.position;
         originPosition = this.position.clone();
+
         this.isDragged = true;
 
         this.fire(new MouseEvent(MouseEvent.events.grab, this, this.position.clone()));
@@ -62,8 +69,9 @@ Component.prototype.draggable = function draggable (options) {
             this.options.cursor = Component.cursors.grab;
         }
         if (this.isDragged && startPosition) {
-            this.isDragged = false;
             startPosition = null;
+
+            this.isDragged = false;
 
             this.fire(new MouseEvent(MouseEvent.events.drop, this, this.position.clone()));
         }
