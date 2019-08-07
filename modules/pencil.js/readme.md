@@ -146,6 +146,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
  * [Position](modules/position)
  * [Vector](modules/vector)
  * [Math](modules/math)
+ * [Navigation](modules/navigation)
  * [Color](modules/color)
  * [LinearGradient](modules/linear-gradient)
  * [RadialGradient](modules/radial-gradient)
