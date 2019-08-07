@@ -284,6 +284,7 @@ export default class Container extends EventEmitter {
      */
     show () {
         this.options.shown = true;
+        this.fire(new BaseEvent(Container.events.show, this));
         return this;
     }
 
@@ -293,6 +294,7 @@ export default class Container extends EventEmitter {
      */
     hide () {
         this.options.shown = false;
+        this.fire(new BaseEvent(Container.events.hide, this));
         return this;
     }
 
@@ -413,10 +415,12 @@ export default class Container extends EventEmitter {
 
     /**
      * @typedef {Object} ContainerEvent
-     * @enum {String}
+     * @extends EventEmitterEvents
      * @prop {String} attach - Container is append to a new parent
      * @prop {String} detach - Container remove from it's parent
      * @prop {String} draw - Container is drawn
+     * @prop {String} hide -
+     * @prop {String} show -
      */
     /**
      * @return {ContainerEvent}
@@ -427,6 +431,8 @@ export default class Container extends EventEmitter {
             attach: "attach",
             detach: "detach",
             draw: "draw",
+            hide: "hide",
+            show: "show",
         };
     }
 

@@ -72,6 +72,7 @@ export default class EventEmitter {
 
     /**
      * @typedef {Object} EventEmitterEvents
+     * @enum {String}
      */
     /**
      * @return {EventEmitterEvents}
