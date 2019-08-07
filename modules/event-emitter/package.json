@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/event-emitter",
-    "version": "1.9.0",
+    "version": "1.10.0",
     "description": "Event emitter for Pencil.js package.",
     "main": "event-emitter.js",
     "files": [],

@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/draggable",
-    "version": "1.9.2",
+    "version": "1.10.0",
     "description": "Allow component to be dragged in Pencil.js package.",
     "main": "draggable.js",
     "files": [],
@@ -24,8 +24,8 @@
         "interaction"
     ],
     "dependencies": {
-        "@pencil.js/component": "^1.9.2",
-        "@pencil.js/mouse-event": "^1.9.0"
+        "@pencil.js/component": "^1.10.0",
+        "@pencil.js/mouse-event": "^1.10.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",
