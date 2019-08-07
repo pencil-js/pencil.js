@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/component",
-    "version": "1.10.0",
+    "version": "1.10.1",
     "description": "Abstract component for Pencil.js package.",
     "main": "component.js",
     "files": [],
@@ -27,7 +27,7 @@
     ],
     "dependencies": {
         "@pencil.js/container": "^1.10.0",
-        "@pencil.js/offscreen-canvas": "^1.10.0",
+        "@pencil.js/offscreen-canvas": "^1.10.1",
         "@pencil.js/position": "^1.10.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
