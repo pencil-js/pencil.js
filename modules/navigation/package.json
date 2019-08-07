@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/navigation",
-    "version": "1.10.1",
+    "version": "1.10.2",
     "description": "Navigation module for Pencil.js package.",
     "main": "navigation.js",
     "files": [],
@@ -31,7 +31,7 @@
         "url": "https://github.com/pencil-js/pencil.js/issues"
     },
     "dependencies": {
-        "@pencil.js/scene": "^1.10.1"
+        "@pencil.js/scene": "^1.10.2"
     },
     "devDependencies": {
         "ava": "^2.2.0",
