@@ -19,7 +19,7 @@ export default class OffScreenCanvas extends Container {
         /**
          * @type {CanvasRenderingContext2D}
          */
-        this.ctx = OffScreenCanvas.buildCanvas(width, height);
+        this.ctx = this.constructor.buildCanvas(width, height);
     }
 
     /**
