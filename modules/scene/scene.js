@@ -21,11 +21,12 @@ export default class Scene extends OffscreenCanvas {
         const measures = container.getBoundingClientRect();
 
         if (container instanceof window.HTMLCanvasElement) {
-            super(undefined, undefined, options);
+            super(null, 0, options);
             this.ctx = container.getContext("2d");
         }
         else {
             super(container, 0, options);
+            container.appendChild(this.ctx.canvas);
         }
         /**
          * @type {Position}
@@ -154,14 +155,16 @@ export default class Scene extends OffscreenCanvas {
      * @param {HTMLElement} container - Element holding the canvas
      * @inheritDoc
      */
-    static buildCanvas (container) {
-        const { scrollWidth, scrollHeight } = container;
-        const ctx = super.buildCanvas(scrollWidth, scrollHeight);
-        ctx.canvas.style.display = "block";
-        ctx.canvas.style.position = "absolute";
-        // FIXME side effect
-        window.document.body.appendChild(ctx.canvas);
-        return ctx;
+    static buildCanvas (container = window.document.body) {
+        if (container) {
+            const { scrollWidth, scrollHeight } = container;
+            const ctx = super.buildCanvas(scrollWidth, scrollHeight);
+            ctx.canvas.style.display = "block";
+            ctx.canvas.style.position = "absolute";
+            return ctx;
+        }
+
+        return null;
     }
 
     /**

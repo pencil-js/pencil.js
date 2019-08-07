@@ -25,16 +25,25 @@ const displayScene = (scene) => {
 
 /**
  * Build all scene and display the first one
- * @param {Object} builders - Set of function returning a scene
+ * @param {Object} builders - Set of function building the scenes
+ * @param {HTMLElement} container - Container for all the scenes
  * @return {Scene} First shown scene
  */
-const prepareScenes = (builders) => {
-    const { canvas } = Scene.buildCanvas(window.document.body);
+const prepareScenes = (builders, container = window.document.body) => {
+    let canvas;
+    if (container instanceof window.HTMLCanvasElement) {
+        canvas = container;
+    }
+    else {
+        ({ canvas } = Scene.buildCanvas(container));
+        container.appendChild(canvas);
+    }
 
     const scenesNames = Object.keys(builders);
     const scenes = {};
     scenesNames.forEach((sceneName) => {
-        const scene = builders[sceneName](canvas);
+        const scene = new Scene(canvas);
+        builders[sceneName](scene);
         scenes[sceneName] = scene;
         scene.hide();
 

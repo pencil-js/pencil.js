@@ -5,13 +5,11 @@ import * as Navigation from ".";
 
 test("Navigation", (t) => {
     Navigation.prepareScenes({
-        home: (container) => {
-            t.is(container.constructor.name, "HTMLCanvasElement");
-            return new Scene(container);
+        home: (scene) => {
+            t.is(scene.constructor, Scene);
         },
-        other: (container) => {
-            t.is(container.constructor.name, "HTMLCanvasElement");
-            return new Scene(container);
+        other: (scene) => {
+            t.is(scene.constructor, Scene);
         },
     });
     const outsider = new Scene();

@@ -14,13 +14,14 @@ Build all scene and display the first one
 
 ```js
 const firstScene = prepareScenes({
-    first: container => new Scene(container),
+    first: scene => scene.add(new Circle()),
 });
 ```
 
 | Name | Type | Default | Comment |
 | --- | --- | --- | --- |
-| builders | ``Object`` | Required | Set of function returning a scene |
+| builders | ``Object`` | Required | Set of function building the scenes |
+| container | ``HTMLElement`` | ``document.body`` | Container for all the scenes |
 
 
 ### displayScene

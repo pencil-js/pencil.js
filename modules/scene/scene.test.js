@@ -87,6 +87,9 @@ test("buildCanvas", (t) => {
     t.is(ctx.constructor.name, "CanvasRenderingContext2D");
     t.is(ctx.canvas.width, 10);
     t.is(ctx.canvas.height, 20);
+
+    const nothing = Scene.buildCanvas(null);
+    t.is(nothing, null);
 });
 
 test("defaultOptions", (t) => {
