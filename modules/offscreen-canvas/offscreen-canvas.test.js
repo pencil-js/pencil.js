@@ -71,6 +71,13 @@ test("toImage", (t) => {
     t.truthy(img.src);
 });
 
+test("buildCanvas", (t) => {
+    const ctx = OffscreenCanvas.buildCanvas(10, 20);
+    t.is(ctx.constructor.name, "CanvasRenderingContext2D");
+    t.is(ctx.canvas.width, 10);
+    t.is(ctx.canvas.height, 20);
+});
+
 test("defaultOptions", (t) => {
     t.is(Scene.defaultOptions.fill, null);
     t.is(Scene.defaultOptions.opacity, 1);

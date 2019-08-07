@@ -79,6 +79,16 @@ test("from", (t) => {
     t.is(scene.options.fill, "red");
 });
 
+test("buildCanvas", (t) => {
+    const ctx = Scene.buildCanvas({
+        scrollWidth: 10,
+        scrollHeight: 20,
+    });
+    t.is(ctx.constructor.name, "CanvasRenderingContext2D");
+    t.is(ctx.canvas.width, 10);
+    t.is(ctx.canvas.height, 20);
+});
+
 test("defaultOptions", (t) => {
     t.is(Scene.defaultOptions.cursor, "default");
 });

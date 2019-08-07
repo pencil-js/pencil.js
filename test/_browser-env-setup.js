@@ -29,7 +29,7 @@ window.FontFace = class FontFace {
 
 window.HTMLCanvasElement.prototype.getContext = function getContext () {
     const noop = () => {};
-    return {
+    const ctx = {
         canvas: this,
         clearRect: noop,
         fillRect: noop,
@@ -45,5 +45,7 @@ window.HTMLCanvasElement.prototype.getContext = function getContext () {
             width: 5,
         }),
     };
+    ctx.constructor.name = "CanvasRenderingContext2D";
+    return ctx;
 };
 window.HTMLCanvasElement.prototype.toDataURL = type => type;

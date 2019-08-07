@@ -16,13 +16,10 @@ export default class OffScreenCanvas extends Container {
      */
     constructor (width = 1, height = 1, options) {
         super(undefined, options);
-        const canvas = window.document.createElement("canvas");
         /**
          * @type {CanvasRenderingContext2D}
          */
-        this.ctx = canvas.getContext("2d");
-        this.width = width;
-        this.height = height;
+        this.ctx = OffScreenCanvas.buildCanvas(width, height);
     }
 
     /**
@@ -163,6 +160,19 @@ export default class OffScreenCanvas extends Container {
         this.height = height;
 
         return img;
+    }
+
+    /**
+     * Build a canvas context and returns it
+     * @param {Number} width - Width of the canvas
+     * @param {Number} height - Height of the canvas
+     * @return {CanvasRenderingContext2D}
+     */
+    static buildCanvas (width, height) {
+        const canvas = window.document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        return canvas.getContext("2d");
     }
 
     /**
