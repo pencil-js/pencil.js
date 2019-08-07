@@ -38,7 +38,7 @@ const prepareScenes = (builders) => {
         scenes[sceneName] = scene;
         scene.hide();
 
-        scene.on("change", event => displayScene(scenes[event.target]));
+        scene.on(Scene.events.change, event => displayScene(scenes[event.target]));
     });
 
     return displayScene(scenes[scenesNames[0]]);
