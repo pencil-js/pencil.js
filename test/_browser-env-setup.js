@@ -1,3 +1,5 @@
+/* eslint-disable require-jsdoc,class-methods-use-this */
+
 import browserEnv from "browser-env";
 
 browserEnv(["window", "document"], {
@@ -27,25 +29,39 @@ window.FontFace = class FontFace {
     }
 };
 
-window.HTMLCanvasElement.prototype.getContext = function getContext () {
-    const noop = () => {};
-    const ctx = {
-        canvas: this,
-        clearRect: noop,
-        fillRect: noop,
-        getImageData: noop,
-        putImageData: noop,
-        save: noop,
-        restore: noop,
-        translate: noop,
-        rotate: noop,
-        scale: noop,
-        setTransform: noop,
-        measureText: () => ({
+window.CanvasRenderingContext2D = class CanvasRenderingContext2D {
+    constructor (canvas) {
+        this.canvas = canvas;
+    }
+
+    clearRect () {}
+
+    fillRect () {}
+
+    getImageData () {}
+
+    putImageData () {}
+
+    save () {}
+
+    restore () {}
+
+    translate () {}
+
+    rotate () {}
+
+    scale () {}
+
+    setTransform () {}
+
+    measureText () {
+        return {
             width: 5,
-        }),
-    };
-    ctx.constructor.name = "CanvasRenderingContext2D";
-    return ctx;
+        };
+    }
+};
+
+window.HTMLCanvasElement.prototype.getContext = function getContext () {
+    return new window.CanvasRenderingContext2D(this);
 };
 window.HTMLCanvasElement.prototype.toDataURL = type => type;

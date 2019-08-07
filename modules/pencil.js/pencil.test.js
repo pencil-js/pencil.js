@@ -3,9 +3,9 @@ import test from "ava";
 /* eslint-disable import/no-duplicates, import/no-named-as-default-member */
 import Pencil from ".";
 import {
-    BaseEvent, MouseEvent, NetworkEvent, KeyboardEvent, Math, Position, Vector, Line, Spline, EventEmitter, Container,
-    Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse, Circle, Text,
-    Path, Input, Checkbox, Slider, ProgressBar, ProgressPie, Button, Select, from, OffScreenCanvas,
+    BaseEvent, MouseEvent, NetworkEvent, KeyboardEvent, Math, Navigation, Position, Vector, Line, Spline, EventEmitter,
+    Container, Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse,
+    Circle, Text, Path, Input, Checkbox, Slider, Knob, ProgressBar, ProgressPie, Button, Select, from, OffScreenCanvas,
     version, author, homepage, Color, LinearGradient, RadialGradient,
 } from ".";
 
@@ -37,6 +37,7 @@ test("namespace", (t) => {
     t.not(Pencil.NetworkEvent, undefined);
     t.not(Pencil.KeyboardEvent, undefined);
     t.not(Pencil.Math, undefined);
+    t.not(Pencil.Navigation, undefined);
     t.not(Pencil.Position, undefined);
     t.not(Pencil.Vector, undefined);
     t.not(Pencil.Line, undefined);
@@ -64,6 +65,7 @@ test("namespace", (t) => {
     t.not(Pencil.Input, undefined);
     t.not(Pencil.Button, undefined);
     t.not(Pencil.Select, undefined);
+    t.not(Pencil.Knob, undefined);
     t.not(Pencil.from, undefined);
     t.not(Pencil.OffScreenCanvas, undefined);
     t.not(Pencil.version, undefined);
@@ -81,6 +83,7 @@ test("named imports", (t) => {
     t.not(NetworkEvent, undefined);
     t.not(KeyboardEvent, undefined);
     t.not(Math, undefined);
+    t.not(Navigation, undefined);
     t.not(Position, undefined);
     t.not(Vector, undefined);
     t.not(Line, undefined);
@@ -108,6 +111,7 @@ test("named imports", (t) => {
     t.not(Input, undefined);
     t.not(Button, undefined);
     t.not(Select, undefined);
+    t.not(Knob, undefined);
     t.not(from, undefined);
     t.not(OffScreenCanvas, undefined);
     t.not(version, undefined);

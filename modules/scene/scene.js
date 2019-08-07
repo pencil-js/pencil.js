@@ -25,7 +25,7 @@ export default class Scene extends OffscreenCanvas {
             this.ctx = container.getContext("2d");
         }
         else {
-            super(container, options);
+            super(container, 0, options);
         }
         /**
          * @type {Position}
@@ -176,6 +176,21 @@ export default class Scene extends OffscreenCanvas {
         return {
             ...super.defaultOptions,
             cursor: Component.cursors.default,
+        };
+    }
+
+    /**
+     * @typedef {Object} SceneEvents
+     * @extends ContainerEvent
+     * @prop {String} change -
+     */
+    /**
+     * @return {SceneEvents}
+     */
+    static get events () {
+        return {
+            ...super.events,
+            change: "change",
         };
     }
 }

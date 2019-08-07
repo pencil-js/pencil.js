@@ -6,6 +6,7 @@ import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Color from "@pencil.js/color";
 import LinearGradient from "@pencil.js/linear-gradient";
 import RadialGradient from "@pencil.js/radial-gradient";
+import * as Navigation from "@pencil.js/navigation";
 
 // Events
 import BaseEvent from "@pencil.js/base-event";
@@ -111,6 +112,7 @@ export default {
     default: undefined,
     from,
     Math,
+    Navigation,
     OffScreenCanvas,
     version,
     author,
@@ -140,6 +142,7 @@ export {
     Text,
     Path,
     Math,
+    Navigation,
     Position,
     Vector,
     BaseEvent,
