@@ -26,6 +26,20 @@ test("constructor", (t) => {
     t.is(t.context.frameCount, 0);
 });
 
+test("setOptions", (t) => {
+    t.context.setOptions({
+        opacity: 0.1,
+    });
+    t.is(t.context.options.opacity, 0.1);
+    t.is(t.context.options.zIndex, 1);
+
+    t.context.setOptions({
+        rotationCenter: [10, 20],
+    });
+    t.is(t.context.options.rotationCenter.x, 10);
+    t.is(t.context.options.rotationCenter.y, 20);
+});
+
 test("isHover", (t) => {
     t.false(t.context.isHover());
     t.false(t.context.isHover(t.context.position));

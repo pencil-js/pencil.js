@@ -26,12 +26,8 @@ export default class Container extends EventEmitter {
         /**
          * @type {ContainerOptions}
          */
-        this.options = {
-            ...this.constructor.defaultOptions,
-            ...options,
-        };
-        this.options.rotationCenter = Position.from(this.options.rotationCenter);
-        this.options.scale = Position.from(this.options.scale);
+        this.options = this.constructor.defaultOptions;
+        this.setOptions(options);
         /**
          * @type {Array<Container>}
          */
@@ -60,6 +56,22 @@ export default class Container extends EventEmitter {
                 }
             });
         });
+    }
+
+    /**
+     * Define options for this container
+     * @param {ContainerOptions} options - Options to override
+     * @return {Container} Itself
+     */
+    setOptions (options) {
+        this.options = {
+            ...this.options,
+            ...options,
+        };
+        this.options.rotationCenter = Position.from(this.options.rotationCenter);
+        this.options.scale = Position.from(this.options.scale);
+
+        return this;
     }
 
     /**
