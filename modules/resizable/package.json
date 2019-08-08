@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/resizable",
-    "version": "1.10.2",
+    "version": "1.10.3",
     "description": "Allow rectangle to be resized in Pencil.js package.",
     "main": "resizable.js",
     "files": [],
@@ -25,7 +25,7 @@
     ],
     "dependencies": {
         "@pencil.js/component": "^1.10.2",
-        "@pencil.js/draggable": "^1.10.2",
+        "@pencil.js/draggable": "^1.10.3",
         "@pencil.js/mouse-event": "^1.10.0",
         "@pencil.js/polygon": "^1.10.2",
         "@pencil.js/rectangle": "^1.10.2",

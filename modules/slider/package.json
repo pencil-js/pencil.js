@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/slider",
-    "version": "1.10.2",
+    "version": "1.10.3",
     "description": "Slider user input for Pencil.js package.",
     "main": "slider.js",
     "files": [],
@@ -29,7 +29,7 @@
         "@pencil.js/circle": "^1.10.2",
         "@pencil.js/component": "^1.10.2",
         "@pencil.js/container": "^1.10.2",
-        "@pencil.js/draggable": "^1.10.2",
+        "@pencil.js/draggable": "^1.10.3",
         "@pencil.js/input": "^1.10.2",
         "@pencil.js/math": "^1.9.0",
         "@pencil.js/mouse-event": "^1.10.0",

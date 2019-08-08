@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/draggable",
-    "version": "1.10.2",
+    "version": "1.10.3",
     "description": "Allow component to be dragged in Pencil.js package.",
     "main": "draggable.js",
     "files": [],
