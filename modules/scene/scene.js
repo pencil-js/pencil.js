@@ -193,7 +193,7 @@ export default class Scene extends OffscreenCanvas {
     static get events () {
         return {
             ...super.events,
-            change: "change",
+            change: "change-scene",
         };
     }
 }
