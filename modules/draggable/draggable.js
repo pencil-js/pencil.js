@@ -1,5 +1,6 @@
 import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
+import Vector from "@pencil.js/vector";
 
 /**
  * @typedef {Object} DraggableOptions
@@ -36,6 +37,7 @@ Component.prototype.draggable = function draggable (options) {
         y: true,
         ...options,
     };
+    mergedOptions.constrain = Vector.from(mergedOptions.constrain);
 
     let startPosition = null;
     let originPosition = null;
@@ -99,7 +101,7 @@ Component.prototype.draggable = function draggable (options) {
          * @param {Vector} constrain - New value for "constrain"
          */
         set constrain (constrain) {
-            mergedOptions.constrain = constrain;
+            mergedOptions.constrain = Vector.from(constrain);
         },
     };
 };

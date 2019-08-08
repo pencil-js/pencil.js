@@ -8,5 +8,10 @@ test("draggable", (t) => {
     t.is(Component.prototype.draggable.name, "draggable");
 
     const rectangle = new Rectangle([0, 0]);
-    rectangle.draggable();
+    rectangle.draggable({
+        constrain: [
+            [0, 0],
+            [10, 20],
+        ],
+    });
 });

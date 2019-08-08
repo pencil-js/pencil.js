@@ -25,7 +25,8 @@
     ],
     "dependencies": {
         "@pencil.js/component": "^1.10.2",
-        "@pencil.js/mouse-event": "^1.10.0"
+        "@pencil.js/mouse-event": "^1.10.0",
+        "@pencil.js/vector": "^1.10.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",
