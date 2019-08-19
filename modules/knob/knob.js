@@ -28,18 +28,17 @@ export default class Knob extends Input {
 
         this.add(this.background);
 
-        const strokeWidth = this.options.radius * Knob.HANDLE_SIZE;
+        const strokeWidth = this.options.radius * Knob.NOTCH_SIZE;
         const margin = this.options.radius / 3;
-        const handle = new Line([0, -margin], [[0, -this.options.radius + margin + strokeWidth]], {
+        const notch = new Line([0, -margin], [[0, -this.options.radius + margin + strokeWidth]], {
             stroke: this.options.fill,
             strokeWidth,
             cursor: Component.cursors.grab,
         });
         this.background
-            .add(handle)
+            .add(notch)
+            .on(MouseEvent.events.rotate, () => this.fire(new BaseEvent(Knob.events.change, this)), true)
             .rotatable();
-
-        this.background.on(MouseEvent.events.rotate, () => this.fire(new BaseEvent(Knob.events.change, this)), true);
     }
 
     /**
@@ -89,7 +88,7 @@ export default class Knob extends Input {
      * Width of the rotation marker
      * @return {Number}
      */
-    static get HANDLE_SIZE () {
+    static get NOTCH_SIZE () {
         return 0.09;
     }
 }

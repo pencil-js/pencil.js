@@ -26,12 +26,12 @@ test("get and set value", (t) => {
     t.true(almostEqual(t.context.background.options.rotation, 6 / 10));
 });
 
-test("default options and HANDLE_SIZE", (t) => {
+test("default options and NOTCH_SIZE", (t) => {
     const { defaultOptions } = Knob;
     t.is(defaultOptions.min, 0);
     t.is(defaultOptions.max, 10);
     t.is(defaultOptions.value, 0);
     t.is(defaultOptions.radius, 100);
 
-    t.is(Knob.HANDLE_SIZE, 0.09);
+    t.is(Knob.NOTCH_SIZE, 0.09);
 });
