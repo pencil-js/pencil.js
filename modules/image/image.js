@@ -45,6 +45,10 @@ export default class Image extends Rectangle {
      * @param {String} url - Link to an image file
      */
     set url (url) {
+        if (this.url === url) {
+            return;
+        }
+
         this.file = null;
         this.isLoaded = false;
         this[urlKey] = url;
