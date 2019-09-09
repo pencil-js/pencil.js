@@ -27,6 +27,7 @@
     "dependencies": {
         "@pencil.js/arc": "^1.10.2",
         "@pencil.js/keyboard-event": "^1.10.2",
+        "@pencil.js/math": "^1.9.0",
         "@pencil.js/polygon": "^1.10.2",
         "@pencil.js/position": "^1.10.0"
     },

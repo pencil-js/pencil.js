@@ -1,5 +1,6 @@
 import Polygon from "@pencil.js/polygon";
 import Position from "@pencil.js/position";
+import { radianCircle } from "@pencil.js/math";
 
 /**
  * Regular polygon class
@@ -67,7 +68,7 @@ export default class RegularPolygon extends Polygon {
         const angle = startAngle - (1 / 4);
         const points = [];
         for (let i = 0; i < nbPoints; ++i) {
-            const rotation = ((i / nbPoints) + angle) * Math.PI * 2;
+            const rotation = ((i / nbPoints) + angle) * radianCircle;
             points.push(new Position(Math.cos(rotation) * radius, Math.sin(rotation) * radius));
         }
         return points;
