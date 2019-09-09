@@ -37,7 +37,9 @@ Component.prototype.draggable = function draggable (options) {
         y: true,
         ...options,
     };
-    mergedOptions.constrain = Vector.from(mergedOptions.constrain);
+    if (mergedOptions.constrain) {
+        mergedOptions.constrain = Vector.from(mergedOptions.constrain);
+    }
 
     let startPosition = null;
     let originPosition = null;
@@ -101,7 +103,7 @@ Component.prototype.draggable = function draggable (options) {
          * @param {Vector} constrain - New value for "constrain"
          */
         set constrain (constrain) {
-            mergedOptions.constrain = Vector.from(constrain);
+            mergedOptions.constrain = constrain ? Vector.from(constrain) : constrain;
         },
     };
 };
