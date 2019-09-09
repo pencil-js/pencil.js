@@ -170,6 +170,7 @@ export default class Text extends Component {
      */
     trace (path) {
         path.rect(0, 0, this.width, this.height);
+        this.path = path;
         return path;
     }
 
