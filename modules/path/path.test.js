@@ -54,10 +54,9 @@ test("trace instructions string", (t) => {
 
 test("isHover", (t) => {
     t.context.trace = () => {};
-    const ctx = {
-        isPointInPath: () => t.fail(),
-        isPointInStroke: () => true,
-    };
+    const ctx = new window.CanvasRenderingContext2D();
+    ctx.isPointInPath = () => t.fail();
+    ctx.isPointInStroke = () => true;
     t.true(t.context.isHover([0, 0], ctx));
 });
 

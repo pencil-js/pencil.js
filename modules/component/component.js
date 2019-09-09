@@ -24,6 +24,10 @@ export default class Component extends Container {
         this.options.shadow.position = Position.from(this.options.shadow.position);
 
         /**
+         * @type {Path2D}
+         */
+        this.path = null;
+        /**
          * @type {Boolean}
          */
         this.isClicked = false;
@@ -54,7 +58,7 @@ export default class Component extends Container {
         if (willFill || willStroke) {
             const path = new window.Path2D();
             this.trace(path);
-
+            this.path = path;
 
             if (willFill) {
                 ctx.fill(path);
@@ -124,32 +128,31 @@ export default class Component extends Container {
             return false;
         }
 
-        const origin = this.getOrigin();
         const relative = Position.from(positionDefinition).clone().subtract(this.position);
-        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationCenter).subtract(origin);
+        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationCenter);
 
-        const willFill = this.options.fill;
-        const willStroke = this.options.stroke && this.options.strokeWidth > 0;
+        ctx.save();
+        const [willFill, willStroke] = this.setContext(ctx);
 
         if (!willFill && !willStroke) {
+            ctx.restore();
             return false;
         }
 
-        if (willStroke) {
-            ctx.lineJoin = this.options.join;
-            ctx.lineCap = this.options.cap;
-            ctx.lineWidth = this.options.strokeWidth;
+        if (!this.path) {
+            const path = new window.Path2D();
+            this.trace(path);
         }
 
-        const path = new window.Path2D();
-        this.trace(path);
-        let result = (willFill && ctx.isPointInPath(path, rotated.x, rotated.y)) ||
-            (willStroke && ctx.isPointInStroke(path, rotated.x, rotated.y));
+        let result = (willFill && ctx.isPointInPath(this.path, rotated.x, rotated.y)) ||
+            (willStroke && ctx.isPointInStroke(this.path, rotated.x, rotated.y));
 
         if (this.options.clip) {
             const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
             result = result && clipper.isHover(relative, ctx);
         }
+
+        ctx.restore();
 
         return result;
     }
@@ -289,6 +292,7 @@ export default class Component extends Container {
         cursors.rightResize = cursors.eResize;
         cursors.bottomResize = cursors.sResize;
         cursors.leftResize = cursors.wResize;
+
         return cursors;
     }
 

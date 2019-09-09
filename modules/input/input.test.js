@@ -36,9 +36,8 @@ test("click", (t) => {
 });
 
 test("isHover", (t) => {
-    const ctx = {
-        isPointInPath: () => true,
-    };
+    const ctx = new window.CanvasRenderingContext2D();
+    ctx.isPointInPath = () => true;
     t.true(t.context.isHover([0, 0], ctx));
 
     t.context.options.shown = false;

@@ -96,9 +96,8 @@ test("trace", (t) => {
 
 test("isHover", (t) => {
     t.context.trace = () => {};
-    const ctx = {
-        isPointInPath: () => true,
-    };
+    const ctx = new window.CanvasRenderingContext2D();
+    ctx.isPointInPath = () => true;
     t.true(t.context.isHover([0, 0], ctx));
 
     t.context.options.clip = {
