@@ -9,7 +9,7 @@ test.beforeEach((t) => {
 });
 
 test("constructor", (t) => {
-    t.is(t.context.from.constructor.name, "Position");
+    t.is(t.context.position.constructor.name, "Position");
     t.is(t.context.radius, 100);
     t.is(typeof t.context.colorStops, "object");
 });
