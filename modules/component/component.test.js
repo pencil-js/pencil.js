@@ -111,6 +111,13 @@ test("isHover not shown", (t) => {
     t.false(t.context.isHover([0, 0], null));
 });
 
+test("isHover not rendered", (t) => {
+    const ctx = new window.CanvasRenderingContext2D();
+    t.context.options.fill = null;
+    t.context.options.stroke = null;
+    t.false(t.context.isHover([0, 0], ctx));
+});
+
 test("defaultOptions", (t) => {
     const options = Component.defaultOptions;
     t.is(options.fill, "#000");

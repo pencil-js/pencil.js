@@ -56,7 +56,9 @@ test("startLoop and stopLoop", (t) => {
 });
 
 test("startLoop render fail", (t) => {
-    t.context.add(new Component());
+    const parent = new Component();
+    parent.add(new Component());
+    t.context.add(parent);
     t.throws(() => t.context.startLoop());
     t.false(t.context.isLooped);
 });

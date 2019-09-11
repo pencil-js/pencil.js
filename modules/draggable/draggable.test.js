@@ -14,4 +14,6 @@ test("draggable", (t) => {
             [10, 20],
         ],
     });
+
+    t.throws(() => rectangle.rotatable());
 });

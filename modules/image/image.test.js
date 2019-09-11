@@ -25,6 +25,7 @@ test.cb("get and set url", (t) => {
         }, 50);
     });
 
+    t.context.url = null;
     t.false(t.context.isLoaded);
     t.context.on("ready", () => {
         t.is(t.context.ratio, 0.5);
@@ -35,6 +36,79 @@ test.cb("get and set url", (t) => {
     });
     t.context.url = "loadable";
     t.is(t.context.url, "loadable");
+
+    Image.load = savedLoad;
+});
+
+test.cb("set url with width", (t) => {
+    const savedLoad = Image.load;
+    Image.load = url => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                url,
+                width: 10,
+                height: 20,
+            });
+        }, 50);
+    });
+
+    t.context.on("ready", () => {
+        t.is(t.context.ratio, 0.5);
+        t.is(t.context.width, 100);
+        t.is(t.context.height, 200);
+        t.end();
+    });
+    t.context.width = 100;
+    t.context.url = "width";
+
+    Image.load = savedLoad;
+});
+
+test.cb("set url with height", (t) => {
+    const savedLoad = Image.load;
+    Image.load = url => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                url,
+                width: 10,
+                height: 20,
+            });
+        }, 50);
+    });
+
+    t.context.on("ready", () => {
+        t.is(t.context.ratio, 0.5);
+        t.is(t.context.width, 50);
+        t.is(t.context.height, 100);
+        t.end();
+    });
+    t.context.height = 100;
+    t.context.url = "height";
+
+    Image.load = savedLoad;
+});
+
+test("set same url", (t) => {
+    const savedLoad = Image.load;
+    Image.load = () => t.fail();
+
+    t.context.url = "url";
+    t.pass();
+
+    Image.load = savedLoad;
+});
+
+test.cb("Fail url load", (t) => {
+    const savedLoad = Image.load;
+    Image.load = () => Promise.reject();
+
+    t.context
+        .on("ready", () => t.fail())
+        .on("error", (event) => {
+            t.is(event.target, t.context);
+            t.end();
+        });
+    t.context.url = "fail";
 
     Image.load = savedLoad;
 });

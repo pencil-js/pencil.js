@@ -9,4 +9,6 @@ test("rotatable", (t) => {
 
     const rectangle = new Rectangle([0, 0]);
     rectangle.rotatable();
+
+    t.throws(() => rectangle.draggable());
 });
