@@ -140,8 +140,8 @@ export default class Component extends Container {
         }
 
         if (!this.path) {
-            const path = new window.Path2D();
-            this.trace(path);
+            this.path = new window.Path2D();
+            this.trace(this.path);
         }
 
         let result = (willFill && ctx.isPointInPath(this.path, rotated.x, rotated.y)) ||
