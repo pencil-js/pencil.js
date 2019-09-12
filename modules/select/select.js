@@ -8,6 +8,8 @@ import Text from "@pencil.js/text";
 import { constrain } from "@pencil.js/math";
 import Triangle from "@pencil.js/triangle";
 
+const selectedKey = Symbol("_selected");
+
 /**
  * Select class
  * @class
@@ -25,7 +27,7 @@ export default class Select extends Input {
             throw new RangeError("Options list should have at least one item.");
         }
         super(positionDefinition, options);
-        this.selected = 0;
+        this[selectedKey] = 0;
 
         const textOptions = {
             cursor: Component.cursors.pointer,
@@ -85,19 +87,19 @@ export default class Select extends Input {
      * @return {Number}
      */
     get value () {
-        return this.selected;
+        return this[selectedKey];
     }
 
     /**
      * @param {Number} value - Index of the selected option
      */
     set value (value) {
-        this.selected = constrain(value, 0, this.optionsList.length - 1);
-        this.display.text = this.optionsList[this.selected].text;
-        this.display.options.origin.set(this.optionsList[this.selected].options.origin);
+        this[selectedKey] = constrain(value, 0, this.optionsList.length - 1);
+        this.display.text = this.optionsList[this[selectedKey]].text;
+        this.display.options.origin.set(this.optionsList[this[selectedKey]].options.origin);
         this.optionsContainer.hide();
         const margin = this.optionsList[0].height * Select.MARGIN;
-        this.optionsContainer.position.set(0, -this.selected * (this.optionsList[0].height + (2 * margin)));
+        this.optionsContainer.position.set(0, -this[selectedKey] * (this.optionsList[0].height + (2 * margin)));
     }
 
     /**
@@ -108,13 +110,31 @@ export default class Select extends Input {
     }
 
     /**
-     * @typedef {Object} ButtonOptions
-     * @extends InputOptions
+     * @inheritDoc
+     */
+    toJSON () {
+        const json = super.toJSON();
+        json.values = this.optionsList.map(component => component.text);
+        return json;
+    }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Select definition
+     * @returns {Select}
+     */
+    static from (definition) {
+        return new Select(definition.position, definition.values, definition.options);
+    }
+
+    /**
+     * @typedef {Object} SelectOptions
      * @extends TextOptions
-     * @prop {String} value - Value of the button
+     * @extends InputOptions
+     * @prop {String} [value=0] - Selected index of the select
      */
     /**
-     * @return {ButtonOptions}
+     * @return {SelectOptions}
      */
     static get defaultOptions () {
         return {

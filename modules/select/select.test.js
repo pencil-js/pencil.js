@@ -49,6 +49,24 @@ test("click", (t) => {
     t.true(t.context.optionsContainer.options.shown);
 });
 
+test("toJSON", (t) => {
+    const json = t.context.toJSON();
+    t.deepEqual(json.values, ["", "B", "C"]);
+});
+
+test("from", (t) => {
+    const definition = {
+        position: [1, 2],
+        values: ["1", "2", "3"],
+        options: {
+            value: 1,
+        },
+    };
+    const select = Select.from(definition);
+    t.is(select.optionsList.length, 3);
+    t.is(select.options.value, 1);
+});
+
 test("MARGIN", (t) => {
     t.is(Select.MARGIN, 0.2);
 });
