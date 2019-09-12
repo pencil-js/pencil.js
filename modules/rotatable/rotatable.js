@@ -30,7 +30,7 @@ Component.prototype.rotatable = function rotatable () {
         this.isRotated = true;
 
         this.fire(new MouseEvent(MouseEvent.events.grab, this, event.position));
-    });
+    }, true);
 
     this.getScene().then(scene => scene.on(MouseEvent.events.move, (event) => {
         if (previousAngle !== null) {
