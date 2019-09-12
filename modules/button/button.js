@@ -61,9 +61,9 @@ export default class Button extends Input {
 
     /**
      * @typedef {Object} ButtonOptions
-     * @extends InputOptions
      * @extends TextOptions
-     * @prop {String} value - Value of the button
+     * @extends InputOptions
+     * @prop {String} [value=""] - Text of the button
      */
     /**
      * @return {ButtonOptions}

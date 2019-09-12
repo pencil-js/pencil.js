@@ -146,12 +146,19 @@ export default class Image extends Rectangle {
     }
 
     /**
-     * @return {RectangleOptions}
+     * @typedef {Object} ImageOptions
+     * @extends ComponentOptions
+     * @prop {String|ColorDefinition} [fill=null] - Color used as background
+     * @prop {String} [description=""] - Description of the image (can be used to for better accessibility)
+     */
+    /**
+     * @return {ImageOptions}
      */
     static get defaultOptions () {
         return {
             ...super.defaultOptions,
             fill: null,
+            description: "",
         };
     }
 }

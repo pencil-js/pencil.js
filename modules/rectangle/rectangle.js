@@ -12,11 +12,18 @@ export default class Rectangle extends Component {
      * @param {PositionDefinition} positionDefinition - Position in space
      * @param {Number} [width=0] - Horizontal size
      * @param {Number} [height=0] - Vertical size
-     * @param {RectangleOptions} [options] - Drawing options
+     * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (positionDefinition, width = 0, height = 0, options) {
         super(positionDefinition, options);
+
+        /**
+         * @type {Number}
+         */
         this.width = width;
+        /**
+         * @type {Number}
+         */
         this.height = height;
     }
 
