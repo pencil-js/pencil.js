@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/particles",
-    "version": "1.10.2",
+    "version": "1.11.0",
     "description": "Particles generator for Pencil.js package.",
     "main": "particles.js",
     "files": [],
@@ -26,7 +26,7 @@
         "wrapper"
     ],
     "dependencies": {
-        "@pencil.js/component": "^1.10.2",
+        "@pencil.js/component": "^1.11.0",
         "@pencil.js/math": "^1.9.0",
         "@pencil.js/position": "^1.10.0"
     },

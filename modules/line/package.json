@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/line",
-    "version": "1.10.2",
+    "version": "1.11.0",
     "description": "Line stroke for Pencil.js package.",
     "main": "line.js",
     "files": [],
@@ -25,7 +25,7 @@
         "shape"
     ],
     "dependencies": {
-        "@pencil.js/component": "^1.10.2",
+        "@pencil.js/component": "^1.11.0",
         "@pencil.js/position": "^1.10.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

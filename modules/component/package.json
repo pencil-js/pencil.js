@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/component",
-    "version": "1.10.2",
+    "version": "1.11.0",
     "description": "Abstract component for Pencil.js package.",
     "main": "component.js",
     "files": [],
