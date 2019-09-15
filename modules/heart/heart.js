@@ -19,7 +19,7 @@ export default class Heart extends Component {
             this.radius = radius;
         }
         else {
-            this.radius = 0;
+            this.radius = 1;
         }
     }
 
