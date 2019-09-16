@@ -86,4 +86,13 @@ export default class Heart extends Component {
 
         return this;
     }
+
+    /**
+     * @inheritDoc
+     * @param {Object} definition - Heart definition
+     * @return {Heart}
+     */
+    static from (definition) {
+        return new Heart(definition.position, definition.radius, definition.options);
+    }
 }

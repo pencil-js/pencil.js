@@ -121,6 +121,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
        * [.rotatable()](modules/rotatable)
        * [Particles](modules/particles)
        * [Path](modules/path)
+       * [Heart](modules/heart)
        * [Line](modules/line)
          * [Spline](modules/spline)
        * [Polygon](modules/polygon)
@@ -170,8 +171,10 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 You want to help us improve ? Please read [the contributing manual](contributing.md).
 
 ### Contributors
-| [![Guillaume Martigny](https://github.com/GMartigny.png?size=99)<br><b>GMartigny</b>](https://github.com/GMartigny) | [![Heraclite](https://github.com/heraclite.png?size=99)<br><b>Heraclite</b>](https://github.com/heraclite) |
-| --- | --- |
+| [![Guillaume Martigny](https://github.com/GMartigny.png?size=99)<br><b>GMartigny</b>](https://github.com/GMartigny) | [![Heraclite](https://github.com/heraclite.png?size=99)<br><b>Heraclite</b>](https://github.com/heraclite)| 
+| [![Zachary Nguyen](https://github.com/zachary-nguyen.png?size=99)<br><b>zachary-nguyen</b>](https://github.com/zachary-nguyen)|
+| --- |
+| --- |
 > All contributions are valued, you can add yourself to this list (or request to be added) whatever your contribution is.
 <!--
 Use this pattern to add yourself:
