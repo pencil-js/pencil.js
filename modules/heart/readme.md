@@ -17,7 +17,7 @@ import Heart from "@pencil.js/heart";
 
 const radius = 2;
 const options = {
-    fill: "read",
+    fill: "red",
     stroke: "teal"
 };
 const heart = new Heart(aPosition, radius, options);
