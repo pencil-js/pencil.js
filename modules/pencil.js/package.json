@@ -52,6 +52,7 @@
         "@pencil.js/draggable": "^1.11.0",
         "@pencil.js/ellipse": "^1.11.0",
         "@pencil.js/event-emitter": "^1.10.0",
+        "@pencil.js/heart": "^1.11.0",
         "@pencil.js/image": "^1.11.0",
         "@pencil.js/input": "^1.11.0",
         "@pencil.js/keyboard-event": "^1.11.0",

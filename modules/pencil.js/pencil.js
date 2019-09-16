@@ -36,6 +36,7 @@ import Square from "@pencil.js/square";
 import Image from "@pencil.js/image";
 import Text from "@pencil.js/text";
 import Path from "@pencil.js/path";
+import Heart from "@pencil.js/heart";
 
 // Complex
 import Input from "@pencil.js/input";
@@ -85,6 +86,7 @@ const exportableClasses = {
     Color,
     LinearGradient,
     RadialGradient,
+    Heart,
 };
 
 /**
@@ -165,4 +167,5 @@ export {
     Color,
     LinearGradient,
     RadialGradient,
+    Heart,
 };
