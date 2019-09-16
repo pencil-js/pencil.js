@@ -172,13 +172,17 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 You want to help us improve ? Please read [the contributing manual](contributing.md).
 
 ### Contributors
-| [![Guillaume Martigny](https://github.com/GMartigny.png?size=99)<br><b>GMartigny</b>](https://github.com/GMartigny) | [![Heraclite](https://github.com/heraclite.png?size=99)<br><b>Heraclite</b>](https://github.com/heraclite) |
-| --- | --- |
+<table>
+<thead>
+<tr>
+<th><a href="https://github.com/GMartigny"><img src="https://github.com/GMartigny.png?size=99" width="99" alt="GMartigny avatar"/><br/>GMartigny</a></th>
+<th><a href="https://github.com/heraclite"><img src="https://github.com/Heraclite.png?size=99" width="99" alt="Heraclite avatar"/><br/>Heraclite</a></th>
+<th><a href="https://github.com/zachary-nguyen"><img src="https://github.com/zachary-nguyen.png?size=99" width="99" alt="Zachary Nguyen avatar"/><br/>Zachary Nguyen</a></th>
+</tr>
+</thead>
+</table>
+
 > All contributions are valued, you can add yourself to this list (or request to be added) whatever your contribution is.
-<!--
-Use this pattern to add yourself:
-[![FULL NAME or USERNAME](https://github.com/USERNAME.png?size=99)<br><b>USERNAME</b>](https://github.com/USERNAME)
--->
 
 ## License 
 
