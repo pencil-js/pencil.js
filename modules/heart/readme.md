@@ -20,5 +20,5 @@ const options = {
     fill: "read",
     stroke: "teal"
 };
-const star = new Heart(aPosition, radius, options);
+const heart = new Heart(aPosition, radius, options);
 ```
