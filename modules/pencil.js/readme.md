@@ -172,15 +172,23 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 You want to help us improve ? Please read [the contributing manual](contributing.md).
 
 ### Contributors
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
-<thead>
-<tr>
-<th><a href="https://github.com/GMartigny"><img src="https://github.com/GMartigny.png?size=99" width="99" alt="GMartigny avatar"/><br/>GMartigny</a></th>
-<th><a href="https://github.com/heraclite"><img src="https://github.com/Heraclite.png?size=99" width="99" alt="Heraclite avatar"/><br/>Heraclite</a></th>
-<th><a href="https://github.com/zachary-nguyen"><img src="https://github.com/zachary-nguyen.png?size=99" width="99" alt="Zachary Nguyen avatar"/><br/>Zachary Nguyen</a></th>
-</tr>
-</thead>
+  <tr>
+    <td align="center"><a href='https://github.com/GMartigny'><img src='https://github.com/GMartigny.png?size=99' width='99px;' alt='Guillaume Martigny avatar'/><br/>
+    <sub><b>Guillaume Martigny</b></sub></a></td>
+    <td align="center"><a href='https://github.com/Heraclite'><img src='https://github.com/Heraclite.png?size=99' width='99px;' alt='Heraclite avatar'/><br/>
+    <sub><b>Heraclite</b></sub></a></td>
+    <td align="center"><a href='https://github.com/zachary-nguyen'><img src='https://github.com/zachary-nguyen.png?size=99' width='99px;' alt='Zachary Nguyen avatar'/><br/>
+    <sub><b>Zachary Nguyen</b></sub></a></td>
+  </tr>
 </table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 > All contributions are valued, you can add yourself to this list (or request to be added) whatever your contribution is.
 
