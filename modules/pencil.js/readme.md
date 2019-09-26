@@ -6,7 +6,7 @@
 [![Maintainability](https://badgen.net/codeclimate/maintainability/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/maintainability)
 [![Test Coverage](https://badgen.net/codeclimate/coverage/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/test_coverage)
 [![Inline docs](http://inch-ci.org/github/pencil-js/pencil.js.svg?branch=master)](http://inch-ci.org/github/pencil-js/pencil.js)
-[![Support me on Patreon](https://badgen.net/badge/become/a%20patron/F96753?icon=patreon)](https://www.patreon.com/gmartigny)
+[![Join us on Discord](https://badgen.net/badge/Discord/Join%20us/7289da?icon=discord)](https://discord.gg/GkEgjsy)
 
 Nice modular interactive 2D drawing library.
 
