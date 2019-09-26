@@ -159,6 +159,7 @@ test("render", (t) => {
     const child = addHeir(t.context);
     child.options.zIndex = -1;
     const otherChild = addHeir(t.context);
+    otherChild.options.zIndex = -2;
 
     const ctx = {
         save: () => t.pass(),

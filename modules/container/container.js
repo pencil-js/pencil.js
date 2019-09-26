@@ -266,13 +266,16 @@ export default class Container extends EventEmitter {
 
         Container.setOpacity(ctx, this.options.opacity);
 
-        const pivotIndex = this.children.length && this.children.findIndex(child => child.options.zIndex >= 0);
+        const firstPositiveIndex = this.children.findIndex(child => child.options.zIndex >= 0);
+        const pivotIndex = firstPositiveIndex === -1 ? this.children.length : firstPositiveIndex;
+        // Render children behind
         for (let i = 0, l = pivotIndex; i < l; ++i) {
             this.children[i].render(ctx);
         }
 
         this.makePath(ctx);
 
+        // Render children in front
         for (let i = pivotIndex, l = this.children.length; i < l; ++i) {
             this.children[i].render(ctx);
         }
