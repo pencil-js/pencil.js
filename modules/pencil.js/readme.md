@@ -63,7 +63,6 @@ const Scene = require("@pencil.js/scene");
 const { Scene } = require("pencil.js");
 
 const scene = new Scene();
-
 ```
 
 Since today's web browser don't support module requirements yet, you need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
