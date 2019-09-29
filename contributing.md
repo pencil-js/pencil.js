@@ -32,13 +32,17 @@ Here's a few steps to guide you.
 You need to [fork the repo](https://help.github.com/articles/fork-a-repo/) to make a copy for you.
 Then you can clone this copy to your machine.
 
-    git clone git@github.com:your-name-here/pencil.js.git
+    git clone git@github.com:<YOUR_GITHUB_ID>/pencil.js.git
     cd pencil.js
     npm install
 
 We use [lerna](https://lernajs.io/) to manage the modular aspect of the project. So, you have to run the `init` script.
 
     npm run init
+
+Then, you'll need to create a new branch to host your modifications. Use a relevant name for your branch (ex: new_heart_component, refacto_all_tests ...).
+
+    git checkout -b <YOUR_BRANCH_NAME>
 
 #### Coding
 
@@ -62,6 +66,10 @@ We use [eslint](https://eslint.org/) to check the code-style with a linting scri
 There's a test file for each modules. You can run all the tests with the test script.
 
     npm test
+
+If you've made structural changes, you can build to check that everything is in order.
+
+    npm run build
 
 #### Committing
 
