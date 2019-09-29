@@ -51,16 +51,19 @@ const scene = new Pencil.scene();
 // Just the part you need
 import Scene from "@pencil.js/scene";
 // or
-import Scene from "pencil.js";
+import { Scene } from "pencil.js";
 
 const scene = new Scene();
 
 /***/
 
 // Works the same way with common.js syntax
-const Scene = require("pencil.js").Scene;
-// or
 const Scene = require("@pencil.js/scene");
+// or
+const { Scene } = require("pencil.js");
+
+const scene = new Scene();
+
 ```
 
 Since today's web browser don't support module requirements yet, you need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).

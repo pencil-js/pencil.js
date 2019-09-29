@@ -24,3 +24,19 @@ test("toJSON", (t) => {
     t.is(json.radius, 2);
     t.is(json.constructor, "Heart");
 });
+
+
+test("from", (t) => {
+    const definition = {
+        position: {
+            x: 0,
+            y: 0,
+        },
+        radius: 100,
+    };
+    const heart = Heart.from(definition);
+
+    t.is(heart.radius, 100);
+    t.is(heart.position.x, 0);
+    t.is(heart.position.y, 0);
+});
