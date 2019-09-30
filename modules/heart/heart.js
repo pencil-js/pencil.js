@@ -18,6 +18,24 @@ export default class Heart extends Component {
     }
 
     /**
+     * Draw the Heart
+     * @param {Path2D} path - Drawing context
+     * @return {Heart} Itself
+     */
+    trace (path) {
+        path.moveTo(0, -0.4 * this.radius);
+        const curves = [
+            [-0.4, -0.9, -1, -0.6, -1, 0],
+            [-1, 0.4, -0.6, 0.6, 0, 1],
+            [0.6, 0.6, 1, 0.4, 1, 0],
+            [1, -0.6, 0.4, -0.9, 0, -0.4],
+        ];
+        curves.concat(curves.slice(0, 1)).forEach(points => path.bezierCurveTo(...points.map(x => x * this.radius)));
+
+        return this;
+    }
+
+    /**
      * @inheritDoc
      */
     toJSON () {
@@ -26,64 +44,6 @@ export default class Heart extends Component {
             ...super.toJSON(),
             radius,
         };
-    }
-
-    /**
-     * Draw the Heart
-     * @param {Path2D} path - Drawing context
-     * @return {Heart} Itself
-     */
-    trace (path) {
-        path.bezierCurveTo(
-            0,
-            -0.3859 * this.radius,
-            0,
-            -0.7368 * this.radius,
-            -0.4385 * this.radius,
-            -0.7368 * this.radius,
-        );
-        path.bezierCurveTo(
-            -0.9649 * this.radius,
-            -0.7017 * this.radius,
-            -0.9649 * this.radius,
-            -0.1052 * this.radius,
-            -0.9649 * this.radius,
-            -0.1052 * this.radius,
-        );
-        path.bezierCurveTo(
-            -0.9649 * this.radius,
-            0.2631 * this.radius,
-            -0.614 * this.radius,
-            0.6491 * this.radius,
-            0,
-            this.radius,
-        );
-        path.bezierCurveTo(
-            0.614 * this.radius,
-            0.6491 * this.radius,
-            0.9649 * this.radius,
-            0.2631 * this.radius,
-            0.9649 * this.radius,
-            -0.1052 * this.radius,
-        );
-        path.bezierCurveTo(
-            0.9649 * this.radius,
-            -0.1052 * this.radius,
-            0.9649 * this.radius,
-            -0.7368 * this.radius,
-            0.4385 * this.radius,
-            -0.7368 * this.radius,
-        );
-        path.bezierCurveTo(
-            0.4385 * this.radius,
-            -0.7368 * this.radius,
-            0,
-            -0.7368 * this.radius,
-            -0.01754 * this.radius,
-            -0.3859 * this.radius,
-        );
-
-        return this;
     }
 
     /**

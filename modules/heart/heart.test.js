@@ -13,7 +13,7 @@ test("constructor", (t) => {
 
 test("trace", (t) => {
     t.context.trace({
-        moveTo: (...params) => t.deepEqual(params, [150, 80]),
+        moveTo: () => t.pass(),
         bezierCurveTo: () => t.pass(),
     });
 });
@@ -36,6 +36,7 @@ test("from", (t) => {
     };
     const heart = Heart.from(definition);
 
+    t.true(heart instanceof Heart);
     t.is(heart.radius, 100);
     t.is(heart.position.x, 0);
     t.is(heart.position.y, 0);
