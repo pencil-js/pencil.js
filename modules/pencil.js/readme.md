@@ -123,6 +123,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
        * [.rotatable()](modules/rotatable)
        * [Particles](modules/particles)
        * [Path](modules/path)
+       * [Heart](modules/heart)
        * [Line](modules/line)
          * [Spline](modules/spline)
        * [Polygon](modules/polygon)

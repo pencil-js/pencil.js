@@ -13,7 +13,7 @@ test("constructor", (t) => {
 
 test("trace", (t) => {
     t.context.trace({
-        moveTo: (...params) => t.deepEqual(params, [150, 80]),
+        moveTo: () => t.pass(),
         bezierCurveTo: () => t.pass(),
     });
 });
@@ -23,4 +23,21 @@ test("toJSON", (t) => {
 
     t.is(json.radius, 2);
     t.is(json.constructor, "Heart");
+});
+
+
+test("from", (t) => {
+    const definition = {
+        position: {
+            x: 0,
+            y: 0,
+        },
+        radius: 100,
+    };
+    const heart = Heart.from(definition);
+
+    t.true(heart instanceof Heart);
+    t.is(heart.radius, 100);
+    t.is(heart.position.x, 0);
+    t.is(heart.position.y, 0);
 });
