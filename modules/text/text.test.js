@@ -42,9 +42,9 @@ test("makePath", (t) => {
         ["world", 0, 20],
     ];
     const ctx = {
-        save: () => t.pass(),
-        translate: () => t.pass(),
-        restore: () => t.pass(),
+        save: () => {},
+        translate: () => {},
+        restore: () => {},
         fillText: (...params) => {
             t.deepEqual(params, expected[ctx.call]);
         },
@@ -53,7 +53,7 @@ test("makePath", (t) => {
         },
         call: 0,
     };
-    t.plan(11);
+    t.plan(8);
     t.context.options.fill = "#123456";
     t.context.options.stroke = "#456789";
     t.context.makePath(ctx);
@@ -69,17 +69,17 @@ test("makePath with underscore", (t) => {
     t.context.options.underscore = true;
 
     const ctx = {
-        save: () => t.pass(),
-        translate: () => t.pass(),
-        restore: () => t.pass(),
-        beginPath: () => t.pass(),
-        fillText: () => t.pass(),
-        moveTo: () => t.pass(),
+        save: () => {},
+        translate: () => {},
+        restore: () => {},
+        beginPath: () => {},
+        fillText: () => {},
+        moveTo: () => {},
         lineTo: () => t.pass(),
-        stroke: () => t.pass(),
-        closePath: () => t.pass(),
+        stroke: () => {},
+        closePath: () => {},
     };
-    t.plan(10);
+    t.plan(2);
 
     t.context.makePath(ctx);
     t.is(ctx.strokeStyle, t.context.options.fill);

@@ -104,42 +104,45 @@ export default class Text extends Component {
      * @return {Text} Itself
      */
     makePath (ctx) {
-        const opts = this.options;
-        if (this.text.length && (opts.fill || (opts.stroke && opts.strokeWidth > 0))) {
+        const { options } = this;
+        if (this.text.length && (options.fill || (options.stroke && options.strokeWidth > 0))) {
             ctx.save();
 
-            const lineHeight = Text.measure("M", this.options).height;
-            const height = lineHeight / opts.lineHeight;
-            const margin = height * ((opts.lineHeight - 1) / 2);
+            const [willFill, willStroke] = this.setContext(ctx);
 
-            this.setContext(ctx);
+            if (willFill || willStroke) {
+                const lineHeight = Text.measure("M", this.options).height;
+                const height = lineHeight / options.lineHeight;
+                const margin = height * ((options.lineHeight - 1) / 2);
 
-            if (opts.underscore) {
-                ctx.beginPath();
-            }
-
-            const offset = this.getAlignOffset();
-            this.lines.forEach((line, index) => {
-                const y = (index * lineHeight) + margin;
-                if (opts.fill) {
-                    ctx.fillText(line, offset * this.width, y);
+                if (options.underscore) {
+                    ctx.beginPath();
                 }
-                if (opts.stroke) {
-                    ctx.strokeText(line, offset * this.width, y);
-                }
-                if (opts.underscore) {
-                    const { width } = Text.measure(line, opts);
-                    const left = offset * (this.width - width);
-                    ctx.moveTo(left, y + height);
-                    ctx.lineTo(left + width, y + height);
-                }
-            });
 
-            if (opts.underscore) {
-                ctx.lineWidth = height * (opts.bold ? 0.07 : 0.05);
-                ctx.strokeStyle = opts.fill || opts.stroke;
-                ctx.stroke();
-                ctx.closePath();
+                const offset = this.getAlignOffset();
+                ctx.translate(offset * this.width, 0);
+                this.lines.forEach((line, index) => {
+                    const y = (index * lineHeight) + margin;
+                    if (willFill) {
+                        ctx.fillText(line, 0, y);
+                    }
+                    if (willStroke) {
+                        ctx.strokeText(line, 0, y);
+                    }
+                    if (options.underscore) {
+                        const { width } = Text.measure(line, options);
+                        const left = offset * width;
+                        ctx.moveTo(-left, y + height);
+                        ctx.lineTo(width - left, y + height);
+                    }
+                });
+
+                if (options.underscore) {
+                    ctx.lineWidth = height * (options.bold ? 0.07 : 0.05);
+                    ctx.strokeStyle = ((willStroke && options.stroke) || options.fill).toString(ctx);
+                    ctx.stroke();
+                    ctx.closePath();
+                }
             }
 
             ctx.restore();
