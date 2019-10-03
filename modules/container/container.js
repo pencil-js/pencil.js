@@ -69,7 +69,9 @@ export default class Container extends EventEmitter {
             ...options,
         };
         this.options.rotationCenter = Position.from(this.options.rotationCenter);
-        this.options.scale = Position.from(this.options.scale);
+        if (typeof this.options.scale !== "number") {
+            this.options.scale = Position.from(this.options.scale);
+        }
 
         return this;
     }
@@ -259,8 +261,13 @@ export default class Container extends EventEmitter {
             ctx.translate(-anchor.x, -anchor.y);
         }
 
-        const scale = Position.from(this.options.scale);
-        ctx.scale(scale.x, scale.y);
+        if (typeof this.options.scale === "number") {
+            ctx.scale(this.options.scale, this.options.scale);
+        }
+        else {
+            const scale = Position.from(this.options.scale);
+            ctx.scale(scale.x, scale.y);
+        }
 
         this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
 
@@ -408,8 +415,8 @@ export default class Container extends EventEmitter {
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
      * @prop {Number} [rotation=0] - Rotation ratio from 0 to 1 (clockwise)
-     * @prop {PositionDefinition} [scale=[1, 1]] - Scaling ratio
      * @prop {PositionDefinition} [rotationCenter=[0, 0]] - Center of rotation relative to this position
+     * @prop {Number|PositionDefinition} [scale=1] - Scaling ratio or a pair of value for horizontal and vertical scaling
      * @prop {Number} [zIndex=1] - Depth ordering
      * @prop {Component} [clip=null] - Other component used to clip the rendering
      */
@@ -421,8 +428,8 @@ export default class Container extends EventEmitter {
             shown: true,
             opacity: null,
             rotation: 0,
-            scale: new Position(1, 1),
             rotationCenter: new Position(),
+            scale: 1,
             zIndex: 1,
             clip: null,
         };

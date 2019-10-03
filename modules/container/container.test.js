@@ -176,6 +176,7 @@ test("render", (t) => {
 test("render with option", (t) => {
     t.context.options.opacity = 0.5;
     t.context.options.rotation = 0.2;
+    t.context.options.scale = [-2, 1];
 
     const ctx = {
         save: () => {},
@@ -304,8 +305,7 @@ test("defaultOptions", (t) => {
     t.is(options.rotation, 0);
     t.is(options.rotationCenter.x, 0);
     t.is(options.rotationCenter.y, 0);
-    t.is(options.scale.x, 1);
-    t.is(options.scale.y, 1);
+    t.is(options.scale, 1);
     t.is(options.zIndex, 1);
     t.is(options.clip, null);
 });
