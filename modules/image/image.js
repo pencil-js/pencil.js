@@ -13,12 +13,10 @@ export default class Image extends Rectangle {
      * Image constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner of the image
      * @param {String} url - Link to an image file
-     * @param {Number} [width] - Width to draw the image, or width and height if height omitted
-     * @param {Number} [height] - Height to draw the image, use file height and width if both omitted
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (positionDefinition, url, width = null, height = null, options) {
-        super(positionDefinition, width, height, options);
+    constructor (positionDefinition, url, options) {
+        super(positionDefinition, undefined, undefined, options);
 
         /**
          * @type {HTMLImageElement}
@@ -28,10 +26,6 @@ export default class Image extends Rectangle {
          * @type {Boolean}
          */
         this.isLoaded = false;
-        /**
-         * @type {Number}
-         */
-        this.ratio = 0;
         /**
          * @type {String}
          * @private
@@ -56,16 +50,8 @@ export default class Image extends Rectangle {
             Image.load(url).then((img) => {
                 this.file = img;
                 this.isLoaded = true;
-                this.ratio = img.width / img.height;
-                if (this.width === null && this.height === null) {
-                    this.restoreSize();
-                }
-                else if (this.width === null) {
-                    this.width = this.height * this.ratio;
-                }
-                else if (this.height === null) {
-                    this.height = this.width / this.ratio;
-                }
+                this.width = img.width;
+                this.height = img.height;
                 this.fire(new NetworkEvent(NetworkEvent.events.ready, this));
             }).catch(() => {
                 this.fire(new NetworkEvent(NetworkEvent.events.error, this));
@@ -97,22 +83,15 @@ export default class Image extends Rectangle {
     }
 
     /**
-     * Use image width and height for drawing width and height
-     */
-    restoreSize () {
-        if (this.isLoaded) {
-            this.width = this.file.width;
-            this.height = this.file.height;
-        }
-    }
-
-    /**
      * @inheritDoc
      */
     toJSON () {
+        const json = super.toJSON();
+        delete json.width;
+        delete json.height;
         const { url } = this;
         return {
-            ...super.toJSON(),
+            ...json,
             url,
         };
     }

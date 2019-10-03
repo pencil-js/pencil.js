@@ -8,7 +8,6 @@ test.beforeEach((t) => {
 test("constructor", (t) => {
     t.is(t.context.file, null);
     t.is(t.context.isLoaded, false);
-    t.is(t.context.ratio, 0);
 });
 
 test.cb("get and set url", (t) => {
@@ -22,13 +21,12 @@ test.cb("get and set url", (t) => {
                 width: 10,
                 height: 20,
             });
-        }, 50);
+        }, 10);
     });
 
     t.context.url = null;
     t.false(t.context.isLoaded);
     t.context.on("ready", () => {
-        t.is(t.context.ratio, 0.5);
         t.true(t.context.isLoaded);
         t.is(t.context.width, 10);
         t.is(t.context.height, 20);
@@ -36,54 +34,6 @@ test.cb("get and set url", (t) => {
     });
     t.context.url = "loadable";
     t.is(t.context.url, "loadable");
-
-    Image.load = savedLoad;
-});
-
-test.cb("set url with width", (t) => {
-    const savedLoad = Image.load;
-    Image.load = url => new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                url,
-                width: 10,
-                height: 20,
-            });
-        }, 50);
-    });
-
-    t.context.on("ready", () => {
-        t.is(t.context.ratio, 0.5);
-        t.is(t.context.width, 100);
-        t.is(t.context.height, 200);
-        t.end();
-    });
-    t.context.width = 100;
-    t.context.url = "width";
-
-    Image.load = savedLoad;
-});
-
-test.cb("set url with height", (t) => {
-    const savedLoad = Image.load;
-    Image.load = url => new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                url,
-                width: 10,
-                height: 20,
-            });
-        }, 50);
-    });
-
-    t.context.on("ready", () => {
-        t.is(t.context.ratio, 0.5);
-        t.is(t.context.width, 50);
-        t.is(t.context.height, 100);
-        t.end();
-    });
-    t.context.height = 100;
-    t.context.url = "height";
 
     Image.load = savedLoad;
 });
@@ -124,17 +74,6 @@ test("makePath", (t) => {
         stroke: () => t.fail(),
     };
     t.context.makePath(ctx);
-});
-
-test("restoreSize", (t) => {
-    t.context.file = {
-        width: 42,
-        height: 55,
-    };
-    t.context.isLoaded = true;
-    t.context.restoreSize();
-    t.is(t.context.width, 42);
-    t.is(t.context.height, 55);
 });
 
 test("toJSON", (t) => {
