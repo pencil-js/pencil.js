@@ -111,7 +111,6 @@ export default {
     MouseEvent,
     NetworkEvent,
     KeyboardEvent,
-    default: undefined,
     from,
     Math,
     Navigation,
