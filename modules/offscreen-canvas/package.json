@@ -11,7 +11,7 @@
     "ava": {
         "require": [
             "esm",
-            "../../test/_browser-env-setup.js"
+            "@pencil.js/test-environment"
         ]
     },
     "repository": {
@@ -37,6 +37,7 @@
         "@pencil.js/vector": "^1.10.0"
     },
     "devDependencies": {
+        "@pencil.js/test-environment": "^1.0.0",
         "ava": "^2.2.0",
         "browser-env": "^3.2.5",
         "esm": "^3.2.22",
