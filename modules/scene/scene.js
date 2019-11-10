@@ -263,6 +263,9 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
         mouseout: (target, eventPosition) => {
             target.fire(new MouseEvent(MouseEvent.events.leave, target, eventPosition));
         },
+        mouseenter: (target, eventPosition) => {
+            target.fire(new MouseEvent(MouseEvent.events.hover, target, eventPosition));
+        },
     };
     Object.keys(mouseListeners).forEach((eventName) => {
         container.addEventListener(eventName, (event) => {
