@@ -12,7 +12,7 @@ export default class Image extends Rectangle {
     /**
      * Image constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner of the image
-     * @param {String} url - Link to an image file
+     * @param {String|HTMLImageElement} url - Link to an image file or the image file itself
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (positionDefinition, url, options) {
@@ -47,15 +47,22 @@ export default class Image extends Rectangle {
         this.isLoaded = false;
         this[urlKey] = url;
         if (url) {
-            Image.load(url).then((img) => {
+            const done = (img) => {
+                this[urlKey] = img.src;
                 this.file = img;
                 this.isLoaded = true;
                 this.width = img.width;
                 this.height = img.height;
                 this.fire(new NetworkEvent(NetworkEvent.events.ready, this));
-            }).catch(() => {
-                this.fire(new NetworkEvent(NetworkEvent.events.error, this));
-            });
+            };
+            if (url instanceof window.HTMLImageElement) {
+                done(url);
+            }
+            else {
+                Image.load(url).then(done).catch(() => {
+                    this.fire(new NetworkEvent(NetworkEvent.events.error, this));
+                });
+            }
         }
     }
 
@@ -125,7 +132,7 @@ export default class Image extends Rectangle {
     /**
      * Promise to load an image file.
      * @param {String|Array<String>} url - Link or an array of links to image files
-     * @return {Promise}
+     * @return {Promise<HTMLImageElement>}
      */
     static load (url) {
         if (Array.isArray(url)) {

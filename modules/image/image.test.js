@@ -63,6 +63,16 @@ test.cb("Fail url load", (t) => {
     Image.load = savedLoad;
 });
 
+test("set url as a image file", (t) => {
+    const file = new window.Image();
+    file.src = "whoa";
+
+    t.context.url = file;
+
+    t.is(t.context.url, "whoa");
+    t.is(t.context.file, file);
+});
+
 test("makePath", (t) => {
     t.context.isLoaded = true;
     const ctx = {
