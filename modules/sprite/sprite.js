@@ -147,10 +147,10 @@ export default class Sprite extends Image {
      * @returns {Spritesheet}
      */
     static async sheet (url) {
-        const response = await fetch(url);
+        const response = await window.fetch(url);
         const json = await response.json();
 
-        json.meta.file = await Image.load(json.meta.image);
+        json.meta.file = await this.load(json.meta.image);
 
         // eslint-disable-next-line no-use-before-define
         return new Spritesheet(json);
