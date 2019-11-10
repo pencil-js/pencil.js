@@ -79,6 +79,7 @@
         "@pencil.js/select": "^1.12.0",
         "@pencil.js/slider": "^1.12.0",
         "@pencil.js/spline": "^1.12.0",
+        "@pencil.js/sprite": "^1.0.0",
         "@pencil.js/square": "^1.12.0",
         "@pencil.js/star": "^1.12.0",
         "@pencil.js/text": "^1.12.0",

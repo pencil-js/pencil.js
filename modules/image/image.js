@@ -98,11 +98,21 @@ export default class Image extends Rectangle {
                 ctx.stroke(path);
             }
 
-            ctx.drawImage(this.file, 0, 0, this.width, this.height);
+            this.draw(ctx);
 
             ctx.restore();
         }
 
+        return this;
+    }
+
+    /**
+     * Draw the image itself
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Image} Itself
+     */
+    draw (ctx) {
+        ctx.drawImage(this.file, 0, 0, this.width, this.height);
         return this;
     }
 

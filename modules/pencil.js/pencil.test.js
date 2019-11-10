@@ -4,7 +4,7 @@ import test from "ava";
 import Pencil from ".";
 import {
     BaseEvent, MouseEvent, NetworkEvent, KeyboardEvent, Math, Navigation, Position, Vector, Line, Spline, EventEmitter,
-    Container, Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Arc, Ellipse,
+    Container, Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Sprite, Arc, Ellipse,
     Circle, Text, Path, Input, Checkbox, Slider, Knob, ProgressBar, ProgressPie, Button, Select, from, OffScreenCanvas,
     version, author, homepage, Color, LinearGradient, RadialGradient,
 } from ".";
@@ -53,6 +53,7 @@ test("namespace", (t) => {
     t.not(Pencil.Rectangle, undefined);
     t.not(Pencil.Square, undefined);
     t.not(Pencil.Image, undefined);
+    t.not(Pencil.Sprite, undefined);
     t.not(Pencil.Arc, undefined);
     t.not(Pencil.Ellipse, undefined);
     t.not(Pencil.Circle, undefined);
@@ -99,6 +100,7 @@ test("named imports", (t) => {
     t.not(Rectangle, undefined);
     t.not(Square, undefined);
     t.not(Image, undefined);
+    t.not(Sprite, undefined);
     t.not(Arc, undefined);
     t.not(Ellipse, undefined);
     t.not(Circle, undefined);
