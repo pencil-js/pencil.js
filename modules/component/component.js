@@ -46,6 +46,39 @@ export default class Component extends Container {
     }
 
     /**
+     * Set variables of the context according to specified options
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {[Boolean, Boolean]} The pair (will fill) and (will stroke)
+     */
+    setContext (ctx) {
+        const willFill = this.options.fill;
+        const willStroke = this.options.stroke && this.options.strokeWidth > 0;
+
+        const origin = this.getOrigin();
+        ctx.translate(origin.x, origin.y);
+
+        if (this.options.shadow.color) {
+            ctx.shadowColor = this.options.shadow.color.toString();
+            ctx.shadowBlur = this.options.shadow.blur;
+            ctx.shadowOffsetX = this.options.shadow.position.x;
+            ctx.shadowOffsetY = this.options.shadow.position.y;
+        }
+
+        if (willFill) {
+            ctx.fillStyle = this.options.fill.toString(ctx);
+        }
+
+        if (willStroke) {
+            ctx.lineJoin = this.options.join;
+            ctx.lineCap = this.options.cap;
+            ctx.strokeStyle = this.options.stroke.toString(ctx);
+            ctx.lineWidth = this.options.strokeWidth;
+        }
+
+        return [willFill, willStroke];
+    }
+
+    /**
      * Make the path and trace it
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Component} Itself
@@ -72,41 +105,6 @@ export default class Component extends Container {
         ctx.restore();
 
         return this;
-    }
-
-    /**
-     * Set variables of the context according to specified options
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @return {[Boolean, Boolean]} The pair (will fill) and (will stroke)
-     */
-    setContext (ctx) {
-        const willFill = this.options.fill;
-        const willStroke = this.options.stroke && this.options.strokeWidth > 0;
-
-        if (willFill || willStroke) {
-            const origin = this.getOrigin();
-            ctx.translate(origin.x, origin.y);
-
-            if (this.options.shadow.color) {
-                ctx.shadowColor = this.options.shadow.color.toString();
-                ctx.shadowBlur = this.options.shadow.blur;
-                ctx.shadowOffsetX = this.options.shadow.position.x;
-                ctx.shadowOffsetY = this.options.shadow.position.y;
-            }
-
-            if (willFill) {
-                ctx.fillStyle = this.options.fill.toString(ctx);
-            }
-
-            if (willStroke) {
-                ctx.lineJoin = this.options.join;
-                ctx.lineCap = this.options.cap;
-                ctx.strokeStyle = this.options.stroke.toString(ctx);
-                ctx.lineWidth = this.options.strokeWidth;
-            }
-        }
-
-        return [willFill, willStroke];
     }
 
     /**

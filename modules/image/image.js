@@ -74,9 +74,26 @@ export default class Image extends Rectangle {
      */
     makePath (ctx) {
         if (this.isLoaded) {
-            super.makePath(ctx);
-            const originPos = this.getOrigin();
-            ctx.drawImage(this.file, originPos.x, originPos.y, this.width, this.height);
+            ctx.save();
+
+            const [willFill, willStroke] = this.setContext(ctx);
+
+            const path = new window.Path2D();
+            this.trace(path);
+            this.path = path;
+
+            if (willFill) {
+                ctx.fill(path);
+                ctx.shadowBlur = 0;
+            }
+
+            if (willStroke) {
+                ctx.stroke(path);
+            }
+
+            ctx.drawImage(this.file, 0, 0, this.width, this.height);
+
+            ctx.restore();
         }
 
         return this;
@@ -102,7 +119,7 @@ export default class Image extends Rectangle {
      * @return {Image}
      */
     static from (definition) {
-        return new Image(definition.position, definition.url, definition.width, definition.height, definition.options);
+        return new Image(definition.position, definition.url, definition.options);
     }
 
     /**

@@ -49,7 +49,7 @@ test("makePath skip", (t) => {
     t.context.trace = () => t.fail();
     const ctx = {
         save: () => t.pass(),
-        translate: () => t.fail(),
+        translate: () => t.pass(),
         fill: () => t.fail(),
         stroke: () => t.fail(),
         restore: () => t.pass(),
