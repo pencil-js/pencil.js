@@ -42,7 +42,7 @@
         "url": "https://github.com/pencil-js/pencil.js/issues"
     },
     "devDependencies": {
-        "@pencil.js/test-environment": "^1.0.0",
+        "@pencil.js/test-environment": "^1.0.1",
         "ava": "^2.2.0",
         "esm": "^3.2.22",
         "nyc": "^14.1.1"
