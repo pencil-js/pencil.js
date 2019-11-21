@@ -114,6 +114,8 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 
 
 ## Modules
+### Core modules
+> Core modules refer to all classes and methods you'll get within Pencil.js library.
  * [EventEmitter](modules/event-emitter)
    * [Container](modules/container)
      * [OffScreenCanvas](modules/offscreen-canvas)
@@ -158,6 +160,11 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
    * [KeyboardEvent](modules/keyboard-event)
    * [NetworkEvent](modules/network-event)
 
+### Non-core modules
+> Non-core modules refer to packages made by us and not part of Pencil.js library. We find them useful so maybe you will too...
+ * [text-direction](https://github.com/pencil-js/text-direction)
+ * [test-environment](https://github.com/pencil-js/test-environment)
+ * [spritesheet](https://github.com/pencil-js/spritesheet)
 
 ## Who is using Pencil.js ?
 
