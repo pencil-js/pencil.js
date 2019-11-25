@@ -142,16 +142,6 @@ export default class Scene extends OffscreenCanvas {
     }
 
     /**
-     * Change the behavior for upscaled images, smoothing is good for pictures but bad for pixel-art
-     * @param {Boolean} enable - Should the smoothing be active or not
-     * @return {Scene} Itself
-     */
-    setImageSmoothing (enable) {
-        this.ctx.imageSmoothingEnabled = enable;
-        return this;
-    }
-
-    /**
      * @inheritDoc
      * @param {Object} definition - Scene definition
      * @return {Scene}

@@ -18,6 +18,13 @@ test("constructor", (t) => {
     t.is(defaultValue.height, 1);
 });
 
+test("setImageSmoothing", (t) => {
+    t.context.setImageSmoothing(false);
+    t.false(t.context.ctx.imageSmoothingEnabled);
+    t.context.setImageSmoothing(true);
+    t.true(t.context.ctx.imageSmoothingEnabled);
+});
+
 test("clear", (t) => {
     t.is(t.context.clear(), t.context);
 });

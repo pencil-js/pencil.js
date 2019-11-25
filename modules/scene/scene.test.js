@@ -71,11 +71,6 @@ test("hide and show", (t) => {
     t.true(t.context.options.shown);
 });
 
-test("setImageSmoothing", (t) => {
-    t.context.setImageSmoothing(false);
-    t.false(t.context.ctx.imageSmoothingEnabled);
-});
-
 test("from", (t) => {
     const scene = Scene.from({
         options: {

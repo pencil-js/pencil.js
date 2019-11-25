@@ -23,6 +23,16 @@ export default class OffScreenCanvas extends Container {
     }
 
     /**
+     * Change the behavior for upscaled images, smoothing is good for pictures but bad for pixel-art
+     * @param {Boolean} enable - Should the smoothing be active or not
+     * @return {OffScreenCanvas} Itself
+     */
+    setImageSmoothing (enable) {
+        this.ctx.imageSmoothingEnabled = enable;
+        return this;
+    }
+
+    /**
      * Erase the canvas
      * @return {OffScreenCanvas} Itself
      */
@@ -112,7 +122,7 @@ export default class OffScreenCanvas extends Container {
             vector = Vector.from(vectorDefinition);
         }
         else {
-            vector = new Vector(undefined, [this.width, this.height]);
+            vector = new Vector(undefined, this.size);
         }
 
         this.render();
