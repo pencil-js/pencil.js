@@ -5,7 +5,6 @@
 [![Dependencies update](https://badgen.net/david/dev/pencil-js/pencil.js?icon=npm)](https://david-dm.org/pencil-js/pencil.js?type=dev)
 [![Maintainability](https://badgen.net/codeclimate/maintainability/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/maintainability)
 [![Test Coverage](https://badgen.net/codeclimate/coverage/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/test_coverage)
-[![Inline docs](http://inch-ci.org/github/pencil-js/pencil.js.svg?branch=master)](http://inch-ci.org/github/pencil-js/pencil.js)
 [![Join us on Discord](https://badgen.net/badge/Discord/Join%20us/7289da?icon=discord)](https://discord.gg/GkEgjsy)
 
 Nice modular interactive 2D drawing library.
@@ -136,6 +135,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
          * [.resizable()](modules/resizable)
          * [Square](modules/square)
          * [Image](modules/image)
+           * [Sprite](modules/sprite)
        * [Arc](modules/arc)
          * [Ellipse](modules/ellipse)
            * [Circle](modules/circle)
@@ -162,9 +162,16 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
 
 ### Non-core modules
 > Non-core modules refer to packages made by us and not part of Pencil.js library. We find them useful so maybe you will too...
- * [text-direction](https://github.com/pencil-js/text-direction)
- * [test-environment](https://github.com/pencil-js/test-environment)
- * [spritesheet](https://github.com/pencil-js/spritesheet)
+ * [text-direction](https://github.com/pencil-js/text-direction)<br/>
+Gives the rendering text direction (left to right or right to left) of a node.
+ * [test-environment](https://github.com/pencil-js/test-environment)<br/>
+Set a Node.js environment suitable for testing Pencil.js and Pencil.js applications.
+ * [spritesheet](https://github.com/pencil-js/spritesheet)<br/>
+Pack a set of images into a single spritesheet along its json description file.
+ * [spritesheet-cli](https://github.com/pencil-js/spritesheet-cli)<br/>
+CLI tool for spritesheet (see above).
+ * [canvas-gif-encoder](https://github.com/pencil-js/canvas-gif-encoder)<br/>
+Create a GIF stream frame by frame from a canvas rendering context.
 
 ## Who is using Pencil.js ?
 
