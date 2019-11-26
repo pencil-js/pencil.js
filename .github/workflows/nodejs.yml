@@ -1,0 +1,39 @@
+name: Node CI
+
+on:
+    push:
+        paths:
+            './modules/**/*.js'
+
+jobs:
+    build:
+
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                node-version: [8, 10, 12]
+
+        steps:
+        - uses: actions/checkout@v1
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+              node-version: ${{ matrix.node-version }}
+        - name: prepare coverage
+          run: |
+              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+              chmod +x ./cc-test-reporter
+              ./cc-test-reporter before-build
+        - name: npm install, build, and test
+          run: |
+              npx lerna bootstrap --hoist
+              npm run build
+              npm run testci
+        - name: coverage
+          run: |
+              ./cc-test-reporter format-coverage -t lcov
+              ./cc-test-reporter upload-coverage
+        env:
+            CI: true
+            CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
