@@ -34,7 +34,6 @@ export default class Particles extends Component {
                 ...optionGenerator(index),
             };
             data.position = Position.from(data.position);
-            data.scale = Position.from(data.scale);
             return data;
         });
     }
@@ -52,11 +51,12 @@ export default class Particles extends Component {
                 this.updater(data, index);
             }
             const { scale, position, rotation } = data;
+            const scaleOptions = typeof scale === "number" ? [scale, scale] : Position.from(scale).toJSON();
             const rotationRadian = rotation * radianCircle;
-            matrix.a = cos(rotationRadian) * scale.x;
-            matrix.b = sin(rotationRadian) * scale.x;
-            matrix.c = -sin(rotationRadian) * scale.y;
-            matrix.d = cos(rotationRadian) * scale.y;
+            matrix.a = cos(rotationRadian) * scaleOptions[0];
+            matrix.b = sin(rotationRadian) * scaleOptions[0];
+            matrix.c = -sin(rotationRadian) * scaleOptions[1];
+            matrix.d = cos(rotationRadian) * scaleOptions[1];
             matrix.e = position.x;
             matrix.f = position.y;
             path.addPath(basePath, matrix);
@@ -98,9 +98,9 @@ export default class Particles extends Component {
 
     /**
      * @typedef {Object} ParticleData
-     * @prop {Position} [position=[0, 0]] - Position of the particle
+     * @prop {Position} [position=new Position()] - Position of the particle
      * @prop {Number} [rotation=0] - Rotation of the particle
-     * @prop {Position} [scale=[1, 1] - Scale of the particle
+     * @prop {Number|Position} [scale=1] - Scaling ratio or a pair of value for horizontal and vertical scaling
      */
     /**
      * @return {ParticleData}
@@ -109,7 +109,7 @@ export default class Particles extends Component {
         return {
             position: new Position(),
             rotation: 0,
-            scale: new Position(1, 1),
+            scale: 1,
         };
     }
 }
