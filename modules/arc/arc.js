@@ -70,10 +70,7 @@ export default class Arc extends Component {
      * @return {LineOptions}
      */
     static get defaultOptions () {
-        return {
-            ...Line.defaultOptions,
-            join: null,
-        };
+        return Line.defaultOptions;
     }
 
     /**

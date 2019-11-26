@@ -57,7 +57,6 @@ test("from", (t) => {
 test("defaultOptions", (t) => {
     t.is(Arc.defaultOptions.cap, Arc.caps.round);
     t.is(Arc.defaultOptions.fill, null);
-    t.is(Arc.defaultOptions.join, null);
 });
 
 test("caps", (t) => {
