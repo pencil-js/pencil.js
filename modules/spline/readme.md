@@ -23,3 +23,9 @@ const options = {
 };
 const spline = new Spline(from, [firstPoint, secondPoint, lastPoint], tension, options);
 ```
+
+
+## SplineOptions
+Inherit from [LineOptions](../line/readme.md#lineoptions).
+
+Spline have no specific options.

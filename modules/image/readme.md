@@ -15,7 +15,13 @@ Image rendering.
 ```js
 import Image from "@pencil.js/image";
 
-const image = new Image(aPosition, "url/to/my/file.png");
+const position = [100, 200];
+const url = "url/to/my/file.png";
+const options = {
+    fill: "black",
+    description: "Cutest cat ever !"
+};
+const image = new Image(position, url, options);
 image.on("ready", () => {
     console.log("Image is loaded");
 });
@@ -32,3 +38,12 @@ Be aware that this example overrides Javascript's `Image` global. Use namespace 
 import * as Namespace from "@pencil.js/image";
 new Namespace.Image();
 ```
+
+
+## ImageOptions
+Inherit from [RectangleOptions](../rectangle/readme.md#rectangleoptions).
+
+| Name | Type | Default | Comment |
+| ---- | ---- | ------- | ------- |
+|fill |[Color](../color/readme.md) or `String` |`null` |Background color for transparent images |
+|description |`String` |`""` |Accessibility description of the image |

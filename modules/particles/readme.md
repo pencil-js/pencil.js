@@ -14,12 +14,11 @@ Particle generator optimized to display thousands of instances.
 
 ```js
 import Particles from "@pencil.js/particles";
-import Square from "@pencil.js/square";
+import Star from "@pencil.js/star";
 import { random } from "@pencil.js/math";
 
-const base = new Square(undefined, 8, {
-    fill: "red",
-});
+const position = [100, 200];
+const base = new Star();
 const count = 5000;
 const generator = () => {
     return {
@@ -32,5 +31,11 @@ const updater = (data) => {
     data.position.add(data.speed);
 };
 
-const particles = new Particles(aPosition, base, count, generator, updater);
+const particles = new Particles(position, base, count, generator, updater);
 ```
+
+
+## ParticlesOptions
+Inherit from [ComponentOptions](../component/readme.md#componentoptions).
+
+Particles have no specific options.

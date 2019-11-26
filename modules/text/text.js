@@ -305,13 +305,13 @@ export default class Text extends Component {
     /**
      * @typedef {Object} TextOptions
      * @extends ComponentOptions
-     * @prop {String} [font="sans-serif"] - Font to use
+     * @prop {String} [font="sans-serif"] - Font to use (can be a URL)
      * @prop {Number} [fontSize=10] - Size of the text in pixels
      * @prop {String} [align=Text.alignments.start] - Text horizontal alignment
      * @prop {Boolean} [bold=false] - Use bold font-weight
      * @prop {Boolean} [italic=false] - Use italic font-style
-     * @prop {Number} [lineHeight=1] - Ratio of line height; 1 is normal, 2 is twice the space
      * @prop {Boolean} [underscore=false] - Draw a line under the text
+     * @prop {Number} [lineHeight=1] - Ratio of line height (1 is normal, 2 is twice the space)
      */
     /**
      * @return {TextOptions}

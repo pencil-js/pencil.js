@@ -15,11 +15,12 @@ Text writing.
 ```js
 import Text from "@pencil.js/text";
 
+const position = [100, 200];
 const options = {
     font: "comic-sans",
     fontSize: 42
 };
-const text = new Text(aPosition, "Hello world !", options);
+const text = new Text(position, "Hello world !", options);
 
 // Can be use to preload a bunch of fonts
 Text.load([url1, url2, url3]).then(() => {
@@ -33,3 +34,16 @@ Be aware that this example overrides Javascript's `Text` global. Use namespace t
 import * as Namespace from "@pencil.js/text";
 new Namespace.Text();
 ```
+
+## TextOptions
+Inherit from [ComponentOptions](../component/readme.md#componentoptions).
+
+| Name | Type | Default | Comment |
+| ---- | ---- | ------- | ------- |
+|font |`String` |`"sans-serif"` |Font to use (can be a URL) |
+|fontSize |`Number` |`20` |Size of the text in pixels |
+|align |`String` |`Text.alignments.start` |Text horizontal alignment |
+|bold |`Boolean` |`false` |Use bold font-weight |
+|italic |`Boolean` |`false` |Use italic font-style |
+|underscore |`Boolean` |`false` |Draw a line under the text |
+|lineHeight |`Number` |`1` |Ratio of line height (1 is normal, 2 is twice the space) |

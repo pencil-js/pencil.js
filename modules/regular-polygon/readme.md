@@ -23,3 +23,9 @@ const options = {
 };
 const heptagon = new RegularPolygon(center, nbSides, radius, options);
 ```
+
+
+## RegularPolygonOptions
+Inherit from [PolygonOptions](../polygon/readme.md#polygonoptions).
+
+Polygon have no specific options.

@@ -415,7 +415,7 @@ export default class Container extends EventEmitter {
      * @prop {Boolean} [shown=true] - Is shown
      * @prop {Number} [opacity=null] - Opacity level from 0 to 1 (null mean inherited from parent)
      * @prop {Number} [rotation=0] - Rotation ratio from 0 to 1 (clockwise)
-     * @prop {PositionDefinition} [rotationCenter=[0, 0]] - Center of rotation relative to this position
+     * @prop {PositionDefinition} [rotationCenter=new Position()] - Center of rotation relative to this position
      * @prop {Number|PositionDefinition} [scale=1] - Scaling ratio or a pair of value for horizontal and vertical scaling
      * @prop {Number} [zIndex=1] - Depth ordering
      * @prop {Component} [clip=null] - Other component used to clip the rendering

@@ -23,3 +23,9 @@ const path = new Path(from, [
     Path.bezierTo(pos4, controlPoint1, controlPoint2),
 ], isClosed, options);
 ```
+
+
+## PathOptions
+Inherit from [ComponentOptions](../component/readme.md#componentoptions) if the path is closed, or from [LineOptions](../line/readme.md#lineoptions) otherwise.
+
+Path have no specific options.

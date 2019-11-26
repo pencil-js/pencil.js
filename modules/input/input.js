@@ -104,6 +104,7 @@ export default class Input extends Container {
     /**
      * @typedef {Object} InputOptions
      * @extends ContainerOptions
+     * @prop {*} [value=null] - Initial value of the input
      * @prop {String} [fill="#444"] - Color of the filling
      * @prop {String} [background="#f6f6f6"] - Color of the background
      * @prop {String} [border="#aaa"] - Color of the border

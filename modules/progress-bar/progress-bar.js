@@ -92,14 +92,14 @@ export default class ProgressBar extends Input {
     }
 
     /**
-     * @typedef {Object} ProgressOptions
+     * @typedef {Object} ProgressBarOptions
      * @extends InputOptions
      * @prop {Number} [value=0] - Initial value
      * @prop {Number} [width=200] - Size of the slider
      * @prop {Number} [speed=0.3] - Transition speed between two value (0 mean no change, 1 mean instant change)
      */
     /**
-     * @return {SliderOptions}
+     * @return {ProgressBarOptions}
      */
     static get defaultOptions () {
         return {

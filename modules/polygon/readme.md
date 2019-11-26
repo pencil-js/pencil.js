@@ -22,3 +22,9 @@ const options = {
 };
 const polygon = new Polygon(points, options);
 ```
+
+
+## PolygonOptions
+Inherit from [ComponentOptions](../component/readme.md#componentoptions).
+
+Rectangle have no specific options.

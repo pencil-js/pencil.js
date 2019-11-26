@@ -15,10 +15,16 @@ Circle shape.
 ```js
 import Circle from "@pencil.js/circle";
 
+const position = [100, 200];
 const radius = 50;
 const options = {
     fill: "red",
     stroke: "#000"
 };
-const circle = new Circle(aPosition, radius, options);
+const circle = new Circle(position, radius, options);
 ```
+
+## CircleOptions
+Inherit from [EllipseOptions](../ellipse/readme.md#ellipseoptions).
+
+Circle have no specific options.

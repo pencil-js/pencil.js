@@ -16,9 +16,12 @@ Gradient transition of color(s) between two position.
 import LinearGradient from "@pencil.js/linear-gradient";
 import Square from "@pencil.js/square";
 
+const position = [100, 200];
 const size = 200;
-const square = new Square(aPosition, size, {
-    fill: new LinearGradient([0, 0], [size, size], {
+const topLeftCorner = [0, 0];
+const bottomRightCorner = [size, size];
+const square = new Square(position, size, {
+    fill: new LinearGradient(topLeftCorner, bottomRightCorner, {
         0: "red",
         0.5: "green",
         1: "blue",

@@ -14,8 +14,7 @@ Sprite component.
 
 The easiest way to use sprites is using a spritesheet (a.k.a. Texture Atlas). A Spritesheet is a combination of a large image composed of smaller images
 and a json file.
-There're plenty of tools that can manage and generate spritesheets
-([spritesheet.js](https://github.com/krzysztof-o/spritesheet.js), [TexturePacker](https://www.codeandweb.com/texturepacker), [ShoeBox](https://renderhjs.net/shoebox/) ...)
+We even create our [own tool to build a spritesheet](https://github.com/pencil-js/spritesheet) from separate images.
 
 Pencil.js offer an easy way to load and use a spritesheet.
 ```js
@@ -39,8 +38,17 @@ const url = "sprite-sheet.png";
 const frames = [
    // list of frames data
 ];
+const options = {
+    // Options
+};
 const sprite = new Sprite(position, url, frames);
 scene.add(sprite).startLoop();
 ```
 
+## SpriteOptions
+Inherit from [ImageOptions](../image/readme.md#imageoptions).
 
+| Name | Type | Default | Comment |
+| ---- | ---- | ------- | ------- |
+|speed |`Number` |`1` |Frame rate of the animation (1 means about 60 frame per seconds, 0 means stopped) |
+|loop |`Boolean` |`true` |Should the animation start over indefinitely |

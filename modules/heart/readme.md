@@ -15,10 +15,16 @@ Heart shape.
 ```js
 import Heart from "@pencil.js/heart";
 
+const position = [100, 200];
 const radius = 2;
 const options = {
     fill: "red",
     stroke: "teal"
 };
-const heart = new Heart(aPosition, radius, options);
+const heart = new Heart(position, radius, options);
 ```
+
+## HeartOptions
+Inherit from [ComponentOptions](../component/readme.md#componentoptions).
+
+Heart have no specific options.

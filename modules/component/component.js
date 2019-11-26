@@ -166,7 +166,7 @@ export default class Component extends Container {
      * @extends ContainerOptions
      * @prop {String|ColorDefinition} [fill="#000"] - Color used to fill, set to null for transparent
      * @prop {String|ColorDefinition} [stroke=null] - Color used to stroke, set to null for transparent
-     * @prop {Number} [strokeWidth=1] - Stroke line thickness in pixels
+     * @prop {Number} [strokeWidth=2] - Stroke line thickness in pixels
      * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
      * @prop {String} [join=Component.joins.miter] - How lines join between them
      * @prop {PositionDefinition} [origin=new Position()] - Relative offset

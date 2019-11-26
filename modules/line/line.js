@@ -63,20 +63,20 @@ export default class Line extends Component {
      * @extends ComponentOptions
      * @prop {String} [cap=Line.caps.round] - How the line end points looks
      * @prop {String} [join=Line.joins.round] - How the line segment are join
+     * @prop {String|ColorDefinition} [fill=null] - Color used to fill, set to null for transparent
+     * @prop {String|ColorDefinition} [stroke=Component.defaultOptions.fill] - Color used to stroke, set to null for transparent
      */
     /**
      * @return {LineOptions}
      */
     static get defaultOptions () {
-        const options = {
+        return {
             ...super.defaultOptions,
             cap: Line.caps.round,
             join: Line.joins.round,
             fill: null,
-            cursor: null,
+            stroke: super.defaultOptions.fill,
         };
-        options.stroke = super.defaultOptions.fill;
-        return options;
     }
 
     /**

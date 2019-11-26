@@ -21,3 +21,14 @@ const options = {
 };
 const line = new Line(from, [firstPoint, secondPoint, lastPoint], options);
 ```
+
+
+## LineOptions
+Inherit from [ComponentOptions](../component/readme.md#componentoptions).
+
+| Name | Type | Default | Comment |
+| ---- | ---- | ------- | ------- |
+|cap |`String` |`Line.caps.round` |How the line end points looks |
+|join |`String` |`Line.joins.round` |How the line segment are join |
+|fill |[Color](../color/readme.md) or `String` |`null` |Color used to fill, set to null for transparent |
+|stroke |[Color](../color/readme.md) or `String` |`Component.defaultOptions.fill` |Color used to stroke, set to null for transparent |

@@ -23,3 +23,12 @@ circle.render(offScreen);
 const imageData = offScreen.imageData;
 
 ```
+
+
+## OffscreenCanvasOptions
+Inherit from [ContainerOptions](../container/readme.md#containeroptions).
+
+| Name | Type | Default | Comment |
+| ---- | ---- | ------- | ------- |
+|fill |[Color](../color/readme.md) or `String` |`null` |Background color |
+|opacity |`Number` |`1` |Global opacity |
