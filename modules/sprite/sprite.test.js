@@ -75,10 +75,11 @@ test("sheet", async (t) => {
 
     const sheet = await Sprite.sheet("url");
     t.true(typeof sheet.json === "object");
-    t.true(typeof sheet.extract === "function");
+
+    const frames = sheet.get("any");
+    t.true(Array.isArray(frames));
 
     const sprite = sheet.extract([4, 5], "any");
-
     t.true(sprite instanceof Sprite);
 });
 

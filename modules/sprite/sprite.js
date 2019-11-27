@@ -207,13 +207,19 @@ class Spritesheet {
     }
 
     /**
-     * Group images from the spritesheet into a single sprite
-     * @param {PositionDefinition} position - Position of the sprite
-     * @param {String|Function|RegExp} selector - Match against the spritesheet images name
-     * @param {ImageOptions} options - Options of the sprite
-     * @returns {Sprite}
+     * Getter for the image file
+     * @returns {Image}
      */
-    extract (position, selector = "*", options) {
+    get file () {
+        return this.json.meta.file;
+    }
+
+    /**
+     * Return all the frames corresponding to a selector
+     * @param {String|Function|RegExp} [selector="*"] - Match against the spritesheet images name using a glob pattern, a validation function or a regular expression
+     * @returns {Array}
+     */
+    get (selector = "*") {
         const filter = ((matcher) => {
             if (typeof matcher === "function") {
                 return matcher;
@@ -229,8 +235,19 @@ class Spritesheet {
         })(selector);
 
         const { frames } = this.json;
-        const selected = Object.keys(frames).filter(filter).map(key => frames[key]);
+        return Object.keys(frames)
+            .filter(filter)
+            .map(key => frames[key]);
+    }
 
-        return new Sprite(position, this.json.meta.file, selected, options);
+    /**
+     * Group images from the spritesheet into a single sprite
+     * @param {PositionDefinition} position - Position of the sprite
+     * @param {String|Function|RegExp} [selector="*"] - Match against the spritesheet images name
+     * @param {ImageOptions} [options] - Options of the sprite
+     * @returns {Sprite}
+     */
+    extract (position, selector, options) {
+        return new Sprite(position, this.file, this.get(selector), options);
     }
 }
