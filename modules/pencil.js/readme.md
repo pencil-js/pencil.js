@@ -20,7 +20,7 @@ But, each part is a JS module and can be used independently, ex:
 
     npm install @pencil.js/scene
 
-# CDN
+# [CDN](https://developer.mozilla.org/docs/Glossaire/CDN "Content Delivery Network")
 If you want to go old-school, you can fetch the script with [unpkg](https://unpkg.com/) or [jsdelivr](https://www.jsdelivr.com/).
 
 ```html
@@ -170,6 +170,8 @@ Set a Node.js environment suitable for testing Pencil.js and Pencil.js applicati
 Pack a set of images into a single spritesheet along its json description file.
  * [spritesheet-cli](https://github.com/pencil-js/spritesheet-cli)<br/>
 CLI tool for spritesheet (see above).
+ * [gif](https://github.com/pencil-js/gif)<br/>
+Turn any Pencil.js scene into an animated GIF.
  * [canvas-gif-encoder](https://github.com/pencil-js/canvas-gif-encoder)<br/>
 Create a GIF stream frame by frame from a canvas rendering context.
 
