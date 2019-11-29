@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/sprite",
-    "version": "1.13.0",
+    "version": "1.13.1",
     "description": "Sprite class for Pencil.js package.",
     "main": "sprite.js",
     "files": [],
@@ -28,7 +28,7 @@
     ],
     "dependencies": {
         "@pencil.js/base-event": "^1.9.0",
-        "@pencil.js/image": "^1.13.0",
+        "@pencil.js/image": "^1.13.1",
         "@pencil.js/math": "^1.9.0",
         "picomatch": "^2.1.1"
     },

@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/draggable",
-    "version": "1.13.0",
+    "version": "1.13.1",
     "description": "Allow component to be dragged in Pencil.js package.",
     "main": "draggable.js",
     "files": [],
@@ -24,7 +24,7 @@
         "interaction"
     ],
     "dependencies": {
-        "@pencil.js/component": "^1.13.0",
+        "@pencil.js/component": "^1.13.1",
         "@pencil.js/mouse-event": "^1.10.0",
         "@pencil.js/vector": "^1.10.0"
     },
