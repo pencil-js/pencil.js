@@ -62,14 +62,16 @@ export default class RegularPolygon extends Polygon {
      * @param {Number} nbPoints - Number of points
      * @param {Number} radius - Distance from origin
      * @param {Number} [startAngle=0] - Starting angle of the points (between 0 and 1)
+     * @param {PositionDefinition} [center] - Relative center of all the points
      * @return {Array<Position>}
      */
-    static getRotatingPoints (nbPoints, radius, startAngle = 0) {
+    static getRotatingPoints (nbPoints, radius, startAngle = 0, center) {
         const angle = startAngle - (1 / 4);
         const points = [];
         for (let i = 0; i < nbPoints; ++i) {
             const rotation = ((i / nbPoints) + angle) * radianCircle;
-            points.push(new Position(Math.cos(rotation) * radius, Math.sin(rotation) * radius));
+            const point = new Position(Math.cos(rotation) * radius, Math.sin(rotation) * radius);
+            points.push(point.add(center));
         }
         return points;
     }
