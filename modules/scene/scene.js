@@ -284,7 +284,7 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
         [KeyboardEvent.events.up]: null,
     };
     Object.keys(keyboardListener).forEach((eventName) => {
-        container.addEventListener(eventName, (event) => {
+        window.document.addEventListener(eventName, (event) => {
             if (this.options.shown) {
                 this.fire(new KeyboardEvent(eventName, this, event.key));
                 if (keyboardListener[eventName] instanceof Function) {
