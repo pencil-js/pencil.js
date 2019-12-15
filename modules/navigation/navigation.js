@@ -35,7 +35,7 @@ const prepareScenes = (builders, container = window.document.body) => {
         canvas = container;
     }
     else {
-        ({ canvas } = Scene.buildCanvas(container));
+        ({ canvas } = Scene.getDrawingContext(container));
         container.appendChild(canvas);
     }
 

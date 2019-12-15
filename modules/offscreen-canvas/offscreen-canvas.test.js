@@ -78,8 +78,8 @@ test("toImage", (t) => {
     t.truthy(img.src);
 });
 
-test("buildCanvas", (t) => {
-    const ctx = OffscreenCanvas.buildCanvas(10, 20);
+test("getDrawingContext", (t) => {
+    const ctx = OffscreenCanvas.getDrawingContext(10, 20);
     t.is(ctx.constructor.name, "CanvasRenderingContext2D");
     t.is(ctx.canvas.width, 10);
     t.is(ctx.canvas.height, 20);

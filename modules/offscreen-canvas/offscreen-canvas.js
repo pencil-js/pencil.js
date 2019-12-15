@@ -19,7 +19,7 @@ export default class OffScreenCanvas extends Container {
         /**
          * @type {CanvasRenderingContext2D}
          */
-        this.ctx = this.constructor.buildCanvas(width, height);
+        this.ctx = this.constructor.getDrawingContext(width, height);
     }
 
     /**
@@ -178,7 +178,7 @@ export default class OffScreenCanvas extends Container {
      * @param {Number} height - Height of the canvas
      * @return {CanvasRenderingContext2D}
      */
-    static buildCanvas (width, height) {
+    static getDrawingContext (width, height) {
         const canvas = window.document.createElement("canvas");
         canvas.width = width;
         canvas.height = height;

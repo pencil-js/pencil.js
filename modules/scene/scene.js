@@ -159,10 +159,10 @@ export default class Scene extends OffscreenCanvas {
      * @param {HTMLElement} container - Element holding the canvas
      * @inheritDoc
      */
-    static buildCanvas (container = window.document.body) {
+    static getDrawingContext (container = window.document.body) {
         if (container) {
             const { scrollWidth, scrollHeight } = container;
-            const ctx = super.buildCanvas(scrollWidth, scrollHeight);
+            const ctx = super.getDrawingContext(scrollWidth, scrollHeight);
             ctx.canvas.style.display = "block";
             ctx.canvas.style.position = "absolute";
             return ctx;

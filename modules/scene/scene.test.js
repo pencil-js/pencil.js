@@ -81,8 +81,8 @@ test("from", (t) => {
     t.is(scene.options.fill, "red");
 });
 
-test("buildCanvas", (t) => {
-    const ctx = Scene.buildCanvas({
+test("getDrawingContext", (t) => {
+    const ctx = Scene.getDrawingContext({
         scrollWidth: 10,
         scrollHeight: 20,
     });
@@ -90,7 +90,7 @@ test("buildCanvas", (t) => {
     t.is(ctx.canvas.width, 10);
     t.is(ctx.canvas.height, 20);
 
-    const nothing = Scene.buildCanvas(null);
+    const nothing = Scene.getDrawingContext(null);
     t.is(nothing, null);
 });
 
