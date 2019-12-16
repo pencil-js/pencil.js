@@ -60,6 +60,7 @@ import { version, author, homepage } from "./package.json";
 const exportableClasses = {
     Container,
     Particles,
+    OffScreenCanvas,
     Scene,
     Arc,
     Ellipse,
@@ -116,7 +117,6 @@ export default {
     from,
     Math,
     Navigation,
-    OffScreenCanvas,
     version,
     author,
     homepage,
