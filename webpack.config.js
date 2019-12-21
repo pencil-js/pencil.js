@@ -1,3 +1,4 @@
+const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 const { resolve } = require("path");
 const { BannerPlugin } = require("webpack");
 
@@ -5,17 +6,34 @@ const { name, version, homepage, author, license } = require("./modules/pencil.j
 
 const mainModule = "./modules/pencil.js/";
 
-module.exports = {
+const entry = resolve(__dirname, `${mainModule}pencil.js`);
+const path = resolve(__dirname, `${mainModule}dist`);
+
+const banner = new BannerPlugin(`${name} v${version} ${homepage}
+${license} license - © ${author}`);
+
+module.exports = [{
+    entry,
     plugins: [
-        new BannerPlugin(`${name} v${version} ${homepage}
-${license} license - © ${author}`),
+        banner,
     ],
-    entry: resolve(__dirname, `${mainModule}pencil.js`),
     output: {
-        path: resolve(__dirname, `${mainModule}dist`),
+        path,
         filename: "pencil.min.js",
         library: "Pencil",
-        libraryTarget: "this",
+        libraryTarget: "global",
         libraryExport: "default",
     },
-};
+}, {
+    entry,
+    plugins: [
+        banner,
+        new EsmWebpackPlugin(),
+    ],
+    output: {
+        path,
+        filename: "pencil.esm.js",
+        library: "Pencil",
+        libraryTarget: "var",
+    },
+}];
