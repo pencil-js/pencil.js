@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/triangle",
-    "version": "1.13.1",
+    "version": "1.14.0",
     "description": "Triangle shape for Pencil.js package.",
     "main": "triangle.js",
     "files": [],
@@ -26,7 +26,7 @@
     ],
     "dependencies": {
         "@pencil.js/position": "^1.10.0",
-        "@pencil.js/regular-polygon": "^1.13.1"
+        "@pencil.js/regular-polygon": "^1.14.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",

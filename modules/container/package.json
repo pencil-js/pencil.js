@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/container",
-    "version": "1.13.1",
+    "version": "1.14.0",
     "description": "Simple container for Pencil.js package.",
     "main": "container.js",
     "files": [],

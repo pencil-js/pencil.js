@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/progress-pie",
-    "version": "1.13.1",
+    "version": "1.14.0",
     "description": "Progress-pie for Pencil.js package.",
     "main": "progress-pie.js",
     "files": [
@@ -28,9 +28,9 @@
         "UI"
     ],
     "dependencies": {
-        "@pencil.js/arc": "^1.13.1",
-        "@pencil.js/circle": "^1.13.1",
-        "@pencil.js/input": "^1.13.1",
+        "@pencil.js/arc": "^1.14.0",
+        "@pencil.js/circle": "^1.14.0",
+        "@pencil.js/input": "^1.14.0",
         "@pencil.js/math": "^1.9.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
