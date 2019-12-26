@@ -54,6 +54,9 @@ test("modulo", (t) => {
     t.is(M.modulo(-10, -3), -1);
     t.is(M.modulo(42, Infinity), 42);
     t.is(M.modulo(Infinity, 99), NaN);
+    t.is(M.modulo(0, 6), 0);
+    t.is(M.modulo(0, -6), 0);
+    t.is(M.modulo(6, 6), 0);
 });
 
 test("distribute", (t) => {

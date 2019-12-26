@@ -82,7 +82,7 @@ export const phi = (Math.sqrt(5) + 1) / 2;
  */
 export const modulo = (value, divisor) => {
     const remainder = value % divisor;
-    return Math.sign(value) === Math.sign(divisor) ? remainder : remainder + divisor;
+    return !value || Math.sign(value) === Math.sign(divisor) ? remainder : remainder + divisor;
 };
 
 /**
