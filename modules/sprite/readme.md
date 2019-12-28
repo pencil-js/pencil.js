@@ -37,7 +37,7 @@ Sprite.sheet("spritesheet.json")
     });
 ```
 
-You can also use the `Sprite` class directly if you prefer.
+You can also use the `Sprite` class directly if you prefer, but you'll need to fill the frames list yourself.
 ```js
 import Sprite from "@pencil.js/sprite";
 
@@ -47,9 +47,10 @@ const frames = [
    // list of frames data
 ];
 const options = {
-    // Options
+    speed: 1,
+    loop: true,
 };
-const sprite = new Sprite(position, url, frames);
+const sprite = new Sprite(position, url, frames, options);
 scene.add(sprite).startLoop();
 ```
 

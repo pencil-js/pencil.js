@@ -4,9 +4,11 @@ import almostEqual from "../../test/_almost-equal";
 
 test.beforeEach((t) => {
     t.context = new Sprite([1, 2], "url", [{
+        sourceSize: {},
         spriteSourceSize: {},
         frame: {},
     }, {
+        sourceSize: {},
         spriteSourceSize: {},
         frame: {},
     }]);

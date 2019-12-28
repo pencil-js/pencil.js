@@ -40,9 +40,9 @@ export default class Sprite extends Image {
      * @return {Sprite} Itself
      */
     makePath (ctx) {
-        const { spriteSourceSize } = this.frames[Math.floor(this.frame)];
-        this.width = spriteSourceSize.w;
-        this.height = spriteSourceSize.h;
+        const { sourceSize } = this.frames[Math.floor(this.frame)];
+        this.width = sourceSize.w;
+        this.height = sourceSize.h;
 
         super.makePath(ctx);
 
@@ -75,7 +75,7 @@ export default class Sprite extends Image {
         ctx.drawImage(
             this.file,
             frame.x, frame.y, frame.w, frame.h,
-            spriteSourceSize.x, spriteSourceSize.y, this.width, this.height,
+            spriteSourceSize.x, spriteSourceSize.y, spriteSourceSize.w, spriteSourceSize.h,
         );
 
         return this;
@@ -225,7 +225,9 @@ class Spritesheet {
                 return matcher;
             }
             if (typeof matcher === "string") {
-                const glob = picomatch(matcher);
+                const glob = picomatch(matcher, {
+                    contains: true,
+                });
                 return string => matcher === string || glob(string);
             }
             if (matcher instanceof RegExp) {
@@ -243,7 +245,7 @@ class Spritesheet {
     /**
      * Group images from the spritesheet into a single sprite
      * @param {PositionDefinition} position - Position of the sprite
-     * @param {String|Function|RegExp} [selector="*"] - Match against the spritesheet images name
+     * @param {String|Function|RegExp} [selector="*"] - Match against the spritesheet images name using a glob pattern, a validation function or a regular expression
      * @param {ImageOptions} [options] - Options of the sprite
      * @returns {Sprite}
      */
