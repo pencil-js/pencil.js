@@ -6,14 +6,14 @@ test.beforeEach((t) => {
 });
 
 test("constructor", (t) => {
-    t.is(t.context.horizontalRadius, 20);
-    t.is(t.context.verticalRadius, 40);
+    t.is(t.context.width, 20);
+    t.is(t.context.height, 40);
     t.is(t.context.startAngle, 0.1);
     t.is(t.context.endAngle, 0.6);
 
     const defaultArc = new Arc();
-    t.is(defaultArc.horizontalRadius, 0);
-    t.is(defaultArc.verticalRadius, 0);
+    t.is(defaultArc.width, 0);
+    t.is(defaultArc.height, 0);
     t.is(defaultArc.startAngle, 0);
     t.is(defaultArc.endAngle, 0.5);
 });
@@ -32,8 +32,8 @@ test("trace", (t) => {
 test("toJSON", (t) => {
     const json = t.context.toJSON();
 
-    t.is(json.horizontalRadius, 20);
-    t.is(json.verticalRadius, 40);
+    t.is(json.width, 20);
+    t.is(json.height, 40);
     t.is(json.startAngle, 0.1);
     t.is(json.endAngle, 0.6);
     t.is(json.constructor, "Arc");
@@ -41,15 +41,15 @@ test("toJSON", (t) => {
 
 test("from", (t) => {
     const definition = {
-        horizontalRadius: 10,
-        verticalRadius: 20,
+        width: 10,
+        height: 20,
         startAngle: 0.1,
         endAngle: 0.9,
     };
     const arc = Arc.from(definition);
 
-    t.is(arc.horizontalRadius, 10);
-    t.is(arc.verticalRadius, 20);
+    t.is(arc.width, 10);
+    t.is(arc.height, 20);
     t.is(arc.startAngle, 0.1);
     t.is(arc.endAngle, 0.9);
 });

@@ -11,16 +11,16 @@ export default class Arc extends Component {
     /**
      * Arc constructor
      * @param {PositionDefinition} positionDefinition - Center of arc
-     * @param {Number} [horizontalRadius=0] - Horizontal radius
-     * @param {Number} [verticalRadius=0] - Vertical radius
+     * @param {Number} [width=0] - Horizontal radius
+     * @param {Number} [height=0] - Vertical radius
      * @param {Number} [startAngle=0] - Angle to start from (0 is top, 0.5 is bottom and 1 is full circle back to top)
      * @param {Number} [endAngle=0.5] - Angle to end to (from startAngle and in clockwise rotation)
      * @param {LineOptions} [options] - Drawing options
      */
-    constructor (positionDefinition, horizontalRadius = 0, verticalRadius = 0, startAngle = 0, endAngle = 0.5, options) {
+    constructor (positionDefinition, width = 0, height = 0, startAngle = 0, endAngle = 0.5, options) {
         super(positionDefinition, options);
-        this.horizontalRadius = horizontalRadius;
-        this.verticalRadius = verticalRadius;
+        this.width = width;
+        this.height = height;
         this.startAngle = startAngle;
         this.endAngle = endAngle;
     }
@@ -34,7 +34,7 @@ export default class Arc extends Component {
         const correction = -0.25;
         const startAngle = (this.startAngle + correction) * radianCircle;
         const endAngle = (this.endAngle + correction) * radianCircle;
-        path.ellipse(0, 0, this.horizontalRadius, this.verticalRadius, 0, startAngle, endAngle);
+        path.ellipse(0, 0, this.width, this.height, 0, startAngle, endAngle);
         return this;
     }
 
@@ -42,11 +42,11 @@ export default class Arc extends Component {
      * @inheritDoc
      */
     toJSON () {
-        const { horizontalRadius, verticalRadius, startAngle, endAngle } = this;
+        const { width, height, startAngle, endAngle } = this;
         return {
             ...super.toJSON(),
-            horizontalRadius,
-            verticalRadius,
+            width,
+            height,
             startAngle,
             endAngle,
         };
@@ -60,7 +60,7 @@ export default class Arc extends Component {
     static from (definition) {
         return new Arc(
             definition.position,
-            definition.horizontalRadius, definition.verticalRadius,
+            definition.width, definition.height,
             definition.startAngle, definition.endAngle,
             definition.options,
         );

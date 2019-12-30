@@ -22,7 +22,7 @@ export default class Circle extends Ellipse {
      * @return {Number}
      */
     get radius () {
-        return this.horizontalRadius;
+        return this.width;
     }
 
     /**
@@ -30,8 +30,8 @@ export default class Circle extends Ellipse {
      * @param {Number} radius - New radius value
      */
     set radius (radius) {
-        this.horizontalRadius = radius;
-        this.verticalRadius = radius;
+        this.width = radius;
+        this.height = radius;
     }
 
     /**
@@ -52,8 +52,8 @@ export default class Circle extends Ellipse {
             ...super.toJSON(),
             radius,
         };
-        delete json.horizontalRadius;
-        delete json.verticalRadius;
+        delete json.width;
+        delete json.height;
         return json;
     }
 
