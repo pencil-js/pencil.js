@@ -40,7 +40,7 @@
     "bugs": {
         "url": "https://github.com/pencil-js/pencil.js/issues"
     },
-    "homepage": "https://github.com/pencil-js/pencil.js#readme",
+    "homepage": "https://pencil.js.org/",
     "dependencies": {
         "@pencil.js/arc": "^1.14.0",
         "@pencil.js/base-event": "^1.9.0",
