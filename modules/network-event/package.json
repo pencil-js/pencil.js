@@ -32,7 +32,7 @@
     "devDependencies": {
         "ava": "^2.2.0",
         "esm": "^3.2.22",
-        "nyc": "^14.1.1"
+        "nyc": "^15.0.0"
     },
     "dependencies": {
         "@pencil.js/base-event": "^1.9.0"
