@@ -9,10 +9,10 @@ import hash from "@sindresorhus/fnv1a";
  * @return {Array<String>}
  */
 function formatString (string) {
-    const separator = "\n";
+    const split = text => text.toString().split("\n");
     return Array.isArray(string) ?
-        string.reduce((acc, line) => acc.concat(line.split(separator)), []) :
-        string.split(separator);
+        string.reduce((acc, line) => acc.concat(split(line)), []) :
+        split(string);
 }
 
 /**
@@ -22,13 +22,17 @@ function formatString (string) {
  * @return {TextMeasures}
  */
 const measureText = (() => {
-    const sandbox = document.createElement("canvas").getContext("2d");
+    let sandbox;
     const cache = {};
 
     return (text, options) => {
         const key = hash(`${text}${JSON.stringify(options)}`);
         if (cache[key] !== undefined) {
             return cache[key];
+        }
+
+        if (!sandbox) {
+            sandbox = document.createElement("canvas").getContext("2d");
         }
 
         sandbox.font = Text.getFontDefinition(options);

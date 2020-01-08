@@ -20,7 +20,10 @@ const options = {
     font: "comic-sans",
     fontSize: 42
 };
-const text = new Text(position, "Hello world !", options);
+const message = new Text(position, "Hellow 😺", options);
+
+// Change the text
+message.text = "Henlo 🐶";
 
 // Can be use to preload a bunch of fonts
 Text.load([url1, url2, url3]).then(() => {
@@ -28,11 +31,11 @@ Text.load([url1, url2, url3]).then(() => {
 });
 ```
 
-Be aware that this example overrides Javascript's `Text` global. Use namespace to avoid this issue.
+Be aware that this example overrides Javascript's `Text` global. Prefer another name for the import if you have collision.
 
 ```js
-import * as Namespace from "@pencil.js/text";
-new Namespace.Text();
+import PText from "@pencil.js/text";
+new PText();
 ```
 
 ## TextOptions

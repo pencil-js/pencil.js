@@ -34,6 +34,18 @@ test("get and set text", (t) => {
     t.context.text = ["Mix", "Array\nand line-break"];
     t.is(t.context.lines.length, 3);
     t.is(t.context.text, "Mix\nArray\nand line-break");
+
+    t.context.text = 666;
+    t.is(t.context.lines.length, 1);
+    t.is(t.context.text, "666");
+
+    t.context.text = [42, {
+        toString () {
+            return "toString function";
+        },
+    }];
+    t.is(t.context.lines.length, 2);
+    t.is(t.context.text, "42\ntoString function");
 });
 
 test("makePath", (t) => {
