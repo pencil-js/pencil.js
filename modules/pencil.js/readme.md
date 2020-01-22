@@ -184,6 +184,11 @@ Create a GIF stream frame by frame from a canvas rendering context.
 
 [![JetBrains logo](https://user-images.githubusercontent.com/2543511/58549723-71160e00-820c-11e9-98c1-9e3d7aafcbb2.png)](https://www.jetbrains.com/?from=Pencil.js)
 
+### Enterprises
+
+We are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications.
+Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-pencil-js?utm_source=npm-pencil-js&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+
 ## Contributions
 You want to help us improve ? Please read [the contributing manual](contributing.md).
 
