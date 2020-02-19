@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/square",
-    "version": "1.14.0",
+    "version": "1.15.0",
     "description": "Square shape for Pencil.js package.",
     "main": "square.js",
     "files": [],
@@ -25,7 +25,7 @@
         "shape"
     ],
     "dependencies": {
-        "@pencil.js/rectangle": "^1.14.0"
+        "@pencil.js/rectangle": "^1.15.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",

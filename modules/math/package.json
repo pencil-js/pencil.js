@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/math",
-    "version": "1.9.0",
+    "version": "1.15.0",
     "description": "Math wrapper for Pencil.js package.",
     "main": "math.js",
     "files": [],
