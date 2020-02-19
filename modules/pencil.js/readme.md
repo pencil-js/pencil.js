@@ -16,11 +16,22 @@ You can install the whole package with the following command :
     npm install pencil.js
 
 
-But, each part is a JS module and can be used independently, ex:
+But, each part is a JS module and can be used independently, for example:
 
     npm install @pencil.js/scene
 
+
 # [CDN](https://developer.mozilla.org/docs/Glossaire/CDN "Content Delivery Network")
+On [capable browsers](https://caniuse.com/#feat=es6-module), the most simple way is to import the [ESM package](https://unpkg.com/pencil.js/dist/pencil.esm.js).
+
+```html
+<script type="module">
+    import { Scene } from "https://unpkg.com/pencil.js/dist/pencil.esm.js";
+    
+    const scene = new Scene();
+</script>
+```
+
 If you want to go old-school, you can fetch the script with [unpkg](https://unpkg.com/) or [jsdelivr](https://www.jsdelivr.com/).
 
 ```html
@@ -35,9 +46,9 @@ If you want to go old-school, you can fetch the script with [unpkg](https://unpk
 
 
 ## Usage
-Once you have installed it, you can start to import it using common.js or ES6 syntax.
+Once you have installed the library using NPM, you can start to import it.
 
-There's multiple ways to rely on the project for your, pick the one that fits you need or preference :
+You can either import everything under a namespace or only the package you're going to use. Pick the way that fit your style.
 
 ```js
 // The whole package under a namespace
@@ -47,24 +58,15 @@ const scene = new Pencil.scene();
 
 /***/
 
-// Just the part you need
-import Scene from "@pencil.js/scene";
-// or
+// Just the part you need (recommended)
 import { Scene } from "pencil.js";
-
-const scene = new Scene();
-
-/***/
-
-// Works the same way with common.js syntax
-const Scene = require("@pencil.js/scene");
 // or
-const { Scene } = require("pencil.js");
+import Scene from "@pencil.js/scene";
 
 const scene = new Scene();
 ```
 
-Since today's web browser don't support module requirements yet, you need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
+In that case, you will need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
 
 
 ## Purpose
@@ -93,16 +95,14 @@ All functions are assured to have a description and also typed arguments and ret
 
 ## Examples
 ```js
-import Scene from "pencil.js"; // or "@pencil.js/scene"
-import Rectangle from "pencil.js"; // or "@pencil.js/rectangle"
-import Position from "pencil.js"; // or "@pencil.js/position"
+import { Scene, Rectangle, Position } from "pencil.js";
 
 const scene = new Scene(); // create a new scene
 
 const width = 80;
 const height = 50;
 const rectangle = new Rectangle(new Position(100, 200), width, height, {
-    fill: "red"
+    fill: "red",
 }); // Create a new red rectangle
 scene.add(rectangle); // Add the rectangle to the scene
 
