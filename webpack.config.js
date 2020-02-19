@@ -12,18 +12,24 @@ const path = resolve(__dirname, `${mainModule}dist`);
 const banner = new BannerPlugin(`${name} v${version} ${homepage}
 ${license} license - © ${author}`);
 
+const output = {
+    path,
+    library: "Pencil",
+};
+const devtool = "source-map";
+
 module.exports = [{
     entry,
     plugins: [
         banner,
     ],
     output: {
-        path,
+        ...output,
         filename: "pencil.min.js",
-        library: "Pencil",
         libraryTarget: "global",
         libraryExport: "default",
     },
+    devtool,
 }, {
     entry,
     plugins: [
@@ -31,9 +37,9 @@ module.exports = [{
         new EsmWebpackPlugin(),
     ],
     output: {
-        path,
+        ...output,
         filename: "pencil.esm.js",
-        library: "Pencil",
         libraryTarget: "var",
     },
+    devtool,
 }];
