@@ -75,15 +75,27 @@ test("set url as a image file", (t) => {
 
 test("makePath", (t) => {
     t.context.isLoaded = true;
+    t.context.options.fill = true;
+    t.context.options.stroke = true;
     const ctx = {
         save: () => t.pass(),
         restore: () => t.pass(),
         translate: () => t.pass(),
         drawImage: () => t.pass(),
         fill: () => t.pass(),
-        stroke: () => t.fail(),
+        stroke: () => t.pass(),
     };
     t.context.makePath(ctx);
+});
+
+test("isHover", (t) => {
+    const ctx = {
+        save: () => t.pass(),
+        restore: () => t.pass(),
+        translate: () => t.pass(),
+        isPointInPath: () => t.pass(),
+    };
+    t.context.isHover([0, 0], ctx);
 });
 
 test("toJSON", (t) => {

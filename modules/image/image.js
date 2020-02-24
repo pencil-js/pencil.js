@@ -119,6 +119,18 @@ export default class Image extends Rectangle {
     /**
      * @inheritDoc
      */
+    isHover (...args) {
+        const previous = this.options.fill;
+        this.options.fill = true;
+        const result = super.isHover(...args);
+        this.options.fill = previous;
+
+        return result;
+    }
+
+    /**
+     * @inheritDoc
+     */
     toJSON () {
         const json = super.toJSON();
         delete json.width;
