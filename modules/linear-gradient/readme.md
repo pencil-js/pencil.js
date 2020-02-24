@@ -18,13 +18,13 @@ import Square from "@pencil.js/square";
 
 const position = [100, 200];
 const size = 200;
-const topLeftCorner = [0, 0];
-const bottomRightCorner = [size, size];
+const startPosition = [0, 0];
+const endPosition = [size, size];
 const square = new Square(position, size, {
-    fill: new LinearGradient(topLeftCorner, bottomRightCorner, {
+    fill: new LinearGradient(startPosition, endPosition, {
         0: "red",
-        0.5: "green",
-        1: "blue",
+        0.5: "yellow",
+        1: "green",
     }),
 });
 ```
