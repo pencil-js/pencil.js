@@ -244,11 +244,11 @@ export default class Container extends EventEmitter {
 
         if (this.options.clip) {
             const clipping = new window.Path2D();
-            const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
-            const { x, y } = clipper.position;
+            const { clip } = this.options;
+            const { x, y } = clip.position;
             ctx.translate(x, y);
-            if (clipper.trace) {
-                clipper.trace(clipping);
+            if (clip.trace) {
+                clip.trace(clipping);
             }
             ctx.clip(clipping);
             ctx.translate(-x, -y);
@@ -456,14 +456,5 @@ export default class Container extends EventEmitter {
             hide: "hide",
             show: "show",
         };
-    }
-
-    /**
-     * Keyword to mean itself
-     * @return {String}
-     * @const
-     */
-    static get ITSELF () {
-        return "itself";
     }
 }

@@ -1,4 +1,5 @@
 import test from "ava";
+import Rectangle from "../rectangle";
 import Container from ".";
 
 test.beforeEach((t) => {
@@ -192,8 +193,7 @@ test("render with option", (t) => {
 });
 
 test("render with clip", (t) => {
-    t.context.options.clip = Container.ITSELF;
-    t.context.trace = () => t.pass();
+    t.context.options.clip = new Rectangle();
 
     const ctx = {
         save: () => {},
@@ -202,7 +202,7 @@ test("render with clip", (t) => {
         clip: () => t.pass(),
         restore: () => {},
     };
-    t.plan(2);
+    t.plan(1);
     t.context.render(ctx);
 });
 
@@ -316,8 +316,4 @@ test("events", (t) => {
     t.is(Container.events.draw, "draw");
     t.is(Container.events.show, "show");
     t.is(Container.events.hide, "hide");
-});
-
-test("ITSELF", (t) => {
-    t.is(Container.ITSELF, "itself");
 });

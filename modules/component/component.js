@@ -89,16 +89,15 @@ export default class Component extends Container {
         const [willFill, willStroke] = this.setContext(ctx);
 
         if (willFill || willStroke) {
-            const path = new window.Path2D();
-            this.trace(path);
-            this.path = path;
+            this.path = new window.Path2D();
+            this.trace(this.path);
 
             if (willFill) {
-                ctx.fill(path);
+                ctx.fill(this.path);
             }
 
             if (willStroke) {
-                ctx.stroke(path);
+                ctx.stroke(this.path);
             }
         }
 
@@ -146,8 +145,7 @@ export default class Component extends Container {
             (willStroke && ctx.isPointInStroke(this.path, rotated.x, rotated.y));
 
         if (this.options.clip) {
-            const clipper = this.options.clip === Container.ITSELF ? this : this.options.clip;
-            result = result && clipper.isHover(relative, ctx);
+            result = result && this.options.clip.isHover(relative, ctx);
         }
 
         ctx.restore();
