@@ -157,7 +157,7 @@ export default class Container extends EventEmitter {
 
     /**
      * Return its highest parent
-     * @return {Container}
+     * @return {Container} Itself
      */
     getRoot () {
         if (this.parent) {
@@ -198,7 +198,7 @@ export default class Container extends EventEmitter {
      * Find the target at a position
      * @param {Position} position - Any position
      * @param {CanvasRenderingContext2D} ctx - Drawing context to apply paths
-     * @return {Container}
+     * @return {Container} Itself
      */
     getTarget (position, ctx) {
         if (!this.options.shown) {
@@ -228,20 +228,11 @@ export default class Container extends EventEmitter {
     }
 
     /**
-     * Call the render method of all children
+     * Set variables of the context according to specified options
      * @param {CanvasRenderingContext2D} ctx - Drawing context
      * @return {Container} Itself
      */
-    render (ctx) {
-        if (!this.options.shown) {
-            return this;
-        }
-
-        this.frameCount++;
-        this.fire(new BaseEvent(Container.events.draw, this));
-        ctx.save();
-        ctx.translate(this.position.x, this.position.y);
-
+    setContext (ctx) {
         if (this.options.clip) {
             const clipping = new window.Path2D();
             const { clip } = this.options;
@@ -262,12 +253,34 @@ export default class Container extends EventEmitter {
         }
 
         if (typeof this.options.scale === "number") {
-            ctx.scale(this.options.scale, this.options.scale);
+            if (this.options.scale !== 1) {
+                ctx.scale(this.options.scale, this.options.scale);
+            }
         }
         else {
             const scale = Position.from(this.options.scale);
-            ctx.scale(scale.x, scale.y);
+            if (scale.x !== 1 || scale.y !== 1) {
+                ctx.scale(scale.x, scale.y);
+            }
         }
+
+        return this;
+    }
+
+    /**
+     * Call the render method of all children
+     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @return {Container} Itself
+     */
+    render (ctx) {
+        if (!this.options.shown) {
+            return this;
+        }
+
+        this.frameCount++;
+        this.fire(new BaseEvent(Container.events.draw, this));
+        ctx.save();
+        ctx.translate(this.position.x, this.position.y);
 
         this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
 

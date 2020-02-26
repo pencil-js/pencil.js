@@ -156,6 +156,20 @@ test("getTarget", (t) => {
     t.is(t.context.getTarget(t.context.position), null);
 });
 
+test("setContext", (t) => {
+    t.context.options.clip = new Rectangle();
+    t.context.options.rotation = 0.5;
+    t.context.options.scale = 2;
+    const ctx = {
+        translate: () => {},
+        clip: () => t.pass(),
+        rotate: () => t.pass(),
+        scale: () => t.pass(),
+    };
+    t.plan(3);
+    t.context.setContext(ctx);
+});
+
 test("render", (t) => {
     const child = addHeir(t.context);
     child.options.zIndex = -1;
@@ -165,45 +179,25 @@ test("render", (t) => {
     const ctx = {
         save: () => t.pass(),
         translate: () => t.pass(),
-        scale: () => t.pass(),
         restore: () => t.pass(),
     };
     child.render = param => t.is(param, ctx);
     otherChild.render = param => t.is(param, ctx);
-    t.plan(6);
+    t.plan(5);
     t.context.render(ctx);
 });
 
 test("render with option", (t) => {
     t.context.options.opacity = 0.5;
-    t.context.options.rotation = 0.2;
-    t.context.options.scale = [-2, 1];
 
     const ctx = {
         save: () => {},
         translate: () => {},
-        rotate: () => t.pass(),
-        scale: () => {},
         restore: () => {},
     };
-    t.plan(2);
     t.context.render(ctx);
 
     t.is(ctx.globalAlpha, t.context.options.opacity);
-});
-
-test("render with clip", (t) => {
-    t.context.options.clip = new Rectangle();
-
-    const ctx = {
-        save: () => {},
-        translate: () => {},
-        scale: () => {},
-        clip: () => t.pass(),
-        restore: () => {},
-    };
-    t.plan(1);
-    t.context.render(ctx);
 });
 
 test("render if not shown", (t) => {

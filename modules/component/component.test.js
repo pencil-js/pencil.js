@@ -96,11 +96,17 @@ test("trace", (t) => {
 
 test("isHover", (t) => {
     t.context.trace = () => {};
-    const ctx = new window.CanvasRenderingContext2D();
-    ctx.isPointInPath = () => true;
+    const ctx = {
+        save: () => {},
+        translate: () => {},
+        clip: () => {},
+        isPointInPath: () => true,
+        restore: () => true,
+    };
     t.true(t.context.isHover([0, 0], ctx));
 
     t.context.options.clip = {
+        position: {},
         isHover: () => false,
     };
     t.false(t.context.isHover([0, 0], ctx));

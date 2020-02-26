@@ -46,11 +46,12 @@ export default class Component extends Container {
     }
 
     /**
-     * Set variables of the context according to specified options
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
+     * @inheritDoc
      * @return {[Boolean, Boolean]} The pair (will fill) and (will stroke)
      */
     setContext (ctx) {
+        super.setContext(ctx);
+
         const willFill = this.options.fill;
         const willStroke = this.options.stroke && this.options.strokeWidth > 0;
 
@@ -126,7 +127,6 @@ export default class Component extends Container {
         }
 
         const relative = Position.from(positionDefinition).clone().subtract(this.position);
-        const rotated = relative.clone().rotate(-this.options.rotation, this.options.rotationCenter);
 
         ctx.save();
         const [willFill, willStroke] = this.setContext(ctx);
@@ -141,14 +141,14 @@ export default class Component extends Container {
             this.trace(this.path);
         }
 
-        let result = (willFill && ctx.isPointInPath(this.path, rotated.x, rotated.y)) ||
-            (willStroke && ctx.isPointInStroke(this.path, rotated.x, rotated.y));
+        let result = (willFill && ctx.isPointInPath(this.path, relative.x, relative.y)) ||
+            (willStroke && ctx.isPointInStroke(this.path, relative.x, relative.y));
+
+        ctx.restore();
 
         if (this.options.clip) {
             result = result && this.options.clip.isHover(relative, ctx);
         }
-
-        ctx.restore();
 
         return result;
     }
