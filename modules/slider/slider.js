@@ -109,7 +109,7 @@ export default class Slider extends Input {
         return {
             ...super.defaultOptions,
             min: 0,
-            max: 10,
+            max: 1,
             value: 0,
             width: 200,
         };

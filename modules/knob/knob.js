@@ -78,7 +78,7 @@ export default class Knob extends Input {
         return {
             ...super.defaultOptions,
             min: 0,
-            max: 10,
+            max: 1,
             value: 0,
             radius: 100,
         };

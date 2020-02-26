@@ -46,7 +46,7 @@ test("get and set value", (t) => {
 test("defaultOptions", (t) => {
     const options = Slider.defaultOptions;
     t.is(options.min, 0);
-    t.is(options.max, 10);
+    t.is(options.max, 1);
     t.is(options.width, 200);
 });
 

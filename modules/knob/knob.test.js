@@ -13,23 +13,23 @@ test("constructor", (t) => {
 });
 
 test("get and set value", (t) => {
-    t.context.value = 8;
-    t.true(almostEqual(t.context.value, 8));
-    t.true(almostEqual(t.context.background.options.rotation, 8 / 10));
+    t.context.value = 0.8;
+    t.true(almostEqual(t.context.value, 0.8));
+    t.true(almostEqual(t.context.background.options.rotation, 0.8));
 
-    t.context.value = -5;
-    t.true(almostEqual(t.context.value, 5));
-    t.true(almostEqual(t.context.background.options.rotation, 5 / 10));
+    t.context.value = -1.5;
+    t.true(almostEqual(t.context.value, 0.5));
+    t.true(almostEqual(t.context.background.options.rotation, 0.5));
 
-    t.context.value = 16;
-    t.true(almostEqual(t.context.value, 6));
-    t.true(almostEqual(t.context.background.options.rotation, 6 / 10));
+    t.context.value = 2.6;
+    t.true(almostEqual(t.context.value, 0.6));
+    t.true(almostEqual(t.context.background.options.rotation, 0.6));
 });
 
 test("default options and NOTCH_SIZE", (t) => {
     const { defaultOptions } = Knob;
     t.is(defaultOptions.min, 0);
-    t.is(defaultOptions.max, 10);
+    t.is(defaultOptions.max, 1);
     t.is(defaultOptions.value, 0);
     t.is(defaultOptions.radius, 100);
 
