@@ -180,9 +180,8 @@ test("isOnSameSide", (t) => {
 });
 
 test("toJSON", (t) => {
-    const json = t.context.toJSON();
-
-    t.deepEqual(json, [-42, 55]);
+    t.deepEqual(t.context.toJSON(), [-42, 55]);
+    t.deepEqual(t.context.set(1.1, 3.333).toJSON(), [1.1, 3.333]);
 });
 
 test("from", (t) => {
@@ -207,8 +206,7 @@ test("from", (t) => {
     t.is(fromObject.x, 42);
     t.is(fromObject.y, 666);
 
-    t.throws(() => Position.from(false), TypeError);
-    t.throws(() => Position.from(new Vector()), TypeError);
+    t.throws(() => Position.from(null), TypeError);
 });
 
 test("average", (t) => {

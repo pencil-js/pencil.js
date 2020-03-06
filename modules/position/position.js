@@ -1,4 +1,4 @@
-import { constrain, equals, radianCircle, truncate, modulo } from "@pencil.js/math";
+import { constrain, equals, radianCircle, modulo } from "@pencil.js/math";
 
 /**
  * Pair of value in 2d space
@@ -22,8 +22,8 @@ export default class Position {
      * @return {Position} Itself
      */
     set (definition, diffY) {
-        let x = 0;
-        let y = 0;
+        let x;
+        let y;
         if (typeof definition === "number") {
             x = definition;
             y = diffY === undefined ? definition : diffY;
@@ -231,6 +231,10 @@ export default class Position {
      * @return {Number}
      */
     get angle () {
+        if (this.x === 0 && this.y === 0) {
+            return 0;
+        }
+
         return (Math.atan(this.y / this.x) / radianCircle) + (this.x < 0 ? 0.75 : 0.25);
     }
 
@@ -241,8 +245,8 @@ export default class Position {
     toJSON () {
         const { x, y } = this;
         return [
-            truncate(x),
-            truncate(y),
+            x,
+            y,
         ];
     }
 
@@ -266,11 +270,13 @@ export default class Position {
         if (Array.isArray(positionDefinition)) {
             return new Position(...positionDefinition);
         }
-        if (positionDefinition.constructor.name === "Object") {
+
+        try {
             return new Position(positionDefinition.x, positionDefinition.y);
         }
-
-        throw new TypeError(`Unexpected type for position: ${JSON.stringify(positionDefinition)}.`);
+        catch {
+            throw TypeError(`Unexpected type for position: ${JSON.stringify(positionDefinition)}.`);
+        }
     }
 
     /**
