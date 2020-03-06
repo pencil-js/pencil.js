@@ -179,6 +179,20 @@ test("isOnSameSide", (t) => {
     t.false(t.context.isOnSameSide(notSameSide, splitter));
 });
 
+test("angle", (t) => {
+    t.is(t.context.set(0, -1).angle, 0);
+    t.is(t.context.set(0, 1).angle, 0.5);
+    t.is(t.context.set(-1, 0).angle, 0.75);
+    t.is(t.context.set(1, 1).angle, 0.375);
+    t.is(t.context.set(0, 0).angle, 0);
+});
+
+test("length", (t) => {
+    t.is(t.context.set(0, -1).length, 1);
+    t.is(t.context.set(0, 0).length, 0);
+    t.is(t.context.set(-3, 4).length, 5);
+});
+
 test("toJSON", (t) => {
     t.deepEqual(t.context.toJSON(), [-42, 55]);
     t.deepEqual(t.context.set(1.1, 3.333).toJSON(), [1.1, 3.333]);

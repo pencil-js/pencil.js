@@ -227,6 +227,14 @@ export default class Position {
     }
 
     /**
+     * Get vector length
+     * @return {Number}
+     */
+    get length () {
+        return this.distance();
+    }
+
+    /**
      * Get the angle of a position relative to the horizontal axis
      * @return {Number}
      */
