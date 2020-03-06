@@ -47,7 +47,13 @@ test("add", (t) => {
     t.is(addValue.end.x, 60);
     t.is(addValue.end.y, 160);
 
-    const addPosition = t.context.clone().add([20, 30]);
+    const addPositionD = t.context.clone().add([20, 30]);
+    t.is(addPositionD.start.x, 10);
+    t.is(addPositionD.start.y, 100);
+    t.is(addPositionD.end.x, 60);
+    t.is(addPositionD.end.y, 170);
+
+    const addPosition = t.context.clone().add(new Position(20, 30));
     t.is(addPosition.start.x, 10);
     t.is(addPosition.start.y, 100);
     t.is(addPosition.end.x, 60);
@@ -161,5 +167,5 @@ test("from", (t) => {
     t.is(fromObject.end.x, 3);
     t.is(fromObject.end.y, 4);
 
-    t.throws(() => Vector.from([]));
+    t.throws(() => Vector.from(null));
 });

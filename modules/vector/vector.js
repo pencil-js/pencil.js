@@ -6,16 +6,20 @@ import Position from "@pencil.js/position";
  * @return {Position|Number}
  */
 function sanitizeParameters (definition) {
-    let scalar;
-    try {
-        // eslint-disable-next-line no-use-before-define
-        const vector = Vector.from(definition);
-        scalar = vector.getDelta();
+    // Number or Position
+    if (typeof definition === "number" || definition instanceof Position) {
+        return definition;
     }
-    catch (e) {
-        scalar = definition.getDelta ? definition.getDelta() : definition;
+    // Anything with a getDelta function
+    if (typeof definition.getDelta === "function") {
+        return definition.getDelta();
     }
-    return scalar;
+    // PositionDefinition
+    if (typeof definition[0] === "number" && typeof definition[1] === "number") {
+        return Position.from(definition);
+    }
+    // eslint-disable-next-line no-use-before-define
+    return Vector.from(definition).getDelta();
 }
 
 /**
@@ -164,11 +168,11 @@ export default class Vector {
      * @prop {PositionDefinition} [end] - End coordinates
      */
     /**
-     * @typedef {Position|Array|AbstractVector} VectorDefinition
+     * @typedef {[PositionDefinition, PositionDefinition]|AbstractVector} VectorDefinition
      */
     /**
      * Create a Vector from a generic definition
-     * @param {VectorDefinition} vectorDefinition - Vector definition
+     * @param {VectorDefinition} [vectorDefinition] - Vector definition
      * @return {Vector}
      */
     static from (vectorDefinition = new Vector()) {
@@ -178,10 +182,11 @@ export default class Vector {
         if (Array.isArray(vectorDefinition) && vectorDefinition.length === 2) {
             return new Vector(...vectorDefinition);
         }
-        if (vectorDefinition.constructor.name === "Object") {
+        try {
             return new Vector(vectorDefinition.start, vectorDefinition.end);
         }
-
-        throw new TypeError(`Unexpected type for vector [${typeof vectorDefinition}]`);
+        catch {
+            throw new TypeError(`Unexpected type for vector: ${JSON.stringify(vectorDefinition)}.`);
+        }
     }
 }
