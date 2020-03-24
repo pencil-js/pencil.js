@@ -204,6 +204,8 @@ You want to help us improve ? Please read [the contributing manual](contributing
     <sub><b>Heraclite</b></sub></a></td>
     <td align="center"><a href='https://github.com/zachary-nguyen'><img src='https://github.com/zachary-nguyen.png?size=99' width='99px;' alt='Zachary Nguyen avatar'/><br/>
     <sub><b>Zachary Nguyen</b></sub></a></td>
+    <td align="center"><a href='https://github.com/jaller94'><img src='https://github.com/jaller94.png?size=99' width='99px;' alt='Christian Paul avatar'/><br/>
+    <sub><b>Christian Paul</b></sub></a></td>
   </tr>
 </table>
 

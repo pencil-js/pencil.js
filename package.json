@@ -14,7 +14,8 @@
         "testci": "nyc --reporter=lcovonly --reporter=text-summary ava",
         "play": "webpack -d --watch",
         "build": "webpack -p",
-        "prepublish": "exit 0"
+        "prepublish": "exit 0",
+        "contrib": "all-contributors generate"
     },
     "ava": {
         "require": [
