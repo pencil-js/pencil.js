@@ -14,6 +14,7 @@ test.beforeEach((t) => {
 test("constructor", (t) => {
     t.is(t.context.options.shadow.position.x, 10);
     t.is(t.context.options.shadow.position.y, 20);
+    t.is(t.context.options.shadow.color, "#123");
 
     t.false(t.context.isClicked);
     t.false(t.context.isHovered);
@@ -28,6 +29,26 @@ test("getOrigin", (t) => {
     const customOrigin = t.context.getOrigin();
     t.is(customOrigin.x, 100);
     t.is(customOrigin.y, 200);
+});
+
+test("setOptions", (t) => {
+    t.context.setOptions({
+        shadow: {
+            blur: 3,
+        },
+    });
+    t.is(t.context.options.shadow.position.x, 10);
+    t.is(t.context.options.shadow.position.y, 20);
+    t.is(t.context.options.shadow.color, "#123");
+    t.is(t.context.options.shadow.blur, 3);
+
+    t.context.setOptions({
+        shadow: {
+            position: [99, 66],
+        },
+    });
+    t.is(t.context.options.shadow.position.x, 99);
+    t.is(t.context.options.shadow.position.y, 66);
 });
 
 test("makePath", (t) => {

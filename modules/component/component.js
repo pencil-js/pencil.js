@@ -17,12 +17,6 @@ export default class Component extends Container {
     constructor (positionDefinition, options = {}) {
         super(positionDefinition, options);
 
-        this.options.shadow = {
-            ...Component.defaultOptions.shadow,
-            ...options.shadow,
-        };
-        this.options.shadow.position = Position.from(this.options.shadow.position);
-
         /**
          * @type {Path2D}
          */
@@ -43,6 +37,23 @@ export default class Component extends Container {
      */
     getOrigin () {
         return Position.from(this.options.origin);
+    }
+
+    /**
+     * Define options for this component
+     * @param {ComponentOptions} options - Options to override
+     * @return {Component}
+     */
+    setOptions (options) {
+        const { shadow } = this.options;
+        super.setOptions(options);
+        this.options.shadow = {
+            ...Component.defaultOptions.shadow, // default
+            ...shadow, // previous value
+            ...options.shadow, // override value
+        };
+        this.options.shadow.position = Position.from(this.options.shadow.position);
+        return this;
     }
 
     /**
