@@ -106,7 +106,7 @@ export default class Sprite extends Image {
     /**
      *
      * @param {Number} frame - Number of the frame to set
-     * @returns {Sprite}
+     * @returns {Sprite} Itself
      */
     setFrame (frame) {
         this.frame = modulo(frame, this.frames.length);

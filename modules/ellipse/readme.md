@@ -1,4 +1,4 @@
-# EventEmitter
+# Ellipse
 
 Ellipse shape (oval).
 
