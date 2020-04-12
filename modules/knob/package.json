@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/knob",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "description": "Knob user input for Pencil.js package.",
     "main": "knob.js",
     "files": [],
@@ -26,13 +26,13 @@
     ],
     "dependencies": {
         "@pencil.js/base-event": "^1.15.0",
-        "@pencil.js/circle": "^1.15.0",
-        "@pencil.js/component": "^1.15.0",
-        "@pencil.js/input": "^1.15.0",
-        "@pencil.js/line": "^1.15.0",
+        "@pencil.js/circle": "^1.16.0",
+        "@pencil.js/component": "^1.16.0",
+        "@pencil.js/input": "^1.16.0",
+        "@pencil.js/line": "^1.16.0",
         "@pencil.js/math": "^1.15.0",
-        "@pencil.js/mouse-event": "^1.15.0",
-        "@pencil.js/rotatable": "^1.15.0"
+        "@pencil.js/mouse-event": "^1.16.0",
+        "@pencil.js/rotatable": "^1.16.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",

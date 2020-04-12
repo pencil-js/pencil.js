@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/radial-gradient",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "description": "Radial gradient background for Pencil.js package.",
     "main": "radial-gradient.js",
     "files": [],
@@ -25,7 +25,7 @@
         "wrapper"
     ],
     "dependencies": {
-        "@pencil.js/position": "^1.15.0"
+        "@pencil.js/position": "^1.16.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",

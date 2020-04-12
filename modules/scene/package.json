@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/scene",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "description": "Scene renderer for Pencil.js package.",
     "main": "scene.js",
     "files": [],
@@ -27,11 +27,11 @@
     ],
     "dependencies": {
         "@pencil.js/base-event": "^1.15.0",
-        "@pencil.js/component": "^1.15.0",
-        "@pencil.js/keyboard-event": "^1.15.0",
-        "@pencil.js/mouse-event": "^1.15.0",
-        "@pencil.js/offscreen-canvas": "^1.15.0",
-        "@pencil.js/position": "^1.15.0"
+        "@pencil.js/component": "^1.16.0",
+        "@pencil.js/keyboard-event": "^1.16.0",
+        "@pencil.js/mouse-event": "^1.16.0",
+        "@pencil.js/offscreen-canvas": "^1.16.0",
+        "@pencil.js/position": "^1.16.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",

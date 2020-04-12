@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/rotatable",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "description": "Allow component to be rotated in Pencil.js package.",
     "main": "rotatable.js",
     "files": [],
@@ -24,8 +24,8 @@
         "interaction"
     ],
     "dependencies": {
-        "@pencil.js/component": "^1.15.0",
-        "@pencil.js/mouse-event": "^1.15.0"
+        "@pencil.js/component": "^1.16.0",
+        "@pencil.js/mouse-event": "^1.16.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",

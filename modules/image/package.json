@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/image",
-    "version": "1.15.0",
+    "version": "1.16.0",
     "description": "Image loading and drawing for Pencil.js package.",
     "main": "image.js",
     "files": [],
@@ -27,7 +27,7 @@
     ],
     "dependencies": {
         "@pencil.js/network-event": "^1.15.0",
-        "@pencil.js/rectangle": "^1.15.0"
+        "@pencil.js/rectangle": "^1.16.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",
