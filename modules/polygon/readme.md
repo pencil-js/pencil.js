@@ -15,12 +15,12 @@ Shape from a bunch of points.
 ```js
 import Polygon from "@pencil.js/polygon";
 
-const points = [aPosition, anotherPosition, yetAgainAPosition, lastPosition];
+const points = [pointA, pointB, pointC];
 const options = {
     fill: "red",
     stroke: "#000"
 };
-const polygon = new Polygon(points, options);
+const polygon = new Polygon(position, points, options);
 ```
 
 
