@@ -174,10 +174,12 @@ CLI tool for spritesheet (see above).
 Turn any Pencil.js scene into an animated GIF.
  * [canvas-gif-encoder](https://github.com/pencil-js/canvas-gif-encoder)<br/>
 Create a GIF stream frame by frame from a canvas rendering context.
+ * [vue-pencil.js](https://github.com/pencil-js/vue-pencil.js)<br/>
+Build reactive 2D graphics scene in your Vue project
 
 ## Who is using Pencil.js ?
 
- - [Socialism Simulator](https://gmartigny.github.io/socialismSimulator/)
+Take a tour of all the [awesome project using Pencil.js](https://github.com/pencil-js/awesome).
 
 
 ## Sponsors
