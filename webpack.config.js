@@ -6,7 +6,7 @@ const { name, version, homepage, author, license } = require("./modules/pencil.j
 
 const mainModule = "./modules/pencil.js/";
 
-const entry = resolve(__dirname, `${mainModule}pencil.js`);
+const entry = resolve(__dirname, `${mainModule}index.js`);
 const path = resolve(__dirname, `${mainModule}dist`);
 
 const banner = new BannerPlugin(`${name} v${version} ${homepage}

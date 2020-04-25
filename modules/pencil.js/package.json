@@ -2,9 +2,10 @@
     "name": "pencil.js",
     "version": "1.16.0",
     "description": "Nice modular interactive 2D drawing library.",
-    "main": "pencil.js",
+    "main": "index.js",
     "files": [
-        "dist/"
+        "dist/",
+        "pencil.js"
     ],
     "sideEffects": false,
     "unpkg": "dist/pencil.min.js",
