@@ -11,7 +11,9 @@ test.beforeEach((t) => {
 test("constructor", (t) => {
     t.is(t.context.points.length, 2);
 
-    t.throws(() => new Polygon(), RangeError);
+    t.throws(() => new Polygon(), {
+        instanceOf: RangeError,
+    });
 });
 
 test("trace", (t) => {

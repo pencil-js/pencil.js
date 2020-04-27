@@ -24,7 +24,9 @@ test("get and set width", (t) => {
     t.context.width = 666;
     t.is(t.context.width, 666);
 
-    t.throws(() => t.context.width = 1, RangeError);
+    t.throws(() => t.context.width = 1, {
+        instanceOf: RangeError,
+    });
 });
 
 test("get and set value", (t) => {

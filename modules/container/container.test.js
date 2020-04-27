@@ -60,12 +60,16 @@ test("add", (t) => {
 
     t.is(grandChild.parent, t.context);
 
-    t.throws(() => t.context.add(t.context), RangeError);
+    t.throws(() => t.context.add(t.context), {
+        instanceOf: RangeError,
+    });
     t.throws(() => {
         const pseudoScene = new Container();
         pseudoScene.isScene = true;
         t.context.add(pseudoScene);
-    }, RangeError);
+    }, {
+        instanceOf: RangeError,
+    });
 });
 
 test("remove", (t) => {

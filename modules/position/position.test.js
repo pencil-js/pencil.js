@@ -220,7 +220,9 @@ test("from", (t) => {
     t.is(fromObject.x, 42);
     t.is(fromObject.y, 666);
 
-    t.throws(() => Position.from(null), TypeError);
+    t.throws(() => Position.from(null), {
+        instanceOf: TypeError,
+    });
 });
 
 test("average", (t) => {

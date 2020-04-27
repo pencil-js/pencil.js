@@ -11,7 +11,9 @@ test("constructor", (t) => {
     t.is(t.context.position.x, 10);
     t.is(t.context.position.y, 20);
 
-    t.throws(() => new RegularPolygon(), RangeError);
+    t.throws(() => new RegularPolygon(), {
+        instanceOf: RangeError,
+    });
 });
 
 test("trace", (t) => {

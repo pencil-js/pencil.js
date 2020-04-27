@@ -26,8 +26,12 @@ test("events listeners", (t) => {
 });
 
 test("get and set value", (t) => {
-    t.throws(() => t.context.value, ReferenceError);
-    t.throws(() => t.context.value = 42, ReferenceError);
+    t.throws(() => t.context.value, {
+        instanceOf: ReferenceError,
+    });
+    t.throws(() => t.context.value = 42, {
+        instanceOf: ReferenceError,
+    });
 });
 
 test("click", (t) => {

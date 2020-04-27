@@ -112,7 +112,9 @@ test("setContext", (t) => {
 });
 
 test("trace", (t) => {
-    t.throws(() => t.context.trace(), ReferenceError);
+    t.throws(() => t.context.trace(), {
+        instanceOf: ReferenceError,
+    });
 });
 
 test("isHover", (t) => {

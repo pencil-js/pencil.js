@@ -78,8 +78,12 @@ test("splineThrough 2 points", (t) => {
 });
 
 test("splineThrough throws", (t) => {
-    t.throws(() => Spline.splineThrough({}, [[1, 2]]), RangeError);
-    t.throws(() => Spline.splineThrough({}, []), RangeError);
+    t.throws(() => Spline.splineThrough({}, [[1, 2]]), {
+        instanceOf: RangeError,
+    });
+    t.throws(() => Spline.splineThrough({}, []), {
+        instanceOf: RangeError,
+    });
 });
 
 test("getControlPoint", (t) => {
@@ -91,5 +95,7 @@ test("getControlPoint", (t) => {
     t.is(ctrls[1].x, 5);
     t.is(ctrls[1].y, 30);
 
-    t.throws(() => Spline.getControlPoint([], 0), RangeError);
+    t.throws(() => Spline.getControlPoint([], 0), {
+        instanceOf: RangeError,
+    });
 });
