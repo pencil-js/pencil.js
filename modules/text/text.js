@@ -1,5 +1,5 @@
 import NetworkEvent from "@pencil.js/network-event";
-import Component from "@pencil.js/component";
+import Rectangle from "@pencil.js/rectangle";
 import textDirection from "text-direction";
 import hash from "@sindresorhus/fnv1a";
 
@@ -51,9 +51,9 @@ const measureText = (() => {
 /**
  * Text class
  * @class
- * @extends Component
+ * @extends Rectangle
  */
-export default class Text extends Component {
+export default class Text extends Rectangle {
     /**
      * Text constructor
      * @param {PositionDefinition} positionDefinition - Top most point of the line start (depend on align option)
@@ -61,7 +61,7 @@ export default class Text extends Component {
      * @param {TextOptions} [options] - Drawing options
      */
     constructor (positionDefinition, text = "", options) {
-        super(positionDefinition, options);
+        super(positionDefinition, undefined, undefined, options);
 
         /**
          * @type {Array<String>}
@@ -171,17 +171,6 @@ export default class Text extends Component {
     }
 
     /**
-     * Draw the text background (used for mouse over detection)
-     * @param {Path2D} path - Drawing context
-     * @return {Path2D}
-     */
-    trace (path) {
-        path.rect(0, 0, this.width, this.height);
-        this.path = path;
-        return path;
-    }
-
-    /**
      * Return the position offset according to alignment
      * @return {Number}
      */
@@ -211,14 +200,6 @@ export default class Text extends Component {
     }
 
     /**
-     * Get this origin position relative to the top-left corner
-     * @return {Position}
-     */
-    getOrigin () {
-        return super.getOrigin().clone().add(-this.getAlignOffset() * this.width, 0);
-    }
-
-    /**
      * Measure the text with current options
      * @return {TextMeasures}
      */
@@ -235,11 +216,25 @@ export default class Text extends Component {
     }
 
     /**
+     * Can't set text's width
+     * @param {*} _ -
+     */
+    set width (_) {
+    }
+
+    /**
      * Height of the text
      * @return {Number}
      */
     get height () {
         return this.getMeasures().height;
+    }
+
+    /**
+     * Can't set text's height
+     * @param {*} _ -
+     */
+    set height (_) {
     }
 
     /**

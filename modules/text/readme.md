@@ -31,11 +31,10 @@ Text.load([url1, url2, url3]).then(() => {
 });
 ```
 
-Be aware that this example overrides Javascript's `Text` global. Prefer another name for the import if you have collision.
+Be aware this example overrides Javascript's `Text` global. Prefer another name for the import if you have collision.
 
 ```js
 import PText from "@pencil.js/text";
-new PText();
 ```
 
 ## TextOptions
@@ -45,7 +44,7 @@ Inherit from [ComponentOptions](../component/readme.md#componentoptions).
 | ---- | ---- | ------- | ------- |
 |font |`String` |`"sans-serif"` |Font to use (can be a URL) |
 |fontSize |`Number` |`20` |Size of the text in pixels |
-|align |`String` |`Text.alignments.start` |Text horizontal alignment |
+|align |`String` |`Text.alignments.start` |Text horizontal alignment (use the `origin` option to move the text) |
 |bold |`Boolean` |`false` |Use bold font-weight |
 |italic |`Boolean` |`false` |Use italic font-style |
 |underscore |`Boolean` |`false` |Draw a line under the text |

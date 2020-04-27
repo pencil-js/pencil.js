@@ -26,8 +26,8 @@
         "writing"
     ],
     "dependencies": {
-        "@pencil.js/component": "^1.16.0",
         "@pencil.js/network-event": "^1.15.0",
+        "@pencil.js/rectangle": "^1.16.0",
         "@sindresorhus/fnv1a": "^1.0.0",
         "text-direction": "^1.1.0"
     },

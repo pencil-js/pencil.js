@@ -145,17 +145,6 @@ test("trace", (t) => {
     t.plan(1);
 });
 
-test("getOrigin", (t) => {
-    t.context.options.align = Text.alignments.center;
-    t.is(t.context.getOrigin().x, -2.5);
-
-    t.context.options.align = Text.alignments.right;
-    t.is(t.context.getOrigin().x, -5);
-
-    t.context.options.align = "bad";
-    t.is(t.context.getOrigin().x, 0);
-});
-
 test("measures and width/height", (t) => {
     t.deepEqual(t.context.getMeasures(), {
         width: 5,
