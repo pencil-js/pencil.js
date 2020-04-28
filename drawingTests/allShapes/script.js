@@ -56,9 +56,10 @@
         strokeWidth: 4,
     }));
 
-    const text = new P.Text(new P.Position(160, 100), "test\n🦄", {
+    const text = new P.Text(new P.Position(170, 150), "test\n🦄", {
         fontSize: 40,
         align: P.Text.alignments.center,
+        origin: P.Text.origins.center,
         bold: true,
         italic: true,
         underscore: true,
