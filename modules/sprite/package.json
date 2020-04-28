@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/sprite",
-    "version": "1.16.0",
+    "version": "1.17.0",
     "description": "Sprite class for Pencil.js package.",
     "main": "sprite.js",
     "files": [],
@@ -27,9 +27,9 @@
         "animation"
     ],
     "dependencies": {
-        "@pencil.js/base-event": "^1.15.0",
-        "@pencil.js/image": "^1.16.0",
-        "@pencil.js/math": "^1.15.0",
+        "@pencil.js/base-event": "^1.17.0",
+        "@pencil.js/image": "^1.17.0",
+        "@pencil.js/math": "^1.17.0",
         "picomatch": "^2.1.1"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

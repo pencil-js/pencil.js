@@ -1,6 +1,6 @@
 {
     "name": "@pencil.js/offscreen-canvas",
-    "version": "1.16.0",
+    "version": "1.17.0",
     "description": "Off-screen canvas for Pencil.js package.",
     "main": "offscreen-canvas.js",
     "files": [],
@@ -31,10 +31,10 @@
         "url": "https://github.com/pencil-js/pencil.js/issues"
     },
     "dependencies": {
-        "@pencil.js/container": "^1.16.0",
-        "@pencil.js/math": "^1.15.0",
-        "@pencil.js/position": "^1.16.0",
-        "@pencil.js/vector": "^1.16.0"
+        "@pencil.js/container": "^1.17.0",
+        "@pencil.js/math": "^1.17.0",
+        "@pencil.js/position": "^1.17.0",
+        "@pencil.js/vector": "^1.17.0"
     },
     "devDependencies": {
         "@pencil.js/test-environment": "^1.2.0",
