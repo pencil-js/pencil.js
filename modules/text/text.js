@@ -109,47 +109,44 @@ export default class Text extends Rectangle {
      */
     makePath (ctx) {
         const { options } = this;
-        if (this.text.length && (options.fill || (options.stroke && options.strokeWidth > 0))) {
-            ctx.save();
+        if (this.text.length && (this.willFill || this.willStroke)) {
+            const origin = this.getOrigin();
+            ctx.translate(origin.x, origin.y);
 
-            const [willFill, willStroke] = this.setContext(ctx);
+            const lineHeight = Text.measure("M", this.options).height;
+            const height = lineHeight / options.lineHeight;
+            const margin = height * ((options.lineHeight - 1) / 2);
 
-            if (willFill || willStroke) {
-                const lineHeight = Text.measure("M", this.options).height;
-                const height = lineHeight / options.lineHeight;
-                const margin = height * ((options.lineHeight - 1) / 2);
-
-                if (options.underscore) {
-                    ctx.beginPath();
-                }
-
-                const offset = this.getAlignOffset();
-                ctx.translate(offset * this.width, 0);
-                this.lines.forEach((line, index) => {
-                    const y = (index * lineHeight) + margin;
-                    if (willFill) {
-                        ctx.fillText(line, 0, y);
-                    }
-                    if (willStroke) {
-                        ctx.strokeText(line, 0, y);
-                    }
-                    if (options.underscore) {
-                        const { width } = Text.measure(line, options);
-                        const left = offset * width;
-                        ctx.moveTo(-left, y + height);
-                        ctx.lineTo(width - left, y + height);
-                    }
-                });
-
-                if (options.underscore) {
-                    ctx.lineWidth = height * (options.bold ? 0.07 : 0.05);
-                    ctx.strokeStyle = ((willStroke && options.stroke) || options.fill).toString(ctx);
-                    ctx.stroke();
-                    ctx.closePath();
-                }
+            if (options.underscore) {
+                ctx.beginPath();
             }
 
-            ctx.restore();
+            const offset = this.getAlignOffset();
+            ctx.translate(offset * this.width, 0);
+            this.lines.forEach((line, index) => {
+                const y = (index * lineHeight) + margin;
+                if (this.willFill) {
+                    ctx.fillText(line, 0, y);
+                }
+                if (this.willStroke) {
+                    ctx.strokeText(line, 0, y);
+                }
+                if (options.underscore) {
+                    const { width } = Text.measure(line, options);
+                    const left = offset * width;
+                    ctx.moveTo(-left, y + height);
+                    ctx.lineTo(width - left, y + height);
+                }
+            });
+
+            if (options.underscore) {
+                ctx.lineWidth = height * (options.bold ? 0.07 : 0.05);
+                ctx.strokeStyle = ((this.willStroke && options.stroke) || options.fill).toString(ctx);
+                ctx.stroke();
+                ctx.closePath();
+            }
+
+            ctx.translate(-origin.x, -origin.y);
         }
 
         return this;
@@ -157,17 +154,18 @@ export default class Text extends Rectangle {
 
     /**
      * @inheritDoc
+     * @return {Text} Itself
      */
     setContext (ctx) {
-        const [willFill, willStroke] = super.setContext(ctx);
+        super.setContext(ctx);
 
-        if (willFill || willStroke) {
+        if (this.willFill || this.willStroke) {
             ctx.font = Text.getFontDefinition(this.options);
             ctx.textAlign = this.options.align;
             ctx.textBaseline = "top"; // TODO: user could want to change this
         }
 
-        return [willFill, willStroke];
+        return this;
     }
 
     /**

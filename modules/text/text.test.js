@@ -65,15 +65,10 @@ test("makePath", (t) => {
         },
         call: 0,
     };
-    t.plan(8);
+    t.plan(4);
     t.context.options.fill = "#123456";
     t.context.options.stroke = "#456789";
     t.context.makePath(ctx);
-
-    t.is(ctx.font, Text.getFontDefinition(t.context.options));
-    t.is(ctx.textAlign, t.context.options.align);
-    t.is(ctx.fillStyle, t.context.options.fill);
-    t.is(ctx.strokeStyle, t.context.options.stroke);
 });
 
 test("makePath with underscore", (t) => {
@@ -130,8 +125,7 @@ test("setContext", (t) => {
     t.context.options.bold = true;
     t.context.options.italic = true;
 
-    const [willFill, willStroke] = t.context.setContext(ctx);
-    t.true(willFill && willStroke);
+    t.context.setContext(ctx);
     t.is(ctx.font, "bold italic 99px whatever");
     t.is(ctx.textAlign, "left");
     t.is(ctx.textBaseline, "top");

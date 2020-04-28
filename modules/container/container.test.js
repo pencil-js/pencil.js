@@ -145,7 +145,8 @@ test("fire", (t) => {
 });
 
 test("getTarget", (t) => {
-    t.is(t.context.getTarget(t.context.position), null);
+    const ctx = new window.CanvasRenderingContext2D();
+    t.is(t.context.getTarget(t.context.position, ctx), null);
 
     const child = addHeir(t.context);
     child.isHover = () => true;
@@ -154,10 +155,10 @@ test("getTarget", (t) => {
     grandChild.options.zIndex = -1;
     addHeir(t.context);
 
-    t.is(t.context.getTarget(t.context.position), child);
+    t.is(t.context.getTarget(t.context.position, ctx), child);
 
     t.context.options.shown = false;
-    t.is(t.context.getTarget(t.context.position), null);
+    t.is(t.context.getTarget(t.context.position, ctx), null);
 });
 
 test("setContext", (t) => {

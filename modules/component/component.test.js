@@ -54,15 +54,13 @@ test("setOptions", (t) => {
 test("makePath", (t) => {
     t.context.trace = () => t.pass();
     const ctx = {
-        save: () => t.pass(),
         translate: () => t.pass(),
         fill: () => t.pass(),
         stroke: () => t.pass(),
-        restore: () => t.pass(),
     };
     t.context.options.stroke = "#abc";
 
-    t.plan(6);
+    t.plan(5);
     t.context.makePath(ctx);
 });
 
@@ -98,8 +96,7 @@ test("setContext", (t) => {
     t.context.options.join = "a";
     t.context.options.cap = "b";
 
-    const [willFill, willStroke] = t.context.setContext(ctx);
-    t.true(willFill && willStroke);
+    t.context.setContext(ctx);
     t.is(ctx.fillStyle, "#369");
     t.is(ctx.strokeStyle, "#abc");
     t.is(ctx.lineWidth, 6);

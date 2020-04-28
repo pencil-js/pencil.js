@@ -57,17 +57,27 @@ export default class Component extends Container {
     }
 
     /**
+     * Tell if a component will need to be filled
+     * @return {Boolean}
+     */
+    get willFill () {
+        return Boolean(this.options.fill);
+    }
+
+    /**
+     * Tell if a component will need to be stroked
+     * @return {*|boolean}
+     */
+    get willStroke () {
+        return Boolean(this.options.stroke) && this.options.strokeWidth > 0;
+    }
+
+    /**
      * @inheritDoc
-     * @return {[Boolean, Boolean]} The pair (will fill) and (will stroke)
+     * @return {Component} Itself
      */
     setContext (ctx) {
         super.setContext(ctx);
-
-        const willFill = this.options.fill;
-        const willStroke = this.options.stroke && this.options.strokeWidth > 0;
-
-        const origin = this.getOrigin();
-        ctx.translate(origin.x, origin.y);
 
         if (this.options.shadow.color) {
             ctx.shadowColor = this.options.shadow.color.toString();
@@ -76,18 +86,18 @@ export default class Component extends Container {
             ctx.shadowOffsetY = this.options.shadow.position.y;
         }
 
-        if (willFill) {
+        if (this.willFill) {
             ctx.fillStyle = this.options.fill.toString(ctx);
         }
 
-        if (willStroke) {
+        if (this.willStroke) {
             ctx.lineJoin = this.options.join;
             ctx.lineCap = this.options.cap;
             ctx.strokeStyle = this.options.stroke.toString(ctx);
             ctx.lineWidth = this.options.strokeWidth;
         }
 
-        return [willFill, willStroke];
+        return this;
     }
 
     /**
@@ -96,24 +106,23 @@ export default class Component extends Container {
      * @return {Component} Itself
      */
     makePath (ctx) {
-        ctx.save();
+        if (this.willFill || this.willStroke) {
+            const origin = this.getOrigin();
+            ctx.translate(origin.x, origin.y);
 
-        const [willFill, willStroke] = this.setContext(ctx);
-
-        if (willFill || willStroke) {
             this.path = new window.Path2D();
             this.trace(this.path);
 
-            if (willFill) {
+            if (this.willFill) {
                 ctx.fill(this.path);
             }
 
-            if (willStroke) {
+            if (this.willStroke) {
                 ctx.stroke(this.path);
             }
-        }
 
-        ctx.restore();
+            ctx.translate(-origin.x, -origin.y);
+        }
 
         return this;
     }
@@ -132,17 +141,19 @@ export default class Component extends Container {
      * @param {CanvasRenderingContext2D} [ctx] - Context use for calculation
      * @returns {Boolean}
      */
-    isHover (positionDefinition, ctx = (new OffScreenCanvas()).ctx) {
+    isHover (positionDefinition, ctx = OffScreenCanvas.getDrawingContext()) {
         if (!this.options.shown) {
             return false;
         }
 
-        const relative = Position.from(positionDefinition).clone().subtract(this.position);
-
         ctx.save();
-        const [willFill, willStroke] = this.setContext(ctx);
 
-        if (!willFill && !willStroke) {
+        const position = Position.from(positionDefinition);
+
+        const origin = this.getOrigin();
+        ctx.translate(origin.x, origin.y);
+
+        if (!this.willFill && !this.willStroke) {
             ctx.restore();
             return false;
         }
@@ -152,15 +163,14 @@ export default class Component extends Container {
             this.trace(this.path);
         }
 
-        let result = (willFill && ctx.isPointInPath(this.path, relative.x, relative.y)) ||
-            (willStroke && ctx.isPointInStroke(this.path, relative.x, relative.y));
-
-        ctx.restore();
+        let result = (this.willFill && ctx.isPointInPath(this.path, position.x, position.y)) ||
+            (this.willStroke && ctx.isPointInStroke(this.path, position.x, position.y));
 
         if (this.options.clip) {
-            result = result && this.options.clip.isHover(relative, ctx);
+            result = result && this.options.clip.isHover(position, ctx);
         }
 
+        ctx.restore();
         return result;
     }
 

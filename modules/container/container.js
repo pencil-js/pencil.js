@@ -205,26 +205,29 @@ export default class Container extends EventEmitter {
             return null;
         }
 
-        const relativePosition = position.clone()
-            .subtract(this.position)
-            .rotate(-this.options.rotation, this.options.rotationCenter);
+        ctx.save();
+
+        ctx.translate(this.position.x, this.position.y);
+
+        this.setContext(ctx);
 
         let lastHovered = null;
         let lookup = this.children.length - 1;
         while (!lastHovered && lookup >= 0) {
-            lastHovered = this.children[lookup].getTarget(relativePosition, ctx);
+            lastHovered = this.children[lookup].getTarget(position, ctx);
             --lookup;
         }
 
-        if (lastHovered) {
-            if (lastHovered.options.zIndex < 0 && this === lastHovered.parent) {
-                return (this.isHover(position, ctx) && this) || lastHovered;
+        let target = lastHovered;
+        // No found or behind this
+        if (!lastHovered || (lastHovered.options.zIndex < 0 && lastHovered.parent === this)) {
+            if (this.isHover(position, ctx)) {
+                target = this;
             }
-
-            return lastHovered;
         }
 
-        return (this.isHover(position, ctx) && this) || null;
+        ctx.restore();
+        return target;
     }
 
     /**
@@ -279,8 +282,12 @@ export default class Container extends EventEmitter {
 
         this.frameCount++;
         this.fire(new BaseEvent(Container.events.draw, this));
+
         ctx.save();
+
         ctx.translate(this.position.x, this.position.y);
+
+        this.setContext(ctx);
 
         this.children.sort((a, b) => a.options.zIndex - b.options.zIndex);
 

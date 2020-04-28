@@ -83,18 +83,18 @@ export default class Image extends Rectangle {
         if (this.isLoaded) {
             ctx.save();
 
-            const [willFill, willStroke] = this.setContext(ctx);
+            this.setContext(ctx);
 
             const path = new window.Path2D();
             this.trace(path);
             this.path = path;
 
-            if (willFill) {
+            if (this.willFill) {
                 ctx.fill(path);
                 ctx.shadowBlur = 0;
             }
 
-            if (willStroke) {
+            if (this.willStroke) {
                 ctx.stroke(path);
             }
 
