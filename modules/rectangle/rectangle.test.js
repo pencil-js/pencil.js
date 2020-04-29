@@ -25,19 +25,25 @@ test("trace", (t) => {
 });
 
 test("getOrigin", (t) => {
-    const defaultOrigin = t.context.getOrigin();
-    t.is(defaultOrigin.x, 0);
-    t.is(defaultOrigin.y, 0);
+    const { origins } = Rectangle;
+    const expected = {
+        [origins.topLeft]: [0, 0],
+        [origins.topCenter]: [-123 / 2, 0],
+        [origins.topRight]: [-123, 0],
+        [origins.centerLeft]: [0, -22 / 2],
+        [origins.center]: [-123 / 2, -22 / 2],
+        [origins.centerRight]: [-123, -22 / 2],
+        [origins.bottomLeft]: [0, -22],
+        [origins.bottomCenter]: [-123 / 2, -22],
+        [origins.bottomRight]: [-123, -22],
+    };
+    Object.keys(expected).forEach((origin) => {
+        t.context.options.origin = origin;
+        const defaultOrigin = t.context.getOrigin();
+        t.is(defaultOrigin.x, expected[origin][0]);
+        t.is(defaultOrigin.y, expected[origin][1]);
+    });
 
-    t.context.options.origin = Rectangle.origins.center;
-    const centerOrigin = t.context.getOrigin();
-    t.is(centerOrigin.x, -123 / 2);
-    t.is(centerOrigin.y, -22 / 2);
-
-    t.context.options.origin = Rectangle.origins.bottomRight;
-    const bottomRightOrigin = t.context.getOrigin();
-    t.is(bottomRightOrigin.x, -123);
-    t.is(bottomRightOrigin.y, -22);
 });
 
 test("toJSON", (t) => {
@@ -57,12 +63,4 @@ test("from", (t) => {
 
     t.is(rectangle.width, 42);
     t.is(rectangle.height, 666);
-});
-
-test("origins", (t) => {
-    t.is(Rectangle.origins.topLeft, "topLeft");
-    t.is(Rectangle.origins.topRight, "topRight");
-    t.is(Rectangle.origins.center, "center");
-    t.is(Rectangle.origins.bottomLeft, "bottomLeft");
-    t.is(Rectangle.origins.bottomRight, "bottomRight");
 });

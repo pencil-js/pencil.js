@@ -45,14 +45,19 @@ export default class Rectangle extends Component {
         if (typeof origin === "string") {
             const { origins } = Rectangle;
             const position = new Position();
-            if (origin === origins.center) {
-                position.set(-this.width / 2, -this.height / 2);
+            // Horizontal
+            if ([origins.topRight, origins.centerRight, origins.bottomRight].includes(origin)) {
+                position.x = -this.width;
             }
-            else {
-                position.set(
-                    ([origins.topRight, origins.bottomRight].includes(origin) && -this.width) || 0,
-                    ([origins.bottomLeft, origins.bottomRight].includes(origin) && -this.height) || 0,
-                );
+            else if ([origins.topCenter, origins.center, origins.bottomCenter].includes(origin)) {
+                position.x = -this.width / 2;
+            }
+            // Vertical
+            if ([origins.bottomLeft, origins.bottomCenter, origins.bottomRight].includes(origin)) {
+                position.y = -this.height;
+            }
+            else if ([origins.centerLeft, origins.center, origins.centerRight].includes(origin)) {
+                position.y = -this.height / 2;
             }
             return position;
         }
@@ -86,9 +91,13 @@ export default class Rectangle extends Component {
      * @enum {String}
      * @prop {String} topLeft
      * @prop {String} topRight
+     * @prop {String} topCenter
+     * @prop {String} center
+     * @prop {String} centerLeft
+     * @prop {String} centerRight
      * @prop {String} bottomLeft
      * @prop {String} bottomRight
-     * @prop {String} center
+     * @prop {String} bottomCenter
      */
     /**
      * @return {RectangleOrigins}
@@ -97,9 +106,13 @@ export default class Rectangle extends Component {
         return {
             topLeft: "topLeft",
             topRight: "topRight",
+            topCenter: "topCenter",
             center: "center",
+            centerLeft: "centerLeft",
+            centerRight: "centerRight",
             bottomLeft: "bottomLeft",
             bottomRight: "bottomRight",
+            bottomCenter: "bottomCenter",
         };
     }
 }
