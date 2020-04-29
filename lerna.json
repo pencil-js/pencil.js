@@ -5,7 +5,7 @@
   ],
   "command": {
     "publish": {
-      "message": ":bookmark: Releasing / Version tags.\nPublish %s"
+      "message": "\uD83D\uDD16 Releasing / Version tags.\nPublish %s"
     }
   },
   "ignoreChanges": [
