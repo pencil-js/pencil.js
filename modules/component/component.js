@@ -85,6 +85,9 @@ export default class Component extends Container {
             ctx.shadowOffsetX = this.options.shadow.position.x;
             ctx.shadowOffsetY = this.options.shadow.position.y;
         }
+        else {
+            ctx.shadowColor = null;
+        }
 
         if (this.willFill) {
             ctx.fillStyle = this.options.fill.toString(ctx);
@@ -132,7 +135,7 @@ export default class Component extends Container {
      * @throws {ReferenceError}
      */
     trace () {
-        throw new ReferenceError(`Unimplemented trace function in ${this.constructor.name}`);
+        throw new ReferenceError(`Unimplemented [trace] function in ${this.constructor.name}.`);
     }
 
     /**
