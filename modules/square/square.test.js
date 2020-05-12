@@ -15,6 +15,16 @@ test("get and set size", (t) => {
 
     t.context.size = 99;
     t.is(t.context.size, 99);
+    t.is(t.context.width, 99);
+    t.is(t.context.height, 99);
+
+    t.context.width = 42;
+    t.is(t.context.width, 42);
+    t.is(t.context.height, 42);
+
+    t.context.height = 24;
+    t.is(t.context.width, 24);
+    t.is(t.context.height, 24);
 });
 
 test("toJSON", (t) => {

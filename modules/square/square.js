@@ -1,5 +1,8 @@
 import Rectangle from "@pencil.js/rectangle";
 
+const widthKey = Symbol("_width");
+const heightKey = Symbol("_height");
+
 /**
  * Square class
  * @class
@@ -21,8 +24,8 @@ export default class Square extends Rectangle {
      * @param {Number} size - New size
      */
     set size (size) {
-        this.width = size;
-        this.height = size;
+        this[widthKey] = size;
+        this[heightKey] = size;
     }
 
     /**
@@ -31,6 +34,38 @@ export default class Square extends Rectangle {
      */
     get size () {
         return this.width;
+    }
+
+    /**
+     * Set width (also set height)
+     * @param {Number} width - Any value for width (and height)
+     */
+    set width (width) {
+        this.size = width;
+    }
+
+    /**
+     * Get width
+     * @return {Number}
+     */
+    get width () {
+        return this[widthKey];
+    }
+
+    /**
+     * Set height (also set width)
+     * @param {Number} height - Any value for height (and width)
+     */
+    set height (height) {
+        this.size = height;
+    }
+
+    /**
+     * Get height
+     * @return {Number}
+     */
+    get height () {
+        return this[heightKey];
     }
 
     /**
