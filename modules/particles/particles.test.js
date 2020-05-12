@@ -52,6 +52,4 @@ test("defaultData", (t) => {
     t.true(defaultData.position.constructor.name === "Position");
     t.is(defaultData.position.x, 0);
     t.is(defaultData.position.y, 0);
-    t.is(defaultData.rotation, 0);
-    t.is(defaultData.scale, 1);
 });

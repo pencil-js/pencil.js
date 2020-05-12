@@ -15,6 +15,7 @@ export default class Particles extends Component {
     /**
      * @callback ParticlesCallback
      * @param {ParticleData} data - One particle data
+     * @param {Number} index - Index of the particle
      */
     /**
      * Particles constructor
@@ -50,7 +51,7 @@ export default class Particles extends Component {
             if (this.updater) {
                 this.updater(data, index);
             }
-            const { scale, position, rotation } = data;
+            const { position, scale = 1, rotation = 0 } = data;
             const scaleOptions = typeof scale === "number" ? [scale, scale] : Position.from(scale).toJSON();
             const rotationRadian = rotation * radianCircle;
             matrix.a = cos(rotationRadian) * scaleOptions[0];
@@ -108,8 +109,6 @@ export default class Particles extends Component {
     static get defaultData () {
         return {
             position: new Position(),
-            rotation: 0,
-            scale: 1,
         };
     }
 }
