@@ -174,6 +174,7 @@ export default class Container extends EventEmitter {
     getAbsolutePosition () {
         const position = new Position();
 
+        // FIXME: don't work for scale and don't take origin into account
         this.climbAncestry((ancestor) => {
             position.rotate(ancestor.options.rotation, ancestor.options.rotationCenter).add(ancestor.position);
         });

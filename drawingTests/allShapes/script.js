@@ -18,14 +18,22 @@
         opacity: 0.5,
     });
 
-    container.add(new P.Circle(new P.Position(0, 60), 20, {
-        fill: "gold",
-    }));
-
-    container.add(new P.Rectangle(new P.Position(50, 0), 50, 40, {
+    const rect = new P.Rectangle(new P.Position(60, 0), 70, 50, {
         rotation: 0.125,
         rotationCenter: new P.Position(25, 20),
-    }));
+    });
+
+    const base = new P.Heart(undefined, 9, {
+        fill: "#a70084",
+    })
+    rect.add(new P.Particles(undefined, base, 9, (i) => ({
+        position: new P.Position(11, 22).add(i * P.Math.phi * 52).modulo([70, 50]),
+        rotation: P.Math.phi * i,
+    })));
+
+    container.add(new P.Circle(new P.Position(0, 60), 20, {
+        fill: "gold",
+    }), rect);
 
     shapes.push(container);
 
@@ -42,7 +50,7 @@
         new P.Position(0, 40),
     ];
 
-    shapes.push(new P.Polygon([20, 80], points, {
+    shapes.push(new P.Polygon([20, 80], [[0, 0], ...points], {
         fill: null,
         stroke: "#111",
         strokeWidth: 8,

@@ -14,6 +14,10 @@ export default class Heart extends Component {
      */
     constructor (positionDefinition, radius, options) {
         super(positionDefinition, options);
+
+        /**
+         * @type {Number}
+         */
         this.radius = radius;
     }
 
