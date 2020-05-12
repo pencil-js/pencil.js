@@ -28,12 +28,12 @@ export default class Star extends RegularPolygon {
      * @inheritDoc
      */
     toJSON () {
-        const { points, bevelRatio } = this;
+        const { bevelRatio } = this;
         const json = {
             ...super.toJSON(),
-            nbBranches: points.length / 2,
             bevelRatio,
         };
+        json.nbBranches = json.nbSides / 2;
         delete json.nbSides;
         return json;
     }

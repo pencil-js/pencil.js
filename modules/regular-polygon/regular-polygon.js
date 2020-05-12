@@ -25,16 +25,6 @@ export default class RegularPolygon extends Polygon {
     }
 
     /**
-     * Draw the polygon
-     * @param {Path2D} path - Current drawing path
-     * @return {Polygon} Itself
-     */
-    trace (path) {
-        this.points.concat(...this.points.slice(0, 2)).forEach(point => path.lineTo(point.x, point.y));
-        return this;
-    }
-
-    /**
      * @inheritDoc
      */
     toJSON () {

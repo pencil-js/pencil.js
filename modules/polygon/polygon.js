@@ -14,7 +14,7 @@ export default class Polygon extends Component {
      * @param {ComponentOptions} [options] - Drawing options
      */
     constructor (positionDefinition, points = [], options) {
-        if (points.length < 2) {
+        if (points.length < 3) {
             throw new RangeError(`A polygon can't have less than 3 vertices, but only ${points.length} given.`);
         }
 
@@ -32,7 +32,7 @@ export default class Polygon extends Component {
      * @return {Polygon} Itself
      */
     trace (path) {
-        this.points.concat([new Position()]).concat(...this.points.slice(0, 2))
+        this.points.concat(...this.points.slice(0, 2))
             .forEach(point => path.lineTo(point.x, point.y));
         return this;
     }

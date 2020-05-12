@@ -32,6 +32,7 @@ Rectangle.prototype.resizable = function resizable (options) {
         x: true,
         y: true,
         handle: new Polygon([this.width, this.height], [
+            [0, 0],
             [-size, 0],
             [0, -size],
         ], {
