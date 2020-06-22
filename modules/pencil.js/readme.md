@@ -9,6 +9,17 @@
 
 Nice modular interactive 2D drawing library.
 
+ - [Installtion](#installation)
+ - [CDN](#cdnhttpsdevelopermozillaorgdocsglossairecdn-content-delivery-network)
+ - [Usage](#usage)
+ - [Purpose](#purpose)
+ - [Examples](#examples)
+ - [Modules](#modules)
+ - [Who is using Pencil.js ?](#who-is-using-penciljs-)
+ - [Sponsors](#sponsors)
+ - [Contributions](#contributions)
+ - [License](#license)
+
 
 ## Installation
 You can install the whole package with the following command :
@@ -21,7 +32,7 @@ But, each part is a JS module and can be used independently, for example:
     npm install @pencil.js/scene
 
 
-# [CDN](https://developer.mozilla.org/docs/Glossaire/CDN "Content Delivery Network")
+## [CDN](https://developer.mozilla.org/docs/Glossaire/CDN "Content Delivery Network")
 On [capable browsers](https://caniuse.com/#feat=es6-module), the most simple way is to import the [ESM package](https://unpkg.com/pencil.js/dist/pencil.esm.js).
 
 ```html
@@ -85,12 +96,12 @@ It makes code look natural.
 
 ### Modularity
 Splitting the whole code into modules make everything cleaner.
-It also allow you to grab only what you need or replace what you don't like.
+It also allows you to grab only what you need or replace what you don't like.
 
 
 ### Documentation
 A complete documentation goes a long way to help developers.
-All functions are assured to have a description and also typed arguments and returns.
+All functions are assured to have a description and typed arguments and returns.
 
 
 ## Examples
@@ -175,7 +186,7 @@ Turn any Pencil.js scene into an animated GIF.
  * [canvas-gif-encoder](https://github.com/pencil-js/canvas-gif-encoder)<br/>
 Create a GIF stream frame by frame from a canvas rendering context.
  * [vue-pencil.js](https://github.com/pencil-js/vue-pencil.js)<br/>
-Build reactive 2D graphics scene in your Vue project
+Build reactive 2D graphics scene in your Vue project.
 
 ## Who is using Pencil.js ?
 
