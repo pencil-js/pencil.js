@@ -1,9 +1,6 @@
 name: Node CI
 
-on:
-    push:
-        paths:
-            './modules/**/*.js'
+on: [push]
 
 jobs:
     build:
