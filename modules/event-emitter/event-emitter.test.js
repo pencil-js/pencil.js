@@ -50,15 +50,44 @@ test("fire targeted", (t) => {
 });
 
 test("removeListener", (t) => {
-    t.context.on(["one", "two", "three"], () => {});
+    const callback = () => t.fail();
+    t.context.on(["one", "two", "three", "four", "five"], callback);
+    t.context.on(["three", "four", "five"], () => {});
 
-    t.is(Object.keys(t.context.eventListeners).length, 3);
+    t.context.fire({
+        name: "unknown",
+    });
+    t.is(Object.keys(t.context.eventListeners).length, 5);
 
     t.context.removeListener("one");
-    t.is(Object.keys(t.context.eventListeners).length, 2);
+    t.context.fire({
+        name: "one",
+    });
 
-    t.context.removeListener(["two", "three", "unknown"]);
-    t.is(Object.keys(t.context.eventListeners).length, 0);
+    t.context.removeListener("unknown");
+
+    t.context.removeListener(["two", "unknown"]);
+    t.context.fire({
+        name: "two",
+    });
+
+    // Wrong callback
+    t.context.removeListener("three", () => {});
+    t.is(t.context.eventListeners.three.length, 2);
+
+    t.context.removeListener("three", callback);
+    t.context.fire({
+        name: "three",
+    });
+
+    // Wrong callback
+    t.context.removeListener(["four"], () => {});
+    t.is(t.context.eventListeners.four.length, 2);
+
+    t.context.removeListener(["four"], callback);
+    t.context.fire({
+        name: "four",
+    });
 });
 
 test("removeAllListener", (t) => {

@@ -1,4 +1,3 @@
-
 /**
  * Able to listen and fire events
  * @abstract
@@ -54,10 +53,18 @@ export default class EventEmitter {
     /**
      * Remove an event or multiple events
      * @param {String|Array<String>} eventName - Name of event (or a list of event names) to remove
+     * @param {Function} [callback] - Specify the callback to remove, if not defined remove all listeners
      * @return {EventEmitter} Itself
      */
-    removeListener (eventName) {
-        (Array.isArray(eventName) ? eventName : [eventName]).forEach(name => delete this.eventListeners[name]);
+    removeListener (eventName, callback) {
+        (Array.isArray(eventName) ? eventName : [eventName]).forEach((name) => {
+            if (callback) {
+                this.eventListeners[name] = this.eventListeners[name].filter(event => event.callback !== callback);
+            }
+            else {
+                delete this.eventListeners[name];
+            }
+        });
         return this;
     }
 
