@@ -6,8 +6,25 @@ import {
     BaseEvent, MouseEvent, NetworkEvent, KeyboardEvent, Math, Navigation, Position, Vector, Line, Spline, EventEmitter,
     Container, Scene, Component, Polygon, RegularPolygon, Triangle, Star, Rectangle, Square, Image, Sprite, Arc, Ellipse,
     Circle, Text, Path, Input, Checkbox, Slider, Knob, ProgressBar, ProgressPie, Button, Select, from, OffScreenCanvas,
-    version, author, homepage, Color, LinearGradient, RadialGradient,
+    version, author, homepage, Color, LinearGradient, RadialGradient, use,
 } from ".";
+
+test("use", (t) => {
+    t.plan(3);
+
+    use({
+        name: "test",
+        install: P => t.is(P, Pencil),
+    });
+    Pencil.use({
+        name: "test2",
+        install: P => t.is(P, Pencil),
+    });
+
+    t.throws(() => use({
+        name: "test",
+    }));
+});
 
 test("from", (t) => {
     const definition = {
