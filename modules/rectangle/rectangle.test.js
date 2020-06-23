@@ -43,7 +43,6 @@ test("getOrigin", (t) => {
         t.is(defaultOrigin.x, expected[origin][0]);
         t.is(defaultOrigin.y, expected[origin][1]);
     });
-
 });
 
 test("toJSON", (t) => {

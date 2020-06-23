@@ -217,7 +217,8 @@ export default class Text extends Rectangle {
      * Can't set text's width
      * @param {*} _ -
      */
-    set width (_) {
+    set width (_) { // eslint-disable-line class-methods-use-this
+        // Do nothing
     }
 
     /**
@@ -232,7 +233,8 @@ export default class Text extends Rectangle {
      * Can't set text's height
      * @param {*} _ -
      */
-    set height (_) {
+    set height (_) { // eslint-disable-line class-methods-use-this
+        // Do nothing
     }
 
     /**

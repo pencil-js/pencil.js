@@ -25,7 +25,6 @@ test("toJSON", (t) => {
     t.is(json.constructor, "Heart");
 });
 
-
 test("from", (t) => {
     const definition = {
         position: {

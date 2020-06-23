@@ -57,7 +57,6 @@ import "@pencil.js/rotatable";
 // Package data
 import { version, author, homepage } from "./package.json";
 
-
 const exportableClasses = {
     Container,
     Particles,
