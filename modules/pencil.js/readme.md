@@ -10,7 +10,7 @@
 Nice modular interactive 2D drawing library.
 
  - [Installtion](#installation)
- - [CDN](#cdnhttpsdevelopermozillaorgdocsglossairecdn-content-delivery-network)
+ - [CDN](#cdn)
  - [Usage](#usage)
  - [Purpose](#purpose)
  - [Examples](#examples)
@@ -106,15 +106,17 @@ All functions are assured to have a description and typed arguments and returns.
 
 ## Examples
 ```js
-import { Scene, Rectangle, Position } from "pencil.js";
+import { Scene, Rectangle } from "pencil.js";
 
 const scene = new Scene(); // create a new scene
 
+const position = [100, 200];
 const width = 80;
 const height = 50;
-const rectangle = new Rectangle(new Position(100, 200), width, height, {
+const options = {
     fill: "red",
-}); // Create a new red rectangle
+};
+const rectangle = new Rectangle(position, width, height, options); // Create a new red rectangle
 scene.add(rectangle); // Add the rectangle to the scene
 
 scene.render(); // Render the scene once
