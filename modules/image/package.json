@@ -36,8 +36,8 @@
     },
     "devDependencies": {
         "@pencil.js/test-environment": "^1.2.0",
-        "ava": "^3.8.0",
+        "ava": "^3.9.0",
         "esm": "^3.2.25",
-        "nyc": "^15.0.0"
+        "nyc": "^15.1.0"
     }
 }
