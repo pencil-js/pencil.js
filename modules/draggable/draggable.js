@@ -14,6 +14,7 @@ import Vector from "@pencil.js/vector";
  * @prop {Function} x - Change the "x" value in the draggable's options
  * @prop {Function} y - Change the "y" value in the draggable's options
  * @prop {Function} constrain - Change the "constrain" value in the draggable's options
+ * @prop {Function} stop - Stop the component from being draggable
  */
 
 /**
@@ -22,7 +23,7 @@ import Vector from "@pencil.js/vector";
  * @return {DraggableAPI}
  */
 Component.prototype.draggable = function draggable (options) {
-    if (this.isDraggable) {
+    if (this.isRotatable) {
         throw new Error("Component can't be both rotatable and draggable.");
     }
 
@@ -43,20 +44,21 @@ Component.prototype.draggable = function draggable (options) {
 
     let startPosition = null;
     let originPosition = null;
-    this.on(MouseEvent.events.down, (event) => {
+    const downHandler = ({ position }) => {
         if (cursorNotSet) {
             this.options.cursor = Component.cursors.grabbing;
         }
 
-        startPosition = event.position;
+        startPosition = position;
         originPosition = this.position.clone();
 
         this.isDragged = true;
 
         this.fire(new MouseEvent(MouseEvent.events.grab, this, this.position.clone()));
-    }, true);
+    };
+    this.on(MouseEvent.events.down, downHandler, true);
 
-    this.getScene().then(scene => scene.on(MouseEvent.events.move, (event) => {
+    const moveHandler = (event) => {
         if (this.isDragged && startPosition) {
             const difference = event.position.clone().subtract(startPosition);
 
@@ -68,7 +70,8 @@ Component.prototype.draggable = function draggable (options) {
 
             this.fire(new MouseEvent(MouseEvent.events.drag, this, this.position.clone()));
         }
-    }).on(MouseEvent.events.up, () => {
+    };
+    const upHandler = () => {
         if (cursorNotSet) {
             this.options.cursor = Component.cursors.grab;
         }
@@ -79,7 +82,16 @@ Component.prototype.draggable = function draggable (options) {
 
             this.fire(new MouseEvent(MouseEvent.events.drop, this, this.position.clone()));
         }
-    }));
+    };
+    let scene;
+    this.getScene().then((theScene) => {
+        if (this.isDraggable) {
+            scene = theScene;
+            scene
+                .on(MouseEvent.events.move, moveHandler)
+                .on(MouseEvent.events.up, upHandler);
+        }
+    });
 
     return {
         /**
@@ -104,6 +116,23 @@ Component.prototype.draggable = function draggable (options) {
          */
         set constrain (constrain) {
             mergedOptions.constrain = constrain ? Vector.from(constrain) : constrain;
+        },
+
+        /**
+         * Stop the component from being draggable
+         */
+        stop: () => {
+            this.removeListener(MouseEvent.events.down, downHandler);
+            if (scene) {
+                scene
+                    .removeListener(MouseEvent.events.move, moveHandler)
+                    .removeListener(MouseEvent.events.up, upHandler);
+            }
+            if (cursorNotSet) {
+                this.options.cursor = Component.cursors.default;
+            }
+            this.isDraggable = false;
+            this.isDragged = false;
         },
     };
 };
