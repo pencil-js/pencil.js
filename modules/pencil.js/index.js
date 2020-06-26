@@ -23,7 +23,6 @@ function use ({ name, install }, options) {
 
     return Pencil;
 }
-
 Pencil.use = use;
 
 export default Pencil;
