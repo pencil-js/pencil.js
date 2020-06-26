@@ -54,7 +54,7 @@ export default class Container extends EventEmitter {
                 else {
                     root.getScene().then(scene => resolve(scene));
                 }
-            });
+            }, true);
         });
     }
 
