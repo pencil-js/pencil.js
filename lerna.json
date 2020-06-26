@@ -1,11 +1,11 @@
 {
-  "version": "1.17.0",
+  "version": "1.18.0",
   "packages": [
     "modules/*"
   ],
   "command": {
     "publish": {
-      "message": "\uD83D\uDD16 Releasing / Version tags.\nPublish %s"
+      "message": "🔖 Releasing / Version tags.\nPublish %s"
     }
   },
   "ignoreChanges": [
