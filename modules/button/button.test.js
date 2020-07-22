@@ -3,11 +3,18 @@ import Button from ".";
 
 test.beforeEach((t) => {
     t.context = new Button([100, 100], {
-        value: "button text",
+        value: ["multi\nline", "button text"],
     });
 });
 
 test("constructor", (t) => {
+    // Force value on button
+    t.context.value = t.context.options.value;
+
+    t.is(t.context.text.lines.length, 3);
+    t.is(t.context.background.width, 21);
+    t.is(t.context.background.height, 68);
+
     t.not(t.context.text, undefined);
     ["fill", "font", "fontSize", "bold", "italic"].forEach((prop) => {
         t.is(t.context.text.options[prop], t.context.options[prop]);

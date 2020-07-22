@@ -52,7 +52,7 @@ export default class Button extends Input {
     set value (value) {
         this.text.text = value;
         const measures = this.text.getMeasures();
-        const margin = measures.height * Button.MARGIN;
+        const margin = Text.measure("M", this.text.options).height * Button.MARGIN;
         this.background.width = measures.width + (margin * 4);
         this.background.height = measures.height + (margin * 2);
         this.text.position.set(margin * 2, margin);
