@@ -2,12 +2,15 @@ import test from "ava";
 import Rectangle from ".";
 
 test.beforeEach((t) => {
-    t.context = new Rectangle([-20, 20], 123, 22);
+    t.context = new Rectangle([-20, 20], 123, 22, {
+        origin: Rectangle.origins.center,
+    });
 });
 
 test("constructor", (t) => {
     t.is(t.context.width, 123);
     t.is(t.context.height, 22);
+    t.is(t.context.options.origin, Rectangle.origins.center);
 
     const defaultRectangle = new Rectangle();
     t.is(defaultRectangle.width, 0);

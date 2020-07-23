@@ -42,11 +42,14 @@ export default class Component extends Container {
     /**
      * Define options for this component
      * @param {ComponentOptions} options - Options to override
-     * @return {Component}
+     * @return {Component} Itself
      */
     setOptions (options) {
-        const { shadow } = this.options;
         super.setOptions(options);
+        const { shadow } = this.options;
+        if (typeof this.options.origin !== "string") {
+            this.options.origin = Position.from(this.options.origin);
+        }
         this.options.shadow = {
             ...Component.defaultOptions.shadow, // default
             ...shadow, // previous value

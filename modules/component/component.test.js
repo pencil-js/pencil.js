@@ -4,6 +4,7 @@ import Component from ".";
 test.beforeEach((t) => {
     t.context = new Component([0, 0], {
         fill: "#369",
+        origin: [1, 2],
         shadow: {
             position: [10, 20],
             color: "#123",
@@ -15,15 +16,16 @@ test("constructor", (t) => {
     t.is(t.context.options.shadow.position.x, 10);
     t.is(t.context.options.shadow.position.y, 20);
     t.is(t.context.options.shadow.color, "#123");
+    t.is(t.context.options.origin.x, 1);
+    t.is(t.context.options.origin.y, 2);
 
     t.false(t.context.isClicked);
     t.false(t.context.isHovered);
 });
 
 test("getOrigin", (t) => {
-    const defaultOrigin = t.context.getOrigin();
-    t.is(defaultOrigin.x, 0);
-    t.is(defaultOrigin.y, 0);
+    const origin = t.context.getOrigin();
+    t.is(origin, t.context.options.origin);
 
     t.context.options.origin = [100, 200];
     const customOrigin = t.context.getOrigin();
