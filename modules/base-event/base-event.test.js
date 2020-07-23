@@ -1,11 +1,17 @@
 import test from "ava";
 import BaseEvent from ".";
 
-test("constructor", (t) => {
-    const target = null;
-    const name = "TestEvent";
-    const fakeEvent = new BaseEvent(name, target);
+test.beforeEach((t) => {
+    t.context = new BaseEvent("name", null);
+});
 
-    t.is(fakeEvent.target, null);
-    t.is(fakeEvent.name, name);
+test("constructor", (t) => {
+    t.is(t.context.target, null);
+    t.is(t.context.name, "name");
+    t.is(t.context.bubble, true);
+});
+
+test("stop", (t) => {
+    t.context.stop();
+    t.is(t.context.bubble, false);
 });

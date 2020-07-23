@@ -11,5 +11,15 @@ export default class BaseEvent {
     constructor (name, target) {
         this.name = name;
         this.target = target;
+        this.bubble = true;
+    }
+
+    /**
+     * Mark this event as stopped
+     * @return {BaseEvent} Itself
+     */
+    stop () {
+        this.bubble = false;
+        return this;
     }
 }

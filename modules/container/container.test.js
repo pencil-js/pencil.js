@@ -132,6 +132,7 @@ test("fire", (t) => {
     const oldFire = Container.prototype.fire;
     const fired = {
         name: "whatever",
+        bubble: true,
     };
     const wrapper = function wrapper (...params) {
         t.is(params[0], fired);
@@ -142,6 +143,19 @@ test("fire", (t) => {
     grandChild.fire = wrapper;
 
     grandChild.fire(fired);
+});
+
+test("fire stopped", (t) => {
+    const child = addHeir(t.context);
+    const event = {
+        name: "name",
+        bubble: false,
+    };
+    t.context.fire = () => {
+        t.fail();
+    };
+    child.fire(event);
+    t.pass();
 });
 
 test("getTarget", (t) => {
