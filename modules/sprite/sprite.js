@@ -84,7 +84,7 @@ export default class Sprite extends Image {
     /**
      * Play the sprite animation
      * @param {Number} [speed] - Choose a play speed
-     * @returns {Sprite} Itself
+     * @return {Sprite} Itself
      */
     play (speed) {
         this.isPaused = false;
@@ -96,7 +96,7 @@ export default class Sprite extends Image {
 
     /**
      * Put the sprite on pause
-     * @returns {Sprite} Itself
+     * @return {Sprite} Itself
      */
     pause () {
         this.isPaused = true;
@@ -106,7 +106,7 @@ export default class Sprite extends Image {
     /**
      *
      * @param {Number} frame - Number of the frame to set
-     * @returns {Sprite} Itself
+     * @return {Sprite} Itself
      */
     setFrame (frame) {
         this.frame = modulo(frame, this.frames.length);
@@ -129,7 +129,7 @@ export default class Sprite extends Image {
     /**
      *
      * @param {Object} definition -
-     * @returns {Sprite}
+     * @return {Sprite}
      */
     static from (definition) {
         const { position, url, frames, frame, isPaused, options } = definition;
@@ -144,7 +144,7 @@ export default class Sprite extends Image {
     /**
      * Load and return a spritesheet json file
      * @param {String} url - Url to the file
-     * @returns {Spritesheet}
+     * @return {Spritesheet}
      */
     static async sheet (url) {
         const response = await window.fetch(url);
@@ -181,7 +181,7 @@ export default class Sprite extends Image {
      * @prop {String} end -
      */
     /**
-     * @returns {SpriteEvents}
+     * @return {SpriteEvents}
      */
     static get events () {
         return {
@@ -208,7 +208,7 @@ class Spritesheet {
 
     /**
      * Getter for the image file
-     * @returns {Image}
+     * @return {Image}
      */
     get file () {
         return this.json.meta.file;
@@ -217,7 +217,7 @@ class Spritesheet {
     /**
      * Return all the frames corresponding to a selector
      * @param {String|Function|RegExp} [selector="*"] - Match against the spritesheet images name using a glob pattern, a validation function or a regular expression
-     * @returns {Array}
+     * @return {Array}
      */
     get (selector = "*") {
         const filter = ((matcher) => {
@@ -247,7 +247,7 @@ class Spritesheet {
      * @param {PositionDefinition} position - Position of the sprite
      * @param {String|Function|RegExp} [selector="*"] - Match against the spritesheet images name using a glob pattern, a validation function or a regular expression
      * @param {ImageOptions} [options] - Options of the sprite
-     * @returns {Sprite}
+     * @return {Sprite}
      */
     extract (position, selector, options) {
         return new Sprite(position, this.file, this.get(selector), options);

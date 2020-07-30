@@ -89,7 +89,7 @@ export default class OffScreenCanvas extends Container {
 
     /**
      * Return the whole scene size
-     * @returns {Position}
+     * @return {Position}
      */
     get size () {
         return new Position(this.width, this.height);

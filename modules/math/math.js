@@ -3,7 +3,7 @@
  * @param {Number} value - Any number
  * @param {Number} min - Minimal limit for the value
  * @param {Number} max - Maximal limit for the value
- * @returns {Number}
+ * @return {Number}
  * @example
  * constrain(999, 0, 50); // => 50
  * constrain(-999, 0, 50); // => 0
@@ -15,7 +15,7 @@ export const constrain = (value, min, max) => Math.min(Math.max(value, min), max
  * @param {Number} number1 - Any number
  * @param {Number} number2 - Any number
  * @param {Number} [epsilon=Number.EPSILON] - Maximum difference to consider two number equal.
- * @returns {Boolean}
+ * @return {Boolean}
  * @example
  * equals(0.1 + 0.2, 0.3); // => true
  */
@@ -25,7 +25,7 @@ export const equals = (number1, number2, epsilon = Number.EPSILON) => Math.abs(n
  * Return a random number between limits
  * @param {Number} [min=1] - Lower limit, or upper limit if max is omitted
  * @param {Number} [max] - Upper limit, can be omitted
- * @returns {Number}
+ * @return {Number}
  * @example
  * random(); // => 0.5918807307648482
  * random(10); // => 4.4856764978326735
@@ -44,7 +44,7 @@ export const random = (min = 1, max) => {
 /**
  * Truncate a number to its integer part.
  * @param {Number} value - Any number
- * @returns {Number}
+ * @return {Number}
  * @example
  * truncate(12.3); // => 12
  * truncate(-4.9); // => -4
@@ -89,7 +89,7 @@ export const modulo = (value, divisor) => {
  * @param {Number} nbValue - Number of value to generate
  * @param {Number} [min=0] - Starting value of the range
  * @param {Number} [max=1] - Ending value of the range
- * @returns {Array<Number>}
+ * @return {Array<Number>}
  * @example
  * distribute(10); // => Number[10] evenly distributed across [0, 1]
  * distribute(5, 10, 20); // => Number[5] evenly distributed across [10, 20]
@@ -103,7 +103,7 @@ export const distribute = (nbValue, min = 0, max = 1) => {
 /**
  * Add up all values passed as argument
  * @param {...Number} values - Any set of number
- * @returns {Number}
+ * @return {Number}
  * @example
  * sum(1, 2, 3); // => 6
  */

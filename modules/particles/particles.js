@@ -87,7 +87,7 @@ export default class Particles extends Component {
     /**
      * @inheritDoc
      * @param {Object} definition -
-     * @returns {Particles}
+     * @return {Particles}
      */
     static from (definition) {
         // FIXME

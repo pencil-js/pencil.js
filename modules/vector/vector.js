@@ -138,7 +138,7 @@ export default class Vector {
     /**
      * Find the closest position to a point on this vector
      * @param {PositionDefinition} positionDefinition - Any position
-     * @returns {Position}
+     * @return {Position}
      */
     getClosestToPoint (positionDefinition) {
         const position = Position.from(positionDefinition);

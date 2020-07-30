@@ -275,7 +275,7 @@ export default class Text extends Rectangle {
     /**
      * Return a font definition from a set of options
      * @param {TextOptions} options - Chosen options
-     * @returns {String}
+     * @return {String}
      */
     static getFontDefinition (options) {
         return `${options.bold ? "bold " : ""}${options.italic ? "italic " : ""}${options.fontSize}px ${options.font}`;
@@ -338,7 +338,7 @@ export default class Text extends Rectangle {
      * @prop {String} end - The text is aligned at the normal end of the line. (regarding locales)
      */
     /**
-     * @returns {TextAlignments}
+     * @return {TextAlignments}
      */
     static get alignments () {
         return {
