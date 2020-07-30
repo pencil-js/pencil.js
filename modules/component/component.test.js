@@ -7,6 +7,7 @@ test.beforeEach((t) => {
         origin: [1, 2],
         shadow: {
             position: [10, 20],
+            blur: 5,
             color: "#123",
         },
     });
@@ -105,7 +106,7 @@ test("setContext", (t) => {
     t.is(ctx.lineJoin, "a");
     t.is(ctx.lineCap, "b");
     t.is(ctx.shadowColor, "#123");
-    t.is(ctx.shadowBlur, 0);
+    t.is(ctx.shadowBlur, 5);
     t.is(ctx.shadowOffsetX, 10);
     t.is(ctx.shadowOffsetY, 20);
 });

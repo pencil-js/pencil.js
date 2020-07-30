@@ -45,8 +45,8 @@ export default class Component extends Container {
      * @return {Component} Itself
      */
     setOptions (options) {
-        super.setOptions(options);
         const { shadow } = this.options;
+        super.setOptions(options);
         if (typeof this.options.origin !== "string") {
             this.options.origin = Position.from(this.options.origin);
         }
@@ -83,13 +83,16 @@ export default class Component extends Container {
         super.setContext(ctx);
 
         if (this.options.shadow.color) {
+            const shadowPosition = Position.from(this.options.shadow.position);
             ctx.shadowColor = this.options.shadow.color.toString();
             ctx.shadowBlur = this.options.shadow.blur;
-            ctx.shadowOffsetX = this.options.shadow.position.x;
-            ctx.shadowOffsetY = this.options.shadow.position.y;
+            ctx.shadowOffsetX = shadowPosition.x;
+            ctx.shadowOffsetY = shadowPosition.y;
         }
         else {
-            ctx.shadowColor = null;
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetX = 0;
+            ctx.shadowOffsetY = 0;
         }
 
         if (this.willFill) {
@@ -145,7 +148,7 @@ export default class Component extends Container {
      * Define if is hover a position
      * @param {PositionDefinition} positionDefinition - Any position
      * @param {CanvasRenderingContext2D} [ctx] - Context use for calculation
-     * @returns {Boolean}
+     * @return {Boolean}
      */
     isHover (positionDefinition, ctx = OffScreenCanvas.getDrawingContext()) {
         if (!this.options.shown) {
