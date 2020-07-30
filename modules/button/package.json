@@ -27,6 +27,7 @@
     ],
     "dependencies": {
         "@pencil.js/input": "^1.18.0",
+        "@pencil.js/rectangle": "^1.18.0",
         "@pencil.js/text": "^1.18.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",

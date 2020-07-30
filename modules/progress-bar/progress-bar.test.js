@@ -20,6 +20,7 @@ test("click", (t) => {
 
 test("get and set width", (t) => {
     t.is(t.context.width, 300);
+    t.is(t.context.height, 20);
 
     t.context.width = 666;
     t.is(t.context.width, 666);
@@ -30,6 +31,7 @@ test("get and set width", (t) => {
 });
 
 test("get and set value", (t) => {
+    t.context.options.speed = 1;
     t.context.value = 0.5;
     t.is(t.context.value, 0.5);
 

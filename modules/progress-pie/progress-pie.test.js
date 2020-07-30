@@ -38,6 +38,7 @@ test("get and set radius", (t) => {
 });
 
 test("get and set value", (t) => {
+    t.context.options.speed = 1;
     t.context.value = 0.5;
     t.is(t.context.value, 0.5);
 

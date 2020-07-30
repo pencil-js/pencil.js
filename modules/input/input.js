@@ -1,55 +1,51 @@
 import BaseEvent from "@pencil.js/base-event";
 import Component from "@pencil.js/component";
-import Container from "@pencil.js/container";
 import MouseEvent from "@pencil.js/mouse-event";
-import Rectangle from "@pencil.js/rectangle";
 
 /**
  * Abstract Input class
  * @abstract
  * @class
- * @extends Container
+ * @extends Component
  */
-export default class Input extends Container {
+export default class Input extends Component {
     /**
      * Input constructor
      * @param {PositionDefinition} positionDefinition - Any position
+     * @param {Component} base - Base shape for the background
      * @param {InputOptions} [options] - Specific options
      */
-    constructor (positionDefinition, options) {
+    constructor (positionDefinition, base, options) {
         super(positionDefinition, options);
 
-        this.background = new Rectangle(undefined, 0, 0, {
-            fill: this.options.background,
-            stroke: this.options.border,
-            strokeWidth: 2,
-            cursor: Component.cursors.pointer,
-        });
-        this.add(this.background);
+        this.base = base;
 
-        this.background.on(MouseEvent.events.hover, () => {
-            this.background.options.fill = this.options.hover;
+        let fill;
+        this.on(MouseEvent.events.hover, () => {
+            fill = fill || this.options.fill;
+            this.options.fill = this.options.hover;
         }).on(MouseEvent.events.leave, () => {
-            this.background.options.fill = this.options.background;
+            this.options.fill = fill;
+            fill = null;
         }).on(MouseEvent.events.click, (event) => {
             this.click(event.position.clone().subtract(this.getAbsolutePosition()));
         });
 
-        this.on(Container.events.attach, () => this.value = this.options.value, true);
+        this.on(Component.events.attach, () => this.value = this.options.value, true);
     }
 
     /**
-     * Add support for origin option
-     * @param {CanvasRenderingContext2D} ctx - Drawing context
-     * @return {Input} Itself
+     * @inheritDoc
      */
-    makePath (ctx) {
-        const previousOrigin = this.background.options.origin;
-        this.background.options.origin = this.options.origin;
-        const origin = this.background.getOrigin();
-        this.background.options.origin = previousOrigin;
-        ctx.translate(origin.x, origin.y);
-        return super.makePath();
+    trace (path) {
+        return this.base.prototype.trace.call(this, path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    getOrigin () {
+        return this.base.prototype.getOrigin.call(this);
     }
 
     /**
@@ -77,18 +73,10 @@ export default class Input extends Container {
     /**
      * @inheritDoc
      */
-    isHover (positionDefinition, ctx) {
-        return this.options.shown && this.background.isHover(this.position.clone().add(positionDefinition), ctx);
-    }
-
-    /**
-     * @inheritDoc
-     */
     toJSON () {
         const json = super.toJSON();
         json.options = json.options || {};
         json.options.value = this.value;
-        json.children = json.children.slice(1);
         return json;
     }
 
@@ -103,12 +91,13 @@ export default class Input extends Container {
 
     /**
      * @typedef {Object} InputOptions
-     * @extends ContainerOptions
+     * @extends ComponentOptions
      * @prop {*} [value=null] - Initial value of the input
-     * @prop {String} [fill="#444"] - Color of the filling
-     * @prop {String} [background="#f6f6f6"] - Color of the background
+     * @prop {String} [foreground="#444"] - Color of the filling
+     * @prop {String} [fill="#f6f6f6"] - Color of the background
      * @prop {String} [border="#aaa"] - Color of the border
      * @prop {String} [hover="#d0d0d0"] - Color of the background when hovered
+     * @prop {String} [cursor=Component.cursors.pointer] - Cursor on hover
      */
     /**
      * @return {InputOptions}
@@ -117,10 +106,11 @@ export default class Input extends Container {
         return {
             ...super.defaultOptions,
             value: null,
-            fill: "#444",
-            background: "#f6f6f6",
-            border: "#aaa",
+            foreground: "#444",
+            fill: "#f6f6f6",
+            stroke: "#aaa",
             hover: "#dcdcdc",
+            cursor: Component.cursors.pointer,
         };
     }
 

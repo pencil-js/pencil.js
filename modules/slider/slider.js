@@ -1,12 +1,11 @@
 import BaseEvent from "@pencil.js/base-event";
 import Circle from "@pencil.js/circle";
-import Component from "@pencil.js/component";
-import Container from "@pencil.js/container";
+import Rectangle from "@pencil.js/rectangle";
 import Input from "@pencil.js/input";
 import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 import Vector from "@pencil.js/vector";
-import { constrain } from "@pencil.js/math";
+import { constrain, map } from "@pencil.js/math";
 import "@pencil.js/draggable";
 
 const constrainerKey = Symbol("_constrainer");
@@ -15,7 +14,7 @@ const moveHandleKey = Symbol("_moveHandle");
 /**
  * Slider class
  * @class
- * @extends Container
+ * @extends Input
  */
 export default class Slider extends Input {
     /**
@@ -24,19 +23,16 @@ export default class Slider extends Input {
      * @param {SliderOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
-        super(positionDefinition, options);
+        super(positionDefinition, Rectangle, options);
 
-        this.background.width = this.width;
-        this.background.height = Slider.HEIGHT;
-
-        const container = new Container(new Position(Slider.HEIGHT / 2, Slider.HEIGHT / 2));
-        this.background.add(container);
-        this.handle = new Circle(new Position(0, 0), (Slider.HEIGHT - 2) / 2, {
-            fill: this.options.fill,
-            cursor: Component.cursors.ewResize,
+        const radius = (this.height - 2) / 2;
+        this.handle = new Circle([0, this.height / 2], radius, {
+            fill: this.options.foreground,
+            cursor: Rectangle.cursors.ewResize,
+            origin: this.getOrigin(),
         });
-        container.add(this.handle);
-        this[constrainerKey] = new Vector(new Position(0, 0), new Position(this.width - Slider.HEIGHT, 0));
+        this.add(this.handle);
+        this[constrainerKey] = new Vector([radius + 1, this.height / 2], [this.width - radius - 1, this.height / 2]);
         this.handle.draggable({
             constrain: this[constrainerKey],
         });
@@ -47,7 +43,8 @@ export default class Slider extends Input {
      * @inheritDoc
      */
     click (position) {
-        this.handle.position.set(position.x - (Slider.HEIGHT / 2), 0)
+        const origin = this.getOrigin();
+        this.handle.position.set(position.x - origin.x, 0)
             .constrain(this[constrainerKey].start, this[constrainerKey].end);
         super.click();
     }
@@ -62,14 +59,13 @@ export default class Slider extends Input {
         }
 
         this.options.width = newWidth;
-        this.background.width = newWidth;
         this[constrainerKey].end = new Position(this.width - Slider.HEIGHT, 0);
 
         this[moveHandleKey](this.value);
     }
 
     /**
-     * Return this slider's size
+     * Return this slider's width
      * @return {Number}
      */
     get width () {
@@ -77,13 +73,21 @@ export default class Slider extends Input {
     }
 
     /**
+     * Return this slider's height
+     * @return {Number}
+     */
+    get height () { // eslint-disable-line class-methods-use-this
+        return Slider.HEIGHT;
+    }
+
+    /**
      * Returns this current value
      * @return {Number}
      */
     get value () {
-        const range = this.options.max - this.options.min;
-        const relativePosition = this.handle.position.x / (this.width - Slider.HEIGHT);
-        return this.options.min + (range * relativePosition);
+        const { min, max } = this.options;
+        const { start, end } = this[constrainerKey];
+        return map(this.handle.position.x, start.x, end.x, min, max);
     }
 
     /**
@@ -131,6 +135,7 @@ export default class Slider extends Input {
  * @memberOf Slider#
  */
 Slider.prototype[moveHandleKey] = function moveHandle (value) {
-    const range = this.options.max - this.options.min;
-    this.handle.position.x = (this.width - Slider.HEIGHT) * ((value - this.options.min) / range);
+    const { min, max } = this.options;
+    const { start, end } = this[constrainerKey];
+    this.handle.position.x = map(value, min, max, start.x, end.x);
 };

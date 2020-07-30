@@ -1,5 +1,6 @@
 import Input from "@pencil.js/input";
 import Circle from "@pencil.js/circle";
+import MouseEvent from "@pencil.js/mouse-event";
 import { constrain } from "@pencil.js/math";
 import Pie from "./pie";
 
@@ -15,25 +16,19 @@ export default class ProgressPie extends Input {
     /**
      * ProgressPie constructor
      * @param {PositionDefinition} positionDefinition - Position of the progress-pie center
-     * @param {ProgressOptions} options - Specific options
+     * @param {ProgressPieOptions} options - Specific options
      */
     constructor (positionDefinition, options) {
-        super(positionDefinition, options);
+        super(positionDefinition, Circle, options);
 
-        this.background.delete();
-        this.background = new Circle(undefined, this.options.radius, {
-            fill: this.options.background,
-            stroke: this.options.border,
-            strokeWidth: 2,
-            cursor: null,
-        });
-        this.add(this.background);
+        this.removeListener([MouseEvent.events.hover, MouseEvent.events.leave, MouseEvent.events.click]);
 
-        this.progress = new Pie(undefined, this.background.radius - 1, 0, 0, {
-            fill: this.options.fill,
+        this.progress = new Pie(undefined, this.radius - 1, 0, 0, {
+            fill: this.options.foreground,
             stroke: null,
+            origin: this.getOrigin(),
         });
-        this.background.add(this.progress);
+        this.add(this.progress);
 
         if (this.options.speed < 1) {
             this.progress.on(ProgressPie.events.draw, () => {
@@ -68,7 +63,6 @@ export default class ProgressPie extends Input {
      */
     set radius (newRadius) {
         this.options.radius = newRadius;
-        this.background.radius = newRadius;
         this.progress.radius = newRadius - 1;
     }
 
@@ -105,6 +99,7 @@ export default class ProgressPie extends Input {
     static get defaultOptions () {
         return {
             ...super.defaultOptions,
+            cursor: null,
             value: 0,
             radius: 100,
             speed: 0.3,

@@ -13,32 +13,42 @@ import "@pencil.js/rotatable";
 export default class Knob extends Input {
     /**
      * knob constructor
-     * @param {PositionDefinition} positionDefinition -
-     * @param {KnobOptions} options -
+     * @param {PositionDefinition} positionDefinition - Position of the center
+     * @param {KnobOptions} options - Specific options
      */
     constructor (positionDefinition, options) {
-        super(positionDefinition, options);
+        super(positionDefinition, Circle, options);
 
-        this.background.delete();
-        this.background = new Circle(undefined, this.options.radius, {
-            fill: this.options.background,
-            stroke: this.options.border,
-            strokeWidth: 2,
-        });
-
-        this.add(this.background);
-
+        const origin = this.getOrigin();
+        this.options.rotationCenter = origin;
         const strokeWidth = this.options.radius * Knob.NOTCH_SIZE;
         const margin = this.options.radius / 3;
         const notch = new Line([0, -margin], [[0, -this.options.radius + margin + strokeWidth]], {
-            stroke: this.options.fill,
+            stroke: this.options.foreground,
             strokeWidth,
             cursor: Component.cursors.grab,
+            origin,
         });
-        this.background
+        this
             .add(notch)
             .on(MouseEvent.events.rotate, () => this.fire(new BaseEvent(Knob.events.change, this)), true)
             .rotatable();
+    }
+
+    /**
+     * Get this knob's radius
+     * @return {Number}
+     */
+    get radius () {
+        return this.options.radius;
+    }
+
+    /**
+     * Set this knob's radius
+     * @param {Number} value - Radius of the knob
+     */
+    set radius (value) {
+        this.options.radius = value;
     }
 
     /**
@@ -53,7 +63,7 @@ export default class Knob extends Input {
      * @return {Number}
      */
     get value () {
-        return map(modulo(this.background.options.rotation, 1), 0, 1, this.options.min, this.options.max);
+        return map(modulo(this.options.rotation, 1), 0, 1, this.options.min, this.options.max);
     }
 
     /**
@@ -61,7 +71,7 @@ export default class Knob extends Input {
      * @param {Number} newValue - A new value to set
      */
     set value (newValue) {
-        this.background.options.rotation = modulo(map(newValue, this.options.min, this.options.max, 0, 1), 1);
+        this.options.rotation = modulo(map(newValue, this.options.min, this.options.max, 0, 1), 1);
     }
 
     /**
@@ -77,6 +87,7 @@ export default class Knob extends Input {
     static get defaultOptions () {
         return {
             ...super.defaultOptions,
+            cursor: Component.cursors.default,
             min: 0,
             max: 1,
             value: 0,

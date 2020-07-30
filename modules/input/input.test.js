@@ -1,28 +1,29 @@
 import test from "ava";
 import Input from ".";
 import MouseEvent from "../mouse-event";
+import Rectangle from "../rectangle";
 
 test.beforeEach((t) => {
-    t.context = new Input([100, 100]);
+    t.context = new Input([100, 100], Rectangle);
 });
 
 test("constructor", (t) => {
-    t.truthy(t.context.background);
+    t.is(t.context.base, Rectangle);
 });
 
 test("events listeners", (t) => {
-    const { background } = t.context;
-    t.is(background.options.fill, t.context.options.background);
+    const { fill, hover } = Input.defaultOptions;
+    t.is(t.context.options.fill, fill);
 
-    background.fire(new MouseEvent(MouseEvent.events.hover, background));
-    t.is(background.options.fill, t.context.options.hover);
+    t.context.fire(new MouseEvent(MouseEvent.events.hover, t.context));
+    t.is(t.context.options.fill, hover);
 
-    background.fire(new MouseEvent(MouseEvent.events.leave, background));
-    t.is(background.options.fill, t.context.options.background);
+    t.context.fire(new MouseEvent(MouseEvent.events.leave, t.context));
+    t.is(t.context.options.fill, fill);
 
     t.context.click = () => t.pass();
     t.plan(4);
-    background.fire(new MouseEvent(MouseEvent.events.click, background));
+    t.context.fire(new MouseEvent(MouseEvent.events.click, t.context));
 });
 
 test("get and set value", (t) => {
@@ -55,7 +56,6 @@ test("toJSON", (t) => {
     const json = t.context.toJSON();
 
     t.is(json.options.value, t.context.value);
-    t.is(json.children.length, 0);
     t.is(json.constructor, "Input");
 });
 
@@ -72,9 +72,9 @@ test("from", (t) => {
 test("defaultOptions", (t) => {
     const options = Input.defaultOptions;
     t.is(options.value, null);
-    t.is(options.fill, "#444");
-    t.is(options.background, "#f6f6f6");
-    t.is(options.border, "#aaa");
+    t.is(options.foreground, "#444");
+    t.is(options.fill, "#f6f6f6");
+    t.is(options.stroke, "#aaa");
     t.is(options.hover, "#dcdcdc");
 });
 

@@ -13,18 +13,48 @@ export default class Checkbox extends Input {
      * @param {CheckboxOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
-        super(positionDefinition, options);
-
-        this.background.width = this.options.size;
-        this.background.height = this.options.size;
+        super(positionDefinition, Square, options);
 
         const margin = this.options.size * Checkbox.MARGIN;
         this.fill = new Square([margin, margin], this.options.size - (2 * margin), {
-            fill: this.options.fill,
+            fill: this.options.foreground,
             shown: this.options.value,
-            cursor: this.background.options.cursor,
+            cursor: this.options.cursor,
+            origin: this.getOrigin(),
         });
-        this.background.add(this.fill);
+        this.add(this.fill);
+    }
+
+    /**
+     * Get it's width
+     * @return {Number}
+     */
+    get width () {
+        return this.options.size;
+    }
+
+    /**
+     * Set it's width
+     * @param {Number} value - Width of the checkbox
+     */
+    set width (value) {
+        this.options.size = value;
+    }
+
+    /**
+     * Get it's height
+     * @return {Number}
+     */
+    get height () {
+        return this.options.size;
+    }
+
+    /**
+     * Set it's height
+     * @param {Number} value - Height of the checkbox
+     */
+    set height (value) {
+        this.options.size = value;
     }
 
     /**

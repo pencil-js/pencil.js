@@ -30,7 +30,7 @@ test("option events", (t) => {
     t.is(firstOption.parent.options.fill, t.context.options.hover);
 
     firstOption.fire(new MouseEvent(MouseEvent.events.leave, firstOption));
-    t.is(firstOption.parent.options.fill, t.context.options.background);
+    t.is(firstOption.parent.options.fill, t.context.options.fill);
 });
 
 test("get and set value", (t) => {

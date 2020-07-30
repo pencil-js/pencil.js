@@ -1,5 +1,6 @@
 import Input from "@pencil.js/input";
 import Text from "@pencil.js/text";
+import Rectangle from "@pencil.js/rectangle";
 
 /**
  * Button class
@@ -9,15 +10,15 @@ import Text from "@pencil.js/text";
 export default class Button extends Input {
     /**
      * Button constructor
-     * @param {PositionDefinition} positionDefinition - Top-left corner
+     * @param {PositionDefinition} positionDefinition - Position of the top-left corner
      * @param {ButtonOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
-        super(positionDefinition, options);
+        super(positionDefinition, Rectangle, options);
 
         this.text = new Text(undefined, this.options.value, {
-            fill: this.options.fill,
-            cursor: this.background.options.cursor,
+            fill: this.options.foreground,
+            cursor: this.options.cursor,
             font: this.options.font,
             fontSize: this.options.fontSize,
             align: this.options.align,
@@ -26,7 +27,36 @@ export default class Button extends Input {
             underscore: this.options.underscore,
             lineHeight: this.options.lineHeight,
         });
-        this.background.add(this.text);
+        this.add(this.text);
+    }
+
+    /**
+     * Computer button size
+     * @return {{width: Number, height: Number}}
+     */
+    get size () {
+        const measures = this.text.getMeasures();
+        const margin = Text.measure("M", this.text.options).height * Button.MARGIN;
+        return {
+            width: measures.width + (margin * 4),
+            height: measures.height + (margin * 2),
+        };
+    }
+
+    /**
+     * Get this button's width
+     * @return {Number}
+     */
+    get width () {
+        return this.size.width;
+    }
+
+    /**
+     * Get this button's height
+     * @return {Number}
+     */
+    get height () {
+        return this.size.height;
     }
 
     /**
@@ -47,16 +77,12 @@ export default class Button extends Input {
 
     /**
      * Change this button's text
-     * @param {String} value - Any text
+     * @param {String|Array<String>} value - Any text or list of line
      */
     set value (value) {
         this.text.text = value;
-        const measures = this.text.getMeasures();
         const margin = Text.measure("M", this.text.options).height * Button.MARGIN;
-        this.background.width = measures.width + (margin * 4);
-        this.background.height = measures.height + (margin * 2);
-        this.text.position.set(margin * 2, margin);
-        this.text.options.origin.set(this.text.getOrigin().multiply(-1));
+        this.text.position.set(this.getOrigin()).add(margin * 2, margin);
     }
 
     /**

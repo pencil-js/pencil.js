@@ -28,6 +28,7 @@
     "dependencies": {
         "@pencil.js/base-event": "^1.18.0",
         "@pencil.js/component": "^1.18.0",
+        "@pencil.js/container": "^1.18.0",
         "@pencil.js/input": "^1.18.0",
         "@pencil.js/math": "^1.18.0",
         "@pencil.js/mouse-event": "^1.18.0",

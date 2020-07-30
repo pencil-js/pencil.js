@@ -15,24 +15,22 @@ export default class ProgressBar extends Input {
     /**
      * Slider constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner
-     * @param {SliderOptions} [options] - Specific options
+     * @param {ProgressBarOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
-        super(positionDefinition, options);
+        super(positionDefinition, Rectangle, options);
 
-        this.background.width = this.width;
-        this.background.height = ProgressBar.HEIGHT;
-        this.background.options.cursor = null;
-        this.background.removeListener([MouseEvent.events.hover, MouseEvent.events.leave]);
+        this.removeListener([MouseEvent.events.hover, MouseEvent.events.leave, MouseEvent.events.click]);
 
         this.progress = new Rectangle([1, 1], 0, ProgressBar.HEIGHT - 2, {
-            fill: this.options.fill,
+            fill: this.options.foreground,
+            origin: this.getOrigin(),
         });
-        this.background.add(this.progress);
+        this.add(this.progress);
 
         if (this.options.speed < 1) {
             this.progress.on(ProgressBar.events.draw, () => {
-                const targetWidth = (this.background.width - 2) * this.value;
+                const targetWidth = (this.width - 2) * this.value;
                 this.progress.width += (targetWidth - this.progress.width) * (this.options.speed ** 2);
             }, true);
         }
@@ -51,7 +49,7 @@ export default class ProgressBar extends Input {
     }
 
     /**
-     * Return this size
+     * Return this width
      * @return {Number}
      */
     get width () {
@@ -68,7 +66,14 @@ export default class ProgressBar extends Input {
         }
 
         this.options.width = newWidth;
-        this.background.width = newWidth - 2;
+    }
+
+    /**
+     * Return this height
+     * @return {Number}
+     */
+    get height () {
+        return ProgressBar.HEIGHT;
     }
 
     /**
@@ -87,7 +92,7 @@ export default class ProgressBar extends Input {
         this[valueKey] = constrain(newValue, 0, 1);
 
         if (this.options.speed >= 1) {
-            this.progress.width = (this.background.width - 2) * this.value;
+            this.progress.width = (this.width - 2) * this.value;
         }
     }
 
@@ -104,6 +109,7 @@ export default class ProgressBar extends Input {
     static get defaultOptions () {
         return {
             ...super.defaultOptions,
+            cursor: null,
             value: 0,
             width: 200,
             speed: 0.3,

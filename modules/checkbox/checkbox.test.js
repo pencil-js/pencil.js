@@ -9,6 +9,19 @@ test("constructor", (t) => {
     t.is(!!t.context.fill.options.shown, !!t.context.options.value);
 });
 
+test("get and set width and height", (t) => {
+    t.is(t.context.width, 20);
+    t.is(t.context.height, 20);
+
+    t.context.width = 30;
+    t.is(t.context.width, 30);
+    t.is(t.context.height, 30);
+
+    t.context.height = 40;
+    t.is(t.context.width, 40);
+    t.is(t.context.height, 40);
+});
+
 test("click and toggle", (t) => {
     t.context.value = true;
     t.context.click();

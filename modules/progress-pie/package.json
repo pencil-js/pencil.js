@@ -31,7 +31,8 @@
         "@pencil.js/arc": "^1.18.0",
         "@pencil.js/circle": "^1.18.0",
         "@pencil.js/input": "^1.18.0",
-        "@pencil.js/math": "^1.18.0"
+        "@pencil.js/math": "^1.18.0",
+        "@pencil.js/mouse-event": "^1.18.0"
     },
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",

@@ -9,21 +9,29 @@ test.beforeEach((t) => {
 });
 
 test("constructor", (t) => {
-    t.true(t.context.background.isRotatable);
+    t.true(t.context.isRotatable);
+    t.context.click(); // Should do nothing
+});
+
+test("get and set radius", (t) => {
+    t.is(t.context.radius, 100);
+
+    t.context.radius = 200;
+    t.is(t.context.radius, 200);
 });
 
 test("get and set value", (t) => {
     t.context.value = 0.8;
     t.true(almostEqual(t.context.value, 0.8));
-    t.true(almostEqual(t.context.background.options.rotation, 0.8));
+    t.true(almostEqual(t.context.options.rotation, 0.8));
 
     t.context.value = -1.5;
     t.true(almostEqual(t.context.value, 0.5));
-    t.true(almostEqual(t.context.background.options.rotation, 0.5));
+    t.true(almostEqual(t.context.options.rotation, 0.5));
 
     t.context.value = 2.6;
     t.true(almostEqual(t.context.value, 0.6));
-    t.true(almostEqual(t.context.background.options.rotation, 0.6));
+    t.true(almostEqual(t.context.options.rotation, 0.6));
 });
 
 test("default options and NOTCH_SIZE", (t) => {
