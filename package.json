@@ -14,7 +14,7 @@
         "play": "webpack -d --watch",
         "build": "webpack -p",
         "contrib": "all-contributors generate",
-        "prepublishOnly": "webpack -p"
+        "prepublishOnly": "npm run build"
     },
     "ava": {
         "require": [
