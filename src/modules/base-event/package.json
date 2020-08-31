@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/base-event",
-    "main": "base-event.js"
+    "main": "base-event.js",
+    "sideEffects": false
 }

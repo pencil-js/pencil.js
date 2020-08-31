@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/knob",
-    "main": "knob.js"
+    "main": "knob.js",
+    "sideEffects": false
 }

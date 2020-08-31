@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/progress-pie",
-    "main": "progress-pie.js"
+    "main": "progress-pie.js",
+    "sideEffects": false
 }

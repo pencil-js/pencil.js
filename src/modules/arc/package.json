@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/arc",
-    "main": "arc.js"
+    "main": "arc.js",
+    "sideEffects": false
 }

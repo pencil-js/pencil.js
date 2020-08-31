@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/button",
-    "main": "button.js"
+    "main": "button.js",
+    "sideEffects": false
 }

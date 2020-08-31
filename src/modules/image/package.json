@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/image",
-    "main": "image.js"
+    "main": "image.js",
+    "sideEffects": false
 }

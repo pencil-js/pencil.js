@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/select",
-    "main": "select.js"
+    "main": "select.js",
+    "sideEffects": false
 }

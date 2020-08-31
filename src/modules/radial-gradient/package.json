@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/radial-gradient",
-    "main": "radial-gradient.js"
+    "main": "radial-gradient.js",
+    "sideEffects": false
 }

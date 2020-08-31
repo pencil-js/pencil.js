@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/mouse-event",
-    "main": "mouse-event.js"
+    "main": "mouse-event.js",
+    "sideEffects": false
 }

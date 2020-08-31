@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/triangle",
-    "main": "triangle.js"
+    "main": "triangle.js",
+    "sideEffects": false
 }

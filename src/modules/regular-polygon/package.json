@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/regular-polygon",
-    "main": "regular-polygon.js"
+    "main": "regular-polygon.js",
+    "sideEffects": false
 }

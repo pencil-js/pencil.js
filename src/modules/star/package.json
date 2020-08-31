@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/star",
-    "main": "star.js"
+    "main": "star.js",
+    "sideEffects": false
 }

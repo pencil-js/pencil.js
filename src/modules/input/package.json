@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/input",
-    "main": "input.js"
+    "main": "input.js",
+    "sideEffects": false
 }
