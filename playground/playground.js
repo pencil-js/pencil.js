@@ -1,4 +1,4 @@
-import { Scene } from "../modules/pencil.js/dist/pencil.esm.js";
+import { Scene } from "../dist/pencil.esm.js";
 
 // Don't forget to run "npm run build" before
 const timer = "Playground ready";
@@ -8,6 +8,7 @@ const scene = new Scene();
 
 // ...
 
-scene.startLoop();
+scene
+    .startLoop();
 
 console.timeEnd(timer);

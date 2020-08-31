@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/navigation",
+    "main": "navigation.js",
+    "sideEffects": false
+}

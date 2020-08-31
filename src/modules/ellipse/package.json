@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/ellipse",
+    "main": "ellipse.js",
+    "sideEffects": false
+}

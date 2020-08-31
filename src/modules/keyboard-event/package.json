@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/keyboard-event",
+    "main": "keyboard-event.js",
+    "sideEffects": false
+}

@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/container",
+    "main": "container.js",
+    "sideEffects": false
+}

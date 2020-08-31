@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/sprite",
+    "main": "sprite.js",
+    "sideEffects": false
+}

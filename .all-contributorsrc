@@ -2,7 +2,7 @@
     "projectName": "pencil.js",
     "projectOwner": "pencil-js",
     "files": [
-        "./modules/pencil.js/readme.md"
+        "readme.md"
     ],
     "imageSize": 99,
     "commit": false,

@@ -1,21 +1,20 @@
 {
-    "name": "@pencil.js/root",
-    "version": "1.0.0",
-    "description": "This is the root of the Pencil.js package, it should never be published.",
-    "main": "index.js",
-    "directories": {
-        "test": "test"
-    },
+    "name": "pencil.js",
+    "version": "1.18.0",
+    "description": "Nice modular interactive 2D drawing library.",
+    "main": "src/index.js",
+    "sideEffects": false,
+    "unpkg": "dist/pencil.min.js",
+    "jsdelivr": "dist/pencil.min.js",
+    "module": "dist/pencil.esm.js",
     "scripts": {
-        "init": "lerna bootstrap --hoist",
-        "reset": "lerna clean --yes && npm run init",
-        "lint": "eslint modules/",
+        "lint": "eslint src/",
         "test": "nyc --reporter=html --reporter=text-summary ava",
         "testci": "nyc --reporter=lcovonly --reporter=text-summary ava",
         "play": "webpack -d --watch",
         "build": "webpack -p",
-        "prepublish": "exit 0",
-        "contrib": "all-contributors generate"
+        "contrib": "all-contributors generate",
+        "prepublishOnly": "npm run build"
     },
     "ava": {
         "require": [
@@ -24,23 +23,82 @@
         ]
     },
     "eslintConfig": {
-        "extends": "@gmartigny/eslint-config"
+        "extends": "@gmartigny/eslint-config",
+        "rules": {
+            "import/no-extraneous-dependencies": 0
+        }
     },
-    "eslintIgnore": [
-        "**/node_modules/*",
-        "**/coverage/*",
-        "**/dist/*"
-    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/pencil-js/pencil.js.git"
     },
+    "keywords": [
+        "canvas",
+        "HTML",
+        "drawing",
+        "renderer",
+        "engine",
+        "frontend",
+        "web",
+        "modular",
+        "OOP",
+        "toolbelt"
+    ],
     "author": "Guillaume Martigny <guillaume.martigny@gmail.com> (https://www.guillaume-martigny.fr)",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/pencil-js/pencil.js/issues"
     },
     "homepage": "https://pencil.js.org/",
+    "funding": "https://github.com/pencil-js/pencil.js?sponsor=1",
+    "dependencies": {
+        "@pencil.js/arc": "file:src/modules/arc",
+        "@pencil.js/base-event": "file:src/modules/base-event",
+        "@pencil.js/button": "file:src/modules/button",
+        "@pencil.js/checkbox": "file:src/modules/checkbox",
+        "@pencil.js/circle": "file:src/modules/circle",
+        "@pencil.js/color": "file:src/modules/color",
+        "@pencil.js/component": "file:src/modules/component",
+        "@pencil.js/container": "file:src/modules/container",
+        "@pencil.js/draggable": "file:src/modules/draggable",
+        "@pencil.js/ellipse": "file:src/modules/ellipse",
+        "@pencil.js/event-emitter": "file:src/modules/event-emitter",
+        "@pencil.js/heart": "file:src/modules/heart",
+        "@pencil.js/image": "file:src/modules/image",
+        "@pencil.js/input": "file:src/modules/input",
+        "@pencil.js/keyboard-event": "file:src/modules/keyboard-event",
+        "@pencil.js/knob": "file:src/modules/knob",
+        "@pencil.js/line": "file:src/modules/line",
+        "@pencil.js/linear-gradient": "file:src/modules/linear-gradient",
+        "@pencil.js/math": "file:src/modules/math",
+        "@pencil.js/mouse-event": "file:src/modules/mouse-event",
+        "@pencil.js/navigation": "file:src/modules/navigation",
+        "@pencil.js/network-event": "file:src/modules/network-event",
+        "@pencil.js/offscreen-canvas": "file:src/modules/offscreen-canvas",
+        "@pencil.js/particles": "file:src/modules/particles",
+        "@pencil.js/path": "file:src/modules/path",
+        "@pencil.js/polygon": "file:src/modules/polygon",
+        "@pencil.js/position": "file:src/modules/position",
+        "@pencil.js/progress-bar": "file:src/modules/progress-bar",
+        "@pencil.js/progress-pie": "file:src/modules/progress-pie",
+        "@pencil.js/radial-gradient": "file:src/modules/radial-gradient",
+        "@pencil.js/rectangle": "file:src/modules/rectangle",
+        "@pencil.js/regular-polygon": "file:src/modules/regular-polygon",
+        "@pencil.js/resizable": "file:src/modules/resizable",
+        "@pencil.js/rotatable": "file:src/modules/rotatable",
+        "@pencil.js/scene": "file:src/modules/scene",
+        "@pencil.js/select": "file:src/modules/select",
+        "@pencil.js/slider": "file:src/modules/slider",
+        "@pencil.js/spline": "file:src/modules/spline",
+        "@pencil.js/sprite": "file:src/modules/sprite",
+        "@pencil.js/square": "file:src/modules/square",
+        "@pencil.js/star": "file:src/modules/star",
+        "@pencil.js/text": "file:src/modules/text",
+        "@pencil.js/triangle": "file:src/modules/triangle",
+        "@pencil.js/vector": "file:src/modules/vector",
+        "@sindresorhus/fnv1a": "^2.0.1",
+        "text-direction": "^1.3.0"
+    },
     "devDependencies": {
         "@gmartigny/eslint-config": "^1.5.0",
         "@pencil.js/test-environment": "^1.2.0",
@@ -49,7 +107,6 @@
         "ava": "^3.9.0",
         "eslint": "^7.3.1",
         "esm": "^3.2.25",
-        "lerna": "^3.22.1",
         "nyc": "^15.1.0",
         "webpack": "^4.43.0",
         "webpack-cli": "^3.3.11"

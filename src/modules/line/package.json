@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/line",
+    "main": "line.js",
+    "sideEffects": false
+}

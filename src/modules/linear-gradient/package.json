@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/linear-gradient",
+    "main": "linear-gradient.js",
+    "sideEffects": false
+}

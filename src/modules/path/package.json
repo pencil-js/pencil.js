@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/path",
+    "main": "path.js",
+    "sideEffects": false
+}

@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/square",
+    "main": "square.js",
+    "sideEffects": false
+}

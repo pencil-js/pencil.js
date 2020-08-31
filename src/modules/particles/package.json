@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/particles",
+    "main": "particles.js",
+    "sideEffects": false
+}

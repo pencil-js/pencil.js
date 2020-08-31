@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/offscreen-canvas",
+    "main": "offscreen-canvas.js",
+    "sideEffects": false
+}

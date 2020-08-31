@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/color",
+    "main": "color.js",
+    "sideEffects": false
+}

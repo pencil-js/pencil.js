@@ -1,0 +1,5 @@
+{
+    "name": "@pencil.js/position",
+    "main": "position.js",
+    "sideEffects": false
+}

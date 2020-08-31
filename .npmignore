@@ -1,0 +1,10 @@
+.idea/
+.github/
+.nyc_output/
+coverage/
+drawingTests/
+playground/
+test/
+
+.all-contributorsrc
+webpack.config.js
