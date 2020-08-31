@@ -3,10 +3,6 @@
     "version": "1.18.0",
     "description": "Nice modular interactive 2D drawing library.",
     "main": "src/index.js",
-    "files": [
-        "dist/",
-        "src/pencil.js"
-    ],
     "sideEffects": false,
     "unpkg": "dist/pencil.min.js",
     "jsdelivr": "dist/pencil.min.js",
