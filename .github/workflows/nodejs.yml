@@ -22,7 +22,7 @@ jobs:
               ./cc-test-reporter before-build
         - name: npm install, build, and test
           run: |
-              npx lerna bootstrap --hoist
+              npm install
               npm run build
               npm run testci
         - name: coverage
