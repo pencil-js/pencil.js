@@ -3,6 +3,7 @@
 .nyc_output/
 coverage/
 drawingTests/
+media/
 playground/
 test/
 
