@@ -69,7 +69,11 @@ test("sheet", async (t) => {
             meta: {
                 image: "",
             },
-            frames: {},
+            frames: {
+                "res/a.png": "1",
+                "images/b.png": "2",
+                "res/sub/c.jpg": "3",
+            },
         })),
     }));
 
@@ -78,10 +82,14 @@ test("sheet", async (t) => {
     const sheet = await Sprite.sheet("url");
     t.true(typeof sheet.json === "object");
 
-    const frames = sheet.get("any");
-    t.true(Array.isArray(frames));
+    t.deepEqual(sheet.get(), ["1", "2", "3"]);
+    t.deepEqual(sheet.get("*.png"), ["1", "2"]);
+    t.deepEqual(sheet.get("res/*.png"), ["1"]);
+    t.deepEqual(sheet.get(key => key.startsWith("images")), ["2"]);
+    t.deepEqual(sheet.get("images/b.png"), ["2"]);
+    t.deepEqual(sheet.get(/c/), ["3"]);
 
-    const sprite = sheet.extract([4, 5], "any");
+    const sprite = sheet.extract();
     t.true(sprite instanceof Sprite);
 });
 

@@ -1,7 +1,7 @@
 import BaseEvent from "@pencil.js/base-event";
 import Image from "@pencil.js/image";
 import { modulo } from "@pencil.js/math";
-import picomatch from "picomatch";
+import minimatch from "minimatch";
 
 /**
  * Sprite class
@@ -225,10 +225,11 @@ class Spritesheet {
                 return matcher;
             }
             if (typeof matcher === "string") {
-                const glob = picomatch(matcher, {
-                    contains: true,
+                const glob = minimatch.Minimatch(matcher, {
+                    dot: true,
+                    matchBase: true,
                 });
-                return string => matcher === string || glob(string);
+                return string => matcher === string || glob.match(string);
             }
             if (matcher instanceof RegExp) {
                 return string => matcher.test(string);
