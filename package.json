@@ -11,8 +11,8 @@
         "lint": "eslint src/",
         "test": "nyc --reporter=html --reporter=text-summary ava",
         "testci": "nyc --reporter=lcovonly --reporter=text-summary ava",
-        "play": "webpack -d --watch",
-        "build": "webpack -p",
+        "play": "webpack --mode=development --watch",
+        "build": "webpack --mode=production",
         "contrib": "all-contributors generate",
         "prepublishOnly": "npm run build"
     },
@@ -50,7 +50,9 @@
         "url": "https://github.com/pencil-js/pencil.js/issues"
     },
     "homepage": "https://pencil.js.org/",
-    "funding": "https://github.com/pencil-js/pencil.js?sponsor=1",
+    "funding": {
+        "url": "https://github.com/pencil-js/pencil.js?sponsor=1"
+    },
     "dependencies": {
         "@pencil.js/arc": "file:src/modules/arc",
         "@pencil.js/base-event": "file:src/modules/base-event",
@@ -103,13 +105,12 @@
     "devDependencies": {
         "@gmartigny/eslint-config": "^1.6.0",
         "@pencil.js/test-environment": "^1.2.0",
-        "@purtuga/esm-webpack-plugin": "^1.2.1",
         "all-contributors-cli": "^6.17.2",
         "ava": "^3.12.1",
         "eslint": "^7.7.0",
         "esm": "^3.2.25",
         "nyc": "^15.1.0",
-        "webpack": "^4.44.1",
-        "webpack-cli": "^3.3.11"
+        "webpack": "^5.1.3",
+        "webpack-cli": "^4.1.0"
     }
 }

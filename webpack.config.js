@@ -1,10 +1,11 @@
-const EsmWebpackPlugin = require("@purtuga/esm-webpack-plugin");
 const { BannerPlugin } = require("webpack");
 
 const { name, version, homepage, author, license } = require("./package.json");
 
-const banner = new BannerPlugin(`${name} v${version} ${homepage}
-${license} license - © ${author}`);
+const plugins = [
+    new BannerPlugin(`${name} v${version} ${homepage}
+${license} license - © ${author}`),
+];
 
 const output = {
     library: "Pencil",
@@ -13,9 +14,7 @@ const devtool = "source-map";
 
 module.exports = [
     {
-        plugins: [
-            banner,
-        ],
+        plugins,
         output: {
             ...output,
             filename: "pencil.min.js",
@@ -25,14 +24,14 @@ module.exports = [
         devtool,
     },
     {
-        plugins: [
-            banner,
-            new EsmWebpackPlugin(),
-        ],
+        experiments: {
+            outputModule: true,
+        },
+        plugins,
         output: {
-            ...output,
             filename: "pencil.esm.js",
-            libraryTarget: "var",
+            module: true,
+            libraryTarget: "global",
         },
         devtool,
     },

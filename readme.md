@@ -9,7 +9,7 @@
 
 Nice modular interactive 2D drawing library.
 
- - [Installtion](#installation)
+ - [Installation](#installation)
  - [CDN](#cdn)
  - [Usage](#usage)
  - [Purpose](#purpose)
@@ -22,18 +22,13 @@ Nice modular interactive 2D drawing library.
 
 
 ## Installation
-You can install the whole package with the following command :
+You can install Pencil.js with the following command :
 
     npm install pencil.js
 
 
-But, each part is a JS module and can be used independently, for example:
-
-    npm install @pencil.js/scene
-
-
 ## [CDN](https://developer.mozilla.org/docs/Glossaire/CDN "Content Delivery Network")
-On [capable browsers](https://caniuse.com/#feat=es6-module), the most simple way is to import the [ESM package](https://unpkg.com/pencil.js/dist/pencil.esm.js).
+On [capable browsers](https://caniuse.com/#feat=es6-module), the easiest way is to import the [ESM package](https://unpkg.com/pencil.js/dist/pencil.esm.js).
 
 ```html
 <script type="module">

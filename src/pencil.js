@@ -55,7 +55,9 @@ import "@pencil.js/resizable";
 import "@pencil.js/rotatable";
 
 // Package data
-import { version, author, homepage } from "../package.json";
+import pkg from "../package.json";
+
+const { version, author, homepage } = pkg;
 
 const exportableClasses = {
     Container,
