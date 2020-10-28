@@ -138,8 +138,10 @@ export default class Vector {
             return true;
         }
 
+        const delta = this.getDelta();
+        const startDiff = vector.start.clone().subtract(this.start);
         // Collinear
-        if (this.start.crossProduct(vector.start) === 0 && this.end.crossProduct(vector.end) === 0) {
+        if (delta.crossProduct(startDiff) === 0 && delta.crossProduct(vector.getDelta()) === 0) {
             // Overlap
             return !allEquals(
                 this.start.x < vector.start.x,
@@ -168,10 +170,8 @@ export default class Vector {
             return null;
         }
 
-        const d1 = this.getDelta();
-        const d2 = vector.getDelta();
-        const diff = this.start.clone().subtract(vector.start);
-        const determinant = ((d1.x * d2.y) - (d2.x * d1.y));
+        const delta = vector.getDelta();
+        const determinant = this.getDelta().crossProduct(delta);
 
         if (determinant === 0) {
             return this.start.clone()
@@ -179,8 +179,8 @@ export default class Vector {
                 .lerp(this.end.clone().constrain(vector.start, vector.end), 0.5);
         }
 
-        const t = determinant === 0 ? 0 : ((d2.x * diff.y) - (d2.y * diff.x)) / determinant;
-        return this.start.clone().lerp(this.end, t);
+        const diff = this.start.clone().subtract(vector.start);
+        return this.start.clone().lerp(this.end, (delta.crossProduct(diff)) / determinant);
     }
 
     /**
