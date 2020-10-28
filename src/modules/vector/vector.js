@@ -1,5 +1,7 @@
 import Position from "@pencil.js/position";
 
+const allEquals = (...args) => args.slice(1).every(a => a === args[0]);
+
 /**
  * Accept all kind of type and return only Number or Position
  * @param {VectorDefinition|PositionDefinition|Number} definition - Value definition
@@ -132,7 +134,27 @@ export default class Vector {
      */
     intersect (vectorDefinition) {
         const vector = Vector.from(vectorDefinition);
-        return !(this.start.isOnSameSide(this.end, vector) || vector.start.isOnSameSide(vector.end, this));
+        if (!(this.start.isOnSameSide(this.end, vector) || vector.start.isOnSameSide(vector.end, this))) {
+            return true;
+        }
+
+        // Collinear
+        if (this.start.crossProduct(vector.start) === 0 && this.end.crossProduct(vector.end) === 0) {
+            // Overlap
+            return !allEquals(
+                this.start.x < vector.start.x,
+                this.start.x < vector.end.x,
+                this.end.x < vector.start.x,
+                this.end.x < vector.end.x,
+            ) || !allEquals(
+                this.start.y < vector.start.y,
+                this.start.y < vector.end.y,
+                this.end.y < vector.start.y,
+                this.end.y < vector.end.y,
+            );
+        }
+
+        return false;
     }
 
     /**

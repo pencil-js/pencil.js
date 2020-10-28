@@ -116,8 +116,9 @@ test("intersect", (t) => {
     const intersect = new Vector([0, 120], [30, 120]);
     const donnot = new Vector([10, 90], [20, 110]);
 
-    t.true(t.context.intersect(intersect));
+    t.true(t.context.intersect(t.context));
     t.true(t.context.intersect([[0, 120], [30, 120]]));
+    t.true(t.context.intersect(intersect));
     t.false(t.context.intersect(donnot));
 });
 
