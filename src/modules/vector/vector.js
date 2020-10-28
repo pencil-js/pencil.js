@@ -158,6 +158,32 @@ export default class Vector {
     }
 
     /**
+     * Return the intersection point between two vector or null if no intersection happen
+     * @param {VectorDefinition} vectorDefinition - Any vector
+     * @return {Position}
+     */
+    getIntersectionPoint (vectorDefinition) {
+        const vector = Vector.from(vectorDefinition);
+        if (!this.intersect(vector)) {
+            return null;
+        }
+
+        const d1 = this.getDelta();
+        const d2 = vector.getDelta();
+        const diff = this.start.clone().subtract(vector.start);
+        const determinant = ((d1.x * d2.y) - (d2.x * d1.y));
+
+        if (determinant === 0) {
+            return this.start.clone()
+                .constrain(vector.start, vector.end)
+                .lerp(this.end.clone().constrain(vector.start, vector.end), 0.5);
+        }
+
+        const t = determinant === 0 ? 0 : ((d2.x * diff.y) - (d2.y * diff.x)) / determinant;
+        return this.start.clone().lerp(this.end, t);
+    }
+
+    /**
      * Find the closest position to a point on this vector
      * @param {PositionDefinition} positionDefinition - Any position
      * @return {Position}

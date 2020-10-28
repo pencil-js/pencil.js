@@ -122,6 +122,16 @@ test("intersect", (t) => {
     t.false(t.context.intersect(donnot));
 });
 
+test("getIntersectionPoint", (t) => {
+    const intersect = new Vector([0, 120], [30, 120]);
+    const donnot = new Vector([10, 90], [20, 110]);
+
+    t.deepEqual(t.context.getIntersectionPoint(t.context), new Position(25, 120));
+    t.deepEqual(t.context.getIntersectionPoint([[0, 120], [30, 120]]), new Position(25, 120));
+    t.deepEqual(t.context.getIntersectionPoint(intersect), new Position(25, 120));
+    t.is(t.context.getIntersectionPoint(donnot), null);
+});
+
 test("getClosestToPoint", (t) => {
     const onAB = t.context.getClosestToPoint([25, 120]);
     const above = t.context.getClosestToPoint([0, 120]);
