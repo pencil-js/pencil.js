@@ -1,5 +1,6 @@
 import test from "ava";
 import Line from ".";
+import Component from "../component";
 
 test.beforeEach((t) => {
     t.context = new Line([100, 50], [
@@ -18,6 +19,25 @@ test("trace", (t) => {
     const expected = [
         [150, 150],
         [200, 200],
+    ];
+    const path = {
+        moveTo: (...params) => {
+            t.deepEqual(params, [0, 0]);
+        },
+        lineTo: (...params) => {
+            t.deepEqual(params, expected[path.call++]);
+        },
+        call: 0,
+    };
+    t.plan(3);
+    t.context.trace(path);
+});
+
+test("trace absolute", (t) => {
+    t.context.options.absolute = true;
+    const expected = [
+        [50, 100],
+        [100, 150],
     ];
     const path = {
         moveTo: (...params) => {
@@ -57,9 +77,12 @@ test("from", (t) => {
 });
 
 test("defaultOptions", (t) => {
-    t.is(Line.defaultOptions.fill, null);
-    t.is(Line.defaultOptions.cap, Line.caps.round);
-    t.is(Line.defaultOptions.join, Line.joins.round);
+    const { cap, join, fill, stroke, absolute } = Line.defaultOptions;
+    t.is(cap, Line.caps.round);
+    t.is(join, Line.joins.round);
+    t.is(fill, null);
+    t.is(stroke, Component.defaultOptions.fill);
+    t.is(absolute, false);
 });
 
 test("caps", (t) => {
