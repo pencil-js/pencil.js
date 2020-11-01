@@ -16,7 +16,7 @@ scene.startLoop();
 ```
 
 
-## RectangleOptions
+## SceneOptions
 Inherit from [OffscreenCanvasOptions](../offscreen-canvas/readme.md#offscreencanvasoptions).
 
 | Name | Type | Default | Comment |
