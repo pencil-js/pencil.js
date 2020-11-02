@@ -1,5 +1,9 @@
 import Scene from "@pencil.js/scene";
 
+/**
+ * @module Navigation
+ */
+
 let currentScene = null;
 
 /**

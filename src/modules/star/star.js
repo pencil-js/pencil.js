@@ -1,6 +1,10 @@
 import RegularPolygon from "@pencil.js/regular-polygon";
 
 /**
+ * @module Star
+ */
+
+/**
  * Star class
  * @class
  * @extends RegularPolygon

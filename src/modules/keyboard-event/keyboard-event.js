@@ -1,6 +1,10 @@
 import BaseEvent from "@pencil.js/base-event";
 
 /**
+ * @module KeyboardEvent
+ */
+
+/**
  * Keyboard event class
  * @class
  * @extends BaseEvent
@@ -26,7 +30,7 @@ export default class KeyboardEvent extends BaseEvent {
      * @prop {String} up - Keyboard key released
      */
     /**
-     * @return {KeyboardEvents}
+     * @type {KeyboardEvents}
      */
     static get events () {
         return {
@@ -63,7 +67,7 @@ export default class KeyboardEvent extends BaseEvent {
      * @prop {String} insert - Insert here or toggle insert mode
      */
     /**
-     * @return {KeyboardKeys}
+     * @type {KeyboardKeys}
      */
     static get keys () {
         return {

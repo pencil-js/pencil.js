@@ -1,5 +1,9 @@
 import Position from "@pencil.js/position";
 
+/**
+ * @module Vector
+ */
+
 const allEquals = (...args) => args.slice(1).every(a => a === args[0]);
 
 /**
@@ -216,7 +220,7 @@ export default class Vector {
      * @prop {PositionDefinition} [end] - End coordinates
      */
     /**
-     * @typedef {[PositionDefinition, PositionDefinition]|AbstractVector} VectorDefinition
+     * @typedef {Array<PositionDefinition>|AbstractVector} VectorDefinition
      */
     /**
      * Create a Vector from a generic definition

@@ -8,6 +8,10 @@ import Vector from "@pencil.js/vector";
 import { constrain, map } from "@pencil.js/math";
 import "@pencil.js/draggable";
 
+/**
+ * @module Slider
+ */
+
 const constrainerKey = Symbol("_constrainer");
 const moveHandleKey = Symbol("_moveHandle");
 
@@ -107,7 +111,7 @@ export default class Slider extends Input {
      * @prop {Number} [width=200] - Size of the slider
      */
     /**
-     * @return {SliderOptions}
+     * @type {SliderOptions}
      */
     static get defaultOptions () {
         return {
@@ -121,8 +125,7 @@ export default class Slider extends Input {
 
     /**
      * Height of sliders
-     * @return {Number}
-     * @constant
+     * @type {Number}
      */
     static get HEIGHT () {
         return 20;

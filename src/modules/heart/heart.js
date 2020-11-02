@@ -1,6 +1,10 @@
 import Component from "@pencil.js/component";
 
 /**
+ * @module Heart
+ */
+
+/**
  * Heart class
  * @class
  * @extends Component

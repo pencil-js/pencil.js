@@ -2,6 +2,10 @@ import Ellipse from "@pencil.js/ellipse";
 import { radianCircle } from "@pencil.js/math";
 
 /**
+ * @module Circle
+ */
+
+/**
  * Circle class
  * @class
  * @extends Ellipse
@@ -35,7 +39,7 @@ export default class Circle extends Ellipse {
     }
 
     /**
-     * @override
+     * @inheritDoc
      * @return {Circle} Itself
      */
     trace (path) {

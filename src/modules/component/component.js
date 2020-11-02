@@ -3,6 +3,10 @@ import Position from "@pencil.js/position";
 import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 
 /**
+ * @module Component
+ */
+
+/**
  * Abstract class for visual component
  * @abstract
  * @class
@@ -201,7 +205,7 @@ export default class Component extends Container {
      * @prop {ShadowOptions} [shadow] - Set of options to set a shadow
      */
     /**
-     * @return {ComponentOptions}
+     * @type {ComponentOptions}
      */
     static get defaultOptions () {
         return {
@@ -268,8 +272,8 @@ export default class Component extends Container {
      */
     /**
      * All available cursors
-     * https://www.w3.org/TR/2017/WD-css-ui-4-20171222/#cursor
-     * @return {Cursors}
+     * {@link https://www.w3.org/TR/2017/WD-css-ui-4-20171222/#cursor}
+     * @type {Cursors}
      */
     static get cursors () {
         const cursors = {
@@ -330,7 +334,7 @@ export default class Component extends Container {
      * @prop {String} bevel - Join with a straight line between the line edges
      */
     /**
-     * @return {LineJoins}
+     * @type {LineJoins}
      */
     static get joins () {
         return {

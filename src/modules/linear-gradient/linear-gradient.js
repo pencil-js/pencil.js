@@ -1,6 +1,10 @@
 import Position from "@pencil.js/position";
 
 /**
+ * @module LinearGradient
+ */
+
+/**
  * Linear-gradient class
  * @class
  */

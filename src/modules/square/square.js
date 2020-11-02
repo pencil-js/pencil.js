@@ -1,5 +1,9 @@
 import Rectangle from "@pencil.js/rectangle";
 
+/**
+ * @module Square
+ */
+
 const widthKey = Symbol("_width");
 const heightKey = Symbol("_height");
 

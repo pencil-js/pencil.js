@@ -1,9 +1,13 @@
 import RegularPolygon from "@pencil.js/regular-polygon";
 
 /**
+ * @module Triangle
+ */
+
+/**
  * Triangle class
  * @class
- * @extends RegularPolygon
+ * @extends {module:RegularPolygon}
  */
 export default class Triangle extends RegularPolygon {
     /**

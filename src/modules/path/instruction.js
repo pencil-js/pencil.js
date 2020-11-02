@@ -1,6 +1,10 @@
 import Position from "@pencil.js/position";
 
 /**
+ * @module Instruction
+ */
+
+/**
  * Instruction class
  * @class
  */

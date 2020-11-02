@@ -1,6 +1,10 @@
 import BaseEvent from "@pencil.js/base-event";
 
 /**
+ * @module NetworkEvent
+ */
+
+/**
  * Network event class
  * @class
  * @extends BaseEvent
@@ -13,7 +17,7 @@ export default class NetworkEvent extends BaseEvent {
      * @prop {String} error - Content load has fail
      */
     /**
-     * @return {NetworkEvents}
+     * @type {NetworkEvents}
      */
     static get events () {
         return {

@@ -6,6 +6,10 @@ import Square from "@pencil.js/square";
 import "@pencil.js/draggable";
 
 /**
+ * @module Resizable
+ */
+
+/**
  * @typedef {Object} ResizableOptions
  * @extends DraggableOptions
  * @prop {Component} [handle] - Draggable shape used as handle (default is a right-triangle at the bottom right angle)
@@ -15,6 +19,7 @@ import "@pencil.js/draggable";
  * Enable resize on a rectangle
  * @param {ResizableOptions} [options] - Additional options
  * @return {DraggableAPI}
+ * @memberOf Rectangle
  */
 Rectangle.prototype.resizable = function resizable (options) {
     if (this.options.rotation % 1 !== 0) {

@@ -3,6 +3,10 @@ import Line from "@pencil.js/line";
 import { radianCircle } from "@pencil.js/math";
 
 /**
+ * @module Arc
+ */
+
+/**
  * Arc class
  * @class
  * @extends Component
@@ -67,14 +71,14 @@ export default class Arc extends Component {
     }
 
     /**
-     * @return {LineOptions}
+     * @type {LineOptions}
      */
     static get defaultOptions () {
         return Line.defaultOptions;
     }
 
     /**
-     * @return {LineCaps}
+     * @type {LineCaps}
      */
     static get caps () {
         return Line.caps;

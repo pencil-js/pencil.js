@@ -2,6 +2,10 @@ import convert from "color-convert";
 import { constrain, truncate, average, equals, lerp } from "@pencil.js/math";
 
 /**
+ * @module Color
+ */
+
+/**
  * Turn 2 bits hexadecimal number into a ratio between 0 and 1
  * @param {Number} hex - 2 bits hexadecimal number
  * @param {Number} n - Position of this number in the full chain

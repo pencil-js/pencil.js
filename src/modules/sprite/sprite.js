@@ -4,6 +4,10 @@ import { modulo } from "@pencil.js/math";
 import minimatch from "minimatch";
 
 /**
+ * @module Sprite
+ */
+
+/**
  * Sprite class
  * @class
  * @extends Image
@@ -163,7 +167,7 @@ export default class Sprite extends Image {
      * @prop {Boolean} [loop=true] -
      */
     /**
-     * return {SpriteOptions}
+     * @type {SpriteOptions}
      */
     static get defaultOptions () {
         return {
@@ -181,7 +185,7 @@ export default class Sprite extends Image {
      * @prop {String} end -
      */
     /**
-     * @return {SpriteEvents}
+     * @type {SpriteEvents}
      */
     static get events () {
         return {

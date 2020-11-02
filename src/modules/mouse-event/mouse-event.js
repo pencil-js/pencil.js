@@ -2,6 +2,10 @@ import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 
 /**
+ * @module MouseEvent
+ */
+
+/**
  * Mouse event class
  * @class
  * @extends BaseEvent
@@ -39,7 +43,7 @@ export default class MouseEvent extends BaseEvent {
      * @prop {String} rotate - Mouse is rotating a component
      */
     /**
-     * @return {MouseEvents}
+     * @type {MouseEvents}
      */
     static get events () {
         return {

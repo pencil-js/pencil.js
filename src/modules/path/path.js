@@ -5,6 +5,10 @@ import Spline from "@pencil.js/spline";
 import Instruction from "./instruction";
 
 /**
+ * @module Path
+ */
+
+/**
  * Path class
  * @class
  * @extends Component

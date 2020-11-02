@@ -4,6 +4,10 @@ import KeyboardEvent from "@pencil.js/keyboard-event";
 import MouseEvent from "@pencil.js/mouse-event";
 import Position from "@pencil.js/position";
 
+/**
+ * @module Scene
+ */
+
 const listenForEventsKey = Symbol("_listenForEvents");
 
 /**
@@ -177,7 +181,7 @@ export default class Scene extends OffscreenCanvas {
      * @prop {String} [cursor=Component.cursors.defaultOptions] - Cursor on hover
      */
     /**
-     * @return {SceneOptions}
+     * @type {SceneOptions}
      */
     static get defaultOptions () {
         return {
@@ -192,7 +196,7 @@ export default class Scene extends OffscreenCanvas {
      * @prop {String} change -
      */
     /**
-     * @return {SceneEvents}
+     * @type {SceneEvents}
      */
     static get events () {
         return {

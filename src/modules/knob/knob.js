@@ -8,6 +8,10 @@ import { map, modulo } from "@pencil.js/math";
 import "@pencil.js/rotatable";
 
 /**
+ * @module Knob
+ */
+
+/**
  * @class
  */
 export default class Knob extends Input {
@@ -82,7 +86,7 @@ export default class Knob extends Input {
      * @prop {Number} [radius=100] - Radius of the knob
      */
     /**
-     * @return {KnobOptions}
+     * @type {KnobOptions}
      */
     static get defaultOptions () {
         return {
@@ -97,7 +101,7 @@ export default class Knob extends Input {
 
     /**
      * Width of the rotation marker
-     * @return {Number}
+     * @type {Number}
      */
     static get NOTCH_SIZE () {
         return 0.09;

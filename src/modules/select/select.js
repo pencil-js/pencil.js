@@ -7,6 +7,10 @@ import Text from "@pencil.js/text";
 import { constrain } from "@pencil.js/math";
 import Triangle from "@pencil.js/triangle";
 
+/**
+ * @module Select
+ */
+
 const selectedKey = Symbol("_selected");
 
 /**
@@ -144,7 +148,7 @@ export default class Select extends Input {
     }
 
     /**
-     * @override
+     * @inheritDoc
      */
     click () {
         const { position } = this.optionsList[this.value].parent;
@@ -177,7 +181,7 @@ export default class Select extends Input {
      * @prop {String} [value=0] - Selected index of the select
      */
     /**
-     * @return {SelectOptions}
+     * @type {SelectOptions}
      */
     static get defaultOptions () {
         return {
@@ -189,7 +193,7 @@ export default class Select extends Input {
 
     /**
      * Margin around the text
-     * @return {Number}
+     * @type {Number}
      */
     static get MARGIN () {
         return 0.2;

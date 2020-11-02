@@ -3,8 +3,13 @@ import Position from "@pencil.js/position";
 import { radianCircle } from "@pencil.js/math";
 
 /**
+ * @module Particles
+ */
+
+/**
  * Particles generator class
  * @class
+ * @extends Component
  */
 export default class Particles extends Component {
     /**
@@ -104,7 +109,7 @@ export default class Particles extends Component {
      * @prop {Number|Position} [scale=1] - Scaling ratio or a pair of value for horizontal and vertical scaling
      */
     /**
-     * @return {ParticleData}
+     * @type {ParticleData}
      */
     static get defaultData () {
         return {

@@ -1,4 +1,8 @@
 /**
+ * @module EventEmitter
+ */
+
+/**
  * Able to listen and fire events
  * @abstract
  * @class
@@ -82,7 +86,7 @@ export default class EventEmitter {
      * @enum {String}
      */
     /**
-     * @return {EventEmitterEvents}
+     * @type {EventEmitterEvents}
      */
     static get events () {
         return {};

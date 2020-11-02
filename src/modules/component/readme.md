@@ -9,9 +9,6 @@ Abstract class for visual component of a scene.
 import { Component } from "pencil.js";
 
 class FunnyShape extends Component {
-    /**
-     * @override Component.prototype.render
-     */
     render (ctx) {
         // Do crazy stuff here
     }

@@ -3,6 +3,10 @@ import Text from "@pencil.js/text";
 import Rectangle from "@pencil.js/rectangle";
 
 /**
+ * @module Button
+ */
+
+/**
  * Button class
  * @class
  * @extends Input
@@ -92,7 +96,7 @@ export default class Button extends Input {
      * @prop {String} [value=""] - Text of the button
      */
     /**
-     * @return {ButtonOptions}
+     * @type {ButtonOptions}
      */
     static get defaultOptions () {
         return {
@@ -104,7 +108,7 @@ export default class Button extends Input {
 
     /**
      * Margin around the text
-     * @return {Number}
+     * @type {Number}
      */
     static get MARGIN () {
         return 0.2;

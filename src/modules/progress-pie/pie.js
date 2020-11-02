@@ -1,6 +1,10 @@
 import Arc from "@pencil.js/arc";
 
 /**
+ * @module Pie
+ */
+
+/**
  * @class
  */
 export default class Pie extends Arc {

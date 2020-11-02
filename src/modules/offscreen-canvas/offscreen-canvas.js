@@ -4,6 +4,10 @@ import Vector from "@pencil.js/vector";
 import { random } from "@pencil.js/math";
 
 /**
+ * @module OffscreenCanvas
+ */
+
+/**
  * Off-screen canvas class
  * @class
  */
@@ -191,7 +195,7 @@ export default class OffScreenCanvas extends Container {
      * @prop {Number} [opacity=1] - Global opacity
      */
     /**
-     * @return {OffscreenCanvasOptions}
+     * @type {OffscreenCanvasOptions}
      */
     static get defaultOptions () {
         return {

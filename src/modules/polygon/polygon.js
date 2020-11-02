@@ -2,6 +2,10 @@ import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
 
 /**
+ * @module Polygon
+ */
+
+/**
  * Polygon class
  * @class
  * @extends Component

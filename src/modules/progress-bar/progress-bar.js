@@ -3,6 +3,10 @@ import Rectangle from "@pencil.js/rectangle";
 import MouseEvent from "@pencil.js/mouse-event";
 import { constrain } from "@pencil.js/math";
 
+/**
+ * @module ProgressBar
+ */
+
 const valueKey = Symbol("_value");
 
 // FIXME: admittedly this is not an input, maybe we need a better name for the super class.
@@ -104,7 +108,7 @@ export default class ProgressBar extends Input {
      * @prop {Number} [speed=0.3] - Transition speed between two value (0 mean no change, 1 mean instant change)
      */
     /**
-     * @return {ProgressBarOptions}
+     * @type {ProgressBarOptions}
      */
     static get defaultOptions () {
         return {
@@ -118,8 +122,7 @@ export default class ProgressBar extends Input {
 
     /**
      * Height of sliders
-     * @return {Number}
-     * @constant
+     * @type {Number}
      */
     static get HEIGHT () {
         return 20;

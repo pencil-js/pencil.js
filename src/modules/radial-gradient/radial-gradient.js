@@ -1,6 +1,10 @@
 import Position from "@pencil.js/position";
 
 /**
+ * @module RadialGradient
+ */
+
+/**
  * Radial-gradient class
  * @class
  */

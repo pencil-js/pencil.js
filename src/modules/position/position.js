@@ -1,6 +1,10 @@
 import { constrain, equals, radianCircle, modulo } from "@pencil.js/math";
 
 /**
+ * @module Position
+ */
+
+/**
  * Pair of value in 2d space
  * @class
  */
@@ -264,7 +268,7 @@ export default class Position {
      * @prop {Number} [y=0] - Horizontal position
      */
     /**
-     * @typedef {Position|Array|AbstractPosition} PositionDefinition
+     * @typedef {Array<Number>|AbstractPosition} PositionDefinition
      */
     /**
      * Create a Position from a generic definition or do nothing if already a Position

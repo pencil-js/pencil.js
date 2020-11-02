@@ -1,4 +1,8 @@
 /**
+ * @module BaseEvent
+ */
+
+/**
  * Base event class
  * @class
  */

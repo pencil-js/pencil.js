@@ -3,6 +3,10 @@ import Position from "@pencil.js/position";
 import { equals } from "@pencil.js/math";
 
 /**
+ * @module Spline
+ */
+
+/**
  * Spline class
  * @class
  * @extends Line
@@ -62,7 +66,7 @@ export default class Spline extends Line {
 
     /**
      * Default ratio of tension
-     * @return {Number}
+     * @type {Number}
      */
     static get defaultTension () {
         return 0.2;

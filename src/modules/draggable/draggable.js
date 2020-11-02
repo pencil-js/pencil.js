@@ -3,6 +3,10 @@ import MouseEvent from "@pencil.js/mouse-event";
 import Vector from "@pencil.js/vector";
 
 /**
+ * @module Draggable
+ */
+
+/**
  * @typedef {Object} DraggableOptions
  * @prop {Boolean} [x=true] - Can move along vertical axis
  * @prop {Boolean} [y=true] - Can move along horizontal axis
@@ -21,6 +25,7 @@ import Vector from "@pencil.js/vector";
  * Set this component draggable
  * @param {DraggableOptions} [options] - Additional options
  * @return {DraggableAPI}
+ * @memberOf Component
  */
 Component.prototype.draggable = function draggable (options) {
     if (this.isRotatable) {
@@ -97,6 +102,7 @@ Component.prototype.draggable = function draggable (options) {
         /**
          * Set the draggable "x" option
          * @param {Boolean} x - New value for "x"
+         * @memberOf DraggableAPI#
          */
         set x (x) {
             mergedOptions.x = x;
@@ -105,6 +111,7 @@ Component.prototype.draggable = function draggable (options) {
         /**
          * Set the draggable "y" option
          * @param {Boolean} y - New value for "y"
+         * @memberOf DraggableAPI#
          */
         set y (y) {
             mergedOptions.y = y;
@@ -113,6 +120,7 @@ Component.prototype.draggable = function draggable (options) {
         /**
          * Set the draggable "constrain" option
          * @param {Vector} constrain - New value for "constrain"
+         * @memberOf DraggableAPI#
          */
         set constrain (constrain) {
             mergedOptions.constrain = constrain ? Vector.from(constrain) : constrain;
@@ -120,6 +128,7 @@ Component.prototype.draggable = function draggable (options) {
 
         /**
          * Stop the component from being draggable
+         * @memberOf DraggableAPI#
          */
         stop: () => {
             this.removeListener(MouseEvent.events.down, downHandler);

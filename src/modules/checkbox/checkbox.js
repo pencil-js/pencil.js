@@ -2,9 +2,13 @@ import Input from "@pencil.js/input";
 import Square from "@pencil.js/square";
 
 /**
+ * @module Checkbox
+ */
+
+/**
  * Checkbox class
  * @class
- * @extends Container
+ * @extends Input
  */
 export default class Checkbox extends Input {
     /**
@@ -103,7 +107,7 @@ export default class Checkbox extends Input {
      * @prop {Boolean} [value=false] - Whether it's check ot not
      */
     /**
-     * @return {CheckboxOptions}
+     * @type {CheckboxOptions}
      */
     static get defaultOptions () {
         return {
@@ -115,8 +119,7 @@ export default class Checkbox extends Input {
 
     /**
      * Margin around the filling square in ratio
-     * @return {Number}
-     * @constant
+     * @type {Number}
      */
     static get MARGIN () {
         return 0.2;

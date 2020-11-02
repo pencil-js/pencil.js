@@ -1,6 +1,10 @@
 import Rectangle from "@pencil.js/rectangle";
 import NetworkEvent from "@pencil.js/network-event";
 
+/**
+ * @module Image
+ */
+
 const urlKey = Symbol("_url");
 
 /**
@@ -177,7 +181,7 @@ export default class Image extends Rectangle {
      * @prop {String} [description=""] - Description of the image (can be used to for better accessibility)
      */
     /**
-     * @return {ImageOptions}
+     * @type {ImageOptions}
      */
     static get defaultOptions () {
         return {

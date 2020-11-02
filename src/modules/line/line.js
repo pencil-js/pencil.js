@@ -2,6 +2,10 @@ import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
 
 /**
+ * @module Line
+ */
+
+/**
  * Line class
  * @class
  * @extends Component
@@ -64,7 +68,7 @@ export default class Line extends Component {
      * @prop {Boolean} [absolute=false] - Should points be treated as absolute coordinates.
      */
     /**
-     * @return {LineOptions}
+     * @type {LineOptions}
      */
     static get defaultOptions () {
         return {
@@ -85,7 +89,7 @@ export default class Line extends Component {
      * @prop {String} square - Square caps by adding a square at end points, with a size of lineWidth
      */
     /**
-     * @return {LineCaps}
+     * @type {LineCaps}
      */
     static get caps () {
         return {

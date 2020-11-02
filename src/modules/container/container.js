@@ -3,6 +3,10 @@ import BaseEvent from "@pencil.js/base-event";
 import Position from "@pencil.js/position";
 import { radianCircle } from "@pencil.js/math";
 
+/**
+ * @module Container
+ */
+
 const scenePromiseKey = Symbol("_scenePromise");
 
 /**
@@ -443,7 +447,7 @@ export default class Container extends EventEmitter {
      * @prop {Component} [clip=null] - Other component used to clip the rendering
      */
     /**
-     * @return {ContainerOptions}
+     * @type {ContainerOptions}
      */
     static get defaultOptions () {
         return {
@@ -467,7 +471,7 @@ export default class Container extends EventEmitter {
      * @prop {String} show -
      */
     /**
-     * @return {ContainerEvent}
+     * @type {ContainerEvent}
      */
     static get events () {
         return {

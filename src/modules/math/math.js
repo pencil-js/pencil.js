@@ -1,4 +1,8 @@
 /**
+ * @module Math
+ */
+
+/**
  * Constrain a number between two limits.
  * @param {Number} value - Any number
  * @param {Number} min - Minimal limit for the value

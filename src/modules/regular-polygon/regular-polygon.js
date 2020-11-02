@@ -3,6 +3,10 @@ import Position from "@pencil.js/position";
 import { radianCircle } from "@pencil.js/math";
 
 /**
+ * @module RegularPolygon
+ */
+
+/**
  * Regular polygon class
  * @class
  * @extends Polygon

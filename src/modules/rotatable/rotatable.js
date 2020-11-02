@@ -2,6 +2,10 @@ import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
 
 /**
+ * @module Rotatable
+ */
+
+/**
  * @typedef {Object} RotatableAPI
  * @prop {Function} stop - Stop the component from being rotatable
  */
@@ -9,6 +13,7 @@ import MouseEvent from "@pencil.js/mouse-event";
 /**
  * Set this component rotatable (use drag and drop interaction to rotate)
  * @return {RotatableAPI}
+ * @memberOf Component
  */
 Component.prototype.rotatable = function rotatable () {
     if (this.isDraggable) {
@@ -72,6 +77,7 @@ Component.prototype.rotatable = function rotatable () {
     return {
         /**
          * Stop the component from being rotatable
+         * @memberOf RotatableAPI#
          */
         stop: () => {
             this.removeListener(MouseEvent.events.down, downHandler, true);

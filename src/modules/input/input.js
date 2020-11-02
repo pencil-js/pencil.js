@@ -3,6 +3,10 @@ import Component from "@pencil.js/component";
 import MouseEvent from "@pencil.js/mouse-event";
 
 /**
+ * @module Input
+ */
+
+/**
  * Abstract Input class
  * @abstract
  * @class
@@ -100,7 +104,7 @@ export default class Input extends Component {
      * @prop {String} [cursor=Component.cursors.pointer] - Cursor on hover
      */
     /**
-     * @return {InputOptions}
+     * @type {InputOptions}
      */
     static get defaultOptions () {
         return {
@@ -120,7 +124,7 @@ export default class Input extends Component {
      * @prop {String} change - Input value has changed
      */
     /**
-     * @return {InputEvents}
+     * @type {InputEvents}
      */
     static get events () {
         return {

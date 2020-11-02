@@ -4,6 +4,10 @@ import textDirection from "text-direction";
 import hash from "@sindresorhus/fnv1a";
 
 /**
+ * @module Text
+ */
+
+/**
  * Reformat passed arguments into an array of line string
  * @param {String|Array<String>} string - Multiline string or Array of multiline strings to split
  * @return {Array<String>}
@@ -313,7 +317,7 @@ export default class Text extends Rectangle {
      * @prop {Number} [lineHeight=1] - Ratio of line height (1 is normal, 2 is twice the space)
      */
     /**
-     * @return {TextOptions}
+     * @type {TextOptions}
      */
     static get defaultOptions () {
         return {
@@ -338,7 +342,7 @@ export default class Text extends Rectangle {
      * @prop {String} end - The text is aligned at the normal end of the line. (regarding locales)
      */
     /**
-     * @return {TextAlignments}
+     * @type {TextAlignments}
      */
     static get alignments () {
         return {

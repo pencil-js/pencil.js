@@ -4,6 +4,10 @@ import MouseEvent from "@pencil.js/mouse-event";
 import { constrain } from "@pencil.js/math";
 import Pie from "./pie";
 
+/**
+ * @module ProgressPie
+ */
+
 const valueKey = Symbol("_value");
 
 // FIXME: admittedly this is not an input, maybe we need a better name for the super class.
@@ -94,7 +98,7 @@ export default class ProgressPie extends Input {
      * @prop {Number} [speed=0.3] - Transition speed between two value (0 mean no change, 1 mean instant change)
      */
     /**
-     * @return {ProgressPieOptions}
+     * @type {ProgressPieOptions}
      */
     static get defaultOptions () {
         return {

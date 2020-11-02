@@ -2,6 +2,10 @@ import Arc from "@pencil.js/arc";
 import Component from "@pencil.js/component";
 
 /**
+ * @module Ellipse
+ */
+
+/**
  * Ellipse class
  * @class
  * @extends Arc
@@ -42,7 +46,7 @@ export default class Ellipse extends Arc {
     }
 
     /**
-     * @return {ComponentOptions}
+     * @type {ComponentOptions}
      */
     static get defaultOptions () {
         return Component.defaultOptions;

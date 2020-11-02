@@ -2,6 +2,10 @@ import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
 
 /**
+ * @module Rectangle
+ */
+
+/**
  * Basic rectangle
  * @class
  * @extends Component
@@ -100,7 +104,7 @@ export default class Rectangle extends Component {
      * @prop {String} bottomCenter
      */
     /**
-     * @return {RectangleOrigins}
+     * @type {RectangleOrigins}
      */
     static get origins () {
         return {
