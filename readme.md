@@ -74,7 +74,9 @@ const scene = new Scene();
 In that case, you will need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
 
 
-## [Documentation](https://pencil-js-docs.vercel.app/)
+## Documentation
+
+The [official documentation]() powered by [![Vercel logo](media/vercel.svg)](https://vercel.com/?utm_source=pencil-js&utm_campaign=oss).
 
 
 ## Purpose
