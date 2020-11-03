@@ -1,0 +1,35 @@
+{
+    "source": {
+        "include": ["./src", "documentation.md"],
+        "includePattern": "\\.js$",
+        "excludePattern": "test\\.js$"
+    },
+    "plugins": ["plugins/markdown"],
+    "opts": {
+        "recurse": true,
+        "destination": "./docs",
+        "template": "./node_modules/clean-jsdoc-theme",
+        "theme_opts": {
+            "meta": [
+                "<link type=\"image/png\" rel=\"icon\" href=\"https://raw.githubusercontent.com/GMartigny/pencil.js/master/media/mini-logo.png\">"
+            ],
+            "theme": "dark",
+            "title": "Pencil.js",
+            "menu": [
+                {
+                    "title": "\uD83C\uDF10 Website",
+                    "link": "https://pencil.js.org/"
+                },
+                {
+                    "title": "\uD83D\uDCC4 Repository",
+                    "link": "https://github.com/pencil-js/pencil.js"
+                }
+            ],
+            "create_style": "#main h1::after { background-color: #642b73; } #main h2::after { background-color: #C6426E; }"
+        }
+    },
+    "tags": {
+        "allowUnknownTags": false,
+        "dictionaries": ["jsdoc"]
+    }
+}

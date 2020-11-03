@@ -2,6 +2,7 @@
 .nyc_output/
 coverage/
 dist/
+docs/
 node_modules/
 
 cc-test-reporter
