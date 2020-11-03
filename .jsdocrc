@@ -1,6 +1,6 @@
 {
     "source": {
-        "include": ["./src", "documentation.md"],
+        "include": ["src", "documentation.md"],
         "includePattern": "\\.js$",
         "excludePattern": "test\\.js$"
     },
@@ -11,7 +11,7 @@
         "template": "./node_modules/clean-jsdoc-theme",
         "theme_opts": {
             "meta": [
-                "<link type=\"image/png\" rel=\"icon\" href=\"https://raw.githubusercontent.com/GMartigny/pencil.js/master/media/mini-logo.png\">"
+                "<link type='image/png' rel='icon' href='https://raw.githubusercontent.com/GMartigny/pencil.js/master/media/mini-logo.png'>"
             ],
             "theme": "dark",
             "title": "Pencil.js",
@@ -25,7 +25,8 @@
                     "link": "https://github.com/pencil-js/pencil.js"
                 }
             ],
-            "create_style": "#main h1::after { background-color: #642b73; } #main h2::after { background-color: #C6426E; }"
+            "create_style": "#main h1::after { background-color: #642b73; } #main h2::after { background-color: #C6426E; } img { vertical-align: middle; }",
+            "footer": "Powered by <a href='https://vercel.com?utm_source=pencil-js&utm_campaign=oss'><img src='https://raw.githubusercontent.com/pencil-js/pencil.js/master/media/vercel.svg'></a>"
         }
     },
     "tags": {
