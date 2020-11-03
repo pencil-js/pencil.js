@@ -12,6 +12,7 @@ Nice modular interactive 2D drawing library.
  - [Installation](#installation)
  - [CDN](#cdn)
  - [Usage](#usage)
+ - [Documentation](#documentation)
  - [Purpose](#purpose)
  - [Examples](#examples)
  - [Modules](#modules)
@@ -71,6 +72,9 @@ const scene = new Scene();
 ```
 
 In that case, you will need to use a bundler like [webpack](https://webpack.js.org/) or [browserify](http://browserify.org/).
+
+
+## [Documentation](https://pencil-js-docs.vercel.app/)
 
 
 ## Purpose
