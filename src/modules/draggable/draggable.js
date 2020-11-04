@@ -25,7 +25,7 @@ import Vector from "@pencil.js/vector";
  * Set this component draggable
  * @param {DraggableOptions} [options] - Additional options
  * @return {DraggableAPI}
- * @memberOf Component
+ * @memberOf {module:Component#}
  */
 Component.prototype.draggable = function draggable (options) {
     if (this.isRotatable) {
