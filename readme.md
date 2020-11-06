@@ -76,7 +76,7 @@ In that case, you will need to use a bundler like [webpack](https://webpack.js.o
 
 ## Documentation
 
-The [official documentation]() powered by [![Vercel logo](media/vercel.svg)](https://vercel.com/?utm_source=pencil-js&utm_campaign=oss).
+The [official documentation]() [![Vercel logo](media/vercel.svg)](https://vercel.com/?utm_source=pencil-js&utm_campaign=oss).
 
 
 ## Purpose

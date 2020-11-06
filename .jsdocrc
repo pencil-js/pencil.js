@@ -26,7 +26,7 @@
                 }
             ],
             "create_style": "#main h1::after { background-color: #642b73; } #main h2::after { background-color: #C6426E; } img { vertical-align: middle; }",
-            "footer": "Powered by <a href='https://vercel.com?utm_source=pencil-js&utm_campaign=oss'><img src='https://raw.githubusercontent.com/pencil-js/pencil.js/master/media/vercel.svg'></a>"
+            "footer": "Made with ❤️, <a href='https://vercel.com?utm_source=pencil-js&utm_campaign=oss'><img src='https://raw.githubusercontent.com/pencil-js/pencil.js/master/media/vercel.svg'></a>"
         }
     },
     "tags": {
