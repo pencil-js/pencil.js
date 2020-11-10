@@ -1,0 +1,48 @@
+body, html {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 1em;
+}
+
+#loader {
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    border: 4px solid;
+    border-color: red green blue yellow;
+    vertical-align: middle;
+    border-radius: 50%;
+    animation: rotate infinite linear 1s;
+}
+#loader.hidden {
+    visibility: hidden;
+    animation: none;
+}
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+main {
+    display: flex;
+    flex: 1 0 auto;
+}
+
+main canvas {
+    display: block;
+    flex: 1 0 50%;
+}
+
+footer {
+    padding: 1em;
+    height: 100px;
+}

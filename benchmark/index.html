@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Benchmark</title>
+    <link rel="stylesheet" href="benchmark.css" type="text/css">
+</head>
+<body>
+    <header>
+        <label for="select1">Compare</label>
+        <select id="select1"></select>
+        <label for="select2">Against</label>
+        <select id="select2"></select>
+        <button id="go">Go !</button>
+        <i id="loader"></i>
+    </header>
+    <main>
+        <canvas id="c1"></canvas>
+        <canvas id="c2"></canvas>
+    </main>
+    <footer>
+        <ul id="results"></ul>
+    </footer>
+    <script src="benchmark.js" type="module"></script>
+</body>
+</html>
