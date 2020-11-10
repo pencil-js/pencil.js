@@ -13,7 +13,7 @@ Nice modular interactive 2D drawing library.
  - [CDN](#cdn)
  - [Usage](#usage)
  - [Documentation](#documentation)
- - [Purpose](#purpose)
+ - [What Pencil.js do best](#what-penciljs-do-best)
  - [Examples](#examples)
  - [Modules](#modules)
  - [Who is using Pencil.js ?](#who-is-using-penciljs-)
@@ -76,10 +76,10 @@ In that case, you will need to use a bundler like [webpack](https://webpack.js.o
 
 ## Documentation
 
-The [official documentation]() [![Vercel logo](media/vercel.svg)](https://vercel.com/?utm_source=pencil-js&utm_campaign=oss).
+The [official documentation](https://docs.pencil-js.vercel.app/) [![Vercel logo](media/vercel.svg)](https://vercel.com/?utm_source=pencil-js&utm_campaign=oss).
 
 
-## Purpose
+## What Pencil.js do best
 
 ### Abstraction
 Drawing in a canvas is not trivial.
@@ -99,8 +99,16 @@ It also allows you to grab only what you need or replace what you don't like.
 
 
 ### Documentation
-A complete documentation goes a long way to help developers.
+A [complete documentation](https://docs.pencil-js.vercel.app/) goes a long way to help developers.
 All functions are assured to have a description and typed arguments and returns.
+
+### Performance
+Pencil.js is able to [draw thousands of shapes](https://benchmarks.slaylines.io/pencil.html) pretty smoothly without tanking your memory.
+Even more if you use the [Particles](src/modules/particles) generator.
+
+### Size
+With [![publish size](https://badgen.net/packagephobia/publish/pencil.js)](https://packagephobia.com/result?p=pencil.js), Pencil.js is fairly lightweight.
+Furthermore, with no side effect, it's fully tree-shakable. So, any decent bundler can further reduce its footprint.
 
 
 ## Examples
@@ -225,7 +233,7 @@ You want to help us improve ? Please read [the contributing manual](contributing
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-> All contributions are valued, you can add yourself to this list (or request to be added) whatever your contribution is.
+> All contributions are valued, you can add yourself to this list (or request to be) whatever your contribution is.
 
 ## License 
 
