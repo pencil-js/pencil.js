@@ -46,12 +46,13 @@ test("setOptions", (t) => {
     t.is(t.context.options.shadow.blur, 3);
 
     t.context.setOptions({
-        shadow: {
-            position: [99, 66],
-        },
+        fill: "red",
     });
-    t.is(t.context.options.shadow.position.x, 99);
-    t.is(t.context.options.shadow.position.y, 66);
+    t.is(t.context.options.shadow.position.x, 10);
+    t.is(t.context.options.shadow.position.y, 20);
+    t.is(t.context.options.fill, "red");
+
+    t.context.setOptions();
 });
 
 test("makePath", (t) => {

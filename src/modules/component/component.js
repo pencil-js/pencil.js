@@ -45,10 +45,10 @@ export default class Component extends Container {
 
     /**
      * Define options for this component
-     * @param {ComponentOptions} options - Options to override
+     * @param {ComponentOptions} [options={}] - Options to override
      * @return {Component} Itself
      */
-    setOptions (options) {
+    setOptions (options = {}) {
         const { shadow } = this.options;
         super.setOptions(options);
         if (typeof this.options.origin !== "string") {

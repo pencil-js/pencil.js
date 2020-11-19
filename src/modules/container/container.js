@@ -64,10 +64,10 @@ export default class Container extends EventEmitter {
 
     /**
      * Define options for this container
-     * @param {ContainerOptions} options - Options to override
+     * @param {ContainerOptions} [options={}] - Options to override
      * @return {Container} Itself
      */
-    setOptions (options) {
+    setOptions (options = {}) {
         this.options = {
             ...this.constructor.defaultOptions,
             ...this.options,
