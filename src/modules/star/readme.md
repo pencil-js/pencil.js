@@ -11,14 +11,14 @@ Star shape.
 import { Star } from "pencil.js";
 
 const position = [100, 200];
+const nbBranches = 6;
 const radius = 50;
-const branches = 6;
 const bevel = 0.7;
 const options = {
     fill: "gold",
     stroke: "goldendrod"
 };
-const star = new Star(position, radius, branches, bevel, options);
+const star = new Star(position, nbBranches, radius, bevel, options);
 ```
 
 

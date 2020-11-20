@@ -1,5 +1,7 @@
 import RegularPolygon from "@pencil.js/regular-polygon";
 
+const bevelRatioKey = Symbol("_bevelKey");
+
 /**
  * @module Star
  */
@@ -13,19 +15,80 @@ export default class Star extends RegularPolygon {
     /**
      * Star constructor
      * @param {PositionDefinition} positionDefinition - Center of the star
-     * @param {Number} outerRadius - Distance of branches from center
      * @param {Number} [nbBranches=5] - Number of branches to create (can't be less than 2)
+     * @param {Number} outerRadius - Distance of branches from center
      * @param {Number} [bevelRatio=0.5] - Ratio between branches length and bevel between them
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (positionDefinition, outerRadius, nbBranches = 5, bevelRatio = 0.5, options) {
-        super(positionDefinition, nbBranches, outerRadius, options);
+    constructor (positionDefinition, nbBranches = 5, outerRadius, bevelRatio = 0.5, options) {
+        super(positionDefinition, nbBranches * 2, outerRadius, options);
 
-        const innerRadius = this.radius * bevelRatio;
-        const innerPoints = RegularPolygon.getRotatingPoints(nbBranches, innerRadius, 0.5 / nbBranches);
-        innerPoints.forEach((point, index) => this.points.splice((index * 2) + 1, 0, point));
+        this[bevelRatioKey] = bevelRatio;
+        this.radius = outerRadius;
+    }
 
-        this.bevelRatio = bevelRatio;
+    /**
+     * Get the number of branches
+     * @return {Number}
+     */
+    get nbBranches () {
+        return this.points.length / 2;
+    }
+
+    /**
+     * Change the number of branches
+     * @param {Number} nbBranches - New number of branches
+     */
+    set nbBranches (nbBranches) {
+        this.points = RegularPolygon.getRotatingPoints(nbBranches * 2, this.radius);
+        this.rebuild();
+    }
+
+    /**
+     * Get the outer radius
+     * @return {Number}
+     */
+    get radius () {
+        return super.radius;
+    }
+
+    /**
+     * Change the outer radius
+     * @param {Number} radius - New radius value
+     */
+    set radius (radius) {
+        super.radius = radius;
+        this.rebuild();
+    }
+
+    /**
+     * Get the bevel ratio
+     * @return {Number}
+     */
+    get bevelRatio () {
+        return this[bevelRatioKey];
+    }
+
+    /**
+     * Change the bevel ratio
+     * @param {Number} bevelRatio - New bevel ratio value
+     */
+    set bevelRatio (bevelRatio) {
+        this[bevelRatioKey] = bevelRatio;
+        this.rebuild();
+    }
+
+    /**
+     * Compute the position for the points from the internal properties
+     */
+    rebuild () {
+        const innerRadius = this.radius * this.bevelRatio;
+        const innerPoints = RegularPolygon.getRotatingPoints(this.nbBranches, innerRadius, 0.5 / this.nbBranches);
+        this.points.forEach((point, index) => {
+            if (index % 2) {
+                point.set(innerPoints[(index - 1) / 2]);
+            }
+        });
     }
 
     /**
@@ -50,7 +113,7 @@ export default class Star extends RegularPolygon {
     static from (definition) {
         return new Star(
             definition.position,
-            definition.radius, definition.nbBranches, definition.bevelRatio,
+            definition.nbBranches, definition.radius, definition.bevelRatio,
             definition.options,
         );
     }

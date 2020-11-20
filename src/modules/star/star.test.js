@@ -1,17 +1,33 @@
 import test from "ava";
 import Star from ".";
+import almostEqual from "../../../test/_almost-equal";
 
 test.beforeEach((t) => {
-    t.context = new Star([10, 20], 11, 6, 0.2);
+    t.context = new Star([10, 20], 6, 11, 0.2);
 });
 
 test("constructor", (t) => {
+    t.is(t.context.nbBranches, 6);
     t.is(t.context.points.length, 12);
+    t.is(t.context.radius, 11);
     t.is(t.context.bevelRatio, 0.2);
 
     const defaultStar = new Star();
     t.is(defaultStar.points.length, 10);
     t.is(defaultStar.bevelRatio, 0.5);
+});
+
+test("set nbBranches", (t) => {
+    t.context.nbBranches = 4;
+    t.is(t.context.points.length, 8);
+    t.true(almostEqual(t.context.points[0].distance(), 11));
+    t.true(almostEqual(t.context.points[1].distance(), 11 * t.context.bevelRatio));
+});
+
+test("set radius", (t) => {
+    t.context.radius = 23;
+    t.is(t.context.radius, 23);
+    t.true(almostEqual(t.context.points[1].distance(), 23 * t.context.bevelRatio));
 });
 
 test("toJSON", (t) => {
