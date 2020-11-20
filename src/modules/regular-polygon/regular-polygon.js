@@ -2,6 +2,8 @@ import Polygon from "@pencil.js/polygon";
 import Position from "@pencil.js/position";
 import { radianCircle } from "@pencil.js/math";
 
+const radiusKey = Symbol("_radius");
+
 /**
  * @module RegularPolygon
  */
@@ -22,10 +24,25 @@ export default class RegularPolygon extends Polygon {
     constructor (position, nbSides, radius = 0, options) {
         super(position, RegularPolygon.getRotatingPoints(nbSides, radius), options);
 
-        /**
-         * @type {Number}
-         */
-        this.radius = radius;
+        this[radiusKey] = radius;
+    }
+
+    /**
+     * Set a new radius
+     * @param {Number} radius - New radius value
+     */
+    set radius (radius) {
+        const newPoints = RegularPolygon.getRotatingPoints(this.points.length, radius);
+        this.points.forEach((point, index) => point.set(newPoints[index]));
+        this[radiusKey] = radius;
+    }
+
+    /**
+     * Get the current radius
+     * @return {Number}
+     */
+    get radius () {
+        return this[radiusKey];
     }
 
     /**

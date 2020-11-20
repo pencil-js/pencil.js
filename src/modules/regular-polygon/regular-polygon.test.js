@@ -1,5 +1,6 @@
 import test from "ava";
 import RegularPolygon from ".";
+import almostEqual from "../../../test/_almost-equal";
 
 test.beforeEach((t) => {
     t.context = new RegularPolygon([10, 20], 5, 20);
@@ -14,6 +15,13 @@ test("constructor", (t) => {
     t.throws(() => new RegularPolygon(), {
         instanceOf: RangeError,
     });
+});
+
+test("set radius", (t) => {
+    t.context.radius = 42;
+
+    t.true(t.context.points.every(p => almostEqual(p.distance(), 42)));
+    t.is(t.context.radius, 42);
 });
 
 test("trace", (t) => {
