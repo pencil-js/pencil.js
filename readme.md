@@ -5,7 +5,6 @@
 [![Dependencies update](https://badgen.net/david/dev/pencil-js/pencil.js?icon=npm)](https://david-dm.org/pencil-js/pencil.js?type=dev)
 [![Maintainability](https://badgen.net/codeclimate/maintainability/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/maintainability)
 [![Test Coverage](https://badgen.net/codeclimate/coverage/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/test_coverage)
-[![Join us on Discord](https://badgen.net/badge/Discord/Join%20us/7289da?icon=discord)](https://discord.gg/GkEgjsy)
 
 Nice modular interactive 2D drawing library.
 
