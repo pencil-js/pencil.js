@@ -7,6 +7,7 @@ import { radianCircle } from "@pencil.js/math";
 
 /**
  * Circle class
+ * <br><img src="./media/examples/circle.png" alt="circle demo"/>
  * @class
  * @extends Ellipse
  */

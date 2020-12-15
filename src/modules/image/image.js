@@ -9,6 +9,7 @@ const urlKey = Symbol("_url");
 
 /**
  * Image class
+ * <br><img src="./media/examples/image.png" alt="image demo"/>
  * @class
  * @extends Rectangle
  */

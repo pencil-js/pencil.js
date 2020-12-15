@@ -13,6 +13,7 @@ const valueKey = Symbol("_value");
 // FIXME: admittedly this is not an input, maybe we need a better name for the super class.
 /**
  * ProgressPie class
+ * <br><img src="./media/examples/progress-pie.png" alt="progress-pie demo"/>
  * @class
  * @extends Input
  */

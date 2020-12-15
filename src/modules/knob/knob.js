@@ -12,7 +12,10 @@ import "@pencil.js/rotatable";
  */
 
 /**
+ * Knob class
+ * <br><img src="./media/examples/knob.png" alt="knob demo"/>
  * @class
+ * @extends Input
  */
 export default class Knob extends Input {
     /**

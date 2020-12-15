@@ -6,6 +6,7 @@ import Position from "@pencil.js/position";
 
 /**
  * Linear-gradient class
+ * <br><img src="./media/examples/linear-gradient.png" alt="linear-gradient demo"/>
  * @class
  */
 export default class LinearGradient {

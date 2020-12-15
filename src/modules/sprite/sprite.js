@@ -9,6 +9,7 @@ import minimatch from "minimatch";
 
 /**
  * Sprite class
+ * <br><img src="./media/examples/sprite.gif" alt="sprite demo"/>
  * @class
  * @extends Image
  */

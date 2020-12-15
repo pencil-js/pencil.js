@@ -8,6 +8,7 @@ import { radianCircle } from "@pencil.js/math";
 
 /**
  * Arc class
+ * <br><img src="./media/examples/arc.png" alt="arc demo"/>
  * @class
  * @extends Component
  */

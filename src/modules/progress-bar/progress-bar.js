@@ -12,6 +12,7 @@ const valueKey = Symbol("_value");
 // FIXME: admittedly this is not an input, maybe we need a better name for the super class.
 /**
  * Slider class
+ * <br><img src="./media/examples/progress-bar.png" alt="progress-bar demo"/>
  * @class
  * @extends Input
  */

@@ -54,6 +54,7 @@ const measureText = (() => {
 
 /**
  * Text class
+ * <br><img src="./media/examples/text.png" alt="text demo"/>
  * @class
  * @extends Rectangle
  */

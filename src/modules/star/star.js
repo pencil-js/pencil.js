@@ -8,6 +8,7 @@ const bevelRatioKey = Symbol("_bevelKey");
 
 /**
  * Star class
+ * <br><img src="./media/examples/star.png" alt="star demo"/>
  * @class
  * @extends RegularPolygon
  */

@@ -6,6 +6,7 @@ import Position from "@pencil.js/position";
 
 /**
  * Radial-gradient class
+ * <br><img src="./media/examples/radial-gradient.png" alt="radial-gradient demo"/>
  * @class
  */
 export default class RadialGradient {

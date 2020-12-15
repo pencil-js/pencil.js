@@ -15,6 +15,7 @@ const selectedKey = Symbol("_selected");
 
 /**
  * Select class
+ * <br><img src="./media/examples/select.png" alt="select demo"/>
  * @class
  * @extends Input
  */

@@ -7,6 +7,7 @@ import Component from "@pencil.js/component";
 
 /**
  * Ellipse class
+ * <br><img src="./media/examples/ellipse.png" alt="ellipse demo"/>
  * @class
  * @extends Arc
  */
