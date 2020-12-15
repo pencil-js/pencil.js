@@ -1,3 +1,5 @@
+![Pencil.js logo](./media/animated-logo.gif)
+
 # Documentation
 
 Welcome to the [Pencil.js documentation page](https://pencil-js-docs.vercel.app/).
