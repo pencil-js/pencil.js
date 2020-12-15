@@ -20,7 +20,8 @@
         "build": "webpack --mode=production",
         "contrib": "all-contributors generate",
         "docs": "rm -rf docs/ && jsdoc -c .jsdocrc",
-        "prepublishOnly": "npm run build"
+        "prepublishOnly": "npm run build",
+        "postversion": "now --prod"
     },
     "ava": {
         "require": [

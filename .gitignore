@@ -1,5 +1,6 @@
 .idea/
 .nyc_output/
+.vercel
 coverage/
 dist/
 docs/
