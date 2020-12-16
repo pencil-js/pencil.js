@@ -11,7 +11,48 @@
         "template": "./node_modules/clean-jsdoc-theme",
         "theme_opts": {
             "meta": [
-                "<link type='image/png' rel='icon' href='https://raw.githubusercontent.com/GMartigny/pencil.js/master/media/mini-logo.png'>"
+                {
+                    "name": "title",
+                    "property": "og:title",
+                    "content": "Pencil.js documentation"
+                },
+                {
+                    "name": "description",
+                    "property": "og:description",
+                    "content": "Full documentation for the Pencil.js library."
+                },
+                {
+                    "name": "image",
+                    "property": "og:image",
+                    "content": "./media/logo-media.png"
+                },
+                {
+                    "property": "og:image:alt",
+                    "content": "Pencil.js written with shapes behind."
+                },
+                {
+                    "name": "author",
+                    "content": "GMartigny"
+                },
+                {
+                    "name": "twitter:creator",
+                    "content": "@gmartigny"
+                },
+                {
+                    "property": "og:type",
+                    "content": "website"
+                },
+                {
+                    "name": "twitter:card",
+                    "content": "summary_large_image"
+                }
+            ],
+            "add_style_path": [
+                {
+                    "type": "image/png",
+                    "rel": "shortcut icon",
+                    "href": "./media/mini-logo.png"
+                }
             ],
             "theme": "dark",
             "title": "Pencil.js",
@@ -25,8 +66,9 @@
                     "link": "https://github.com/pencil-js/pencil.js"
                 }
             ],
+            "static_dir": ["./media"],
             "create_style": "#main h1::after { background-color: #642b73; } #main h2::after { background-color: #C6426E; } img { vertical-align: middle; }",
-            "footer": "Made with ❤️, <a href='https://vercel.com?utm_source=pencil-js&utm_campaign=oss'><img src='https://raw.githubusercontent.com/pencil-js/pencil.js/master/media/vercel.svg'></a>"
+            "footer": "Made with ❤️, <a href='https://vercel.com?utm_source=pencil-js&utm_campaign=oss'><img src='./media/vercel.svg'></a>"
         }
     },
     "tags": {

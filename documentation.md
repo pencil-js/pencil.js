@@ -2,7 +2,7 @@
 
 # Documentation
 
-Welcome to the [Pencil.js documentation page](https://pencil-js-docs.vercel.app/).
+Welcome to the [Pencil.js documentation page](https://docs.pencil-js.vercel.app/).
 
 
 ## Get started
