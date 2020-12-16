@@ -11,6 +11,11 @@ const output = {
     library: "Pencil",
 };
 const devtool = "source-map";
+const resolve = {
+    fallback: {
+        path: false,
+    },
+};
 
 module.exports = [
     {
@@ -22,6 +27,7 @@ module.exports = [
             libraryExport: "default",
         },
         devtool,
+        resolve,
     },
     {
         experiments: {
@@ -34,5 +40,6 @@ module.exports = [
             libraryTarget: "global",
         },
         devtool,
+        resolve,
     },
 ];
