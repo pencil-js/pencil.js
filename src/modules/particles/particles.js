@@ -49,7 +49,7 @@ export default class Particles extends Component {
         this.data = this.data.concat([...new Array(number)].map((_, index) => {
             const data = {
                 ...Particles.defaultData,
-                ...this.generator(index, ...params),
+                ...this.generator ? this.generator(index, ...params) : {},
             };
             data.position = Position.from(data.position);
             return data;
