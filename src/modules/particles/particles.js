@@ -22,27 +22,40 @@ export default class Particles extends Component {
      * @callback ParticlesCallback
      * @param {ParticleData} data - One particle data
      * @param {Number} index - Index of the particle
+     * @param {...*} params - Additional parameters
      */
     /**
      * Particles constructor
      * @param {PositionDefinition} positionDefinition - Origin for all particles
      * @param {Component} base - Blueprint for each particle
-     * @param {Number} nbInstances - Number of particle to create
-     * @param {OptionsGenerator} optionGenerator - Initialization function for all particles data
+     * @param {OptionsGenerator} generator - Initialization function for all particles data
      * @param {ParticlesCallback} updater - Function called on each particle draw (should not be computation intensive)
      */
-    constructor (positionDefinition, base, nbInstances, optionGenerator, updater) {
+    constructor (positionDefinition, base, generator, updater) {
         super(positionDefinition, base.options);
         this.base = base;
+        this.generator = generator;
         this.updater = updater;
-        this.data = [...new Array(nbInstances)].map((_, index) => {
+        this.data = [];
+    }
+
+    /**
+     * Create new particles
+     * @param {Number} number - Number of particles to generate
+     * @param {...*} params - Additional parameters for the generator function
+     * @return {Particles} Itself
+     */
+    generate (number, ...params) {
+        this.data = this.data.concat([...new Array(number)].map((_, index) => {
             const data = {
                 ...Particles.defaultData,
-                ...optionGenerator(index),
+                ...this.generator(index, ...params),
             };
             data.position = Position.from(data.position);
             return data;
-        });
+        }));
+
+        return this;
     }
 
     /**
@@ -53,11 +66,11 @@ export default class Particles extends Component {
         this.base.trace(basePath);
         const matrix = new window.DOMMatrix();
         const { cos, sin } = Math;
-        this.data.forEach((data, index) => {
+        this.data = this.data.filter((data, index) => {
             if (this.updater) {
                 this.updater(data, index);
             }
-            const { position, scale = 1, rotation = 0 } = data;
+            const { position, scale = 1, rotation = 0, ttl } = data;
             const scaleOptions = typeof scale === "number" ? [scale, scale] : Position.from(scale).toJSON();
             const rotationRadian = rotation * radianCircle;
             matrix.a = cos(rotationRadian) * scaleOptions[0];
@@ -67,6 +80,8 @@ export default class Particles extends Component {
             matrix.e = position.x;
             matrix.f = position.y;
             path.addPath(basePath, matrix);
+
+            return ttl === undefined || data.ttl-- > 0;
         });
         return this;
     }
