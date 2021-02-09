@@ -8,6 +8,7 @@
         "src",
         "!src/**/*.test.js"
     ],
+    "types": "dist/src/pencil.d.ts",
     "sideEffects": false,
     "unpkg": "dist/pencil.min.js",
     "jsdelivr": "dist/pencil.min.js",
@@ -20,7 +21,7 @@
         "build": "webpack --mode=production",
         "contrib": "all-contributors generate",
         "docs": "rm -rf docs/ && jsdoc -c .jsdocrc",
-        "prepublishOnly": "npm run build",
+        "prepublishOnly": "npm run build && tsc",
         "postversion": "now --prod"
     },
     "ava": {
@@ -120,6 +121,7 @@
         "esm": "^3.2.25",
         "jsdoc": "^3.6.6",
         "nyc": "^15.1.0",
+        "typescript": "^4.1.3",
         "webpack": "^5.1.3",
         "webpack-cli": "^4.1.0"
     }
