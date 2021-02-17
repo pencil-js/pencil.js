@@ -225,11 +225,14 @@ You want to help us improve ? Please read [the contributing manual](contributing
     <sub><b>Zachary Nguyen</b></sub></a></td>
     <td align="center"><a href='https://github.com/jaller94'><img src='https://github.com/jaller94.png?size=99' width='99px;' alt='Christian Paul avatar'/><br/>
     <sub><b>Christian Paul</b></sub></a></td>
+    <td align="center"><a href='https://github.com/Marr11317'><img src='https://github.com/Marr11317.png?size=99' width='99px;' alt='Rémi Marche avatar'/><br/>
+    <sub><b>Rémi Marche</b></sub></a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 > All contributions are valued, you can add yourself to this list (or request to be) whatever your contribution is.

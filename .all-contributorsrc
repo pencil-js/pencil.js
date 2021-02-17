@@ -1,43 +1,50 @@
 {
-    "projectName": "pencil.js",
-    "projectOwner": "pencil-js",
-    "files": [
-        "readme.md"
-    ],
-    "imageSize": 99,
-    "commit": false,
-    "contributorTemplate": "<a href='https://github.com/${ contributor.login }'><img src='https://github.com/${ contributor.login }.png?size=${ options.imageSize }' width='${ options.imageSize }px;' alt='${ contributor.name } avatar'/><br/>\n    <sub><b>${ contributor.name }</b></sub></a>",
-    "contributors": [
-        {
-            "login": "GMartigny",
-            "name": "Guillaume Martigny",
-            "avatar_url": "https://avatars3.githubusercontent.com/u/2543511?v=4",
-            "profile": "http://www.guillaume-martigny.fr",
-            "contributions": []
-        },
-        {
-            "login": "Heraclite",
-            "name": "Heraclite",
-            "avatar_url": "https://avatars3.githubusercontent.com/u/26170557?v=4",
-            "profile": "https://github.com/Heraclite",
-            "contributions": []
-        },
-        {
-            "login": "zachary-nguyen",
-            "name": "Zachary Nguyen",
-            "avatar_url": "https://avatars1.githubusercontent.com/u/43250829?v=4",
-            "profile": "https://github.com/zachary-nguyen",
-            "contributions": []
-        },
-        {
-            "login": "jaller94",
-            "name": "Christian Paul",
-            "avatar_url": "https://avatars1.githubusercontent.com/u/10872136?v=4",
-            "profile": "https://github.com/jaller94",
-            "contributions": []
-        }
-    ],
-    "contributorsPerLine": 7,
-    "repoType": "github",
-    "commitConvention": "none"
+  "projectName": "pencil.js",
+  "projectOwner": "pencil-js",
+  "files": [
+    "readme.md"
+  ],
+  "imageSize": 99,
+  "commit": false,
+  "contributorTemplate": "<a href='https://github.com/${ contributor.login }'><img src='https://github.com/${ contributor.login }.png?size=${ options.imageSize }' width='${ options.imageSize }px;' alt='${ contributor.name } avatar'/><br/>\n    <sub><b>${ contributor.name }</b></sub></a>",
+  "contributors": [
+    {
+      "login": "GMartigny",
+      "name": "Guillaume Martigny",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2543511?v=4",
+      "profile": "http://www.guillaume-martigny.fr",
+      "contributions": []
+    },
+    {
+      "login": "Heraclite",
+      "name": "Heraclite",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/26170557?v=4",
+      "profile": "https://github.com/Heraclite",
+      "contributions": []
+    },
+    {
+      "login": "zachary-nguyen",
+      "name": "Zachary Nguyen",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/43250829?v=4",
+      "profile": "https://github.com/zachary-nguyen",
+      "contributions": []
+    },
+    {
+      "login": "jaller94",
+      "name": "Christian Paul",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/10872136?v=4",
+      "profile": "https://github.com/jaller94",
+      "contributions": []
+    },
+    {
+      "login": "Marr11317",
+      "name": "Rémi Marche",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35939574?v=4",
+      "profile": "https://github.com/Marr11317",
+      "contributions": []
+    }
+  ],
+  "contributorsPerLine": 7,
+  "repoType": "github",
+  "commitConvention": "none"
 }
