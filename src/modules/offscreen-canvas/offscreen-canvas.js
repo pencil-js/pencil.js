@@ -16,7 +16,7 @@ export default class OffScreenCanvas extends Container {
      * Off-screen canvas constructor
      * @param {Number} [width=1] - Width of the canvas
      * @param {Number} [height=1] - Height of the canvas
-     * @param {ContainerOptions} options - Specific options
+     * @param {ContainerOptions} [options] - Specific options
      */
     constructor (width = 1, height = 1, options) {
         super(undefined, options);

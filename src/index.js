@@ -10,7 +10,7 @@ const installed = [];
 /**
  * Install a plugin in Pencil.js
  * @param {Plugin} plugin - Plugin to install
- * @param {Object} options - Option passed down to the plugin
+ * @param {Object} [options] - Option passed down to the plugin
  * @return {Object} The Pencil.js package
  */
 function use ({ name, install }, options) {

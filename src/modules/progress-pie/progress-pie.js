@@ -21,7 +21,7 @@ export default class ProgressPie extends Input {
     /**
      * ProgressPie constructor
      * @param {PositionDefinition} positionDefinition - Position of the progress-pie center
-     * @param {ProgressPieOptions} options - Specific options
+     * @param {ProgressPieOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
         super(positionDefinition, Circle, options);

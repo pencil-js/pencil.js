@@ -21,7 +21,7 @@ export default class Knob extends Input {
     /**
      * knob constructor
      * @param {PositionDefinition} positionDefinition - Position of the center
-     * @param {KnobOptions} options - Specific options
+     * @param {KnobOptions} [options] - Specific options
      */
     constructor (positionDefinition, options) {
         super(positionDefinition, Circle, options);

@@ -31,7 +31,7 @@ export default class Sprite extends Image {
      * @param {PositionDefinition} positionDefinition -
      * @param {String} url -
      * @param {Array<FrameData>} frames -
-     * @param {SpriteOptions} options - Drawing options
+     * @param {SpriteOptions} [options] - Drawing options
      */
     constructor (positionDefinition, url, frames, options) {
         super(positionDefinition, url, options);

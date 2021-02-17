@@ -14,7 +14,7 @@ export default class Pie extends Arc {
      * @param {Number} radius - Circle radius
      * @param {Number} startAngle - Angle beginning the arc
      * @param {Number} endAngle - Angle ending the arc
-     * @param {ComponentOptions} options - Specific options
+     * @param {ComponentOptions} [options] - Specific options
      */
     constructor (positionDefinition, radius, startAngle, endAngle, options) {
         super(positionDefinition, radius, radius, startAngle, endAngle, options);
