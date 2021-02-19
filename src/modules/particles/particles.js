@@ -28,8 +28,8 @@ export default class Particles extends Component {
      * Particles constructor
      * @param {PositionDefinition} positionDefinition - Origin for all particles
      * @param {Component} base - Blueprint for each particle
-     * @param {OptionsGenerator} generator - Initialization function for all particles data
-     * @param {ParticlesCallback} updater - Function called on each particle draw (should not be computation intensive)
+     * @param {OptionsGenerator} [generator] - Initialization function for all particles data
+     * @param {ParticlesCallback} [updater] - Function called on each particle draw (should not be computation intensive)
      */
     constructor (positionDefinition, base, generator, updater) {
         super(positionDefinition, base.options);
@@ -121,8 +121,9 @@ export default class Particles extends Component {
     /**
      * @typedef {Object} ParticleData
      * @prop {Position} [position=new Position()] - Position of the particle
-     * @prop {Number} [rotation=0] - Rotation of the particle
+     * @prop {Number} [rotation=0] - Rotation applied to the particle
      * @prop {Number|Position} [scale=1] - Scaling ratio or a pair of value for horizontal and vertical scaling
+     * @prop {Number} [ttl] - Time to live, number of frames the particle is displayed. This number will be decremented and the data removed when it reach 0
      */
     /**
      * @type {ParticleData}
