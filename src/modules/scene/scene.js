@@ -243,10 +243,10 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
             this.setCursor(target.options.cursor);
             this.cursorPosition.set(eventPosition);
         },
-        [MouseEvent.events.up]: (target, eventPosition) => {
+        [MouseEvent.events.up]: (target, eventPosition, event) => {
             startPosition = null;
             if (target.isClicked) {
-                target.fire(new MouseEvent(MouseEvent.events.click, target, eventPosition));
+                target.fire(new MouseEvent(MouseEvent.events.click, target, eventPosition, event));
                 target.isClicked = false;
             }
         },
@@ -255,15 +255,16 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
             const events = event.deltaY > 0 ?
                 [mouseEvents.scrollDown, mouseEvents.zoomOut] :
                 [mouseEvents.scrollUp, mouseEvents.zoomIn];
-            target.fire(new MouseEvent(events[0], target, eventPosition))
-                .fire(new MouseEvent(events[1], target, eventPosition));
+            target.fire(new MouseEvent(events[0], target, eventPosition, event))
+                .fire(new MouseEvent(events[1], target, eventPosition, event));
         },
-        mouseout: (target, eventPosition) => {
-            target.fire(new MouseEvent(MouseEvent.events.leave, target, eventPosition));
+        mouseout: (target, eventPosition, event) => {
+            target.fire(new MouseEvent(MouseEvent.events.leave, target, eventPosition, event));
         },
-        mouseenter: (target, eventPosition) => {
-            target.fire(new MouseEvent(MouseEvent.events.hover, target, eventPosition));
+        mouseenter: (target, eventPosition, event) => {
+            target.fire(new MouseEvent(MouseEvent.events.hover, target, eventPosition, event));
         },
+        [MouseEvent.events.contextMenu]: null,
     };
     Object.keys(mouseListeners).forEach((eventName) => {
         container.addEventListener(eventName, (event) => {
@@ -273,14 +274,14 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
                     .add(window.scrollX, window.scrollY);
                 const target = this.getTarget(eventPosition, this.ctx);
                 if (target) {
-                    target.fire(new MouseEvent(eventName, target, eventPosition));
+                    target.fire(new MouseEvent(eventName, target, eventPosition, event));
                     if (mouseListeners[eventName] instanceof Function) {
                         mouseListeners[eventName](target, eventPosition, event);
                     }
                 }
             }
         }, {
-            passive: true,
+            passive: false,
         });
     });
     const keyboardListener = {
@@ -290,7 +291,7 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
     Object.keys(keyboardListener).forEach((eventName) => {
         window.document.addEventListener(eventName, (event) => {
             if (this.options.shown) {
-                this.fire(new KeyboardEvent(eventName, this, event.key));
+                this.fire(new KeyboardEvent(eventName, this, event));
                 if (keyboardListener[eventName] instanceof Function) {
                     keyboardListener[eventName](event);
                 }

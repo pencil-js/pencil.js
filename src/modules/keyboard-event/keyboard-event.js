@@ -14,13 +14,20 @@ export default class KeyboardEvent extends BaseEvent {
      * MouseEvent constructor
      * @param {String} name - Name of the event
      * @param {EventEmitter} target - Component concerned by the event
-     * @param {String} key - Key that trigger the event
+     * @param {UIEvent} [event] - Original HTML event
      * For the complete list of key values:
-     * https://developer.mozilla.org/fr/docs/Web/API/KeyboardEvent/key/Key_Values
+     * https://developer.mozilla.org/en/docs/Web/API/KeyboardEvent/key/Key_Values
      */
-    constructor (name, target, key) {
-        super(name, target);
-        this.key = key;
+    constructor (name, target, event) {
+        super(name, target, event);
+        this.key = event.key;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    getModifier () {
+        return this.key;
     }
 
     /**
@@ -30,6 +37,8 @@ export default class KeyboardEvent extends BaseEvent {
      * @prop {String} up - Keyboard key released
      */
     /**
+     * Set of supported event name for easy access
+     * @example component.on(KeyboardEvent.events.up, () => console.log("User release a key"));
      * @type {KeyboardEvents}
      */
     static get events () {
@@ -54,8 +63,9 @@ export default class KeyboardEvent extends BaseEvent {
      * @prop {String} enter - Add line-break or validate entry
      * @prop {String} delete - Remove character in front
      * @prop {String} escape - Cancel or leave screen
-     * @prop {String} control - Modifying key (function)
+     * @prop {String} control - Modifying key (control)
      * @prop {String} shift - Modifying key (uppercase)
+     * @prop {String} fn - Modifying key (function)
      * @prop {ArrowKeys}
      * @prop {String} tab - Next input or toggle focus
      * @prop {String} alt - Modifying key (alternative)
@@ -67,6 +77,10 @@ export default class KeyboardEvent extends BaseEvent {
      * @prop {String} insert - Insert here or toggle insert mode
      */
     /**
+     * Set of keys for easy access
+     * @example if (key === KeyboardEvent.keys.enter) {
+     *     console.log("This is the enter key");
+     * }
      * @type {KeyboardKeys}
      */
     static get keys () {
@@ -77,6 +91,7 @@ export default class KeyboardEvent extends BaseEvent {
             escape: "Escape",
             control: "Control",
             shift: "Shift",
+            fn: "Fn",
             arrows: {
                 up: "ArrowUp",
                 right: "ArrowRight",

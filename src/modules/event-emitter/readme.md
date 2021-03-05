@@ -1,20 +1,20 @@
 # EventEmitter
 
-Abstract class for event listener and triggerer.
+Abstract class for event listeners and triggers.
+
+Allow for all components to listen and fire events.
 
 
 ## Examples
 
 ```js
-import { EventEmitter } from "pencil.js";
+const eventName = "eventName";
+component.on(eventName, (event) => {
+    console.log("Event fired");
+});
 
-class MyEmitter extends EventEmitter {
-    fire (event) {
-        super.fire(event);
-        const trigger = `on${capitalize(event.name)}`;
-        if (target[trigger]) {
-            target[trigger](event);
-        }
-    }
-}
+// ...
+
+const event = new BaseEvent(eventName, component);
+component.fire(event);
 ```

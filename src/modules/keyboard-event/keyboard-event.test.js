@@ -4,12 +4,15 @@ import KeyboardEvent from ".";
 test("constructor", (t) => {
     const target = null;
     const name = "TestEvent";
-    const key = "shift";
-    const fakeEvent = new KeyboardEvent(name, target, key);
+    const event = {
+        key: "Shift",
+    };
+    const fakeEvent = new KeyboardEvent(name, target, event);
 
     t.is(fakeEvent.target, null);
     t.is(fakeEvent.name, name);
-    t.is(fakeEvent.key, key);
+    t.is(fakeEvent.key, event.key);
+    t.is(fakeEvent.getModifier(), event.key);
 });
 
 test("events", (t) => {

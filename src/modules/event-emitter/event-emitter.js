@@ -12,15 +12,28 @@ export default class EventEmitter {
      * EventEmitter constructor
      */
     constructor () {
+        /**
+         * @typedef {Object} EventListener
+         * @prop {Function} callback - Function called when event is fired
+         * @prop {EventEmitter} element - Element on which to listen for the event
+         * @prop {Boolean} isTargeted - Will call the callback only when the event target is the element
+         * @prop {String} [modifier] - Additional data about the event
+         */
+        /**
+         * Set of event listeners of this component
+         * @type {Object<string, Array<EventListener>>}
+         */
         this.eventListeners = {};
     }
 
     /**
      * Listen to an event or multiple events
-     * @param {String|Array<String>} eventName - Name of event (or a list of event names) to listen to
+     * @param {String|Array<String>} eventName - Name of event (or a list of event names) to listen to.<br>
+     * The event name can be followed by a modifier (separated by a ".")
      * @param {Function} callback - Function to call when event fire
      * @param {Boolean} [isTargeted=false] - Should only listen to event targeting itself
      * @return {EventEmitter} Itself
+     * @example component.on("event.modifier", () => console.log("Event fired with modifier"));
      */
     on (eventName, callback, isTargeted = false) {
         const event = {
@@ -29,10 +42,14 @@ export default class EventEmitter {
             isTargeted,
         };
         (Array.isArray(eventName) ? eventName : [eventName]).forEach((name) => {
-            if (!this.eventListeners[name]) {
-                this.eventListeners[name] = [];
+            const [baseName, modifier] = name.split(".");
+            if (!this.eventListeners[baseName]) {
+                this.eventListeners[baseName] = [];
             }
-            this.eventListeners[name].push(event);
+            this.eventListeners[baseName].push({
+                ...event,
+                modifier,
+            });
         });
         return this;
     }
@@ -47,7 +64,10 @@ export default class EventEmitter {
         if (listeners) {
             listeners.forEach((listener) => {
                 if (!listener.isTargeted || listener.element === event.target) {
-                    listener.callback.call(this, event);
+                    const modifier = event.getModifier && event.getModifier();
+                    if (!listener.modifier || listener.modifier === modifier) {
+                        listener.callback.call(this, event);
+                    }
                 }
             });
         }
@@ -62,11 +82,14 @@ export default class EventEmitter {
      */
     removeListener (eventName, callback) {
         (Array.isArray(eventName) ? eventName : [eventName]).forEach((name) => {
-            if (callback) {
-                this.eventListeners[name] = this.eventListeners[name].filter(event => event.callback !== callback);
+            const [baseName, modifier] = name.split(".");
+            if (callback || modifier) {
+                this.eventListeners[baseName] = this.eventListeners[baseName]
+                    .filter(event => (callback && event.callback !== callback) ||
+                        (modifier && event.modifier !== modifier));
             }
             else {
-                delete this.eventListeners[name];
+                delete this.eventListeners[baseName];
             }
         });
         return this;

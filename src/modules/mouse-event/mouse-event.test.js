@@ -4,12 +4,24 @@ import MouseEvent from ".";
 test("constructor", (t) => {
     const target = null;
     const name = "TestEvent";
-    const fakeEvent = new MouseEvent(name, target, [120, 42]);
+    const position = [120, 42];
+    const event = {
+        button: 1,
+    };
+    const fakeEvent = new MouseEvent(name, target, position, event);
 
     t.is(fakeEvent.target, target);
     t.is(fakeEvent.name, name);
     t.is(fakeEvent.position.x, 120);
     t.is(fakeEvent.position.y, 42);
+    t.is(fakeEvent.button, event.button);
+    t.is(fakeEvent.getModifier(), event.button);
+});
+
+test("buttons", (t) => {
+    Object.keys(MouseEvent.buttons).forEach((key) => {
+        t.is(typeof MouseEvent.buttons[key], "string");
+    });
 });
 
 test("events", (t) => {
