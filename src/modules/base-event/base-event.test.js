@@ -15,3 +15,18 @@ test("stop", (t) => {
     t.context.stop();
     t.is(t.context.bubble, false);
 });
+
+test("getModifier", (t) => {
+    t.is(t.context.getModifier(), null);
+});
+
+test("prevent", (t) => {
+    t.context.event = {
+        preventDefault () {
+            t.pass();
+        },
+    };
+
+    t.plan(2);
+    t.is(t.context.prevent(), t.context);
+});
