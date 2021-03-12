@@ -37,7 +37,7 @@
 
     shapes.push(container);
 
-    shapes.push(new P.Star(new P.Position(100, 100), 20));
+    shapes.push(new P.Star(new P.Position(100, 100), 5, 20));
 
     shapes.push(new P.RegularPolygon(new P.Position(100, 100), 5, 20, {
         fill: null,
