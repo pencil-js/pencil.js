@@ -106,7 +106,7 @@ Pencil.js is able to [draw thousands of shapes](https://benchmarks.slaylines.io/
 Even more if you use the [Particles](src/modules/particles) generator.
 
 ### Size
-With [![publish size](https://badgen.net/packagephobia/publish/pencil.js)](https://packagephobia.com/result?p=pencil.js), Pencil.js is fairly lightweight.
+With [![Minified and gzip size](https://badgen.net/bundlephobia/minzip/pencil.js)](https://bundlephobia.com/result?p=pencil.js), Pencil.js is fairly lightweight.
 Furthermore, with no side effect, it's fully tree-shakable. So, any decent bundler can further reduce its footprint.
 
 
