@@ -10,7 +10,19 @@ test("resizable", (t) => {
     rectangle.resizable();
 });
 
-test("resizable square without x and y axis", (t) => {
+test("resizable throws", (t) => {
+    t.throws(() => {
+        const rect = new Rectangle([0, 0], 10, 20, {
+            rotation: 0.3,
+        });
+        rect.resizable();
+    });
+    t.throws(() => {
+        const rect = new Rectangle([0, 0], 10, 20, {
+            origin: [2, 3],
+        });
+        rect.resizable();
+    });
     t.throws(() => {
         const square = new Square([0, 0], 10);
         square.resizable({

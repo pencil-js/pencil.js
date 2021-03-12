@@ -17,17 +17,31 @@ test("constructor", (t) => {
     t.is(defaultStar.bevelRatio, 0.5);
 });
 
+const checkPointsDistance = (t) => {
+    t.context.points.forEach((point, index) => {
+        const distance = point.distance();
+        const expected = t.context.radius * (index % 2 ? t.context.bevelRatio : 1);
+        t.true(almostEqual(distance, expected));
+    });
+};
+
 test("set nbBranches", (t) => {
     t.context.nbBranches = 4;
+    t.is(t.context.nbBranches, 4);
     t.is(t.context.points.length, 8);
-    t.true(almostEqual(t.context.points[0].distance(), 11));
-    t.true(almostEqual(t.context.points[1].distance(), 11 * t.context.bevelRatio));
+    checkPointsDistance(t);
 });
 
 test("set radius", (t) => {
     t.context.radius = 23;
     t.is(t.context.radius, 23);
-    t.true(almostEqual(t.context.points[1].distance(), 23 * t.context.bevelRatio));
+    checkPointsDistance(t);
+});
+
+test("set bevel ratio", (t) => {
+    t.context.bevelRatio = 0.5;
+    t.is(t.context.bevelRatio, 0.5);
+    checkPointsDistance(t);
 });
 
 test("toJSON", (t) => {

@@ -28,7 +28,8 @@
         "require": [
             "esm",
             "@pencil.js/test-environment"
-        ]
+        ],
+        "timeout": "2m"
     },
     "eslintConfig": {
         "extends": "@gmartigny/eslint-config",

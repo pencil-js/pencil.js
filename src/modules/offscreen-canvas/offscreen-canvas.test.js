@@ -65,17 +65,29 @@ test("getRandomPosition", (t) => {
 });
 
 test("get and set imageData", (t) => {
-    const imgData = t.context.getImageData([[10, 10], [20, 20]]);
-    t.context.setImageData(imgData, [20, 20]);
-    t.pass();
+    const override = expected => (...args) => {
+        t.deepEqual(args, expected);
+    };
+    t.context.ctx.getImageData = override([10, 11, 20, 21]);
+    t.context.getImageData([[10, 11], [20, 21]]);
+    t.context.ctx.getImageData = override([0, 0, 100, 200]);
+    const imgData = t.context.getImageData();
+
+    t.context.ctx.putImageData = (data, ...args) => {
+        t.is(data, imgData);
+        t.deepEqual(args, [20, 22]);
+    };
+    t.context.setImageData(imgData, [20, 22]);
 });
 
 test("toImage", (t) => {
     const img = t.context.toImage();
     t.is(img.width, 100);
     t.is(img.height, 200);
-    t.true(img instanceof window.HTMLImageElement);
     t.truthy(img.src);
+    const cropped = t.context.toImage([[10, 20], [30, 60]]);
+    t.is(cropped.width, 20);
+    t.is(cropped.height, 40);
 });
 
 test("getDrawingContext", (t) => {

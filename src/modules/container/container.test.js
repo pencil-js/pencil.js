@@ -39,6 +39,12 @@ test("setOptions", (t) => {
     });
     t.is(t.context.options.rotationCenter.x, 10);
     t.is(t.context.options.rotationCenter.y, 20);
+
+    t.context.setOptions({
+        scale: [2, 3],
+    });
+    t.is(t.context.options.scale.x, 2);
+    t.is(t.context.options.scale.y, 3);
 });
 
 test("isHover", (t) => {
@@ -181,11 +187,15 @@ test("setContext", (t) => {
     t.context.options.scale = 2;
     const ctx = {
         translate: () => {},
-        clip: () => t.pass(),
-        rotate: () => t.pass(),
-        scale: () => t.pass(),
+        clip: (...args) => t.is(args.length, 1),
+        rotate: (...args) => t.deepEqual(args, [Math.PI]),
+        scale: (...args) => t.deepEqual(args, [2, 2]),
     };
-    t.plan(3);
+    t.plan(6);
+    t.context.setContext(ctx);
+
+    ctx.scale = (...args) => t.deepEqual(args, [3, 4]);
+    t.context.options.scale = [3, 4];
     t.context.setContext(ctx);
 });
 

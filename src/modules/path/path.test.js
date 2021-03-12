@@ -60,11 +60,17 @@ test("isHover", (t) => {
     t.true(t.context.isHover([0, 0], ctx));
 });
 
-test.todo("toJSON");
+test("toJSON", (t) => {
+    t.throws(() => {
+        JSON.stringify(t.context);
+    });
+});
 
 test("from", (t) => {
     const definition = {};
-    t.throws(() => Path.from(definition));
+    t.throws(() => {
+        Path.from(definition);
+    });
 });
 
 test("lineTo", (t) => {
@@ -104,7 +110,24 @@ test("quadTo", (t) => {
     instruction.execute(ctx);
 });
 
-test.todo("splineThrough");
+test("splineThrough", (t) => {
+    const points = [
+        [10, 20],
+        [30, 40],
+        [1, 2],
+    ];
+    let i = 0;
+    const ctx = {
+        bezierCurveTo: (ctr1x, ctr1y, ctr2x, ctr2y, x, y) => {
+            t.is(x, points[i][0]);
+            t.is(y, points[i][1]);
+            i++;
+        },
+    };
+    t.plan(6);
+    const instruction = Path.splineThrough(points, 0.5);
+    instruction.execute(ctx);
+});
 
 test("waveTo", (t) => {
     t.throws(() => Path.waveTo([0, 0], 3));
