@@ -117,7 +117,8 @@ export default class Image extends Rectangle {
      * @return {Image} Itself
      */
     draw (ctx) {
-        ctx.drawImage(this.file, 0, 0, this.width, this.height);
+        const origin = this.getOrigin();
+        ctx.drawImage(this.file, origin.x, origin.y, this.width, this.height);
         return this;
     }
 
