@@ -89,12 +89,16 @@ test("makePath", (t) => {
 });
 
 test("isHover", (t) => {
+    // not loaded, should call nothing
+    t.false(t.context.isHover([0, 0], {}));
+
     const ctx = {
         save: () => t.pass(),
         restore: () => t.pass(),
         translate: () => t.pass(),
         isPointInPath: () => t.pass(),
     };
+    t.context.isLoaded = true;
     t.context.isHover([0, 0], ctx);
 });
 

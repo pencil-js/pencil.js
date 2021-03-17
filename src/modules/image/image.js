@@ -88,8 +88,6 @@ export default class Image extends Rectangle {
         if (this.isLoaded) {
             ctx.save();
 
-            this.setContext(ctx);
-
             const path = new window.Path2D();
             this.trace(path);
             this.path = path;
@@ -126,6 +124,10 @@ export default class Image extends Rectangle {
      * @inheritDoc
      */
     isHover (...args) {
+        if (!this.isLoaded) {
+            return false;
+        }
+
         const previous = this.options.fill;
         this.options.fill = true;
         const result = super.isHover(...args);
