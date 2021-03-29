@@ -73,6 +73,30 @@ test("set url as a image file", (t) => {
     t.is(t.context.file, file);
 });
 
+test.cb("set url as another Image", (t) => {
+    const savedLoad = Image.load;
+    Image.load = url => new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                url,
+                width: 10,
+                height: 20,
+            });
+        }, 10);
+    });
+
+    const blueprint = new Image(undefined, "nice");
+    blueprint.on("ready", () => {
+        t.context.url = blueprint;
+
+        t.is(t.context.url, blueprint.url);
+        t.is(t.context.file, blueprint.file);
+
+        Image.load = savedLoad;
+        t.end();
+    });
+});
+
 test("makePath", (t) => {
     t.context.isLoaded = true;
     t.context.options.fill = true;

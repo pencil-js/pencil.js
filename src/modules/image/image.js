@@ -17,10 +17,10 @@ export default class Image extends Rectangle {
     /**
      * Image constructor
      * @param {PositionDefinition} positionDefinition - Top-left corner of the image
-     * @param {String|HTMLImageElement} url - Link to an image file or the image file itself
+     * @param {String|Image|HTMLImageElement} source - Link to an image file, another Image instance or the image file itself
      * @param {ComponentOptions} [options] - Drawing options
      */
-    constructor (positionDefinition, url, options) {
+    constructor (positionDefinition, source, options) {
         super(positionDefinition, undefined, undefined, options);
 
         /**
@@ -36,22 +36,22 @@ export default class Image extends Rectangle {
          * @private
          */
         this[urlKey] = null;
-        this.url = url;
+        this.url = source;
     }
 
     /**
      * Change the image URL
-     * @param {String} url - Link to an image file
+     * @param {String|Image|HTMLImageElement} source - Link to an image file, another Image instance or the image file itself
      */
-    set url (url) {
-        if (this.url === url) {
+    set url (source) {
+        if (this.url === source) {
             return;
         }
 
         this.file = null;
         this.isLoaded = false;
-        this[urlKey] = url;
-        if (url) {
+        this[urlKey] = source;
+        if (source) {
             const done = (img) => {
                 this[urlKey] = img.src;
                 this.file = img;
@@ -60,11 +60,14 @@ export default class Image extends Rectangle {
                 this.height = img.height;
                 this.fire(new NetworkEvent(NetworkEvent.events.ready, this));
             };
-            if (url instanceof window.HTMLImageElement) {
-                done(url);
+            if (source instanceof window.HTMLImageElement) {
+                done(source);
+            }
+            else if (source instanceof Image && source.isLoaded) {
+                done(source.file);
             }
             else {
-                Image.load(url).then(done).catch(() => {
+                Image.load(source).then(done).catch(() => {
                     this.fire(new NetworkEvent(NetworkEvent.events.error, this));
                 });
             }
@@ -87,6 +90,9 @@ export default class Image extends Rectangle {
     makePath (ctx) {
         if (this.isLoaded) {
             ctx.save();
+
+            const origin = this.getOrigin();
+            ctx.translate(origin.x, origin.y);
 
             const path = new window.Path2D();
             this.trace(path);
@@ -115,8 +121,7 @@ export default class Image extends Rectangle {
      * @return {Image} Itself
      */
     draw (ctx) {
-        const origin = this.getOrigin();
-        ctx.drawImage(this.file, origin.x, origin.y, this.width, this.height);
+        ctx.drawImage(this.file, 0, 0, this.width, this.height);
         return this;
     }
 
