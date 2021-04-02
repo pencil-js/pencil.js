@@ -194,8 +194,9 @@ export default class Color {
      * @return {Color} Itself
      */
     saturation (value) {
-        const target = average(Math.min(...this.array), Math.max(...this.array));
-        return this.set(...this.array.map(channel => target + (value * (channel - target))));
+        const { array } = this;
+        const target = average(Math.min(...array), Math.max(...array));
+        return this.set(...array.map(channel => target + (value * (channel - target))));
     }
 
     /**
