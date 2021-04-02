@@ -91,9 +91,12 @@ export default class Path extends Component {
      * @return {Path}
      */
     static from (definition) {
+        const instructions = Array.isArray(definition.instructions) ?
+            definition.instructions.map(instruction => Instruction.from(instruction)) :
+            undefined;
         return new Path(
             definition.position,
-            definition.instructions.map(instruction => Instruction.from(instruction)),
+            instructions,
             definition.isClosed,
             definition.options,
         );

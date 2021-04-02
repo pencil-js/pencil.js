@@ -67,7 +67,9 @@ test("toJSON", (t) => {
 });
 
 test("from", (t) => {
-    const definition = {};
+    const definition = {
+        instructions: [{}],
+    };
     t.throws(() => {
         Path.from(definition);
     });
