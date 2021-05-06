@@ -40,4 +40,5 @@ test("events", (t) => {
     t.is(typeof MouseEvent.events.drag, "string");
     t.is(typeof MouseEvent.events.drop, "string");
     t.is(typeof MouseEvent.events.resize, "string");
+    t.is(typeof MouseEvent.events.dblClick, "string");
 });

@@ -265,6 +265,7 @@ Scene.prototype[listenForEventsKey] = function listenForEvents (container) {
             target.fire(new MouseEvent(MouseEvent.events.hover, target, eventPosition, event));
         },
         [MouseEvent.events.contextMenu]: null,
+        [MouseEvent.events.doubleClick]: null,
     };
     Object.keys(mouseListeners).forEach((eventName) => {
         container.addEventListener(eventName, (event) => {
