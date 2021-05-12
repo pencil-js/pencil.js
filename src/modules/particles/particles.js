@@ -1,6 +1,6 @@
 import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
-import { radianCircle } from "@pencil.js/math";
+import { radianCircle, random } from "@pencil.js/math";
 
 /**
  * @module Particles
@@ -30,9 +30,13 @@ export default class Particles extends Component {
      * @param {Component} base - Blueprint for each particle
      * @param {OptionsGenerator} [generator] - Initialization function for all particles data
      * @param {ParticlesCallback} [updater] - Function called on each particle draw (should not be computation intensive)
+     * @param {ParticleOptions} [options] -
      */
-    constructor (positionDefinition, base, generator, updater) {
-        super(positionDefinition, base.options);
+    constructor (positionDefinition, base, generator, updater, options) {
+        super(positionDefinition, {
+            ...base.options,
+            ...options,
+        });
         this.base = base;
         this.generator = generator;
         this.updater = updater;
@@ -81,8 +85,14 @@ export default class Particles extends Component {
             matrix.f = position.y;
             path.addPath(basePath, matrix);
 
-            return ttl === undefined || data.ttl-- > 0;
+            return !ttl || --data.ttl > 0;
         });
+
+        if (this.options.emit && random() < this.options.frequency) {
+            const nb = Array.isArray(this.options.emit) ? random(...this.options.emit) : this.options.emit;
+            this.generate(Math.floor(nb), ...this.options.args);
+        }
+
         return this;
     }
 
@@ -107,7 +117,7 @@ export default class Particles extends Component {
 
     /**
      * @inheritDoc
-     * @param {Object} definition -
+     * @param {Object} definition - Particles definition
      * @return {Particles}
      */
     static from (definition) {
@@ -116,6 +126,25 @@ export default class Particles extends Component {
         const particles = new Particles(definition.position, base, 0);
         particles.data = definition.data;
         return particles;
+    }
+
+    /**
+     * @typedef {Object} ParticleOptions
+     * @extends ComponentOptions
+     * @prop {Number} [frequency=1] - Frequency of emission (randomized)
+     * @prop {Number|Array<Number>} [emit] - Number or range of particles emitted
+     * @prop {Array} [args] - Arguments passed to the generator function
+     */
+    /**
+     * @type {ParticleOptions}
+     */
+    static get defaultOptions () {
+        return {
+            ...super.defaultOptions,
+            frequency: 1,
+            emit: null,
+            args: [],
+        };
     }
 
     /**

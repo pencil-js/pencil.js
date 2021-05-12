@@ -47,6 +47,24 @@ test("generate and trace", (t) => {
     t.is(t.context.data.length, 0);
 });
 
+test("trace and generate", (t) => {
+    const args = ["a", "b"];
+    t.context.options.emit = 11;
+    t.context.options.args = args;
+
+    let expected = 0;
+    t.context.generator = (index, ...passed) => {
+        t.is(index, expected++);
+        t.deepEqual(passed, args);
+    };
+
+    const ctx = {
+        addPath: () => t.pass(),
+    };
+    t.context.trace(ctx);
+    t.is(t.context.data.length, 11);
+});
+
 test("isHover", (t) => {
     t.false(t.context.isHover(t.context.position));
 });
@@ -60,8 +78,13 @@ test("toJSON", (t) => {
 
 test.todo("from");
 
-test("defaultData", (t) => {
-    const { defaultData } = Particles;
+test("defaultOptions and defaultData", (t) => {
+    const { defaultOptions, defaultData } = Particles;
+
+    t.is(defaultOptions.frequency, 1);
+    t.is(defaultOptions.emit, null);
+    t.true(defaultOptions.args.length === 0);
+
     t.true(defaultData.position.constructor.name === "Position");
     t.is(defaultData.position.x, 0);
     t.is(defaultData.position.y, 0);
