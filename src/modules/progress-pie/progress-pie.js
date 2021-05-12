@@ -28,10 +28,8 @@ export default class ProgressPie extends Input {
 
         this.removeListener([MouseEvent.events.hover, MouseEvent.events.leave, MouseEvent.events.click]);
 
-        this.progress = new Pie(undefined, this.radius - 1, 0, 0, {
+        this.progress = new Pie(this.getOrigin(), this.radius - (this.options.strokeWidth / 2), 0, 0, {
             fill: this.options.foreground,
-            stroke: null,
-            origin: this.getOrigin(),
         });
         this.add(this.progress);
 

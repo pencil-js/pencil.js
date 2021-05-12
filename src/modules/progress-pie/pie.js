@@ -27,4 +27,20 @@ export default class Pie extends Arc {
         path.moveTo(0, 0);
         return super.trace(path);
     }
+
+    /**
+     * @typedef {Object} PieOptions
+     * @extends LineOptions
+     * @prop {String|ColorDefinition} [fill=null] - Color used to fill
+     */
+    /**
+     * @return {PieOptions}
+     */
+    static get defaultOptions () {
+        return {
+            ...super.defaultOptions,
+            fill: super.defaultOptions.stroke,
+            stroke: null,
+        };
+    }
 }
