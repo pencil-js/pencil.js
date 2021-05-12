@@ -1,6 +1,6 @@
 import Component from "@pencil.js/component";
 import Position from "@pencil.js/position";
-import { radianCircle } from "@pencil.js/math";
+import { radianCircle, random } from "@pencil.js/math";
 
 /**
  * @module Particles
@@ -22,27 +22,44 @@ export default class Particles extends Component {
      * @callback ParticlesCallback
      * @param {ParticleData} data - One particle data
      * @param {Number} index - Index of the particle
+     * @param {...*} params - Additional parameters
      */
     /**
      * Particles constructor
      * @param {PositionDefinition} positionDefinition - Origin for all particles
      * @param {Component} base - Blueprint for each particle
-     * @param {Number} nbInstances - Number of particle to create
-     * @param {OptionsGenerator} optionGenerator - Initialization function for all particles data
-     * @param {ParticlesCallback} updater - Function called on each particle draw (should not be computation intensive)
+     * @param {OptionsGenerator} [generator] - Initialization function for all particles data
+     * @param {ParticlesCallback} [updater] - Function called on each particle draw (should not be computation intensive)
+     * @param {ParticleOptions} [options] -
      */
-    constructor (positionDefinition, base, nbInstances, optionGenerator, updater) {
-        super(positionDefinition, base.options);
+    constructor (positionDefinition, base, generator, updater, options) {
+        super(positionDefinition, {
+            ...base.options,
+            ...options,
+        });
         this.base = base;
+        this.generator = generator;
         this.updater = updater;
-        this.data = [...new Array(nbInstances)].map((_, index) => {
+        this.data = [];
+    }
+
+    /**
+     * Create new particles
+     * @param {Number} number - Number of particles to generate
+     * @param {...*} params - Additional parameters for the generator function
+     * @return {Particles} Itself
+     */
+    generate (number, ...params) {
+        this.data = this.data.concat([...new Array(number)].map((_, index) => {
             const data = {
                 ...Particles.defaultData,
-                ...optionGenerator(index),
+                ...this.generator ? this.generator(index, ...params) : {},
             };
             data.position = Position.from(data.position);
             return data;
-        });
+        }));
+
+        return this;
     }
 
     /**
@@ -53,11 +70,11 @@ export default class Particles extends Component {
         this.base.trace(basePath);
         const matrix = new window.DOMMatrix();
         const { cos, sin } = Math;
-        this.data.forEach((data, index) => {
+        this.data = this.data.filter((data, index) => {
             if (this.updater) {
                 this.updater(data, index);
             }
-            const { position, scale = 1, rotation = 0 } = data;
+            const { position, scale = 1, rotation = 0, ttl } = data;
             const scaleOptions = typeof scale === "number" ? [scale, scale] : Position.from(scale).toJSON();
             const rotationRadian = rotation * radianCircle;
             matrix.a = cos(rotationRadian) * scaleOptions[0];
@@ -67,7 +84,15 @@ export default class Particles extends Component {
             matrix.e = position.x;
             matrix.f = position.y;
             path.addPath(basePath, matrix);
+
+            return !ttl || --data.ttl > 0;
         });
+
+        if (this.options.emit && random() < this.options.frequency) {
+            const nb = Array.isArray(this.options.emit) ? random(...this.options.emit) : this.options.emit;
+            this.generate(Math.floor(nb), ...this.options.args);
+        }
+
         return this;
     }
 
@@ -92,7 +117,7 @@ export default class Particles extends Component {
 
     /**
      * @inheritDoc
-     * @param {Object} definition -
+     * @param {Object} definition - Particles definition
      * @return {Particles}
      */
     static from (definition) {
@@ -104,10 +129,30 @@ export default class Particles extends Component {
     }
 
     /**
+     * @typedef {Object} ParticleOptions
+     * @extends ComponentOptions
+     * @prop {Number} [frequency=1] - Frequency of emission (randomized)
+     * @prop {Number|Array<Number>} [emit] - Number or range of particles emitted
+     * @prop {Array} [args] - Arguments passed to the generator function
+     */
+    /**
+     * @type {ParticleOptions}
+     */
+    static get defaultOptions () {
+        return {
+            ...super.defaultOptions,
+            frequency: 1,
+            emit: null,
+            args: [],
+        };
+    }
+
+    /**
      * @typedef {Object} ParticleData
      * @prop {Position} [position=new Position()] - Position of the particle
-     * @prop {Number} [rotation=0] - Rotation of the particle
+     * @prop {Number} [rotation=0] - Rotation applied to the particle
      * @prop {Number|Position} [scale=1] - Scaling ratio or a pair of value for horizontal and vertical scaling
+     * @prop {Number} [ttl] - Time to live, number of frames the particle is displayed. This number will be decremented and the data removed when it reach 0
      */
     /**
      * @type {ParticleData}
