@@ -26,7 +26,7 @@
         "contrib": "all-contributors generate",
         "docs": "rm -rf docs/ && jsdoc -c .jsdocrc",
         "prepublishOnly": "npm run build",
-        "postversion": "now --prod"
+        "postversion": "vercel --prod"
     },
     "ava": {
         "require": [
