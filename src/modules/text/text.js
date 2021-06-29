@@ -1,7 +1,7 @@
+/* eslint-disable no-use-before-define */
 import NetworkEvent from "@pencil.js/network-event";
 import Rectangle from "@pencil.js/rectangle";
 import textDirection from "text-direction";
-import hash from "@sindresorhus/fnv1a";
 
 /**
  * @module Text
@@ -15,22 +15,40 @@ import hash from "@sindresorhus/fnv1a";
 function formatString (string) {
     const split = text => text.toString().split("\n");
     return Array.isArray(string) ?
-        string.reduce((acc, line) => acc.concat(split(line)), []) :
+        string.reduce((acc, line) => acc.concat(formatString(line)), []) :
         split(string);
 }
 
 /**
  * Cache based text measurement
- * @param {String} text - Any text
+ * @param {String|Array<String>} text - Any text
  * @param {TextOptions} options - Font definition
  * @return {TextMeasures}
  */
 const measureText = (() => {
     let sandbox;
     const cache = {};
+    const select = ({
+        lineHeight,
+        bold,
+        italic,
+        fontSize,
+        font,
+    }) => ({
+        lineHeight,
+        bold,
+        italic,
+        fontSize,
+        font,
+    });
 
     return (text, options) => {
-        const key = hash(`${text}${JSON.stringify(options)}`);
+        const lines = formatString(text);
+        const selected = select({
+            ...Text.defaultOptions,
+            ...options,
+        });
+        const key = `${lines.join("\n")}${JSON.stringify(selected)}`;
         if (cache[key] !== undefined) {
             return cache[key];
         }
@@ -39,9 +57,8 @@ const measureText = (() => {
             sandbox = document.createElement("canvas").getContext("2d");
         }
 
-        sandbox.font = Text.getFontDefinition(options);
-        const lines = formatString(text);
-        const height = options.fontSize * options.lineHeight * lines.length;
+        sandbox.font = Text.getFontDefinition(selected);
+        const height = selected.fontSize * selected.lineHeight * lines.length;
         const width = lines.reduce((max, line) => Math.max(max, sandbox.measureText(line).width), 0);
         const result = {
             width,
@@ -298,12 +315,7 @@ export default class Text extends Rectangle {
      * @return {TextMeasures}
      */
     static measure (text, options) {
-        const string = Array.isArray(text) ? text.join("\n") : text;
-        const opts = {
-            ...this.defaultOptions,
-            ...options,
-        };
-        return measureText(string, opts);
+        return measureText(text, options);
     }
 
     /**
