@@ -1,7 +1,7 @@
 import { colord, extend } from "colord";
 import namesPlugin from "colord/plugins/names";
 import mixPlugin from "colord/plugins/mix";
-import { truncate, constrain } from "@pencil.js/math";
+import { truncate, constrain, degreeCircle } from "@pencil.js/math";
 
 extend([namesPlugin, mixPlugin]);
 
@@ -188,8 +188,6 @@ export default class Color {
                 b,
             };
         }
-        // console.log(colorDefinition);
-        // console.log(input, alpha);
         this[parsedKey] = colord(input).alpha(alpha);
         return this;
     }
@@ -209,9 +207,7 @@ export default class Color {
      * @return {Color} Itself
      */
     hue (value) {
-        const hsl = this[parsedKey].toHsl();
-        hsl.h = value * 360;
-        this[parsedKey] = colord(hsl);
+        this[parsedKey] = this[parsedKey].hue(value * degreeCircle);
         return this;
     }
 
