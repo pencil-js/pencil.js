@@ -8,18 +8,6 @@
 
 Nice modular interactive 2D drawing library.
 
- - [Installation](#installation)
- - [CDN](#cdn)
- - [Usage](#usage)
- - [Documentation](#documentation)
- - [What Pencil.js do best](#what-penciljs-do-best)
- - [Examples](#examples)
- - [Modules](#modules)
- - [Who is using Pencil.js ?](#who-is-using-penciljs-)
- - [Sponsors](#sponsors)
- - [Contributions](#contributions)
- - [License](#license)
-
 
 ## Installation
 You can install Pencil.js with the following command :
