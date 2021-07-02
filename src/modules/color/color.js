@@ -1,38 +1,15 @@
-import convert from "color-convert";
-import { constrain, truncate, average, equals, lerp } from "@pencil.js/math";
+import { colord, extend } from "colord";
+import namesPlugin from "colord/plugins/names";
+import mixPlugin from "colord/plugins/mix";
+import { truncate, constrain, degreeCircle } from "@pencil.js/math";
+
+extend([namesPlugin, mixPlugin]);
 
 /**
  * @module Color
  */
 
-/**
- * Turn 2 bits hexadecimal number into a ratio between 0 and 1
- * @param {Number} hex - 2 bits hexadecimal number
- * @param {Number} n - Position of this number in the full chain
- * @return {Number}
- */
-function hexToRatio (hex, n) {
-    // eslint-disable-next-line no-bitwise
-    return ((hex >> (8 * n)) & 0xff) / 0xff;
-}
-
-/**
- * Turn a ratio number (between 0 and 1) into a 2 bits hexadecimal integer (between 0 and 255)
- * @param {Number} ratio - Any number
- * @return {Number}
- */
-function ratioToNum (ratio) {
-    return truncate((ratio * 0xff) + 0.5);
-}
-
-/**
- * Turn a ratio number (between 0 and 1) into a 2 bits hexadecimal string
- * @param {Number} ratio - Any number
- * @return {String}
- */
-function ratioToHex (ratio) {
-    return ratioToNum(ratio).toString(16).padStart(2, "0");
-}
+const parsedKey = Symbol("_parsed");
 
 /**
  * Color class
@@ -46,7 +23,7 @@ export default class Color {
      * Color constructor
      * @param {ColorDefinition} colorDefinition - Many types accepted (other Color instance, color name, hex string, hex number, red/green/blue/alpha value)
      * @example
-     * new Color("indigo"); // All CSS color names
+     * new Color("indigo"); // Any valid CSS color name
      * new Color("#123456"); // Hex string definition
      * new Color("#123"); // Hex shorthand string definition, #123 <=> #112233
      * new Color(0x123456); // Hex number definition
@@ -55,11 +32,10 @@ export default class Color {
      * new Color("violet", 0.5);
      */
     constructor (...colorDefinition) {
-        this.red = 0;
-        this.green = 0;
-        this.blue = 0;
-        this.alpha = 1;
-
+        /**
+         * @type {colord}
+         */
+        this[parsedKey] = null;
         this.set(...colorDefinition);
     }
 
@@ -68,7 +44,71 @@ export default class Color {
      * @return {Color}
      */
     clone () {
-        return (new Color(this));
+        return new Color(this);
+    }
+
+    /**
+     * Get the red channel value
+     * @return {Number}
+     */
+    get red () {
+        return this[parsedKey].rgba.r / 255;
+    }
+
+    /**
+     * Set the red channel
+     * @param {Number} value - New value
+     */
+    set red (value) {
+        this[parsedKey].rgba.r = constrain(value * 255, 0, 255);
+    }
+
+    /**
+     * Get the green channel value
+     * @return {Number}
+     */
+    get green () {
+        return this[parsedKey].rgba.g / 255;
+    }
+
+    /**
+     * Set the green channel
+     * @param {Number} value - New value
+     */
+    set green (value) {
+        this[parsedKey].rgba.g = constrain(value * 255, 0, 255);
+    }
+
+    /**
+     * Get the blue channel value
+     * @return {Number}
+     */
+    get blue () {
+        return this[parsedKey].rgba.b / 255;
+    }
+
+    /**
+     * Set the blue channel
+     * @param {Number} value - New value
+     */
+    set blue (value) {
+        this[parsedKey].rgba.b = constrain(value * 255, 0, 255);
+    }
+
+    /**
+     * Get the transparency channel value
+     * @return {Number}
+     */
+    get alpha () {
+        return this[parsedKey].rgba.a;
+    }
+
+    /**
+     * Set the transparency channel
+     * @param {Number} value - New value
+     */
+    set alpha (value) {
+        this[parsedKey].rgba.a = constrain(value, 0, 1);
     }
 
     /**
@@ -89,17 +129,18 @@ export default class Color {
      * @example "#123456"
      * @return {String}
      */
-    get rgb () {
-        return `#${this.array.map(channel => ratioToHex(channel)).join("")}`;
+    get hex () {
+        return this[parsedKey].toHex();
     }
 
     /**
-     * Return rgba notation
-     * @example "rgba(10,20,30,0.5)"
+     * Return hexadecimal rgb notation
+     * @example "#123456"
      * @return {String}
+     * @alias hex
      */
-    get rgba () {
-        return `rgba(${this.array.map(channel => ratioToNum(channel)).concat(this.alpha).join(",")})`;
+    get rgb () {
+        return this.hex;
     }
 
     /**
@@ -108,7 +149,7 @@ export default class Color {
      * @return {String}
      */
     get name () {
-        return convert.rgb.keyword(this.array.map(channel => ratioToNum(channel)));
+        return this[parsedKey].toName();
     }
 
     // TODO: do we need more getters ? User only need to interact with Color, not read values.
@@ -119,51 +160,35 @@ export default class Color {
      * @return {Color} Itself
      */
     set (...colorDefinition) {
-        if (colorDefinition.length > 0 && colorDefinition.length < 3) {
-            const param = colorDefinition[0];
-            if (param instanceof Color) {
-                this.red = param.red;
-                this.green = param.green;
-                this.blue = param.blue;
-                this.alpha = param.alpha;
-            }
-            else {
-                let hex = param;
-                if (typeof param === "string") {
-                    if (param.startsWith("#")) {
-                        const hexString = param.substr(1);
-                        const str = hexString.length < 4 ?
-                            hexString.split("").map(char => char.repeat(2)).join("") :
-                            hexString;
-                        hex = Number.parseInt(str, 16);
-                    }
-                    else {
-                        const rgb = convert.keyword.rgb(param.toLocaleLowerCase()) || [0, 0, 0];
-                        this.red = rgb[0] / 0xff;
-                        this.green = rgb[1] / 0xff;
-                        this.blue = rgb[2] / 0xff;
-                    }
-                }
-                if (typeof hex === "number") {
-                    this.red = hexToRatio(hex, 2);
-                    this.green = hexToRatio(hex, 1);
-                    this.blue = hexToRatio(hex, 0);
-                }
-                const alpha = colorDefinition[1];
-                if (alpha !== undefined) {
-                    this.alpha = constrain(alpha, 0, 1);
-                }
-            }
+        const [first] = colorDefinition;
+        let input;
+        let alpha;
+        if (first instanceof Color) {
+            input = first[parsedKey].rgba;
+            [, alpha = input.a] = colorDefinition;
         }
-        else if (colorDefinition.length > 2) {
-            this.red = constrain(colorDefinition[0], 0, 1);
-            this.green = constrain(colorDefinition[1], 0, 1);
-            this.blue = constrain(colorDefinition[2], 0, 1);
-            const alpha = colorDefinition[3];
-            if (alpha !== undefined) {
-                this.alpha = constrain(alpha, 0, 1);
-            }
+        else if (typeof first === "string") {
+            input = first;
+            [, alpha = 1] = colorDefinition;
         }
+        else if (first === undefined || first === null) {
+            input = "#000";
+            alpha = 1;
+        }
+        else if (colorDefinition.length < 3) {
+            input = `#${truncate(colorDefinition[0]).toString(16)}`;
+            [, alpha = 1] = colorDefinition;
+        }
+        else {
+            const [r, g, b] = colorDefinition.slice(0, 3).map(value => value * 255);
+            [,,, alpha = 1] = colorDefinition;
+            input = {
+                r,
+                g,
+                b,
+            };
+        }
+        this[parsedKey] = colord(input).alpha(alpha);
         return this;
     }
 
@@ -172,9 +197,8 @@ export default class Color {
      * @return {Color} Itself
      */
     grey () {
-        const weights = [0.299, 0.587, 0.114];
-        const target = average(...this.array.map((channel, index) => channel * weights[index]));
-        return this.set(target, target, target);
+        this[parsedKey] = this[parsedKey].grayscale();
+        return this;
     }
 
     /**
@@ -183,9 +207,8 @@ export default class Color {
      * @return {Color} Itself
      */
     hue (value) {
-        const hsl = convert.rgb.hsl(this.array.map(channel => ratioToNum(channel)));
-        hsl[0] = (value % 1) * 360;
-        return this.set(...convert.hsl.rgb(hsl).map(channel => channel / 0xff));
+        this[parsedKey] = this[parsedKey].hue(value * degreeCircle);
+        return this;
     }
 
     /**
@@ -194,9 +217,10 @@ export default class Color {
      * @return {Color} Itself
      */
     saturation (value) {
-        const { array } = this;
-        const target = average(Math.min(...array), Math.max(...array));
-        return this.set(...array.map(channel => target + (value * (channel - target))));
+        const hsl = this[parsedKey].toHsl();
+        hsl.s = value * 100;
+        this[parsedKey] = colord(hsl);
+        return this;
     }
 
     /**
@@ -205,10 +229,10 @@ export default class Color {
      * @return {Color} Itself
      */
     lightness (value) {
-        const fn = value < 0.5 ?
-            channel => channel * value :
-            channel => channel + ((1 - channel) * (value - 0.5) * 2);
-        return this.set(...this.array.map(fn));
+        const hsl = this[parsedKey].toHsl();
+        hsl.l = value * 100;
+        this[parsedKey] = colord(hsl);
+        return this;
     }
 
     /**
@@ -216,16 +240,22 @@ export default class Color {
      * @return {Color} Itself
      */
     reverse () {
-        return this.set(...this.array.map(channel => 1 - channel));
+        this[parsedKey] = this[parsedKey].invert();
+        return this;
     }
 
     /**
-     * Restrict color's channels to set amount of value
-     * @param {Number} number - Number of allowed value on each channel
+     * Restrict the color space to an amount of possible value
+     * @param {Number} number - Number of allowed value
      * @return {Color} Itself
      */
     level (number) {
-        return this.set(...this.array.map(channel => truncate((channel * number) + 1) / (number + 1)));
+        const { r, g, b } = this[parsedKey].rgba;
+        const p = 255 / number;
+        this[parsedKey].rgba.r = truncate(r / p) * p + (p / 2);
+        this[parsedKey].rgba.g = truncate(g / p) * p + (p / 2);
+        this[parsedKey].rgba.b = truncate(b / p) * p + (p / 2);
+        return this;
     }
 
     /**
@@ -236,20 +266,15 @@ export default class Color {
      */
     lerp (colorDefinition, ratio) {
         const color = Color.from(colorDefinition);
-        const thisArray = this.array.concat(this.alpha);
-        const colorArray = color.array.concat(color.alpha);
-        return this.set(...thisArray.map((channel, index) => lerp(channel, colorArray[index], ratio)));
+        this[parsedKey] = this[parsedKey].mix(color[parsedKey], ratio);
+        return this;
     }
 
     /**
      * @return {String}
      */
     toString () {
-        if (equals(this.alpha, 1)) {
-            return this.rgb;
-        }
-
-        return this.rgba;
+        return this.hex;
     }
 
     /**
@@ -257,7 +282,10 @@ export default class Color {
      * @return {Array<Number>}
      */
     toJSON () {
-        return this.array.concat(this.alpha);
+        return [
+            ...this.array,
+            this.alpha,
+        ];
     }
 
     /**
@@ -267,9 +295,12 @@ export default class Color {
      */
     static from (...colorDefinition) {
         const param = colorDefinition[0];
-        if (param instanceof Color || param === null) {
+        if (param instanceof Color) {
             return param;
         }
         return new Color(...colorDefinition);
     }
 }
+
+Color.prototype.gray = Color.prototype.grey;
+Color.prototype.mix = Color.prototype.lerp;

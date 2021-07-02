@@ -111,7 +111,7 @@
         "@pencil.js/text": "file:src/modules/text",
         "@pencil.js/triangle": "file:src/modules/triangle",
         "@pencil.js/vector": "file:src/modules/vector",
-        "color-convert": "^2.0.1",
+        "colord": "^2.1.0",
         "minimatch": "^3.0.4",
         "text-direction": "^1.3.0"
     },
