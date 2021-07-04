@@ -92,6 +92,7 @@
         "@pencil.js/offscreen-canvas": "file:src/modules/offscreen-canvas",
         "@pencil.js/particles": "file:src/modules/particles",
         "@pencil.js/path": "file:src/modules/path",
+        "@pencil.js/pattern": "file:src/modules/pattern",
         "@pencil.js/polygon": "file:src/modules/polygon",
         "@pencil.js/position": "file:src/modules/position",
         "@pencil.js/progress-bar": "file:src/modules/progress-bar",

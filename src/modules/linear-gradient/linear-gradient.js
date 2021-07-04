@@ -35,4 +35,6 @@ export default class LinearGradient {
         Object.keys(this.colorStops).forEach(key => gradient.addColorStop(key, this.colorStops[key].toString()));
         return gradient;
     }
+
+    // TODO: add toJSON and static from function
 }
