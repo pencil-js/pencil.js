@@ -149,7 +149,9 @@ export default class Color {
      * @return {String}
      */
     get name () {
-        return this[parsedKey].toName();
+        return this[parsedKey].toName({
+            closest: true,
+        });
     }
 
     // TODO: do we need more getters ? User only need to interact with Color, not read values.

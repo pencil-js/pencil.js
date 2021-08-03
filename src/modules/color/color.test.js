@@ -85,7 +85,7 @@ test("get hex and rgb", (t) => {
     t.is(color.rgb, "#0066ff80");
 });
 
-test.skip("get name", (t) => {
+test("get name", (t) => {
     const color = new Color("#ff0000");
     t.is(color.name, "red");
     const colorApprox = new Color("#fe0000");
