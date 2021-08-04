@@ -79,22 +79,31 @@ test.cb("set url as another Image", (t) => {
         setTimeout(() => {
             resolve({
                 url,
-                width: 10,
-                height: 20,
+                width: Math.random(),
+                height: Math.random(),
             });
-        }, 10);
+        }, 1000);
     });
 
     const blueprint = new Image(undefined, "nice");
-    blueprint.on("ready", () => {
-        t.context.url = blueprint;
+    const target = new Image(undefined, blueprint);
 
-        t.is(t.context.url, blueprint.url);
-        t.is(t.context.file, blueprint.file);
-
-        Image.load = savedLoad;
-        t.end();
+    t.context.on("ready", () => {
+        t.is(target.url, blueprint.url);
+        t.is(target.file, blueprint.file);
     });
+
+    const blueprintReady = new Image(undefined, "I'm ready");
+
+    blueprintReady.on("ready", () => {
+        t.context.url = blueprintReady;
+
+        t.is(t.context.url, blueprintReady.url);
+        t.is(t.context.file, blueprintReady.file);
+    });
+
+    Image.load = savedLoad;
+    t.end();
 });
 
 test("makePath", (t) => {

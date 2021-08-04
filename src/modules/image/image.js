@@ -63,8 +63,13 @@ export default class Image extends Rectangle {
             if (source instanceof window.HTMLImageElement) {
                 done(source);
             }
-            else if (source instanceof Image && source.isLoaded) {
-                done(source.file);
+            else if (source instanceof Image) {
+                if (source.isLoaded) {
+                    done(source.file);
+                }
+                else {
+                    source.on(NetworkEvent.events.ready, () => done(source.file));
+                }
             }
             else {
                 Image.load(source).then(done).catch(() => {
