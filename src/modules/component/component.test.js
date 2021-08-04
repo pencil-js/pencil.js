@@ -1,5 +1,5 @@
 import test from "ava";
-import Component from ".";
+import Component from "./component.js";
 
 test.beforeEach((t) => {
     t.context = new Component([0, 0], {

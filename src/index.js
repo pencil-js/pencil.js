@@ -1,4 +1,4 @@
-import Pencil from "./pencil";
+import Pencil from "./pencil.js";
 
 const installed = [];
 
@@ -29,7 +29,7 @@ function use ({ name, install }, options) {
 Pencil.use = use;
 
 export default Pencil;
-export * from "./pencil";
+export * from "./pencil.js";
 export {
     use,
 };

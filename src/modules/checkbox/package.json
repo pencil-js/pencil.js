@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/checkbox",
     "main": "checkbox.js",
+    "type": "module",
     "sideEffects": false
 }

@@ -1,6 +1,6 @@
 import test from "ava";
-import Scene from ".";
-import Component from "../component";
+import Component from "@pencil.js/component";
+import Scene from "./scene.js";
 
 test.beforeEach((t) => {
     t.context = new Scene();

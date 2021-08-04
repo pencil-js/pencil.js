@@ -1,5 +1,5 @@
 import test from "ava";
-import ConicGradient from ".";
+import ConicGradient from "./conic-gradient.js";
 
 test.beforeEach((t) => {
     t.context = new ConicGradient([0, 0], 0, {

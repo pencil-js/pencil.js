@@ -1,6 +1,6 @@
 import test from "ava";
-import OffscreenCanvas from ".";
-import Scene from "../scene";
+import Scene from "@pencil.js/scene";
+import OffscreenCanvas from "./offscreen-canvas.js";
 
 test.beforeEach((t) => {
     t.context = new OffscreenCanvas(100, 200, {

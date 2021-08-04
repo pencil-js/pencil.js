@@ -2,7 +2,7 @@ import Component from "@pencil.js/component";
 import Line from "@pencil.js/line";
 import Position from "@pencil.js/position";
 import Spline from "@pencil.js/spline";
-import Instruction from "./instruction";
+import Instruction from "./instruction.js";
 
 /**
  * @module Path

@@ -1,5 +1,5 @@
 import test from "ava";
-import Arc from ".";
+import Arc from "./arc.js";
 
 test.beforeEach((t) => {
     t.context = new Arc([100, 50], 20, 40, 0.1, 0.6);

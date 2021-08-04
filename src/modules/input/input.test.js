@@ -1,7 +1,7 @@
 import test from "ava";
-import Input from ".";
-import MouseEvent from "../mouse-event";
-import Rectangle from "../rectangle";
+import MouseEvent from "@pencil.js/mouse-event";
+import Rectangle from "@pencil.js/rectangle";
+import Input from "./input.js";
 
 test.beforeEach((t) => {
     t.context = new Input([100, 100], Rectangle);

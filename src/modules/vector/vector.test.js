@@ -1,6 +1,6 @@
 import test from "ava";
-import Vector from ".";
-import Position from "../position";
+import Position from "@pencil.js/position";
+import Vector from "./vector.js";
 
 test.beforeEach((t) => {
     t.context = new Vector([10, 100], [40, 140]);

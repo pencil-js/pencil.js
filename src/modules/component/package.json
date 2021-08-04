@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/component",
     "main": "component.js",
+    "type": "module",
     "sideEffects": false
 }

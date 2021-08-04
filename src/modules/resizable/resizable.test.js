@@ -1,7 +1,7 @@
 import test from "ava";
-import Rectangle from "../rectangle";
-import Square from "../square";
-import "./resizable";
+import Rectangle from "@pencil.js/rectangle";
+import Square from "@pencil.js/square";
+import "./resizable.js";
 
 test("resizable", (t) => {
     t.is(typeof Rectangle.prototype.resizable, "function");

@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/vector",
     "main": "vector.js",
+    "type": "module",
     "sideEffects": false
 }

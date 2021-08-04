@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/text",
     "main": "text.js",
+    "type": "module",
     "sideEffects": false
 }

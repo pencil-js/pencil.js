@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/spline",
     "main": "spline.js",
+    "type": "module",
     "sideEffects": false
 }

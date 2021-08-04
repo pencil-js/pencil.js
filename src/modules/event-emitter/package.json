@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/event-emitter",
     "main": "event-emitter.js",
+    "type": "module",
     "sideEffects": false
 }

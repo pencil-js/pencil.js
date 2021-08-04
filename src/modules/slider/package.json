@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/slider",
     "main": "slider.js",
+    "type": "module",
     "sideEffects": false
 }

@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/resizable",
-    "main": "resizable.js"
+    "main": "resizable.js",
+    "type": "module"
 }

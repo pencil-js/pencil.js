@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/rectangle",
     "main": "rectangle.js",
+    "type": "module",
     "sideEffects": false
 }

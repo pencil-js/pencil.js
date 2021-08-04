@@ -1,5 +1,5 @@
 import test from "ava";
-import KeyboardEvent from ".";
+import KeyboardEvent from "./keyboard-event.js";
 
 test("constructor", (t) => {
     const target = null;

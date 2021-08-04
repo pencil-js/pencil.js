@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/mouse-event",
     "main": "mouse-event.js",
+    "type": "module",
     "sideEffects": false
 }

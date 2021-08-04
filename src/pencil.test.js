@@ -1,7 +1,7 @@
 import test from "ava";
 
-/* eslint-disable import/no-duplicates, import/no-named-as-default-member */
-import Pencil from ".";
+/* eslint-disable import/no-duplicates, import/named */
+import Pencil from "./index.js";
 import {
     BaseEvent,
     MouseEvent,
@@ -40,15 +40,15 @@ import {
     Button,
     Select,
     from,
-    OffScreenCanvas,
     version,
     author,
     homepage,
+    OffScreenCanvas,
     Color,
     LinearGradient,
     RadialGradient,
     use,
-} from ".";
+} from "./index.js";
 
 test("use", (t) => {
     t.plan(4);

@@ -1,8 +1,8 @@
 import test from "ava";
-import Component from "../component";
-import ".";
-import Rectangle from "../rectangle";
-import "../draggable";
+import Component from "@pencil.js/component";
+import Rectangle from "@pencil.js/rectangle";
+import "@pencil.js/draggable";
+import "./rotatable.js";
 
 test("rotatable", (t) => {
     t.is(typeof Component.prototype.rotatable, "function");

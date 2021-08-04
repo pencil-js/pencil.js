@@ -1,5 +1,5 @@
 import test from "ava";
-import Pie from ".";
+import Pie from "./pie.js";
 
 test.beforeEach((t) => {
     t.context = new Pie([0, 0], 99, 0.1, 0.9);

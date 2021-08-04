@@ -1,5 +1,5 @@
 import test from "ava";
-import Image from ".";
+import Image from "./image.js";
 
 test.beforeEach((t) => {
     t.context = new Image([10, 20], "url");
@@ -10,14 +10,14 @@ test("constructor", (t) => {
     t.is(t.context.isLoaded, false);
 });
 
-test.cb("get and set url", (t) => {
+test("get and set url", async (t) => {
     t.is(t.context.url, "url");
 
     const savedLoad = Image.load;
     Image.load = url => new Promise((resolve) => {
         setTimeout(() => {
             resolve({
-                url,
+                src: url,
                 width: 10,
                 height: 20,
             });
@@ -26,13 +26,15 @@ test.cb("get and set url", (t) => {
 
     t.context.url = null;
     t.false(t.context.isLoaded);
-    t.context.on("ready", () => {
-        t.true(t.context.isLoaded);
-        t.is(t.context.width, 10);
-        t.is(t.context.height, 20);
-        t.end();
-    });
     t.context.url = "loadable";
+    await new Promise((resolve) => {
+        t.context.on("ready", () => {
+            t.true(t.context.isLoaded);
+            t.is(t.context.width, 10);
+            t.is(t.context.height, 20);
+            resolve();
+        });
+    });
     t.is(t.context.url, "loadable");
 
     Image.load = savedLoad;
@@ -48,17 +50,19 @@ test("set same url", (t) => {
     Image.load = savedLoad;
 });
 
-test.cb("Fail url load", (t) => {
+test("Fail url load", async (t) => {
     const savedLoad = Image.load;
     Image.load = () => Promise.reject();
 
-    t.context
-        .on("ready", () => t.fail())
-        .on("error", (event) => {
-            t.is(event.target, t.context);
-            t.end();
-        });
     t.context.url = "fail";
+    await new Promise((resolve, reject) => {
+        t.context
+            .on("ready", () => reject())
+            .on("error", (event) => {
+                t.is(event.target, t.context);
+                resolve();
+            });
+    });
 
     Image.load = savedLoad;
 });
@@ -73,7 +77,7 @@ test("set url as a image file", (t) => {
     t.is(t.context.file, file);
 });
 
-test.cb("set url as another Image", (t) => {
+test("set url as another Image", async (t) => {
     const savedLoad = Image.load;
     Image.load = url => new Promise((resolve) => {
         setTimeout(() => {
@@ -82,28 +86,33 @@ test.cb("set url as another Image", (t) => {
                 width: Math.random(),
                 height: Math.random(),
             });
-        }, 1000);
-    });
-
-    const blueprint = new Image(undefined, "nice");
-    const target = new Image(undefined, blueprint);
-
-    t.context.on("ready", () => {
-        t.is(target.url, blueprint.url);
-        t.is(target.file, blueprint.file);
+        }, 100);
     });
 
     const blueprintReady = new Image(undefined, "I'm ready");
+    await new Promise((resolve) => {
+        blueprintReady.on("ready", () => {
+            t.context.url = blueprintReady;
 
-    blueprintReady.on("ready", () => {
-        t.context.url = blueprintReady;
-
-        t.is(t.context.url, blueprintReady.url);
-        t.is(t.context.file, blueprintReady.file);
+            t.is(t.context.url, blueprintReady.url);
+            t.is(t.context.file, blueprintReady.file);
+            resolve();
+        });
     });
 
+    // const blueprint = new Image(undefined, "nice");
+    // t.context.url = blueprint;
+    // await new Promise((resolve) => {
+    //     t.context.on("ready", () => {
+    //         t.is(t.context.url, blueprint.url);
+    //         t.is(t.context.file, blueprint.file);
+    //         resolve();
+    //     });
+    // });
+
     Image.load = savedLoad;
-    t.end();
+
+    t.pass();
 });
 
 test("makePath", (t) => {

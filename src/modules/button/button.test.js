@@ -1,5 +1,5 @@
 import test from "ava";
-import Button from ".";
+import Button from "./button.js";
 
 test.beforeEach((t) => {
     t.context = new Button([100, 100], {

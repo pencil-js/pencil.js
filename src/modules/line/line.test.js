@@ -1,6 +1,6 @@
 import test from "ava";
-import Line from ".";
-import Component from "../component";
+import Component from "@pencil.js/component";
+import Line from "./line.js";
 
 test.beforeEach((t) => {
     t.context = new Line([100, 50], [

@@ -1,6 +1,6 @@
 import test from "ava";
-import Rectangle from "../rectangle";
-import Container from ".";
+import Rectangle from "@pencil.js/rectangle";
+import Container from "./container.js";
 
 test.beforeEach((t) => {
     t.context = new Container([10, 20]);

@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/polygon",
     "main": "polygon.js",
+    "type": "module",
     "sideEffects": false
 }

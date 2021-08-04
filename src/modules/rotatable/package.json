@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/rotatable",
-    "main": "rotatable.js"
+    "main": "rotatable.js",
+    "type": "module"
 }

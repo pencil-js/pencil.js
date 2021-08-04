@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/heart",
     "main": "heart.js",
+    "type": "module",
     "sideEffects": false
 }

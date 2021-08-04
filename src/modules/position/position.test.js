@@ -1,7 +1,7 @@
 import test from "ava";
-import Position from ".";
-import Vector from "../vector";
-import almostEqual from "../../../test/_almost-equal";
+import Vector from "@pencil.js/vector";
+import Position from "./position.js";
+import almostEqual from "../../../test/_almost-equal.js";
 
 test.beforeEach((t) => {
     t.context = new Position(-42, 55);

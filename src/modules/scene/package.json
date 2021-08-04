@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/scene",
     "main": "scene.js",
+    "type": "module",
     "sideEffects": false
 }

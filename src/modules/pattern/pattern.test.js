@@ -1,7 +1,7 @@
 import test from "ava";
-import Pattern from ".";
-import OffScreenCanvas from "../offscreen-canvas";
-import Image from "../image";
+import Pattern from "./pattern.js";
+import OffScreenCanvas from "../offscreen-canvas/offscreen-canvas.js";
+import Image from "../image/image.js";
 
 const img = new window.Image();
 test.beforeEach((t) => {

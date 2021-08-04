@@ -1,5 +1,5 @@
 import test from "ava";
-import Checkbox from ".";
+import Checkbox from "./checkbox.js";
 
 test.beforeEach((t) => {
     t.context = new Checkbox([100, 100]);

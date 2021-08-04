@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/math",
     "main": "math.js",
+    "type": "module",
     "sideEffects": false
 }

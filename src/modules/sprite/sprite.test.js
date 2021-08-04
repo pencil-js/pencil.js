@@ -1,6 +1,6 @@
 import test from "ava";
-import Sprite from ".";
-import almostEqual from "../../../test/_almost-equal";
+import Sprite from "./sprite.js";
+import almostEqual from "../../../test/_almost-equal.js";
 
 test.beforeEach((t) => {
     t.context = new Sprite([1, 2], "url", [{

@@ -1,5 +1,5 @@
 import test from "ava";
-import Heart from ".";
+import Heart from "./heart.js";
 
 test.beforeEach((t) => {
     t.context = new Heart([100, 100], 2);

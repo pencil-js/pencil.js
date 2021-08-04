@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/button",
     "main": "button.js",
+    "type": "module",
     "sideEffects": false
 }

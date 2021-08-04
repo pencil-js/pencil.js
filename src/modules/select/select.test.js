@@ -1,6 +1,6 @@
 import test from "ava";
-import MouseEvent from "../mouse-event";
-import Select from ".";
+import MouseEvent from "@pencil.js/mouse-event";
+import Select from "./select.js";
 
 test.beforeEach((t) => {
     t.context = new Select([0, 0], [

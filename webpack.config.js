@@ -1,10 +1,12 @@
-const { BannerPlugin } = require("webpack");
+// import webpack from "webpack";
+// import pkg from "./package.json";
 
-const { name, version, homepage, author, license } = require("./package.json");
+// const { BannerPlugin } = webpack;
+// const { name, version, homepage, author, license } = pkg;
 
 const plugins = [
-    new BannerPlugin(`${name} v${version} ${homepage}
-${license} license - © ${author}`),
+//     new BannerPlugin(`${name} v${version} ${homepage}
+// ${license} license - © ${author}`),
 ];
 
 const output = {
@@ -17,7 +19,7 @@ const resolve = {
     },
 };
 
-module.exports = [
+export default [
     {
         plugins,
         output: {

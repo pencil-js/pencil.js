@@ -1,5 +1,5 @@
 import test from "ava";
-import MouseEvent from ".";
+import MouseEvent from "./mouse-event.js";
 
 test("constructor", (t) => {
     const target = null;

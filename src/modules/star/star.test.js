@@ -1,6 +1,6 @@
 import test from "ava";
-import Star from ".";
-import almostEqual from "../../../test/_almost-equal";
+import Star from "./star.js";
+import almostEqual from "../../../test/_almost-equal.js";
 
 test.beforeEach((t) => {
     t.context = new Star([10, 20], 6, 11, 0.2);

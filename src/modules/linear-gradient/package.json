@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/linear-gradient",
     "main": "linear-gradient.js",
+    "type": "module",
     "sideEffects": false
 }

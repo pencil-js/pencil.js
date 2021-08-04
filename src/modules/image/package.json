@@ -1,5 +1,6 @@
 {
     "name": "@pencil.js/image",
     "main": "image.js",
+    "type": "module",
     "sideEffects": false
 }

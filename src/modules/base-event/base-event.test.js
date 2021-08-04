@@ -1,5 +1,5 @@
 import test from "ava";
-import BaseEvent from ".";
+import BaseEvent from "./base-event.js";
 
 test.beforeEach((t) => {
     t.context = new BaseEvent("name", null);

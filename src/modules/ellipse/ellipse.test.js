@@ -1,5 +1,5 @@
 import test from "ava";
-import Ellipse from ".";
+import Ellipse from "./ellipse.js";
 
 test.beforeEach((t) => {
     t.context = new Ellipse([10, 20], 50, 100);

@@ -1,7 +1,7 @@
 import test from "ava";
-import Scene from "../scene";
-import BaseEvent from "../base-event";
-import * as Navigation from ".";
+import Scene from "@pencil.js/scene";
+import BaseEvent from "@pencil.js/base-event";
+import * as Navigation from "./navigation.js";
 
 test("Navigation", (t) => {
     Navigation.prepareScenes({

@@ -1,4 +1,5 @@
 {
     "name": "@pencil.js/draggable",
-    "main": "draggable.js"
+    "main": "draggable.js",
+    "type": "module"
 }

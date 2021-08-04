@@ -1,6 +1,6 @@
 import test from "ava";
-import Knob from ".";
-import almostEqual from "../../../test/_almost-equal";
+import Knob from "./knob.js";
+import almostEqual from "../../../test/_almost-equal.js";
 
 test.beforeEach((t) => {
     t.context = new Knob([0, 0], {

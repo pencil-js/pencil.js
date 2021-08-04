@@ -1,6 +1,6 @@
 import test from "ava";
-import RegularPolygon from ".";
-import almostEqual from "../../../test/_almost-equal";
+import RegularPolygon from "./regular-polygon.js";
+import almostEqual from "../../../test/_almost-equal.js";
 
 test.beforeEach((t) => {
     t.context = new RegularPolygon([10, 20], 5, 20);
