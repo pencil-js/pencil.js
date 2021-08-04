@@ -14,6 +14,9 @@ const installed = [];
  * @return {Object} The Pencil.js package
  */
 function use ({ name, install }, options) {
+    if (!name) {
+        throw new Error("You're trying to install a nameless plugin.");
+    }
     if (installed.includes(name)) {
         throw new Error(`The plugin "${name}" is already installed.`);
     }
