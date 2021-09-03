@@ -1,6 +1,7 @@
 .idea/
 .github/
 .nyc_output/
+benchmark/
 coverage/
 dist/
 docs/
@@ -10,3 +11,5 @@ test/
 
 .all-contributorsrc
 webpack.config.js
+
+src/**/*.test.js
