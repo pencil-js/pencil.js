@@ -76,10 +76,10 @@ export default class Spline extends Line {
 
     /**
      * Draw a spline through points using a tension (first point should be current position)
-     * @param {Path2D} path - Current drawing path
+     * @param {Path2D|CanvasRenderingContext2D} path - Current drawing path
      * @param {Array<PositionDefinition>} points - Points to use (need at least 2 points)
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
-     * @param {PositionDefinition} _correction - Apply position correction to all points (used by the library)
+     * @param {PositionDefinition} [_correction] - Apply position correction to all points (used by the library)
      */
     static splineThrough (path, points, tension = Spline.defaultTension, _correction) {
         if (points.length < 2) {

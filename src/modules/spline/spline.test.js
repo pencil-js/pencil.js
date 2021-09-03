@@ -12,19 +12,29 @@ test("creation", (t) => {
 });
 
 test("trace", (t) => {
-    t.plan(6);
+    t.plan(11);
+    let i = 0;
     t.context.trace({
         moveTo: (...params) => t.deepEqual(params, [0, 0]),
-        bezierCurveTo: () => t.pass(),
+        bezierCurveTo: (c1x, c1y, c2x, c2y, x, y) => {
+            t.is(x, t.context.points[i].x);
+            t.is(y, t.context.points[i].y);
+            ++i;
+        },
     });
 });
 
 test("trace with tension at 0", (t) => {
-    t.plan(6);
+    t.plan(11);
+    let i = 0;
     t.context.tension = 0;
     t.context.trace({
         moveTo: (...params) => t.deepEqual(params, [0, 0]),
-        lineTo: () => t.pass(),
+        lineTo: (x, y) => {
+            t.is(x, t.context.points[i].x);
+            t.is(y, t.context.points[i].y);
+            ++i;
+        },
     });
 });
 

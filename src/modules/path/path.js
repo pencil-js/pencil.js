@@ -213,9 +213,9 @@ export default class Path extends Component {
         const controls = points.map(point => Position.from(point));
         const last = controls[controls.length - 1];
         return new Instruction((path, pos, lp) => {
-            const relativePosition = Position.from(last).clone().subtract(pos);
+            const relativePosition = last.clone().subtract(pos);
             const corrected = controls.map(point => point.clone().subtract(relativePosition));
-            Spline.splineThrough(path, [lp].concat(corrected), tension);
+            Spline.splineThrough(path, corrected, tension);
         }, last);
     }
 
