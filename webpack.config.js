@@ -33,11 +33,16 @@ module.exports = [
         experiments: {
             outputModule: true,
         },
+        externalsType: "module",
         plugins,
         output: {
             filename: "pencil.esm.js",
             module: true,
-            libraryTarget: "global",
+            library: {
+                type: "module",
+            },
+            chunkLoading: "import",
+            chunkFormat: "module",
         },
         devtool,
         resolve,
