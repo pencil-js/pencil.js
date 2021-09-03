@@ -20,14 +20,14 @@ test("trace", (t) => {
         [150, 150],
         [200, 200],
     ];
+    let i = 0;
     const path = {
         moveTo: (...params) => {
             t.deepEqual(params, [0, 0]);
         },
         lineTo: (...params) => {
-            t.deepEqual(params, expected[path.call++]);
+            t.deepEqual(params, expected[i++]);
         },
-        call: 0,
     };
     t.plan(3);
     t.context.trace(path);
@@ -39,14 +39,14 @@ test("trace absolute", (t) => {
         [50, 100],
         [100, 150],
     ];
+    let i = 0;
     const path = {
         moveTo: (...params) => {
             t.deepEqual(params, [0, 0]);
         },
         lineTo: (...params) => {
-            t.deepEqual(params, expected[path.call++]);
+            t.deepEqual(params, expected[i++]);
         },
-        call: 0,
     };
     t.plan(3);
     t.context.trace(path);

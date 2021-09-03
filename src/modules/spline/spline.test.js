@@ -2,7 +2,7 @@ import test from "ava";
 import Spline from ".";
 
 test.beforeEach((t) => {
-    const points = (new Array(5)).fill().map((x, index) => [index + 1, index + 1]);
+    const points = [...new Array(5)].map((_, i) => [(i + 1) ** 2, (i + 1) * 2]);
     t.context = new Spline([120, 55], points, 0.7);
 });
 
@@ -25,6 +25,19 @@ test("trace with tension at 0", (t) => {
     t.context.trace({
         moveTo: (...params) => t.deepEqual(params, [0, 0]),
         lineTo: () => t.pass(),
+    });
+});
+
+test("trace with absolute option", (t) => {
+    let i = 0;
+    t.context.options.absolute = true;
+    t.context.trace({
+        moveTo: (...params) => t.deepEqual(params, [0, 0]),
+        bezierCurveTo: (c1x, c1y, c2x, c2y, x, y) => {
+            t.is(t.context.points[i].x - t.context.position.x, x);
+            t.is(t.context.points[i].y - t.context.position.y, y);
+            ++i;
+        },
     });
 });
 
@@ -61,7 +74,7 @@ test("splineThrough", (t) => {
         [300, 300],
         [400, 100],
     ];
-    t.plan(points.length - 1);
+    t.plan(points.length);
     Spline.splineThrough({
         bezierCurveTo: () => t.pass(),
     }, points, 0.5);
@@ -82,20 +95,6 @@ test("splineThrough throws", (t) => {
         instanceOf: RangeError,
     });
     t.throws(() => Spline.splineThrough({}, []), {
-        instanceOf: RangeError,
-    });
-});
-
-test("getControlPoint", (t) => {
-    const points = [[10, 10], [0, 20], [20, 30]];
-    const ctrls = Spline.getControlPoint(points, 0.5);
-    t.is(ctrls.length, 2);
-    t.is(ctrls[0].x, -5);
-    t.is(ctrls[0].y, 10);
-    t.is(ctrls[1].x, 5);
-    t.is(ctrls[1].y, 30);
-
-    t.throws(() => Spline.getControlPoint([], 0), {
         instanceOf: RangeError,
     });
 });

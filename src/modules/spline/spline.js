@@ -40,7 +40,8 @@ export default class Spline extends Line {
         }
         else {
             path.moveTo(0, 0);
-            Spline.splineThrough(path, [new Position(0, 0)].concat(this.points), this.tension);
+            const correction = this.options.absolute ? this.position : new Position();
+            Spline.splineThrough(path, this.points, this.tension, correction);
         }
         return this;
     }
@@ -78,48 +79,59 @@ export default class Spline extends Line {
      * @param {Path2D} path - Current drawing path
      * @param {Array<PositionDefinition>} points - Points to use (need at least 2 points)
      * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
+     * @param {PositionDefinition} _correction - Apply position correction to all points (used by the library)
      */
-    static splineThrough (path, points, tension = Spline.defaultTension) {
+    static splineThrough (path, points, tension = Spline.defaultTension, _correction) {
         if (points.length < 2) {
             throw new RangeError(`Need at least 2 points to spline, but only ${points.length} given.`);
         }
 
-        const positions = points.map(point => Position.from(point));
-        if (positions.length === 2) {
-            path.lineTo(positions[1].x, positions[1].y);
+        const shift = Position.from(_correction);
+
+        if (points.length === 2) {
+            const target = Position.from(points[1]);
+            path.lineTo(target.x - shift.x, target.y - shift.y);
             return;
         }
 
-        const getCtrlPts = Spline.getControlPoint;
-        let previousControls = [null, positions[0]];
+        const positions = points.map(point => Position.from(point).clone().subtract(shift));
+        positions.unshift(new Position());
 
-        for (let i = 1, l = positions.length; i < l; ++i) {
-            const controlPoints = i < l - 1 ? getCtrlPts(positions.slice(i - 1, i + 2), tension) : [positions[i], null];
+        for (let i = 1; i < positions.length; ++i) {
+            const slice = [...new Array(4)].map((_, n) => positions[i + n - 2]);
+            // eslint-disable-next-line no-use-before-define
+            const [before, after] = getControlPoint(slice, tension);
+
             path.bezierCurveTo(
-                previousControls[1].x, previousControls[1].y, controlPoints[0].x, controlPoints[0].y,
+                before.x, before.y,
+                after.x, after.y,
                 positions[i].x, positions[i].y,
             );
-
-            previousControls = controlPoints;
         }
     }
+}
 
-    /**
-     * Returns control points for a point in a spline (needs before and after, 3 points in total)
-     * @param {Array<PositionDefinition>} points - 3 points to use (before, target, after)
-     * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
-     * @return {Array<Position>}
-     */
-    static getControlPoint (points, tension = Spline.defaultTension) {
-        if (points.length < 3) {
-            throw new RangeError(`Need exactly 3 points to compute control points, but ${points.length} given.`);
-        }
-
-        const positions = points.map(point => Position.from(point));
-        const diff = positions[2].clone().subtract(positions[0]).multiply(tension);
-        return [
-            positions[1].clone().subtract(diff),
-            positions[1].clone().add(diff),
-        ];
+/**
+ * Returns control points for a point in a spline (needs before and after, 3 points in total)
+ * @param {Array<Position>} points - 4 points to use (before, one, two, after)
+ * @param {Number} [tension=Spline.defaultTension] - Ratio of tension
+ * @return {Array<Position>}
+ */
+function getControlPoint (points, tension = Spline.defaultTension) {
+    if (points.length < 3) {
+        throw new RangeError(`Need more than 3 points to compute control points, but only ${points.length} given.`);
     }
+
+    let diffBefore;
+    let diffAfter;
+    if (points[0]) {
+        diffBefore = points[2].clone().subtract(points[0]).multiply(tension);
+    }
+    if (points[3]) {
+        diffAfter = points[1].clone().subtract(points[3]).multiply(tension);
+    }
+    return [
+        points[1].clone().add(diffBefore),
+        points[2].clone().add(diffAfter),
+    ];
 }
