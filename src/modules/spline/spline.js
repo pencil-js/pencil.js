@@ -41,7 +41,7 @@ export default class Spline extends Line {
         else {
             path.moveTo(0, 0);
             const correction = this.options.absolute ? this.position : new Position();
-            Spline.splineThrough(path, this.points, this.tension, correction);
+            Spline.splineThrough(path, [new Position(), ...this.points], this.tension, correction);
         }
         return this;
     }
@@ -95,7 +95,6 @@ export default class Spline extends Line {
         }
 
         const positions = points.map(point => Position.from(point).clone().subtract(shift));
-        positions.unshift(new Position());
 
         for (let i = 1; i < positions.length; ++i) {
             const slice = [...new Array(4)].map((_, n) => positions[i + n - 2]);
@@ -118,17 +117,15 @@ export default class Spline extends Line {
  * @return {Array<Position>}
  */
 function getControlPoint (points, tension = Spline.defaultTension) {
-    if (points.length < 3) {
-        throw new RangeError(`Need more than 3 points to compute control points, but only ${points.length} given.`);
-    }
+    const [previous, current, target, next] = points;
 
     let diffBefore;
     let diffAfter;
-    if (points[0]) {
-        diffBefore = points[2].clone().subtract(points[0]).multiply(tension);
+    if (previous) {
+        diffBefore = target.clone().subtract(previous).multiply(tension);
     }
-    if (points[3]) {
-        diffAfter = points[1].clone().subtract(points[3]).multiply(tension);
+    if (next) {
+        diffAfter = current.clone().subtract(next).multiply(tension);
     }
     return [
         points[1].clone().add(diffBefore),

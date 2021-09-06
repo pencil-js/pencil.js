@@ -84,7 +84,7 @@ test("splineThrough", (t) => {
         [300, 300],
         [400, 100],
     ];
-    t.plan(points.length);
+    t.plan(points.length - 1);
     Spline.splineThrough({
         bezierCurveTo: () => t.pass(),
     }, points, 0.5);

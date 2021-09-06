@@ -11,9 +11,9 @@ import Position from "@pencil.js/position";
 export default class Instruction {
     /**
      * @callback InstructionCallback
-     * @param {CanvasRenderingContext2D} ctx
-     * @param {Position} target
-     * @param {Position} previousPosition
+     * @param {Path2D} path - Current drawing path
+     * @param {Position} target - Target position
+     * @param {Position} previousPosition - Position from where instruction started
      */
     /**
      * Instruction constructor
