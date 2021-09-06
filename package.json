@@ -1,6 +1,6 @@
 {
     "name": "pencil.js",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "description": "Nice modular interactive 2D drawing library.",
     "main": "src/index.js",
     "files": [
