@@ -226,7 +226,6 @@ export default class Component extends Container {
 
     /**
      * @typedef {Object} Cursors
-     * @enum {String}
      * @prop {String} default - Normal behavior
      * @prop {String} none - No visible cursor
      * @prop {String} contextMenu - Possible to extends context-menu
@@ -328,7 +327,6 @@ export default class Component extends Container {
 
     /**
      * @typedef {Object} LineJoins
-     * @enum {String}
      * @prop {String} miter - Join segment by extending the line edges until they meet
      * @prop {String} round - Join with a circle tangent to line edges
      * @prop {String} bevel - Join with a straight line between the line edges

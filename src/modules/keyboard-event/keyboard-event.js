@@ -32,7 +32,6 @@ export default class KeyboardEvent extends BaseEvent {
 
     /**
      * @typedef {Object} KeyboardEvents
-     * @enum {String}
      * @prop {String} down - Keyboard key pressed
      * @prop {String} up - Keyboard key released
      */
@@ -50,7 +49,6 @@ export default class KeyboardEvent extends BaseEvent {
 
     /**
      * @typedef {Object} ArrowKeys
-     * @enum {String}
      * @prop {String} up - Up arrow
      * @prop {String} right - Right arrow
      * @prop {String} down - Down arrow
@@ -58,7 +56,6 @@ export default class KeyboardEvent extends BaseEvent {
      */
     /**
      * @typedef {Object} KeyboardKeys
-     * @enum {String}
      * @prop {String} backspace - Remove last character or return previous screen
      * @prop {String} enter - Add line-break or validate entry
      * @prop {String} delete - Remove character in front

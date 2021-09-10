@@ -33,7 +33,6 @@ export default class MouseEvent extends BaseEvent {
 
     /**
      * @typedef {Object} MouseButtons
-     * @enum {String}
      * @prop {String} left - Left button on a classic right-handed mouse
      * @prop {String} main - Main button
      * @prop {String} wheel - The scroll wheel
@@ -69,7 +68,6 @@ export default class MouseEvent extends BaseEvent {
 
     /**
      * @typedef {Object} MouseEvents
-     * @enum {String}
      * @prop {String} down - Mouse button is pressed
      * @prop {String} up - Mouse button is released
      * @prop {String} click - Mouse button is pressed then released without moving

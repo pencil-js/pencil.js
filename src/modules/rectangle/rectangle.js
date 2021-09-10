@@ -93,7 +93,6 @@ export default class Rectangle extends Component {
 
     /**
      * @typedef {Object} RectangleOrigins
-     * @enum {String}
      * @prop {String} topLeft
      * @prop {String} topRight
      * @prop {String} topCenter

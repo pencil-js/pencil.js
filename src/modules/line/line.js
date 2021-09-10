@@ -66,7 +66,7 @@ export default class Line extends Component {
      * @prop {String} [join=Line.joins.round] - How the line segment are join
      * @prop {String|ColorDefinition} [fill=null] - Color used to fill, set to null for transparent
      * @prop {String|ColorDefinition} [stroke=Component.defaultOptions.fill] - Color used to stroke, set to null for transparent
-     * @prop {Boolean} [absolute=false] - Should points be treated as absolute coordinates.
+     * @prop {Boolean} [absolute=false] - Should points be treated as absolute coordinates
      */
     /**
      * @type {LineOptions}
@@ -84,7 +84,6 @@ export default class Line extends Component {
 
     /**
      * @typedef {Object} LineCaps
-     * @enum {String}
      * @prop {String} butt - Caps cut straight at end points
      * @prop {String} round - Round caps by adding a circle at end points, with a radius of lineWidth
      * @prop {String} square - Square caps by adding a square at end points, with a size of lineWidth

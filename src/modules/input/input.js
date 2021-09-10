@@ -120,7 +120,6 @@ export default class Input extends Component {
 
     /**
      * @typedef {Object} InputEvents
-     * @enum {String}
      * @prop {String} change - Input value has changed
      */
     /**

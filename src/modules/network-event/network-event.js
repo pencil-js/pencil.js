@@ -12,7 +12,6 @@ import BaseEvent from "@pencil.js/base-event";
 export default class NetworkEvent extends BaseEvent {
     /**
      * @typedef {Object} NetworkEvents
-     * @enum {String}
      * @prop {String} ready - Content has been loaded
      * @prop {String} error - Content load has fail
      */

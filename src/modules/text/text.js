@@ -347,7 +347,6 @@ export default class Text extends Rectangle {
 
     /**
      * @typedef {Object} TextAlignments
-     * @enum {String}
      * @prop {String} left - The text is left-aligned.
      * @prop {String} right - The text is right-aligned.
      * @prop {String} center - The text is centered.
