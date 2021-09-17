@@ -111,7 +111,7 @@ export default class Component extends Container {
 
             if (this.options.dashed) {
                 const { dashed, strokeWidth } = this.options;
-                const pattern = Array.isArray(dashed) ? dashed : [4, 4];
+                const pattern = Array.isArray(dashed) ? dashed : Component.dashes.default;
                 ctx.setLineDash(pattern.map(v => v * strokeWidth));
             }
             else {

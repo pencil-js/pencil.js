@@ -116,6 +116,7 @@ test("makePath with no fill nor stroke", (t) => {
 test("setContext", (t) => {
     const ctx = {
         translate: (...args) => t.deepEqual(args, [10, 20]),
+        setLineDash: arg => t.deepEqual(arg, []),
     };
     t.context.options.stroke = "#123";
     t.context.options.origin = [10, 20];
@@ -129,6 +130,19 @@ test("setContext", (t) => {
     t.is(ctx.font, "bold italic 99px whatever");
     t.is(ctx.textAlign, "left");
     t.is(ctx.textBaseline, "top");
+});
+
+test("getAlignOffset ", (t) => {
+    t.is(t.context.getAlignOffset(), 0);
+
+    t.context.options.align = Text.alignments.left;
+    t.is(t.context.getAlignOffset(), 0);
+
+    t.context.options.align = Text.alignments.center;
+    t.is(t.context.getAlignOffset(), 0.5);
+
+    t.context.options.align = Text.alignments.right;
+    t.is(t.context.getAlignOffset(), 1);
 });
 
 test("trace", (t) => {

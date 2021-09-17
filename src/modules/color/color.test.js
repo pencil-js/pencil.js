@@ -72,6 +72,25 @@ test("rgba constructor", (t) => {
     t.is(fromRGBA.alpha, 0.1);
 });
 
+test("get and set channels", (t) => {
+    const color = new Color(0.1, 0.2, 0.3, 0.4);
+
+    t.is(color.red, 0.1);
+    t.is(color.green, 0.2);
+    t.is(color.blue, 0.3);
+    t.is(color.alpha, 0.4);
+
+    color.red = 0.9;
+    color.green = 0.8;
+    color.blue = 0.7;
+    color.alpha = 0.6;
+
+    t.is(color.red, 0.9);
+    t.is(color.green, 0.8);
+    t.is(color.blue, 0.7);
+    t.is(color.alpha, 0.6);
+});
+
 test("clone", (t) => {
     const origin = new Color(0.1, 0.2, 0.3, 0.4);
     const clone = origin.clone();

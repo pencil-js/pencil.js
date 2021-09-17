@@ -53,6 +53,9 @@ test("setOptions", (t) => {
     t.is(t.context.options.fill, "red");
 
     t.context.setOptions();
+    t.is(t.context.options.shadow.position.x, 10);
+    t.is(t.context.options.shadow.position.y, 20);
+    t.is(t.context.options.fill, "red");
 });
 
 test("makePath", (t) => {
@@ -93,11 +96,12 @@ test("setContext", (t) => {
     t.context.trace = () => {};
     const ctx = {
         translate: (...args) => t.deepEqual(args, [10, 20]),
-        setLineDash: arg => t.deepEqual(arg, []),
+        setLineDash: arg => t.deepEqual(arg, [12, 18, 24]),
     };
     t.context.options.origin = [10, 20];
     t.context.options.stroke = "#abc";
     t.context.options.strokeWidth = 6;
+    t.context.options.dashed = [2, 3, 4];
     t.context.options.join = "a";
     t.context.options.cap = "b";
 

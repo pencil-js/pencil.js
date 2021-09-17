@@ -18,13 +18,15 @@ test("click", (t) => {
 });
 
 test("trace", (t) => {
+    const noop = () => {};
     const ctx = {
-        save: () => {},
-        translate: () => {},
-        scale: () => {},
-        restore: () => {},
-        fill: () => {},
-        stroke: () => {},
+        save: noop,
+        translate: noop,
+        scale: noop,
+        restore: noop,
+        fill: noop,
+        stroke: noop,
+        setLineDash: noop,
     };
     t.context.render(ctx);
     t.pass();
