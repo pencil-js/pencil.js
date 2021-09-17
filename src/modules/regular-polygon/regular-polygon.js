@@ -12,7 +12,7 @@ const radiusKey = Symbol("_radius");
  * Regular polygon class
  * <br><img src="./media/examples/regular-polygon.png" alt="regular-polygon demo"/>
  * @class
- * @extends Polygon
+ * @extends {module:Polygon}
  */
 export default class RegularPolygon extends Polygon {
     /**

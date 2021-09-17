@@ -12,7 +12,7 @@ const scenePromiseKey = Symbol("_scenePromise");
 /**
  * Container class
  * @class
- * @extends EventEmitter
+ * @extends {module:EventEmitter}
  */
 export default class Container extends EventEmitter {
     /**

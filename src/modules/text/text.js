@@ -73,7 +73,7 @@ const measureText = (() => {
  * Text class
  * <br><img src="./media/examples/text.png" alt="text demo"/>
  * @class
- * @extends Rectangle
+ * @extends {module:Rectangle}
  */
 export default class Text extends Rectangle {
     /**

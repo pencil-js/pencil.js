@@ -14,7 +14,7 @@ const valueKey = Symbol("_value");
  * Slider class
  * <br><img src="./media/examples/progress-bar.png" alt="progress-bar demo"/>
  * @class
- * @extends Input
+ * @extends {module:Input}
  */
 export default class ProgressBar extends Input {
     /**

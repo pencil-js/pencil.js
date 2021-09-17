@@ -11,7 +11,7 @@ const urlKey = Symbol("_url");
  * Image class
  * <br><img src="./media/examples/image.png" alt="image demo"/>
  * @class
- * @extends Rectangle
+ * @extends {module:Rectangle}
  */
 export default class Image extends Rectangle {
     /**

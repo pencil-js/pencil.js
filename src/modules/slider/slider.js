@@ -19,7 +19,7 @@ const moveHandleKey = Symbol("_moveHandle");
  * Slider class
  * <br><img src="./media/examples/slider.png" alt="slider demo"/>
  * @class
- * @extends Input
+ * @extends {module:Input}
  */
 export default class Slider extends Input {
     /**

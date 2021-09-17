@@ -10,7 +10,7 @@ import Rectangle from "@pencil.js/rectangle";
  * Button class
  * <br><img src="./media/examples/button.png" alt="button demo"/>
  * @class
- * @extends Input
+ * @extends {module:Input}
  */
 export default class Button extends Input {
     /**

@@ -8,7 +8,7 @@ import RegularPolygon from "@pencil.js/regular-polygon";
  * Triangle class
  * <br><img src="./media/examples/triangle.png" alt="triangle demo"/>
  * @class
- * @extends RegularPolygon
+ * @extends {module:RegularPolygon}
  */
 export default class Triangle extends RegularPolygon {
     /**

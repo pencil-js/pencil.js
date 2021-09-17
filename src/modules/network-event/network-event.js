@@ -7,7 +7,7 @@ import BaseEvent from "@pencil.js/base-event";
 /**
  * Network event class
  * @class
- * @extends BaseEvent
+ * @extends {module:BaseEvent}
  */
 export default class NetworkEvent extends BaseEvent {
     /**

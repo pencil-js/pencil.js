@@ -10,7 +10,7 @@ import MouseEvent from "@pencil.js/mouse-event";
  * Abstract Input class
  * @abstract
  * @class
- * @extends Component
+ * @extends {module:Component}
  */
 export default class Input extends Component {
     /**

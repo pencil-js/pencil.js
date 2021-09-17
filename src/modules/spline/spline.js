@@ -10,7 +10,7 @@ import { equals } from "@pencil.js/math";
  * Spline class
  * <br><img src="./media/examples/spline.png" alt="spline demo"/>
  * @class
- * @extends Line
+ * @extends {module:Line}
  */
 export default class Spline extends Line {
     /**

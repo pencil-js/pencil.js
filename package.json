@@ -24,7 +24,7 @@
         "play": "webpack --mode=development --watch",
         "build": "webpack --mode=production && tsc",
         "contrib": "all-contributors generate",
-        "docs": "rm -rf docs/ && jsdoc -c .jsdocrc",
+        "docs": "jsdoc -c .jsdocrc",
         "prepublishOnly": "npm run build",
         "postversion": "vercel --prod"
     },

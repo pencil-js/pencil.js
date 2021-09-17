@@ -8,7 +8,7 @@ import Component from "@pencil.js/component";
  * Heart class
  * <br><img src="./media/examples/heart.png" alt="heart demo"/>
  * @class
- * @extends Component
+ * @extends {module:Component}
  */
 export default class Heart extends Component {
     /**

@@ -10,7 +10,7 @@ import OffScreenCanvas from "@pencil.js/offscreen-canvas";
  * Abstract class for visual component
  * @abstract
  * @class
- * @extends Container
+ * @extends {module:Container}
  */
 export default class Component extends Container {
     /**

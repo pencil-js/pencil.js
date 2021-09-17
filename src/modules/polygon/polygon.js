@@ -9,7 +9,7 @@ import Position from "@pencil.js/position";
  * Polygon class
  * <br><img src="./media/examples/polygon.png" alt="polygon demo"/>
  * @class
- * @extends Component
+ * @extends {module:Component}
  */
 export default class Polygon extends Component {
     /**

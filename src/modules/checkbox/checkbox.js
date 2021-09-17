@@ -9,7 +9,7 @@ import Square from "@pencil.js/square";
  * Checkbox class
  * <br><img src="./media/examples/checkbox.png" alt="checkbox demo"/>
  * @class
- * @extends Input
+ * @extends {module:Input}
  */
 export default class Checkbox extends Input {
     /**

@@ -12,7 +12,7 @@ import Instruction from "./instruction";
  * Path class
  * <br><img src="./media/examples/path.png" alt="path demo"/>
  * @class
- * @extends Component
+ * @extends {module:Component}
  */
 export default class Path extends Component {
     /**

@@ -9,7 +9,7 @@ import Position from "@pencil.js/position";
  * Basic rectangle
  * <br><img src="./media/examples/rectangle.png" alt="rectangle demo"/>
  * @class
- * @extends Component
+ * @extends {module:Component}
  */
 export default class Rectangle extends Component {
     /**

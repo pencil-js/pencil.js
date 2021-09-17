@@ -10,7 +10,7 @@ import { radianCircle, random } from "@pencil.js/math";
  * Particles generator class
  * <br><img src="./media/examples/particles.png" alt="particles demo"/>
  * @class
- * @extends Component
+ * @extends {module:Component}
  */
 export default class Particles extends Component {
     /**

@@ -32,9 +32,6 @@ export default class Color {
      * new Color("violet", 0.5);
      */
     constructor (...colorDefinition) {
-        /**
-         * @type {colord}
-         */
         this[parsedKey] = null;
         this.set(...colorDefinition);
     }
@@ -137,7 +134,6 @@ export default class Color {
      * Return hexadecimal rgb notation
      * @example "#123456"
      * @return {String}
-     * @alias hex
      */
     get rgb () {
         return this.hex;

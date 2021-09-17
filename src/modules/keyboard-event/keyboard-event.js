@@ -7,7 +7,7 @@ import BaseEvent from "@pencil.js/base-event";
 /**
  * Keyboard event class
  * @class
- * @extends BaseEvent
+ * @extends {module:BaseEvent}
  */
 export default class KeyboardEvent extends BaseEvent {
     /**

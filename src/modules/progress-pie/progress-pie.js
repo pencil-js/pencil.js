@@ -15,7 +15,7 @@ const valueKey = Symbol("_value");
  * ProgressPie class
  * <br><img src="./media/examples/progress-pie.png" alt="progress-pie demo"/>
  * @class
- * @extends Input
+ * @extends {module:Input}
  */
 export default class ProgressPie extends Input {
     /**
@@ -91,7 +91,7 @@ export default class ProgressPie extends Input {
 
     /**
      * @typedef {Object} ProgressPieOptions
-     * @extends {InputOptions}
+     * @extends InputOptions
      * @prop {Number} [value=0] - Initial value
      * @prop {Number} [radius=100] - Size of the progress-pie
      * @prop {Number} [speed=0.3] - Transition speed between two value (0 mean no change, 1 mean instant change)

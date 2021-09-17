@@ -9,7 +9,7 @@ import Position from "@pencil.js/position";
  * Line class
  * <br><img src="./media/examples/line.png" alt="line demo"/>
  * @class
- * @extends Component
+ * @extends {module:Component}
  */
 export default class Line extends Component {
     /**

@@ -13,7 +13,7 @@ const listenForEventsKey = Symbol("_listenForEvents");
 /**
  * Scene class
  * @class
- * @extends OffscreenCanvas
+ * @extends {module:OffscreenCanvas}
  */
 export default class Scene extends OffscreenCanvas {
     /**
@@ -177,7 +177,7 @@ export default class Scene extends OffscreenCanvas {
 
     /**
      * @typedef {Object} SceneOptions
-     * @extends {OffscreenCanvasOptions}
+     * @extends OffscreenCanvasOptions
      * @prop {String} [cursor=Component.cursors.defaultOptions] - Cursor on hover
      */
     /**

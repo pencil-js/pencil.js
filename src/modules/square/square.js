@@ -11,7 +11,7 @@ const heightKey = Symbol("_height");
  * Square class
  * <br><img src="./media/examples/square.png" alt="square demo"/>
  * @class
- * @extends Rectangle
+ * @extends {module:Rectangle}
  */
 export default class Square extends Rectangle {
     /**
