@@ -108,6 +108,15 @@ export default class Component extends Container {
             ctx.lineCap = this.options.cap;
             ctx.strokeStyle = this.options.stroke.toString(ctx);
             ctx.lineWidth = this.options.strokeWidth;
+
+            if (this.options.dashed) {
+                const { dashed, strokeWidth } = this.options;
+                const pattern = Array.isArray(dashed) ? dashed : [4, 4];
+                ctx.setLineDash(pattern.map(v => v * strokeWidth));
+            }
+            else {
+                ctx.setLineDash([]);
+            }
         }
 
         return this;
@@ -199,6 +208,7 @@ export default class Component extends Container {
      * @prop {String|ColorDefinition} [fill="#000"] - Color used to fill, set to null for transparent
      * @prop {String|ColorDefinition} [stroke=null] - Color used to stroke, set to null for transparent
      * @prop {Number} [strokeWidth=2] - Stroke line thickness in pixels
+     * @prop {Boolean|Array} [dashed=false] - Should the line be dashed, you can also specify the dash pattern (ex: [4, 4] or Component.dashes.dots)
      * @prop {String} [cursor=Component.cursors.default] - Cursor to use when hover
      * @prop {String} [join=Component.joins.miter] - How lines join between them
      * @prop {PositionDefinition} [origin=new Position()] - Relative offset
@@ -213,6 +223,7 @@ export default class Component extends Container {
             fill: "#000",
             stroke: null,
             strokeWidth: 2,
+            dashed: false,
             cursor: Component.cursors.default,
             join: Component.joins.miter,
             origin: new Position(),
@@ -340,5 +351,25 @@ export default class Component extends Container {
             round: "round",
             bevel: "bevel",
         };
+    }
+
+    /**
+     * @typedef {Object} DashPatterns
+     * @prop {Array<Number>} default - Simple dash
+     * @prop {Array<Number>} dots - Simple dots
+     * @prop {Array<Number>} long - Longer dash
+     * @prop {Array<Number>} sewing - Alternating pattern of short and long dash
+     */
+    /**
+     * @type {DashPatterns}
+     */
+    static get dashes () {
+        const pattern = {
+            default: [4, 4],
+            dots: [1, 4],
+            long: [9, 4],
+        };
+        pattern.sewing = [...pattern.default, ...pattern.dots];
+        return pattern;
     }
 }

@@ -23,6 +23,7 @@ Inherit from [ContainerOptions](../container/readme.md#containeroptions).
 |fill |[Color](../color/readme.md) or `String` |`"#000"` |Background Color used to fill, set to null for transparent |
 |stroke |[Color](../color/readme.md) or `String` |`null` |Color used to stroke, set to null for transparent |
 |strokeWidth |`Number` |`2` |Stroke line thickness in pixels |
+|dashed |`Boolean` or `Array` |`false` |Should the line be dashed, you can also specify the dash pattern (ex: [4, 4] or Component.dashes.dots) |
 |cursor |`String` |`Component.cursors.default` |Cursor to use when hover |
 |join |`String` |`Component.joins.miter` |How lines join between them |
 |origin |[`Position`](../position) |`new Position()` |Relative offset |

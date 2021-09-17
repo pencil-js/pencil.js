@@ -93,6 +93,7 @@ test("setContext", (t) => {
     t.context.trace = () => {};
     const ctx = {
         translate: (...args) => t.deepEqual(args, [10, 20]),
+        setLineDash: arg => t.deepEqual(arg, []),
     };
     t.context.options.origin = [10, 20];
     t.context.options.stroke = "#abc";
@@ -153,6 +154,7 @@ test("defaultOptions", (t) => {
     t.is(options.fill, "#000");
     t.is(options.stroke, null);
     t.is(options.strokeWidth, 2);
+    t.is(options.dashed, false);
     t.is(options.cursor, Component.cursors.default);
     t.is(options.join, Component.joins.miter);
     t.is(options.origin.x, 0);
@@ -171,4 +173,11 @@ test("joins", (t) => {
     t.is(Component.joins.miter, "miter");
     t.is(Component.joins.round, "round");
     t.is(Component.joins.bevel, "bevel");
+});
+
+test("dashes", (t) => {
+    t.deepEqual(Component.dashes.default, [4, 4]);
+    t.deepEqual(Component.dashes.dots, [1, 4]);
+    t.deepEqual(Component.dashes.long, [9, 4]);
+    t.deepEqual(Component.dashes.sewing, [4, 4, 1, 4]);
 });
