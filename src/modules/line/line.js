@@ -24,7 +24,7 @@ export default class Line extends Component {
         /**
          * @type {Array<Position>}
          */
-        this.points = points.map(point => Position.from(point));
+        this.points = points.map(Position.from);
     }
 
     /**
@@ -34,8 +34,8 @@ export default class Line extends Component {
      */
     trace (path) {
         path.moveTo(0, 0);
-        const correction = this.options.absolute ? this.position : new Position();
-        this.points.forEach(point => path.lineTo(point.x - correction.x, point.y - correction.y));
+        const { x = 0, y = 0 } = this.options.absolute ? this.position : {};
+        this.points.forEach(point => path.lineTo(point.x - x, point.y - y));
         return this;
     }
 
