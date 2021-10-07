@@ -2,7 +2,7 @@
 
 # :pencil2: Pencil.js
 [![NPM Version](https://badgen.net/npm/v/pencil.js?icon=npm)](https://www.npmjs.com/package/pencil.js)
-[![Dependencies update](https://badgen.net/david/dev/pencil-js/pencil.js?icon=npm)](https://david-dm.org/pencil-js/pencil.js?type=dev)
+[![Vulnerability](https://badgen.net/snyk/pencil-js/pencil.js?icon=dependabot)](https://snyk.io/test/github/pencil-js/pencil.js)
 [![Maintainability](https://badgen.net/codeclimate/maintainability/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/maintainability)
 [![Test Coverage](https://badgen.net/codeclimate/coverage/pencil-js/pencil.js?icon=codeclimate)](https://codeclimate.com/github/pencil-js/pencil.js/test_coverage)
 
