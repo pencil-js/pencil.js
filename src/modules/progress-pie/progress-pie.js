@@ -1,8 +1,8 @@
+import Pie from "@pencil.js/pie";
 import Input from "@pencil.js/input";
 import Circle from "@pencil.js/circle";
 import MouseEvent from "@pencil.js/mouse-event";
 import { constrain } from "@pencil.js/math";
-import Pie from "./pie";
 
 /**
  * @module ProgressPie

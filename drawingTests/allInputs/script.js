@@ -5,23 +5,30 @@
 
     const scene = new P.Scene(window.allInputsScene);
 
+    const value = 0.7;
     const slider = new P.Slider([20, 10], {
-        value: 0.7,
+        value,
     });
     const progress = new P.ProgressBar([20, 40], {
-        value: 0.7,
+        value,
     });
     const knob = new P.Knob([40, 130], {
         radius: 20,
-        value: 0.7,
+        value,
+    });
+    const pie = new P.ProgressPie([90, 130], {
+        radius: 20,
+        value,
     });
     slider.on(P.Input.events.change, () => {
         progress.value = slider.value;
         knob.value = slider.value;
+        pie.value = slider.value;
     });
     knob.on(P.Input.events.change, () => {
         progress.value = knob.value;
         slider.value = knob.value;
+        pie.value = knob.value;
     });
 
     scene.add(
@@ -42,6 +49,7 @@
             value: true,
         }),
         knob,
+        pie,
     );
 
     scene.startLoop();

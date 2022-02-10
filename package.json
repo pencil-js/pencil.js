@@ -93,6 +93,7 @@
         "@pencil.js/particles": "file:src/modules/particles",
         "@pencil.js/path": "file:src/modules/path",
         "@pencil.js/pattern": "file:src/modules/pattern",
+        "@pencil.js/pie": "file:src/modules/pie",
         "@pencil.js/polygon": "file:src/modules/polygon",
         "@pencil.js/position": "file:src/modules/position",
         "@pencil.js/progress-bar": "file:src/modules/progress-bar",
@@ -114,11 +115,11 @@
         "@pencil.js/vector": "file:src/modules/vector",
         "colord": "^2.7.0",
         "minimatch": "^3.0.4",
-        "text-direction": "^1.4.1"
+        "text-direction": "1.3.0"
     },
     "devDependencies": {
         "@gmartigny/eslint-config": "^1.6.0",
-        "@pencil.js/test-environment": "^1.2.0",
+        "@pencil.js/test-environment": "1.2.0",
         "all-contributors-cli": "^6.20.0",
         "ava": "^3.15.0",
         "benchmark": "^2.1.4",

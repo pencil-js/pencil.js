@@ -1,11 +1,15 @@
 import Arc from "@pencil.js/arc";
+import Component from "@pencil.js/component";
 
 /**
  * @module Pie
  */
 
 /**
+ * Pie class
+ * <br><img src="./media/examples/pie.png" alt="pie demo"/>
  * @class
+ * @extends {module:Arc}
  */
 export default class Pie extends Arc {
     /**
@@ -29,18 +33,40 @@ export default class Pie extends Arc {
     }
 
     /**
-     * @typedef {Object} PieOptions
-     * @extends LineOptions
-     * @prop {String|ColorDefinition} [fill=null] - Color used to fill
+     * Return this pie's radius
+     * @return {Number}
      */
+    get radius () {
+        return this.width;
+    }
+
     /**
-     * @return {PieOptions}
+     * Change this pie's radius
+     * @param {Number} radius - New radius value
+     */
+    set radius (radius) {
+        this.width = radius;
+        this.height = radius;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    toJSON () {
+        const { radius } = this;
+        const json = {
+            ...super.toJSON(),
+            radius,
+        };
+        delete json.width;
+        delete json.height;
+        return json;
+    }
+
+    /**
+     * @return {ComponentOptions}
      */
     static get defaultOptions () {
-        return {
-            ...super.defaultOptions,
-            fill: super.defaultOptions.stroke,
-            stroke: null,
-        };
+        return Component.defaultOptions;
     }
 }

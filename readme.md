@@ -144,6 +144,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
          * [Image](src/modules/image)
            * [Sprite](src/modules/sprite)
        * [Arc](src/modules/arc)
+         * [Pie](src/modules/pie)
          * [Ellipse](src/modules/ellipse)
            * [Circle](src/modules/circle)
        * [Text](src/modules/text)

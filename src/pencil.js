@@ -24,6 +24,7 @@ import Particles from "@pencil.js/particles";
 
 // Shapes
 import Arc from "@pencil.js/arc";
+import Pie from "@pencil.js/pie";
 import Ellipse from "@pencil.js/ellipse";
 import Circle from "@pencil.js/circle";
 import Line from "@pencil.js/line";
@@ -66,6 +67,7 @@ const exportableClasses = {
     OffScreenCanvas,
     Scene,
     Arc,
+    Pie,
     Ellipse,
     Circle,
     Line,
@@ -135,6 +137,7 @@ export {
     Component,
     Particles,
     Arc,
+    Pie,
     Ellipse,
     Circle,
     Line,

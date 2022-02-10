@@ -5,16 +5,26 @@ test.beforeEach((t) => {
     t.context = new ProgressBar([0, 0], {
         value: 0.8,
         width: 300,
-        speed: 0.5,
     });
-});
-
-test("constructor", (t) => {
-    t.is(t.context.options.value, 0.8);
 });
 
 test("click", (t) => {
     t.context.click();
+    t.pass();
+});
+
+test("trace", (t) => {
+    const noop = () => {};
+    const ctx = {
+        save: noop,
+        translate: noop,
+        scale: noop,
+        restore: noop,
+        fill: noop,
+        stroke: noop,
+        setLineDash: noop,
+    };
+    t.context.render(ctx);
     t.pass();
 });
 
@@ -31,6 +41,12 @@ test("get and set width", (t) => {
 });
 
 test("get and set value", (t) => {
+    t.context.fire({
+        name: "attach",
+        target: t.context,
+    });
+    t.is(t.context.value, 0.8);
+
     t.context.options.speed = 1;
     t.context.value = 0.5;
     t.is(t.context.value, 0.5);

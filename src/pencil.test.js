@@ -26,6 +26,7 @@ import {
     Image,
     Sprite,
     Arc,
+    Pie,
     Ellipse,
     Circle,
     Text,
@@ -113,6 +114,7 @@ test("namespace", (t) => {
     t.not(Pencil.Image, undefined);
     t.not(Pencil.Sprite, undefined);
     t.not(Pencil.Arc, undefined);
+    t.not(Pencil.Pie, undefined);
     t.not(Pencil.Ellipse, undefined);
     t.not(Pencil.Circle, undefined);
     t.not(Pencil.Text, undefined);
@@ -160,6 +162,7 @@ test("named imports", (t) => {
     t.not(Image, undefined);
     t.not(Sprite, undefined);
     t.not(Arc, undefined);
+    t.not(Pie, undefined);
     t.not(Ellipse, undefined);
     t.not(Circle, undefined);
     t.not(Text, undefined);

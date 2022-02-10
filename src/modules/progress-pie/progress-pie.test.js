@@ -8,10 +8,6 @@ test.beforeEach((t) => {
     });
 });
 
-test("constructor", (t) => {
-    t.is(t.context.options.value, 0.8);
-});
-
 test("click", (t) => {
     t.context.click();
     t.pass();
@@ -40,6 +36,12 @@ test("get and set radius", (t) => {
 });
 
 test("get and set value", (t) => {
+    t.context.fire({
+        name: "attach",
+        target: t.context,
+    });
+    t.is(t.context.value, 0.8);
+
     t.context.options.speed = 1;
     t.context.value = 0.5;
     t.is(t.context.value, 0.5);
