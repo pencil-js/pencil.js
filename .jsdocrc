@@ -55,6 +55,7 @@
                 }
             ],
             "theme": "dark",
+            "exclude_inherited": true,
             "title": "Pencil.js",
             "menu": [
                 {
