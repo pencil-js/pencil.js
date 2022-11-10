@@ -99,6 +99,7 @@
         "@pencil.js/progress-bar": "file:src/modules/progress-bar",
         "@pencil.js/progress-pie": "file:src/modules/progress-pie",
         "@pencil.js/radial-gradient": "file:src/modules/radial-gradient",
+        "@pencil.js/conic-gradient": "file:src/modules/conic-gradient",
         "@pencil.js/rectangle": "file:src/modules/rectangle",
         "@pencil.js/regular-polygon": "file:src/modules/regular-polygon",
         "@pencil.js/resizable": "file:src/modules/resizable",
