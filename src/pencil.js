@@ -6,6 +6,7 @@ import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 import Color from "@pencil.js/color";
 import LinearGradient from "@pencil.js/linear-gradient";
 import RadialGradient from "@pencil.js/radial-gradient";
+import ConicGradient from "@pencil.js/conic-gradient";
 import Pattern from "@pencil.js/pattern";
 import * as Navigation from "@pencil.js/navigation";
 
@@ -93,6 +94,7 @@ const exportableClasses = {
     Color,
     LinearGradient,
     RadialGradient,
+    ConicGradient,
     Pattern,
     Heart,
     Sprite,
@@ -175,6 +177,7 @@ export {
     Color,
     LinearGradient,
     RadialGradient,
+    ConicGradient,
     Heart,
     Sprite,
 };
