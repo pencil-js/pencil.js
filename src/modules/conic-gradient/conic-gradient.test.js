@@ -10,14 +10,14 @@ test.beforeEach((t) => {
 
 test("constructor", (t) => {
     t.is(t.context.position.constructor.name, "Position");
-    t.is(t.context.radius, 0);
+    t.is(t.context.startAngle, 0);
     t.is(typeof t.context.colorStops, "object");
 });
 
 test("toString", (t) => {
     const expected = [
-        ["0", "red"],
-        ["1", "blue"],
+        [0, "red"],
+        [1, "blue"],
     ];
     const ctx = {
         createConicGradient: () => ({

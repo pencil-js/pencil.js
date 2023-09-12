@@ -163,6 +163,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
  * [Color](src/modules/color)
  * [LinearGradient](src/modules/linear-gradient)
  * [RadialGradient](src/modules/radial-gradient)
+ * [ConicGradient](src/modules/conic-gradient)
  * [Pattern](src/modules/pattern)
  * [BaseEvent](src/modules/base-event)
    * [MouseEvent](src/modules/mouse-event)
