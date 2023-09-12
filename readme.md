@@ -207,18 +207,22 @@ You want to help us improve ? Please read [the contributing manual](contributing
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href='https://github.com/GMartigny'><img src='https://github.com/GMartigny.png?size=99' width='99px;' alt='Guillaume Martigny avatar'/><br/>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/GMartigny'><img src='https://github.com/GMartigny.png?size=99' width='99px;' alt='Guillaume Martigny avatar'/><br/>
     <sub><b>Guillaume Martigny</b></sub></a></td>
-    <td align="center"><a href='https://github.com/Heraclite'><img src='https://github.com/Heraclite.png?size=99' width='99px;' alt='Heraclite avatar'/><br/>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/Heraclite'><img src='https://github.com/Heraclite.png?size=99' width='99px;' alt='Heraclite avatar'/><br/>
     <sub><b>Heraclite</b></sub></a></td>
-    <td align="center"><a href='https://github.com/zachary-nguyen'><img src='https://github.com/zachary-nguyen.png?size=99' width='99px;' alt='Zachary Nguyen avatar'/><br/>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/zachary-nguyen'><img src='https://github.com/zachary-nguyen.png?size=99' width='99px;' alt='Zachary Nguyen avatar'/><br/>
     <sub><b>Zachary Nguyen</b></sub></a></td>
-    <td align="center"><a href='https://github.com/jaller94'><img src='https://github.com/jaller94.png?size=99' width='99px;' alt='Christian Paul avatar'/><br/>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/jaller94'><img src='https://github.com/jaller94.png?size=99' width='99px;' alt='Christian Paul avatar'/><br/>
     <sub><b>Christian Paul</b></sub></a></td>
-    <td align="center"><a href='https://github.com/Marr11317'><img src='https://github.com/Marr11317.png?size=99' width='99px;' alt='Rémi Marche avatar'/><br/>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/Marr11317'><img src='https://github.com/Marr11317.png?size=99' width='99px;' alt='Rémi Marche avatar'/><br/>
     <sub><b>Rémi Marche</b></sub></a></td>
-  </tr>
+      <td align="center" valign="top" width="14.28%"><a href='https://github.com/curedbylethe'><img src='https://github.com/curedbylethe.png?size=99' width='99px;' alt='Parsa avatar'/><br/>
+    <sub><b>Parsa</b></sub></a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
