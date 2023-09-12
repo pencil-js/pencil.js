@@ -72,6 +72,7 @@
         "@pencil.js/circle": "file:src/modules/circle",
         "@pencil.js/color": "file:src/modules/color",
         "@pencil.js/component": "file:src/modules/component",
+        "@pencil.js/conic-gradient": "file:src/modules/conic-gradient",
         "@pencil.js/container": "file:src/modules/container",
         "@pencil.js/draggable": "file:src/modules/draggable",
         "@pencil.js/ellipse": "file:src/modules/ellipse",
@@ -97,7 +98,6 @@
         "@pencil.js/progress-bar": "file:src/modules/progress-bar",
         "@pencil.js/progress-pie": "file:src/modules/progress-pie",
         "@pencil.js/radial-gradient": "file:src/modules/radial-gradient",
-        "@pencil.js/conic-gradient": "file:src/modules/conic-gradient",
         "@pencil.js/rectangle": "file:src/modules/rectangle",
         "@pencil.js/regular-polygon": "file:src/modules/regular-polygon",
         "@pencil.js/resizable": "file:src/modules/resizable",
@@ -117,6 +117,8 @@
         "text-direction": "^2.0.1"
     },
     "devDependencies": {
+        "@babel/plugin-syntax-import-assertions": "^7.22.5",
+        "@babel/preset-env": "^7.22.15",
         "@gmartigny/eslint-config": "^2.1.0",
         "@pencil.js/test-environment": "^1.2.1",
         "all-contributors-cli": "^6.26.1",
@@ -126,6 +128,7 @@
         "clean-jsdoc-theme": "4.1.10",
         "eslint": "^8.49.0",
         "jsdoc": "^3.6.11",
+        "jsdoc-babel": "^0.5.0",
         "typescript": "^5.2.2",
         "webpack": "^5.53.0",
         "webpack-cli": "^5.1.4"

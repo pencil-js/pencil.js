@@ -4,7 +4,7 @@
         "includePattern": "\\.js$",
         "excludePattern": "test\\.js$"
     },
-    "plugins": ["plugins/markdown"],
+    "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"],
     "opts": {
         "recurse": true,
         "destination": "./docs",
