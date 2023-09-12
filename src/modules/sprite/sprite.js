@@ -230,7 +230,7 @@ class Spritesheet {
                 return matcher;
             }
             if (typeof matcher === "string") {
-                const glob = minimatch.Minimatch(matcher, {
+                const glob = new minimatch.Minimatch(matcher, {
                     dot: true,
                     matchBase: true,
                 });

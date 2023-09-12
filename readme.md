@@ -1,4 +1,4 @@
-![Pencil.js logo](media/animated-logo.gif)
+[![Pencil.js logo](media/animated-logo.gif)](https://pencil.js.org)
 
 # :pencil2: Pencil.js
 [![NPM Version](https://badgen.net/npm/v/pencil.js?icon=npm)](https://www.npmjs.com/package/pencil.js)
@@ -94,7 +94,7 @@ Pencil.js is able to [draw thousands of shapes](https://benchmarks.slaylines.io/
 Even more if you use the [Particles](src/modules/particles) generator.
 
 ### Size
-With [![Minified and gzip size](https://badgen.net/bundlephobia/minzip/pencil.js)](https://bundlephobia.com/result?p=pencil.js), Pencil.js is fairly lightweight.
+With [![Package size](https://badgen.net/packagephobia/publish/pencil.js)](https://packagephobia.com/result?p=pencil.js), Pencil.js is fairly lightweight.
 Furthermore, with no side effect, it's fully tree-shakable. So, any decent bundler can further reduce its footprint.
 
 
@@ -170,7 +170,7 @@ Take a look at [more advanced examples](https://codepen.io/collection/XqzkNQ/).
    * [NetworkEvent](src/modules/network-event)
 
 ### Non-core modules
-> Non-core modules refer to packages made by us and not part of Pencil.js library. We find them useful so maybe you will too...
+> Non-core modules refer to packages made by us and not part of Pencil.js library. We find them useful, so maybe you will too...
  * [spritesheet](https://github.com/pencil-js/spritesheet) ([CLI](https://github.com/pencil-js/spritesheet-cli))<br/>
 Pack a set of images into a single spritesheet along its json description file.
  * [vue-pencil.js](https://github.com/pencil-js/vue-pencil.js)<br/>

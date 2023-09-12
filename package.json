@@ -112,22 +112,22 @@
         "@pencil.js/text": "file:src/modules/text",
         "@pencil.js/triangle": "file:src/modules/triangle",
         "@pencil.js/vector": "file:src/modules/vector",
-        "colord": "^2.7.0",
-        "minimatch": "^3.0.4",
+        "colord": "^2.9.3",
+        "minimatch": "^5.1.6",
         "text-direction": "^2.0.1"
     },
     "devDependencies": {
         "@gmartigny/eslint-config": "^2.1.0",
         "@pencil.js/test-environment": "^1.2.1",
-        "all-contributors-cli": "^6.20.0",
+        "all-contributors-cli": "^6.26.1",
         "ava": "^5.3.1",
         "benchmark": "^2.1.4",
         "c8": "^8.0.1",
-        "clean-jsdoc-theme": "^3.2.4",
+        "clean-jsdoc-theme": "4.1.10",
         "eslint": "^8.49.0",
-        "jsdoc": "^3.6.6",
-        "typescript": "^4.4.3",
+        "jsdoc": "^3.6.11",
+        "typescript": "^5.2.2",
         "webpack": "^5.53.0",
-        "webpack-cli": "^4.8.0"
+        "webpack-cli": "^5.1.4"
     }
 }

@@ -13,7 +13,7 @@ import MouseEvent from "@pencil.js/mouse-event";
 /**
  * Set this component rotatable (use drag and drop interaction to rotate)
  * @return {RotatableAPI}
- * @memberOf {module:Component#}
+ * @memberOf module:Component#
  */
 Component.prototype.rotatable = function rotatable () {
     if (this.isDraggable) {

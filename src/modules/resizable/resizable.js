@@ -19,7 +19,7 @@ import "@pencil.js/draggable";
  * Enable resize on a rectangle
  * @param {ResizableOptions} [options] - Additional options
  * @return {DraggableAPI}
- * @memberOf {module:Rectangle#}
+ * @memberOf module:Rectangle#
  */
 Rectangle.prototype.resizable = function resizable (options) {
     if (this.options.rotation % 1 !== 0) {
