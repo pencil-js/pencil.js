@@ -1,9 +1,5 @@
-/* global Pencil */
-
-{
+export default async function draw (scene, Pencil) {
     const P = Pencil;
-
-    const scene = new P.Scene(window.allInputsScene);
 
     const value = 0.7;
     const slider = new P.Slider([20, 10], {
@@ -11,6 +7,7 @@
     });
     const progress = new P.ProgressBar([20, 40], {
         value,
+        speed: 1,
     });
     const knob = new P.Knob([40, 130], {
         radius: 20,
@@ -19,6 +16,7 @@
     const pie = new P.ProgressPie([90, 130], {
         radius: 20,
         value,
+        speed: 1,
     });
     slider.on(P.Input.events.change, () => {
         progress.value = slider.value;
@@ -51,6 +49,4 @@
         knob,
         pie,
     );
-
-    scene.startLoop();
 }

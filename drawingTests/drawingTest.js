@@ -1,64 +1,43 @@
+import Pencil from "../dist/pencil.esm.js";
+
 const tests = [
     "allShapes",
     "allInputs",
 ];
 
-/**
- * Wait next tick to call a function
- * @param {Function} func - Any function to defer
- * @param {*} ctx - This context of the function
- * @param {...*} params - Some params
- */
-function defer (func, ctx, ...params) {
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            func.apply(ctx, params);
-        });
-    });
-}
+tests.forEach(async (name) => {
+    const test = document.createElement("div");
+    test.className = "test";
+    const expected = new Pencil.Image(undefined, `./${name}/expected.png`);
 
-window.addEventListener("load", () => {
-    let chain = Promise.resolve();
-
-    tests.forEach((name) => {
+    expected.on(Pencil.NetworkEvent.events.ready, async () => {
         const container = document.createElement("div");
-        container.id = name;
-        container.className = "test";
+        test.appendChild(container);
+        container.style.width = `${expected.width}px`;
+        container.style.height = `${expected.height}px`;
+        const scene = new Pencil.Scene(container);
 
-        const scriptTag = document.createElement("script");
-        scriptTag.src = `./${name}/script.js`;
+        const script = await import(`./${name}/script.js`);
+        await script.default(scene, Pencil);
+        scene.startLoop();
 
-        const scene = document.createElement("div");
-        scene.className = "scene";
-        window[`${name}Scene`] = scene;
-        container.appendChild(scene);
+        const compare = new Pencil.OffScreenCanvas(expected.width, expected.height);
+        compare.add(expected);
 
-        const expected = document.createElement("img");
-        expected.className = "expected";
-        chain = chain.then(() => {
-            return new Promise((resolve) => {
-                console.log(`Load ${name}`);
-                expected.src = `./${name}/expected.png`;
-                expected.addEventListener("load", () => {
-                    scene.style.height = `${expected.height}px`;
-                    scene.style.width = `${expected.width}px`;
-                    defer(() => {
-                        container.appendChild(scriptTag);
-                        console.log(`Resolve ${name}`);
-                        resolve();
-                    });
-                });
-                expected.addEventListener("error", () => {
-                    scene.style.height = "200px";
-                    scene.style.width = "50%";
-                    container.appendChild(scriptTag);
-                    console.log(`Fail ${name}`);
-                    resolve();
-                });
-            });
-        });
-        container.appendChild(expected);
+        const { data } = scene.getImageData();
+        const { data: other } = compare.getImageData();
 
-        document.body.appendChild(container);
+        test.appendChild(compare.ctx.canvas);
+
+        const diffs = [...data].map((pixel, i) => Math.abs(pixel - other[i])).filter(diff => diff > 1);
+        if (diffs.length) {
+            const percentage = (Pencil.Math.sum(...diffs) / diffs.length / 255) * 100;
+            console.error(`${name} failed with ${Math.ceil(diffs.length / 4)} pixels by ${(percentage).toFixed(2)}%`);
+            test.classList.add("error");
+        }
+        else {
+            console.log(`${name} Success`);
+        }
     });
+    document.body.appendChild(test);
 });

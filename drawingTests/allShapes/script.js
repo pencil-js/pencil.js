@@ -1,11 +1,7 @@
-/* global Pencil */
-
-{
+export default async function draw (scene, Pencil){
     const P = Pencil;
 
-    const scene = new P.Scene(window.allShapesScene, {
-        fill: "rgba(200, 200, 200, 0.3)",
-    });
+    scene.options.fill = "rgba(200, 200, 200, 0.3)";
 
     const shapes = [];
 
@@ -108,5 +104,7 @@
 
     scene.add(...shapes);
 
-    text.on(P.NetworkEvent.events.ready, () => scene.render());
+    return new Promise((resolve) => {
+        text.on(P.NetworkEvent.events.ready, resolve);
+    });
 }
