@@ -27,6 +27,17 @@ test("trace", (t) => {
     t.context.trace(path);
 });
 
+test("trace rounded", (t) => {
+    t.context.options.rounded = 11;
+    const path = {
+        roundRect: (...params) => {
+            t.deepEqual(params, [0, 0, 123, 22, 11]);
+        },
+    };
+    t.plan(1);
+    t.context.trace(path);
+});
+
 test("getOrigin", (t) => {
     const { origins } = Rectangle;
     const expected = {

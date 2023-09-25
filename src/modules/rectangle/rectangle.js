@@ -38,7 +38,13 @@ export default class Rectangle extends Component {
      * @return {Rectangle} Itself
      */
     trace (path) {
-        path.rect(0, 0, this.width, this.height);
+        const { rounded } = this.options;
+        if (rounded) {
+            path.roundRect(0, 0, this.width, this.height, ...(Array.isArray(rounded) ? rounded : [rounded]));
+        }
+        else {
+            path.rect(0, 0, this.width, this.height);
+        }
         return this;
     }
 
@@ -89,6 +95,21 @@ export default class Rectangle extends Component {
      */
     static from (definition) {
         return new Rectangle(definition.position, definition.width, definition.height, definition.options);
+    }
+
+    /**
+     * @typedef {Object} RectangleOptions
+     * @extends ComponentOptions
+     * @prop {Number|Array<Number>} rounded - Corner radius or an array of radii [top-left, top-right, bottom-right, bottom-left]
+     */
+    /**
+     * @type {RectangleOptions}
+     */
+    static get defaultOptions () {
+        return {
+            ...super.defaultOptions,
+            rounded: 0,
+        };
     }
 
     /**
