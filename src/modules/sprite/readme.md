@@ -52,7 +52,7 @@ scene.add(sprite).startLoop();
 ## SpriteOptions
 Inherit from [ImageOptions](../image/readme.md#imageoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|speed |`Number` |`1` |Frame rate of the animation (1 means about 60 frame per seconds, 0 means stopped) |
-|loop |`Boolean` |`true` |Should the animation start over indefinitely |
+| Name  | Type      | Default | Comment                                                                           |
+|-------|-----------|---------|-----------------------------------------------------------------------------------|
+| speed | `Number`  | `1`     | Frame rate of the animation (1 means about 60 frame per seconds, 0 means stopped) |
+| loop  | `Boolean` | `true`  | Should the animation start over indefinitely                                      |

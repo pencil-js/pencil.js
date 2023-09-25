@@ -19,6 +19,6 @@ scene.startLoop();
 ## SceneOptions
 Inherit from [OffscreenCanvasOptions](../offscreen-canvas/readme.md#offscreencanvasoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|cursor |`String` |`Component.cursors.default` |Cursor on hover |
+| Name   | Type     | Default                     | Comment         |
+|--------|----------|-----------------------------|-----------------|
+| cursor | `String` | `Component.cursors.default` | Cursor on hover |

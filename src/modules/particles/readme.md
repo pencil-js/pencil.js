@@ -72,11 +72,11 @@ const particles = new Particles(position, base, generator, updater, {
 
 Inherit from [ComponentOptions](../component/readme.md#componentoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|`frequency` |`Number` |`1` |Frequency of emission per frame (randomized, 1 mean every frame, 0.1 mean about 1 each 10 frames) |
-|`emit` |`Number` or `Array<Number>` | |Number or range of number of particles emitted |
-|`args` |`Array` | |Arguments passed to the generator function |
+| Name        | Type                        | Default | Comment                                                                                           |
+|-------------|-----------------------------|---------|---------------------------------------------------------------------------------------------------|
+| `frequency` | `Number`                    | `1`     | Frequency of emission per frame (randomized, 1 mean every frame, 0.1 mean about 1 each 10 frames) |
+| `emit`      | `Number` or `Array<Number>` |         | Number or range of number of particles emitted                                                    |
+| `args`      | `Array`                     |         | Arguments passed to the generator function                                                        |
 
 
 ## ParticlesData
@@ -84,11 +84,11 @@ Inherit from [ComponentOptions](../component/readme.md#componentoptions).
 `ParticlesData` stores individuals information about each particle.
 It supports a limited number of properties.
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|`position` |[`Position`](../position) |`new Position()` |Position of the particle |
-|`rotation` |`Number` |`0` |Rotation applied to the particle |
-|`scale` |`Number` or `Array` |`1` |Scaling ratio or a pair of value for horizontal and vertical scaling |
-|`ttl` |`Number` |`undefined` |Time to live, number of frames the particle is displayed. This number will be decremented and the data removed when it reach 0. Any falsy value will prevent this behavior |
+| Name       | Type                      | Default          | Comment                                                                                                                                                                    |
+|------------|---------------------------|------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `position` | [`Position`](../position) | `new Position()` | Position of the particle                                                                                                                                                   |
+| `rotation` | `Number`                  | `0`              | Rotation applied to the particle                                                                                                                                           |
+| `scale`    | `Number` or `Array`       | `1`              | Scaling ratio or a pair of value for horizontal and vertical scaling                                                                                                       |
+| `ttl`      | `Number`                  | `undefined`      | Time to live, number of frames the particle is displayed. This number will be decremented and the data removed when it reach 0. Any falsy value will prevent this behavior |
 
 The data object can also be used to store any other individual values for each particle.

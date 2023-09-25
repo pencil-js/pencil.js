@@ -19,7 +19,7 @@ const imageData = offScreen.getImageData();
 ## OffscreenCanvasOptions
 Inherit from [ContainerOptions](../container/readme.md#containeroptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|fill |[Color](../color/readme.md) or `String` |`null` |Background color |
-|opacity |`Number` |`1` |Global opacity |
+| Name    | Type                          | Default | Comment          |
+|---------|-------------------------------|---------|------------------|
+| fill    | [Color](../color) or `String` | `null`  | Background color |
+| opacity | `Number`                      | `1`     | Global opacity   |

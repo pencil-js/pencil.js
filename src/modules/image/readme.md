@@ -39,7 +39,7 @@ new Namespace.Image();
 ## ImageOptions
 Inherit from [RectangleOptions](../rectangle/readme.md#rectangleoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|fill |[Color](../color/readme.md) or `String` |`null` |Background color for transparent images |
-|description |`String` |`""` |Accessibility description of the image |
+| Name        | Type                                    | Default | Comment                                 |
+|-------------|-----------------------------------------|---------|-----------------------------------------|
+| fill        | [Color](../color/readme.md) or `String` | `null`  | Background color for transparent images |
+| description | `String`                                | `""`    | Accessibility description of the image  |

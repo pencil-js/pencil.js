@@ -36,12 +36,12 @@ import { Text as PText } from "pencil.js";
 ## TextOptions
 Inherit from [ComponentOptions](../component/readme.md#componentoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|font |`String` |`"sans-serif"` |Font to use (can be a URL) |
-|fontSize |`Number` |`20` |Size of the text in pixels |
-|align |`String` |`Text.alignments.start` |Text horizontal alignment (use the `origin` option to move the text) |
-|bold |`Boolean` |`false` |Use bold font-weight |
-|italic |`Boolean` |`false` |Use italic font-style |
-|underscore |`Boolean` |`false` |Draw a line under the text |
-|lineHeight |`Number` |`1` |Ratio of line height (1 is normal, 2 is twice the space) |
+| Name       | Type      | Default                 | Comment                                                              |
+|------------|-----------|-------------------------|----------------------------------------------------------------------|
+| font       | `String`  | `"sans-serif"`          | Font to use (can be a URL)                                           |
+| fontSize   | `Number`  | `20`                    | Size of the text in pixels                                           |
+| align      | `String`  | `Text.alignments.start` | Text horizontal alignment (use the `origin` option to move the text) |
+| bold       | `Boolean` | `false`                 | Use bold font-weight                                                 |
+| italic     | `Boolean` | `false`                 | Use italic font-style                                                |
+| underscore | `Boolean` | `false`                 | Draw a line under the text                                           |
+| lineHeight | `Number`  | `1`                     | Ratio of line height (1 is normal, 2 is twice the space)             |

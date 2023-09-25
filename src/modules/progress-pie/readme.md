@@ -23,8 +23,8 @@ progressPie.value = 0.5; // set to 50%
 ## ProgressPieOptions
 Inherit from [InputOptions](../input/readme.md#inputoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|value |`Number` |`0` |Initial value |
-|radius |`Number` |`100` |Size of the progress-pie |
-|speed |`Number` |`0.3` |Transition speed between two value (0 mean no change, 1 mean instant change) |
+| Name   | Type     | Default | Comment                                                                      |
+|--------|----------|---------|------------------------------------------------------------------------------|
+| value  | `Number` | `0`     | Initial value                                                                |
+| radius | `Number` | `100`   | Size of the progress-pie                                                     |
+| speed  | `Number` | `0.3`   | Transition speed between two value (0 mean no change, 1 mean instant change) |

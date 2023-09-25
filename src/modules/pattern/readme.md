@@ -28,8 +28,8 @@ Image.load("pattern.png").then((image) => {
 
 ## PatternOptions
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|repeat |`String` |`"repeat"` |Repetition rule |
-|origin |[`Position`](../position) |`new Position()` |Relative offset |
-|scale |`Number` or [`Position`](../position) |`1` |Scaling ratio or a pair of value for horizontal and vertical scaling |
+| Name   | Type                                  | Default          | Comment                                                              |
+|--------|---------------------------------------|------------------|----------------------------------------------------------------------|
+| repeat | `String`                              | `"repeat"`       | Repetition rule                                                      |
+| origin | [`Position`](../position)             | `new Position()` | Relative offset                                                      |
+| scale  | `Number` or [`Position`](../position) | `1`              | Scaling ratio or a pair of value for horizontal and vertical scaling |

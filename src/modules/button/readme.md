@@ -20,6 +20,6 @@ const button = new Button(position, options);
 ## ButtonOptions
 Inherit from [TextOptions](../text/readme.md#textoptions) and from [InputOptions](../input/readme.md#inputoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|value |`String` |`""` |Text of the button |
+| Name  | Type     | Default | Comment            |
+|-------|----------|---------|--------------------|
+| value | `String` | `""`    | Text of the button |

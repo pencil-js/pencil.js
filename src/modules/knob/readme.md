@@ -25,9 +25,9 @@ knob.value = 0.5; // set to 50%
 ## KnobOptions
 Inherit from [ComponentOptions](../input/readme.md#inputoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|min |`Number` |`0` |Minimum value when the knob is at lowest |
-|max |`Number` |`10` |Maximum value when the knob is at highest |
-|value |`Number` |`0` |Initial value |
-|radius |`Number` |`100` |Radius of the knob |
+| Name   | Type     | Default | Comment                                   |
+|--------|----------|---------|-------------------------------------------|
+| min    | `Number` | `0`     | Minimum value when the knob is at lowest  |
+| max    | `Number` | `10`    | Maximum value when the knob is at highest |
+| value  | `Number` | `0`     | Initial value                             |
+| radius | `Number` | `100`   | Radius of the knob                        |

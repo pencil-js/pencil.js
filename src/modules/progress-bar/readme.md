@@ -24,8 +24,8 @@ progressBar.value = 0.5; // set to 50%
 ## ProgressBarOptions
 Inherit from [InputOptions](../input/readme.md#inputoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|value |`Number` |`0` |Initial value |
-|width |`Number` |`200` |Size of the slider |
-|speed |`Number` |`0.3` |Transition speed between two value (0 mean no change, 1 mean instant change) |
+| Name  | Type     | Default | Comment                                                                      |
+|-------|----------|---------|------------------------------------------------------------------------------|
+| value | `Number` | `0`     | Initial value                                                                |
+| width | `Number` | `200`   | Size of the slider                                                           |
+| speed | `Number` | `0.3`   | Transition speed between two value (0 mean no change, 1 mean instant change) |

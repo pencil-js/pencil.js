@@ -27,6 +27,6 @@ const select = new Select(position, items, options);
 ## SelectOptions
 Inherit from [TextOptions](../text/readme.md#textoptions) and [InputOptions](../input/readme.md#inputoptions).
 
-| Name | Type | Default | Comment |
-| ---- | ---- | ------- | ------- |
-|value |`Number` |`0` |Selected index of the select |
+| Name  | Type     | Default | Comment                      |
+|-------|----------|---------|------------------------------|
+| value | `Number` | `0`     | Selected index of the select |
