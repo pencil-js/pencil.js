@@ -190,10 +190,6 @@ Create a GIF stream frame by frame from a canvas rendering context.
 Take a tour of all the [awesome project using Pencil.js](https://github.com/pencil-js/awesome).
 
 
-## Sponsors
-
-[![JetBrains logo](https://user-images.githubusercontent.com/2543511/58549723-71160e00-820c-11e9-98c1-9e3d7aafcbb2.png)](https://www.jetbrains.com/?from=Pencil.js)
-
 ### Enterprises
 
 We are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications.
