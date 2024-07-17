@@ -160,7 +160,7 @@ export default class Scene extends OffscreenCanvas {
 
     /**
      * Build a canvas and set it to fill the entire document.body
-     * @param {HTMLElement} container - Element holding the canvas
+     * @param {HTMLElement} [container=window.document.body] - Element holding the canvas
      * @inheritDoc
      */
     static getDrawingContext (container = window.document.body) {
