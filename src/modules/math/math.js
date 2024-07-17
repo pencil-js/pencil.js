@@ -12,7 +12,7 @@
  * constrain(999, 0, 50); // => 50
  * constrain(-999, 0, 50); // => 0
  */
-export const constrain = (value, min, max) => Math.min(Math.max(value, min), max);
+const constrain = (value, min, max) => Math.min(Math.max(value, min), max);
 
 /**
  * Determine if two number can considered equals accounting for JS precision.
@@ -23,7 +23,7 @@ export const constrain = (value, min, max) => Math.min(Math.max(value, min), max
  * @example
  * equals(0.1 + 0.2, 0.3); // => true
  */
-export const equals = (number1, number2, epsilon = Number.EPSILON) => Math.abs(number1 - number2) < epsilon;
+const equals = (number1, number2, epsilon = Number.EPSILON) => Math.abs(number1 - number2) < epsilon;
 
 /**
  * Return a random number between limits
@@ -35,7 +35,7 @@ export const equals = (number1, number2, epsilon = Number.EPSILON) => Math.abs(n
  * random(10); // => 4.4856764978326735
  * random(100, 200); // => 134.57047268453047
  */
-export const random = (min = 1, max) => {
+const random = (min = 1, max) => {
     let from = min;
     let to = max;
     if (max === undefined) {
@@ -54,25 +54,25 @@ export const random = (min = 1, max) => {
  * truncate(-4.9); // => -4
  */
 // eslint-disable-next-line no-bitwise
-export const truncate = value => value << 0;
+const truncate = value => value << 0;
 
 /**
  * Full rotation on radian circle
  * @type {Number}
  */
-export const radianCircle = Math.PI * 2;
+const radianCircle = Math.PI * 2;
 
 /**
  * Full rotation on degree circle
  * @type {Number}
  */
-export const degreeCircle = 360;
+const degreeCircle = 360;
 
 /**
  * Golden ratio number
  * @type {Number}
  */
-export const phi = (Math.sqrt(5) + 1) / 2;
+const phi = (Math.sqrt(5) + 1) / 2;
 
 /**
  * Return modulo with the same sign as the divisor (Floored division)
@@ -83,7 +83,7 @@ export const phi = (Math.sqrt(5) + 1) / 2;
  * modulo(10, 3); // => 1
  * modulo(10, -3); // => -2
  */
-export const modulo = (value, divisor) => {
+const modulo = (value, divisor) => {
     const remainder = value % divisor;
     return !value || Math.sign(value) === Math.sign(divisor) ? remainder : remainder + divisor;
 };
@@ -98,7 +98,7 @@ export const modulo = (value, divisor) => {
  * distribute(10); // => Number[10] evenly distributed across [0, 1]
  * distribute(5, 10, 20); // => Number[5] evenly distributed across [10, 20]
  */
-export const distribute = (nbValue, min = 0, max = 1) => {
+const distribute = (nbValue, min = 0, max = 1) => {
     const start = random(min, max);
     const diff = max - min;
     return [...new Array(nbValue)].map((_, i) => min + modulo(start + (i * phi * diff), diff));
@@ -111,7 +111,7 @@ export const distribute = (nbValue, min = 0, max = 1) => {
  * @example
  * sum(1, 2, 3); // => 6
  */
-export const sum = (...values) => values.reduce((acc, value) => acc + value, 0);
+const sum = (...values) => values.reduce((acc, value) => acc + value, 0);
 
 /**
  * Return the average of all values
@@ -120,7 +120,7 @@ export const sum = (...values) => values.reduce((acc, value) => acc + value, 0);
  * @example
  * sum(1, 2, 3); // => 2
  */
-export const average = (...values) => sum(...values) / values.length;
+const average = (...values) => sum(...values) / values.length;
 
 /**
  * Return the equivalent of a value from a scale to another
@@ -133,7 +133,7 @@ export const average = (...values) => sum(...values) / values.length;
  * @example
  * map(5, 0, 10, 100, 200); // => 150
  */
-export const map = (value, fromMin, fromMax, toMin = 0, toMax = 1) => (
+const map = (value, fromMin, fromMax, toMin = 0, toMax = 1) => (
     ((value - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin
 );
 
@@ -144,4 +144,20 @@ export const map = (value, fromMin, fromMax, toMin = 0, toMax = 1) => (
  * @param {Number} ratio - Extrapolation ratio, 0 is the starting value and 1 the ending value
  * @return {Number}
  */
-export const lerp = (from, to, ratio) => from + ((to - from) * ratio);
+const lerp = (from, to, ratio) => from + ((to - from) * ratio);
+
+export {
+    constrain,
+    equals,
+    random,
+    truncate,
+    radianCircle,
+    degreeCircle,
+    phi,
+    modulo,
+    distribute,
+    sum,
+    average,
+    map,
+    lerp,
+};

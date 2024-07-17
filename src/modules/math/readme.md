@@ -6,10 +6,10 @@ Wrapper for some mathematical helpers.
 ## Examples
 
 ```js
-// This will override the native Math !
-import { Math } from "pencil.js";
+import { Math as M } from "pencil.js";
 
-Math.truncate(-99.9); // -99
+M.truncate(-99.9); // -99
+M.sum(1, 2, 3); // 6
 ```
 
 ## Documentation
