@@ -2,6 +2,8 @@
 
 # Documentation
 
+[![NPM Version](https://badgen.net/npm/v/pencil.js?icon=npm)](https://www.npmjs.com/package/pencil.js)
+
 Welcome to the [Pencil.js documentation page](https://docs.pencil-js.vercel.app/).
 
 
