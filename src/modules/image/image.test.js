@@ -50,7 +50,7 @@ test("set same url", (t) => {
     Image.load = savedLoad;
 });
 
-test("Fail url load", async (t) => {
+test("fail url load", async (t) => {
     const savedLoad = Image.load;
     Image.load = () => Promise.reject();
 
@@ -100,16 +100,6 @@ test("set url as another Image", async (t) => {
         });
     });
 
-    // const blueprint = new Image(undefined, "nice");
-    // t.context.url = blueprint;
-    // await new Promise((resolve) => {
-    //     t.context.on("ready", () => {
-    //         t.is(t.context.url, blueprint.url);
-    //         t.is(t.context.file, blueprint.file);
-    //         resolve();
-    //     });
-    // });
-
     Image.load = savedLoad;
 
     t.pass();
@@ -142,6 +132,26 @@ test("isHover", (t) => {
     };
     t.context.isLoaded = true;
     t.context.isHover([0, 0], ctx);
+});
+
+test("tint option", (t) => {
+    t.context.options.tint = {
+        toString () {
+            t.pass();
+            return "";
+        },
+    };
+
+    const ctx = {
+        drawImage: (canvas, x, y) => {
+            t.is(canvas.constructor.name, "HTMLCanvasElement");
+            t.is(x, 0);
+            t.is(y, 0);
+        },
+    };
+    t.context.draw(ctx);
+
+    t.plan(4);
 });
 
 test("toJSON", (t) => {

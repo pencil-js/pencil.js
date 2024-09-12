@@ -58,7 +58,7 @@ import "@pencil.js/resizable";
 import "@pencil.js/rotatable";
 
 // Package data
-import pkg from "../package.json" assert { type: "json" };
+import pkg from "../package.json" with { type: "json" };
 
 const { version, author, homepage } = pkg;
 

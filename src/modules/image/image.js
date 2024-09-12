@@ -1,11 +1,13 @@
 import Rectangle from "@pencil.js/rectangle";
 import NetworkEvent from "@pencil.js/network-event";
+import OffScreenCanvas from "@pencil.js/offscreen-canvas";
 
 /**
  * @module Image
  */
 
 const urlKey = Symbol("_url");
+const offscreenKey = Symbol("_offscreen");
 
 /**
  * Image class
@@ -36,6 +38,11 @@ export default class Image extends Rectangle {
          * @private
          */
         this[urlKey] = null;
+        /**
+         * @type {{ tint: String, cache: OffScreenCanvas }}
+         * @private
+         */
+        this[offscreenKey] = {};
         this.url = source;
     }
 
@@ -126,7 +133,27 @@ export default class Image extends Rectangle {
      * @return {Image} Itself
      */
     draw (ctx) {
-        ctx.drawImage(this.file, 0, 0, this.width, this.height);
+        if (this.options.tint) {
+            if (!this[offscreenKey].cache) {
+                this[offscreenKey].cache = OffScreenCanvas.getDrawingContext(this.width, this.height);
+            }
+
+            const { cache } = this[offscreenKey];
+            const tintString = this.options.tint.toString();
+            if (tintString !== this[offscreenKey].tint) {
+                cache.clearRect(0, 0, cache.canvas.width, cache.canvas.height);
+                cache.drawImage(this.file, 0, 0);
+                cache.globalCompositeOperation = "source-atop";
+                cache.fillStyle = tintString;
+                cache.fillRect(0, 0, cache.canvas.width, cache.canvas.height);
+                this[offscreenKey].tint = tintString;
+            }
+
+            ctx.drawImage(this[offscreenKey].cache.canvas, 0, 0, this.width, this.height);
+        }
+        else {
+            ctx.drawImage(this.file, 0, 0, this.width, this.height);
+        }
         return this;
     }
 
@@ -191,7 +218,8 @@ export default class Image extends Rectangle {
     /**
      * @typedef {Object} ImageOptions
      * @extends ComponentOptions
-     * @prop {String|ColorDefinition} [fill=null] - Color used as background
+     * @prop {String|Color} [fill=null] - Color used as background
+     * @prop {String|Color} [tint=null] - Multiply the image pixels with a color
      * @prop {String} [description=""] - Description of the image (can be used to for better accessibility)
      */
     /**
@@ -201,6 +229,7 @@ export default class Image extends Rectangle {
         return {
             ...super.defaultOptions,
             fill: null,
+            tint: null,
             description: "",
         };
     }

@@ -42,4 +42,5 @@ Inherit from [RectangleOptions](../rectangle/readme.md#rectangleoptions).
 | Name        | Type                                    | Default | Comment                                 |
 |-------------|-----------------------------------------|---------|-----------------------------------------|
 | fill        | [Color](../color/readme.md) or `String` | `null`  | Background color for transparent images |
+| tint        | [Color](../color/readme.md)             | `null`  | Multiply the image pixels with a color  |
 | description | `String`                                | `""`    | Accessibility description of the image  |
