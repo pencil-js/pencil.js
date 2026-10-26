@@ -2,9 +2,19 @@
  * Compare the local version of Pencil.js against any published version
  * Run with "npm run bench"
  */
-import type * as PencilModuleType from "../src/index.js";
+import * as Local from "../src/index.js";
 
-type PencilModule = typeof PencilModuleType;
+type PencilModule = Pick<typeof Local, "Scene" | "Square">;
+
+/**
+ * Published versions with a broken "ESM" bundle: they copy every export on the global object (overriding window.Math)
+ */
+const BROKEN_VERSIONS = ["2.1.0", "2.2.0", "2.2.1"];
+
+/**
+ * First version shipping a dist/pencil.esm.js bundle
+ */
+const FIRST_ESM_VERSION = [1, 14, 0];
 
 const select1 = document.getElementById("select1") as HTMLSelectElement;
 const select2 = document.getElementById("select2") as HTMLSelectElement;
@@ -67,14 +77,39 @@ const measure = async (fn: () => void): Promise<number> => {
     return count / ((performance.now() - start) / 1000);
 };
 
-const getUrl = (value: string) => (value === "local" ? "../src/index.ts" : `https://unpkg.com/pencil.js@${value}/dist/pencil.esm.js`);
+/**
+ * Load a version of Pencil.js
+ * @param version - "local" or any published version
+ */
+const load = async (version: string): Promise<PencilModule> => {
+    if (version === "local") {
+        return Local;
+    }
+    const module = await import(/* @vite-ignore */ `https://unpkg.com/pencil.js@${version}/dist/pencil.esm.js`);
+    const Pencil = module.Scene ? module : module.default;
+    if (!Pencil?.Scene || !Pencil?.Square) {
+        throw new Error(`Pencil.js v${version} doesn't expose Scene and Square.`);
+    }
+    return Pencil;
+};
 
 const getColor = (colors = ["red", "green", "blue", "yellow", "black", "white"]) => colors[Math.floor(Math.random() * colors.length)];
 
 go.addEventListener("click", async () => {
     loader.classList.remove("hidden");
-    const P1 = await import(/* @vite-ignore */ getUrl(select1.value));
-    const P2 = await import(/* @vite-ignore */ getUrl(select2.value));
+    results.innerHTML = "";
+    let P1: PencilModule;
+    let P2: PencilModule;
+    try {
+        [P1, P2] = await Promise.all([load(select1.value), load(select2.value)]);
+    }
+    catch (error) {
+        const item = document.createElement("li");
+        item.textContent = String(error);
+        results.appendChild(item);
+        loader.classList.add("hidden");
+        return;
+    }
 
     const squares: Array<SquareData> = Array.from({ length: 111 }, () => ({
         position: [Math.random() * c1.width, Math.random() * c1.height],
@@ -94,7 +129,6 @@ go.addEventListener("click", async () => {
         },
     }));
 
-    results.innerHTML = "";
     for (const [name, module, canvas] of [[select1.value, P1, c1], [select2.value, P2, c2]] as const) {
         const ops = await measure(() => run(module, canvas, squares));
         const item = document.createElement("li");
@@ -106,8 +140,14 @@ go.addEventListener("click", async () => {
 
 const createList = async () => {
     const response = await fetch("https://registry.npmjs.org/pencil.js");
-    const { versions } = await response.json() as { versions: Record<string, { module?: string }> };
-    const list = ["local", ...Object.keys(versions).filter(version => versions[version].module).reverse()];
+    const { versions } = await response.json() as { versions: Record<string, unknown> };
+    const hasEsm = (version: string) => {
+        const [major, minor, patch] = version.split(/[.-]/).map(Number);
+        const [eMajor, eMinor, ePatch] = FIRST_ESM_VERSION;
+        const isRecent = major !== eMajor ? major > eMajor : (minor !== eMinor ? minor > eMinor : patch >= ePatch);
+        return isRecent && !BROKEN_VERSIONS.includes(version);
+    };
+    const list = ["local", ...Object.keys(versions).filter(hasEsm).reverse()];
     for (const version of list) {
         const option = document.createElement("option");
         option.textContent = version;
