@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/pie",
-    "main": "pie.js",
-    "type": "module",
-    "sideEffects": false
-}

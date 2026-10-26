@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/circle",
-    "main": "circle.js",
-    "type": "module",
-    "sideEffects": false
-}

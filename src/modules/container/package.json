@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/container",
-    "main": "container.js",
-    "type": "module",
-    "sideEffects": false
-}

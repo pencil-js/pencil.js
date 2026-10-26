@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/input",
-    "main": "input.js",
-    "type": "module",
-    "sideEffects": false
-}

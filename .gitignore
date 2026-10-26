@@ -1,7 +1,9 @@
 .idea/
-.nyc_output/
 .vercel
 coverage/
 dist/
-docs/
 node_modules/
+docs/api/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+*.tsbuildinfo

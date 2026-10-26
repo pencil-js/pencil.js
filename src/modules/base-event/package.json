@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/base-event",
-    "main": "base-event.js",
-    "type": "module",
-    "sideEffects": false
-}

@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/star",
-    "main": "star.js",
-    "type": "module",
-    "sideEffects": false
-}

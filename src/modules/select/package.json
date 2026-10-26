@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/select",
-    "main": "select.js",
-    "type": "module",
-    "sideEffects": false
-}

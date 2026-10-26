@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/arc",
-    "main": "arc.js",
-    "type": "module",
-    "sideEffects": false
-}
