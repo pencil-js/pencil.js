@@ -18,7 +18,7 @@ export interface SpriteOptions extends ImageOptions {
 /**
  * Rectangle definition in a spritesheet
  */
-interface FrameRectangle {
+export interface FrameRectangle {
     x: number;
     y: number;
     w: number;
@@ -72,9 +72,8 @@ function toFilter (selector: FrameSelector): (name: string) => boolean {
 
 /**
  * Animated image from a spritesheet
- * @module Sprite
  */
-export default class Sprite<O extends SpriteOptions = SpriteOptions> extends Image<O> {
+export class Sprite<O extends SpriteOptions = SpriteOptions> extends Image<O> {
     static override get className (): string {
         return "Sprite";
     }
@@ -298,3 +297,5 @@ export class Spritesheet {
         return new Sprite(position, this.file ?? null, this.get(selector), options);
     }
 }
+
+export default Sprite;

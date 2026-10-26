@@ -26,9 +26,8 @@ export interface SliderOptions extends InputOptions {
 
 /**
  * Slider input to choose a value in a range
- * @module Slider
  */
-export default class Slider<O extends SliderOptions = SliderOptions> extends Input<O> {
+export class Slider<O extends SliderOptions = SliderOptions> extends Input<O> {
     static override get className (): string {
         return "Slider";
     }
@@ -147,3 +146,5 @@ export default class Slider<O extends SliderOptions = SliderOptions> extends Inp
         return 20;
     }
 }
+
+export default Slider;

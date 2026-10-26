@@ -5,9 +5,8 @@ import type { PositionDefinition } from "./position.js";
 
 /**
  * Equilateral triangle
- * @module Triangle
  */
-export default class Triangle<O extends ComponentOptions = ComponentOptions> extends RegularPolygon<O> {
+export class Triangle<O extends ComponentOptions = ComponentOptions> extends RegularPolygon<O> {
     static override get className (): string {
         return "Triangle";
     }
@@ -35,3 +34,5 @@ export default class Triangle<O extends ComponentOptions = ComponentOptions> ext
         return new this(definition.position, definition.radius, definition.options);
     }
 }
+
+export default Triangle;

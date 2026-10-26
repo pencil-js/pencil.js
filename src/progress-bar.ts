@@ -17,9 +17,8 @@ export interface ProgressBarOptions extends WidgetOptions {
 
 /**
  * Horizontal bar displaying a progression
- * @module ProgressBar
  */
-export default class ProgressBar<O extends ProgressBarOptions = ProgressBarOptions> extends Widget<O> {
+export class ProgressBar<O extends ProgressBarOptions = ProgressBarOptions> extends Widget<O> {
     static override get className (): string {
         return "ProgressBar";
     }
@@ -113,3 +112,5 @@ export default class ProgressBar<O extends ProgressBarOptions = ProgressBarOptio
         return 20;
     }
 }
+
+export default ProgressBar;

@@ -2,6 +2,8 @@ import Position, { type PositionDefinition } from "./position.js";
 import { radianCircle } from "./math.js";
 import { addColorStops, colorStopsToJSON, type ColorStops } from "./internal/gradient.js";
 
+export type { ColorStops };
+
 /**
  * JSON representation of a conic gradient
  */
@@ -14,9 +16,8 @@ export interface ConicGradientJSON {
 
 /**
  * Conic gradient usable as fill or stroke
- * @module ConicGradient
  */
-export default class ConicGradient {
+export class ConicGradient {
     static get className (): "ConicGradient" {
         return "ConicGradient";
     }
@@ -71,3 +72,5 @@ export default class ConicGradient {
         return new ConicGradient(definition.position, definition.startAngle, definition.colorStops);
     }
 }
+
+export default ConicGradient;

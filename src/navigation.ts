@@ -3,7 +3,6 @@ import type BaseEvent from "./base-event.js";
 
 /**
  * Helpers to handle multiple scenes sharing one canvas
- * @module Navigation
  */
 
 let currentScene: Scene | null = null;

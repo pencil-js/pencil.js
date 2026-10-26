@@ -22,9 +22,8 @@ export type ImageSource = string | HTMLImageElement | Image | null;
 
 /**
  * Display an image
- * @module Image
  */
-export default class Image<O extends ImageOptions = ImageOptions> extends Rectangle<O> {
+export class Image<O extends ImageOptions = ImageOptions> extends Rectangle<O> {
     static override get className (): string {
         return "Image";
     }
@@ -256,3 +255,5 @@ export default class Image<O extends ImageOptions = ImageOptions> extends Rectan
         };
     }
 }
+
+export default Image;

@@ -1,6 +1,5 @@
 /**
  * Turn JSON definitions back into Pencil.js instances
- * @module Serialization
  */
 
 /**

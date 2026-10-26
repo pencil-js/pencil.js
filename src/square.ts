@@ -4,9 +4,8 @@ import type { PositionDefinition } from "./position.js";
 
 /**
  * Square shape (width and height always equal)
- * @module Square
  */
-export default class Square<O extends RectangleOptions = RectangleOptions> extends Rectangle<O> {
+export class Square<O extends RectangleOptions = RectangleOptions> extends Rectangle<O> {
     static override get className (): string {
         return "Square";
     }
@@ -65,3 +64,5 @@ export default class Square<O extends RectangleOptions = RectangleOptions> exten
         return new this(definition.position, definition.size, definition.options);
     }
 }
+
+export default Square;

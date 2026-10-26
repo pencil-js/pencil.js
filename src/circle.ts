@@ -6,9 +6,8 @@ import { radianCircle } from "./math.js";
 
 /**
  * Circle shape
- * @module Circle
  */
-export default class Circle<O extends ComponentOptions = ComponentOptions> extends Ellipse<O> {
+export class Circle<O extends ComponentOptions = ComponentOptions> extends Ellipse<O> {
     static override get className (): string {
         return "Circle";
     }
@@ -56,3 +55,5 @@ export default class Circle<O extends ComponentOptions = ComponentOptions> exten
         return new this(definition.position, definition.radius, definition.options);
     }
 }
+
+export default Circle;

@@ -6,9 +6,8 @@ import { radianCircle } from "./math.js";
 
 /**
  * Portion of an ellipse outline
- * @module Arc
  */
-export default class Arc<O extends ComponentOptions = ComponentOptions> extends Component<O> {
+export class Arc<O extends ComponentOptions = ComponentOptions> extends Component<O> {
     static override get className (): string {
         return "Arc";
     }
@@ -93,3 +92,5 @@ export default class Arc<O extends ComponentOptions = ComponentOptions> extends 
         return Line.caps;
     }
 }
+
+export default Arc;

@@ -19,9 +19,8 @@ export interface SelectOptions extends InputOptions, Pick<TextOptions, "font" | 
 
 /**
  * Drop-down list input
- * @module Select
  */
-export default class Select<O extends SelectOptions = SelectOptions> extends Input<O> {
+export class Select<O extends SelectOptions = SelectOptions> extends Input<O> {
     static override get className (): string {
         return "Select";
     }
@@ -203,3 +202,5 @@ export default class Select<O extends SelectOptions = SelectOptions> extends Inp
         return 0.2;
     }
 }
+
+export default Select;

@@ -1,8 +1,7 @@
 /**
  * Base event class
- * @module BaseEvent
  */
-export default class BaseEvent<T = unknown> {
+export class BaseEvent<T = unknown> {
     /** Name of the event */
     name: string;
 
@@ -53,3 +52,5 @@ export default class BaseEvent<T = unknown> {
         return this;
     }
 }
+
+export default BaseEvent;

@@ -18,9 +18,8 @@ export interface ProgressPieOptions extends WidgetOptions {
 
 /**
  * Pie displaying a progression
- * @module ProgressPie
  */
-export default class ProgressPie<O extends ProgressPieOptions = ProgressPieOptions> extends Widget<O> {
+export class ProgressPie<O extends ProgressPieOptions = ProgressPieOptions> extends Widget<O> {
     static override get className (): string {
         return "ProgressPie";
     }
@@ -91,3 +90,5 @@ export default class ProgressPie<O extends ProgressPieOptions = ProgressPieOptio
         };
     }
 }
+
+export default ProgressPie;

@@ -22,9 +22,8 @@ const CLICK_TOLERANCE = 10;
 
 /**
  * Root of every drawing, linked to a canvas displayed on screen and handling user interactions
- * @module Scene
  */
-export default class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanvas<O> {
+export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanvas<O> {
     static override get className (): string {
         return "Scene";
     }
@@ -361,3 +360,5 @@ export default class Scene<O extends SceneOptions = SceneOptions> extends OffScr
         };
     }
 }
+
+export default Scene;

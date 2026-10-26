@@ -11,9 +11,8 @@ const curves: Array<[number, number, number, number, number, number]> = [
 
 /**
  * Heart shape
- * @module Heart
  */
-export default class Heart<O extends ComponentOptions = ComponentOptions> extends Component<O> {
+export class Heart<O extends ComponentOptions = ComponentOptions> extends Component<O> {
     static override get className (): string {
         return "Heart";
     }
@@ -65,3 +64,5 @@ export default class Heart<O extends ComponentOptions = ComponentOptions> extend
         return new this(definition.position, definition.radius, definition.options);
     }
 }
+
+export default Heart;

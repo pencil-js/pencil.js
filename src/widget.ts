@@ -25,7 +25,6 @@ export interface WidgetBase {
 
 /**
  * Base class for UI elements drawn over a background shape and holding a value
- * @module Widget
  */
 export abstract class Widget<O extends WidgetOptions = WidgetOptions> extends Component<O> {
     static override get className (): string {

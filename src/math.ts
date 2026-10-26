@@ -1,6 +1,5 @@
 /**
  * Set of math helpers.
- * @module Math
  */
 
 /**

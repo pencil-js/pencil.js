@@ -5,6 +5,8 @@ import { getSandbox, toStyle, type StyleLike } from "./internal/canvas.js";
 /**
  * Anything usable as fill or stroke (color string, Color, gradient, pattern …)
  */
+export type { StyleLike };
+
 export type Style = StyleLike | string | null;
 
 /**
@@ -45,7 +47,6 @@ export interface ComponentOptions extends ContainerOptions {
 
 /**
  * Abstract class for visual component
- * @module Component
  */
 export abstract class Component<O extends ComponentOptions = ComponentOptions> extends Container<O> {
     static override get className (): string {

@@ -4,9 +4,8 @@ import Position, { type PositionDefinition } from "./position.js";
 
 /**
  * Polygon class (closed shape from a set of vertices)
- * @module Polygon
  */
-export default class Polygon<O extends ComponentOptions = ComponentOptions> extends Component<O> {
+export class Polygon<O extends ComponentOptions = ComponentOptions> extends Component<O> {
     static override get className (): string {
         return "Polygon";
     }
@@ -60,3 +59,5 @@ export default class Polygon<O extends ComponentOptions = ComponentOptions> exte
         return new this(definition.position, definition.points, definition.options);
     }
 }
+
+export default Polygon;

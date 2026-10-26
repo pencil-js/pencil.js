@@ -24,9 +24,8 @@ export interface KnobOptions extends InputOptions {
 
 /**
  * Rotating knob input
- * @module Knob
  */
-export default class Knob<O extends KnobOptions = KnobOptions> extends Input<O> {
+export class Knob<O extends KnobOptions = KnobOptions> extends Input<O> {
     static override get className (): string {
         return "Knob";
     }
@@ -107,3 +106,5 @@ export default class Knob<O extends KnobOptions = KnobOptions> extends Input<O> 
         return 0.09;
     }
 }
+
+export default Knob;

@@ -13,9 +13,8 @@ export type ColorDefinition = Color | string | number | null | undefined;
 
 /**
  * Color class
- * @module Color
  */
-export default class Color {
+export class Color {
     #parsed!: Colord;
 
     /**
@@ -297,3 +296,5 @@ export default class Color {
         return new Color(...colorDefinition as Array<ColorDefinition>);
     }
 }
+
+export default Color;

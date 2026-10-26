@@ -1,6 +1,8 @@
 import Position, { type PositionDefinition } from "./position.js";
 import { addColorStops, colorStopsToJSON, type ColorStops } from "./internal/gradient.js";
 
+export type { ColorStops };
+
 /**
  * JSON representation of a linear gradient
  */
@@ -13,9 +15,8 @@ export interface LinearGradientJSON {
 
 /**
  * Linear gradient usable as fill or stroke
- * @module LinearGradient
  */
-export default class LinearGradient {
+export class LinearGradient {
     static get className (): "LinearGradient" {
         return "LinearGradient";
     }
@@ -75,3 +76,5 @@ export default class LinearGradient {
         return new LinearGradient(definition.from, definition.to, definition.colorStops);
     }
 }
+
+export default LinearGradient;

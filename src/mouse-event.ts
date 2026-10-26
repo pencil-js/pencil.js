@@ -3,9 +3,8 @@ import Position, { type PositionDefinition } from "./position.js";
 
 /**
  * Mouse (or any pointer, touch included) event class
- * @module MouseEvent
  */
-export default class MouseEvent<T = unknown> extends BaseEvent<T> {
+export class MouseEvent<T = unknown> extends BaseEvent<T> {
     /** Position of the pointer when the event trigger */
     position: Position;
 
@@ -104,3 +103,5 @@ export default class MouseEvent<T = unknown> extends BaseEvent<T> {
         } as const;
     }
 }
+
+export default MouseEvent;

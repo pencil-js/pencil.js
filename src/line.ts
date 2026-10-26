@@ -14,9 +14,8 @@ export interface LineOptions extends ComponentOptions {
 
 /**
  * Line class (a set of connected segments)
- * @module Line
  */
-export default class Line<O extends LineOptions = LineOptions> extends Component<O> {
+export class Line<O extends LineOptions = LineOptions> extends Component<O> {
     static override get className (): string {
         return "Line";
     }
@@ -94,3 +93,5 @@ export default class Line<O extends LineOptions = LineOptions> extends Component
         } as const;
     }
 }
+
+export default Line;

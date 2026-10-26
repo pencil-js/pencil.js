@@ -17,9 +17,8 @@ export interface ButtonOptions extends InputOptions, Pick<TextOptions, "font" | 
 
 /**
  * Clickable button with a text
- * @module Button
  */
-export default class Button<O extends ButtonOptions = ButtonOptions> extends Input<O> {
+export class Button<O extends ButtonOptions = ButtonOptions> extends Input<O> {
     static override get className (): string {
         return "Button";
     }
@@ -127,3 +126,5 @@ export default class Button<O extends ButtonOptions = ButtonOptions> extends Inp
         return 0.2;
     }
 }
+
+export default Button;

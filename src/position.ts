@@ -16,13 +16,12 @@ export interface AbstractPosition {
  */
 export type PositionDefinition = Position | AbstractPosition | [number?, number?] | ReadonlyArray<number>;
 
-type Operation = (self: number, other: number) => number;
+export type Operation = (self: number, other: number) => number;
 
 /**
  * Pair of value in 2d space
- * @module Position
  */
-export default class Position {
+export class Position {
     /** Horizontal component */
     x: number;
 
@@ -287,3 +286,5 @@ export default class Position {
         return result.divide(positionDefinitions.length || 1);
     }
 }
+
+export default Position;

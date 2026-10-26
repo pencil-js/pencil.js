@@ -14,9 +14,8 @@ export interface CheckboxOptions extends InputOptions {
 
 /**
  * Checkbox input
- * @module Checkbox
  */
-export default class Checkbox<O extends CheckboxOptions = CheckboxOptions> extends Input<O> {
+export class Checkbox<O extends CheckboxOptions = CheckboxOptions> extends Input<O> {
     static override get className (): string {
         return "Checkbox";
     }
@@ -124,3 +123,5 @@ export default class Checkbox<O extends CheckboxOptions = CheckboxOptions> exten
         return 0.2;
     }
 }
+
+export default Checkbox;

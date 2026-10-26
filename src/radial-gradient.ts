@@ -1,6 +1,8 @@
 import Position, { type PositionDefinition } from "./position.js";
 import { addColorStops, colorStopsToJSON, type ColorStops } from "./internal/gradient.js";
 
+export type { ColorStops };
+
 /**
  * JSON representation of a radial gradient
  */
@@ -13,9 +15,8 @@ export interface RadialGradientJSON {
 
 /**
  * Radial gradient usable as fill or stroke
- * @module RadialGradient
  */
-export default class RadialGradient {
+export class RadialGradient {
     static get className (): "RadialGradient" {
         return "RadialGradient";
     }
@@ -70,3 +71,5 @@ export default class RadialGradient {
         return new RadialGradient(definition.position, definition.radius, definition.colorStops);
     }
 }
+
+export default RadialGradient;

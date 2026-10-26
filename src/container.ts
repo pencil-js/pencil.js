@@ -53,9 +53,8 @@ const isSerializable = (value: unknown): value is Serializable => typeof (value 
 
 /**
  * Basic node in the scene graph, holding children and their common transformations
- * @module Container
  */
-export default class Container<O extends ContainerOptions = ContainerOptions> extends EventEmitter {
+export class Container<O extends ContainerOptions = ContainerOptions> extends EventEmitter {
     /** Name used when serializing (survive minification) */
     static get className (): string {
         return "Container";
@@ -634,3 +633,5 @@ export default class Container<O extends ContainerOptions = ContainerOptions> ex
         };
     }
 }
+
+export default Container;

@@ -38,9 +38,8 @@ export interface PatternJSON {
 
 /**
  * Repeated image usable as fill or stroke
- * @module Pattern
  */
-export default class Pattern {
+export class Pattern {
     static get className (): "Pattern" {
         return "Pattern";
     }
@@ -195,3 +194,5 @@ export default class Pattern {
         } as const;
     }
 }
+
+export default Pattern;

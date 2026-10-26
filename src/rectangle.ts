@@ -53,7 +53,6 @@ export function getRectangleOrigin (sized: Sized): Position {
 
 /**
  * Rectangle shape
- * @module Rectangle
  */
 export class Rectangle<O extends RectangleOptions = RectangleOptions> extends Component<O> {
     static override get className (): string {

@@ -22,9 +22,8 @@ function getControlPoint (points: Array<Position | undefined>, tension: number):
 
 /**
  * Smooth line going through all its points
- * @module Spline
  */
-export default class Spline<O extends LineOptions = LineOptions> extends Line<O> {
+export class Spline<O extends LineOptions = LineOptions> extends Line<O> {
     static override get className (): string {
         return "Spline";
     }
@@ -120,3 +119,5 @@ export default class Spline<O extends LineOptions = LineOptions> extends Line<O>
         }
     }
 }
+
+export default Spline;

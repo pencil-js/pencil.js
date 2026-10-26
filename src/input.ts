@@ -15,7 +15,6 @@ export interface InputOptions extends WidgetOptions {
 
 /**
  * Base class for interactive UI elements
- * @module Input
  */
 export abstract class Input<O extends InputOptions = InputOptions> extends Widget<O> {
     static override get className (): string {

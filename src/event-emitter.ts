@@ -27,9 +27,8 @@ const split = (name: string): [string, string | undefined] => {
 
 /**
  * Able to listen and fire events
- * @module EventEmitter
  */
-export default class EventEmitter {
+export class EventEmitter {
     /** Set of event listeners of this component */
     eventListeners: Record<string, Array<EventListener>>;
 
@@ -137,3 +136,5 @@ export default class EventEmitter {
         return {};
     }
 }
+
+export default EventEmitter;

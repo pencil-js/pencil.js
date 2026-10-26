@@ -5,9 +5,8 @@ import type { PositionDefinition } from "./position.js";
 
 /**
  * Ellipse shape
- * @module Ellipse
  */
-export default class Ellipse<O extends ComponentOptions = ComponentOptions> extends Arc<O> {
+export class Ellipse<O extends ComponentOptions = ComponentOptions> extends Arc<O> {
     static override get className (): string {
         return "Ellipse";
     }
@@ -40,3 +39,5 @@ export default class Ellipse<O extends ComponentOptions = ComponentOptions> exte
         return Component.defaultOptions;
     }
 }
+
+export default Ellipse;

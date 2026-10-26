@@ -47,9 +47,8 @@ function sanitizeParameters (definition: VectorDefinition | PositionDefinition |
 
 /**
  * Segment between two positions
- * @module Vector
  */
-export default class Vector {
+export class Vector {
     /** Starting position */
     start: Position;
 
@@ -235,3 +234,5 @@ export default class Vector {
         throw new TypeError(`Unexpected type for vector: ${JSON.stringify(vectorDefinition)}.`);
     }
 }
+
+export default Vector;

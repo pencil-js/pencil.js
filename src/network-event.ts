@@ -2,9 +2,8 @@ import BaseEvent from "./base-event.js";
 
 /**
  * Network event class
- * @module NetworkEvent
  */
-export default class NetworkEvent<T = unknown> extends BaseEvent<T> {
+export class NetworkEvent<T = unknown> extends BaseEvent<T> {
     /**
      * Set of events for easy access
      */
@@ -17,3 +16,5 @@ export default class NetworkEvent<T = unknown> extends BaseEvent<T> {
         } as const;
     }
 }
+
+export default NetworkEvent;

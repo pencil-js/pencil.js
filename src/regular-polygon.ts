@@ -6,9 +6,8 @@ import { radianCircle } from "./math.js";
 
 /**
  * Polygon with all sides of the same length
- * @module RegularPolygon
  */
-export default class RegularPolygon<O extends ComponentOptions = ComponentOptions> extends Polygon<O> {
+export class RegularPolygon<O extends ComponentOptions = ComponentOptions> extends Polygon<O> {
     static override get className (): string {
         return "RegularPolygon";
     }
@@ -85,3 +84,5 @@ export default class RegularPolygon<O extends ComponentOptions = ComponentOption
         });
     }
 }
+
+export default RegularPolygon;

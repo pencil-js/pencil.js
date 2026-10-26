@@ -15,9 +15,8 @@ export interface OffScreenCanvasOptions extends ContainerOptions {
 
 /**
  * Canvas not displayed on screen, useful to pre-render or export
- * @module OffScreenCanvas
  */
-export default class OffScreenCanvas<O extends OffScreenCanvasOptions = OffScreenCanvasOptions> extends Container<O> {
+export class OffScreenCanvas<O extends OffScreenCanvasOptions = OffScreenCanvasOptions> extends Container<O> {
     static override get className (): string {
         return "OffScreenCanvas";
     }
@@ -211,3 +210,5 @@ export default class OffScreenCanvas<O extends OffScreenCanvasOptions = OffScree
         };
     }
 }
+
+export default OffScreenCanvas;

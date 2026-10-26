@@ -5,9 +5,8 @@ import type { PositionDefinition } from "./position.js";
 
 /**
  * Star shape
- * @module Star
  */
-export default class Star<O extends ComponentOptions = ComponentOptions> extends RegularPolygon<O> {
+export class Star<O extends ComponentOptions = ComponentOptions> extends RegularPolygon<O> {
     static override get className (): string {
         return "Star";
     }
@@ -102,3 +101,5 @@ export default class Star<O extends ComponentOptions = ComponentOptions> extends
         return new this(definition.position, definition.nbBranches, definition.radius, definition.bevelRatio, definition.options);
     }
 }
+
+export default Star;

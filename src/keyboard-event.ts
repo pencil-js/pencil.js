@@ -2,9 +2,8 @@ import BaseEvent from "./base-event.js";
 
 /**
  * Keyboard event class
- * @module KeyboardEvent
  */
-export default class KeyboardEvent<T = unknown> extends BaseEvent<T> {
+export class KeyboardEvent<T = unknown> extends BaseEvent<T> {
     /** Pressed key value (see https://developer.mozilla.org/en/docs/Web/API/KeyboardEvent/key/Key_Values) */
     key: string;
 
@@ -69,3 +68,5 @@ export default class KeyboardEvent<T = unknown> extends BaseEvent<T> {
         } as const;
     }
 }
+
+export default KeyboardEvent;

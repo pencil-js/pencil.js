@@ -33,7 +33,7 @@ export interface TextMeasures {
     height: number;
 }
 
-type FontOptions = Pick<TextOptions, "font" | "fontSize" | "bold" | "italic" | "lineHeight">;
+export type FontOptions = Pick<TextOptions, "font" | "fontSize" | "bold" | "italic" | "lineHeight">;
 
 /**
  * Format a text or a list of lines into a list of lines
@@ -48,9 +48,8 @@ const measureCache = new Map<string, TextMeasures>();
 
 /**
  * Display text
- * @module Text
  */
-export default class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
+export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
     static override get className (): string {
         return "Text";
     }
@@ -329,3 +328,5 @@ export default class Text<O extends TextOptions = TextOptions> extends Rectangle
         } as const;
     }
 }
+
+export default Text;

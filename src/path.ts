@@ -140,9 +140,8 @@ const arc = (path: Path2D, target: Position, from: Position, angle: number, magi
 
 /**
  * Free shape following a list of instructions (or a SVG path string)
- * @module Path
  */
-export default class Path<O extends ComponentOptions = ComponentOptions> extends Component<O> {
+export class Path<O extends ComponentOptions = ComponentOptions> extends Component<O> {
     static override get className (): string {
         return "Path";
     }
@@ -391,3 +390,5 @@ export default class Path<O extends ComponentOptions = ComponentOptions> extends
         }, position, "sinTo", [nbSins, sinsHeight]);
     }
 }
+
+export default Path;

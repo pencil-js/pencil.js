@@ -5,9 +5,8 @@ import type { PositionDefinition } from "./position.js";
 
 /**
  * Slice of a circle (like a pie chart slice)
- * @module Pie
  */
-export default class Pie<O extends ComponentOptions = ComponentOptions> extends Arc<O> {
+export class Pie<O extends ComponentOptions = ComponentOptions> extends Arc<O> {
     static override get className (): string {
         return "Pie";
     }
@@ -63,3 +62,5 @@ export default class Pie<O extends ComponentOptions = ComponentOptions> extends 
         return Component.defaultOptions;
     }
 }
+
+export default Pie;

@@ -43,9 +43,8 @@ export interface ParticlesOptions extends ComponentOptions {
 
 /**
  * Efficiently draw lots of copies of the same shape
- * @module Particles
  */
-export default class Particles<O extends ParticlesOptions = ParticlesOptions> extends Component<O> {
+export class Particles<O extends ParticlesOptions = ParticlesOptions> extends Component<O> {
     static override get className (): string {
         return "Particles";
     }
@@ -213,3 +212,5 @@ export default class Particles<O extends ParticlesOptions = ParticlesOptions> ex
         };
     }
 }
+
+export default Particles;
