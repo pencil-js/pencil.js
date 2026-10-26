@@ -15,20 +15,28 @@ export default defineConfig(({ mode }) => ({
         __PENCIL_VERSION__: JSON.stringify(version),
     },
     build: mode === "bundle" ? {
-        // Single-file builds for CDN usage
+        // Single-file minified builds for CDN usage (not using lib mode to get whitespace minification on ESM)
         emptyOutDir: false,
         sourcemap: true,
-        lib: {
-            entry: resolve("src/index.ts"),
-            name: "Pencil",
-            formats: ["es", "iife"],
-            fileName: format => (format === "es" ? "pencil.esm.js" : "pencil.min.js"),
-        },
+        minify: true,
+        copyPublicDir: false,
         rolldownOptions: {
-            output: {
-                banner,
-                exports: "named",
-            },
+            input: resolve("src/index.ts"),
+            preserveEntrySignatures: "strict",
+            output: [
+                {
+                    format: "es",
+                    entryFileNames: "pencil.esm.js",
+                    postBanner: banner,
+                },
+                {
+                    format: "iife",
+                    name: "Pencil",
+                    entryFileNames: "pencil.min.js",
+                    exports: "named",
+                    postBanner: banner,
+                },
+            ],
         },
     } : {
         // One file per module, tree-shakable, dependencies kept external
