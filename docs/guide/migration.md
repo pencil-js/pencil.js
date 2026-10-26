@@ -23,7 +23,7 @@ Imports from `pencil.js` (named or default) don't change.
 
 - The CDN files are still `dist/pencil.esm.js` and `dist/pencil.min.js`. The global `Pencil` variable exposes every named export.
 - TypeScript declarations are included, no need for `@types`.
-- Node.js 20.19 or later is required for tooling (the library itself runs in any modern browser).
+- Node.js 22.12 or later is required for tooling (the library itself runs in any modern browser).
 
 ## Behavior changes
 
