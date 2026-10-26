@@ -67,7 +67,7 @@ import "./rotatable.js";
 /**
  * Version of the library
  */
-export const version: string = __PENCIL_VERSION__;
+export const version: string = typeof __PENCIL_VERSION__ === "undefined" ? "dev" : __PENCIL_VERSION__;
 
 /**
  * Author of the library
