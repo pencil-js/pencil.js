@@ -1,4 +1,7 @@
-export default async function draw (scene, Pencil) {
+import type PencilType from "../../src/index.js";
+import type Scene from "../../src/scene.js";
+
+export default async function draw (scene: Scene, Pencil: typeof PencilType) {
     const P = Pencil;
 
     const value = 0.7;

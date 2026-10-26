@@ -40,7 +40,7 @@ export default class LinearGradient {
      *     1: "blue",
      * });
      */
-    constructor (fromPosition: PositionDefinition, toPosition: PositionDefinition, colorStops: ColorStops) {
+    constructor (fromPosition: PositionDefinition | undefined, toPosition: PositionDefinition | undefined, colorStops: ColorStops = {}) {
         this.from = Position.from(fromPosition);
         this.to = Position.from(toPosition);
         this.colorStops = colorStops;

@@ -1,4 +1,7 @@
-export default async function draw (scene, Pencil){
+import type PencilType from "../../src/index.js";
+import type Scene from "../../src/scene.js";
+
+export default async function draw (scene: Scene, Pencil: typeof PencilType) {
     const P = Pencil;
 
     scene.options.fill = "rgba(200, 200, 200, 0.3)";
@@ -22,7 +25,7 @@ export default async function draw (scene, Pencil){
     const base = new P.Heart(undefined, 9, {
         fill: "#a70084",
     });
-    const particles = new P.Particles(undefined, base, i => ({
+    const particles = new P.Particles(undefined, base, (i: number) => ({
         position: new P.Position(11, 22).add(i * P.Math.phi * 52).modulo([70, 50]),
         rotation: P.Math.phi * i,
     }));
@@ -104,7 +107,7 @@ export default async function draw (scene, Pencil){
 
     scene.add(...shapes);
 
-    return new Promise((resolve) => {
-        text.on(P.NetworkEvent.events.ready, resolve);
+    return new Promise<void>((resolve) => {
+        text.on(P.NetworkEvent.events.ready, () => resolve());
     });
 }

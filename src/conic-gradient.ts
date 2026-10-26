@@ -36,7 +36,7 @@ export default class ConicGradient {
      * @param startAngle - Starting angle (0 is top, 0.5 is bottom and 1 is full circle back to top)
      * @param colorStops - Set of colors to go through (key is position [from 0 to 1], value is the color)
      */
-    constructor (positionDefinition: PositionDefinition, startAngle = 0, colorStops: ColorStops = {}) {
+    constructor (positionDefinition: PositionDefinition | undefined, startAngle = 0, colorStops: ColorStops = {}) {
         this.position = Position.from(positionDefinition);
         this.startAngle = startAngle;
         this.colorStops = colorStops;

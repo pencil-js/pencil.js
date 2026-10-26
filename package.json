@@ -42,7 +42,8 @@
         "docs:api": "typedoc",
         "docs:dev": "npm run docs:api && vitepress dev docs",
         "docs:build": "npm run docs:api && vitepress build docs",
-        "prepublishOnly": "npm run typecheck && npm run test && npm run build"
+        "prepublishOnly": "npm run typecheck && npm run test && npm run build",
+        "bench": "vite benchmark"
     },
     "repository": {
         "type": "git",

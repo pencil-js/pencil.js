@@ -35,7 +35,7 @@ export default class RadialGradient {
      * @param radius - Radius of the gradient
      * @param colorStops - Set of colors to go through (key is position [from 0 to 1], value is the color)
      */
-    constructor (positionDefinition: PositionDefinition, radius: number, colorStops: ColorStops) {
+    constructor (positionDefinition: PositionDefinition | undefined, radius = 0, colorStops: ColorStops = {}) {
         this.position = Position.from(positionDefinition);
         this.radius = radius;
         this.colorStops = colorStops;
