@@ -57,6 +57,8 @@ export default defineConfig(({ mode }) => ({
     },
     test: {
         environment: "jsdom",
+        // Create jsdom once per worker while keeping each test file isolated (much faster than the default "forks")
+        pool: "vmThreads",
         setupFiles: ["./test/setup.ts"],
         include: ["src/**/*.test.ts", "test/**/*.test.ts"],
         coverage: {
