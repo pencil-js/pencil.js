@@ -47,10 +47,17 @@ export class Arc<O extends ComponentOptions = ComponentOptions> extends Componen
      * @returns Itself
      */
     trace (path: Path2D): this {
+        const width = Math.abs(this.width);
+        const height = Math.abs(this.height);
+        if (Math.abs(this.endAngle - this.startAngle) >= 1) {
+            // Full turn: start from 0 (some renderers draw nothing for a full turn starting elsewhere)
+            path.ellipse(0, 0, width, height, 0, 0, radianCircle);
+            return this;
+        }
         const correction = -0.25;
         const startAngle = (this.startAngle + correction) * radianCircle;
         const endAngle = (this.endAngle + correction) * radianCircle;
-        path.ellipse(0, 0, Math.abs(this.width), Math.abs(this.height), 0, startAngle, endAngle);
+        path.ellipse(0, 0, width, height, 0, startAngle, endAngle);
         return this;
     }
 

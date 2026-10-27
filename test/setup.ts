@@ -2,14 +2,37 @@
  * Bridge jsdom (no canvas support) with @napi-rs/canvas (a real 2D renderer)
  * so tests run against actual drawing, hit-testing and pixel output.
  */
+import { readdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
     createCanvas,
+    GlobalFonts,
     DOMMatrix as NapiDOMMatrix,
     ImageData as NapiImageData,
     Path2D as NapiPath2D,
     type Canvas,
     type SKRSContext2D,
 } from "@napi-rs/canvas";
+
+/**
+ * Fonts shipped with the tests, so text renders the same on every machine.
+ * Generic families are redirected to them (system fonts differ from one OS to another).
+ */
+const FONTS = {
+    "sans-serif": "Pencil Test Sans",
+    "serif": "Pencil Test Serif",
+} as const;
+const fontsFolder = join(dirname(fileURLToPath(import.meta.url)), "fonts");
+for (const file of readdirSync(fontsFolder).filter(name => name.endsWith(".ttf"))) {
+    GlobalFonts.registerFromPath(join(fontsFolder, file), file.startsWith("DejaVuSerif") ? FONTS.serif : FONTS["sans-serif"]);
+}
+const toTestFont = (font: string) => font
+    .replace(/(^|[\s,])sans-serif\b/g, `$1"${FONTS["sans-serif"]}"`)
+    .replace(/(^|[\s,])serif\b/g, `$1"${FONTS.serif}"`);
+const fromTestFont = (font: string) => font
+    .replace(new RegExp(`"?${FONTS["sans-serif"]}"?`, "g"), "sans-serif")
+    .replace(new RegExp(`"?${FONTS.serif}"?`, "g"), "serif");
 
 const backing = new WeakMap<HTMLCanvasElement, Canvas>();
 const contexts = new WeakMap<HTMLCanvasElement, SKRSContext2D>();
@@ -65,6 +88,9 @@ proto.getContext = function getContext (this: HTMLCanvasElement, type: string) {
                     const draw = target.drawImage as (...a: Array<unknown>) => void;
                     return (source: unknown, ...args: Array<number>) => draw.call(target, toNapiSource(source), ...args);
                 }
+                if (key === "font") {
+                    return fromTestFont(target.font);
+                }
                 if (key === "createPattern") {
                     return (source: unknown, repeat: string) => target.createPattern(toNapiSource(source) as never, repeat as never);
                 }
@@ -72,7 +98,7 @@ proto.getContext = function getContext (this: HTMLCanvasElement, type: string) {
                 return typeof value === "function" ? value.bind(target) : value;
             },
             set (target, key, value) {
-                return Reflect.set(target, key, value, target);
+                return Reflect.set(target, key, key === "font" ? toTestFont(String(value)) : value, target);
             },
         });
         contexts.set(this, proxy as unknown as SKRSContext2D);

@@ -209,6 +209,7 @@ You want to help us improve ? Great, here's how to get started:
 npm install
 npm run dev        # Playground with hot reload (playground/playground.ts)
 npm test           # Unit and visual tests (Vitest with a real canvas renderer)
+npm run test:visual:update  # Regenerate visual references (check test/visual/references before committing)
 npm run lint       # ESLint
 npm run typecheck  # TypeScript
 npm run build      # Build modules, CDN bundles and type declarations
