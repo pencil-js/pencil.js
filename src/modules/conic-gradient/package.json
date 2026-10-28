@@ -1,6 +1,0 @@
-{
-  "name": "@pencil.js/conic-gradient",
-  "main": "conic-gradient.js",
-  "type": "module",
-  "sideEffects": false
-}

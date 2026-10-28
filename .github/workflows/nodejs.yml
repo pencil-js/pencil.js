@@ -1,41 +1,52 @@
-name: Node CI
+name: CI
 
 on:
     push:
         branches:
             - master
-        paths:
-            - '**.js'
+            - v4
     pull_request:
-        branches:
-            - master
-        paths:
-            - '**.js'
 
 jobs:
-    build:
-
+    check:
         runs-on: ubuntu-latest
 
+        strategy:
+            fail-fast: false
+            matrix:
+                node-version: [22, 24]
+
         steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-          with:
-              node-version: '*'
-        - name: prepare coverage
-          run: |
-              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-              chmod +x ./cc-test-reporter
-              ./cc-test-reporter before-build
-        - name: npm install, build, and test
-          run: |
-              npm install
-              npm run build
-              npm run testci
-        - name: coverage
-          run: |
-              ./cc-test-reporter format-coverage -t lcov
-              ./cc-test-reporter upload-coverage
-        env:
-            CI: true
-            CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+            - uses: actions/checkout@v5
+
+            - uses: actions/setup-node@v5
+              with:
+                  node-version: ${{ matrix.node-version }}
+                  cache: npm
+
+            - run: npm ci
+
+            - name: Lint
+              run: npm run lint
+
+            - name: Typecheck
+              run: npm run typecheck
+
+            - name: Test
+              run: npm run coverage
+
+            - name: Build
+              run: npm run build
+
+            - name: Size
+              run: npm run size
+
+            - name: Documentation
+              if: matrix.node-version == 22
+              run: npm run docs:build
+
+            - uses: actions/upload-artifact@v5
+              if: failure()
+              with:
+                  name: visual-output-${{ matrix.node-version }}
+                  path: test/visual/__output__

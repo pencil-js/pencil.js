@@ -1,15 +1,15 @@
 .idea/
 .github/
-.nyc_output/
 benchmark/
 coverage/
 dist/
-docs/
-drawingTests/
 playground/
+scripts/
 test/
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/api/
 
 .all-contributorsrc
-webpack.config.js
 
-src/**/*.test.js
+src/**/*.test.ts

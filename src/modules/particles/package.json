@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/particles",
-    "main": "particles.js",
-    "type": "module",
-    "sideEffects": false
-}

@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/knob",
-    "main": "knob.js",
-    "type": "module",
-    "sideEffects": false
-}

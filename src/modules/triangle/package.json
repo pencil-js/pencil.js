@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/triangle",
-    "main": "triangle.js",
-    "type": "module",
-    "sideEffects": false
-}

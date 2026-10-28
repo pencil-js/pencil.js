@@ -1,43 +1,52 @@
 {
     "name": "pencil.js",
-    "version": "3.2.0",
+    "version": "4.0.0-alpha.0",
     "description": "Nice modular interactive 2D drawing library.",
-    "main": "src/index.js",
     "type": "module",
-    "files": [
-        "dist",
-        "src",
-        "!src/**/*.test.js"
-    ],
-    "types": "dist/index.d.ts",
-    "sideEffects": false,
-    "unpkg": "dist/pencil.min.js",
-    "jsdelivr": "dist/pencil.min.js",
-    "scripts": {
-        "lint": "eslint src/",
-        "test": "c8 --reporter=html --reporter=text-summary ava",
-        "testci": "c8 --reporter=lcovonly --reporter=text-summary ava",
-        "play": "webpack --mode=development --watch",
-        "build": "webpack --mode=production && tsc",
-        "contrib": "all-contributors generate",
-        "docs": "jsdoc -c .jsdocrc",
-        "prepublishOnly": "npm run build",
-        "postversion": "vercel --prod"
-    },
-    "ava": {
-        "require": [
-            "@pencil.js/test-environment"
-        ],
-        "timeout": "2m"
-    },
-    "eslintConfig": {
-        "extends": "@gmartigny/eslint-config",
-        "parserOptions": {
-            "ecmaVersion": "latest"
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "unpkg": "./dist/pencil.min.js",
+    "jsdelivr": "./dist/pencil.min.js",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
         },
-        "rules": {
-            "import/no-extraneous-dependencies": 0
-        }
+        "./*": {
+            "types": "./dist/*.d.ts",
+            "import": "./dist/*.js"
+        },
+        "./bundle": "./dist/pencil.esm.js",
+        "./package.json": "./package.json"
+    },
+    "files": [
+        "dist"
+    ],
+    "sideEffects": false,
+    "engines": {
+        "node": ">=22.12"
+    },
+    "scripts": {
+        "dev": "vite playground --config vite.config.ts",
+        "build": "npm run build:modules && npm run build:bundle && npm run build:types",
+        "build:modules": "vite build",
+        "build:bundle": "vite build --mode bundle",
+        "build:types": "tsc -p tsconfig.build.json",
+        "typecheck": "tsc --noEmit",
+        "lint": "eslint .",
+        "test": "vitest run",
+        "test:watch": "vitest",
+        "coverage": "vitest run --coverage",
+        "size": "node scripts/size.js",
+        "docs:api": "typedoc",
+        "docs:dev": "npm run docs:api && vitepress dev docs",
+        "docs:build": "npm run docs:api && vitepress build docs",
+        "prepublishOnly": "npm run typecheck && npm run test && npm run build",
+        "bench": "vite benchmark --config vite.config.ts",
+        "docs:preview": "vitepress preview docs",
+        "test:visual:update": "UPDATE_VISUAL=1 vitest run test/visual",
+        "bench:headless": "playwright install chromium && node benchmark/headless.js"
     },
     "repository": {
         "type": "git",
@@ -65,72 +74,31 @@
         "url": "https://github.com/pencil-js/pencil.js?sponsor=1"
     },
     "dependencies": {
-        "@pencil.js/arc": "file:src/modules/arc",
-        "@pencil.js/base-event": "file:src/modules/base-event",
-        "@pencil.js/button": "file:src/modules/button",
-        "@pencil.js/checkbox": "file:src/modules/checkbox",
-        "@pencil.js/circle": "file:src/modules/circle",
-        "@pencil.js/color": "file:src/modules/color",
-        "@pencil.js/component": "file:src/modules/component",
-        "@pencil.js/conic-gradient": "file:src/modules/conic-gradient",
-        "@pencil.js/container": "file:src/modules/container",
-        "@pencil.js/draggable": "file:src/modules/draggable",
-        "@pencil.js/ellipse": "file:src/modules/ellipse",
-        "@pencil.js/event-emitter": "file:src/modules/event-emitter",
-        "@pencil.js/heart": "file:src/modules/heart",
-        "@pencil.js/image": "file:src/modules/image",
-        "@pencil.js/input": "file:src/modules/input",
-        "@pencil.js/keyboard-event": "file:src/modules/keyboard-event",
-        "@pencil.js/knob": "file:src/modules/knob",
-        "@pencil.js/line": "file:src/modules/line",
-        "@pencil.js/linear-gradient": "file:src/modules/linear-gradient",
-        "@pencil.js/math": "file:src/modules/math",
-        "@pencil.js/mouse-event": "file:src/modules/mouse-event",
-        "@pencil.js/navigation": "file:src/modules/navigation",
-        "@pencil.js/network-event": "file:src/modules/network-event",
-        "@pencil.js/offscreen-canvas": "file:src/modules/offscreen-canvas",
-        "@pencil.js/particles": "file:src/modules/particles",
-        "@pencil.js/path": "file:src/modules/path",
-        "@pencil.js/pattern": "file:src/modules/pattern",
-        "@pencil.js/pie": "file:src/modules/pie",
-        "@pencil.js/polygon": "file:src/modules/polygon",
-        "@pencil.js/position": "file:src/modules/position",
-        "@pencil.js/progress-bar": "file:src/modules/progress-bar",
-        "@pencil.js/progress-pie": "file:src/modules/progress-pie",
-        "@pencil.js/radial-gradient": "file:src/modules/radial-gradient",
-        "@pencil.js/rectangle": "file:src/modules/rectangle",
-        "@pencil.js/regular-polygon": "file:src/modules/regular-polygon",
-        "@pencil.js/resizable": "file:src/modules/resizable",
-        "@pencil.js/rotatable": "file:src/modules/rotatable",
-        "@pencil.js/scene": "file:src/modules/scene",
-        "@pencil.js/select": "file:src/modules/select",
-        "@pencil.js/slider": "file:src/modules/slider",
-        "@pencil.js/spline": "file:src/modules/spline",
-        "@pencil.js/sprite": "file:src/modules/sprite",
-        "@pencil.js/square": "file:src/modules/square",
-        "@pencil.js/star": "file:src/modules/star",
-        "@pencil.js/text": "file:src/modules/text",
-        "@pencil.js/triangle": "file:src/modules/triangle",
-        "@pencil.js/vector": "file:src/modules/vector",
         "colord": "^2.9.3",
-        "minimatch": "^5.1.6",
-        "text-direction": "^2.0.1"
+        "text-direction": "^2.0.1",
+        "zeptomatch": "^2.1.0"
     },
     "devDependencies": {
-        "@babel/plugin-syntax-import-assertions": "^7.22.5",
-        "@babel/preset-env": "^7.22.15",
-        "@gmartigny/eslint-config": "^2.1.0",
-        "@pencil.js/test-environment": "^1.2.1",
-        "all-contributors-cli": "^6.26.1",
-        "ava": "^5.3.1",
-        "benchmark": "^2.1.4",
-        "c8": "^8.0.1",
-        "clean-jsdoc-theme": "4.2.12",
-        "eslint": "^8.49.0",
-        "jsdoc": "^4.0.2",
-        "jsdoc-babel": "^0.5.0",
-        "typescript": "^5.2.2",
-        "webpack": "^5.53.0",
-        "webpack-cli": "^5.1.4"
+        "@eslint/js": "^10.0.1",
+        "@napi-rs/canvas": "^1.0.13",
+        "@stylistic/eslint-plugin": "^5.10.0",
+        "@types/node": "^26.6.5",
+        "@types/pngjs": "^6.0.5",
+        "@vitest/coverage-v8": "^5.0.5",
+        "esbuild": "^0.28.2",
+        "eslint": "^10.13.0",
+        "globals": "^17.13.0",
+        "jsdom": "^30.1.3",
+        "pixelmatch": "^8.0.0",
+        "playwright": "^1.64.1",
+        "pngjs": "^7.0.0",
+        "typedoc": "^0.28.20",
+        "typedoc-plugin-markdown": "^4.14.1",
+        "typedoc-vitepress-theme": "^1.1.4",
+        "typescript": "~6.0",
+        "typescript-eslint": "^8.72.0",
+        "vite": "^8.3.5",
+        "vitepress": "^1.6.4",
+        "vitest": "^5.0.5"
     }
 }

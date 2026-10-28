@@ -1,6 +1,0 @@
-{
-    "name": "@pencil.js/sprite",
-    "main": "sprite.js",
-    "type": "module",
-    "sideEffects": false
-}
