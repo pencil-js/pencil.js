@@ -2,15 +2,13 @@
  * Headless rendering benchmark, same scene as https://benchmarks.slaylines.io/
  * (moving squares with a white fill and a black 1px stroke)
  *
- * Usage: node benchmark/headless.js [count=16000] [path/to/other/pencil.min.js …]
- * Run "npm run build" before. Needs Playwright (global install is fine, set NODE_PATH accordingly).
+ * Usage: npm run bench:headless -- [count=16000] [path/to/other/pencil.min.js …]
+ * Run "npm run build" before (Chromium is installed by Playwright on first run).
+ * Set CHROMIUM_PATH to use an already installed Chrome or Chromium instead.
  */
 import { readFileSync } from "node:fs";
-import { createRequire } from "node:module";
 import { resolve } from "node:path";
-
-// Playwright is not a dependency, use any installed version (npx playwright install chromium)
-const { chromium } = createRequire(import.meta.url)("playwright");
+import { chromium } from "playwright";
 
 const root = resolve(import.meta.dirname, "..");
 const [countArgument, ...others] = process.argv.slice(2);
@@ -95,7 +93,10 @@ const candidates = [
     ...others.map(file => [file, "pencil", resolve(file)]),
 ];
 
-const browser = await chromium.launch();
+const browser = await chromium.launch({
+    // Use an existing browser instead of the one installed by Playwright
+    executablePath: process.env.CHROMIUM_PATH || undefined,
+});
 console.log(`${count} squares, median frame time over ${frames} frames`);
 for (const [name, kind, file] of candidates) {
     const page = await browser.newPage();

@@ -216,6 +216,7 @@ npm run build      # Build modules, CDN bundles and type declarations
 npm run size       # Bundles and tree-shaking report
 npm run docs:dev   # Documentation website (VitePress + TypeDoc)
 npm run bench      # Compare performances with published versions
+npm run bench:headless -- 16000  # Measure rendering time in a headless Chromium
 ```
 
 ### Contributors
