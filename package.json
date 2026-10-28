@@ -45,7 +45,8 @@
         "prepublishOnly": "npm run typecheck && npm run test && npm run build",
         "bench": "vite benchmark --config vite.config.ts",
         "docs:preview": "vitepress preview docs",
-        "test:visual:update": "UPDATE_VISUAL=1 vitest run test/visual"
+        "test:visual:update": "UPDATE_VISUAL=1 vitest run test/visual",
+        "bench:headless": "node benchmark/headless.js"
     },
     "repository": {
         "type": "git",

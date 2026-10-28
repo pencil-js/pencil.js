@@ -32,6 +32,16 @@ export class Heart<O extends ComponentOptions = ComponentOptions> extends Compon
         this.radius = radius;
     }
 
+    #pathRadius = NaN;
+
+    protected override isPathDirty (): boolean {
+        if (this.trace !== Heart.prototype.trace || this.#pathRadius !== this.radius) {
+            this.#pathRadius = this.radius;
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Draw the heart
      * @param path - Drawing path

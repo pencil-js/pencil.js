@@ -1,6 +1,9 @@
 import Container, { type ContainerOptions } from "./container.js";
 import Position, { type PositionDefinition } from "./position.js";
-import { getSandbox, toStyle, type StyleLike } from "./internal/canvas.js";
+import { getSandbox, setStyle, toStyle, type StyleLike } from "./internal/canvas.js";
+import { isTracked, set, state } from "./internal/render-state.js";
+
+const NO_DASH: Array<number> = [];
 
 /**
  * Anything usable as fill or stroke (color string, Color, gradient, pattern …)
@@ -124,17 +127,24 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
      */
     protected setLineContext (ctx: CanvasRenderingContext2D): void {
         const { join, cap, strokeWidth, dashed } = this.options;
-        ctx.lineJoin = join;
+        set(ctx, "lineJoin", join);
         if (cap) {
-            ctx.lineCap = cap;
+            set(ctx, "lineCap", cap);
         }
-        ctx.lineWidth = strokeWidth;
+        set(ctx, "lineWidth", strokeWidth);
+        if (isTracked(ctx)) {
+            if (state.dash === dashed && state.dashWidth === strokeWidth) {
+                return;
+            }
+            state.dash = dashed;
+            state.dashWidth = strokeWidth;
+        }
         if (dashed) {
             const pattern = Array.isArray(dashed) ? dashed : Component.dashes.default;
             ctx.setLineDash(pattern.map(value => value * strokeWidth));
         }
         else {
-            ctx.setLineDash([]);
+            ctx.setLineDash(NO_DASH);
         }
     }
 
@@ -145,26 +155,33 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
      */
     override setContext (ctx: CanvasRenderingContext2D): this {
         const { shadow, fill, stroke } = this.options;
+        const isKnown = isTracked(ctx);
         if (shadow.color) {
             const shadowPosition = Position.from(shadow.position);
             ctx.shadowColor = String(toStyle(shadow.color, ctx));
             ctx.shadowBlur = shadow.blur ?? 0;
             ctx.shadowOffsetX = shadowPosition.x;
             ctx.shadowOffsetY = shadowPosition.y;
+            if (isKnown) {
+                state.hasShadow = true;
+            }
         }
-        else {
-            ctx.shadowColor = "transparent";
+        else if (!isKnown || state.hasShadow !== false) {
+            // No blur and no offset means no shadow
             ctx.shadowBlur = 0;
             ctx.shadowOffsetX = 0;
             ctx.shadowOffsetY = 0;
+            if (isKnown) {
+                state.hasShadow = false;
+            }
         }
 
         if (this.willFill && fill) {
-            ctx.fillStyle = toStyle(fill, ctx);
+            setStyle(ctx, "fillStyle", fill);
         }
 
         if (this.willStroke && stroke) {
-            ctx.strokeStyle = toStyle(stroke, ctx);
+            setStyle(ctx, "strokeStyle", stroke);
             this.setLineContext(ctx);
         }
 
@@ -182,7 +199,51 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
     }
 
     /**
-     * Make the path and trace it
+     * Tell if the path needs to be traced again (always by default).
+     * Shapes with a simple geometry override it to keep their path between renders.
+     */
+    protected isPathDirty (): boolean {
+        return true;
+    }
+
+    /**
+     * Return the path of this component, traced again only when needed
+     */
+    getPath (): Path2D {
+        if (this.isPathDirty() || !this.path) {
+            return this.buildPath();
+        }
+        return this.path;
+    }
+
+    /**
+     * Fill and stroke the component (the context is already set)
+     * @param ctx - Drawing context
+     */
+    protected paint (ctx: CanvasRenderingContext2D): void {
+        const path = this.getPath();
+
+        if (this.willFill) {
+            ctx.fill(path);
+        }
+
+        if (this.willStroke) {
+            ctx.stroke(path);
+        }
+    }
+
+    /**
+     * Tell if drawing only change the context through the render state (so it stays known)
+     * @internal
+     */
+    override get hasPureDrawing (): boolean {
+        return this.makePath === Component.prototype.makePath &&
+            this.setContext === Component.prototype.setContext &&
+            this.paint === Component.prototype.paint;
+    }
+
+    /**
+     * Set the context and draw the component
      * @param ctx - Drawing context
      * @returns Itself
      */
@@ -191,19 +252,17 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
             this.setContext(ctx);
 
             const origin = this.getOrigin();
-            ctx.translate(origin.x, origin.y);
-
-            const path = this.buildPath();
-
-            if (this.willFill) {
-                ctx.fill(path);
+            const { x, y } = origin;
+            const isShifted = x !== 0 || y !== 0;
+            if (isShifted) {
+                ctx.translate(x, y);
             }
 
-            if (this.willStroke) {
-                ctx.stroke(path);
-            }
+            this.paint(ctx);
 
-            ctx.translate(-origin.x, -origin.y);
+            if (isShifted) {
+                ctx.translate(-x, -y);
+            }
         }
 
         return this;
@@ -232,7 +291,7 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
         const origin = this.getOrigin();
         ctx.translate(origin.x, origin.y);
 
-        const path = this.path ?? this.buildPath();
+        const path = this.getPath();
 
         let result = this.willFill && ctx.isPointInPath(path, position.x, position.y);
         if (!result && this.willStroke) {

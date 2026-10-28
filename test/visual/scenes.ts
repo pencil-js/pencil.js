@@ -492,6 +492,143 @@ const scenes: Record<string, VisualScene> = {
         },
     },
 
+    // Render pipeline (context state must never leak from one element to the next)
+    "render-state-after-text": {
+        width: 160,
+        draw: async (scene) => {
+            // Underscored text changes the stroke style and line width behind the renderer's back
+            const text = new Text([10, 40], "Text", {
+                underscore: true,
+                fill: "#2a9d8f",
+            });
+            scene.add(
+                new Rectangle([10, 10], 40, 20, {
+                    fill: "#e63946",
+                    stroke: "#1d3557",
+                    strokeWidth: 3,
+                }),
+                text,
+                new Rectangle([10, 70], 40, 20, {
+                    fill: "#e63946",
+                    stroke: "#1d3557",
+                    strokeWidth: 3,
+                }),
+            );
+            await waitReady(text);
+        },
+    },
+    "render-state-after-clip": {
+        draw: (scene) => {
+            const clipped = new Container([0, 0], {
+                clip: new Rectangle([0, 0], 50, 50),
+            });
+            clipped.add(new Circle([25, 25], 30, {
+                fill: "#ffb703",
+                stroke: "#000",
+                dashed: true,
+                strokeWidth: 4,
+                shadow: {
+                    color: "#000",
+                    blur: 4,
+                    position: [3, 3],
+                },
+            }));
+            scene.add(clipped, new Rectangle([60, 60], 30, 30, {
+                fill: "#ffb703",
+                stroke: "#000",
+                strokeWidth: 4,
+            }));
+        },
+    },
+    "render-state-after-image": {
+        draw: async (scene) => {
+            const image = new Image([10, 10], "test-30x30.png", {
+                fill: "#06d6a0",
+                shadow: {
+                    color: "#000",
+                    blur: 5,
+                },
+            });
+            scene.add(image, new Square([55, 55], 30, {
+                fill: "#06d6a0",
+            }));
+            await waitReady(image);
+        },
+    },
+    "render-state-nested-render": {
+        draw: (scene) => {
+            // The pattern renders its own canvas while the scene is being rendered
+            const tile = new OffScreenCanvas(8, 8, {
+                fill: "#fff",
+            });
+            tile.add(new Square([0, 0], 4, {
+                fill: "#8338ec",
+                stroke: "#ff006e",
+            }));
+            scene.add(
+                new Square([10, 10], 30, {
+                    fill: "#3a86ff",
+                    stroke: "#000",
+                }),
+                new Square([50, 10], 40, {
+                    fill: new Pattern(tile),
+                }),
+                new Square([10, 50], 30, {
+                    fill: "#3a86ff",
+                    stroke: "#000",
+                }),
+            );
+        },
+    },
+    "render-state-parent-space": {
+        draw: (scene) => {
+            // Plain rectangles draw in their (rotated and scaled) parent space with an offset
+            const parent = new Container([50, 50], {
+                rotation: 0.1,
+                scale: [1.5, 1],
+            });
+            parent.add(
+                new Square([-30, -30], 20, {
+                    fill: "#fb8500",
+                    stroke: "#023047",
+                }),
+                new Square([10, -30], 20, {
+                    fill: "#fb8500",
+                    stroke: "#023047",
+                    rotation: 0.125,
+                }),
+                new Square([-30, 10], 20, {
+                    fill: new LinearGradient([0, 0], [20, 0], {
+                        0: "#fb8500",
+                        1: "#023047",
+                    }),
+                }),
+                new Square([10, 10], 20, {
+                    fill: "#8ecae6",
+                    origin: Rectangle.origins.center,
+                    opacity: 0.5,
+                }),
+            );
+            scene.add(parent);
+        },
+    },
+    "render-state-many": {
+        width: 200,
+        height: 200,
+        draw: (scene) => {
+            // Many siblings sharing styles, with a few different ones in between
+            for (let i = 0; i < 400; ++i) {
+                const special = i % 37 === 0;
+                scene.add(new Square([(i * 37) % 190, (i * 53) % 190], 6 + (i % 10), {
+                    fill: special ? "#e63946" : "white",
+                    stroke: special ? null : "black",
+                    strokeWidth: 1,
+                    dashed: i % 50 === 0,
+                }));
+            }
+        },
+    },
+
     // Text
     "text-default": {
         draw: async (scene) => {

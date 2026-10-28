@@ -36,6 +36,10 @@ These are bug fixes or improvements that can change what you see.
 - `Container.setContext` only sets styles. Position, clipping, rotation and scale are applied by the new `applyTransform` method. Update your overrides if you used `setContext` to transform the context.
 - Clipping takes the clip component's own rotation, scale and origin into account, and clipped areas can't be hovered anymore.
 
+- The render is much faster: each element sets its absolute transformation instead of saving and restoring the context, unchanged context properties are not set again, simple shapes keep their path between renders and plain rectangles use `fillRect`/`strokeRect`.
+  As a consequence, a parent no longer calls its children's `render` method (it calls the internal `renderTree`). Override `makePath` to customize how a component is drawn, not `render`.
+- `draw` events are only created when someone listens to them.
+
 ### Pointer events
 
 - Mouse, touch and pen all trigger the usual `mousedown`, `mousemove`, `mouseup`, `click` … events (the scene uses Pointer Events and captures the pointer while pressed).

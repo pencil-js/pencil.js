@@ -4,6 +4,7 @@ import Rectangle, { type RectangleOptions } from "./rectangle.js";
 import type { ContainerJSON } from "./container.js";
 import type { PositionDefinition } from "./position.js";
 import { getSandbox, toStyle } from "./internal/canvas.js";
+import { set } from "./internal/render-state.js";
 
 /**
  * Text options
@@ -155,9 +156,9 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
     override setContext (ctx: CanvasRenderingContext2D): this {
         super.setContext(ctx);
 
-        ctx.font = Text.getFontDefinition(this.options);
-        ctx.textAlign = this.options.align;
-        ctx.textBaseline = "top";
+        set(ctx, "font", Text.getFontDefinition(this.options));
+        set(ctx, "textAlign", this.options.align);
+        set(ctx, "textBaseline", "top");
 
         return this;
     }

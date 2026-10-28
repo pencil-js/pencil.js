@@ -42,7 +42,7 @@ export default tseslint.config(
         },
     },
     {
-        files: ["**/*.test.ts", "test/**", "scripts/**", "*.config.*"],
+        files: ["**/*.test.ts", "test/**", "scripts/**", "benchmark/headless.js", "*.config.*"],
         languageOptions: {
             globals: {
                 ...globals.node,

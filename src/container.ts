@@ -2,6 +2,7 @@ import BaseEvent from "./base-event.js";
 import EventEmitter from "./event-emitter.js";
 import Position, { type PositionDefinition } from "./position.js";
 import { radianCircle } from "./math.js";
+import { end, invalidate, start, state } from "./internal/render-state.js";
 import type Scene from "./scene.js";
 import type Component from "./component.js";
 
@@ -42,6 +43,56 @@ export interface ContainerJSON {
     [key: string]: any;
 }
 
+const DRAW = "draw";
+
+/** Pair of values reused to avoid allocations */
+const pair: [number, number] = [0, 0];
+
+/**
+ * Read a number or a position-like value without allocating
+ * @param value - Number, Position, array or object with x and y
+ * @param fallback - Value when undefined
+ */
+function readPair (value: number | PositionDefinition | null | undefined, fallback: number): [number, number] {
+    if (typeof value === "number") {
+        pair[0] = value;
+        pair[1] = value;
+    }
+    else if (value == null) {
+        pair[0] = fallback;
+        pair[1] = fallback;
+    }
+    else if (Array.isArray(value)) {
+        pair[0] = value[0] ?? fallback;
+        pair[1] = value[1] ?? fallback;
+    }
+    else {
+        pair[0] = (value as Position).x ?? fallback;
+        pair[1] = (value as Position).y ?? fallback;
+    }
+    return pair;
+}
+
+/**
+ * Tell if an event fired by a container would reach any listener (itself or its ancestors)
+ * @param container - Starting container
+ * @param name - Name of the event
+ */
+function hasListener (container: Container, name: string): boolean {
+    const own = container.eventListeners[name];
+    if (own?.length) {
+        return true;
+    }
+    // Targeted listeners of ancestors only react to their own events
+    for (let current = container.parent; current; current = current.parent) {
+        const listeners = current.eventListeners[name];
+        if (listeners?.some(listener => !listener.isTargeted)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /**
  * Something that can be serialized
  */
@@ -77,6 +128,12 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
 
     /** Is this the root scene */
     readonly isScene: boolean = false;
+
+    /**
+     * Absolute transformation [a, b, c, d, e, f] computed during the last render
+     * @internal
+     */
+    readonly worldMatrix: Float64Array = new Float64Array([1, 0, 0, 1, 0, 0]);
 
     #scenePromise?: Promise<Scene>;
 
@@ -432,8 +489,8 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
     }
 
     /**
-     * Call the render method of all children
-     * @param ctx - Drawing context
+     * Draw itself and all its children
+     * @param ctx - Drawing context (its current transformation and opacity are used as starting point)
      * @returns Itself
      */
     render (ctx: CanvasRenderingContext2D): this {
@@ -441,17 +498,103 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
             return this;
         }
 
-        this.frameCount++;
-        this.fire(new BaseEvent(Container.events.draw, this));
+        const { a, b, c, d, e, f } = ctx.getTransform();
 
+        // Only one save/restore for the whole tree
+        const previous = start(ctx);
         ctx.save();
-
-        this.applyTransform(ctx);
-
-        const { opacity } = this.options;
-        if (opacity != null && opacity !== 1) {
-            ctx.globalAlpha *= opacity;
+        try {
+            this.renderTree(ctx, [a, b, c, d, e, f], ctx.globalAlpha);
         }
+        finally {
+            ctx.restore();
+            end(previous);
+        }
+
+        return this;
+    }
+
+    /**
+     * Draw itself and its children from a parent transformation
+     * Each element set its absolute transformation, which is a lot faster than saving and restoring the context.
+     * @param ctx - Drawing context
+     * @param parentMatrix - Absolute transformation of the parent [a, b, c, d, e, f]
+     * @param parentAlpha - Absolute opacity of the parent
+     * @internal
+     */
+    renderTree (ctx: CanvasRenderingContext2D, parentMatrix: ArrayLike<number>, parentAlpha: number): void {
+        const { options } = this;
+        if (!options.shown) {
+            return;
+        }
+
+        this.frameCount++;
+        if (hasListener(this, DRAW)) {
+            this.fire(new BaseEvent(DRAW, this));
+            // Listeners could do anything with the context
+            invalidate();
+        }
+
+        const world = this.worldMatrix;
+        let a = parentMatrix[0];
+        let b = parentMatrix[1];
+        let c = parentMatrix[2];
+        let d = parentMatrix[3];
+        let e = parentMatrix[4];
+        let f = parentMatrix[5];
+
+        // Position
+        const { x, y } = this.position;
+        e += (a * x) + (c * y);
+        f += (b * x) + (d * y);
+
+        // Clip (in the parent space, after position)
+        const { clip } = options;
+        if (clip) {
+            ctx.save();
+            ctx.setTransform(a, b, c, d, e, f);
+            ctx.clip(Container.getClipPath(clip));
+            state.matrix = null;
+        }
+
+        // Rotation around its center
+        const { rotation } = options;
+        if (rotation) {
+            const [cx, cy] = readPair(options.rotationCenter, 0);
+            e += (a * cx) + (c * cy);
+            f += (b * cx) + (d * cy);
+            const radian = rotation * radianCircle;
+            const cos = Math.cos(radian);
+            const sin = Math.sin(radian);
+            const na = (a * cos) + (c * sin);
+            const nb = (b * cos) + (d * sin);
+            c = (c * cos) - (a * sin);
+            d = (d * cos) - (b * sin);
+            a = na;
+            b = nb;
+            e -= (a * cx) + (c * cy);
+            f -= (b * cx) + (d * cy);
+        }
+
+        // Scale
+        const [sx, sy] = readPair(options.scale, 1);
+        const isTranslation = !rotation && sx === 1 && sy === 1;
+        if (!isTranslation) {
+            a *= sx;
+            b *= sx;
+            c *= sy;
+            d *= sy;
+        }
+
+        world[0] = a;
+        world[1] = b;
+        world[2] = c;
+        world[3] = d;
+        world[4] = e;
+        world[5] = f;
+
+        const { opacity } = options;
+        const alpha = opacity == null ? parentAlpha : parentAlpha * opacity;
 
         this.sortChildren();
         const { children } = this;
@@ -459,19 +602,71 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
         let index = 0;
         // Render children behind
         for (; index < children.length && children[index].options.zIndex < 0; ++index) {
-            children[index].render(ctx);
+            children[index].renderTree(ctx, world, alpha);
         }
 
-        this.makePath(ctx);
+        if (this.makePath !== Container.prototype.makePath) {
+            if (ctx.globalAlpha !== alpha) {
+                ctx.globalAlpha = alpha;
+            }
+            const isTracked = state.ctx === ctx;
+            if (isTracked && isTranslation && this.canDrawInParentSpace()) {
+                // Draw with an offset in the parent space: no need to change the transformation
+                if (state.matrix !== parentMatrix) {
+                    ctx.setTransform(parentMatrix[0], parentMatrix[1], parentMatrix[2], parentMatrix[3], parentMatrix[4], parentMatrix[5]);
+                    state.matrix = parentMatrix;
+                }
+                this.drawInParentSpace(ctx, x, y);
+            }
+            else {
+                if (!isTracked || state.matrix !== world) {
+                    ctx.setTransform(a, b, c, d, e, f);
+                    state.matrix = world;
+                }
+                this.makePath(ctx);
+                if (!this.hasPureDrawing) {
+                    invalidate();
+                }
+            }
+        }
 
         // Render children in front
         for (; index < children.length; ++index) {
-            children[index].render(ctx);
+            children[index].renderTree(ctx, world, alpha);
         }
 
-        ctx.restore();
+        if (clip) {
+            ctx.restore();
+            invalidate();
+        }
+    }
 
-        return this;
+    /**
+     * Tell if drawing only change the context through the render state (so it stays known)
+     * @internal
+     */
+    get hasPureDrawing (): boolean {
+        return this.makePath === Container.prototype.makePath;
+    }
+
+    /**
+     * Tell if it can draw itself in its parent space (see drawInParentSpace)
+     * @internal
+     */
+    protected canDrawInParentSpace (): boolean {
+        return false;
+    }
+
+    /**
+     * Draw itself in its parent space, with its position as offset (only called when it has no rotation and no scale)
+     * @param _ctx - Drawing context, with the parent transformation
+     * @param _x - Horizontal offset
+     * @param _y - Vertical offset
+     * @returns True if it has been drawn
+     * @internal
+     */
+    drawInParentSpace (_ctx: CanvasRenderingContext2D, _x: number, _y: number): boolean {
+        return false;
     }
 
     /**

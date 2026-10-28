@@ -23,6 +23,10 @@ export class Pie<O extends ComponentOptions = ComponentOptions> extends Arc<O> {
         super(positionDefinition, radius, radius, startAngle, endAngle, options);
     }
 
+    protected override isPathDirty (): boolean {
+        return this.trace !== Pie.prototype.trace || this.updatePathKey();
+    }
+
     override trace (path: Path2D): this {
         path.moveTo(0, 0);
         super.trace(path);

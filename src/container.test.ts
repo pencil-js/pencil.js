@@ -1,4 +1,4 @@
-import { test, expect, beforeEach } from "vitest";
+import { test, expect, vi, beforeEach } from "vitest";
 import almostEqual from "../test/_almost-equal.js";
 
 
@@ -226,17 +226,65 @@ test("render", () => {
     const child = addHeir(context);
     child.options.zIndex = -1;
     const otherChild = addHeir(context);
-    otherChild.options.zIndex = -2;
+    otherChild.options.zIndex = 2;
 
-    const ctx = {
-        save: () => expect(true).toBe(true),
-        translate: () => expect(true).toBe(true),
-        restore: () => expect(true).toBe(true),
+    const ctx = window.document.createElement("canvas").getContext("2d")!;
+    const order: Array<string> = [];
+    child.makePath = () => {
+        order.push("behind");
+        return child;
     };
-    child.render = param => expect(param).toBe(ctx);
-    otherChild.render = param => expect(param).toBe(ctx);
-    expect.assertions(5);
+    context.makePath = () => {
+        order.push("parent");
+        return context;
+    };
+    otherChild.makePath = () => {
+        order.push("front");
+        return otherChild;
+    };
     context.render(ctx);
+    expect(order).toEqual(["behind", "parent", "front"]);
+});
+
+test("render set absolute transformations", () => {
+    context.position.set(10, 20);
+    context.options.rotation = 0.25;
+    context.options.scale = 2;
+    const child = addHeir(context);
+    child.position.set(5, 0);
+
+    const ctx = window.document.createElement("canvas").getContext("2d")!;
+    ctx.translate(100, 0);
+    let matrix: DOMMatrix | null = null;
+    child.makePath = (param: CanvasRenderingContext2D) => {
+        matrix = param.getTransform();
+        return child;
+    };
+    context.render(ctx);
+
+    // Same as the matrix computed with DOMMatrix, plus the context starting transformation
+    const expected = new DOMMatrix().translateSelf(100, 0).multiplySelf(child.getAbsoluteMatrix());
+    for (const key of ["a", "b", "c", "d", "e", "f"] as const) {
+        expect(matrix![key]).toBeCloseTo(expected[key]);
+    }
+    expect(Array.from(child.worldMatrix).map(value => Math.round(value * 1000) / 1000)).toEqual([0, 2, -2, 0, 110, 30]);
+    // Context is left untouched
+    const after = ctx.getTransform();
+    expect([after.a, after.e]).toEqual([1, 100]);
+});
+
+test("render only fire draw event when listened", () => {
+    const child = addHeir(context);
+    const spy = vi.spyOn(child, "fire");
+    const ctx = window.document.createElement("canvas").getContext("2d")!;
+    context.render(ctx);
+    expect(spy).not.toHaveBeenCalled();
+
+    let count = 0;
+    context.on(Container.events.draw, () => count++);
+    context.render(ctx);
+    // Fired by both the context and the child (bubbling)
+    expect(count).toBe(2);
 });
 
 test("render with option", () => {
@@ -247,7 +295,7 @@ test("render with option", () => {
 
     const ctx = window.document.createElement("canvas").getContext("2d")!;
     let alpha = 0;
-    grandChild.render = (param: CanvasRenderingContext2D) => {
+    grandChild.makePath = (param: CanvasRenderingContext2D) => {
         alpha = param.globalAlpha;
         return grandChild;
     };
@@ -368,4 +416,15 @@ test("events", () => {
     expect(Container.events.draw).toBe("draw");
     expect(Container.events.show).toBe("show");
     expect(Container.events.hide).toBe("hide");
+});
+
+test("render ignore targeted listeners of ancestors", () => {
+    const child = addHeir(context);
+    const spy = vi.spyOn(child, "fire");
+    const ctx = window.document.createElement("canvas").getContext("2d")!;
+    let count = 0;
+    context.on(Container.events.draw, () => count++, true);
+    context.render(ctx);
+    expect(count).toBe(1);
+    expect(spy).not.toHaveBeenCalled();
 });

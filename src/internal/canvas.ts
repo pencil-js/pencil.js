@@ -1,3 +1,5 @@
+import { set } from "./render-state.js";
+
 let sandbox: CanvasRenderingContext2D | null = null;
 
 /**
@@ -42,3 +44,14 @@ export interface StyleLike {
 export const toStyle = (style: StyleLike | string, ctx: CanvasRenderingContext2D): string | CanvasGradient | CanvasPattern => (
     typeof style === "string" ? style : style.toString(ctx)
 );
+
+/**
+ * Set the fill or stroke style of a context (skipped when already set during a render pass)
+ * @param ctx - Drawing context
+ * @param property - "fillStyle" or "strokeStyle"
+ * @param style - Color, gradient, pattern or string
+ * @internal
+ */
+export const setStyle = (ctx: CanvasRenderingContext2D, property: "fillStyle" | "strokeStyle", style: StyleLike | string): void => {
+    set(ctx, property, toStyle(style, ctx));
+};

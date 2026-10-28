@@ -11,19 +11,9 @@ beforeEach(() => {
     });
 });
 
-test("trace", () => {
-    const noop = () => {};
-    const ctx = {
-        save: noop,
-        translate: noop,
-        scale: noop,
-        restore: noop,
-        fill: noop,
-        stroke: noop,
-        setLineDash: noop,
-    };
-    context.render(ctx);
-    expect(true).toBe(true);
+test("render", () => {
+    const ctx = window.document.createElement("canvas").getContext("2d")!;
+    expect(() => context.render(ctx)).not.toThrow();
 });
 
 test("get and set radius", () => {
