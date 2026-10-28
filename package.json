@@ -23,7 +23,14 @@
     "files": [
         "dist"
     ],
-    "sideEffects": false,
+    "sideEffects": [
+        "./src/draggable.ts",
+        "./src/resizable.ts",
+        "./src/rotatable.ts",
+        "./dist/draggable.js",
+        "./dist/resizable.js",
+        "./dist/rotatable.js"
+    ],
     "engines": {
         "node": ">=22.12"
     },
@@ -42,7 +49,7 @@
         "docs:api": "typedoc",
         "docs:dev": "npm run docs:api && vitepress dev docs",
         "docs:build": "npm run docs:api && vitepress build docs",
-        "prepublishOnly": "npm run typecheck && npm run test && npm run build",
+        "prepublishOnly": "npm run typecheck && npm run test && npm run build && npm run size",
         "bench": "vite benchmark --config vite.config.ts",
         "docs:preview": "vitepress preview docs",
         "test:visual:update": "UPDATE_VISUAL=1 vitest run test/visual",

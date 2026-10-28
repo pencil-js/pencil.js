@@ -30,3 +30,12 @@ test("resizable throws", () => {
         });
     }).toThrow();
 });
+
+test("resizable constrain", () => {
+    const rectangle = new Rectangle([0, 0], 50, 50);
+    const api = rectangle.resizable({
+        constrain: [[20, 20], [100, 100]],
+    });
+    expect(api.constrain).toBeTruthy();
+    expect(api.constrain!.end.toJSON()).toEqual([100, 100]);
+});

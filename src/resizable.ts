@@ -10,7 +10,7 @@ import "./draggable.js";
 /**
  * Resizable options
  */
-export interface ResizableOptions extends Omit<DraggableOptions, "constrain"> {
+export interface ResizableOptions extends DraggableOptions {
     /** Draggable shape used as handle (default is a right-triangle at the bottom right angle) */
     handle?: Component;
 }
@@ -63,7 +63,11 @@ Rectangle.prototype.resizable = function resizable (this: Rectangle, options?: R
     this.add(handle);
     // Distance between the handle's position and the bottom-right corner
     const shift = new Position(this.width, this.height).subtract(handle.position);
-    const api = handle.draggable(settings);
+    // The constrain applies to the handle position (bounding the size)
+    const api = handle.draggable({
+        ...settings,
+        constrain: options?.constrain ?? null,
+    });
 
     handle.on(MouseEvent.events.drag, () => {
         const corner = handle.position.clone().add(shift);

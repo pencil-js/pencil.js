@@ -18,7 +18,12 @@ const sizeOf = code => ({
 const results = [];
 
 for (const file of ["pencil.min.js", "pencil.esm.js"]) {
-    const { raw, gzip } = sizeOf(readFileSync(join(root, "dist", file)));
+    const code = readFileSync(join(root, "dist", file), "utf8");
+    if (!code.includes("prototype.draggable")) {
+        console.error(`dist/${file} is missing the interaction modules (draggable …)`);
+        process.exitCode = 1;
+    }
+    const { raw, gzip } = sizeOf(code);
     results.push([`dist/${file}`, raw, gzip]);
 }
 
@@ -28,7 +33,15 @@ const scenarios = {
     "import { Scene, Circle }": "import { Scene, Circle } from \"pencil.js\"; new Scene().add(new Circle()).render();",
     "import Circle from \"pencil.js/circle\"": "import Circle from \"pencil.js/circle\"; console.log(new Circle());",
     "import everything": "import Pencil from \"pencil.js\"; console.log(Pencil);",
+    "import \"pencil.js/draggable\"": "import Rectangle from \"pencil.js/rectangle\"; import \"pencil.js/draggable\"; new Rectangle().draggable();",
 };
+
+// Modules only imported for their side effects must survive tree-shaking (see "sideEffects" in package.json)
+const mustContain = {
+    "import everything": ["prototype.draggable", "prototype.resizable", "prototype.rotatable"],
+    "import \"pencil.js/draggable\"": ["prototype.draggable"],
+};
+const missing = [];
 
 const temp = mkdtempSync(join(tmpdir(), "pencil-size-"));
 try {
@@ -54,6 +67,11 @@ try {
             },
         });
         const chunk = (Array.isArray(output) ? output[0] : output).output.find(one => one.type === "chunk");
+        for (const expected of mustContain[name] ?? []) {
+            if (!chunk.code.includes(expected)) {
+                missing.push(`${name}: ${expected}`);
+            }
+        }
         const { raw, gzip } = sizeOf(chunk.code);
         results.push([name, raw, gzip]);
     }
@@ -66,4 +84,9 @@ const width = Math.max(...results.map(([name]) => name.length));
 console.log(`${"".padEnd(width)}  ${"minified".padStart(10)}  ${"gzip".padStart(10)}`);
 for (const [name, raw, gzip] of results) {
     console.log(`${name.padEnd(width)}  ${kB(raw).padStart(10)}  ${kB(gzip).padStart(10)}`);
+}
+
+if (missing.length) {
+    console.error(`\nSide-effect modules removed by tree-shaking:\n${missing.join("\n")}`);
+    process.exitCode = 1;
 }
