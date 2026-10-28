@@ -1,5 +1,5 @@
 import { test, expect, beforeEach, afterEach, describe } from "vitest";
-import { drag } from "../test/_pointer.js";
+import pointer, { drag } from "../test/_pointer.js";
 import Container from "./container.js";
 import Scene from "./scene.js";
 import Component from "./component.js";
@@ -96,4 +96,23 @@ describe("interactions", () => {
         expect(rectangle.position.x).toBeCloseTo(20);
         expect(rectangle.position.y).toBeCloseTo(0);
     });
+});
+
+test("doesn't keep listeners on the scene", () => {
+    const scene = new Scene();
+    const rectangle = new Rectangle([0, 0], 50, 50);
+    scene.add(rectangle);
+    const api = rectangle.draggable();
+    expect(scene.eventListeners.mousemove ?? []).toHaveLength(0);
+
+    pointer(scene, "pointerdown", 10, 10);
+    expect(scene.eventListeners.mousemove).toHaveLength(1);
+    pointer(scene, "pointerup", 10, 10);
+    expect(scene.eventListeners.mousemove).toHaveLength(0);
+
+    // Removed from the scene, nothing references it anymore
+    rectangle.delete();
+    api.stop();
+    expect(scene.eventListeners.mousedown ?? []).toHaveLength(0);
+    scene.destroy();
 });

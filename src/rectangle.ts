@@ -58,6 +58,18 @@ export function getRectangleOrigin (sized: Sized): Position {
     return position;
 }
 
+const rectangleOrigins = {
+    topLeft: "topLeft",
+    topRight: "topRight",
+    topCenter: "topCenter",
+    center: "center",
+    centerLeft: "centerLeft",
+    centerRight: "centerRight",
+    bottomLeft: "bottomLeft",
+    bottomRight: "bottomRight",
+    bottomCenter: "bottomCenter",
+} as const;
+
 /**
  * Rectangle shape
  */
@@ -226,17 +238,7 @@ export class Rectangle<O extends RectangleOptions = RectangleOptions> extends Co
      * Set of named origins
      */
     static get origins () {
-        return {
-            topLeft: "topLeft",
-            topRight: "topRight",
-            topCenter: "topCenter",
-            center: "center",
-            centerLeft: "centerLeft",
-            centerRight: "centerRight",
-            bottomLeft: "bottomLeft",
-            bottomRight: "bottomRight",
-            bottomCenter: "bottomCenter",
-        } as const;
+        return rectangleOrigins;
     }
 }
 

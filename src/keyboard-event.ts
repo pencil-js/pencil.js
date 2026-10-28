@@ -1,5 +1,37 @@
 import BaseEvent from "./base-event.js";
 
+const keyboardEventEvents = {
+    /** Keyboard key pressed */
+    down: "keydown",
+    /** Keyboard key released */
+    up: "keyup",
+} as const;
+
+const keyboardEventKeys = {
+    backspace: "Backspace",
+    enter: "Enter",
+    delete: "Delete",
+    escape: "Escape",
+    control: "Control",
+    shift: "Shift",
+    fn: "Fn",
+    arrows: {
+        up: "ArrowUp",
+        right: "ArrowRight",
+        down: "ArrowDown",
+        left: "ArrowLeft",
+    },
+    tab: "Tab",
+    alt: "Alt",
+    altGr: "AltGraph",
+    pageUp: "PageUp",
+    pageDown: "PageDown",
+    start: "Home",
+    end: "End",
+    insert: "Insert",
+    space: " ",
+} as const;
+
 /**
  * Keyboard event class
  */
@@ -27,12 +59,7 @@ export class KeyboardEvent<T = unknown> extends BaseEvent<T> {
      * @example component.on(KeyboardEvent.events.up, () => console.log("User release a key"));
      */
     static get events () {
-        return {
-            /** Keyboard key pressed */
-            down: "keydown",
-            /** Keyboard key released */
-            up: "keyup",
-        } as const;
+        return keyboardEventEvents;
     }
 
     /**
@@ -42,30 +69,7 @@ export class KeyboardEvent<T = unknown> extends BaseEvent<T> {
      * }
      */
     static get keys () {
-        return {
-            backspace: "Backspace",
-            enter: "Enter",
-            delete: "Delete",
-            escape: "Escape",
-            control: "Control",
-            shift: "Shift",
-            fn: "Fn",
-            arrows: {
-                up: "ArrowUp",
-                right: "ArrowRight",
-                down: "ArrowDown",
-                left: "ArrowLeft",
-            },
-            tab: "Tab",
-            alt: "Alt",
-            altGr: "AltGraph",
-            pageUp: "PageUp",
-            pageDown: "PageDown",
-            start: "Home",
-            end: "End",
-            insert: "Insert",
-            space: " ",
-        } as const;
+        return keyboardEventKeys;
     }
 }
 

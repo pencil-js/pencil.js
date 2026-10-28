@@ -86,8 +86,12 @@ function hasListener (container: Container, name: string): boolean {
     // Targeted listeners of ancestors only react to their own events
     for (let current = container.parent; current; current = current.parent) {
         const listeners = current.eventListeners[name];
-        if (listeners?.some(listener => !listener.isTargeted)) {
-            return true;
+        if (listeners) {
+            for (let i = 0; i < listeners.length; ++i) {
+                if (!listeners[i].isTargeted) {
+                    return true;
+                }
+            }
         }
     }
     return false;
@@ -101,6 +105,8 @@ interface Serializable {
 }
 
 const isSerializable = (value: unknown): value is Serializable => typeof (value as Serializable | null)?.toJSON === "function";
+
+let containerEvents: Record<string, string> | undefined;
 
 /**
  * Basic node in the scene graph, holding children and their common transformations
@@ -127,13 +133,16 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
     frameCount: number;
 
     /** Is this the root scene */
-    readonly isScene: boolean = false;
+    get isScene (): boolean {
+        return false;
+    }
 
     /**
      * Absolute transformation [a, b, c, d, e, f] computed during the last render
+     * (only kept for containers with children, they need it to render their children)
      * @internal
      */
-    readonly worldMatrix: Float64Array = new Float64Array([1, 0, 0, 1, 0, 0]);
+    worldMatrix: Float64Array | null = null;
 
     #scenePromise?: Promise<Scene>;
 
@@ -535,7 +544,6 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
             invalidate();
         }
 
-        const world = this.worldMatrix;
         let a = parentMatrix[0];
         let b = parentMatrix[1];
         let c = parentMatrix[2];
@@ -560,7 +568,9 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
         // Rotation around its center
         const { rotation } = options;
         if (rotation) {
-            const [cx, cy] = readPair(options.rotationCenter, 0);
+            const center = readPair(options.rotationCenter, 0);
+            const cx = center[0];
+            const cy = center[1];
             e += (a * cx) + (c * cy);
             f += (b * cx) + (d * cy);
             const radian = rotation * radianCircle;
@@ -577,7 +587,9 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
         }
 
         // Scale
-        const [sx, sy] = readPair(options.scale, 1);
+        const scale = readPair(options.scale, 1);
+        const sx = scale[0];
+        const sy = scale[1];
         const isTranslation = !rotation && sx === 1 && sy === 1;
         if (!isTranslation) {
             a *= sx;
@@ -586,23 +598,27 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
             d *= sy;
         }
 
-        world[0] = a;
-        world[1] = b;
-        world[2] = c;
-        world[3] = d;
-        world[4] = e;
-        world[5] = f;
+        const { children } = this;
+        let world: Float64Array | null = null;
+        if (children.length) {
+            world = this.worldMatrix ??= new Float64Array(6);
+            world[0] = a;
+            world[1] = b;
+            world[2] = c;
+            world[3] = d;
+            world[4] = e;
+            world[5] = f;
+        }
 
         const { opacity } = options;
         const alpha = opacity == null ? parentAlpha : parentAlpha * opacity;
 
         this.sortChildren();
-        const { children } = this;
 
         let index = 0;
         // Render children behind
         for (; index < children.length && children[index].options.zIndex < 0; ++index) {
-            children[index].renderTree(ctx, world, alpha);
+            children[index].renderTree(ctx, world as Float64Array, alpha);
         }
 
         if (this.makePath !== Container.prototype.makePath) {
@@ -619,7 +635,8 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
                 this.drawInParentSpace(ctx, x, y);
             }
             else {
-                if (!isTracked || state.matrix !== world) {
+                // Without children, no matrix is kept so it can't be recognized later
+                if (!world || !isTracked || state.matrix !== world) {
                     ctx.setTransform(a, b, c, d, e, f);
                     state.matrix = world;
                 }
@@ -632,7 +649,7 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
 
         // Render children in front
         for (; index < children.length; ++index) {
-            children[index].renderTree(ctx, world, alpha);
+            children[index].renderTree(ctx, world as Float64Array, alpha);
         }
 
         if (clip) {
@@ -813,7 +830,8 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
      * Set of events for easy access
      */
     static override get events () {
-        return {
+        // Built once
+        containerEvents ??= {
             ...super.events,
             /** Container is append to a new parent */
             attach: "attach",
@@ -826,6 +844,7 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
             /** Container is shown */
             show: "show",
         };
+        return containerEvents;
     }
 }
 

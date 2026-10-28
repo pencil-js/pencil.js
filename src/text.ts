@@ -47,6 +47,36 @@ function formatString (text: string | Array<string> | number): Array<string> {
 const MAX_CACHE_SIZE = 500;
 const measureCache = new Map<string, TextMeasures>();
 
+const DEFAULT_FONT = "sans-serif";
+const DEFAULT_FONT_SIZE = 20;
+const NO_DASH: Array<number> = [];
+
+/**
+ * Measures and font of a text, kept while the text and font options don't change
+ */
+interface TextCache {
+    lines: Array<string>;
+    font: string;
+    fontSize: number;
+    bold: boolean;
+    italic: boolean;
+    lineHeight: number;
+    definition: string;
+    measures: TextMeasures;
+    lineWidths: Array<number>;
+}
+
+/** Text direction of each canvas, computed once per frame */
+const directions = new WeakMap<HTMLCanvasElement, { frame: number; direction: string }>();
+
+const textAlignments = {
+    left: "left",
+    right: "right",
+    center: "center",
+    start: "start",
+    end: "end",
+} as const;
+
 /**
  * Display text
  */
@@ -57,6 +87,8 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
 
     /** Lines of text */
     lines!: Array<string>;
+
+    #cache: TextCache | null = null;
 
     /**
      * Text constructor
@@ -95,8 +127,9 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
     }
 
     override makePath (ctx: CanvasRenderingContext2D): this {
-        const { options } = this;
-        if (!this.text.length || (!this.willFill && !this.willStroke)) {
+        const { options, lines } = this;
+        const isEmpty = lines.length === 1 && !lines[0];
+        if (isEmpty || (!this.willFill && !this.willStroke)) {
             return this;
         }
 
@@ -105,32 +138,34 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
         const origin = this.getOrigin();
         ctx.translate(origin.x, origin.y);
 
-        const lineHeight = Text.measure("M", options).height;
-        const height = lineHeight / options.lineHeight;
+        const cache = this.#getCache();
+        const height = options.fontSize;
+        const lineHeight = height * options.lineHeight;
         const margin = height * ((options.lineHeight - 1) / 2);
 
         const offset = this.getAlignOffset();
-        ctx.translate(offset * this.width, 0);
+        const shift = offset * cache.measures.width;
+        ctx.translate(shift, 0);
 
         if (options.underscore) {
             ctx.beginPath();
         }
 
-        this.lines.forEach((line, index) => {
+        for (let index = 0; index < lines.length; ++index) {
             const y = (index * lineHeight) + margin;
             if (this.willFill) {
-                ctx.fillText(line, 0, y);
+                ctx.fillText(lines[index], 0, y);
             }
             if (this.willStroke) {
-                ctx.strokeText(line, 0, y);
+                ctx.strokeText(lines[index], 0, y);
             }
             if (options.underscore) {
-                const { width } = Text.measure(line, options);
+                const width = cache.lineWidths[index];
                 const left = offset * width;
                 ctx.moveTo(-left, y + height);
                 ctx.lineTo(width - left, y + height);
             }
-        });
+        }
 
         if (options.underscore) {
             const style = (this.willStroke && options.stroke) || options.fill;
@@ -138,11 +173,11 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
             if (style) {
                 ctx.strokeStyle = toStyle(style, ctx);
             }
-            ctx.setLineDash([]);
+            ctx.setLineDash(NO_DASH);
             ctx.stroke();
         }
 
-        ctx.translate(-(offset * this.width) - origin.x, -origin.y);
+        ctx.translate(-shift - origin.x, -origin.y);
 
         return this;
     }
@@ -156,7 +191,7 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
     override setContext (ctx: CanvasRenderingContext2D): this {
         super.setContext(ctx);
 
-        set(ctx, "font", Text.getFontDefinition(this.options));
+        set(ctx, "font", this.#getCache().definition);
         set(ctx, "textAlign", this.options.align);
         set(ctx, "textBaseline", "top");
 
@@ -168,23 +203,36 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
      */
     getAlignOffset (): number {
         const { align } = this.options;
-        const { alignments } = Text;
 
-        if (align === alignments.center) {
+        if (align === "center") {
             return 0.5;
         }
-        if (align === alignments.right) {
+        if (align === "right") {
             return 1;
         }
-        if (align === alignments.start || align === alignments.end) {
-            const root = this.getRoot() as unknown as { isScene: boolean; ctx?: CanvasRenderingContext2D };
-            if (root.isScene && root.ctx?.canvas.isConnected) {
-                const dir = textDirection(root.ctx.canvas);
-                if ((align === alignments.start && dir === "rtl") || (align === alignments.end && dir === "ltr")) {
+        if (align === "start" || align === "end") {
+            const root = this.getRoot() as unknown as { isScene: boolean; ctx?: CanvasRenderingContext2D; frameCount: number };
+            const canvas = root.ctx?.canvas;
+            if (root.isScene && canvas?.isConnected) {
+                // Reading the direction is costly, do it once per frame for all texts
+                let known = directions.get(canvas);
+                if (!known) {
+                    known = {
+                        frame: NaN,
+                        direction: "",
+                    };
+                    directions.set(canvas, known);
+                }
+                if (known.frame !== root.frameCount) {
+                    known.frame = root.frameCount;
+                    known.direction = textDirection(canvas);
+                }
+                const { direction } = known;
+                if ((align === "start" && direction === "rtl") || (align === "end" && direction === "ltr")) {
                     return 1;
                 }
             }
-            else if (align === alignments.end) {
+            else if (align === "end") {
                 return 1;
             }
         }
@@ -196,7 +244,40 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
      * Measure the text with current options
      */
     getMeasures (): TextMeasures {
-        return Text.measure(this.lines, this.options);
+        return this.#getCache().measures;
+    }
+
+    /**
+     * Return measures and font, computed again only when the text or the font options change
+     */
+    #getCache (): TextCache {
+        const { lines } = this;
+        const { font, fontSize, bold, italic, lineHeight } = this.options;
+        const cache = this.#cache;
+        if (cache && cache.lines === lines && cache.font === font && cache.fontSize === fontSize &&
+            cache.bold === bold && cache.italic === italic && cache.lineHeight === lineHeight) {
+            return cache;
+        }
+
+        const definition = Text.getFontDefinition(this.options);
+        const sandbox = getSandbox();
+        sandbox.font = definition;
+        const lineWidths = lines.map(line => sandbox.measureText(line).width);
+        this.#cache = {
+            lines,
+            font,
+            fontSize,
+            bold,
+            italic,
+            lineHeight,
+            definition,
+            measures: {
+                width: Math.max(0, ...lineWidths),
+                height: fontSize * lineHeight * lines.length,
+            },
+            lineWidths,
+        };
+        return this.#cache;
     }
 
     /**
@@ -260,10 +341,7 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
      * @param options - Font related options
      */
     static getFontDefinition (options: Partial<FontOptions>): string {
-        const { bold, italic, fontSize, font } = {
-            ...Text.defaultOptions,
-            ...options,
-        };
+        const { bold, italic, fontSize = DEFAULT_FONT_SIZE, font = DEFAULT_FONT } = options;
         return `${bold ? "bold " : ""}${italic ? "italic " : ""}${fontSize}px ${font}`;
     }
 
@@ -274,16 +352,8 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
      */
     static measure (text: string | Array<string>, options: Partial<FontOptions> = {}): TextMeasures {
         const lines = formatString(text);
-        const { lineHeight, fontSize, font, bold, italic } = {
-            ...Text.defaultOptions,
-            ...options,
-        };
-        const fontDefinition = Text.getFontDefinition({
-            font,
-            fontSize,
-            bold,
-            italic,
-        });
+        const { lineHeight = 1, fontSize = DEFAULT_FONT_SIZE } = options;
+        const fontDefinition = Text.getFontDefinition(options);
         const key = `${fontDefinition}|${lineHeight}|${lines.join("\n")}`;
         const cached = measureCache.get(key);
         if (cached) {
@@ -306,8 +376,8 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
     static override get defaultOptions (): TextOptions {
         return {
             ...super.defaultOptions,
-            font: "sans-serif",
-            fontSize: 20,
+            font: DEFAULT_FONT,
+            fontSize: DEFAULT_FONT_SIZE,
             align: Text.alignments.start,
             bold: false,
             italic: false,
@@ -320,13 +390,7 @@ export class Text<O extends TextOptions = TextOptions> extends Rectangle<O> {
      * Text alignments
      */
     static get alignments () {
-        return {
-            left: "left",
-            right: "right",
-            center: "center",
-            start: "start",
-            end: "end",
-        } as const;
+        return textAlignments;
     }
 }
 

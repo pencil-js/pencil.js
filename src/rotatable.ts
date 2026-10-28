@@ -1,7 +1,7 @@
 import Component from "./component.js";
 import MouseEvent from "./mouse-event.js";
 import Position from "./position.js";
-import type Scene from "./scene.js";
+import type Container from "./container.js";
 
 /**
  * Control over a rotatable component
@@ -47,7 +47,24 @@ Component.prototype.rotatable = function rotatable (this: Component): RotatableA
 
     let previousAngle: number | null = null;
     let startingAngle = 0;
+    // Listen to the scene only while grabbed, so nothing is kept when the component is removed
+    let scene: Container | null = null;
+    const listen = () => {
+        scene = this.getRoot();
+        scene
+
+            .on(MouseEvent.events.move, moveHandler)
+
+            .on(MouseEvent.events.up, upHandler);
+    };
+    const unlisten = () => {
+
+        scene?.removeListener(MouseEvent.events.move, moveHandler).removeListener(MouseEvent.events.up, upHandler);
+        scene = null;
+    };
+
     const downHandler = ({ position }: MouseEvent) => {
+        listen();
         if (cursorNotSet) {
             this.options.cursor = cursors.grabbing;
         }
@@ -68,6 +85,7 @@ Component.prototype.rotatable = function rotatable (this: Component): RotatableA
         }
     };
     const upHandler = ({ position }: MouseEvent) => {
+        unlisten();
         if (cursorNotSet && this.isRotatable) {
             this.options.cursor = cursors.grab;
         }
@@ -78,20 +96,11 @@ Component.prototype.rotatable = function rotatable (this: Component): RotatableA
         }
     };
 
-    let scene: Scene | null = null;
-    this.getScene().then((theScene) => {
-        if (this.isRotatable) {
-            scene = theScene;
-            scene
-                .on(MouseEvent.events.move, moveHandler)
-                .on(MouseEvent.events.up, upHandler);
-        }
-    });
 
     return {
         stop: () => {
             this.removeListener(MouseEvent.events.down, downHandler);
-            scene?.removeListener(MouseEvent.events.move, moveHandler).removeListener(MouseEvent.events.up, upHandler);
+            unlisten();
             if (cursorNotSet) {
                 this.options.cursor = cursors.default;
             }

@@ -61,6 +61,8 @@ export class Particles<O extends ParticlesOptions = ParticlesOptions> extends Co
     /** All particles data */
     data: Array<ParticleData>;
 
+    #matrix = new DOMMatrix();
+
     /**
      * Particles constructor
      * @param positionDefinition - Origin for all particles
@@ -110,14 +112,20 @@ export class Particles<O extends ParticlesOptions = ParticlesOptions> extends Co
      * @returns Itself
      */
     update (): this {
-        this.data = this.data.filter((data, index) => {
-            this.updater?.(data, index);
-            if (data.ttl === undefined) {
-                return true;
+        // Remove dead particles in place (no new array every frame)
+        const { data } = this;
+        let kept = 0;
+        for (let index = 0; index < data.length; ++index) {
+            const one = data[index];
+            this.updater?.(one, index);
+            if (one.ttl !== undefined) {
+                one.ttl--;
             }
-            data.ttl--;
-            return data.ttl > 0;
-        });
+            if (one.ttl === undefined || one.ttl > 0) {
+                data[kept++] = one;
+            }
+        }
+        data.length = kept;
 
         const { emit, frequency, args } = this.options;
         if (emit && random() < frequency) {
@@ -139,13 +147,13 @@ export class Particles<O extends ParticlesOptions = ParticlesOptions> extends Co
      * @returns Itself
      */
     trace (path: Path2D): this {
-        const basePath = new Path2D();
-        this.base.trace(basePath);
+        const basePath = this.base.getPath();
         const baseOrigin = this.base.getOrigin();
-        const matrix = new DOMMatrix();
+        const matrix = this.#matrix;
         for (const data of this.data) {
             const { position, scale = 1, rotation = 0 } = data;
-            const { x: scaleX, y: scaleY } = typeof scale === "number" ? { x: scale, y: scale } : Position.from(scale);
+            const scaleX = typeof scale === "number" ? scale : Position.from(scale).x;
+            const scaleY = typeof scale === "number" ? scale : Position.from(scale).y;
             const radian = rotation * radianCircle;
             const cos = Math.cos(radian);
             const sin = Math.sin(radian);

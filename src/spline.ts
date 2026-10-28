@@ -4,20 +4,60 @@ import Position, { type PositionDefinition } from "./position.js";
 import { equals } from "./math.js";
 
 /**
- * Compute the two control points to go from one point to the next
- * @param points - Previous, current, target and next points
+ * Draw a spline from a starting point through a list of points (computed with numbers only, no allocation)
+ * @param path - Drawing path
+ * @param startX - Horizontal starting position
+ * @param startY - Vertical starting position
+ * @param points - Points to go through after the start
  * @param tension - Ratio of tension
+ * @param shiftX - Horizontal shift applied to every point
+ * @param shiftY - Vertical shift applied to every point
+ * @internal
  */
-function getControlPoint (points: Array<Position | undefined>, tension: number): [Position, Position] {
-    const [previous, current, target, next] = points as [Position | undefined, Position, Position, Position | undefined];
+export function traceSpline (
+    path: Path2D,
+    startX: number,
+    startY: number,
+    points: ReadonlyArray<PositionDefinition>,
+    tension: number,
+    shiftX = 0,
+    shiftY = 0,
+): void {
+    const count = points.length + 1;
+    // Point at an index of the virtual list [start, ...points]
+    const read = (index: number, axis: "x" | "y"): number => {
+        if (index === 0) {
+            return axis === "x" ? startX : startY;
+        }
+        const point = points[index - 1];
+        return (point instanceof Position ? point : Position.from(point))[axis];
+    };
 
-    const diffBefore = previous ? target.clone().subtract(previous).multiply(tension) : new Position();
-    const diffAfter = next ? current.clone().subtract(next).multiply(tension) : new Position();
+    if (count === 2) {
+        path.lineTo(read(1, "x") - shiftX, read(1, "y") - shiftY);
+        return;
+    }
 
-    return [
-        current.clone().add(diffBefore),
-        target.clone().add(diffAfter),
-    ];
+    for (let i = 1; i < count; ++i) {
+        const currentX = read(i - 1, "x");
+        const currentY = read(i - 1, "y");
+        const targetX = read(i, "x");
+        const targetY = read(i, "y");
+        // First control point follows the direction from the previous point to the target
+        const before = i >= 2;
+        const control1X = currentX + (before ? (targetX - read(i - 2, "x")) * tension : 0);
+        const control1Y = currentY + (before ? (targetY - read(i - 2, "y")) * tension : 0);
+        // Second control point follows the direction from the next point to the current one
+        const after = i + 1 < count;
+        const control2X = targetX + (after ? (currentX - read(i + 1, "x")) * tension : 0);
+        const control2Y = targetY + (after ? (currentY - read(i + 1, "y")) * tension : 0);
+
+        path.bezierCurveTo(
+            control1X - shiftX, control1Y - shiftY,
+            control2X - shiftX, control2Y - shiftY,
+            targetX - shiftX, targetY - shiftY,
+        );
+    }
 }
 
 /**
@@ -55,8 +95,13 @@ export class Spline<O extends LineOptions = LineOptions> extends Line<O> {
         }
 
         path.moveTo(0, 0);
-        const correction = this.options.absolute ? this.position : new Position();
-        Spline.splineThrough(path, [new Position().add(correction), ...this.points], this.tension, correction);
+        if (this.options.absolute) {
+            const { x, y } = this.position;
+            traceSpline(path, x, y, this.points, this.tension, x, y);
+        }
+        else {
+            traceSpline(path, 0, 0, this.points, this.tension);
+        }
         return this;
     }
 
@@ -99,24 +144,10 @@ export class Spline<O extends LineOptions = LineOptions> extends Line<O> {
             throw new RangeError(`Need at least 2 points to spline, but only ${points.length} given.`);
         }
 
-        const shift = Position.from(correction);
-        const positions = points.map(point => Position.from(point).clone().subtract(shift));
-
-        if (positions.length === 2) {
-            path.lineTo(positions[1].x, positions[1].y);
-            return;
-        }
-
-        for (let i = 1; i < positions.length; ++i) {
-            const slice = [positions[i - 2], positions[i - 1], positions[i], positions[i + 1]];
-            const [before, after] = getControlPoint(slice, tension);
-
-            path.bezierCurveTo(
-                before.x, before.y,
-                after.x, after.y,
-                positions[i].x, positions[i].y,
-            );
-        }
+        const [start, ...rest] = points;
+        const { x, y } = Position.from(start);
+        const shift = correction === undefined ? null : Position.from(correction);
+        traceSpline(path, x, y, rest, tension, shift?.x, shift?.y);
     }
 }
 

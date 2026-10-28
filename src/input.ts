@@ -13,6 +13,8 @@ export interface InputOptions extends WidgetOptions {
     hover: Style;
 }
 
+let inputEvents: Record<string, string> | undefined;
+
 /**
  * Base class for interactive UI elements
  */
@@ -61,11 +63,13 @@ export abstract class Input<O extends InputOptions = InputOptions> extends Widge
     }
 
     static override get events () {
-        return {
+        // Built once
+        inputEvents ??= {
             ...super.events,
             /** Input value has changed */
             change: "change",
         };
+        return inputEvents;
     }
 }
 

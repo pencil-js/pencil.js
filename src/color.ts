@@ -15,7 +15,19 @@ export type ColorDefinition = Color | string | number | null | undefined;
  * Color class
  */
 export class Color {
-    #parsed!: Colord;
+    #value!: Colord;
+
+    /** Hexadecimal notation, kept until the color changes (used at each render) */
+    #hex: string | null = null;
+
+    get #parsed (): Colord {
+        return this.#value;
+    }
+
+    set #parsed (value: Colord) {
+        this.#value = value;
+        this.#hex = null;
+    }
 
     /**
      * Color constructor
@@ -105,7 +117,8 @@ export class Color {
      * @example "#123456"
      */
     get hex (): string {
-        return this.#parsed.toHex();
+        this.#hex ??= this.#value.toHex();
+        return this.#hex;
     }
 
     /**

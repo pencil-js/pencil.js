@@ -36,6 +36,17 @@ export interface PatternJSON {
     options: Partial<PatternOptions>;
 }
 
+const patternRepetition = {
+    /** Repeat in both directions */
+    repeat: "repeat",
+    /** Repeat only horizontally */
+    x: "repeat-x",
+    /** Repeat only vertically */
+    y: "repeat-y",
+    /** Don't repeat */
+    none: "no-repeat",
+} as const;
+
 /**
  * Repeated image usable as fill or stroke
  */
@@ -182,16 +193,7 @@ export class Pattern {
      * Repetition rules
      */
     static get repetition () {
-        return {
-            /** Repeat in both directions */
-            repeat: "repeat",
-            /** Repeat only horizontally */
-            x: "repeat-x",
-            /** Repeat only vertically */
-            y: "repeat-y",
-            /** Don't repeat */
-            none: "no-repeat",
-        } as const;
+        return patternRepetition;
     }
 }
 

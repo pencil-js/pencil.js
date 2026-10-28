@@ -86,6 +86,79 @@ export interface ComponentOptions extends ContainerOptions {
     shadow: Partial<ShadowOptions>;
 }
 
+const componentJoins = {
+    /** Join segment by extending the line edges until they meet */
+    miter: "miter",
+    /** Join with a circle tangent to line edges */
+    round: "round",
+    /** Join with a straight line between the line edges */
+    bevel: "bevel",
+} as const;
+
+const cssCursors = {
+    default: "default",
+    none: "none",
+    contextMenu: "context-menu",
+    help: "help",
+    pointer: "pointer",
+    progress: "progress",
+    wait: "wait",
+    cell: "cell",
+    crosshair: "crosshair",
+    text: "text",
+    textVertical: "vertical-text",
+    alias: "alias",
+    copy: "copy",
+    move: "move",
+    noDrop: "no-drop",
+    notAllowed: "not-allowed",
+    grab: "grab",
+    grabbing: "grabbing",
+    allScroll: "all-scroll",
+    colResize: "col-resize",
+    rowResize: "row-resize",
+    nResize: "n-resize",
+    eResize: "e-resize",
+    sResize: "s-resize",
+    wResize: "w-resize",
+    neResize: "ne-resize",
+    seResize: "se-resize",
+    swResize: "sw-resize",
+    nwResize: "nw-resize",
+    ewResize: "ew-resize",
+    nsResize: "ns-resize",
+    neswResize: "nesw-resize",
+    nwseResize: "nwse-resize",
+    zoomIn: "zoom-in",
+    zoomOut: "zoom-out",
+};
+
+const componentCursors = {
+    ...cssCursors,
+    // Aliases
+    link: cssCursors.alias,
+    verticalResize: cssCursors.rowResize,
+    horizontalResize: cssCursors.colResize,
+    topResize: cssCursors.nResize,
+    rightResize: cssCursors.eResize,
+    bottomResize: cssCursors.sResize,
+    leftResize: cssCursors.wResize,
+};
+
+const dashPatterns = {
+    /** Simple dash */
+    default: [4, 4],
+    /** Simple dots */
+    dots: [1, 4],
+    /** Longer dash */
+    long: [9, 4],
+};
+const componentDashes = {
+    ...dashPatterns,
+    /** Alternating pattern of short and long dash */
+    sewing: [...dashPatterns.default, ...dashPatterns.dots],
+};
+
 /**
  * Abstract class for visual component
  */
@@ -104,7 +177,7 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
     isHovered: boolean;
 
     /** Values used to trace the current path */
-    #pathDependencies: Array<unknown> = [];
+    #pathDependencies: Array<unknown> | null = null;
 
     /**
      * Component constructor
@@ -139,7 +212,8 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
             this.options.origin = Position.from(this.options.origin);
         }
         const shadow = {
-            ...Component.defaultOptions.shadow,
+            blur: 0,
+            color: null,
             ...previousShadow,
             ...options.shadow,
         };
@@ -260,7 +334,7 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
         if (!dependencies) {
             return true;
         }
-        const known = this.#pathDependencies;
+        const known = this.#pathDependencies ??= [];
         let isDirty = known.length !== dependencies.length;
         for (let i = 0; i < dependencies.length; ++i) {
             if (!Object.is(known[i], dependencies[i])) {
@@ -395,88 +469,21 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
      * {@link https://developer.mozilla.org/docs/Web/CSS/cursor}
      */
     static get cursors () {
-        const cursors = {
-            default: "default",
-            none: "none",
-            contextMenu: "context-menu",
-            help: "help",
-            pointer: "pointer",
-            progress: "progress",
-            wait: "wait",
-            cell: "cell",
-            crosshair: "crosshair",
-            text: "text",
-            textVertical: "vertical-text",
-            alias: "alias",
-            copy: "copy",
-            move: "move",
-            noDrop: "no-drop",
-            notAllowed: "not-allowed",
-            grab: "grab",
-            grabbing: "grabbing",
-            allScroll: "all-scroll",
-            colResize: "col-resize",
-            rowResize: "row-resize",
-            nResize: "n-resize",
-            eResize: "e-resize",
-            sResize: "s-resize",
-            wResize: "w-resize",
-            neResize: "ne-resize",
-            seResize: "se-resize",
-            swResize: "sw-resize",
-            nwResize: "nw-resize",
-            ewResize: "ew-resize",
-            nsResize: "ns-resize",
-            neswResize: "nesw-resize",
-            nwseResize: "nwse-resize",
-            zoomIn: "zoom-in",
-            zoomOut: "zoom-out",
-        };
-
-        return {
-            ...cursors,
-            // Aliases
-            link: cursors.alias,
-            verticalResize: cursors.rowResize,
-            horizontalResize: cursors.colResize,
-            topResize: cursors.nResize,
-            rightResize: cursors.eResize,
-            bottomResize: cursors.sResize,
-            leftResize: cursors.wResize,
-        };
+        return componentCursors;
     }
 
     /**
      * How lines join between them
      */
     static get joins () {
-        return {
-            /** Join segment by extending the line edges until they meet */
-            miter: "miter",
-            /** Join with a circle tangent to line edges */
-            round: "round",
-            /** Join with a straight line between the line edges */
-            bevel: "bevel",
-        } as const;
+        return componentJoins;
     }
 
     /**
      * Dash patterns
      */
     static get dashes () {
-        const pattern = {
-            /** Simple dash */
-            default: [4, 4],
-            /** Simple dots */
-            dots: [1, 4],
-            /** Longer dash */
-            long: [9, 4],
-        };
-        return {
-            ...pattern,
-            /** Alternating pattern of short and long dash */
-            sewing: [...pattern.default, ...pattern.dots],
-        };
+        return componentDashes;
     }
 }
 

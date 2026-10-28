@@ -2,7 +2,8 @@ import Component, { type ComponentOptions } from "./component.js";
 import type { ContainerJSON } from "./container.js";
 import Line, { type LineOptions } from "./line.js";
 import Position, { type PositionDefinition } from "./position.js";
-import Spline from "./spline.js";
+import Spline, { traceSpline } from "./spline.js";
+import { radianCircle } from "./math.js";
 
 /**
  * Function executed by an instruction
@@ -109,33 +110,39 @@ const bezier = (path: Path2D, target: Position, control1: Position, control2: Po
     path.bezierCurveTo(control1.x, control1.y, control2.x, control2.y, target.x, target.y);
 };
 
+
 /**
  * Approximate an arc between two positions with a bezier curve
  * @param path - Current drawing path
- * @param target - Ending position
- * @param from - Starting position
+ * @param fromX - Starting horizontal position
+ * @param fromY - Starting vertical position
+ * @param toX - Ending horizontal position
+ * @param toY - Ending vertical position
  * @param angle - Arc angle in ratio of a full circle (should be at most 0.5)
  * @param magicRatio - Control points "openness" ratio
  * @param clockwise - Should the arc be clockwise or not
  */
-const arc = (path: Path2D, target: Position, from: Position, angle: number, magicRatio: number, clockwise: boolean) => {
-    const distance = target.distance(from);
-    if (!distance) {
+const arc = (
+    path: Path2D,
+    fromX: number, fromY: number,
+    toX: number, toY: number,
+    angle: number, magicRatio: number, clockwise: boolean,
+) => {
+    const dx = toX - fromX;
+    const dy = toY - fromY;
+    if (!dx && !dy) {
         return;
     }
-    const radius = distance / 2;
-    const alpha = (angle / 2) * (clockwise ? 1 : -1);
-    const ctrl1 = target.clone()
-        .subtract(from).rotate(-alpha)
-        .divide(distance)
-        .multiply(magicRatio * radius)
-        .add(from);
-    const ctrl2 = from.clone()
-        .subtract(target).rotate(alpha)
-        .divide(distance)
-        .multiply(magicRatio * radius)
-        .add(target);
-    bezier(path, target, ctrl1, ctrl2);
+    // Control points are the chord rotated by half the angle, scaled by the magic ratio
+    const radian = (angle / 2) * (clockwise ? 1 : -1) * radianCircle;
+    const cos = Math.cos(radian);
+    const sin = Math.sin(radian);
+    const scale = magicRatio / 2;
+    path.bezierCurveTo(
+        fromX + (((dx * cos) + (dy * sin)) * scale), fromY + (((dy * cos) - (dx * sin)) * scale),
+        toX - (((dx * cos) - (dy * sin)) * scale), toY - (((dy * cos) + (dx * sin)) * scale),
+        toX, toY,
+    );
 };
 
 /**
@@ -254,7 +261,7 @@ export class Path<O extends ComponentOptions = ComponentOptions> extends Compone
      */
     static quarterTo (position: PositionDefinition, clockwise = true): Instruction {
         return new Instruction((path, target, from) => {
-            arc(path, target, from, 0.25, (4 / 3) * (Math.sqrt(2) - 1), clockwise);
+            arc(path, from.x, from.y, target.x, target.y, 0.25, (4 / 3) * (Math.sqrt(2) - 1), clockwise);
         }, position, "quarterTo", [clockwise]);
     }
 
@@ -265,7 +272,7 @@ export class Path<O extends ComponentOptions = ComponentOptions> extends Compone
      */
     static halfTo (position: PositionDefinition, clockwise = true): Instruction {
         return new Instruction((path, target, from) => {
-            arc(path, target, from, 0.5, 4 / 3, clockwise);
+            arc(path, from.x, from.y, target.x, target.y, 0.5, 4 / 3, clockwise);
         }, position, "halfTo", [clockwise]);
     }
 
@@ -278,7 +285,7 @@ export class Path<O extends ComponentOptions = ComponentOptions> extends Compone
      */
     static arcTo (position: PositionDefinition, angle: number, magicRatio: number, clockwise = true): Instruction {
         return new Instruction((path, target, from) => {
-            arc(path, target, from, angle, magicRatio, clockwise);
+            arc(path, from.x, from.y, target.x, target.y, angle, magicRatio, clockwise);
         }, position, "arcTo", [angle, magicRatio, clockwise]);
     }
 
@@ -337,7 +344,7 @@ export class Path<O extends ComponentOptions = ComponentOptions> extends Compone
         const points = allPoints.map(point => Position.from(point));
         const target = points[points.length - 1];
         return new Instruction((path, _target, from) => {
-            Spline.splineThrough(path, [from, ...points], tension);
+            traceSpline(path, from.x, from.y, points, tension);
         }, target, "splineThrough", [points.slice(0, -1), tension]);
     }
 
@@ -349,11 +356,12 @@ export class Path<O extends ComponentOptions = ComponentOptions> extends Compone
     static waveTo (position: PositionDefinition, nbWaves = 1): Instruction {
         const count = Math.max(1, Math.round(nbWaves));
         return new Instruction((path, target, from) => {
-            let previous = from;
-            for (let i = 1; i <= count; ++i) {
-                const next = from.clone().lerp(target, i / count);
-                arc(path, next, previous, 0.5, 4 / 3, true);
-                previous = next;
+            const stepX = (target.x - from.x) / count;
+            const stepY = (target.y - from.y) / count;
+            for (let i = 0; i < count; ++i) {
+                const x = from.x + (stepX * i);
+                const y = from.y + (stepY * i);
+                arc(path, x, y, x + stepX, y + stepY, 0.5, 4 / 3, true);
             }
         }, position, "waveTo", [count]);
     }
@@ -367,25 +375,30 @@ export class Path<O extends ComponentOptions = ComponentOptions> extends Compone
     static sinTo (position: PositionDefinition, nbSins = 1, sinsHeight = 10): Instruction {
         return new Instruction((path, target, from) => {
             const halves = Math.max(1, Math.round(nbSins * 2));
-            const delta = target.clone().subtract(from);
-            const length = delta.length;
+            const dx = target.x - from.x;
+            const dy = target.y - from.y;
+            const length = Math.hypot(dx, dy);
             if (!length) {
                 return;
             }
-            // Perpendicular unit vector
-            const normal = new Position(-delta.y / length, delta.x / length);
-            const step = delta.clone().divide(halves);
-            // Bezier approximation of a half sine: control points at 1/3 and 2/3 with a 4/3 height ratio
+            // Bezier approximation of a half sine: control points at 1/3 and 2/3 with a 4/3 height ratio,
+            // pushed along the perpendicular of the direction
             const peak = sinsHeight * (4 / 3);
-            let previous = from;
+            const normalX = -dy / length;
+            const normalY = dx / length;
+            const stepX = dx / halves;
+            const stepY = dy / halves;
             for (let i = 0; i < halves; ++i) {
                 const direction = i % 2 ? -1 : 1;
-                const next = from.clone().add(step.clone().multiply(i + 1));
-                const offset = normal.clone().multiply(peak * direction);
-                const control1 = previous.clone().add(step.clone().divide(3)).add(offset);
-                const control2 = previous.clone().add(step.clone().multiply(2 / 3)).add(offset);
-                bezier(path, next, control1, control2);
-                previous = next;
+                const x = from.x + (stepX * i);
+                const y = from.y + (stepY * i);
+                const offsetX = normalX * peak * direction;
+                const offsetY = normalY * peak * direction;
+                path.bezierCurveTo(
+                    x + (stepX / 3) + offsetX, y + (stepY / 3) + offsetY,
+                    x + (stepX * (2 / 3)) + offsetX, y + (stepY * (2 / 3)) + offsetY,
+                    x + stepX, y + stepY,
+                );
             }
         }, position, "sinTo", [nbSins, sinsHeight]);
     }

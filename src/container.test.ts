@@ -267,7 +267,9 @@ test("render set absolute transformations", () => {
     for (const key of ["a", "b", "c", "d", "e", "f"] as const) {
         expect(matrix![key]).toBeCloseTo(expected[key]);
     }
-    expect(Array.from(child.worldMatrix).map(value => Math.round(value * 1000) / 1000)).toEqual([0, 2, -2, 0, 110, 30]);
+    // Only containers with children keep their matrix
+    expect(child.worldMatrix).toBe(null);
+    expect(Array.from(context.worldMatrix!).map(value => Math.round(value * 1000) / 1000)).toEqual([0, 2, -2, 0, 110, 20]);
     // Context is left untouched
     const after = ctx.getTransform();
     expect([after.a, after.e]).toEqual([1, 100]);

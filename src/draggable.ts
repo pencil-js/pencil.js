@@ -3,7 +3,6 @@ import type Container from "./container.js";
 import MouseEvent from "./mouse-event.js";
 import type Position from "./position.js";
 import Vector, { type VectorDefinition } from "./vector.js";
-import type Scene from "./scene.js";
 
 /**
  * Draggable options
@@ -76,7 +75,24 @@ Component.prototype.draggable = function draggable (this: Component, options?: D
     let startPosition: Position | null = null;
     let originPosition: Position | null = null;
 
+    // Listen to the scene only while grabbed, so nothing is kept when the component is removed
+    let scene: Container | null = null;
+    const listen = () => {
+        scene = this.getRoot();
+        scene
+
+            .on(MouseEvent.events.move, moveHandler)
+
+            .on(MouseEvent.events.up, upHandler);
+    };
+    const unlisten = () => {
+
+        scene?.removeListener(MouseEvent.events.move, moveHandler).removeListener(MouseEvent.events.up, upHandler);
+        scene = null;
+    };
+
     const downHandler = ({ position }: MouseEvent) => {
+        listen();
         if (cursorNotSet) {
             this.options.cursor = cursors.grabbing;
         }
@@ -103,6 +119,7 @@ Component.prototype.draggable = function draggable (this: Component, options?: D
         }
     };
     const upHandler = () => {
+        unlisten();
         if (cursorNotSet && this.isDraggable) {
             this.options.cursor = cursors.grab;
         }
@@ -113,15 +130,6 @@ Component.prototype.draggable = function draggable (this: Component, options?: D
         }
     };
 
-    let scene: Scene | null = null;
-    this.getScene().then((theScene) => {
-        if (this.isDraggable) {
-            scene = theScene;
-            scene
-                .on(MouseEvent.events.move, moveHandler)
-                .on(MouseEvent.events.up, upHandler);
-        }
-    });
 
     return {
         get x () {
@@ -144,7 +152,7 @@ Component.prototype.draggable = function draggable (this: Component, options?: D
         },
         stop: () => {
             this.removeListener(MouseEvent.events.down, downHandler);
-            scene?.removeListener(MouseEvent.events.move, moveHandler).removeListener(MouseEvent.events.up, upHandler);
+            unlisten();
             if (cursorNotSet) {
                 this.options.cursor = cursors.default;
             }

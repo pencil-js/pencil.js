@@ -12,6 +12,15 @@ export interface LineOptions extends ComponentOptions {
     absolute: boolean;
 }
 
+const lineCaps = {
+    /** Flat end */
+    butt: "butt",
+    /** Rounded end */
+    round: "round",
+    /** Squared end (extend the line by half its width) */
+    square: "square",
+} as const;
+
 /**
  * Line class (a set of connected segments)
  */
@@ -42,7 +51,8 @@ export class Line<O extends LineOptions = LineOptions> extends Component<O> {
      */
     trace (path: Path2D): this {
         path.moveTo(0, 0);
-        const { x, y } = this.options.absolute ? this.position : new Position();
+        const x = this.options.absolute ? this.position.x : 0;
+        const y = this.options.absolute ? this.position.y : 0;
         for (const point of this.points) {
             path.lineTo(point.x - x, point.y - y);
         }
@@ -83,14 +93,7 @@ export class Line<O extends LineOptions = LineOptions> extends Component<O> {
      * How lines end
      */
     static get caps () {
-        return {
-            /** Flat end */
-            butt: "butt",
-            /** Rounded end */
-            round: "round",
-            /** Squared end (extend the line by half its width) */
-            square: "square",
-        } as const;
+        return lineCaps;
     }
 }
 

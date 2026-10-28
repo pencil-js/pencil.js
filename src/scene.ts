@@ -20,6 +20,8 @@ export interface SceneOptions extends OffScreenCanvasOptions {
  */
 const CLICK_TOLERANCE = 10;
 
+let sceneEvents: Record<string, string> | undefined;
+
 /**
  * Root of every drawing, linked to a canvas displayed on screen and handling user interactions
  */
@@ -28,7 +30,14 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
         return "Scene";
     }
 
-    override readonly isScene: boolean = true;
+    override get isScene (): boolean {
+        return true;
+    }
+
+    /** Render the next frame (created once) */
+    #loop = (): void => {
+        this.render();
+    };
 
     /** Last known pointer position */
     cursorPosition: Position;
@@ -106,7 +115,7 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
      */
     override render (): this {
         if (this.isLooped) {
-            this.#frameId = window.requestAnimationFrame(() => this.render());
+            this.#frameId = window.requestAnimationFrame(this.#loop);
         }
 
         try {
@@ -353,11 +362,13 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
      * Set of events for easy access
      */
     static override get events () {
-        return {
+        // Built once
+        sceneEvents ??= {
             ...super.events,
             /** Ask to change the displayed scene (see Navigation) */
             change: "change-scene",
         };
+        return sceneEvents;
     }
 }
 

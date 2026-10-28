@@ -70,6 +70,8 @@ function toFilter (selector: FrameSelector): (name: string) => boolean {
     return name => name === selector || zeptomatch(pattern, name, {});
 }
 
+let spriteEvents: Record<string, string> | undefined;
+
 /**
  * Animated image from a spritesheet
  */
@@ -241,7 +243,8 @@ export class Sprite<O extends SpriteOptions = SpriteOptions> extends Image<O> {
     }
 
     static override get events () {
-        return {
+        // Built once
+        spriteEvents ??= {
             ...super.events,
             /** Animation starts */
             start: "sprite-start",
@@ -250,6 +253,7 @@ export class Sprite<O extends SpriteOptions = SpriteOptions> extends Image<O> {
             /** Animation reach its end (only when not looping) */
             end: "sprite-end",
         };
+        return spriteEvents;
     }
 }
 
