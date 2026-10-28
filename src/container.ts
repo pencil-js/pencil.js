@@ -106,6 +106,13 @@ interface Serializable {
 
 const isSerializable = (value: unknown): value is Serializable => typeof (value as Serializable | null)?.toJSON === "function";
 
+/**
+ * Tell if a value can be compared through its JSON (serializable instance or plain object like shadow)
+ * @param value - Any value
+ */
+const isComparable = (value: unknown): boolean => isSerializable(value) ||
+    (Boolean(value) && Object.getPrototypeOf(value) === Object.prototype);
+
 let containerEvents: Record<string, string> | undefined;
 
 /**
@@ -679,11 +686,10 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
      * @param _ctx - Drawing context, with the parent transformation
      * @param _x - Horizontal offset
      * @param _y - Vertical offset
-     * @returns True if it has been drawn
      * @internal
      */
-    drawInParentSpace (_ctx: CanvasRenderingContext2D, _x: number, _y: number): boolean {
-        return false;
+    drawInParentSpace (_ctx: CanvasRenderingContext2D, _x: number, _y: number): void {
+        // Only called when canDrawInParentSpace returns true
     }
 
     /**
@@ -756,7 +762,7 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
             const defaultValue = defaults[key];
             const isDefault = value && typeof (value as Position).equals === "function" ?
                 (value as Position).equals(defaultValue as Position) :
-                Object.is(value, defaultValue) || (isSerializable(value) && isSerializable(defaultValue) &&
+                Object.is(value, defaultValue) || (isComparable(value) && isComparable(defaultValue) &&
                     JSON.stringify(value) === JSON.stringify(defaultValue));
             if (!isDefault) {
                 optionsCopy[key] = isSerializable(value) ? value.toJSON() : value;
@@ -781,12 +787,20 @@ export class Container<O extends ContainerOptions = ContainerOptions> extends Ev
      */
     clone (): this {
         const ctor = this.constructor as typeof Container;
+        // Positions are mutable, the copy needs its own (in nested objects like shadow too)
+        const copyValue = (value: unknown): unknown => {
+            if (value instanceof Position) {
+                return value.clone();
+            }
+            if (value && Object.getPrototypeOf(value) === Object.prototype) {
+                return Object.fromEntries(Object.entries(value).map(([key, nested]) => [key, copyValue(nested)]));
+            }
+            return value;
+        };
         const copy = ctor.from({
             ...this.toJSON(),
             children: undefined,
-            options: {
-                ...this.options,
-            },
+            options: copyValue(this.options) as O,
         }) as this;
         copy.add(...this.children.map(child => child.clone()));
         return copy;

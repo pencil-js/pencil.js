@@ -36,14 +36,26 @@ export interface StyleLike {
 }
 
 /**
+ * Color as [red, green, blue, alpha] values from 0 to 1 (what Color#toJSON returns)
+ */
+export type ColorArray = ReadonlyArray<number>;
+
+/**
  * Turn any style into something usable by the drawing context
- * @param style - Color, gradient, pattern or string
+ * @param style - Color, gradient, pattern, string or [red, green, blue, alpha] array
  * @param ctx - Drawing context
  * @internal
  */
-export const toStyle = (style: StyleLike | string, ctx: CanvasRenderingContext2D): string | CanvasGradient | CanvasPattern => (
-    typeof style === "string" ? style : style.toString(ctx)
-);
+export const toStyle = (style: StyleLike | ColorArray | string, ctx: CanvasRenderingContext2D): string | CanvasGradient | CanvasPattern => {
+    if (typeof style === "string") {
+        return style;
+    }
+    if (Array.isArray(style)) {
+        const [red = 0, green = 0, blue = 0, alpha = 1] = style as ColorArray;
+        return `rgba(${red * 255}, ${green * 255}, ${blue * 255}, ${alpha})`;
+    }
+    return (style as StyleLike).toString(ctx);
+};
 
 /**
  * Set the fill or stroke style of a context (skipped when already set during a render pass)
@@ -52,6 +64,6 @@ export const toStyle = (style: StyleLike | string, ctx: CanvasRenderingContext2D
  * @param style - Color, gradient, pattern or string
  * @internal
  */
-export const setStyle = (ctx: CanvasRenderingContext2D, property: "fillStyle" | "strokeStyle", style: StyleLike | string): void => {
+export const setStyle = (ctx: CanvasRenderingContext2D, property: "fillStyle" | "strokeStyle", style: StyleLike | ColorArray | string): void => {
     set(ctx, property, toStyle(style, ctx));
 };

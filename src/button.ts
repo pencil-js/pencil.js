@@ -51,10 +51,11 @@ export class Button<O extends ButtonOptions = ButtonOptions> extends Input<O> {
         // Visual feedback when pressed
         let fill: Button["options"]["fill"] | undefined;
         const release = () => {
-            if (fill !== undefined) {
+            // Leaving restores the normal fill first (Input), so only undo the pressed state
+            if (fill !== undefined && this.options.fill === this.options.active) {
                 this.options.fill = fill;
-                fill = undefined;
             }
+            fill = undefined;
         };
         this.on(MouseEvent.events.down, () => {
             fill = this.options.fill;

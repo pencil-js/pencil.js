@@ -115,6 +115,10 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
      */
     override render (): this {
         if (this.isLooped) {
+            // Rendering out of the loop (getImageData, toImage …) must not start another loop
+            if (this.#frameId !== null) {
+                window.cancelAnimationFrame(this.#frameId);
+            }
             this.#frameId = window.requestAnimationFrame(this.#loop);
         }
 
@@ -213,6 +217,8 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
         const { events } = MouseEvent;
 
         let hovered: Container | null = null;
+        // Target of the last pointer down
+        let pressed: Component | null = null;
         let startPosition: Position | null = null;
 
         const fire = (name: string, target: Container, position: Position, event?: Event) => {
@@ -221,7 +227,8 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
 
         const handlers: Record<string, ((target: Container, position: Position, event: Event) => void) | null> = {
             [events.down]: (target, position, event) => {
-                (target as Component).isClicked = true;
+                pressed = target as Component;
+                pressed.isClicked = true;
                 this.isClicked = true;
                 startPosition = position;
                 // Keep receiving events when the pointer goes out of the canvas while pressed
@@ -236,8 +243,8 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
                 }
             },
             [events.move]: (target, position) => {
-                if (startPosition && position.distance(startPosition) >= CLICK_TOLERANCE) {
-                    (target as Component).isClicked = false;
+                if (pressed && startPosition && position.distance(startPosition) >= CLICK_TOLERANCE) {
+                    pressed.isClicked = false;
                 }
                 if (target !== hovered) {
                     if (hovered) {
@@ -259,9 +266,12 @@ export class Scene<O extends SceneOptions = SceneOptions> extends OffScreenCanva
             [events.up]: (target, position, event) => {
                 startPosition = null;
                 this.isClicked = false;
-                const component = target as Component;
-                if (component.isClicked) {
-                    component.isClicked = false;
+                const isClick = pressed === target && pressed.isClicked;
+                if (pressed) {
+                    pressed.isClicked = false;
+                    pressed = null;
+                }
+                if (isClick) {
                     fire(events.click, target, position, event);
                 }
             },

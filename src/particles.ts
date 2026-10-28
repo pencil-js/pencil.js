@@ -114,10 +114,11 @@ export class Particles<O extends ParticlesOptions = ParticlesOptions> extends Co
     update (): this {
         // Remove dead particles in place (no new array every frame)
         const { data } = this;
+        const { emit, frequency, args } = this.options;
         let kept = 0;
         for (let index = 0; index < data.length; ++index) {
             const one = data[index];
-            this.updater?.(one, index);
+            this.updater?.(one, index, ...args);
             if (one.ttl !== undefined) {
                 one.ttl--;
             }
@@ -127,7 +128,6 @@ export class Particles<O extends ParticlesOptions = ParticlesOptions> extends Co
         }
         data.length = kept;
 
-        const { emit, frequency, args } = this.options;
         if (emit && random() < frequency) {
             const nb = Array.isArray(emit) ? random(...emit) : emit;
             this.generate(Math.floor(nb), ...args);

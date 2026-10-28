@@ -184,7 +184,7 @@ export class Select<O extends SelectOptions = SelectOptions> extends Input<O> {
      * @param definition - Select definition
      */
     static override from (definition: ContainerJSON): Select {
-        return new Select(definition.position, definition.values, definition.options);
+        return new this(definition.position, definition.values, definition.options);
     }
 
     static override get defaultOptions (): SelectOptions {

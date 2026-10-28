@@ -14,7 +14,7 @@ export interface RectangleOptions extends ComponentOptions {
  * Tell if a style is a plain color (string or Color), not a gradient nor a pattern
  * @param style - Any style
  */
-const isPlainColor = (style: unknown): boolean => style == null || typeof style === "string" ||
+const isPlainColor = (style: unknown): boolean => style == null || typeof style === "string" || Array.isArray(style) ||
     typeof (style as { hex?: unknown }).hex === "string";
 
 /**
@@ -176,7 +176,7 @@ export class Rectangle<O extends RectangleOptions = RectangleOptions> extends Co
      * @param y - Vertical offset
      * @internal
      */
-    override drawInParentSpace (ctx: CanvasRenderingContext2D, x: number, y: number): boolean {
+    override drawInParentSpace (ctx: CanvasRenderingContext2D, x: number, y: number): void {
         if (this.willFill || this.willStroke) {
             this.setContext(ctx);
             const origin = this.getOrigin();
@@ -191,7 +191,6 @@ export class Rectangle<O extends RectangleOptions = RectangleOptions> extends Co
                 ctx.strokeRect(left, top, width, height);
             }
         }
-        return true;
     }
 
     /**

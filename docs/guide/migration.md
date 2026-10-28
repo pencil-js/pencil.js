@@ -90,7 +90,8 @@ These are bug fixes or improvements that can change what you see.
 
 - Hex numbers keep their leading zeros (`new Color(0x00ff00)` was invalid).
 - CSS color strings keep their alpha (`"rgba(0, 0, 0, 0.5)"`).
-- `Color.from` accepts the `[red, green, blue, alpha]` array produced by `toJSON`.
+- `Color.from` accepts the `[red, green, blue, alpha]` array produced by `toJSON`, and so do `fill` and `stroke` (a serialized color stays usable once revived).
+- `Color#lerp` and `Color#mix` blend in the CIE LAB color space, which gives smoother, perceptually even transitions. Results differ slightly from v3, which blended RGB channels (`#000` to `#fff` at 0.5 gives `#777777` instead of `#808080`).
 
 ### Navigation
 

@@ -36,6 +36,9 @@ export class Image<O extends ImageOptions = ImageOptions> extends Rectangle<O> {
 
     #url: string | null = null;
 
+    /** Incremented at each source change, to ignore outdated loads */
+    #request = 0;
+
     #cache: { ctx?: CanvasRenderingContext2D; tint?: string; file?: HTMLImageElement } = {};
 
     /**
@@ -64,19 +67,24 @@ export class Image<O extends ImageOptions = ImageOptions> extends Rectangle<O> {
      * @param source - Url of the image, image element or other Image instance
      */
     set url (source: ImageSource) {
-        if (source === this.#url) {
+        if (typeof source === "string" && source === this.#url) {
             return;
         }
 
         this.file = null;
         this.isLoaded = false;
         this.#url = typeof source === "string" ? source : null;
+        const request = ++this.#request;
 
         if (!source) {
             return;
         }
 
         const done = (img: HTMLImageElement) => {
+            // Make sure the source hasn't changed meanwhile
+            if (request !== this.#request) {
+                return;
+            }
             this.#url = img.getAttribute?.("src") ?? img.src;
             this.file = img;
             this.isLoaded = true;
@@ -104,13 +112,10 @@ export class Image<O extends ImageOptions = ImageOptions> extends Rectangle<O> {
             }
         }
         else {
-            Image.load(source).then((img) => {
-                // Make sure the source hasn't changed meanwhile
-                if (this.#url === source) {
-                    done(img);
+            Image.load(source).then(done).catch(() => {
+                if (request === this.#request) {
+                    this.fire(new NetworkEvent(NetworkEvent.events.error, this));
                 }
-            }).catch(() => {
-                this.fire(new NetworkEvent(NetworkEvent.events.error, this));
             });
         }
     }

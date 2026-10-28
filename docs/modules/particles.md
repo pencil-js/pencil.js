@@ -76,7 +76,7 @@ Inherit from [ComponentOptions](./component.md#componentoptions).
 |-------------|-----------------------------|---------|---------------------------------------------------------------------------------------------------|
 | `frequency` | `Number`                    | `1`     | Frequency of emission per frame (randomized, 1 mean every frame, 0.1 mean about 1 each 10 frames) |
 | `emit`      | `Number` or `Array<Number>` |         | Number or range of number of particles emitted                                                    |
-| `args`      | `Array`                     |         | Arguments passed to the generator function                                                        |
+| `args`      | `Array`                     |         | Arguments passed to the generator and updater functions                                            |
 
 
 ## ParticlesData

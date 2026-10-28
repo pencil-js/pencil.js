@@ -1,6 +1,6 @@
 import Container, { type ContainerOptions } from "./container.js";
 import Position, { type PositionDefinition } from "./position.js";
-import { getSandbox, setStyle, toStyle, type StyleLike } from "./internal/canvas.js";
+import { getSandbox, setStyle, toStyle, type ColorArray, type StyleLike } from "./internal/canvas.js";
 import { isTracked, set, state } from "./internal/render-state.js";
 
 const NO_DASH: Array<number> = [];
@@ -48,7 +48,10 @@ const isCacheable = (component: Component): boolean => {
  */
 export type { StyleLike };
 
-export type Style = StyleLike | string | null;
+/**
+ * Fill or stroke style: color string, Color, gradient, pattern, [red, green, blue, alpha] array (from 0 to 1) or null for none
+ */
+export type Style = StyleLike | ColorArray | string | null;
 
 /**
  * Shadow options
@@ -456,10 +459,11 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
             cursor: Component.cursors.default,
             join: Component.joins.miter,
             origin: new Position(),
+            // Same keys order as built by setOptions (to be recognized as default when serializing)
             shadow: {
                 blur: 0,
-                position: new Position(),
                 color: null,
+                position: new Position(),
             },
         };
     }

@@ -269,7 +269,7 @@ export class Position {
         if (Array.isArray(positionDefinition)) {
             return new Position(positionDefinition[0], positionDefinition[1]);
         }
-        if (typeof positionDefinition === "object") {
+        if (typeof positionDefinition === "object" && positionDefinition !== null) {
             const { x, y } = positionDefinition as AbstractPosition;
             return new Position(x, y);
         }
