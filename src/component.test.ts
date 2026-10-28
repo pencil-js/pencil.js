@@ -1,8 +1,11 @@
-import { test, expect, beforeEach } from "vitest";
+import { test, expect, beforeEach, describe } from "vitest";
 
 
 let context: any;
 import Component from "./component.js";
+import Circle from "./circle.js";
+import Polygon from "./polygon.js";
+import Square from "./square.js";
 
 beforeEach(() => {
     context = new Component([0, 0], {
@@ -190,4 +193,59 @@ test("dashes", () => {
     expect(Component.dashes.dots).toEqual([1, 4]);
     expect(Component.dashes.long).toEqual([9, 4]);
     expect(Component.dashes.sewing).toEqual([4, 4, 1, 4]);
+});
+
+describe("path cache", () => {
+    test("keep the path while its dependencies don't change", () => {
+        const circle = new Circle([0, 0], 10);
+        const path = circle.getPath();
+        expect(circle.getPath()).toBe(path);
+
+        circle.radius = 20;
+        const other = circle.getPath();
+        expect(other).not.toBe(path);
+        expect(circle.getPath()).toBe(other);
+    });
+
+    test("always trace again without dependencies", () => {
+        const polygon = new Polygon([0, 0], [[0, 0], [10, 0], [0, 10]]);
+        expect(polygon.getPath()).not.toBe(polygon.getPath());
+    });
+
+    test("subclass overriding trace without its own dependencies", () => {
+        class Cross extends Square {
+            override trace (path: Path2D) {
+                path.moveTo(0, 0);
+                path.lineTo(this.size, this.size);
+                return this;
+            }
+        }
+        const cross = new Cross([0, 0], 10);
+        expect(cross.getPath()).not.toBe(cross.getPath());
+    });
+
+    test("subclass overriding trace and its dependencies", () => {
+        class Cross extends Square {
+            override trace (path: Path2D) {
+                path.moveTo(0, 0);
+                path.lineTo(this.size, this.size);
+                return this;
+            }
+
+            protected override get pathDependencies () {
+                return [this.size];
+            }
+        }
+        const cross = new Cross([0, 0], 10);
+        expect(cross.getPath()).toBe(cross.getPath());
+    });
+
+    test("trace set on an instance", () => {
+        const circle = new Circle([0, 0], 10);
+        circle.trace = (path: Path2D) => {
+            path.rect(0, 0, 1, 1);
+            return circle;
+        };
+        expect(circle.getPath()).not.toBe(circle.getPath());
+    });
 });

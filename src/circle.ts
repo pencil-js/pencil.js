@@ -34,8 +34,8 @@ export class Circle<O extends ComponentOptions = ComponentOptions> extends Ellip
         this.height = radius;
     }
 
-    protected override isPathDirty (): boolean {
-        return this.trace !== Circle.prototype.trace || this.updatePathKey();
+    protected override get pathDependencies (): ReadonlyArray<unknown> {
+        return [this.radius];
     }
 
     override trace (path: Path2D): this {

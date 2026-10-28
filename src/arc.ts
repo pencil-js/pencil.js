@@ -41,28 +41,8 @@ export class Arc<O extends ComponentOptions = ComponentOptions> extends Componen
         this.endAngle = endAngle;
     }
 
-    /** Geometry used to trace the cached path */
-    #pathKey: [number, number, number, number] = [NaN, NaN, NaN, NaN];
-
-    /**
-     * Update the cached geometry
-     * @returns True if it has changed
-     */
-    protected updatePathKey (): boolean {
-        const key = this.#pathKey;
-        const { width, height, startAngle, endAngle } = this;
-        if (key[0] === width && key[1] === height && key[2] === startAngle && key[3] === endAngle) {
-            return false;
-        }
-        key[0] = width;
-        key[1] = height;
-        key[2] = startAngle;
-        key[3] = endAngle;
-        return true;
-    }
-
-    protected override isPathDirty (): boolean {
-        return this.trace !== Arc.prototype.trace || this.updatePathKey();
+    protected override get pathDependencies (): ReadonlyArray<unknown> {
+        return [this.width, this.height, this.startAngle, this.endAngle];
     }
 
     /**

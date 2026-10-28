@@ -37,3 +37,33 @@ Inherit from [ContainerOptions](./container.md#containeroptions).
 | position | [`Position`](./position.md)               | `new Position()` | Position of the shadow relative to the component |
 | color    | [Color](./color.md) or `String` | `null`           | Color of the shadow                              |
 
+
+## Custom shapes
+
+Extend `Component` and implement `trace`. By default, the path is traced again at every render.
+When the path only depends on a few values, declare them with `pathDependencies`: the path is then kept between renders until one of them changes.
+
+```js
+import { Component } from "pencil.js";
+
+class Cross extends Component {
+    constructor (position, size, options) {
+        super(position, options);
+        this.size = size;
+    }
+
+    trace (path) {
+        path.moveTo(0, 0);
+        path.lineTo(this.size, this.size);
+        path.moveTo(this.size, 0);
+        path.lineTo(0, this.size);
+        return this;
+    }
+
+    get pathDependencies () {
+        return [this.size];
+    }
+}
+```
+
+A subclass redefining `trace` without its own `pathDependencies` is always traced again, so extending a shape never shows an outdated path.

@@ -70,9 +70,6 @@ export class Rectangle<O extends RectangleOptions = RectangleOptions> extends Co
 
     #height = 0;
 
-    /** Geometry used to trace the cached path */
-    #pathKey: [number, number, number] = [NaN, NaN, NaN];
-
     /**
      * Rectangle constructor
      * @param positionDefinition - Top-left corner (depending on the origin)
@@ -125,23 +122,10 @@ export class Rectangle<O extends RectangleOptions = RectangleOptions> extends Co
         return this;
     }
 
-    /**
-     * Keep the path while the size don't change
-     */
-    protected override isPathDirty (): boolean {
+    protected override get pathDependencies (): ReadonlyArray<unknown> | null {
         const { rounded } = this.options;
-        if (this.trace !== Rectangle.prototype.trace || typeof rounded !== "number") {
-            return true;
-        }
-        const key = this.#pathKey;
-        const { width, height } = this;
-        if (key[0] === width && key[1] === height && key[2] === rounded) {
-            return false;
-        }
-        key[0] = width;
-        key[1] = height;
-        key[2] = rounded;
-        return true;
+        // Rounded corners as a list can be changed in place, always trace again
+        return typeof rounded === "number" ? [this.width, this.height, rounded] : null;
     }
 
     /**

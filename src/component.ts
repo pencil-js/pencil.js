@@ -5,6 +5,44 @@ import { isTracked, set, state } from "./internal/render-state.js";
 
 const NO_DASH: Array<number> = [];
 
+const cacheableClasses = new WeakMap<object, boolean>();
+
+/**
+ * Find the prototype defining a property
+ * @param prototype - Starting prototype
+ * @param key - Name of the property
+ */
+const findOwner = (prototype: object | null, key: string): object | null => {
+    let current = prototype;
+    while (current && !Object.hasOwn(current, key)) {
+        current = Object.getPrototypeOf(current);
+    }
+    return current;
+};
+
+/**
+ * Tell if the path of a component can be kept between renders:
+ * its path dependencies must be declared by the class defining its "trace" method (or a subclass of it)
+ * @param component - Any component
+ */
+
+const isCacheable = (component: Component): boolean => {
+    if (Object.hasOwn(component, "trace")) {
+        return false;
+    }
+    const prototype = Object.getPrototypeOf(component) as object;
+    let result = cacheableClasses.get(prototype);
+    if (result === undefined) {
+        const traceOwner = findOwner(prototype, "trace");
+        const dependenciesOwner = findOwner(prototype, "pathDependencies");
+
+        result = Boolean(traceOwner && dependenciesOwner && dependenciesOwner !== Component.prototype &&
+            (dependenciesOwner === traceOwner || Object.prototype.isPrototypeOf.call(traceOwner, dependenciesOwner)));
+        cacheableClasses.set(prototype, result);
+    }
+    return result;
+};
+
 /**
  * Anything usable as fill or stroke (color string, Color, gradient, pattern …)
  */
@@ -64,6 +102,9 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
 
     /** Is currently hovered */
     isHovered: boolean;
+
+    /** Values used to trace the current path */
+    #pathDependencies: Array<unknown> = [];
 
     /**
      * Component constructor
@@ -199,11 +240,36 @@ export abstract class Component<O extends ComponentOptions = ComponentOptions> e
     }
 
     /**
-     * Tell if the path needs to be traced again (always by default).
-     * Shapes with a simple geometry override it to keep their path between renders.
+     * Values the path depends on (the path is kept between renders while they don't change).
+     * Return null when the path must be traced at every render (the default).
+     * Override it alongside "trace" when the traced path only depends on a few values.
+     * @example
+     * protected override get pathDependencies () {
+     *     return [this.width, this.height];
+     * }
+     */
+    protected get pathDependencies (): ReadonlyArray<unknown> | null {
+        return null;
+    }
+
+    /**
+     * Tell if the path needs to be traced again
      */
     protected isPathDirty (): boolean {
-        return true;
+        const dependencies = isCacheable(this) ? this.pathDependencies : null;
+        if (!dependencies) {
+            return true;
+        }
+        const known = this.#pathDependencies;
+        let isDirty = known.length !== dependencies.length;
+        for (let i = 0; i < dependencies.length; ++i) {
+            if (!Object.is(known[i], dependencies[i])) {
+                known[i] = dependencies[i];
+                isDirty = true;
+            }
+        }
+        known.length = dependencies.length;
+        return isDirty;
     }
 
     /**
