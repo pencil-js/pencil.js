@@ -1,0 +1,59 @@
+name: Release
+
+# Publish to npm when a version tag (v1.2.3, v1.2.3-beta.0 …) is pushed on a commit of main.
+# Uses npm Trusted Publishing (OIDC): no token, but "pencil-js/pencil.js" and this workflow
+# must be declared as trusted publisher in the package settings on npmjs.com.
+
+on:
+    push:
+        tags:
+            - "v*"
+
+permissions:
+    contents: read
+    id-token: write
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
+
+            - uses: actions/setup-node@v5
+              with:
+                  node-version: 24
+                  cache: npm
+                  registry-url: https://registry.npmjs.org
+
+            # Trusted Publishing needs npm 11.5.1 or later
+            - run: npm install --global npm@^11.5.1
+
+            - name: Check the tag
+              run: |
+                  git merge-base --is-ancestor "$GITHUB_SHA" origin/main || {
+                      echo "::error::Tag $GITHUB_REF_NAME is not on main"
+                      exit 1
+                  }
+                  version=$(node -p "require('./package.json').version")
+                  [ "$GITHUB_REF_NAME" = "v$version" ] || {
+                      echo "::error::Tag $GITHUB_REF_NAME doesn't match package.json version $version"
+                      exit 1
+                  }
+
+            - run: npm ci
+
+            - name: Lint
+              run: npm run lint
+
+            # "prepublishOnly" runs the typecheck, the tests and the build
+            - name: Publish
+              run: |
+                  version=$(node -p "require('./package.json').version")
+                  case "$version" in
+                      *-*) tag=next ;;
+                      *) tag=latest ;;
+                  esac
+                  npm publish --provenance --access public --tag "$tag"
