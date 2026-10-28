@@ -42,7 +42,6 @@ export default defineConfig({
                 items: [
                     { text: "Migrate from v3", link: "/guide/migration" },
                     { text: "Changelog", link: "https://github.com/pencil-js/pencil.js/releases" },
-                    { text: "v3 documentation", link: "https://docs.pencil-js.vercel.app/" },
                 ],
             },
         ],
@@ -161,7 +160,7 @@ export default defineConfig({
             provider: "local",
         },
         editLink: {
-            pattern: "https://github.com/pencil-js/pencil.js/edit/v4/docs/:path",
+            pattern: "https://github.com/pencil-js/pencil.js/edit/main/docs/:path",
         },
         footer: {
             message: "Released under the MIT License.",

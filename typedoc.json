@@ -30,6 +30,6 @@
         "pretty": true,
         "collapsed": true
     },
-    "gitRevision": "v4",
+    "gitRevision": "main",
     "sourceLinkTemplate": "https://github.com/pencil-js/pencil.js/blob/{gitRevision}/{path}#L{line}"
 }

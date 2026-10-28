@@ -82,7 +82,7 @@ Each class module follows the same shape:
 ### Git
 
 - Commit messages use **[gitmoji](https://gitmoji.dev/)** followed by a short English summary: `🐛 Fix …`, `✨ Add …`, `⚡ …`, `♻️ …`, `✅ …`, `📝 …`, `🔧 …`, `👷 …`. Details go in the body as a list.
-- v4 work happens on the `v4` branch.
+- `main` is the default branch; work on a feature branch and open a pull request.
 
 ## Pitfalls
 
